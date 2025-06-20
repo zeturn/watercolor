@@ -22,13 +22,10 @@ const tableBodyClasses = computed(() => {
 
 <style scoped>
 .wc-table-body {
-  background-color: #ffffff;
+  background-color: var(--wc-neutral-0);
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .wc-table-body {
-    background-color: #111827;
-  }
+.dark .wc-table-body {
+  background-color: var(--wc-neutral-800);
 }
 </style> 

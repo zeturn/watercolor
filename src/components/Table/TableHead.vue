@@ -28,8 +28,8 @@ const tableHeadClasses = computed(() => {
 
 <style scoped>
 .wc-table-head {
-  background-color: #f9fafb;
-  border-bottom: 2px solid #e5e7eb;
+  background-color: var(--wc-neutral-50);
+  border-bottom: 2px solid var(--wc-neutral-200);
 }
 
 .wc-table-head--sticky {
@@ -38,11 +38,8 @@ const tableHeadClasses = computed(() => {
   z-index: 10;
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .wc-table-head {
-    background-color: #1f2937;
-    border-bottom-color: #4b5563;
-  }
+.dark .wc-table-head {
+  background-color: var(--wc-neutral-700);
+  border-bottom-color: var(--wc-neutral-600);
 }
 </style> 
