@@ -1,3 +1,9 @@
+// 通过 CSS 变量动态生成调色板，便于主题与暗色模式切换
+const generatePalette = (name) => {
+  const shades = ['50','100','200','300','400','500','600','700','800','900','950']
+  return Object.fromEntries(shades.map((shade) => [shade, `var(--wc-${name}-${shade})`]))
+}
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -197,6 +203,24 @@ export default {
           800: 'var(--wc-indigo-800)',
           900: 'var(--wc-indigo-900)'
         }
+        primary: generatePalette('primary'),
+        secondary: generatePalette('secondary'),
+        accent: generatePalette('accent'),
+        neutral: {
+          0: 'var(--wc-neutral-0)',
+          ...generatePalette('neutral'),
+        },
+        success: generatePalette('success'),
+        warning: generatePalette('warning'),
+        error: generatePalette('error'),
+        info: generatePalette('info'),
+        danger: generatePalette('danger'),
+        purple: generatePalette('purple'),
+        orange: generatePalette('orange'),
+        cyan: generatePalette('cyan'),
+        pink: generatePalette('pink'),
+        teal: generatePalette('teal'),
+        indigo: generatePalette('indigo'),
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
