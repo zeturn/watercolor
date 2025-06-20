@@ -88,6 +88,11 @@ export { default as ToastReact } from './components/Toast/Toast.jsx'
 export { default as FeedReact } from './components/Feed/Feed.jsx'
 export { default as FeatureReact } from './components/Feature/Feature.jsx'
 export { default as FileInputReact } from './components/FileInput/FileInput.jsx'
+export { default as TableReact } from './components/Table/Table.jsx'
+export { default as TypographyReact } from './components/Typography/Typography.jsx'
+export { default as TypingTextReact } from './components/TypingText/TypingText.jsx'
+export { default as VideoPlayerReact } from './components/VideoPlayer/VideoPlayer.jsx'
+export { default as WatermarkReact } from './components/Watermark/Watermark.jsx'
 
 // 主题工具
 export * from './utils/theme'
