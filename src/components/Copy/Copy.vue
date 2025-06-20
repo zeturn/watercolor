@@ -168,12 +168,12 @@ const handleCopy = async () => {
   cursor: pointer;
   transition: all 0.2s ease;
   border: 1px solid transparent;
-  background-color: #f9fafb;
+  background-color: var(--wc-neutral-50);
   user-select: none;
 }
 
 .wc-copy:hover {
-  background-color: #f3f4f6;
+  background-color: var(--wc-neutral-100);
 }
 
 .wc-copy--sm {
@@ -199,7 +199,7 @@ const handleCopy = async () => {
 
 .wc-copy-text {
   flex: 1;
-  color: #374151;
+  color: var(--wc-neutral-800);
   line-height: 1.4;
   word-break: break-all;
 }
@@ -218,7 +218,7 @@ const handleCopy = async () => {
 }
 
 .wc-copy-label {
-  color: #6b7280;
+  color: var(--wc-neutral-600);
   font-size: 12px;
   font-weight: 500;
 }
@@ -228,7 +228,7 @@ const handleCopy = async () => {
   top: -40px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #1f2937;
+  background-color: var(--wc-neutral-900);
   color: white;
   padding: 6px 12px;
   border-radius: 6px;
@@ -245,30 +245,30 @@ const handleCopy = async () => {
   left: 50%;
   transform: translateX(-50%);
   border: 4px solid transparent;
-  border-top-color: #1f2937;
+  border-top-color: var(--wc-neutral-900);
 }
 
 .wc-copy-tooltip--success {
-  background-color: #22c55e;
+  background-color: var(--wc-success-500);
 }
 
 .wc-copy-tooltip--success::after {
-  border-top-color: #22c55e;
+  border-top-color: var(--wc-success-500);
 }
 
 /* 变体样式 */
 .wc-copy--outlined {
   background-color: transparent;
-  border-color: #d1d5db;
+  border-color: var(--wc-neutral-200);
 }
 
 .wc-copy--outlined:hover {
-  border-color: #1a8cff;
-  background-color: #f0f9ff;
+  border-color: var(--wc-primary-500);
+  background-color: var(--wc-primary-50);
 }
 
 .wc-copy--filled {
-  background-color: #1a8cff;
+  background-color: var(--wc-primary-500);
   color: white;
 }
 
@@ -281,7 +281,7 @@ const handleCopy = async () => {
 }
 
 .wc-copy--filled:hover {
-  background-color: #1976d2;
+  background-color: var(--wc-primary-600);
 }
 
 .wc-copy--minimal {
@@ -291,93 +291,91 @@ const handleCopy = async () => {
 }
 
 .wc-copy--minimal:hover {
-  background-color: #f3f4f6;
+  background-color: var(--wc-neutral-100);
 }
 
 /* 状态样式 */
 .wc-copy--copied {
-  background-color: #dcfce7;
-  border-color: #22c55e;
+  background-color: var(--wc-success-50);
+  border-color: var(--wc-success-500);
 }
 
 .wc-copy--copied .wc-copy-icon {
-  color: #22c55e;
+  color: var(--wc-success-500);
 }
 
 .wc-copy--copied .wc-copy-label {
-  color: #166534;
+  color: var(--wc-success-700);
 }
 
 .wc-copy--error {
-  background-color: #fee2e2;
-  border-color: #ef4444;
+  background-color: var(--wc-error-50);
+  border-color: var(--wc-error-500);
 }
 
 .wc-copy--error .wc-copy-icon {
-  color: #ef4444;
+  color: var(--wc-error-500);
 }
 
 .wc-copy--error .wc-copy-label {
-  color: #991b1b;
+  color: var(--wc-error-700);
 }
 
-/* 深色模式 */
-@media (prefers-color-scheme: dark) {
-  .wc-copy {
-    background-color: #374151;
-  }
-  
-  .wc-copy:hover {
-    background-color: #4b5563;
-  }
-  
-  .wc-copy-text {
-    color: #f3f4f6;
-  }
-  
-  .wc-copy-label {
-    color: #d1d5db;
-  }
-  
-  .wc-copy--outlined {
-    background-color: transparent;
-    border-color: #4b5563;
-  }
-  
-  .wc-copy--outlined:hover {
-    border-color: #60a5fa;
-    background-color: #1e3a8a;
-  }
-  
-  .wc-copy--filled {
-    background-color: #60a5fa;
-  }
-  
-  .wc-copy--filled:hover {
-    background-color: #3b82f6;
-  }
-  
-  .wc-copy--minimal:hover {
-    background-color: #4b5563;
-  }
-  
-  .wc-copy--copied {
-    background-color: #14532d;
-    border-color: #22c55e;
-  }
-  
-  .wc-copy--copied .wc-copy-label {
-    color: #bbf7d0;
-  }
-  
-  .wc-copy--error {
-    background-color: #991b1b;
-    border-color: #ef4444;
-  }
-  
-  .wc-copy--error .wc-copy-label {
-    color: #fca5a5;
-  }
+/* 深色模式 - 使用 .dark class */
+.dark .wc-copy {
+  background-color: var(--wc-neutral-800);
+}
+
+.dark .wc-copy:hover {
+  background-color: var(--wc-neutral-700);
+}
+
+.dark .wc-copy-text {
+  color: var(--wc-neutral-100);
+}
+
+.dark .wc-copy-label {
+  color: var(--wc-neutral-400);
+}
+
+.dark .wc-copy--outlined {
+  background-color: transparent;
+  border-color: var(--wc-neutral-700);
+}
+
+.dark .wc-copy--outlined:hover {
+  border-color: var(--wc-primary-400);
+  background-color: var(--wc-primary-800);
+}
+
+.dark .wc-copy--filled {
+  background-color: var(--wc-primary-400);
+}
+
+.dark .wc-copy--filled:hover {
+  background-color: var(--wc-primary-500);
+}
+
+.dark .wc-copy--minimal:hover {
+  background-color: var(--wc-neutral-700);
+}
+
+.dark .wc-copy--copied {
+  background-color: var(--wc-success-800);
+  border-color: var(--wc-success-500);
+}
+
+.dark .wc-copy--copied .wc-copy-label {
+  color: var(--wc-success-200);
+}
+
+.dark .wc-copy--error {
+  background-color: var(--wc-error-800);
+  border-color: var(--wc-error-500);
+}
+
+.dark .wc-copy--error .wc-copy-label {
+  color: var(--wc-error-200);
 }
 
 /* 响应式设计 */
