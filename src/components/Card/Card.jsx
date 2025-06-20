@@ -2,55 +2,105 @@ import React from 'react'
 
 const Card = ({
   children,
-  title = '',
   variant = 'default',
   padding = 'md',
-  header,
-  footer,
+  fullWidth = false,
+  hover = false,
+  clickable = false,
+  disabled = false,
+  elevation = 0,
+  borderRadius = 'md',
+  title = null,
+  subtitle = null,
+  header = null,
+  footer = null,
+  media = null,
   className = '',
+  style = {},
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
   ...props
 }) => {
-  const baseClasses = 'wc-card'
-  
-  const variantClasses = {
-    default: '',
-    elevated: 'shadow-hover'
+  const getCardClasses = () => {
+    const classes = ['wc-card']
+    
+    // Variant classes
+    classes.push(`wc-card--${variant}`)
+    
+    // Padding classes
+    classes.push(`wc-card--padding-${padding}`)
+    
+    // Border radius classes
+    classes.push(`wc-card--radius-${borderRadius}`)
+    
+    // State classes
+    if (fullWidth) classes.push('wc-card--full-width')
+    if (hover) classes.push('wc-card--hover')
+    if (clickable) classes.push('wc-card--clickable')
+    if (disabled) classes.push('wc-card--disabled')
+    if (elevation > 0) classes.push(`wc-card--elevation-${elevation}`)
+    
+    return classes.concat(className).filter(Boolean).join(' ')
   }
-  
-  const paddingClasses = {
-    none: 'p-0',
-    sm: 'p-4',
-    md: 'p-6',
-    lg: 'p-8'
+
+  const getCardStyles = () => {
+    const styles = { ...style }
+    
+    // Use CSS variables for theming
+    styles.backgroundColor = 'var(--wc-neutral-0)'
+    styles.border = '1px solid var(--wc-neutral-200)'
+    styles.color = 'var(--wc-neutral-900)'
+    
+    return styles
   }
-  
-  const cardClasses = [
-    baseClasses,
-    variantClasses[variant],
-    paddingClasses[padding],
-    className
-  ].filter(Boolean).join(' ')
-  
+
+  const handleClick = (e) => {
+    if (!disabled && clickable && onClick) {
+      onClick(e)
+    }
+  }
+
   return (
-    <div className={cardClasses} {...props}>
-      {(title || header) && (
-        <div className="wc-card-header mb-4">
-          {header || (
-            title && (
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                {title}
-              </h3>
-            )
+    <div
+      className={getCardClasses()}
+      style={getCardStyles()}
+      onClick={handleClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      role={clickable ? 'button' : undefined}
+      tabIndex={clickable ? 0 : undefined}
+      {...props}
+    >
+      {media && (
+        <div className="wc-card__media">
+          {media}
+        </div>
+      )}
+      
+      {header && (
+        <div className="wc-card__header">
+          {header}
+        </div>
+      )}
+      
+      {(title || subtitle) && (
+        <div className="wc-card__title-section">
+          {title && (
+            <h3 className="wc-card__title">{title}</h3>
+          )}
+          {subtitle && (
+            <p className="wc-card__subtitle">{subtitle}</p>
           )}
         </div>
       )}
       
-      <div className="wc-card-content">
+      <div className="wc-card__content">
         {children}
       </div>
       
       {footer && (
-        <div className="wc-card-footer mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-700">
+        <div className="wc-card__footer">
           {footer}
         </div>
       )}

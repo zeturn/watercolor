@@ -2,15 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* CSS 变量定义 */
+/* CSS Variables */
 :root {
-  /* 字体配置 */
+  /* Font configuration */
   --wc-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --wc-font-chinese: "";
   --wc-font-english: "";
   --wc-font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
 
-  /* 主色调 - 使用新的blue配色 */
+  /* Primary colors - using new blue scheme */
   --wc-primary-50: oklch(0.97 0.014 254.604);
   --wc-primary-100: oklch(0.932 0.032 255.585);
   --wc-primary-200: oklch(0.882 0.059 254.128);
@@ -22,7 +22,7 @@
   --wc-primary-800: oklch(0.424 0.199 265.638);
   --wc-primary-900: oklch(0.379 0.146 265.522);
 
-  /* 次色调 - 使用新的emerald配色 */
+  /* Secondary colors - using new emerald scheme */
   --wc-secondary-50: oklch(0.979 0.021 166.113);
   --wc-secondary-100: oklch(0.95 0.052 163.051);
   --wc-secondary-200: oklch(0.905 0.093 164.15);
@@ -34,7 +34,7 @@
   --wc-secondary-800: oklch(0.432 0.095 166.913);
   --wc-secondary-900: oklch(0.378 0.077 168.94);
 
-  /* 中性色调 - 使用新的neutral配色 */
+  /* Neutral colors - using new neutral scheme */
   --wc-neutral-0: oklch(1 0 0);
   --wc-neutral-50: oklch(0.985 0 0);
   --wc-neutral-100: oklch(0.97 0 0);
@@ -48,8 +48,8 @@
   --wc-neutral-900: oklch(0.205 0 0);
   --wc-neutral-950: oklch(0.145 0 0);
 
-  /* 语义色彩 - 保持不变 */
-  /* 成功色 */
+  /* Semantic colors - unchanged */
+  /* Success colors */
   --wc-success-50: #F0FFF4;
   --wc-success-100: #EEFFCC;
   --wc-success-200: #D8FF9A;
@@ -61,7 +61,7 @@
   --wc-success-800: #2C9300;
   --wc-success-900: #1D7A00;
 
-  /* 信息色 */
+  /* Info colors */
   --wc-info-50: #F0FDFA;
   --wc-info-100: #D9FEFC;
   --wc-info-200: #B3FEFE;
@@ -73,7 +73,7 @@
   --wc-info-800: #145B92;
   --wc-info-900: #0C4178;
 
-  /* 警告色 */
+  /* Warning colors */
   --wc-warning-50: #FFFEF0;
   --wc-warning-100: #FFF9D0;
   --wc-warning-200: #FFF0A1;
@@ -85,7 +85,7 @@
   --wc-warning-800: #936B07;
   --wc-warning-900: #7A5504;
 
-  /* 错误/危险色 */
+  /* Error/Danger colors */
   --wc-error-50: #fef2f2;
   --wc-error-100: #FFE6CF;
   --wc-error-200: #FFC79F;
@@ -108,8 +108,8 @@
   --wc-danger-800: #930508;
   --wc-danger-900: #7A030E;
 
-  /* 扩展调色板 - 使用新的oklch配色 */
-  /* 紫色调色板 */
+  /* Extended color palette - using new oklch colors */
+  /* Purple color palette */
   --wc-purple-50: oklch(0.977 0.014 308.299);
   --wc-purple-100: oklch(0.946 0.033 307.174);
   --wc-purple-200: oklch(0.902 0.063 306.703);
@@ -121,7 +121,7 @@
   --wc-purple-800: oklch(0.438 0.218 303.724);
   --wc-purple-900: oklch(0.381 0.176 304.987);
 
-  /* 粉色调色板 */
+  /* Pink color palette */
   --wc-pink-50: oklch(0.971 0.014 343.198);
   --wc-pink-100: oklch(0.948 0.028 342.258);
   --wc-pink-200: oklch(0.899 0.061 343.231);
@@ -133,7 +133,7 @@
   --wc-pink-800: oklch(0.459 0.187 3.815);
   --wc-pink-900: oklch(0.408 0.153 2.432);
 
-  /* 青色调色板 */
+  /* Teal color palette */
   --wc-teal-50: oklch(0.984 0.014 180.72);
   --wc-teal-100: oklch(0.953 0.051 180.801);
   --wc-teal-200: oklch(0.91 0.096 180.426);
@@ -145,7 +145,7 @@
   --wc-teal-800: oklch(0.437 0.078 188.216);
   --wc-teal-900: oklch(0.386 0.063 188.416);
 
-  /* 靛蓝调色板 */
+  /* Indigo color palette */
   --wc-indigo-50: oklch(0.962 0.018 272.314);
   --wc-indigo-100: oklch(0.93 0.034 272.788);
   --wc-indigo-200: oklch(0.87 0.065 274.039);
@@ -158,8 +158,8 @@
   --wc-indigo-900: oklch(0.359 0.144 278.697);
 }
 
-/* 主题变体 */
-/* 海洋蓝主题 */
+/* Theme variants */
+/* Ocean blue theme */
 .theme-ocean {
   --wc-primary-50: #E6F7FF;
   --wc-primary-100: #BAE7FF;
@@ -184,7 +184,7 @@
   --wc-secondary-900: #002329;
 }
 
-/* 森林绿主题 */
+/* Forest green theme */
 .theme-forest {
   --wc-primary-50: #F6FFED;
   --wc-primary-100: #D9F7BE;
@@ -209,7 +209,7 @@
   --wc-secondary-900: #0F1100;
 }
 
-/* 夕阳橙主题 */
+/* Sunset orange theme */
 .theme-sunset {
   --wc-primary-50: #FFF7E6;
   --wc-primary-100: #FFE7BA;
@@ -234,7 +234,7 @@
   --wc-secondary-900: #5C0011;
 }
 
-/* 紫罗兰主题 */
+/* Violet theme */
 .theme-violet {
   --wc-primary-50: #F9F0FF;
   --wc-primary-100: #EFDBFF;
@@ -259,7 +259,7 @@
   --wc-secondary-900: #311B92;
 }
 
-/* 玫瑰粉主题 */
+/* Rose pink theme */
 .theme-rose {
   --wc-primary-50: #FFF0F6;
   --wc-primary-100: #FFD6E7;
@@ -284,9 +284,9 @@
   --wc-secondary-900: #37001C;
 }
 
-/* 深色模式 */
+/* Dark mode */
 .dark {
-  /* 中性色调在深色模式下的映射 */
+  /* Neutral colors mapping in dark mode */
   --wc-neutral-0: oklch(0.145 0 0);
   --wc-neutral-50: oklch(0.205 0 0);
   --wc-neutral-100: oklch(0.269 0 0);
@@ -303,124 +303,119 @@
 
 @layer base {
   * {
-    @apply border-gray-200;
+    border-color: var(--wc-neutral-200);
   }
   
   body {
-    @apply bg-neutral-0 text-neutral-900;
+    background-color: var(--wc-neutral-0);
+    color: var(--wc-neutral-900);
     font-family: var(--wc-font-family);
     transition: background-color 0.25s ease, color 0.25s ease;
   }
 
   .dark body {
-    @apply bg-neutral-900 text-neutral-100;
+    background-color: var(--wc-neutral-900);
+    color: var(--wc-neutral-100);
   }
 }
 
-/* 基础样式 - 使用原生CSS以确保兼容性 */
+/* Base styles - using native CSS for compatibility */
 
-/* 输入框样式 */
+/* Input styles - flat design */
 .wc-input {
   width: 100%;
   padding: 12px 16px;
-  background-color: #f4f4f5;
-  color: #18181b;
+  background-color: var(--wc-neutral-50);
+  color: var(--wc-neutral-900);
   border: none;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  border-radius: 8px;
+  transition: all 0.2s ease;
   outline: none;
   font-size: 14px;
+  font-family: var(--wc-font-family);
 }
 
 .wc-input::placeholder {
-  color: #a1a1aa;
+  color: var(--wc-neutral-400);
 }
 
 .wc-input:focus {
-  background-color: #e4e4e7;
+  background-color: var(--wc-neutral-100);
   outline: none;
 }
 
-/* 深色模式下的输入框 */
-@media (prefers-color-scheme: dark) {
-  .wc-input {
-    background-color: #27272a;
-    color: #fafafa;
-  }
-  
-  .wc-input::placeholder {
-    color: #71717a;
-  }
-  
-  .wc-input:focus {
-    background-color: #3f3f46;
-  }
+/* Dark mode input */
+.dark .wc-input {
+  background-color: var(--wc-neutral-800);
+  color: var(--wc-neutral-100);
 }
 
-/* 卡片样式 */
+.dark .wc-input::placeholder {
+  color: var(--wc-neutral-500);
+}
+
+.dark .wc-input:focus {
+  background-color: var(--wc-neutral-700);
+}
+
+/* Card styles - flat design, no shadows */
 .wc-card {
-  background-color: #ffffff;
-  border-radius: 16px;
+  background-color: var(--wc-neutral-0);
+  border-radius: 12px;
   padding: 24px;
-  border: 1px solid #e4e4e7;
-  transition: all 0.3s ease;
+  border: 1px solid var(--wc-neutral-200);
+  transition: all 0.2s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  .wc-card {
-    background-color: #27272a;
-    border-color: #3f3f46;
-  }
+.dark .wc-card {
+  background-color: var(--wc-neutral-800);
+  border-color: var(--wc-neutral-700);
 }
 
-/* 标签页样式 */
+/* Tab styles - flat design */
 .wc-tabs {
   display: flex;
   gap: 4px;
-  border-radius: 12px;
-  background-color: #f4f4f5;
+  border-radius: 8px;
+  background-color: var(--wc-neutral-100);
   padding: 4px;
 }
 
-@media (prefers-color-scheme: dark) {
-  .wc-tabs {
-    background-color: #27272a;
-  }
+.dark .wc-tabs {
+  background-color: var(--wc-neutral-800);
 }
 
 .wc-tab {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 10px 16px;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.25;
-  color: #3f3f46;
-  transition: all 0.3s ease;
+  color: var(--wc-neutral-600);
+  transition: all 0.2s ease;
   cursor: pointer;
   border: none;
   background: transparent;
   outline: none;
+  font-family: var(--wc-font-family);
 }
 
 .wc-tab--active {
-  background-color: #ffffff;
-  color: #1a8cff;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  background-color: var(--wc-neutral-0);
+  color: var(--wc-primary-500);
 }
 
-@media (prefers-color-scheme: dark) {
-  .wc-tab {
-    color: #d4d4d8;
-  }
-  
-  .wc-tab--active {
-    background-color: #3f3f46;
-    color: #75bbff;
-  }
+.dark .wc-tab {
+  color: var(--wc-neutral-400);
 }
 
-/* 全局组件字体样式 */
+.dark .wc-tab--active {
+  background-color: var(--wc-neutral-700);
+  color: var(--wc-primary-400);
+}
+
+/* Global component font styles */
 .wc-toast,
 .wc-modal,
 .wc-dropdown,
@@ -433,12 +428,12 @@
   font-family: var(--wc-font-family);
 }
 
-/* Modal 组件全局样式 */
+/* Modal component global styles - no backdrop blur for flat design */
 .wc-modal-overlay {
-  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* 字体工具类 */
+/* Font utility classes */
 .font-chinese {
   font-family: var(--wc-font-chinese), var(--wc-font-family);
 }
