@@ -90,9 +90,9 @@ const tableCellStyles = computed(() => {
 
 <style scoped>
 .wc-table-cell {
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--wc-neutral-200);
   vertical-align: inherit;
-  color: #111827;
+  color: var(--wc-neutral-900);
   line-height: 1.43;
 }
 
@@ -116,9 +116,9 @@ const tableCellStyles = computed(() => {
 /* Variants */
 .wc-table-cell--head {
   font-weight: 600;
-  color: #374151;
+  color: var(--wc-neutral-700);
   line-height: 1.5;
-  background-color: #f9fafb;
+  background-color: var(--wc-neutral-50);
 }
 
 .wc-table-cell--body {
@@ -165,7 +165,7 @@ const tableCellStyles = computed(() => {
 }
 
 .wc-table-cell--sortable:hover {
-  color: #2563eb;
+  color: var(--wc-primary-500);
 }
 
 .wc-table-cell--sortable::after {
@@ -195,20 +195,18 @@ const tableCellStyles = computed(() => {
   opacity: 1;
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .wc-table-cell {
-    border-bottom-color: #374151;
-    color: #f9fafb;
-  }
-  
-  .wc-table-cell--head {
-    color: #d1d5db;
-    background-color: #1f2937;
-  }
-  
-  .wc-table-cell--sortable:hover {
-    color: #60a5fa;
-  }
+/* Dark mode */
+.dark .wc-table-cell {
+  border-bottom-color: var(--wc-neutral-700);
+  color: var(--wc-neutral-100);
+}
+
+.dark .wc-table-cell--head {
+  color: var(--wc-neutral-200);
+  background-color: var(--wc-neutral-700);
+}
+
+.dark .wc-table-cell--sortable:hover {
+  color: var(--wc-primary-400);
 }
 </style> 

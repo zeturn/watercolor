@@ -71,11 +71,11 @@ export default {
   font-size: 1.5rem;
   line-height: 1;
   padding: 0;
-  color: var(--color-gray-300, #d1d5db);
+  color: var(--wc-neutral-300);
   transition: color 0.2s ease;
 }
 .rating-item.active {
-  color: var(--color-yellow-400, #fbbf24);
+  color: var(--wc-warning-500);
 }
 .rating-item:hover {
   transform: scale(1.1);
@@ -83,12 +83,12 @@ export default {
 .rating-item:disabled {
   cursor: default;
 }
-@media (prefers-color-scheme: dark) {
-  .rating-item {
-    color: var(--color-dark-border, #4b5563);
-  }
-  .rating-item.active {
-    color: var(--color-yellow-300, #fcd34d);
-  }
+/* Dark mode */
+.dark .rating-item {
+  color: var(--wc-neutral-500);
+}
+
+.dark .rating-item.active {
+  color: var(--wc-warning-400);
 }
 </style> 

@@ -19,7 +19,7 @@ const props = defineProps({
   fontStyle: { type: String, default: 'normal' },
   fontVariant: { type: String, default: '' },
   fontWeight: { type: Number, default: 400 },
-  fontColor: { type: String, default: 'rgba(128,128,128,.3)' },
+  fontColor: { type: String, default: 'var(--wc-neutral-500, rgba(128,128,128,.3))' },
   fullscreen: { type: Boolean, default: false },
   globalRotate: { type: Number, default: 0 },
   lineHeight: { type: Number, default: 14 },
@@ -41,6 +41,17 @@ const props = defineProps({
 
 const url = ref('')
 const show = computed(() => !!props.content || !!props.image)
+
+function resolveColor(color) {
+  if (color.startsWith('var(')) {
+    const match = color.match(/--[^, )]+/)
+    if (match) {
+      const cssValue = getComputedStyle(document.documentElement).getPropertyValue(match[0]).trim()
+      return cssValue || color
+    }
+  }
+  return color
+}
 
 function createCanvasUrl() {
   const canvas = document.createElement('canvas')
@@ -75,7 +86,7 @@ function createCanvasUrl() {
   const lines = (props.content || '').split(/\\n/)
   ctx.textAlign = props.textAlign as CanvasTextAlign
   ctx.textBaseline = 'middle'
-  ctx.fillStyle = props.fontColor
+  ctx.fillStyle = resolveColor(props.fontColor)
   ctx.font = `${props.fontStyle} ${props.fontVariant} ${props.fontWeight} ${props.fontSize}px ${props.fontFamily}`
 
   ctx.translate(tileWidth / 2, tileHeight / 2)

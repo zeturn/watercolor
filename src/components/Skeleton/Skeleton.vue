@@ -91,7 +91,7 @@ const skeletonStyles = computed(() => {
 <style scoped>
 /* Variant shapes */
 .wc-skeleton {
-  background-color: #e5e7eb; /* 灰色背景 */
+  background-color: var(--wc-neutral-200);
   display: block;
   position: relative;
   overflow: hidden;
@@ -150,5 +150,10 @@ const skeletonStyles = computed(() => {
   100% {
     transform: translateX(100%);
   }
+}
+
+/* Dark mode */
+.dark .wc-skeleton {
+  background-color: var(--wc-neutral-700);
 }
 </style> 

@@ -25,7 +25,7 @@ const props = defineProps({
 })
 
 const paperClasses = computed(() => {
-  const baseClasses = 'bg-white dark:bg-neutral-800 transition-all duration-250'
+  const baseClasses = 'transition-all duration-250 bg-[var(--wc-neutral-0)] dark:bg-[var(--wc-neutral-800)]'
   
   const classes = [baseClasses]
   
@@ -36,24 +36,12 @@ const paperClasses = computed(() => {
   
   // Variant styles
   if (props.variant === 'outlined') {
-    classes.push('border border-neutral-200 dark:border-neutral-700')
+    classes.push('border border-[var(--wc-neutral-200)] dark:border-[var(--wc-neutral-700)]')
   } else {
-    // Elevation shadows
-    const shadowMap = {
-      0: 'shadow-none',
-      1: 'shadow-sm',
-      2: 'shadow',
-      3: 'shadow-md',
-      4: 'shadow-lg',
-      6: 'shadow-xl',
-      8: 'shadow-2xl',
-      12: 'shadow-2xl',
-      16: 'shadow-2xl',
-      24: 'shadow-2xl'
+    // 扁平化设计：移除阴影，仅在 elevation > 0 时使用浅色描边
+    if (props.elevation > 0) {
+      classes.push('border border-[var(--wc-neutral-200)] dark:border-[var(--wc-neutral-700)]')
     }
-    
-    const shadow = shadowMap[props.elevation] || shadowMap[1]
-    classes.push(shadow)
   }
   
   return classes
