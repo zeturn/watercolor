@@ -193,4 +193,13 @@ export { default as ColorPicker } from './components/ColorPicker/ColorPicker.vue
 export { default as VerificationCodeInput } from './components/Input/VerificationCodeInput.vue'
 export { default as NumberAnimation } from './components/NumberAnimation/NumberAnimation.vue'
 export { default as Watermark } from './components/Watermark/Watermark.vue'
-export { default as Paradox } from './components/Paradox/Paradox.vue' 
+export { default as Paradox } from './components/Paradox/Paradox.vue'
+
+// React 组件
+export { default as PaginationReact } from './components/Pagination/Pagination.jsx'
+export { default as PaperReact } from './components/Paper/Paper.jsx'
+export { default as ParadoxReact } from './components/Paradox/Paradox.jsx'
+export { default as PopoverReact } from './components/Popover/Popover.jsx'
+export { default as PricingTableReact } from './components/PricingTable/PricingTable.jsx'
+export { default as RadioReact } from './components/Radio/Radio.jsx'
+export { RadioGroup as RadioGroupReact } from './components/Radio/Radio.jsx' 
