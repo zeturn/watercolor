@@ -88,6 +88,12 @@ export { default as ToastReact } from './components/Toast/Toast.jsx'
 export { default as FeedReact } from './components/Feed/Feed.jsx'
 export { default as FeatureReact } from './components/Feature/Feature.jsx'
 export { default as FileInputReact } from './components/FileInput/FileInput.jsx'
+export { default as BannerReact } from './components/Banner/Banner.jsx'
+export { default as BlockquoteReact } from './components/Blockquote/Blockquote.jsx'
+export { default as BoxReact } from './components/Box/Box.jsx'
+export { default as BreadcrumbReact } from './components/Breadcrumb/Breadcrumb.jsx'
+export { default as ChipReact } from './components/Chip/Chip.jsx'
+export { default as ColorPickerReact } from './components/ColorPicker/ColorPicker.jsx'
 
 // 主题工具
 export * from './utils/theme'

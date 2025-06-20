@@ -91,14 +91,18 @@ const emit = defineEmits(['close', 'action'])
 
 const visible = ref(true)
 
-const bannerClasses = computed(() => [
-  'wc-banner',
-  `wc-banner--${props.type}`,
-  `wc-banner--${props.position}`,
-  {
-    'wc-banner--sticky': props.sticky
+const bannerClasses = computed(() => {
+  const base = ['wc-banner', `wc-banner--${props.type}`, `wc-banner--${props.position}`]
+  const sticky = props.sticky ? 'wc-banner--sticky' : ''
+  // Flat design color classes based on Tailwind palette & dark mode
+  const typeFlatClasses = {
+    success: 'bg-success-600 dark:bg-success-500 text-neutral-0',
+    info: 'bg-info-600 dark:bg-info-500 text-neutral-0',
+    warning: 'bg-warning-600 dark:bg-warning-500 text-neutral-0',
+    error: 'bg-error-600 dark:bg-error-500 text-neutral-0'
   }
-])
+  return [...base, sticky, typeFlatClasses[props.type] || typeFlatClasses.info]
+})
 
 const bannerStyles = computed(() => ({
   zIndex: props.zIndex
@@ -226,45 +230,35 @@ const handleAction = () => {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Success Banner */
+/* Success */
 .wc-banner--success {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  color: white;
+  background-color: var(--wc-success-600, #16a34a);
+  color: var(--wc-neutral-0, #ffffff);
 }
 
-.wc-banner--success .wc-banner-icon {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Info Banner */
+/* Info */
 .wc-banner--info {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  color: white;
+  background-color: var(--wc-info-600, #2563eb);
+  color: var(--wc-neutral-0, #ffffff);
 }
 
-.wc-banner--info .wc-banner-icon {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Warning Banner */
+/* Warning */
 .wc-banner--warning {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: white;
+  background-color: var(--wc-warning-600, #d97706);
+  color: var(--wc-neutral-0, #ffffff);
 }
 
-.wc-banner--warning .wc-banner-icon {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Error Banner */
+/* Error */
 .wc-banner--error {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-  color: white;
+  background-color: var(--wc-error-600, #dc2626);
+  color: var(--wc-neutral-0, #ffffff);
 }
 
-.wc-banner--error .wc-banner-icon {
-  background-color: rgba(255, 255, 255, 0.2);
-}
+/* 深色模式覆盖 */
+:deep(.dark) .wc-banner--success { background-color: var(--wc-success-500, #22c55e); }
+:deep(.dark) .wc-banner--info    { background-color: var(--wc-info-500,   #3b82f6); }
+:deep(.dark) .wc-banner--warning { background-color: var(--wc-warning-500,#f59e0b); }
+:deep(.dark) .wc-banner--error   { background-color: var(--wc-error-500,  #ef4444); }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
