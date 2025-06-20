@@ -68,10 +68,7 @@ export { default as Tab } from './components/Tabs/Tabs.vue' // 复用 Tabs 组�
 export * from './utils/theme'
 
 // 兼容性别名和组件包装器
-import TypographyComponent from './components/Display/Typography.vue'
-import BoxComponent from './components/Box/Box.vue'
 import ListItemComponent from './components/Display/ListItem.vue'
-import ButtonComponent from './components/Button/Button.vue'
 import PaperComponent from './components/Paper/Paper.vue'
 
 export const ListItemButton = ListItemComponent

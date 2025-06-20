@@ -1,7 +1,7 @@
 <template>
   <div class="wc-code-input" @paste.prevent="handlePaste">
     <input
-      v-for="(char, index) in boxes"
+      v-for="(_, index) in boxes"
       :key="index"
       ref="inputs"
       class="wc-code-input__box"
