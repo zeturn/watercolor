@@ -1,0 +1,456 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS 变量定义 */
+:root {
+  /* 字体配置 */
+  --wc-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --wc-font-chinese: "";
+  --wc-font-english: "";
+  --wc-font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+
+  /* 主色调 - 使用新的blue配色 */
+  --wc-primary-50: oklch(0.97 0.014 254.604);
+  --wc-primary-100: oklch(0.932 0.032 255.585);
+  --wc-primary-200: oklch(0.882 0.059 254.128);
+  --wc-primary-300: oklch(0.809 0.105 251.813);
+  --wc-primary-400: oklch(0.707 0.165 254.624);
+  --wc-primary-500: oklch(0.623 0.214 259.815);
+  --wc-primary-600: oklch(0.546 0.245 262.881);
+  --wc-primary-700: oklch(0.488 0.243 264.376);
+  --wc-primary-800: oklch(0.424 0.199 265.638);
+  --wc-primary-900: oklch(0.379 0.146 265.522);
+
+  /* 次色调 - 使用新的emerald配色 */
+  --wc-secondary-50: oklch(0.979 0.021 166.113);
+  --wc-secondary-100: oklch(0.95 0.052 163.051);
+  --wc-secondary-200: oklch(0.905 0.093 164.15);
+  --wc-secondary-300: oklch(0.845 0.143 164.978);
+  --wc-secondary-400: oklch(0.765 0.177 163.223);
+  --wc-secondary-500: oklch(0.696 0.17 162.48);
+  --wc-secondary-600: oklch(0.596 0.145 163.225);
+  --wc-secondary-700: oklch(0.508 0.118 165.612);
+  --wc-secondary-800: oklch(0.432 0.095 166.913);
+  --wc-secondary-900: oklch(0.378 0.077 168.94);
+
+  /* 中性色调 - 使用新的neutral配色 */
+  --wc-neutral-0: oklch(1 0 0);
+  --wc-neutral-50: oklch(0.985 0 0);
+  --wc-neutral-100: oklch(0.97 0 0);
+  --wc-neutral-200: oklch(0.922 0 0);
+  --wc-neutral-300: oklch(0.87 0 0);
+  --wc-neutral-400: oklch(0.708 0 0);
+  --wc-neutral-500: oklch(0.556 0 0);
+  --wc-neutral-600: oklch(0.439 0 0);
+  --wc-neutral-700: oklch(0.371 0 0);
+  --wc-neutral-800: oklch(0.269 0 0);
+  --wc-neutral-900: oklch(0.205 0 0);
+  --wc-neutral-950: oklch(0.145 0 0);
+
+  /* 语义色彩 - 保持不变 */
+  /* 成功色 */
+  --wc-success-50: #F0FFF4;
+  --wc-success-100: #EEFFCC;
+  --wc-success-200: #D8FF9A;
+  --wc-success-300: #BDFF67;
+  --wc-success-400: #A2FF41;
+  --wc-success-500: #76FF03;
+  --wc-success-600: #59DB02;
+  --wc-success-700: #40B701;
+  --wc-success-800: #2C9300;
+  --wc-success-900: #1D7A00;
+
+  /* 信息色 */
+  --wc-info-50: #F0FDFA;
+  --wc-info-100: #D9FEFC;
+  --wc-info-200: #B3FEFE;
+  --wc-info-300: #8CF5FE;
+  --wc-info-400: #70E8FD;
+  --wc-info-500: #41D3FC;
+  --wc-info-600: #2FA7D8;
+  --wc-info-700: #207FB5;
+  --wc-info-800: #145B92;
+  --wc-info-900: #0C4178;
+
+  /* 警告色 */
+  --wc-warning-50: #FFFEF0;
+  --wc-warning-100: #FFF9D0;
+  --wc-warning-200: #FFF0A1;
+  --wc-warning-300: #FFE673;
+  --wc-warning-400: #FFDC50;
+  --wc-warning-500: #FFCC16;
+  --wc-warning-600: #DBAA10;
+  --wc-warning-700: #B78A0B;
+  --wc-warning-800: #936B07;
+  --wc-warning-900: #7A5504;
+
+  /* 错误/危险色 */
+  --wc-error-50: #fef2f2;
+  --wc-error-100: #FFE6CF;
+  --wc-error-200: #FFC79F;
+  --wc-error-300: #FFA16F;
+  --wc-error-400: #FF7D4B;
+  --wc-error-500: #ff4010;
+  --wc-error-600: #DB250B;
+  --wc-error-700: #B71108;
+  --wc-error-800: #930508;
+  --wc-error-900: #7A030E;
+
+  --wc-danger-50: #fef2f2;
+  --wc-danger-100: #FFE6CF;
+  --wc-danger-200: #FFC79F;
+  --wc-danger-300: #FFA16F;
+  --wc-danger-400: #FF7D4B;
+  --wc-danger-500: #ff4010;
+  --wc-danger-600: #DB250B;
+  --wc-danger-700: #B71108;
+  --wc-danger-800: #930508;
+  --wc-danger-900: #7A030E;
+
+  /* 扩展调色板 - 使用新的oklch配色 */
+  /* 紫色调色板 */
+  --wc-purple-50: oklch(0.977 0.014 308.299);
+  --wc-purple-100: oklch(0.946 0.033 307.174);
+  --wc-purple-200: oklch(0.902 0.063 306.703);
+  --wc-purple-300: oklch(0.827 0.119 306.383);
+  --wc-purple-400: oklch(0.714 0.203 305.504);
+  --wc-purple-500: oklch(0.627 0.265 303.9);
+  --wc-purple-600: oklch(0.558 0.288 302.321);
+  --wc-purple-700: oklch(0.496 0.265 301.924);
+  --wc-purple-800: oklch(0.438 0.218 303.724);
+  --wc-purple-900: oklch(0.381 0.176 304.987);
+
+  /* 粉色调色板 */
+  --wc-pink-50: oklch(0.971 0.014 343.198);
+  --wc-pink-100: oklch(0.948 0.028 342.258);
+  --wc-pink-200: oklch(0.899 0.061 343.231);
+  --wc-pink-300: oklch(0.823 0.12 346.018);
+  --wc-pink-400: oklch(0.718 0.202 349.761);
+  --wc-pink-500: oklch(0.656 0.241 354.308);
+  --wc-pink-600: oklch(0.592 0.249 0.584);
+  --wc-pink-700: oklch(0.525 0.223 3.958);
+  --wc-pink-800: oklch(0.459 0.187 3.815);
+  --wc-pink-900: oklch(0.408 0.153 2.432);
+
+  /* 青色调色板 */
+  --wc-teal-50: oklch(0.984 0.014 180.72);
+  --wc-teal-100: oklch(0.953 0.051 180.801);
+  --wc-teal-200: oklch(0.91 0.096 180.426);
+  --wc-teal-300: oklch(0.855 0.138 181.071);
+  --wc-teal-400: oklch(0.777 0.152 181.912);
+  --wc-teal-500: oklch(0.704 0.14 182.503);
+  --wc-teal-600: oklch(0.6 0.118 184.704);
+  --wc-teal-700: oklch(0.511 0.096 186.391);
+  --wc-teal-800: oklch(0.437 0.078 188.216);
+  --wc-teal-900: oklch(0.386 0.063 188.416);
+
+  /* 靛蓝调色板 */
+  --wc-indigo-50: oklch(0.962 0.018 272.314);
+  --wc-indigo-100: oklch(0.93 0.034 272.788);
+  --wc-indigo-200: oklch(0.87 0.065 274.039);
+  --wc-indigo-300: oklch(0.785 0.115 274.713);
+  --wc-indigo-400: oklch(0.673 0.182 276.935);
+  --wc-indigo-500: oklch(0.585 0.233 277.117);
+  --wc-indigo-600: oklch(0.511 0.262 276.966);
+  --wc-indigo-700: oklch(0.457 0.24 277.023);
+  --wc-indigo-800: oklch(0.398 0.195 277.366);
+  --wc-indigo-900: oklch(0.359 0.144 278.697);
+}
+
+/* 主题变体 */
+/* 海洋蓝主题 */
+.theme-ocean {
+  --wc-primary-50: #E6F7FF;
+  --wc-primary-100: #BAE7FF;
+  --wc-primary-200: #91D5FF;
+  --wc-primary-300: #69C0FF;
+  --wc-primary-400: #40A9FF;
+  --wc-primary-500: #1890FF;
+  --wc-primary-600: #096DD9;
+  --wc-primary-700: #0050B3;
+  --wc-primary-800: #003A8C;
+  --wc-primary-900: #002766;
+
+  --wc-secondary-50: #E6FFFB;
+  --wc-secondary-100: #B5F5EC;
+  --wc-secondary-200: #87E8DE;
+  --wc-secondary-300: #5CDBD3;
+  --wc-secondary-400: #36CFC9;
+  --wc-secondary-500: #13C2C2;
+  --wc-secondary-600: #08979C;
+  --wc-secondary-700: #006D75;
+  --wc-secondary-800: #00474F;
+  --wc-secondary-900: #002329;
+}
+
+/* 森林绿主题 */
+.theme-forest {
+  --wc-primary-50: #F6FFED;
+  --wc-primary-100: #D9F7BE;
+  --wc-primary-200: #B7EB8F;
+  --wc-primary-300: #95DE64;
+  --wc-primary-400: #73D13D;
+  --wc-primary-500: #52C41A;
+  --wc-primary-600: #389E0D;
+  --wc-primary-700: #237804;
+  --wc-primary-800: #135200;
+  --wc-primary-900: #092B00;
+
+  --wc-secondary-50: #F9FFED;
+  --wc-secondary-100: #EAFF99;
+  --wc-secondary-200: #DEFF66;
+  --wc-secondary-300: #D4FF33;
+  --wc-secondary-400: #CBFF00;
+  --wc-secondary-500: #A6CC00;
+  --wc-secondary-600: #7D9900;
+  --wc-secondary-700: #546600;
+  --wc-secondary-800: #2B3300;
+  --wc-secondary-900: #0F1100;
+}
+
+/* 夕阳橙主题 */
+.theme-sunset {
+  --wc-primary-50: #FFF7E6;
+  --wc-primary-100: #FFE7BA;
+  --wc-primary-200: #FFD591;
+  --wc-primary-300: #FFC069;
+  --wc-primary-400: #FFA940;
+  --wc-primary-500: #FA8C16;
+  --wc-primary-600: #D46B08;
+  --wc-primary-700: #AD4E00;
+  --wc-primary-800: #873800;
+  --wc-primary-900: #612500;
+
+  --wc-secondary-50: #FFF2E8;
+  --wc-secondary-100: #FFD8BF;
+  --wc-secondary-200: #FFBB96;
+  --wc-secondary-300: #FF9C6E;
+  --wc-secondary-400: #FF7A45;
+  --wc-secondary-500: #FF4D4F;
+  --wc-secondary-600: #CF1322;
+  --wc-secondary-700: #A8071A;
+  --wc-secondary-800: #820014;
+  --wc-secondary-900: #5C0011;
+}
+
+/* 紫罗兰主题 */
+.theme-violet {
+  --wc-primary-50: #F9F0FF;
+  --wc-primary-100: #EFDBFF;
+  --wc-primary-200: #D3ADF7;
+  --wc-primary-300: #B37FEB;
+  --wc-primary-400: #9254DE;
+  --wc-primary-500: #722ED1;
+  --wc-primary-600: #531DAB;
+  --wc-primary-700: #391085;
+  --wc-primary-800: #22075E;
+  --wc-primary-900: #120338;
+
+  --wc-secondary-50: #F4F0FF;
+  --wc-secondary-100: #E6D7FF;
+  --wc-secondary-200: #D2B3FF;
+  --wc-secondary-300: #BD8CFF;
+  --wc-secondary-400: #A866FF;
+  --wc-secondary-500: #9340FF;
+  --wc-secondary-600: #7B1FA2;
+  --wc-secondary-700: #6A1B9A;
+  --wc-secondary-800: #4A148C;
+  --wc-secondary-900: #311B92;
+}
+
+/* 玫瑰粉主题 */
+.theme-rose {
+  --wc-primary-50: #FFF0F6;
+  --wc-primary-100: #FFD6E7;
+  --wc-primary-200: #FFADD2;
+  --wc-primary-300: #FF85C0;
+  --wc-primary-400: #F759AB;
+  --wc-primary-500: #EB2F96;
+  --wc-primary-600: #C41D7F;
+  --wc-primary-700: #9E1068;
+  --wc-primary-800: #780650;
+  --wc-primary-900: #520339;
+
+  --wc-secondary-50: #FFF2F6;
+  --wc-secondary-100: #FFE0EC;
+  --wc-secondary-200: #FFCDD2;
+  --wc-secondary-300: #F8BBD9;
+  --wc-secondary-400: #F06292;
+  --wc-secondary-500: #E91E63;
+  --wc-secondary-600: #AD1457;
+  --wc-secondary-700: #880E4F;
+  --wc-secondary-800: #560027;
+  --wc-secondary-900: #37001C;
+}
+
+/* 深色模式 */
+.dark {
+  /* 中性色调在深色模式下的映射 */
+  --wc-neutral-0: oklch(0.145 0 0);
+  --wc-neutral-50: oklch(0.205 0 0);
+  --wc-neutral-100: oklch(0.269 0 0);
+  --wc-neutral-200: oklch(0.371 0 0);
+  --wc-neutral-300: oklch(0.439 0 0);
+  --wc-neutral-400: oklch(0.556 0 0);
+  --wc-neutral-500: oklch(0.708 0 0);
+  --wc-neutral-600: oklch(0.87 0 0);
+  --wc-neutral-700: oklch(0.922 0 0);
+  --wc-neutral-800: oklch(0.97 0 0);
+  --wc-neutral-900: oklch(0.985 0 0);
+  --wc-neutral-950: oklch(1 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  
+  body {
+    @apply bg-neutral-0 text-neutral-900;
+    font-family: var(--wc-font-family);
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  .dark body {
+    @apply bg-neutral-900 text-neutral-100;
+  }
+}
+
+/* 基础样式 - 使用原生CSS以确保兼容性 */
+
+/* 输入框样式 */
+.wc-input {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #f4f4f5;
+  color: #18181b;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  outline: none;
+  font-size: 14px;
+}
+
+.wc-input::placeholder {
+  color: #a1a1aa;
+}
+
+.wc-input:focus {
+  background-color: #e4e4e7;
+  outline: none;
+}
+
+/* 深色模式下的输入框 */
+@media (prefers-color-scheme: dark) {
+  .wc-input {
+    background-color: #27272a;
+    color: #fafafa;
+  }
+  
+  .wc-input::placeholder {
+    color: #71717a;
+  }
+  
+  .wc-input:focus {
+    background-color: #3f3f46;
+  }
+}
+
+/* 卡片样式 */
+.wc-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #e4e4e7;
+  transition: all 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .wc-card {
+    background-color: #27272a;
+    border-color: #3f3f46;
+  }
+}
+
+/* 标签页样式 */
+.wc-tabs {
+  display: flex;
+  gap: 4px;
+  border-radius: 12px;
+  background-color: #f4f4f5;
+  padding: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .wc-tabs {
+    background-color: #27272a;
+  }
+}
+
+.wc-tab {
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: #3f3f46;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.wc-tab--active {
+  background-color: #ffffff;
+  color: #1a8cff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .wc-tab {
+    color: #d4d4d8;
+  }
+  
+  .wc-tab--active {
+    background-color: #3f3f46;
+    color: #75bbff;
+  }
+}
+
+/* 全局组件字体样式 */
+.wc-toast,
+.wc-modal,
+.wc-dropdown,
+.wc-button,
+.wc-textfield,
+.wc-card,
+.wc-input,
+.wc-select,
+.wc-textarea {
+  font-family: var(--wc-font-family);
+}
+
+/* Modal 组件全局样式 */
+.wc-modal-overlay {
+  backdrop-filter: blur(4px);
+}
+
+/* 字体工具类 */
+.font-chinese {
+  font-family: var(--wc-font-chinese), var(--wc-font-family);
+}
+
+.font-english {
+  font-family: var(--wc-font-english), var(--wc-font-family);
+}
+
+.font-system {
+  font-family: var(--wc-font-family);
+}
+
+.font-mono {
+  font-family: var(--wc-font-mono);
+} 
