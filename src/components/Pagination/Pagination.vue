@@ -116,7 +116,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .pagination {
   display: inline-flex;
   align-items: center;
@@ -127,9 +127,9 @@ export default {
   min-width: 32px;
   height: 32px;
   padding: 0 6px;
-  border: 1px solid var(--color-border, #e5e7eb);
-  background: white;
-  color: var(--color-text, #374151);
+  border: 1px solid var(--wc-neutral-200);
+  background: var(--wc-neutral-0);
+  color: var(--wc-neutral-900);
   border-radius: 4px;
   font-size: 0.875rem;
   cursor: pointer;
@@ -137,9 +137,9 @@ export default {
 }
 
 .page-btn:hover:not(:disabled) {
-  background: var(--color-gray-50, #f9fafb);
-  border-color: var(--color-primary, #3b82f6);
-  color: var(--color-primary, #3b82f6);
+  background: var(--wc-neutral-50);
+  border-color: var(--wc-primary-500);
+  color: var(--wc-primary-500);
 }
 
 .page-btn:disabled {
@@ -148,32 +148,31 @@ export default {
 }
 
 .page-btn.active {
-  background: var(--color-primary, #3b82f6);
-  border-color: var(--color-primary, #3b82f6);
-  color: white;
+  background: var(--wc-primary-500);
+  border-color: var(--wc-primary-500);
+  color: var(--wc-neutral-0);
 }
 
 .page-ellipsis {
   padding: 0 6px;
-  color: var(--color-text-secondary, #9ca3af);
+  color: var(--wc-neutral-400);
   user-select: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  .page-btn {
-    background: var(--color-dark-surface, #1f2937);
-    color: var(--color-dark-text, #f9fafb);
-    border-color: var(--color-dark-border, #374151);
-  }
-  .page-btn:hover:not(:disabled) {
-    background: var(--color-dark-hover, #374151);
-    border-color: var(--color-primary, #3b82f6);
-  }
-  .page-btn.active {
-    background: var(--color-primary, #3b82f6);
-  }
-  .page-ellipsis {
-    color: var(--color-dark-text-secondary, #6b7280);
-  }
+/* Dark mode overrides */
+.dark .page-btn {
+  background: var(--wc-neutral-800);
+  color: var(--wc-neutral-100);
+  border-color: var(--wc-neutral-700);
+}
+.dark .page-btn:hover:not(:disabled) {
+  background: var(--wc-neutral-700);
+  border-color: var(--wc-primary-400);
+}
+.dark .page-btn.active {
+  background: var(--wc-primary-400);
+}
+.dark .page-ellipsis {
+  color: var(--wc-neutral-500);
 }
 </style> 

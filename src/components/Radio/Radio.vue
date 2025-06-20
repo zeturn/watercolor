@@ -138,7 +138,7 @@ const handleBlur = () => {
 }
 </script>
 
-<style scoped>
+<style>
 .wc-radio {
   display: inline-flex;
   align-items: center;
@@ -178,9 +178,9 @@ const handleBlur = () => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #d1d5db;
+  border: 2px solid var(--wc-neutral-300);
   border-radius: 50%;
-  background: #ffffff;
+  background: var(--wc-neutral-0);
   transition: all 0.2s ease;
   flex-shrink: 0;
 }
@@ -202,83 +202,83 @@ const handleBlur = () => {
 
 /* Color Variants */
 .wc-radio__button--primary.wc-radio__button--checked {
-  border-color: #3b82f6;
-  background: #3b82f6;
+  border-color: var(--wc-primary-500);
+  background: var(--wc-primary-500);
 }
 
 .wc-radio__button--secondary.wc-radio__button--checked {
-  border-color: #6b7280;
-  background: #6b7280;
+  border-color: var(--wc-secondary-500);
+  background: var(--wc-secondary-500);
 }
 
 .wc-radio__button--success.wc-radio__button--checked {
-  border-color: #10b981;
-  background: #10b981;
+  border-color: var(--wc-success-500);
+  background: var(--wc-success-500);
 }
 
 .wc-radio__button--error.wc-radio__button--checked {
-  border-color: #ef4444;
-  background: #ef4444;
+  border-color: var(--wc-error-500);
+  background: var(--wc-error-500);
 }
 
 .wc-radio__button--warning.wc-radio__button--checked {
-  border-color: #f59e0b;
-  background: #f59e0b;
+  border-color: var(--wc-warning-500);
+  background: var(--wc-warning-500);
 }
 
 .wc-radio__button--info.wc-radio__button--checked {
-  border-color: #06b6d4;
-  background: #06b6d4;
+  border-color: var(--wc-info-500);
+  background: var(--wc-info-500);
 }
 
 /* Hover Effects */
 .wc-radio:hover .wc-radio__button--primary {
-  border-color: #3b82f6;
+  border-color: var(--wc-primary-500);
 }
 
 .wc-radio:hover .wc-radio__button--secondary {
-  border-color: #6b7280;
+  border-color: var(--wc-secondary-500);
 }
 
 .wc-radio:hover .wc-radio__button--success {
-  border-color: #10b981;
+  border-color: var(--wc-success-500);
 }
 
 .wc-radio:hover .wc-radio__button--error {
-  border-color: #ef4444;
+  border-color: var(--wc-error-500);
 }
 
 .wc-radio:hover .wc-radio__button--warning {
-  border-color: #f59e0b;
+  border-color: var(--wc-warning-500);
 }
 
 .wc-radio:hover .wc-radio__button--info {
-  border-color: #06b6d4;
+  border-color: var(--wc-info-500);
 }
 
 /* Focus Ring */
 .wc-radio--focused .wc-radio__button--primary {
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  outline: 2px solid var(--wc-primary-200);
 }
 
 .wc-radio--focused .wc-radio__button--secondary {
-  box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.2);
+  outline: 2px solid var(--wc-secondary-200);
 }
 
 .wc-radio--focused .wc-radio__button--success {
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  outline: 2px solid var(--wc-success-200);
 }
 
 .wc-radio--focused .wc-radio__button--error {
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+  outline: 2px solid var(--wc-error-200);
 }
 
 .wc-radio--focused .wc-radio__button--warning {
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+  outline: 2px solid var(--wc-warning-200);
 }
 
 .wc-radio--focused .wc-radio__button--info {
-  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+  outline: 2px solid var(--wc-info-200);
 }
 
 /* Radio Dot */
@@ -286,7 +286,7 @@ const handleBlur = () => {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: white;
+  background: var(--wc-neutral-0);
   display: block;
 }
 
@@ -303,27 +303,25 @@ const handleBlur = () => {
 /* Label */
 .radio-label {
   margin-left: 8px;
-  color: #374151;
+  color: var(--wc-neutral-900);
   line-height: 1.5;
 }
 
 .wc-radio--disabled .radio-label {
-  color: #9ca3af;
+  color: var(--wc-neutral-400);
 }
 
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  .wc-radio__button {
-    background: #1f2937;
-    border-color: #4b5563;
-  }
-  
-  .radio-label {
-    color: #d1d5db;
-  }
-  
-  .wc-radio--disabled .radio-label {
-    color: #6b7280;
-  }
+/* Dark mode */
+.dark .wc-radio__button {
+  background: var(--wc-neutral-800);
+  border-color: var(--wc-neutral-600);
+}
+
+.dark .radio-label {
+  color: var(--wc-neutral-100);
+}
+
+.dark .wc-radio--disabled .radio-label {
+  color: var(--wc-neutral-500);
 }
 </style> 
