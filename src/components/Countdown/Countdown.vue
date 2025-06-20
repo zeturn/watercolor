@@ -27,7 +27,7 @@ const props = defineProps({
   /** 文本颜色 */
   color: {
     type: String,
-    default: '#000'
+    default: '' // 若未指定，则自动使用主题中性色
   }
 })
 
@@ -79,10 +79,16 @@ const formattedTime = computed(() => {
   else return `${pad(minutes)}:${pad(seconds)}`
 })
 
-const wrapperStyle = computed(() => ({
-  fontSize: props.fontSize,
-  color: props.color
-}))
+const wrapperStyle = computed(() => {
+  // 当未显式设置颜色时，使用主题中性色；暗色模式下使用浅色
+  const defaultColor = document.documentElement.classList.contains('dark')
+    ? 'var(--wc-neutral-100)'
+    : 'var(--wc-neutral-900)'
+  return {
+    fontSize: props.fontSize,
+    color: props.color || defaultColor
+  }
+})
 
 /** 对外暴露方法 */
 defineExpose({ start, clear })
