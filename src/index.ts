@@ -212,8 +212,22 @@ export { default as VerificationCodeInput } from './components/Input/Verificatio
 export { default as NumberAnimation } from './components/NumberAnimation/NumberAnimation.vue'
 export { default as Watermark } from './components/Watermark/Watermark.vue'
 export { default as Paradox } from './components/Paradox/Paradox.vue'
-
+=======
 // New React Components
+export { default as ListReact } from './components/List/List.jsx'
+export { default as ListItemReact } from './components/List/ListItem.jsx'
+export { default as ListItemTextReact } from './components/List/ListItemText.jsx'
+export { default as ListItemIconReact } from './components/List/ListItemIcon.jsx'
+
+export { default as AppBarReact } from './components/Navigation/AppBar.jsx'
+export { default as ToolbarReact } from './components/Navigation/Toolbar.jsx'
+export { default as MenuReact } from './components/Navigation/Menu.jsx'
+export { default as MenuItemReact } from './components/Navigation/MenuItem.jsx'
+
+export { default as MarqueeReact } from './components/Marquee/Marquee.jsx'
+
+export { default as NumberAnimationReact } from './components/NumberAnimation/NumberAnimation.jsx' 
+
 export { default as FormControlReact } from './components/Form/FormControl.jsx'
 export { default as FormControlLabelReact } from './components/Form/FormControlLabel.jsx'
 export { default as FormGroupReact } from './components/Form/FormGroup.jsx'
@@ -222,7 +236,6 @@ export { default as GridReact } from './components/Grid/Grid.jsx'
 export { default as HoverCardReact } from './components/HoverCard/HoverCard.jsx'
 export { default as ImageGalleryReact } from './components/ImageGallery/ImageGallery.jsx' 
 
-// React 组件
 export { default as PaginationReact } from './components/Pagination/Pagination.jsx'
 export { default as PaperReact } from './components/Paper/Paper.jsx'
 export { default as ParadoxReact } from './components/Paradox/Paradox.jsx'
@@ -230,3 +243,4 @@ export { default as PopoverReact } from './components/Popover/Popover.jsx'
 export { default as PricingTableReact } from './components/PricingTable/PricingTable.jsx'
 export { default as RadioReact } from './components/Radio/Radio.jsx'
 export { RadioGroup as RadioGroupReact } from './components/Radio/Radio.jsx' 
+

@@ -156,6 +156,19 @@
   --wc-indigo-700: oklch(0.457 0.24 277.023);
   --wc-indigo-800: oklch(0.398 0.195 277.366);
   --wc-indigo-900: oklch(0.359 0.144 278.697);
+
+  /* 别名变量：兼容旧组件中的 --color-* 命名 */
+  --color-primary: var(--wc-primary-500);
+  --color-secondary: var(--wc-secondary-500);
+  --color-gray-50: var(--wc-neutral-50);
+  --color-gray-300: var(--wc-neutral-300);
+  --color-border: var(--wc-neutral-200);
+  --color-text: var(--wc-neutral-900);
+  --color-text-secondary: var(--wc-neutral-600);
+  --color-dark-surface: var(--wc-neutral-800);
+  --color-dark-border: var(--wc-neutral-700);
+  --color-dark-text: var(--wc-neutral-100);
+  --color-dark-text-secondary: var(--wc-neutral-400);
 }
 
 /* Theme variants */
