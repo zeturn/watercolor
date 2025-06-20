@@ -19,20 +19,31 @@ const props = defineProps({
 })
 </script>
 
-<style scoped>
+<style>
 .wc-paradox {
   font-style: italic;
   position: relative;
   padding: 12px 16px;
-  border-left: 4px solid #ccc;
-  background: #f9f9f9;
-  color: #333;
+  border-left: 4px solid var(--wc-primary-500);
+  background: var(--wc-neutral-50);
+  color: var(--wc-neutral-900);
   cursor: default;
   user-select: none;
   transition: color 0.3s ease;
 }
 
 .wc-paradox:hover {
-  color: #ff5f5f;
+  color: var(--wc-primary-600);
+}
+
+/* Dark mode */
+.dark .wc-paradox {
+  background: var(--wc-neutral-800);
+  color: var(--wc-neutral-100);
+  border-left-color: var(--wc-primary-400);
+}
+
+.dark .wc-paradox:hover {
+  color: var(--wc-primary-300);
 }
 </style> 
