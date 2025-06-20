@@ -76,9 +76,9 @@ provide('tableContext', {
 <style scoped>
 .wc-table-container {
   overflow-x: auto;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--wc-neutral-200);
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: var(--wc-neutral-0);
 }
 
 .wc-table-container--sticky {
@@ -93,26 +93,18 @@ provide('tableContext', {
 }
 
 /* Size variants */
-.wc-table--sm {
-  font-size: 12px;
-}
-
-.wc-table--md {
-  font-size: 14px;
-}
-
-.wc-table--lg {
-  font-size: 16px;
-}
+.wc-table--sm { font-size: 12px; }
+.wc-table--md { font-size: 14px; }
+.wc-table--lg { font-size: 16px; }
 
 /* Hover effect */
 .wc-table--hover :deep(tbody tr:hover) {
-  background-color: #f9fafb;
+  background-color: var(--wc-neutral-50);
 }
 
 /* Striped rows */
 .wc-table--striped :deep(tbody tr:nth-child(even)) {
-  background-color: #f8fafc;
+  background-color: var(--wc-neutral-100);
 }
 
 /* Dense table */
@@ -121,19 +113,17 @@ provide('tableContext', {
   padding: 8px 12px;
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .wc-table-container {
-    border-color: #374151;
-    background-color: #111827;
-  }
-  
-  .wc-table--hover :deep(tbody tr:hover) {
-    background-color: #1f2937;
-  }
-  
-  .wc-table--striped :deep(tbody tr:nth-child(even)) {
-    background-color: #1f2937;
-  }
+/* Dark mode */
+.dark .wc-table-container {
+  border-color: var(--wc-neutral-700);
+  background-color: var(--wc-neutral-800);
+}
+
+.dark .wc-table--hover :deep(tbody tr:hover) {
+  background-color: var(--wc-neutral-700);
+}
+
+.dark .wc-table--striped :deep(tbody tr:nth-child(even)) {
+  background-color: var(--wc-neutral-700);
 }
 </style> 

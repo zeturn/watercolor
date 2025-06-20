@@ -60,16 +60,16 @@ const handleClick = (event) => {
 
 <style scoped>
 .wc-table-row {
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--wc-neutral-200);
   transition: background-color 0.2s ease;
 }
 
 .wc-table-row--hover:hover {
-  background-color: #f9fafb;
+  background-color: var(--wc-neutral-50);
 }
 
 .wc-table-row--selected {
-  background-color: #dbeafe;
+  background-color: var(--wc-primary-100);
 }
 
 .wc-table-row--clickable {
@@ -77,25 +77,12 @@ const handleClick = (event) => {
 }
 
 .wc-table-row--clickable:active {
-  background-color: #f3f4f6;
+  background-color: var(--wc-neutral-100);
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .wc-table-row {
-    border-bottom-color: #374151;
-  }
-  
-  .wc-table-row--hover:hover {
-    background-color: #1f2937;
-  }
-  
-  .wc-table-row--selected {
-    background-color: #1e3a8a;
-  }
-  
-  .wc-table-row--clickable:active {
-    background-color: #374151;
-  }
-}
+/* Dark mode */
+.dark .wc-table-row { border-bottom-color: var(--wc-neutral-700); }
+.dark .wc-table-row--hover:hover { background-color: var(--wc-neutral-700); }
+.dark .wc-table-row--selected { background-color: var(--wc-primary-700); }
+.dark .wc-table-row--clickable:active { background-color: var(--wc-neutral-700); }
 </style> 
