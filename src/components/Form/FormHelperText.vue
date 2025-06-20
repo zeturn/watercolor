@@ -92,13 +92,13 @@ const helperTextClasses = computed(() => {
   font-size: 12px;
   line-height: 1.4;
   font-weight: 400;
-  color: #6b7280;
+  color: var(--color-text-secondary, #6b7280);
   transition: all 0.2s ease-in-out;
   display: block;
 }
 
 .dark .form-helper-text {
-  color: #9ca3af;
+  color: var(--color-dark-text-secondary, #9ca3af);
 }
 
 /* Size variants */
@@ -121,28 +121,28 @@ const helperTextClasses = computed(() => {
 
 /* State variants */
 .form-helper-text--error {
-  color: #ef4444;
+  color: var(--color-error, #ef4444);
 }
 
 .dark .form-helper-text--error {
-  color: #f87171;
+  color: var(--color-dark-error, #f87171);
 }
 
 .form-helper-text--disabled {
-  color: #d1d5db;
+  color: var(--color-disabled-text, #d1d5db);
   opacity: 0.7;
 }
 
 .dark .form-helper-text--disabled {
-  color: #6b7280;
+  color: var(--color-dark-disabled-text, #6b7280);
 }
 
 .form-helper-text--focused {
-  color: #3b82f6;
+  color: var(--color-primary, #3b82f6);
 }
 
 .dark .form-helper-text--focused {
-  color: #60a5fa;
+  color: var(--color-dark-primary, #60a5fa);
 }
 
 /* Animation for error state */

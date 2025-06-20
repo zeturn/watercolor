@@ -93,6 +93,14 @@ export { default as CopyReact } from './components/Copy/Copy.jsx'
 export { default as CountdownReact } from './components/Countdown/Countdown.jsx'
 export { default as DatePickerReact } from './components/DatePicker/DatePicker.jsx'
 export { default as AlertReact } from './components/Feedback/Alert.jsx'
+
+export { default as BannerReact } from './components/Banner/Banner.jsx'
+export { default as BlockquoteReact } from './components/Blockquote/Blockquote.jsx'
+export { default as BoxReact } from './components/Box/Box.jsx'
+export { default as BreadcrumbReact } from './components/Breadcrumb/Breadcrumb.jsx'
+export { default as ChipReact } from './components/Chip/Chip.jsx'
+export { default as ColorPickerReact } from './components/ColorPicker/ColorPicker.jsx'
+
 export { default as TableReact } from './components/Table/Table.jsx'
 export { default as TypographyReact } from './components/Typography/Typography.jsx'
 export { default as TypingTextReact } from './components/TypingText/TypingText.jsx'
@@ -204,6 +212,15 @@ export { default as VerificationCodeInput } from './components/Input/Verificatio
 export { default as NumberAnimation } from './components/NumberAnimation/NumberAnimation.vue'
 export { default as Watermark } from './components/Watermark/Watermark.vue'
 export { default as Paradox } from './components/Paradox/Paradox.vue'
+
+// New React Components
+export { default as FormControlReact } from './components/Form/FormControl.jsx'
+export { default as FormControlLabelReact } from './components/Form/FormControlLabel.jsx'
+export { default as FormGroupReact } from './components/Form/FormGroup.jsx'
+export { default as FormHelperTextReact } from './components/Form/FormHelperText.jsx'
+export { default as GridReact } from './components/Grid/Grid.jsx'
+export { default as HoverCardReact } from './components/HoverCard/HoverCard.jsx'
+export { default as ImageGalleryReact } from './components/ImageGallery/ImageGallery.jsx' 
 
 // React 组件
 export { default as PaginationReact } from './components/Pagination/Pagination.jsx'

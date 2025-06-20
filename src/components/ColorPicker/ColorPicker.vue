@@ -56,7 +56,7 @@ function onInput(e: Event) {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 2px solid #e5e7eb; /* 默认边框 */
+  border: 2px solid var(--wc-neutral-200, #e5e7eb); /* 默认边框 */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   display: inline-block;
@@ -69,15 +69,14 @@ function onInput(e: Event) {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* 深色模式下的边框与阴影 */
-@media (prefers-color-scheme: dark) {
-  .wc-color-picker__preview {
-    border-color: #4b5563;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-  }
-  .wc-color-picker__label:hover .wc-color-picker__preview,
-  .wc-color-picker__input:focus + .wc-color-picker__preview {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-  }
+/* 深色模式 */
+:deep(.dark) .wc-color-picker__preview {
+  border-color: var(--wc-neutral-600, #4b5563);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+:deep(.dark) .wc-color-picker__label:hover .wc-color-picker__preview,
+:deep(.dark) .wc-color-picker__input:focus + .wc-color-picker__preview {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 </style> 
