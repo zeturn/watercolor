@@ -69,12 +69,12 @@ export default {
 }
 .slideover-panel {
   position: relative;
-  background: white;
+  background: var(--wc-neutral-0);
   max-height: 100vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  box-shadow: -4px 0 12px rgba(0,0,0,0.1);
+  /* Flat design: remove shadow */
 }
 .slideover-left { order: 0; }
 .slideover-right { order: 1; }
@@ -87,8 +87,8 @@ export default {
   font-size: 1.25rem;
   cursor: pointer;
 }
-.slideover-header, .slideover-footer { padding: 16px; border-bottom: 1px solid #e5e7eb; }
-.slideover-footer { border-top: 1px solid #e5e7eb; border-bottom: none; }
+.slideover-header, .slideover-footer { padding: 16px; border-bottom: 1px solid var(--wc-neutral-200); }
+.slideover-footer { border-top: 1px solid var(--wc-neutral-200); border-bottom: none; }
 .slideover-body { padding: 16px; flex: 1 1 auto; }
 
 .slideover-enter-active, .slideover-leave-active { transition: transform 0.3s ease, opacity 0.3s ease; }
@@ -98,8 +98,5 @@ export default {
 .slideover-left.slideover-panel.slideover-enter-from { transform: translateX(-100%); }
 .slideover-left.slideover-panel.slideover-leave-to { transform: translateX(-100%); }
 
-@media (prefers-color-scheme: dark) {
-  .slideover-panel { background: var(--color-dark-surface, #1f2937); color: var(--color-dark-text, #f9fafb); }
-  .slideover-header, .slideover-footer { border-color: var(--color-dark-border, #374151); }
-}
+/* Dark mode handled via CSS variables */
 </style> 

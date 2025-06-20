@@ -88,6 +88,11 @@ export { default as ToastReact } from './components/Toast/Toast.jsx'
 export { default as FeedReact } from './components/Feed/Feed.jsx'
 export { default as FeatureReact } from './components/Feature/Feature.jsx'
 export { default as FileInputReact } from './components/FileInput/FileInput.jsx'
+export { default as SpinnerReact } from './components/Spinner/Spinner.jsx'
+export { default as SliderReact } from './components/Slider/Slider.jsx'
+export { default as SlideOverReact } from './components/SlideOver/SlideOver.jsx'
+export { default as SkeletonReact } from './components/Skeleton/Skeleton.jsx'
+export { default as RatingReact } from './components/Rating/Rating.jsx'
 
 // 主题工具
 export * from './utils/theme'
