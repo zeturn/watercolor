@@ -93,14 +93,15 @@ export default {
 <style scoped>
 .video-wrapper { width: 100%; max-width: 640px; margin: 0 auto; }
 .video-el { width: 100%; border-radius: 8px; background: black; }
-.controls { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 0.875rem; }
+.controls { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 0.875rem; color: var(--wc-neutral-700); }
 .ctrl-btn { background: none; border: none; cursor: pointer; font-size: 1rem; }
-.progress { flex: 1 1 auto; height: 6px; background: var(--color-gray-300, #d1d5db); border-radius: 3px; cursor: pointer; position: relative; }
-.progress-bar { height: 100%; background: var(--color-primary, #3b82f6); border-radius: 3px; }
+.progress { flex: 1 1 auto; height: 6px; background: var(--wc-neutral-300); border-radius: 3px; cursor: pointer; position: relative; }
+.progress-bar { height: 100%; background: var(--wc-primary-500); border-radius: 3px; }
 .volume { width: 80px; }
 .time { min-width: 60px; text-align: center; }
-@media (prefers-color-scheme: dark) {
-  .progress { background: var(--color-dark-border, #4b5563); }
-  .controls { color: var(--color-dark-text, #f9fafb); }
-}
+
+/* Dark mode */
+.dark .controls { color: var(--wc-neutral-200); }
+.dark .progress { background: var(--wc-neutral-600); }
+.dark .progress-bar { background: var(--wc-primary-400); }
 </style> 

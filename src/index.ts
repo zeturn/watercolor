@@ -88,6 +88,16 @@ export { default as ToastReact } from './components/Toast/Toast.jsx'
 export { default as FeedReact } from './components/Feed/Feed.jsx'
 export { default as FeatureReact } from './components/Feature/Feature.jsx'
 export { default as FileInputReact } from './components/FileInput/FileInput.jsx'
+export { default as TableReact } from './components/Table/Table.jsx'
+export { default as TypographyReact } from './components/Typography/Typography.jsx'
+export { default as TypingTextReact } from './components/TypingText/TypingText.jsx'
+export { default as VideoPlayerReact } from './components/VideoPlayer/VideoPlayer.jsx'
+export { default as WatermarkReact } from './components/Watermark/Watermark.jsx'
+export { default as SpinnerReact } from './components/Spinner/Spinner.jsx'
+export { default as SliderReact } from './components/Slider/Slider.jsx'
+export { default as SlideOverReact } from './components/SlideOver/SlideOver.jsx'
+export { default as SkeletonReact } from './components/Skeleton/Skeleton.jsx'
+export { default as RatingReact } from './components/Rating/Rating.jsx'
 
 // 主题工具
 export * from './utils/theme'
@@ -189,8 +199,8 @@ export { default as VerificationCodeInput } from './components/Input/Verificatio
 export { default as NumberAnimation } from './components/NumberAnimation/NumberAnimation.vue'
 export { default as Watermark } from './components/Watermark/Watermark.vue'
 export { default as Paradox } from './components/Paradox/Paradox.vue'
-
-// === 新增：List / Navigation / Marquee / NumberAnimation React 组件 ===
+=======
+// New React Components
 export { default as ListReact } from './components/List/List.jsx'
 export { default as ListItemReact } from './components/List/ListItem.jsx'
 export { default as ListItemTextReact } from './components/List/ListItemText.jsx'
@@ -204,3 +214,20 @@ export { default as MenuItemReact } from './components/Navigation/MenuItem.jsx'
 export { default as MarqueeReact } from './components/Marquee/Marquee.jsx'
 
 export { default as NumberAnimationReact } from './components/NumberAnimation/NumberAnimation.jsx' 
+
+export { default as FormControlReact } from './components/Form/FormControl.jsx'
+export { default as FormControlLabelReact } from './components/Form/FormControlLabel.jsx'
+export { default as FormGroupReact } from './components/Form/FormGroup.jsx'
+export { default as FormHelperTextReact } from './components/Form/FormHelperText.jsx'
+export { default as GridReact } from './components/Grid/Grid.jsx'
+export { default as HoverCardReact } from './components/HoverCard/HoverCard.jsx'
+export { default as ImageGalleryReact } from './components/ImageGallery/ImageGallery.jsx' 
+
+export { default as PaginationReact } from './components/Pagination/Pagination.jsx'
+export { default as PaperReact } from './components/Paper/Paper.jsx'
+export { default as ParadoxReact } from './components/Paradox/Paradox.jsx'
+export { default as PopoverReact } from './components/Popover/Popover.jsx'
+export { default as PricingTableReact } from './components/PricingTable/PricingTable.jsx'
+export { default as RadioReact } from './components/Radio/Radio.jsx'
+export { RadioGroup as RadioGroupReact } from './components/Radio/Radio.jsx' 
+

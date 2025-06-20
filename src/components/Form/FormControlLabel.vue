@@ -134,12 +134,12 @@ const handleClick = (event) => {
 .form-control-label__text {
   font-size: 14px;
   line-height: 1.5;
-  color: #374151;
+  color: var(--color-text-secondary, #374151);
   font-weight: 400;
 }
 
 .dark .form-control-label__text {
-  color: #f3f4f6;
+  color: var(--color-dark-text, #f3f4f6);
 }
 
 /* Spacing based on placement */
@@ -161,7 +161,7 @@ const handleClick = (event) => {
 
 /* Required indicator */
 .form-control-label__required {
-  color: #ef4444;
+  color: var(--color-error, #ef4444);
   margin-left: 2px;
   font-weight: 500;
 }
@@ -174,16 +174,16 @@ const handleClick = (event) => {
 }
 
 .form-control-label__text--disabled {
-  color: #9ca3af;
+  color: var(--color-disabled-text, #9ca3af);
 }
 
 .dark .form-control-label__text--disabled {
-  color: #6b7280;
+  color: var(--color-dark-disabled-text, #6b7280);
 }
 
 /* Focus styles for accessibility */
 .form-control-label:focus-within {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid var(--color-primary, #3b82f6);
   outline-offset: 2px;
   border-radius: 4px;
 }

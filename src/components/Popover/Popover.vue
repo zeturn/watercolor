@@ -139,27 +139,27 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .popover-trigger {
   padding: 6px 12px;
-  border: 1px solid var(--color-border, #e5e7eb);
-  background: white;
+  border: 1px solid var(--wc-neutral-200);
+  background: var(--wc-neutral-0);
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 .popover-trigger:hover {
-  background: var(--color-gray-50, #f9fafb);
+  background: var(--wc-neutral-50);
 }
 
 .popover-content {
   position: absolute;
   z-index: 2000;
   min-width: 180px;
-  background: white;
-  border: 1px solid var(--color-border, #e5e7eb);
+  background: var(--wc-neutral-0);
+  border: 1px solid var(--wc-neutral-200);
   border-radius: 6px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  box-shadow: none;
   padding: 12px;
 }
 
@@ -173,19 +173,18 @@ export default {
   transform: scale(0.95);
 }
 
-@media (prefers-color-scheme: dark) {
-  .popover-content {
-    background: var(--color-dark-surface, #1f2937);
-    border-color: var(--color-dark-border, #374151);
-    color: var(--color-dark-text, #f9fafb);
-  }
-  .popover-trigger {
-    background: var(--color-dark-surface, #1f2937);
-    color: var(--color-dark-text, #f9fafb);
-    border-color: var(--color-dark-border, #374151);
-  }
-  .popover-trigger:hover {
-    background: var(--color-dark-hover, #374151);
-  }
+/* Dark mode */
+.dark .popover-content {
+  background: var(--wc-neutral-800);
+  border-color: var(--wc-neutral-700);
+  color: var(--wc-neutral-100);
+}
+.dark .popover-trigger {
+  background: var(--wc-neutral-800);
+  color: var(--wc-neutral-100);
+  border-color: var(--wc-neutral-700);
+}
+.dark .popover-trigger:hover {
+  background: var(--wc-neutral-700);
 }
 </style> 
