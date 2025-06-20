@@ -188,4 +188,19 @@ export { default as ColorPicker } from './components/ColorPicker/ColorPicker.vue
 export { default as VerificationCodeInput } from './components/Input/VerificationCodeInput.vue'
 export { default as NumberAnimation } from './components/NumberAnimation/NumberAnimation.vue'
 export { default as Watermark } from './components/Watermark/Watermark.vue'
-export { default as Paradox } from './components/Paradox/Paradox.vue' 
+export { default as Paradox } from './components/Paradox/Paradox.vue'
+
+// === 新增：List / Navigation / Marquee / NumberAnimation React 组件 ===
+export { default as ListReact } from './components/List/List.jsx'
+export { default as ListItemReact } from './components/List/ListItem.jsx'
+export { default as ListItemTextReact } from './components/List/ListItemText.jsx'
+export { default as ListItemIconReact } from './components/List/ListItemIcon.jsx'
+
+export { default as AppBarReact } from './components/Navigation/AppBar.jsx'
+export { default as ToolbarReact } from './components/Navigation/Toolbar.jsx'
+export { default as MenuReact } from './components/Navigation/Menu.jsx'
+export { default as MenuItemReact } from './components/Navigation/MenuItem.jsx'
+
+export { default as MarqueeReact } from './components/Marquee/Marquee.jsx'
+
+export { default as NumberAnimationReact } from './components/NumberAnimation/NumberAnimation.jsx' 
