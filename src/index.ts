@@ -188,4 +188,13 @@ export { default as ColorPicker } from './components/ColorPicker/ColorPicker.vue
 export { default as VerificationCodeInput } from './components/Input/VerificationCodeInput.vue'
 export { default as NumberAnimation } from './components/NumberAnimation/NumberAnimation.vue'
 export { default as Watermark } from './components/Watermark/Watermark.vue'
-export { default as Paradox } from './components/Paradox/Paradox.vue' 
+export { default as Paradox } from './components/Paradox/Paradox.vue'
+
+// New React Components
+export { default as FormControlReact } from './components/Form/FormControl.jsx'
+export { default as FormControlLabelReact } from './components/Form/FormControlLabel.jsx'
+export { default as FormGroupReact } from './components/Form/FormGroup.jsx'
+export { default as FormHelperTextReact } from './components/Form/FormHelperText.jsx'
+export { default as GridReact } from './components/Grid/Grid.jsx'
+export { default as HoverCardReact } from './components/HoverCard/HoverCard.jsx'
+export { default as ImageGalleryReact } from './components/ImageGallery/ImageGallery.jsx' 
