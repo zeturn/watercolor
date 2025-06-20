@@ -1,7 +1,7 @@
 {
   "name": "watercolor-ui",
   "version": "1.0.0",
-  "description": "一个现代化的极简跨框架组件库",
+  "description": "A modern minimalist cross-framework component library",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

@@ -35,34 +35,34 @@ export interface WatercolorTheme {
 }
 
 /**
- * 设置主题色彩和字体
- * @param theme 主题配置对象
+ * Set theme colors and fonts
+ * @param theme Theme configuration object
  */
 export function setTheme(theme: WatercolorTheme): void {
   const root = document.documentElement
 
-  // 设置主色调
+  // Set primary colors
   if (theme.primary) {
     Object.entries(theme.primary).forEach(([shade, color]) => {
       root.style.setProperty(`--wc-primary-${shade}`, color)
     })
   }
 
-  // 设置次色调
+  // Set secondary colors
   if (theme.secondary) {
     Object.entries(theme.secondary).forEach(([shade, color]) => {
       root.style.setProperty(`--wc-secondary-${shade}`, color)
     })
   }
 
-  // 设置中性色调
+  // Set neutral colors
   if (theme.neutral) {
     Object.entries(theme.neutral).forEach(([shade, color]) => {
       root.style.setProperty(`--wc-neutral-${shade}`, color)
     })
   }
 
-  // 设置语义色彩
+  // Set semantic colors
   if (theme.success) {
     Object.entries(theme.success).forEach(([shade, color]) => {
       root.style.setProperty(`--wc-success-${shade}`, color)
@@ -93,7 +93,7 @@ export function setTheme(theme: WatercolorTheme): void {
     })
   }
 
-  // 设置扩展调色板
+  // Set extended color palette
   if (theme.purple) {
     Object.entries(theme.purple).forEach(([shade, color]) => {
       root.style.setProperty(`--wc-purple-${shade}`, color)
@@ -118,66 +118,66 @@ export function setTheme(theme: WatercolorTheme): void {
     })
   }
 
-  // 设置字体
+  // Set fonts
   if (theme.fonts) {
     setFonts(theme.fonts)
   }
 }
 
 /**
- * 应用CSS类主题
- * @param themeName 主题名称
+ * Apply CSS class theme
+ * @param themeName Theme name
  */
 export function applyCSSTheme(themeName: string): void {
   const root = document.documentElement
   
-  // 移除所有主题类
+  // Remove all theme classes
   root.classList.remove('theme-ocean', 'theme-forest', 'theme-sunset', 'theme-violet', 'theme-rose')
   
-  // 应用新主题类
+  // Apply new theme class
   if (themeName !== 'default') {
     root.classList.add(`theme-${themeName}`)
   }
 }
 
 /**
- * 设置字体配置
- * @param fonts 字体配置对象
+ * Set font configuration
+ * @param fonts Font configuration object
  */
 export function setFonts(fonts: FontConfig): void {
   const root = document.documentElement
   
-  // 构建字体栈
+  // Build font stack
   let fontStack: string[] = []
   
-  // 添加中文字体
+  // Add Chinese fonts
   if (fonts.chinese) {
     fontStack.push(`"${fonts.chinese}"`)
   }
   
-  // 添加英文字体
+  // Add English fonts
   if (fonts.english) {
     fontStack.push(`"${fonts.english}"`)
   }
   
-  // 添加默认后备字体
+  // Add default fallback fonts
   const defaultFallback = fonts.fallback || '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"'
   fontStack.push(defaultFallback)
   
   const finalFontFamily = fontStack.join(', ')
   
-  // 设置CSS变量
+  // Set CSS variables
   root.style.setProperty('--wc-font-family', finalFontFamily)
   root.style.setProperty('--wc-font-chinese', fonts.chinese || '')
   root.style.setProperty('--wc-font-english', fonts.english || '')
   
-  // 立即应用到body
+  // Apply to body immediately
   document.body.style.fontFamily = finalFontFamily
 }
 
 /**
- * 切换深色模式
- * @param isDark 是否为深色模式
+ * Toggle dark mode
+ * @param isDark Whether it's dark mode
  */
 export function toggleDarkMode(isDark: boolean): void {
   const root = document.documentElement
@@ -189,17 +189,17 @@ export function toggleDarkMode(isDark: boolean): void {
 }
 
 /**
- * 获取当前是否为深色模式
+ * Get current dark mode status
  */
 export function isDarkMode(): boolean {
   return document.documentElement.classList.contains('dark')
 }
 
 /**
- * 6个主题配置 - 默认主题更新为oklch格式
+ * 6 theme configurations - Default theme updated to oklch format
  */
 export const themes = {
-  // 默认主题 - 使用新的oklch配色
+  // Default theme - using new oklch colors
   default: {
     primary: {
       50: 'oklch(0.97 0.014 254.604)',
@@ -227,7 +227,7 @@ export const themes = {
     }
   },
   
-  // 海洋蓝主题
+  // Ocean blue theme
   ocean: {
     primary: {
       50: '#E6F7FF',
@@ -255,7 +255,7 @@ export const themes = {
     }
   },
   
-  // 森林绿主题
+  // Forest green theme
   forest: {
     primary: {
       50: '#F6FFED',
@@ -283,7 +283,7 @@ export const themes = {
     }
   },
   
-  // 夕阳橙主题
+  // Sunset orange theme
   sunset: {
     primary: {
       50: '#FFF7E6',
@@ -311,7 +311,7 @@ export const themes = {
     }
   },
   
-  // 紫罗兰主题
+  // Violet theme
   violet: {
     primary: {
       50: '#F9F0FF',
@@ -339,7 +339,7 @@ export const themes = {
     }
   },
   
-  // 玫瑰粉主题
+  // Rose pink theme
   rose: {
     primary: {
       50: '#FFF0F6',
@@ -369,54 +369,54 @@ export const themes = {
 } as const
 
 /**
- * 应用预定义主题 - 使用CSS类方式
- * @param themeName 主题名称
+ * Apply predefined theme - using CSS class method
+ * @param themeName Theme name
  */
 export function applyTheme(themeName: keyof typeof themes): void {
   applyCSSTheme(themeName)
 }
 
 /**
- * 预定义字体主题
+ * Predefined font themes
  */
 export const fontThemes = {
-  // 系统默认字体
+  // System default fonts
   system: {
     english: 'system-ui',
     chinese: 'system-ui',
     fallback: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
   },
-  // 中文友好字体组合
+  // Chinese-friendly font combination
   chinese: {
     chinese: 'PingFang SC',
     english: 'SF Pro Display',
     fallback: '"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif'
   },
-  // 英文现代字体
+  // Modern English fonts
   modern: {
     english: 'Inter',
     chinese: 'Noto Sans SC',
     fallback: '"Inter", "Noto Sans SC", sans-serif'
   },
-  // 优雅字体组合
+  // Elegant font combination
   elegant: {
     english: 'Poppins',
     chinese: 'Source Han Sans',
     fallback: '"Poppins", "Source Han Sans", "Noto Sans CJK SC", sans-serif'
   },
-  // 可读性优先
+  // Readability first
   readable: {
     english: 'IBM Plex Sans',
     chinese: 'IBM Plex Sans SC',
     fallback: '"IBM Plex Sans", "IBM Plex Sans SC", sans-serif'
   },
-  // 苹果风格
+  // Apple style
   apple: {
     english: 'SF Pro Display',
     chinese: 'PingFang SC',
     fallback: '"SF Pro Display", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif'
   },
-  // Google字体
+  // Google fonts
   google: {
     english: 'Roboto',
     chinese: 'Noto Sans SC',
@@ -425,15 +425,15 @@ export const fontThemes = {
 } as const
 
 /**
- * 应用预定义字体主题
- * @param fontThemeName 字体主题名称
+ * Apply predefined font theme
+ * @param fontThemeName Font theme name
  */
 export function applyFontTheme(fontThemeName: keyof typeof fontThemes): void {
   setFonts(fontThemes[fontThemeName])
 }
 
 /**
- * 获取当前字体配置
+ * Get current font configuration
  */
 export function getCurrentFonts(): FontConfig {
   const root = document.documentElement
