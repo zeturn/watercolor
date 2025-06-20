@@ -19,34 +19,37 @@ export default {
 
 <style scoped>
 .wc-blockquote {
-  position: relative;
   padding: 24px 32px;
-  background: var(--color-gray-50, #f9fafb);
   border-radius: 12px;
   margin: 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  background-color: var(--wc-neutral-50, #f9fafb);
+  color: var(--wc-neutral-800, #374151);
+  border-left: 4px solid var(--wc-primary-500, #3D5AFE);
 }
+
+/* 文本 */
 .quote-text {
   margin: 0;
   font-size: 1rem;
-  color: var(--color-text, #374151);
   line-height: 1.6;
 }
+
 .quote-cite {
   margin-top: 8px;
   font-size: 0.875rem;
-  color: var(--color-text-secondary, #6b7280);
+  color: var(--wc-neutral-500, #6b7280);
   text-align: right;
 }
-@media (prefers-color-scheme: dark) {
-  .wc-blockquote {
-    background: var(--color-dark-gray, #374151);
-  }
-  .quote-text {
-    color: var(--color-dark-text, #f9fafb);
-  }
-  .quote-cite {
-    color: var(--color-dark-text-secondary, #d1d5db);
-  }
+
+/* 暗色模式 */
+:deep(.dark) .wc-blockquote {
+  background-color: var(--wc-neutral-800, #374151);
+  color: var(--wc-neutral-50, #f9fafb);
+  border-left-color: var(--wc-primary-400, #6D85FE);
 }
+:deep(.dark) .quote-cite {
+  color: var(--wc-neutral-400, #9ca3af);
+}
+
+/* 响应式保持原样 */
 </style> 
