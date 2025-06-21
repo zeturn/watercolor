@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Watercolor UI Logo](\public\img\watercolorui.png)
+![Watercolor UI Logo](https://github.com/zeturn/watercolor/blob/main/public/img/watercolorui.png)
 
 A modern minimalist cross-framework component library supporting Vue 3 and React 18+, perfect alternative to Material-UI.
 
