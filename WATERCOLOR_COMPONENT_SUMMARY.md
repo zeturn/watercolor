@@ -19,6 +19,16 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 | RadioGroup | ✅ RadioGroup.vue | - | 🆕 完成 | ✅ |
 | Switch | ✅ Switch.vue | ✅ Switch.jsx | 完成 | ✅ |
 | Input | ✅ Input.vue | ✅ Input.jsx | 完成 | ✅ |
+| DatePicker | ✅ DatePicker.vue | ✅ DatePicker.jsx | 🆕 完成 | 🔄 |
+| ColorPicker | ✅ ColorPicker.vue | ✅ ColorPicker.jsx | 🆕 完成 | 🔄 |
+| FileInput | ✅ FileInput.vue | ✅ FileInput.jsx | 🆕 完成 | 🔄 |
+| Slider | ✅ Slider.vue | ✅ Slider.jsx | 🆕 完成 | 🔄 |
+| Rating | ✅ Rating.vue | ✅ Rating.jsx | 🆕 完成 | 🔄 |
+| FormControlLabel | ✅ FormControlLabel.vue | ✅ FormControlLabel.jsx | 🆕 完成 | ✅ |
+| FormGroup | ✅ FormGroup.vue | ✅ FormGroup.jsx | 🆕 完成 | ✅ |
+| FormHelperText | ✅ FormHelperText.vue | ✅ FormHelperText.jsx | 🆕 完成 | ✅ |
+| IconButton | ✅ IconButton.vue | - | 🆕 完成 | ✅ |
+| Fab | ✅ Fab.vue | - | 🆕 完成 | ✅ |
 
 ### 🏗️ 布局组件 (Layout Components)
 
@@ -39,6 +49,8 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 | MenuItem | ✅ MenuItem.vue | - | 完成 | ✅ |
 | Tabs | ✅ Tabs.vue | ✅ Tabs.jsx | 完成 | ✅ |
 | Dropdown | ✅ Dropdown.vue | ✅ Dropdown.jsx | 完成 | 🔄 |
+| Breadcrumb | ✅ Breadcrumb.vue | - | 🆕 完成 | ✅ |
+| Pagination | ✅ Pagination.vue | ✅ Pagination.jsx | 🆕 完成 | ✅ |
 
 ### 💬 反馈组件 (Feedback Components)
 
@@ -54,6 +66,9 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 | LinearProgress | ✅ Progress.vue | ✅ Progress.jsx | 完成 | ✅ |
 | Toast | ✅ Toast.vue | ✅ Toast.jsx | 完成 | 🔄 |
 | Modal | ✅ Modal.vue | ✅ Modal.jsx | 完成 | 🔄 |
+| Skeleton | ✅ Skeleton.vue | ✅ Skeleton.jsx | 🆕 完成 | ✅ |
+| Tooltip | ✅ Tooltip.vue | ✅ Tooltip.jsx | 🆕 完成 | ✅ |
+| Spinner | ✅ Spinner.vue | ✅ Spinner.jsx | 🆕 完成 | 🔄 |
 
 ### 📊 数据展示组件 (Data Display Components)
 
@@ -70,6 +85,11 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 | CardContent | ✅ CardContent.vue | - | 🆕 完成 | ✅ |
 | CardActions | ✅ CardActions.vue | - | 🆕 完成 | ✅ |
 | Badge | ✅ Badge.vue | ✅ Badge.jsx | 完成 | ✅ |
+| ListItemIcon | ✅ ListItemIcon.vue | ✅ ListItemIcon.jsx | 🆕 完成 | ✅ |
+| TableBody | ✅ TableBody.vue | - | 🆕 完成 | ✅ |
+| TableCell | ✅ TableCell.vue | - | 🆕 完成 | ✅ |
+| TableHead | ✅ TableHead.vue | - | 🆕 完成 | ✅ |
+| TableRow | ✅ TableRow.vue | - | 🆕 完成 | ✅ |
 
 ## 🎯 Material-UI 兼容性
 
@@ -91,6 +111,13 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 - ✅ Radio
 - ✅ RadioGroup
 - ✅ Switch
+- ✅ FormControlLabel
+- ✅ FormGroup
+- ✅ FormHelperText
+- ✅ IconButton
+- ✅ Fab
+- ✅ Slider
+- ✅ Rating
 
 #### 导航组件
 - ✅ AppBar
@@ -98,6 +125,8 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 - ✅ Menu
 - ✅ MenuItem
 - ✅ Tabs
+- ✅ Breadcrumbs
+- ✅ Pagination
 
 #### 反馈组件
 - ✅ Alert
@@ -108,12 +137,19 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 - ✅ DialogActions
 - ✅ CircularProgress
 - ✅ LinearProgress
+- ✅ Skeleton
+- ✅ Tooltip
 
 #### 数据展示组件
 - ✅ List
 - ✅ ListItem
 - ✅ ListItemText
+- ✅ ListItemIcon
 - ✅ Table
+- ✅ TableBody
+- ✅ TableCell
+- ✅ TableHead
+- ✅ TableRow
 - ✅ Avatar
 - ✅ Chip
 - ✅ Card
@@ -124,44 +160,31 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 ### 🔄 计划实现的组件
 
 #### 表单组件
-- 🔜 FormControlLabel
-- 🔜 FormGroup
-- 🔜 FormHelperText
 - 🔜 FormLabel
 - 🔜 InputAdornment
 - 🔜 FilledInput
 - 🔜 OutlinedInput
 - 🔜 InputBase
 - 🔜 InputLabel
-- 🔜 IconButton
-- 🔜 Fab
 - 🔜 ToggleButton
 - 🔜 ToggleButtonGroup
 
 #### 数据展示组件
-- 🔜 ListItemIcon
 - 🔜 ListItemButton
-- 🔜 TableBody
-- 🔜 TableCell
 - 🔜 TableContainer
-- 🔜 TableHead
-- 🔜 TableRow
 - 🔜 TablePagination
 
 #### 反馈组件
-- 🔜 Skeleton
-- 🔜 Tooltip
+- 🔜 （暂无）
 
 #### 导航组件
 - 🔜 Drawer
-- 🔜 Breadcrumbs
-- 🔜 Link
-- 🔜 Pagination
 - 🔜 Stepper
 - 🔜 Step
 - 🔜 StepLabel
 - 🔜 Tab
 - 🔜 TabPanel
+- 🔜 Link
 
 #### 主题组件
 - 🔜 ThemeProvider
@@ -271,11 +294,11 @@ import {
 
 ## 📈 项目统计
 
-- **总组件数**: 35+
-- **Vue 组件**: 30+
-- **React 组件**: 15+
-- **Material-UI 兼容**: 25+
-- **覆盖率**: 85%+
+- **总组件数**: 55+
+- **Vue 组件**: 50+
+- **React 组件**: 30+
+- **Material-UI 兼容**: 35+
+- **覆盖率**: 90%+
 
 ## 🔧 开发工具
 

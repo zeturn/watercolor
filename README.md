@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Watercolor UI Logo](https://via.placeholder.com/200x80/4F46E5/FFFFFF?text=Watercolor+UI)
+![Watercolor UI Logo](\public\img\watercolorui.png)
 
 A modern minimalist cross-framework component library supporting Vue 3 and React 18+, perfect alternative to Material-UI.
 

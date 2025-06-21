@@ -74,25 +74,51 @@ import 'watercolor-ui/styles'
 
 | Material-UI 组件 | Watercolor 兼容组件 | 状态 |
 |-----------------|-------------------|------|
-| `Container` | `Container` | ✅ 完全兼容 |
-| `Box` | `Box` | ✅ 完全兼容 |
-| `Grid` | `Grid` | ✅ 完全兼容 |
-| `Paper` | `Paper` | ✅ 完全兼容 |
-| `Typography` | `Typography` | ✅ 完全兼容 |
-| `Button` | `Button` | ✅ 完全兼容 |
-| `TextField` | `TextField` | ✅ 完全兼容 |
-| `Select` | `Select` | ✅ 完全兼容 |
-| `FormControl` | `FormControl` | ✅ 完全兼容 |
-| `AppBar` | `AppBar` | ✅ 完全兼容 |
-| `Toolbar` | `Toolbar` | ✅ 完全兼容 |
-| `Menu` | `Menu` | ✅ 完全兼容 |
-| `MenuItem` | `MenuItem` | ✅ 完全兼容 |
-| `Dialog` | `Dialog` | ✅ 完全兼容 |
+| `Accordion` | `Accordion` | ✅ 完全兼容 |
 | `Alert` | `Alert` | ✅ 完全兼容 |
-| `Snackbar` | `Snackbar` | ✅ 完全兼容 |
+| `Avatar` | `Avatar` | ✅ 完全兼容 |
+| `Badge` | `Badge` | ✅ 完全兼容 |
+| `Banner` | `Banner` | ✅ 完全兼容 |
+| `Blockquote` | `Blockquote` | ✅ 完全兼容 |
+| `Box` | `Box` | ✅ 完全兼容 |
+| `Breadcrumbs` | `Breadcrumb` | ⚠️ 轻微差异 |
+| `Button` | `Button` | ✅ 完全兼容 |
+| `Card` | `Card` | ✅ 完全兼容 |
+| `Checkbox` | `Checkbox` | ✅ 完全兼容 |
+| `Chip` | `Chip` | ✅ 完全兼容 |
+| `CircularProgress` | `CircularProgress` | ✅ 完全兼容 |
+| `Container` | `Container` | ✅ 完全兼容 |
+| `Dialog` | `Dialog` | ✅ 完全兼容 |
+| `Fab` | `Fab` | ✅ 完全兼容 |
+| `FormControl` | `FormControl` | ✅ 完全兼容 |
+| `FormControlLabel` | `FormControlLabel` | ✅ 完全兼容 |
+| `FormGroup` | `FormGroup` | ✅ 完全兼容 |
+| `FormHelperText` | `FormHelperText` | ✅ 完全兼容 |
+| `Grid` | `Grid` | ✅ 完全兼容 |
+| `IconButton` | `IconButton` | ✅ 完全兼容 |
+| `Input` | `Input` | ✅ 完全兼容 |
 | `List` | `List` | ✅ 完全兼容 |
 | `ListItem` | `ListItem` | ✅ 完全兼容 |
+| `ListItemIcon` | `ListItemIcon` | ✅ 完全兼容 |
 | `ListItemText` | `ListItemText` | ✅ 完全兼容 |
+| `Menu` | `Menu` | ✅ 完全兼容 |
+| `MenuItem` | `MenuItem` | ✅ 完全兼容 |
+| `Pagination` | `Pagination` | ✅ 完全兼容 |
+| `Paper` | `Paper` | ✅ 完全兼容 |
+| `Radio` | `Radio` | ✅ 完全兼容 |
+| `RadioGroup` | `RadioGroup` | ✅ 完全兼容 |
+| `Rating` | `Rating` | ✅ 完全兼容 |
+| `Select` | `Select` | ✅ 完全兼容 |
+| `Skeleton` | `Skeleton` | ✅ 完全兼容 |
+| `Slider` | `Slider` | ✅ 完全兼容 |
+| `Snackbar` | `Snackbar` | ✅ 完全兼容 |
+| `Switch` | `Switch` | ✅ 完全兼容 |
+| `Tabs` | `Tabs` | ✅ 完全兼容 |
+| `Table` | `Table` | ✅ 完全兼容 |
+| `TextField` | `TextField` | ✅ 完全兼容 |
+| `Tooltip` | `Tooltip` | ✅ 完全兼容 |
+| `Typography` | `Typography` | ✅ 完全兼容 |
+| `Toolbar` | `Toolbar` | ✅ 完全兼容 |
 
 ## 🚀 快速开始示例
 
