@@ -184,13 +184,8 @@ const closeButtonClasses = computed(() => {
   return classes
 })
 
-const handleClose = () => {
-  emit('close')
-}
-
-const handleActionClick = () => {
-  emit('action')
-}
+const handleClose = () => emit('close')
+const handleActionClick = () => emit('action')
 
 const startAutoHideTimer = () => {
   if (props.autoHideDuration > 0) {
@@ -200,28 +195,17 @@ const startAutoHideTimer = () => {
   }
 }
 
-const clearAutoHideTimer = () => {
-  if (autoHideTimer) {
-    clearTimeout(autoHideTimer)
-    autoHideTimer = null
-  }
-}
-
-watch(() => props.open, (newOpen) => {
-  if (newOpen) {
+watch(() => props.open, (newVal) => {
+  if (newVal) {
     startAutoHideTimer()
   } else {
-    clearAutoHideTimer()
+    clearTimeout(autoHideTimer)
   }
 })
 
 onMounted(() => {
-  if (props.open) {
-    startAutoHideTimer()
-  }
+  if (props.open) startAutoHideTimer()
 })
 
-onUnmounted(() => {
-  clearAutoHideTimer()
-})
+onUnmounted(() => clearTimeout(autoHideTimer))
 </script> 
