@@ -147,32 +147,55 @@ export { default as WatermarkReact } from './components/Watermark/Watermark.jsx'
 // 主题工具
 export * from './utils/theme'
 
-// 类型定义
-export type ButtonVariant = 'primary' | 'secondary' | 'filled' | 'success' | 'warning' | 'error' | 'purple' | 'orange' | 'cyan' | 'pink'
-export type ButtonSize = 'sm' | 'md' | 'lg'
-export type InputSize = 'sm' | 'md' | 'lg'
-export type CardVariant = 'default' | 'elevated'
-export type CardPadding = 'none' | 'sm' | 'md' | 'lg'
+export type AccordionVariant = 'default' | 'bordered' | 'filled'
+export type AppBarPosition = 'fixed' | 'absolute' | 'sticky' | 'static' | 'relative'
+export type AppBarColor = 'primary' | 'secondary' | 'transparent' | 'inherit'
+export type AlertSeverity = 'success' | 'info' | 'warning' | 'error'
+export type AlertVariant = 'standard' | 'filled' | 'outlined'
 export type BadgeVariant = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'purple' | 'orange' | 'cyan' | 'pink'
 export type BadgeSize = 'sm' | 'md' | 'lg'
+export type BannerType = 'success' | 'info' | 'warning' | 'error'
+export type BannerPosition = 'top' | 'bottom'
+export type ButtonVariant = 'primary' | 'secondary' | 'filled' | 'success' | 'warning' | 'error' | 'purple' | 'orange' | 'cyan' | 'pink'
+export type ButtonSize = 'sm' | 'md' | 'lg'
+export type BreadcrumbVariant = 'default' | 'underlined' | 'contained'
+export type CopyVariant = 'default' | 'outlined' | 'filled' | 'minimal'
+export type CopySize = 'sm' | 'md' | 'lg'
+export type CardVariant = 'default' | 'elevated'
+export type CardPadding = 'none' | 'sm' | 'md' | 'lg'
+export type ContainerMaxWidth = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | false
+export type DialogMaxWidth = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false
+export type DatePickerVariant = 'default' | 'outlined' | 'filled'
+export type DatePickerSize = 'sm' | 'md' | 'lg'
+export type InputSize = 'sm' | 'md' | 'lg'
 export type ProgressColor = 'primary' | 'success' | 'warning' | 'error' | 'purple' | 'orange' | 'cyan' | 'pink'
 export type ProgressSize = 'sm' | 'md' | 'lg'
 export type SwitchColor = 'primary' | 'success' | 'warning' | 'error' | 'purple' | 'orange' | 'cyan' | 'pink'
-export type TabsVariant = 'default' | 'pills' | 'underline'
-
-// 新增组件类型定义
-export type TextFieldVariant = 'outlined' | 'filled' | 'standard'
-export type TextFieldSize = 'sm' | 'md' | 'lg'
-export type AlertSeverity = 'success' | 'info' | 'warning' | 'error'
-export type AlertVariant = 'standard' | 'filled' | 'outlined'
 export type SnackbarSeverity = 'success' | 'info' | 'warning' | 'error'
 export type SnackbarVariant = 'filled' | 'outlined' | 'standard'
+export type TabsVariant = 'default' | 'pills' | 'underline'
+export type TextFieldVariant = 'outlined' | 'filled' | 'standard'
+export type TextFieldSize = 'sm' | 'md' | 'lg'
 export type TypographyVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2' | 'caption' | 'overline' | 'button'
 export type TypographyColor = 'inherit' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'textPrimary' | 'textSecondary' | 'textDisabled'
-export type ContainerMaxWidth = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | false
-export type DialogMaxWidth = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false
-export type AppBarPosition = 'fixed' | 'absolute' | 'sticky' | 'static' | 'relative'
-export type AppBarColor = 'primary' | 'secondary' | 'transparent' | 'inherit'
+
+export interface AnchorOrigin {
+  vertical: 'top' | 'center' | 'bottom'
+  horizontal: 'left' | 'center' | 'right'
+}
+
+export interface AccordionItem {
+  title: string
+  content: string
+}
+
+export interface BreadcrumbItem {
+  label: string
+  href?: string
+  to?: string
+  disabled?: boolean
+  icon?: string
+}
 
 export interface WatercolorTheme {
   primary: Record<string, string>
@@ -190,32 +213,4 @@ export interface SelectOption {
   label: string
   value: string | number
   disabled?: boolean
-}
-
-export interface AnchorOrigin {
-  vertical: 'top' | 'center' | 'bottom'
-  horizontal: 'left' | 'center' | 'right'
-}
-
-// 新增组件类型定义
-export type AccordionVariant = 'default' | 'bordered' | 'filled'
-export type BannerType = 'success' | 'info' | 'warning' | 'error'
-export type BannerPosition = 'top' | 'bottom'
-export type BreadcrumbVariant = 'default' | 'underlined' | 'contained'
-export type CopyVariant = 'default' | 'outlined' | 'filled' | 'minimal'
-export type CopySize = 'sm' | 'md' | 'lg'
-export type DatePickerVariant = 'default' | 'outlined' | 'filled'
-export type DatePickerSize = 'sm' | 'md' | 'lg'
-
-export interface AccordionItem {
-  title: string
-  content: string
-}
-
-export interface BreadcrumbItem {
-  label: string
-  href?: string
-  to?: string
-  disabled?: boolean
-  icon?: string
 }
