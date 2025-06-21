@@ -203,24 +203,6 @@ export default {
           800: 'var(--wc-indigo-800)',
           900: 'var(--wc-indigo-900)'
         }
-        primary: generatePalette('primary'),
-        secondary: generatePalette('secondary'),
-        accent: generatePalette('accent'),
-        neutral: {
-          0: 'var(--wc-neutral-0)',
-          ...generatePalette('neutral'),
-        },
-        success: generatePalette('success'),
-        warning: generatePalette('warning'),
-        error: generatePalette('error'),
-        info: generatePalette('info'),
-        danger: generatePalette('danger'),
-        purple: generatePalette('purple'),
-        orange: generatePalette('orange'),
-        cyan: generatePalette('cyan'),
-        pink: generatePalette('pink'),
-        teal: generatePalette('teal'),
-        indigo: generatePalette('indigo'),
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

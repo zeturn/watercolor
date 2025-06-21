@@ -30,16 +30,16 @@ export { default as Switch } from './components/Switch/Switch.vue'
 export { default as Slider } from './components/Slider/Slider.vue'
 
 // 反馈组件
-export { default as Alert } from './components/Feedback/Alert.vue'
-export { default as Snackbar } from './components/Feedback/Snackbar.vue'
-export { default as Dialog } from './components/Feedback/Dialog.vue'
-export { default as DialogTitle } from './components/Feedback/DialogTitle.vue'
-export { default as DialogContent } from './components/Feedback/DialogContent.vue'
-export { default as DialogActions } from './components/Feedback/DialogActions.vue'
-export { default as CircularProgress } from './components/Feedback/CircularProgress.vue'
+export { default as Alert } from './components/Alert/Alert.vue'
+export { default as Snackbar } from './components/Snackbar/Snackbar.vue'
+export { default as Dialog } from './components/Dialog/Dialog.vue'
+export { default as DialogTitle } from './components/Dialog/DialogTitle.vue'
+export { default as DialogContent } from './components/Dialog/DialogContent.vue'
+export { default as DialogActions } from './components/Dialog/DialogActions.vue'
+export { default as CircularProgress } from './components/CircularProgress/CircularProgress.vue'
 export { default as LinearProgress } from './components/Progress/Progress.vue'
-export { default as Tooltip } from './components/Feedback/Tooltip.vue'
-export { default as Skeleton } from './components/Feedback/Skeleton.vue'
+export { default as Tooltip } from './components/Tooltip/Tooltip.vue'
+export { default as Skeleton } from './components/Skeleton/Skeleton.vue'
 
 // 数据展示组件
 export { default as Typography } from './components/Display/Typography.vue'
@@ -68,10 +68,7 @@ export { default as Tab } from './components/Tabs/Tabs.vue' // 复用 Tabs 组�
 export * from './utils/theme'
 
 // 兼容性别名和组件包装器
-import TypographyComponent from './components/Display/Typography.vue'
-import BoxComponent from './components/Box/Box.vue'
 import ListItemComponent from './components/Display/ListItem.vue'
-import ButtonComponent from './components/Button/Button.vue'
 import PaperComponent from './components/Paper/Paper.vue'
 
 export const ListItemButton = ListItemComponent

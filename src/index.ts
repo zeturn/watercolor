@@ -3,9 +3,9 @@ import './styles/index.css'
 
 // 组件导出（按组件名 A-Z 排序，同名组件 Vue + React 紧邻）
 export { default as AccordionVue } from './components/Accordion/Accordion.vue'
-export { default as AlertVue } from './components/Feedback/Alert.vue'
-export { default as AlertNewVue } from './components/Alert/Alert.vue'
-export { default as AlertReact } from './components/Feedback/Alert.jsx'
+export { default as AccordionReact } from './components/Accordion/Accordion.jsx'
+export { default as AlertVue } from './components/Alert/Alert.vue'
+export { default as AlertReact } from './components/Alert/Alert.jsx'
 export { default as AppBarVue } from './components/Navigation/AppBar.vue'
 export { default as AppBarReact } from './components/Navigation/AppBar.jsx'
 export { default as AvatarVue } from './components/Avatar/Avatar.vue'
@@ -28,7 +28,8 @@ export { default as CardContentVue } from './components/Card/CardContent.vue'
 export { default as CheckboxVue } from './components/Checkbox/Checkbox.vue'
 export { default as ChipVue } from './components/Chip/Chip.vue'
 export { default as ChipReact } from './components/Chip/Chip.jsx'
-export { default as CircularProgressVue } from './components/Feedback/CircularProgress.vue'
+export { default as CircularProgressVue } from './components/CircularProgress/CircularProgress.vue'
+export { default as CircularProgressReact } from './components/CircularProgress/CircularProgress.jsx'
 export { default as ColorPicker } from './components/ColorPicker/ColorPicker.vue'
 export { default as ColorPickerReact } from './components/ColorPicker/ColorPicker.jsx'
 export { default as ContainerVue } from './components/Container/Container.vue'
@@ -39,10 +40,11 @@ export { default as Countdown } from './components/Countdown/Countdown.vue'
 export { default as CountdownReact } from './components/Countdown/Countdown.jsx'
 export { default as DatePickerVue } from './components/DatePicker/DatePicker.vue'
 export { default as DatePickerReact } from './components/DatePicker/DatePicker.jsx'
-export { default as DialogVue } from './components/Feedback/Dialog.vue'
-export { default as DialogActionsVue } from './components/Feedback/DialogActions.vue'
-export { default as DialogContentVue } from './components/Feedback/DialogContent.vue'
-export { default as DialogTitleVue } from './components/Feedback/DialogTitle.vue'
+export { default as DialogVue } from './components/Dialog/Dialog.vue'
+export { default as DialogReact } from './components/Dialog/Dialog.jsx'
+export { default as DialogActionsVue } from './components/Dialog/DialogActions.vue'
+export { default as DialogContentVue } from './components/Dialog/DialogContent.vue'
+export { default as DialogTitleVue } from './components/Dialog/DialogTitle.vue'
 export { default as DropdownVue } from './components/Dropdown/Dropdown.vue'
 export { default as FabVue } from './components/Button/Fab.vue'
 export { default as Feed } from './components/Feed/Feed.vue'
@@ -110,7 +112,8 @@ export { default as SliderVue } from './components/Slider/Slider.vue'
 export { default as SliderReact } from './components/Slider/Slider.jsx'
 export { default as SlideOver } from './components/SlideOver/SlideOver.vue'
 export { default as SlideOverReact } from './components/SlideOver/SlideOver.jsx'
-export { default as SnackbarVue } from './components/Feedback/Snackbar.vue'
+export { default as SnackbarVue } from './components/Snackbar/Snackbar.vue'
+export { default as SnackbarReact } from './components/Snackbar/Snackbar.jsx'
 export { default as Spinner } from './components/Spinner/Spinner.vue'
 export { default as SpinnerReact } from './components/Spinner/Spinner.jsx'
 export { default as SwitchVue } from './components/Switch/Switch.vue'
@@ -128,7 +131,8 @@ export { default as ToastVue } from './components/Toast/Toast.vue'
 export { default as ToastReact } from './components/Toast/Toast.jsx'
 export { default as ToolbarVue } from './components/Navigation/Toolbar.vue'
 export { default as ToolbarReact } from './components/Navigation/Toolbar.jsx'
-export { default as TooltipVue } from './components/Feedback/Tooltip.vue'
+export { default as TooltipVue } from './components/Tooltip/Tooltip.vue'
+export { default as TooltipReact } from './components/Tooltip/Tooltip.jsx'
 export { default as TypographyVue } from './components/Typography/Typography.vue'
 export { default as TypographyReact } from './components/Typography/Typography.jsx'
 export { default as TypingText } from './components/TypingText/TypingText.vue'
@@ -138,6 +142,7 @@ export { default as VideoPlayer } from './components/VideoPlayer/VideoPlayer.vue
 export { default as VideoPlayerReact } from './components/VideoPlayer/VideoPlayer.jsx'
 export { default as Watermark } from './components/Watermark/Watermark.vue'
 export { default as WatermarkReact } from './components/Watermark/Watermark.jsx'
+
 
 // 主题工具
 export * from './utils/theme'
@@ -214,10 +219,3 @@ export interface BreadcrumbItem {
   disabled?: boolean
   icon?: string
 }
-
-// New Components
-// ... 删除重复导出，避免命名冲突 ...
-
-// 新增工具类组件
-// ... 删除重复导出，避免命名冲突 ...
-

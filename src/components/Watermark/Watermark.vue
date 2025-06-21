@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, onMounted, ref, computed } from 'vue'
+import { watch, ref, computed } from 'vue'
 
 const props = defineProps({
   content: String,
@@ -42,7 +42,7 @@ const props = defineProps({
 const url = ref('')
 const show = computed(() => !!props.content || !!props.image)
 
-function resolveColor(color) {
+function resolveColor(color: string): string {
   if (color.startsWith('var(')) {
     const match = color.match(/--[^, )]+/)
     if (match) {
@@ -78,7 +78,7 @@ function createCanvasUrl() {
         ctx.drawImage(img, -w / 2, -h / 2, w, h)
         resolve(canvas.toDataURL())
       }
-      img.src = props.image
+      img.src = props.image!
     })
   }
 

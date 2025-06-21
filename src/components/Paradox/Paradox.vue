@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
+const { content, tooltip } = defineProps({
   /** 显示的悖论文本 */
   content: {
     type: String,
