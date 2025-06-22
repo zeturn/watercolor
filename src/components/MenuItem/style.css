@@ -1,0 +1,41 @@
+/* MenuItem 组件样式 */
+
+.wc-menu-item {
+  @apply flex items-center text-sm transition-colors duration-150 cursor-pointer focus:outline-none;
+}
+
+.wc-menu-item--dense {
+  @apply px-3 py-1;
+}
+
+.wc-menu-item--regular {
+  @apply px-4 py-2;
+}
+
+.wc-menu-item--disabled {
+  @apply opacity-50 cursor-not-allowed text-neutral-400;
+}
+
+.wc-menu-item--selected {
+  @apply bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400;
+}
+
+.wc-menu-item--normal {
+  @apply text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700;
+}
+
+.wc-menu-item--divider {
+  @apply border-b border-neutral-200 dark:border-neutral-700;
+}
+
+.wc-menu-item__icon {
+  @apply mr-3 flex-shrink-0;
+}
+
+.wc-menu-item__content {
+  @apply flex-1 min-w-0;
+}
+
+.wc-menu-item__suffix {
+  @apply ml-3 flex-shrink-0;
+} 

@@ -1,4 +1,6 @@
 import React from 'react'
+import { getToolbarClasses } from './utils.js'
+import './style.css'
 
 const Toolbar = ({
   children,
@@ -8,12 +10,7 @@ const Toolbar = ({
   style = {},
   ...rest
 }) => {
-  const classes = [
-    'flex items-center w-full',
-    variant === 'dense' ? 'min-h-12 py-2' : 'min-h-16 py-3',
-    !disableGutters && 'px-4 sm:px-6 lg:px-8',
-    className
-  ].filter(Boolean).join(' ')
+  const classes = getToolbarClasses(variant, disableGutters, className)
 
   return (
     <div className={classes} style={style} {...rest}>
@@ -22,4 +19,4 @@ const Toolbar = ({
   )
 }
 
-export default Toolbar
+export default Toolbar 

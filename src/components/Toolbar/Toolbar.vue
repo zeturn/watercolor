@@ -6,6 +6,8 @@
 
 <script setup>
 import { computed } from 'vue'
+import { getToolbarClasses } from './utils.js'
+import './style.css'
 
 const props = defineProps({
   variant: {
@@ -20,21 +22,6 @@ const props = defineProps({
 })
 
 const toolbarClasses = computed(() => {
-  const baseClasses = 'flex items-center w-full'
-  const classes = [baseClasses]
-  
-  // Height variants
-  if (props.variant === 'dense') {
-    classes.push('min-h-12 py-2')
-  } else {
-    classes.push('min-h-16 py-3')
-  }
-  
-  // Gutters (horizontal padding)
-  if (!props.disableGutters) {
-    classes.push('px-4 sm:px-6 lg:px-8')
-  }
-  
-  return classes
+  return getToolbarClasses(props.variant, props.disableGutters)
 })
 </script> 

@@ -1,0 +1,76 @@
+/* AppBar 组件样式 */
+
+.wc-appbar {
+  @apply w-full transition-all duration-250 z-50;
+}
+
+.wc-appbar--fixed {
+  @apply fixed top-0 left-0 right-0;
+}
+
+.wc-appbar--absolute {
+  @apply absolute top-0 left-0 right-0;
+}
+
+.wc-appbar--sticky {
+  @apply sticky top-0;
+}
+
+.wc-appbar--static {
+  @apply static;
+}
+
+.wc-appbar--relative {
+  @apply relative;
+}
+
+.wc-appbar--primary {
+  @apply bg-primary-500 text-white;
+}
+
+.wc-appbar--secondary {
+  @apply bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100;
+}
+
+.wc-appbar--transparent {
+  @apply bg-transparent;
+}
+
+.wc-appbar--inherit {
+  @apply bg-inherit text-inherit;
+}
+
+.wc-appbar--outlined {
+  @apply border-b border-neutral-200 dark:border-neutral-700;
+}
+
+.wc-appbar--elevation-0 {
+  @apply shadow-none;
+}
+
+.wc-appbar--elevation-1 {
+  @apply shadow-sm;
+}
+
+.wc-appbar--elevation-2 {
+  @apply shadow;
+}
+
+.wc-appbar--elevation-3 {
+  @apply shadow-md;
+}
+
+.wc-appbar--elevation-4 {
+  @apply shadow-lg;
+}
+
+.wc-appbar--elevation-6 {
+  @apply shadow-xl;
+}
+
+.wc-appbar--elevation-8,
+.wc-appbar--elevation-12,
+.wc-appbar--elevation-16,
+.wc-appbar--elevation-24 {
+  @apply shadow-2xl;
+} 

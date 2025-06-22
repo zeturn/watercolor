@@ -1,0 +1,44 @@
+/* Menu 组件样式 */
+
+.wc-menu {
+  @apply absolute bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 py-2 min-w-32 max-w-xs transition-all duration-150 origin-top-left;
+}
+
+.wc-menu__backdrop {
+  @apply fixed inset-0 bg-black bg-opacity-25;
+}
+
+.wc-menu__container {
+  @apply fixed inset-0 z-50;
+}
+
+.wc-menu--elevation-0 {
+  @apply shadow-none;
+}
+
+.wc-menu--elevation-1 {
+  @apply shadow-sm;
+}
+
+.wc-menu--elevation-2 {
+  @apply shadow;
+}
+
+.wc-menu--elevation-3 {
+  @apply shadow-md;
+}
+
+.wc-menu--elevation-4 {
+  @apply shadow-lg;
+}
+
+.wc-menu--elevation-6 {
+  @apply shadow-xl;
+}
+
+.wc-menu--elevation-8,
+.wc-menu--elevation-12,
+.wc-menu--elevation-16,
+.wc-menu--elevation-24 {
+  @apply shadow-2xl;
+} 

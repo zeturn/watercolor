@@ -23,6 +23,8 @@
 
 <script setup>
 import { computed } from 'vue'
+import { getMenuItemClasses } from './utils.js'
+import './style.css'
 
 const props = defineProps({
   disabled: {
@@ -46,33 +48,7 @@ const props = defineProps({
 const emit = defineEmits(['click'])
 
 const menuItemClasses = computed(() => {
-  const baseClasses = 'flex items-center text-sm transition-colors duration-150 cursor-pointer focus:outline-none'
-  const classes = [baseClasses]
-  
-  // Padding based on density
-  if (props.dense) {
-    classes.push('px-3 py-1')
-  } else {
-    classes.push('px-4 py-2')
-  }
-  
-  // States
-  if (props.disabled) {
-    classes.push('opacity-50 cursor-not-allowed text-neutral-400')
-  } else {
-    if (props.selected) {
-      classes.push('bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400')
-    } else {
-      classes.push('text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700')
-    }
-  }
-  
-  // Divider
-  if (props.divider) {
-    classes.push('border-b border-neutral-200 dark:border-neutral-700')
-  }
-  
-  return classes
+  return getMenuItemClasses(props.disabled, props.dense, props.divider, props.selected)
 })
 
 const handleClick = (event) => {
