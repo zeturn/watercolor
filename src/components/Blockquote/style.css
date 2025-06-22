@@ -3,9 +3,25 @@
   padding: 24px 32px;
   border-radius: 12px;
   margin: 0;
-  background-color: var(--wc-neutral-50, #f9fafb);
+  background-color: var(--wc-neutral-100, #f5f5f5);
   color: var(--wc-neutral-800, #374151);
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+/* 默认有边框样式（保留原有样式） */
+.wc-blockquote:not(.wc-blockquote--no-border) {
   border-left: 4px solid var(--wc-primary-500, #3D5AFE);
+}
+
+/* 无边框样式（新的默认样式） */
+.wc-blockquote--no-border {
+  border: none;
+}
+
+/* 交互效果 */
+.wc-blockquote--interactive:hover {
+  background-color: var(--wc-neutral-200, #e5e5e5);
 }
 
 /* 文本 */
@@ -22,12 +38,205 @@
   text-align: right;
 }
 
+/* 颜色变体 */
+.wc-blockquote--primary {
+  background-color: var(--wc-primary-50, #e8eaf6);
+  color: var(--wc-primary-800, #1565c0);
+  border-left-color: var(--wc-primary-500, #3D5AFE);
+}
+
+.wc-blockquote--primary.wc-blockquote--interactive:hover {
+  background-color: var(--wc-primary-100, #c5cae9);
+}
+
+.wc-blockquote--success {
+  background-color: var(--wc-success-50, #f0f9f4);
+  color: var(--wc-success-800, #166534);
+  border-left-color: var(--wc-success-500, #22c55e);
+}
+
+.wc-blockquote--success.wc-blockquote--interactive:hover {
+  background-color: var(--wc-success-100, #dcfce7);
+}
+
+.wc-blockquote--warning {
+  background-color: var(--wc-warning-50, #fffbeb);
+  color: var(--wc-warning-800, #92400e);
+  border-left-color: var(--wc-warning-500, #f59e0b);
+}
+
+.wc-blockquote--warning.wc-blockquote--interactive:hover {
+  background-color: var(--wc-warning-100, #fef3c7);
+}
+
+.wc-blockquote--error {
+  background-color: var(--wc-error-50, #fef2f2);
+  color: var(--wc-error-800, #991b1b);
+  border-left-color: var(--wc-error-500, #ef4444);
+}
+
+.wc-blockquote--error.wc-blockquote--interactive:hover {
+  background-color: var(--wc-error-100, #fee2e2);
+}
+
+.wc-blockquote--info {
+  background-color: var(--wc-info-50, #f0f9ff);
+  color: var(--wc-info-800, #075985);
+  border-left-color: var(--wc-info-500, #0ea5e9);
+}
+
+.wc-blockquote--info.wc-blockquote--interactive:hover {
+  background-color: var(--wc-info-100, #e0f2fe);
+}
+
+/* 颜色变体的引用来源文字颜色 */
+.wc-blockquote--primary .quote-cite {
+  color: var(--wc-primary-600, #1976d2);
+}
+
+.wc-blockquote--success .quote-cite {
+  color: var(--wc-success-600, #16a34a);
+}
+
+.wc-blockquote--warning .quote-cite {
+  color: var(--wc-warning-700, #a16207);
+}
+
+.wc-blockquote--error .quote-cite {
+  color: var(--wc-error-600, #dc2626);
+}
+
+.wc-blockquote--info .quote-cite {
+  color: var(--wc-info-600, #0284c7);
+}
+
+/* 变体样式 */
+.wc-blockquote--minimal {
+  padding: 16px 20px;
+  background-color: transparent;
+  border-left: 3px solid var(--wc-neutral-300, #d1d5db);
+}
+
+.wc-blockquote--minimal:hover {
+  background-color: var(--wc-neutral-50, #f9fafb);
+}
+
+.wc-blockquote--card {
+  background-color: var(--wc-neutral-50, #f9fafb);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--wc-neutral-200, #e5e7eb);
+}
+
+.wc-blockquote--card:hover {
+  background-color: var(--wc-neutral-100, #f5f5f5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 尺寸变体 */
+.wc-blockquote--small {
+  padding: 16px 20px;
+}
+
+.wc-blockquote--small .quote-text {
+  font-size: 0.875rem;
+}
+
+.wc-blockquote--small .quote-cite {
+  font-size: 0.75rem;
+  margin-top: 6px;
+}
+
+.wc-blockquote--large {
+  padding: 32px 40px;
+}
+
+.wc-blockquote--large .quote-text {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.wc-blockquote--large .quote-cite {
+  font-size: 1rem;
+  margin-top: 12px;
+}
+
 /* 暗色模式 */
 @media (prefers-color-scheme: dark) {
   .wc-blockquote {
     background-color: var(--wc-neutral-800, #374151);
     color: var(--wc-neutral-50, #f9fafb);
+  }
+  
+  .wc-blockquote--interactive:hover {
+    background-color: var(--wc-neutral-700, #4b5563);
+  }
+  
+  .wc-blockquote:not(.wc-blockquote--no-border) {
     border-left-color: var(--wc-primary-400, #6D85FE);
+  }
+  
+  /* 暗色模式下的颜色变体 */
+  .wc-blockquote--primary {
+    background-color: var(--wc-primary-900, #0d47a1);
+    color: var(--wc-primary-100, #c5cae9);
+  }
+  
+  .wc-blockquote--primary.wc-blockquote--interactive:hover {
+    background-color: var(--wc-primary-800, #1565c0);
+  }
+  
+  .wc-blockquote--success {
+    background-color: var(--wc-success-900, #14532d);
+    color: var(--wc-success-100, #dcfce7);
+  }
+  
+  .wc-blockquote--success.wc-blockquote--interactive:hover {
+    background-color: var(--wc-success-800, #166534);
+  }
+  
+  .wc-blockquote--warning {
+    background-color: var(--wc-warning-900, #78350f);
+    color: var(--wc-warning-100, #fef3c7);
+  }
+  
+  .wc-blockquote--warning.wc-blockquote--interactive:hover {
+    background-color: var(--wc-warning-800, #92400e);
+  }
+  
+  .wc-blockquote--error {
+    background-color: var(--wc-error-900, #7f1d1d);
+    color: var(--wc-error-100, #fee2e2);
+  }
+  
+  .wc-blockquote--error.wc-blockquote--interactive:hover {
+    background-color: var(--wc-error-800, #991b1b);
+  }
+  
+  .wc-blockquote--info {
+    background-color: var(--wc-info-900, #0c4a6e);
+    color: var(--wc-info-100, #e0f2fe);
+  }
+  
+  .wc-blockquote--info.wc-blockquote--interactive:hover {
+    background-color: var(--wc-info-800, #075985);
+  }
+  
+  .wc-blockquote--minimal {
+    background-color: transparent;
+    border-left-color: var(--wc-neutral-600, #6b7280);
+  }
+  
+  .wc-blockquote--minimal:hover {
+    background-color: var(--wc-neutral-800, #374151);
+  }
+  
+  .wc-blockquote--card {
+    background-color: var(--wc-neutral-800, #374151);
+    border-color: var(--wc-neutral-700, #4b5563);
+  }
+  
+  .wc-blockquote--card:hover {
+    background-color: var(--wc-neutral-700, #4b5563);
   }
   
   .quote-cite {

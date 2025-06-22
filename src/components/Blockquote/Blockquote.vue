@@ -18,8 +18,33 @@ const props = defineProps({
   className: {
     type: String,
     default: ''
+  },
+  variant: {
+    type: String,
+    default: 'default',
+    validator: (value) => ['default', 'minimal', 'card'].includes(value)
+  },
+  noBorder: {
+    type: Boolean,
+    default: true
+  },
+  interactive: {
+    type: Boolean,
+    default: true
+  },
+  size: {
+    type: String,
+    default: 'medium',
+    validator: (value) => ['small', 'medium', 'large'].includes(value)
+  },
+  color: {
+    type: String,
+    default: 'default',
+    validator: (value) => ['default', 'primary', 'success', 'warning', 'error', 'info'].includes(value)
   }
 })
 
-const blockquoteClasses = computed(() => getBlockquoteClasses(props.className))
+const blockquoteClasses = computed(() => 
+  getBlockquoteClasses(props.className, props.variant, props.noBorder, props.interactive, props.size, props.color)
+)
 </script> 
