@@ -9,13 +9,16 @@
       <span class="time">{{ formattedCurrent }} / {{ formattedDuration }}</span>
       <button class="ctrl-btn" @click="toggleMute">{{ muted ? '🔇' : '🔊' }}</button>
       <input class="volume" type="range" min="0" max="1" step="0.05" v-model.number="volume" />
-      <button class="ctrl-btn" @click="toggleFullscreen">⛶</button>
+      <button class="ctrl-btn" @click="handleFullscreen">⛶</button>
     </div>
   </div>
 </template>
 
 <script>
 import { ref, computed, onMounted, watch } from 'vue'
+import { formatTime, calculateSeekPosition, toggleFullscreen } from './utils'
+import './style.css'
+
 export default {
   name: 'VideoPlayer',
   props: {
@@ -32,13 +35,8 @@ export default {
     const duration = ref(0)
     const current = ref(0)
 
-    const formattedTime = (s) => {
-      const m = Math.floor(s / 60)
-      const sec = Math.floor(s % 60).toString().padStart(2, '0')
-      return `${m}:${sec}`
-    }
-    const formattedCurrent = computed(() => formattedTime(current.value))
-    const formattedDuration = computed(() => formattedTime(duration.value))
+    const formattedCurrent = computed(() => formatTime(current.value))
+    const formattedDuration = computed(() => formatTime(duration.value))
 
     const togglePlay = () => {
       if (!video.value) return
@@ -48,6 +46,7 @@ export default {
         video.value.pause()
       }
     }
+    
     const updateProgress = () => {
       if (!video.value) return
       duration.value = video.value.duration || 0
@@ -55,22 +54,20 @@ export default {
       progress.value = duration.value ? (current.value / duration.value) * 100 : 0
       playing.value = !video.value.paused
     }
+    
     const seek = (e) => {
-      const rect = e.currentTarget.getBoundingClientRect()
-      const percent = (e.clientX - rect.left) / rect.width
-      if (video.value) video.value.currentTime = percent * duration.value
+      if (video.value) {
+        video.value.currentTime = calculateSeekPosition(e, duration.value)
+      }
     }
+    
     const toggleMute = () => {
       muted.value = !muted.value
       if (video.value) video.value.muted = muted.value
     }
-    const toggleFullscreen = () => {
-      const el = video.value.parentElement
-      if (!document.fullscreenElement) {
-        el.requestFullscreen?.()
-      } else {
-        document.exitFullscreen?.()
-      }
+    
+    const handleFullscreen = () => {
+      toggleFullscreen(video.value?.parentElement)
     }
 
     watch(volume, (v) => { if (video.value) video.value.volume = v })
@@ -85,7 +82,11 @@ export default {
       }
     })
 
-    return { video, playing, progress, togglePlay, updateProgress, seek, volume, muted, toggleMute, toggleFullscreen, formattedCurrent, formattedDuration, onEnded }
+    return { 
+      video, playing, progress, togglePlay, updateProgress, seek, 
+      volume, muted, toggleMute, handleFullscreen, 
+      formattedCurrent, formattedDuration, onEnded 
+    }
   }
 }
 </script>

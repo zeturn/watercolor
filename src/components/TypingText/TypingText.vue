@@ -1,11 +1,14 @@
 <template>
   <span class="typing-wrapper">
-    <span class="typing-text">{{ displayText }}</span><span v-if="showCursor" class="typing-cursor"></span>
+    <span class="typing-text">{{ displayText }}</span>
+    <span v-if="showCursor" class="typing-cursor"></span>
   </span>
 </template>
 
 <script>
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import { TypingAnimator } from './utils'
+import './style.css'
 
 export default {
   name: 'TypingText',
@@ -19,57 +22,28 @@ export default {
   },
   setup(props) {
     const displayText = ref('')
-    const index = ref(0)
-    const direction = ref(1) // 1 typing, -1 deleting
-    let timer
+    let animator = null
 
-    const start = () => {
-      stop()
-      timer = setInterval(step, props.speed)
-    }
-    const stop = () => {
-      if (timer) clearInterval(timer)
-    }
-    const step = () => {
-      if (direction.value === 1) {
-        // typing
-        if (index.value < props.text.length) {
-          index.value++
-          displayText.value = props.text.slice(0, index.value)
-        } else if (props.loop) {
-          if (props.erase) {
-            direction.value = -1
-          } else {
-            stop()
-            setTimeout(() => {
-              index.value = 0
-              displayText.value = ''
-              start()
-            }, props.pause)
-          }
-        } else {
-          stop()
-        }
-      } else {
-        // deleting
-        if (index.value > 0) {
-          index.value--
-          displayText.value = props.text.slice(0, index.value)
-        } else {
-          direction.value = 1
-        }
-      }
+    const initAnimator = () => {
+      if (animator) animator.stop()
+      
+      animator = new TypingAnimator(props.text, {
+        speed: props.speed,
+        pause: props.pause,
+        loop: props.loop,
+        erase: props.erase,
+        onUpdate: (text) => { displayText.value = text }
+      })
+      animator.start()
     }
 
-    onMounted(start)
-    onBeforeUnmount(stop)
-    watch(() => props.text, () => {
-      index.value = 0
-      displayText.value = ''
-      direction.value = 1
-      start()
+    onMounted(initAnimator)
+    
+    onBeforeUnmount(() => {
+      if (animator) animator.stop()
     })
-    watch(() => props.speed, () => start())
+    
+    watch(() => [props.text, props.speed, props.pause, props.loop, props.erase], initAnimator)
 
     return { displayText }
   }
