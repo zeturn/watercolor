@@ -6,6 +6,7 @@
 
 <script setup>
 import { computed, inject } from 'vue'
+import './style.css'
 
 const props = defineProps({
   hover: {
@@ -58,31 +59,4 @@ const handleClick = (event) => {
 }
 </script>
 
-<style scoped>
-.wc-table-row {
-  border-bottom: 1px solid var(--wc-neutral-200);
-  transition: background-color 0.2s ease;
-}
-
-.wc-table-row--hover:hover {
-  background-color: var(--wc-neutral-50);
-}
-
-.wc-table-row--selected {
-  background-color: var(--wc-primary-100);
-}
-
-.wc-table-row--clickable {
-  cursor: pointer;
-}
-
-.wc-table-row--clickable:active {
-  background-color: var(--wc-neutral-100);
-}
-
-/* Dark mode */
-.dark .wc-table-row { border-bottom-color: var(--wc-neutral-700); }
-.dark .wc-table-row--hover:hover { background-color: var(--wc-neutral-700); }
-.dark .wc-table-row--selected { background-color: var(--wc-primary-700); }
-.dark .wc-table-row--clickable:active { background-color: var(--wc-neutral-700); }
-</style> 
+ 

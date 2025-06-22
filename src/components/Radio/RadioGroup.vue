@@ -18,6 +18,7 @@
 
 <script setup>
 import { computed, provide } from 'vue'
+import './style.css'
 
 const props = defineProps({
   modelValue: {
@@ -93,16 +94,4 @@ provide('radioGroupContext', {
 })
 </script>
 
-<style scoped>
-.wc-radio-group {
-  @apply block;
-}
-
-.wc-radio-group-label {
-  @apply block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-3;
-}
-
-.wc-radio-group-content {
-  @apply w-full;
-}
-</style> 
+ 

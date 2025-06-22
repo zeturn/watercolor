@@ -1,4 +1,9 @@
-/* FileInput 共用样式 */
+/* FileInput 共用样式 - Watercolor风格 */
+
+/* 隐藏原生文件输入 */
+.wc-file-input {
+  display: none;
+}
 
 /* 基础包装器 */
 .wc-file-input-wrapper {
@@ -18,32 +23,31 @@
 
 /* 变体样式 */
 
-/* 块状变体 */
+/* 块状变体 - Watercolor风格 */
 .wc-file-input-wrapper.variant-block {
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 32px;
-  border: 2px dashed var(--wc-neutral-300, #d1d5db);
+  /* Watercolor风格：去掉边框，使用淡灰色背景 */
+  border: none;
   border-radius: 8px;
-  background: var(--wc-neutral-50, #f9fafb);
+  background: var(--wc-neutral-100, #f5f5f5);
   text-align: center;
   min-height: 120px;
   width: 100%;
 }
 
 .wc-file-input-wrapper.variant-block:hover {
-  border-color: var(--wc-primary-300, #93c5fd);
-  background: var(--wc-primary-25, #eff6ff);
+  /* Watercolor风格：hover时背景变深 */
+  background: var(--wc-neutral-200, #e5e5e5);
 }
 
 .wc-file-input-wrapper.variant-block:active {
-  border-color: var(--wc-primary-400, #60a5fa);
-  background: var(--wc-primary-50, #dbeafe);
+  background: var(--wc-neutral-300, #d1d5db);
 }
 
 .wc-file-input-wrapper.variant-block.drag-over {
-  border-color: var(--wc-primary-500, #3b82f6);
   background: var(--wc-primary-50, #dbeafe);
   transform: scale(1.02);
 }
@@ -75,39 +79,39 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 图标变体 */
+/* 图标变体 - Watercolor风格 */
 .wc-file-input-wrapper.variant-icon {
   width: 40px;
   height: 40px;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--wc-neutral-300, #d1d5db);
+  /* Watercolor风格：去掉边框，使用淡灰色背景 */
+  border: none;
   border-radius: 50%;
-  background: var(--wc-neutral-50, #f9fafb);
+  background: var(--wc-neutral-100, #f5f5f5);
   font-size: 18px;
   color: var(--wc-neutral-600, #4b5563);
 }
 
 .wc-file-input-wrapper.variant-icon:hover {
-  border-color: var(--wc-primary-300, #93c5fd);
-  background: var(--wc-primary-50, #dbeafe);
+  background: var(--wc-neutral-200, #e5e5e5);
   color: var(--wc-primary-600, #2563eb);
   transform: scale(1.1);
 }
 
-/* 紧凑变体 */
+/* 紧凑变体 - Watercolor风格 */
 .wc-file-input-wrapper.variant-compact {
   padding: 6px 12px;
-  border: 1px solid var(--wc-neutral-300, #d1d5db);
+  /* Watercolor风格：去掉边框，使用淡灰色背景 */
+  border: none;
   border-radius: 4px;
-  background: var(--wc-background, #ffffff);
+  background: var(--wc-neutral-100, #f5f5f5);
   font-size: 13px;
   gap: 6px;
 }
 
 .wc-file-input-wrapper.variant-compact:hover {
-  border-color: var(--wc-primary-300, #93c5fd);
-  background: var(--wc-primary-25, #eff6ff);
+  background: var(--wc-neutral-200, #e5e5e5);
 }
 
 /* 内容区域 */
@@ -137,6 +141,17 @@
   margin: 0;
 }
 
+/* 按钮文本样式 */
+.wc-file-button {
+  pointer-events: none;
+}
+
+/* 图标文本样式 */
+.wc-file-icon {
+  pointer-events: none;
+  font-size: 16px;
+}
+
 /* 状态样式 */
 .wc-file-input-wrapper--disabled {
   opacity: 0.6;
@@ -158,7 +173,7 @@
   background: var(--wc-success-25, #f0fdf4);
 }
 
-/* 文件列表 */
+/* 文件列表 - Watercolor风格 */
 .wc-file-input-list {
   margin-top: 12px;
   list-style: none;
@@ -172,10 +187,11 @@
   align-items: center;
   gap: 8px;
   padding: 8px;
-  border: 1px solid var(--wc-neutral-200, #e5e7eb);
+  /* Watercolor风格：去掉边框，使用淡灰色背景 */
+  border: none;
   border-radius: 4px;
   margin-bottom: 4px;
-  background: var(--wc-background, #ffffff);
+  background: var(--wc-neutral-100, #f5f5f5);
 }
 
 .wc-file-input-item__icon {

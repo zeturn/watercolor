@@ -7,47 +7,49 @@
       :class="labelClasses"
     >
       {{ label }}
-      <span v-if="required" class="required-indicator">*</span>
+      <span v-if="required" class="wc-select__required">*</span>
     </label>
     
     <!-- Select Container -->
     <div :class="selectContainerClasses" @click="toggleDropdown">
       <!-- Display Value -->
-      <div class="select-display">
-        <span v-if="displayValue" class="select-value">{{ displayValue }}</span>
-        <span v-else class="select-placeholder">{{ placeholder }}</span>
+      <div class="wc-select__value">
+        <span v-if="displayValue">{{ displayValue }}</span>
+        <span v-else class="wc-select__placeholder">{{ placeholder }}</span>
       </div>
       
       <!-- Arrow Icon -->
-      <div class="select-arrow" :class="{ 'select-arrow--open': open }">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="6,9 12,15 18,9"></polyline>
-        </svg>
+      <div class="wc-select__indicators">
+        <div :class="['wc-select__arrow', { 'wc-select__arrow--open': open }]">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6,9 12,15 18,9"></polyline>
+          </svg>
+        </div>
       </div>
     </div>
     
     <!-- Dropdown -->
-    <div v-if="open" class="select-dropdown">
-      <div v-if="searchable" class="select-search">
+    <div v-if="open" class="wc-select__dropdown">
+      <div v-if="searchable" class="wc-select__search">
         <input
           v-model="searchQuery"
-          class="select-search-input"
+          class="wc-select__search-input"
           placeholder="搜索..."
           @click.stop
         />
       </div>
       
-      <div class="select-options">
+      <div class="wc-select__options">
         <div
           v-for="option in filteredOptions"
           :key="getOptionValue(option)"
           :class="getOptionClasses(option)"
           @click="selectOption(option)"
         >
-          <span class="option-text">{{ getOptionLabel(option) }}</span>
+          <span class="wc-select__option-text">{{ getOptionLabel(option) }}</span>
           <svg
             v-if="isSelected(option)"
-            class="option-check"
+            class="wc-select__option-check"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -57,22 +59,23 @@
           </svg>
         </div>
         
-        <div v-if="filteredOptions.length === 0" class="select-no-options">
+        <div v-if="filteredOptions.length === 0" class="wc-select__no-options">
           没有找到选项
         </div>
       </div>
     </div>
     
     <!-- Helper Text -->
-    <div v-if="error || helperText" class="helper-text">
-      <p v-if="error" class="error-text">{{ error }}</p>
-      <p v-else-if="helperText" class="helper-text-content">{{ helperText }}</p>
+    <div v-if="error || helperText">
+      <p v-if="error" class="wc-select__error">{{ error }}</p>
+      <p v-else-if="helperText" class="wc-select__helper">{{ helperText }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, getCurrentInstance, onMounted, onUnmounted } from 'vue'
+import './style.css'
 
 const props = defineProps({
   modelValue: {
@@ -217,10 +220,10 @@ const isSelected = (option) => {
 }
 
 const getOptionClasses = (option) => {
-  const classes = ['select-option']
+  const classes = ['wc-select__option']
   
   if (isSelected(option)) {
-    classes.push('select-option--selected')
+    classes.push('wc-select__option--selected')
   }
   
   return classes
@@ -271,310 +274,4 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped>
-.wc-select {
-  position: relative;
-  display: inline-block;
-  font-family: var(--wc-font-family);
-}
-
-/* Label Styles */
-.wc-select__label {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 8px;
-  color: #374151;
-  transition: color 0.2s ease;
-}
-
-.wc-select__label--sm {
-  font-size: 12px;
-}
-
-.wc-select__label--md {
-  font-size: 14px;
-}
-
-.wc-select__label--lg {
-  font-size: 16px;
-}
-
-.wc-select__label--error {
-  color: #ef4444;
-}
-
-.required-indicator {
-  color: #ef4444;
-  margin-left: 4px;
-}
-
-/* Container Styles */
-.wc-select__container {
-  display: flex;
-  align-items: center;
-  position: relative;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background: #ffffff;
-  min-height: 40px;
-  min-width: 200px;
-}
-
-.wc-select__container--sm {
-  min-height: 32px;
-  font-size: 12px;
-}
-
-.wc-select__container--md {
-  min-height: 40px;
-  font-size: 14px;
-}
-
-.wc-select__container--lg {
-  min-height: 48px;
-  font-size: 16px;
-}
-
-/* Variant Styles */
-.wc-select__container--outlined {
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 0 12px;
-}
-
-.wc-select__container--outlined:hover {
-  border-color: #9ca3af;
-}
-
-.wc-select__container--outlined.wc-select__container--open {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.wc-select__container--filled {
-  background: #f3f4f6;
-  border: none;
-  border-bottom: 2px solid #d1d5db;
-  border-radius: 8px 8px 0 0;
-  padding: 8px 12px 4px;
-}
-
-.wc-select__container--filled:hover {
-  background: #e5e7eb;
-}
-
-.wc-select__container--filled.wc-select__container--open {
-  border-bottom-color: #3b82f6;
-  background: #e5e7eb;
-}
-
-.wc-select__container--standard {
-  border: none;
-  border-bottom: 1px solid #d1d5db;
-  border-radius: 0;
-  padding: 4px 0;
-  background: transparent;
-}
-
-.wc-select__container--standard:hover {
-  border-bottom-color: #9ca3af;
-}
-
-.wc-select__container--standard.wc-select__container--open {
-  border-bottom-color: #3b82f6;
-  border-bottom-width: 2px;
-}
-
-/* Error States */
-.wc-select__container--error.wc-select__container--outlined {
-  border-color: #ef4444;
-}
-
-.wc-select__container--error.wc-select__container--filled {
-  border-bottom-color: #ef4444;
-}
-
-.wc-select__container--error.wc-select__container--standard {
-  border-bottom-color: #ef4444;
-}
-
-/* Disabled States */
-.wc-select__container--disabled {
-  background: #f9fafb;
-  border-color: #e5e7eb;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-.wc-select__container--disabled:hover {
-  border-color: #e5e7eb;
-}
-
-/* Display */
-.select-display {
-  flex: 1;
-  overflow: hidden;
-}
-
-.select-value {
-  color: #111827;
-}
-
-.select-placeholder {
-  color: #9ca3af;
-}
-
-/* Arrow */
-.select-arrow {
-  margin-left: 8px;
-  width: 20px;
-  height: 20px;
-  color: #6b7280;
-  transition: transform 0.2s ease;
-}
-
-.select-arrow--open {
-  transform: rotate(180deg);
-}
-
-.select-arrow svg {
-  width: 100%;
-  height: 100%;
-}
-
-/* Dropdown */
-.select-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: white;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  margin-top: 4px;
-  max-height: 300px;
-  overflow: hidden;
-}
-
-/* Search */
-.select-search {
-  padding: 8px;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.select-search-input {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  outline: none;
-  font-size: 14px;
-}
-
-.select-search-input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-/* Options */
-.select-options {
-  max-height: 240px;
-  overflow-y: auto;
-}
-
-.select-option {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  border-bottom: 1px solid #f3f4f6;
-}
-
-.select-option:last-child {
-  border-bottom: none;
-}
-
-.select-option:hover {
-  background: #f9fafb;
-}
-
-.select-option--selected {
-  background: #f0f9ff;
-  color: #0369a1;
-}
-
-.option-text {
-  flex: 1;
-}
-
-.option-check {
-  width: 16px;
-  height: 16px;
-  color: #3b82f6;
-}
-
-.select-no-options {
-  padding: 16px;
-  text-align: center;
-  color: #6b7280;
-  font-size: 14px;
-}
-
-/* Helper Text */
-.helper-text {
-  margin-top: 8px;
-}
-
-.helper-text-content {
-  font-size: 12px;
-  color: #6b7280;
-  margin: 0;
-}
-
-.error-text {
-  font-size: 12px;
-  color: #ef4444;
-  margin: 0;
-}
-
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  .wc-select__container {
-    background: #1f2937;
-  }
-  
-  .wc-select__label {
-    color: #d1d5db;
-  }
-  
-  .select-value {
-    color: #f9fafb;
-  }
-  
-  .wc-select__container--outlined {
-    border-color: #4b5563;
-  }
-  
-  .wc-select__container--filled {
-    background: #374151;
-  }
-  
-  .select-dropdown {
-    background: #1f2937;
-    border-color: #4b5563;
-  }
-  
-  .select-option:hover {
-    background: #374151;
-  }
-  
-  .select-option--selected {
-    background: #1e3a8a;
-    color: #93c5fd;
-  }
-}
-</style> 
+ 

@@ -1,6 +1,6 @@
 /**
- * Snackbar Component Utilities
- * Provides utility functions for snackbar/toast notification functionality
+ * Enhanced Snackbar Component Utilities
+ * Integrated functionality from Toast and Snackbar components
  */
 
 // ====== Constants ======
@@ -25,7 +25,8 @@ export const SNACKBAR_VARIANTS = {
   filled: 'filled',
   outlined: 'outlined',
   minimal: 'minimal',
-  elevated: 'elevated'
+  elevated: 'elevated',
+  standard: 'standard'
 };
 
 export const ANIMATION_TYPES = {
@@ -36,14 +37,47 @@ export const ANIMATION_TYPES = {
   fade: 'fade'
 };
 
+// Icon mapping from Toast
+export const ICON_MAP = {
+  success: '✓',
+  info: 'ℹ',
+  warning: '⚠',
+  error: '✕'
+};
+
+// Color mapping from Toast
+export const COLOR_MAP = {
+  info: { 
+    bg: '#e8f4ff', 
+    text: '#0070f3', 
+    border: '#1a8cff' 
+  },
+  success: { 
+    bg: '#ecfdf5', 
+    text: '#047857', 
+    border: '#10b981' 
+  },
+  warning: { 
+    bg: '#fffbeb', 
+    text: '#b45309', 
+    border: '#f59e0b' 
+  },
+  error: { 
+    bg: '#fef2f2', 
+    text: '#b91c1c', 
+    border: '#ef4444' 
+  }
+};
+
 export const DEFAULT_DURATION = 6000;
 export const PERSIST_DURATION = -1;
 
-// ====== Snackbar Manager ======
+// ====== Enhanced Snackbar Manager ======
 
 /**
- * Snackbar Manager Class
+ * Enhanced Snackbar Manager Class
  * Manages multiple snackbars with queue, positioning, and lifecycle
+ * Integrated with Toast functionality
  */
 export class SnackbarManager {
   constructor(config = {}) {
@@ -57,8 +91,8 @@ export class SnackbarManager {
   }
 
   /**
-   * Show a snackbar
-   * @param {Object} options - Snackbar options
+   * Show a snackbar with enhanced options
+   * @param {Object} options - Enhanced snackbar options
    * @returns {string} Snackbar ID
    */
   show(options = {}) {
@@ -95,9 +129,9 @@ export class SnackbarManager {
   }
 
   /**
-   * Create snackbar object
+   * Create enhanced snackbar object
    * @param {Object} options - Snackbar options
-   * @returns {Object} Snackbar object
+   * @returns {Object} Enhanced snackbar object
    */
   createSnackbar(options) {
     const id = `snackbar-${this.nextId++}`;
@@ -107,15 +141,16 @@ export class SnackbarManager {
       id,
       timestamp,
       message: options.message || '',
-      title: options.title,
-      severity: options.severity || SNACKBAR_SEVERITIES.default,
+      title: options.title || '', // From Toast
+      severity: options.severity || SNACKBAR_SEVERITIES.info,
       variant: options.variant || SNACKBAR_VARIANTS.filled,
       position: options.position || this.defaultPosition,
       duration: options.duration !== undefined ? options.duration : this.defaultDuration,
       persistent: options.duration === PERSIST_DURATION,
       showCloseButton: options.showCloseButton !== false,
-      showIcon: options.showIcon !== false,
-      showProgress: options.showProgress !== false,
+      showIcon: options.showIcon !== false, // From Toast
+      showProgress: options.showProgress !== false, // Enhanced feature
+      closable: options.closable !== false,
       actions: options.actions || [],
       onClose: options.onClose,
       onAction: options.onAction,
@@ -205,29 +240,37 @@ export class SnackbarManager {
   }
 
   /**
-   * Pause auto-hide timer
+   * Pause snackbar timer
    * @param {string} id - Snackbar ID
    */
   pauseTimer(id) {
     const snackbar = this.snackbars.get(id);
     if (snackbar && snackbar.timer) {
       clearTimeout(snackbar.timer);
-      snackbar.paused = true;
-      snackbar.remainingTime = snackbar.duration - (Date.now() - snackbar.timestamp);
+      snackbar.pausedAt = Date.now();
+      snackbar.timer = null;
     }
   }
 
   /**
-   * Resume auto-hide timer
+   * Resume snackbar timer
    * @param {string} id - Snackbar ID
    */
   resumeTimer(id) {
     const snackbar = this.snackbars.get(id);
-    if (snackbar && snackbar.paused && !snackbar.persistent) {
-      snackbar.paused = false;
-      snackbar.timer = setTimeout(() => {
+    if (snackbar && snackbar.pausedAt && !snackbar.persistent) {
+      const elapsed = snackbar.pausedAt - snackbar.timestamp;
+      const remaining = Math.max(0, snackbar.duration - elapsed);
+      
+      if (remaining > 0) {
+        snackbar.timer = setTimeout(() => {
+          this.removeSnackbar(id);
+        }, remaining);
+      } else {
         this.removeSnackbar(id);
-      }, snackbar.remainingTime || snackbar.duration);
+      }
+      
+      snackbar.pausedAt = null;
     }
   }
 
@@ -252,11 +295,7 @@ export class SnackbarManager {
   }
 }
 
-// ====== Helper Functions ======
-
-/**
- * Create default snackbar manager instance
- */
+// ====== Global Manager Instance ======
 let defaultManager = null;
 
 export function getDefaultManager() {
@@ -266,92 +305,75 @@ export function getDefaultManager() {
   return defaultManager;
 }
 
+// ====== Enhanced Convenience Functions ======
+
 /**
- * Show success snackbar
- * @param {string|Object} message - Message or options
+ * Show success snackbar with enhanced options
+ * @param {string} message - Message text
  * @param {Object} options - Additional options
  * @returns {string} Snackbar ID
  */
 export function showSuccess(message, options = {}) {
-  const manager = getDefaultManager();
-  const config = typeof message === 'string' 
-    ? { message, ...options }
-    : { ...message, ...options };
-  
-  return manager.show({
-    ...config,
-    severity: SNACKBAR_SEVERITIES.success
+  return getDefaultManager().show({
+    message,
+    severity: SNACKBAR_SEVERITIES.success,
+    ...options
   });
 }
 
 /**
- * Show warning snackbar
- * @param {string|Object} message - Message or options
+ * Show warning snackbar with enhanced options
+ * @param {string} message - Message text
  * @param {Object} options - Additional options
  * @returns {string} Snackbar ID
  */
 export function showWarning(message, options = {}) {
-  const manager = getDefaultManager();
-  const config = typeof message === 'string' 
-    ? { message, ...options }
-    : { ...message, ...options };
-  
-  return manager.show({
-    ...config,
-    severity: SNACKBAR_SEVERITIES.warning
+  return getDefaultManager().show({
+    message,
+    severity: SNACKBAR_SEVERITIES.warning,
+    ...options
   });
 }
 
 /**
- * Show error snackbar
- * @param {string|Object} message - Message or options
+ * Show error snackbar with enhanced options
+ * @param {string} message - Message text
  * @param {Object} options - Additional options
  * @returns {string} Snackbar ID
  */
 export function showError(message, options = {}) {
-  const manager = getDefaultManager();
-  const config = typeof message === 'string' 
-    ? { message, ...options }
-    : { ...message, ...options };
-  
-  return manager.show({
-    ...config,
+  return getDefaultManager().show({
+    message,
     severity: SNACKBAR_SEVERITIES.error,
-    duration: options.duration !== undefined ? options.duration : 8000
+    ...options
   });
 }
 
 /**
- * Show info snackbar
- * @param {string|Object} message - Message or options
+ * Show info snackbar with enhanced options
+ * @param {string} message - Message text
  * @param {Object} options - Additional options
  * @returns {string} Snackbar ID
  */
 export function showInfo(message, options = {}) {
-  const manager = getDefaultManager();
-  const config = typeof message === 'string' 
-    ? { message, ...options }
-    : { ...message, ...options };
-  
-  return manager.show({
-    ...config,
-    severity: SNACKBAR_SEVERITIES.info
+  return getDefaultManager().show({
+    message,
+    severity: SNACKBAR_SEVERITIES.info,
+    ...options
   });
 }
 
 /**
- * Show default snackbar
- * @param {string|Object} message - Message or options
- * @param {Object} options - Additional options
+ * Show snackbar with custom options
+ * @param {string} message - Message text
+ * @param {Object} options - Snackbar options
  * @returns {string} Snackbar ID
  */
 export function show(message, options = {}) {
-  const manager = getDefaultManager();
-  const config = typeof message === 'string' 
-    ? { message, ...options }
-    : { ...message, ...options };
-  
-  return manager.show(config);
+  return getDefaultManager().show({
+    message,
+    ...options
+  });
 }
 
 /**
@@ -359,88 +381,130 @@ export function show(message, options = {}) {
  * @param {string} id - Snackbar ID
  */
 export function hide(id) {
-  const manager = getDefaultManager();
-  manager.hide(id);
+  getDefaultManager().hide(id);
 }
 
 /**
  * Hide all snackbars
  */
 export function hideAll() {
-  const manager = getDefaultManager();
-  manager.hideAll();
+  getDefaultManager().hideAll();
 }
 
-// ====== Class Name Utilities ======
+// ====== Enhanced Utility Functions ======
 
 /**
- * Generate class names for snackbar container
+ * Get snackbar icon
+ * @param {string} severity - Severity type
+ * @returns {string} Icon character
+ */
+export function getSnackbarIcon(severity) {
+  return ICON_MAP[severity] || ICON_MAP.info;
+}
+
+/**
+ * Get snackbar colors
+ * @param {string} severity - Severity type
+ * @returns {Object} Color object
+ */
+export function getSnackbarColors(severity) {
+  return COLOR_MAP[severity] || COLOR_MAP.info;
+}
+
+/**
+ * Validate snackbar position
+ * @param {string} position - Position string
+ * @returns {boolean} Is valid position
+ */
+export function isValidPosition(position) {
+  return Object.values(SNACKBAR_POSITIONS).includes(position);
+}
+
+/**
+ * Validate snackbar severity
+ * @param {string} severity - Severity string
+ * @returns {boolean} Is valid severity
+ */
+export function isValidSeverity(severity) {
+  return Object.values(SNACKBAR_SEVERITIES).includes(severity);
+}
+
+/**
+ * Get enhanced container classes
  * @param {Object} props - Component props
- * @returns {string} Class names
+ * @returns {string} CSS classes
  */
 export function getContainerClasses(props = {}) {
   const { position = SNACKBAR_POSITIONS.bottomLeft } = props;
   
-  const classes = ['wc-snackbar-container'];
-  classes.push(`wc-snackbar-container--${position}`);
+  const baseClasses = 'fixed z-50 pointer-events-none flex flex-col gap-2';
+  const positionClasses = {
+    [SNACKBAR_POSITIONS.topLeft]: 'top-4 left-4 items-start',
+    [SNACKBAR_POSITIONS.topCenter]: 'top-4 left-1/2 transform -translate-x-1/2 items-center',
+    [SNACKBAR_POSITIONS.topRight]: 'top-4 right-4 items-end',
+    [SNACKBAR_POSITIONS.bottomLeft]: 'bottom-4 left-4 items-start flex-col-reverse',
+    [SNACKBAR_POSITIONS.bottomCenter]: 'bottom-4 left-1/2 transform -translate-x-1/2 items-center flex-col-reverse',
+    [SNACKBAR_POSITIONS.bottomRight]: 'bottom-4 right-4 items-end flex-col-reverse'
+  };
   
-  return classes.join(' ');
+  return `${baseClasses} ${positionClasses[position] || positionClasses[SNACKBAR_POSITIONS.bottomLeft]}`;
 }
 
 /**
- * Generate class names for snackbar
+ * Get enhanced snackbar classes
  * @param {Object} props - Component props
- * @returns {string} Class names
+ * @returns {string} CSS classes
  */
 export function getSnackbarClasses(props = {}) {
   const {
-    severity = SNACKBAR_SEVERITIES.default,
+    severity = SNACKBAR_SEVERITIES.info,
     variant = SNACKBAR_VARIANTS.filled,
-    animation = ANIMATION_TYPES.fade,
-    animationState = 'entered',
-    loading = false
+    className = ''
   } = props;
   
-  const classes = ['wc-snackbar'];
+  const baseClasses = 'pointer-events-auto max-w-sm w-full rounded-lg shadow-lg p-4 transition-all duration-300 ease-in-out';
   
-  if (severity !== SNACKBAR_SEVERITIES.default) {
-    classes.push(`wc-snackbar--${severity}`);
+  let variantClasses = '';
+  if (variant === SNACKBAR_VARIANTS.filled) {
+    const colorMap = {
+      [SNACKBAR_SEVERITIES.success]: 'bg-success-500 text-white border border-success-500',
+      [SNACKBAR_SEVERITIES.info]: 'bg-primary-500 text-white border border-primary-500',
+      [SNACKBAR_SEVERITIES.warning]: 'bg-warning-500 text-white border border-warning-500',
+      [SNACKBAR_SEVERITIES.error]: 'bg-error-500 text-white border border-error-500'
+    };
+    variantClasses = colorMap[severity] || 'bg-neutral-800 text-white border border-neutral-700';
+  } else if (variant === SNACKBAR_VARIANTS.outlined) {
+    const colorMap = {
+      [SNACKBAR_SEVERITIES.success]: 'bg-white dark:bg-neutral-800 border-success-500 text-success-600 dark:text-success-400 border-l-4',
+      [SNACKBAR_SEVERITIES.info]: 'bg-white dark:bg-neutral-800 border-primary-500 text-primary-600 dark:text-primary-400 border-l-4',
+      [SNACKBAR_SEVERITIES.warning]: 'bg-white dark:bg-neutral-800 border-warning-500 text-warning-600 dark:text-warning-400 border-l-4',
+      [SNACKBAR_SEVERITIES.error]: 'bg-white dark:bg-neutral-800 border-error-500 text-error-600 dark:text-error-400 border-l-4'
+    };
+    variantClasses = colorMap[severity] || 'bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100';
+  } else {
+    variantClasses = 'bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100';
   }
   
-  if (variant !== SNACKBAR_VARIANTS.filled) {
-    classes.push(`wc-snackbar--${variant}`);
-  }
-  
-  if (animation && animationState) {
-    classes.push(`wc-snackbar--${animation}-${animationState}`);
-  }
-  
-  if (loading) {
-    classes.push('wc-snackbar--loading');
-  }
-  
-  return classes.join(' ');
+  return `${baseClasses} ${variantClasses} ${className}`.trim();
 }
 
-// ====== Animation Utilities ======
-
 /**
- * Get animation class based on position and state
- * @param {string} position - Snackbar position
+ * Get animation classes by position
+ * @param {string} position - Position
  * @param {string} state - Animation state
- * @returns {string} Animation type
+ * @returns {string} Animation classes
  */
 export function getAnimationByPosition(position, state = 'enter') {
   const animationMap = {
-    [SNACKBAR_POSITIONS.topLeft]: ANIMATION_TYPES.slideDown,
-    [SNACKBAR_POSITIONS.topCenter]: ANIMATION_TYPES.slideDown,
-    [SNACKBAR_POSITIONS.topRight]: ANIMATION_TYPES.slideDown,
-    [SNACKBAR_POSITIONS.bottomLeft]: ANIMATION_TYPES.slideUp,
-    [SNACKBAR_POSITIONS.bottomCenter]: ANIMATION_TYPES.slideUp,
-    [SNACKBAR_POSITIONS.bottomRight]: ANIMATION_TYPES.slideUp
+    [SNACKBAR_POSITIONS.topLeft]: state === 'enter' ? 'animate-slide-down' : 'animate-slide-up',
+    [SNACKBAR_POSITIONS.topCenter]: state === 'enter' ? 'animate-slide-down' : 'animate-slide-up',
+    [SNACKBAR_POSITIONS.topRight]: state === 'enter' ? 'animate-slide-down' : 'animate-slide-up',
+    [SNACKBAR_POSITIONS.bottomLeft]: state === 'enter' ? 'animate-slide-up' : 'animate-slide-down',
+    [SNACKBAR_POSITIONS.bottomCenter]: state === 'enter' ? 'animate-slide-up' : 'animate-slide-down',
+    [SNACKBAR_POSITIONS.bottomRight]: state === 'enter' ? 'animate-slide-up' : 'animate-slide-down'
   };
   
-  return animationMap[position] || ANIMATION_TYPES.fade;
+  return animationMap[position] || 'animate-fade';
 }
 
 /**
@@ -450,86 +514,95 @@ export function getAnimationByPosition(position, state = 'enter') {
  * @returns {number} Progress percentage
  */
 export function calculateProgress(elapsed, duration) {
-  if (duration <= 0) return 100;
-  return Math.min((elapsed / duration) * 100, 100);
+  if (duration <= 0) return 0;
+  return Math.max(0, Math.min(100, 100 - (elapsed / duration) * 100));
 }
 
-// ====== Validation ======
-
 /**
- * Validate snackbar options
- * @param {Object} options - Snackbar options
- * @returns {Object} Validation result
+ * Enhanced validation for options
+ * @param {Object} options - Options to validate
+ * @returns {Object} Validated and normalized options
  */
 export function validateOptions(options = {}) {
-  const errors = [];
-  const warnings = [];
+  const normalized = { ...options };
   
-  // Message validation
-  if (!options.message && !options.title) {
-    errors.push('Either message or title is required');
+  // Validate and normalize position
+  if (!isValidPosition(normalized.position)) {
+    normalized.position = SNACKBAR_POSITIONS.bottomLeft;
   }
   
-  // Severity validation
-  if (options.severity && !Object.values(SNACKBAR_SEVERITIES).includes(options.severity)) {
-    errors.push(`Invalid severity: ${options.severity}`);
+  // Validate and normalize severity
+  if (!isValidSeverity(normalized.severity)) {
+    normalized.severity = SNACKBAR_SEVERITIES.info;
   }
   
-  // Position validation
-  if (options.position && !Object.values(SNACKBAR_POSITIONS).includes(options.position)) {
-    errors.push(`Invalid position: ${options.position}`);
+  // Validate and normalize variant
+  if (!Object.values(SNACKBAR_VARIANTS).includes(normalized.variant)) {
+    normalized.variant = SNACKBAR_VARIANTS.filled;
   }
   
-  // Duration validation
-  if (options.duration !== undefined && typeof options.duration !== 'number') {
-    errors.push('Duration must be a number');
+  // Validate duration
+  if (typeof normalized.duration !== 'number' || normalized.duration < 0) {
+    normalized.duration = DEFAULT_DURATION;
   }
   
-  // Actions validation
-  if (options.actions && !Array.isArray(options.actions)) {
-    errors.push('Actions must be an array');
+  // Ensure boolean properties
+  normalized.closable = Boolean(normalized.closable !== false);
+  normalized.showIcon = Boolean(normalized.showIcon !== false);
+  normalized.showProgress = Boolean(normalized.showProgress);
+  
+  // Validate callbacks
+  if (normalized.onClose && typeof normalized.onClose !== 'function') {
+    delete normalized.onClose;
   }
   
-  return {
-    isValid: errors.length === 0,
-    errors,
-    warnings
-  };
+  if (normalized.onAction && typeof normalized.onAction !== 'function') {
+    delete normalized.onAction;
+  }
+  
+  return normalized;
 }
 
-// ====== Accessibility ======
-
 /**
- * Generate ARIA attributes for snackbar
+ * Get ARIA attributes for accessibility
  * @param {Object} props - Component props
  * @returns {Object} ARIA attributes
  */
 export function getAriaAttributes(props = {}) {
-  const {
-    severity = SNACKBAR_SEVERITIES.default,
-    persistent = false,
-    id
-  } = props;
+  const { severity = SNACKBAR_SEVERITIES.info, message = '', title = '' } = props;
   
   const roleMap = {
     [SNACKBAR_SEVERITIES.error]: 'alert',
     [SNACKBAR_SEVERITIES.warning]: 'alert',
     [SNACKBAR_SEVERITIES.success]: 'status',
-    [SNACKBAR_SEVERITIES.info]: 'status',
-    [SNACKBAR_SEVERITIES.default]: 'status'
+    [SNACKBAR_SEVERITIES.info]: 'status'
   };
   
   return {
-    role: roleMap[severity],
+    role: roleMap[severity] || 'status',
     'aria-live': severity === SNACKBAR_SEVERITIES.error ? 'assertive' : 'polite',
     'aria-atomic': 'true',
-    'aria-relevant': 'additions text',
-    'aria-label': persistent ? 'Notification' : 'Notification, will close automatically',
-    id: id || undefined
+    'aria-label': title || message || `${severity} notification`
   };
 }
 
-// ====== Utility Functions ======
+/**
+ * Create error snackbar from Error object
+ * @param {Error} error - Error object
+ * @param {Object} options - Additional options
+ * @returns {string} Snackbar ID
+ */
+export function createErrorSnackbar(error, options = {}) {
+  const message = error.message || 'An unexpected error occurred';
+  const title = options.title || 'Error';
+  
+  return showError(message, {
+    title,
+    duration: options.duration || 8000, // Longer duration for errors
+    showIcon: true,
+    ...options
+  });
+}
 
 /**
  * Format duration for display
@@ -537,99 +610,50 @@ export function getAriaAttributes(props = {}) {
  * @returns {string} Formatted duration
  */
 export function formatDuration(duration) {
-  if (duration === PERSIST_DURATION) return 'Persistent';
+  if (duration < 0) return 'Persistent';
   if (duration < 1000) return `${duration}ms`;
   return `${(duration / 1000).toFixed(1)}s`;
 }
 
 /**
  * Truncate message if too long
- * @param {string} message - Message text
+ * @param {string} message - Original message
  * @param {number} maxLength - Maximum length
  * @returns {string} Truncated message
  */
 export function truncateMessage(message, maxLength = 200) {
-  if (!message || message.length <= maxLength) return message;
+  if (typeof message !== 'string') return '';
+  if (message.length <= maxLength) return message;
   return message.substring(0, maxLength - 3) + '...';
 }
 
 /**
- * Debounce function for rapid snackbar calls
+ * Debounce snackbar calls to prevent spam
  * @param {Function} func - Function to debounce
- * @param {number} delay - Debounce delay
+ * @param {number} delay - Delay in milliseconds
  * @returns {Function} Debounced function
  */
 export function debounceSnackbar(func, delay = 500) {
   let timeoutId;
-  let lastArgs;
+  const messageMap = new Map();
   
   return function (...args) {
-    lastArgs = args;
-    clearTimeout(timeoutId);
+    const [message] = args;
+    const now = Date.now();
     
+    // Check if same message was shown recently
+    if (messageMap.has(message)) {
+      const lastShown = messageMap.get(message);
+      if (now - lastShown < delay) {
+        return; // Skip showing duplicate message
+      }
+    }
+    
+    messageMap.set(message, now);
+    
+    clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
-      func.apply(this, lastArgs);
-    }, delay);
+      func.apply(this, args);
+    }, 100); // Small delay to batch calls
   };
 }
-
-/**
- * Create snackbar from error object
- * @param {Error} error - Error object
- * @param {Object} options - Additional options
- * @returns {Object} Snackbar options
- */
-export function createErrorSnackbar(error, options = {}) {
-  return {
-    message: error.message || 'An error occurred',
-    title: options.title || 'Error',
-    severity: SNACKBAR_SEVERITIES.error,
-    duration: 8000,
-    showCloseButton: true,
-    ...options
-  };
-}
-
-// ====== Export All Utilities ======
-export default {
-  // Constants
-  SNACKBAR_POSITIONS,
-  SNACKBAR_SEVERITIES,
-  SNACKBAR_VARIANTS,
-  ANIMATION_TYPES,
-  DEFAULT_DURATION,
-  PERSIST_DURATION,
-  
-  // Manager
-  SnackbarManager,
-  getDefaultManager,
-  
-  // Show functions
-  show,
-  showSuccess,
-  showWarning,
-  showError,
-  showInfo,
-  hide,
-  hideAll,
-  
-  // Class utilities
-  getContainerClasses,
-  getSnackbarClasses,
-  
-  // Animation utilities
-  getAnimationByPosition,
-  calculateProgress,
-  
-  // Validation
-  validateOptions,
-  
-  // Accessibility
-  getAriaAttributes,
-  
-  // Utility functions
-  formatDuration,
-  truncateMessage,
-  debounceSnackbar,
-  createErrorSnackbar
-};

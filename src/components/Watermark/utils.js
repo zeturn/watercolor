@@ -12,17 +12,17 @@ export const defaultProps = {
   fullscreen: false,
   globalRotate: 0,
   lineHeight: 14,
-  height: 32,
-  width: 32,
+  height: 64,
+  width: 200,
   image: undefined,
   imageHeight: undefined,
   imageWidth: undefined,
   imageOpacity: 1,
   rotate: 0,
   selectable: true,
-  textAlign: 'left',
-  xGap: 0,
-  yGap: 0,
+  textAlign: 'center',
+  xGap: 48,
+  yGap: 48,
   xOffset: 0,
   yOffset: 0,
   zIndex: 10
@@ -45,8 +45,24 @@ export function createCanvasUrl(props) {
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
 
-  const tileWidth = props.width + props.xGap
-  const tileHeight = props.height + props.yGap
+  let tileWidth = props.width
+  let tileHeight = props.height
+
+  if (!props.image && props.content) {
+    ctx.font = `${props.fontStyle} ${props.fontVariant} ${props.fontWeight} ${props.fontSize}px ${props.fontFamily}`
+
+    const lines = props.content.split(/\n/)
+    const maxLineWidth = Math.max(...lines.map((l) => ctx.measureText(l).width))
+
+    const textBlockHeight = props.lineHeight * lines.length
+
+    tileWidth = Math.max(tileWidth, Math.ceil(maxLineWidth))
+    tileHeight = Math.max(tileHeight, Math.ceil(textBlockHeight))
+  }
+
+  tileWidth += props.xGap
+  tileHeight += props.yGap
+
   canvas.width = tileWidth
   canvas.height = tileHeight
 
@@ -72,7 +88,7 @@ export function createCanvasUrl(props) {
 
   // 绘制文本
   const lines = (props.content || '').split(/\n/)
-  ctx.textAlign = props.textAlign
+  ctx.textAlign = props.textAlign || 'center'
   ctx.textBaseline = 'middle'
   
   // 处理颜色（可能是CSS变量）

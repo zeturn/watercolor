@@ -1,4 +1,5 @@
 import React, { useMemo, useEffect } from 'react'
+import './style.css'
 
 const variants = {
   text: 'wc-skeleton--text',

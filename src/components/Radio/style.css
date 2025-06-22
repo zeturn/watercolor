@@ -1,4 +1,4 @@
-/* ====== Radio Component Styles ====== */
+/* ====== Radio Component Styles - Watercolor风格 ====== */
 
 /* CSS Variables */
 :root {
@@ -7,11 +7,11 @@
   --wc-radio-size-md: 20px;
   --wc-radio-size-lg: 24px;
   
-  /* Colors */
-  --wc-radio-border: var(--wc-neutral-300);
-  --wc-radio-bg: var(--wc-neutral-0);
-  --wc-radio-checked: var(--wc-primary-500);
-  --wc-radio-dot: var(--wc-neutral-0);
+  /* Colors - Watercolor风格 */
+  --wc-radio-border: var(--wc-neutral-300, #d1d5db);
+  --wc-radio-bg: var(--wc-neutral-200, #e5e7eb); /* 未激活时整个灰色圆球 */
+  --wc-radio-checked: var(--wc-primary-500, #3b82f6);
+  --wc-radio-dot: var(--wc-neutral-0, #ffffff);
   
   /* Spacing */
   --wc-radio-gap: 8px;
@@ -23,9 +23,9 @@
 
 /* Dark Mode Variables */
 .dark {
-  --wc-radio-border: var(--wc-neutral-500);
-  --wc-radio-bg: var(--wc-neutral-800);
-  --wc-radio-checked: var(--wc-primary-400);
+  --wc-radio-border: var(--wc-neutral-500, #6b7280);
+  --wc-radio-bg: var(--wc-neutral-600, #4b5563);
+  --wc-radio-checked: var(--wc-primary-400, #60a5fa);
 }
 
 /* ====== Radio Container ====== */
@@ -79,7 +79,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--wc-radio-border);
+  /* Watercolor风格：去掉边框，未激活时整个灰色圆球 */
+  border: none;
   border-radius: 50%;
   background: var(--wc-radio-bg);
   transition: var(--wc-radio-transition);
@@ -130,9 +131,9 @@
   background-color: var(--wc-info-500);
 }
 
-/* Checked State */
+/* Checked State - 激活后保持现有样式 */
 .wc-radio__button--checked {
-  border-color: var(--wc-radio-checked);
+  border: 2px solid var(--wc-radio-checked);
   background-color: var(--wc-radio-checked);
 }
 
@@ -153,9 +154,13 @@
   transform: scale(1);
 }
 
-/* Hover Effects */
-.wc-radio:not(.wc-radio--disabled):hover .wc-radio__button {
-  border-color: var(--wc-radio-checked);
+/* Hover Effects - Watercolor风格 */
+.wc-radio:not(.wc-radio--disabled):hover .wc-radio__button:not(.wc-radio__button--checked) {
+  background: var(--wc-neutral-300);
+  box-shadow: 0 0 0 4px rgba(var(--wc-primary-500-rgb), 0.1);
+}
+
+.wc-radio:not(.wc-radio--disabled):hover .wc-radio__button.wc-radio__button--checked {
   box-shadow: 0 0 0 4px rgba(var(--wc-primary-500-rgb), 0.1);
 }
 
@@ -185,6 +190,43 @@
 
 /* ====== Radio Group ====== */
 .wc-radio-group {
+  display: block;
+}
+
+.wc-radio-group-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--wc-neutral-700, #374151);
+  margin-bottom: 12px;
+}
+
+.dark .wc-radio-group-label {
+  color: var(--wc-neutral-300, #d1d5db);
+}
+
+.wc-radio-group-content {
+  width: 100%;
+}
+
+.wc-radio-group-content.space-y-2 > * + * {
+  margin-top: 8px;
+}
+
+.wc-radio-group-content.flex {
+  display: flex;
+}
+
+.wc-radio-group-content.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.wc-radio-group-content.gap-4 {
+  gap: 16px;
+}
+
+/* Alternative radio group layout styles */
+.wc-radio-group-items {
   display: flex;
   flex-direction: column;
   gap: var(--wc-radio-gap);

@@ -1,22 +1,24 @@
 /**
- * Input 组件样式
+ * Input 组件样式 - Watercolor风格
  * 输入框组件的完整样式定义
  */
 
 /* CSS变量定义 */
 :root {
-  --input-bg: #ffffff;
-  --input-border: #d1d5db;
-  --input-border-focus: #3b82f6;
-  --input-border-error: #ef4444;
+  /* Watercolor风格：淡灰色背景，无边框 */
+  --input-bg: var(--wc-neutral-100, #f5f5f5);
+  --input-border: transparent;
+  --input-border-focus: transparent;
+  --input-border-error: transparent;
   --input-text: #111827;
   --input-text-secondary: #6b7280;
   --input-placeholder: #9ca3af;
   --input-label: #374151;
-  --input-disabled-bg: #f9fafb;
-  --input-disabled-border: #e5e7eb;
+  --input-disabled-bg: var(--wc-neutral-200, #e5e5e5);
+  --input-disabled-border: transparent;
   --input-radius: 6px;
-  --input-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --input-shadow: none;
+  /* Watercolor风格：focus时背景变深并添加淡色焦点效果 */
   --input-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.1);
   --input-shadow-error: 0 0 0 3px rgba(239, 68, 68, 0.1);
   --input-transition: all 0.2s ease;
@@ -25,17 +27,17 @@
 /* 深色模式变量 */
 @media (prefers-color-scheme: dark) {
   :root {
-    --input-bg: #1f2937;
-    --input-border: #4b5563;
-    --input-border-focus: #60a5fa;
-    --input-border-error: #f87171;
+    --input-bg: var(--wc-neutral-800, #1f2937);
+    --input-border: transparent;
+    --input-border-focus: transparent;
+    --input-border-error: transparent;
     --input-text: #f9fafb;
     --input-text-secondary: #d1d5db;
     --input-placeholder: #9ca3af;
     --input-label: #e5e7eb;
-    --input-disabled-bg: #374151;
-    --input-disabled-border: #4b5563;
-    --input-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --input-disabled-bg: var(--wc-neutral-700, #374151);
+    --input-disabled-border: transparent;
+    --input-shadow: none;
     --input-shadow-focus: 0 0 0 3px rgba(96, 165, 250, 0.2);
     --input-shadow-error: 0 0 0 3px rgba(248, 113, 113, 0.2);
   }
@@ -80,7 +82,8 @@
 /* 基础输入框样式 */
 .wc-input {
   width: 100%;
-  border: 1px solid var(--input-border);
+  /* Watercolor风格：去掉边框，使用淡灰色背景 */
+  border: none;
   border-radius: var(--input-radius);
   background-color: var(--input-bg);
   color: var(--input-text);
@@ -96,7 +99,8 @@
 
 .wc-input:focus {
   outline: none;
-  border-color: var(--input-border-focus);
+  /* Watercolor风格：focus时背景变深 */
+  background-color: var(--wc-neutral-200, #e5e5e5);
   box-shadow: var(--input-shadow-focus);
 }
 
@@ -118,41 +122,45 @@
 
 /* 样式变体 */
 .wc-input--outlined {
-  background-color: transparent;
-  border: 1px solid var(--input-border);
+  /* Watercolor风格：outlined版本也去掉边框 */
+  background-color: var(--input-bg);
+  border: none;
+}
+
+.wc-input--outlined:focus {
+  background-color: var(--wc-neutral-200, #e5e5e5);
 }
 
 .wc-input--filled {
-  background-color: var(--input-disabled-bg);
-  border: 1px solid transparent;
-  border-bottom: 2px solid var(--input-border);
+  background-color: var(--input-bg);
+  border: none;
+  border-radius: var(--input-radius);
 }
 
 .wc-input--filled:focus {
-  background-color: var(--input-bg);
-  border-bottom-color: var(--input-border-focus);
+  background-color: var(--wc-neutral-200, #e5e5e5);
 }
 
 .wc-input--standard {
-  background-color: transparent;
+  background-color: var(--input-bg);
   border: none;
-  border-bottom: 1px solid var(--input-border);
-  border-radius: 0;
-  padding-left: 0;
-  padding-right: 0;
+  border-radius: var(--input-radius);
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .wc-input--standard:focus {
-  border-bottom: 2px solid var(--input-border-focus);
+  background-color: var(--wc-neutral-200, #e5e5e5);
 }
 
 /* 状态样式 */
 .wc-input--error {
-  border-color: var(--input-border-error);
+  background-color: var(--wc-error-50, #fef2f2);
+  border: none;
 }
 
 .wc-input--error:focus {
-  border-color: var(--input-border-error);
+  background-color: var(--wc-error-100, #fee2e2);
   box-shadow: var(--input-shadow-error);
 }
 

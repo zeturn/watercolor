@@ -1,4 +1,4 @@
-/* Button 组件样式 */
+/* Button 组件样式 - Watercolor风格 */
 .wc-btn {
   display: inline-flex;
   align-items: center;
@@ -16,6 +16,9 @@
   white-space: nowrap;
   user-select: none;
   vertical-align: middle;
+  /* Watercolor默认：无背景，无边框 */
+  background-color: transparent;
+  border: none;
 }
 
 /* Size variants */
@@ -233,7 +236,7 @@
   }
 }
 
-/* 样式模式 - Default: 只有彩色的字，没有背景，hover时才有浅色的背景，没有边框 */
+/* 样式模式 - Default: watercolor风格，只有彩色的字，没有背景，hover时才有浅色的背景，没有边框 */
 .wc-btn--style-default {
   background-color: transparent;
   border: none;
@@ -248,11 +251,11 @@
 }
 
 .wc-btn--style-default.wc-btn--secondary {
-  color: var(--wc-secondary-500, #6b7280);
+  color: var(--wc-neutral-500, #6b7280);
 }
 
 .wc-btn--style-default.wc-btn--secondary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-secondary-50, #f9fafb);
+  background-color: var(--wc-neutral-50, #f9fafb);
 }
 
 .wc-btn--style-default.wc-btn--success {
@@ -319,7 +322,7 @@
   background-color: var(--wc-pink-50, #fdf2f8);
 }
 
-/* 样式模式 - Outlined: 只有彩色的字，没有背景，hover时才有浅色的背景，有边框 */
+/* 样式模式 - Outlined: watercolor风格，只有彩色的字，没有背景，hover时才有浅色的背景，有边框 */
 .wc-btn--style-outlined {
   background-color: transparent;
   border: 1px solid currentColor;
@@ -335,12 +338,12 @@
 }
 
 .wc-btn--style-outlined.wc-btn--secondary {
-  color: var(--wc-secondary-500, #6b7280);
-  border-color: var(--wc-secondary-500, #6b7280);
+  color: var(--wc-neutral-500, #6b7280);
+  border-color: var(--wc-neutral-500, #6b7280);
 }
 
 .wc-btn--style-outlined.wc-btn--secondary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-secondary-50, #f9fafb);
+  background-color: var(--wc-neutral-50, #f9fafb);
 }
 
 .wc-btn--style-outlined.wc-btn--success {
@@ -427,13 +430,13 @@
 }
 
 .wc-btn--style-filled.wc-btn--secondary {
-  background-color: var(--wc-secondary-500, #6b7280);
+  background-color: var(--wc-neutral-500, #6b7280);
   color: white;
   border: none;
 }
 
 .wc-btn--style-filled.wc-btn--secondary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-secondary-600, #4b5563);
+  background-color: var(--wc-neutral-600, #4b5563);
 }
 
 .wc-btn--style-filled.wc-btn--success {
@@ -517,11 +520,11 @@
 }
 
 .wc-btn--style-filled.wc-btn--filled {
-  background-color: var(--wc-neutral-900, #111827);
+  background-color: var(--wc-neutral-800, #1f2937);
   color: white;
   border: none;
 }
 
 .wc-btn--style-filled.wc-btn--filled:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-neutral-800, #1f2937);
+  background-color: var(--wc-neutral-900, #111827);
 } 

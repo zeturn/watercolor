@@ -1,41 +1,41 @@
-/* ====== Table Component Styles ====== */
+/* ====== Table Component Styles - Watercolor风格 ====== */
 
 /* CSS Variables */
 :root {
-  /* Container */
-  --wc-table-container-bg: var(--wc-neutral-0);
-  --wc-table-container-border: var(--wc-neutral-200);
+  /* Container - Watercolor风格 */
+  --wc-table-container-bg: var(--wc-neutral-100, #f5f5f5);
+  --wc-table-container-border: transparent;
   --wc-table-container-border-radius: 8px;
   --wc-table-container-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   
   /* Table */
-  --wc-table-font-family: var(--wc-font-family);
+  --wc-table-font-family: var(--wc-font-family, system-ui, -apple-system, sans-serif);
   --wc-table-font-size-sm: 0.75rem;
   --wc-table-font-size-md: 0.875rem;
   --wc-table-font-size-lg: 1rem;
   
-  /* Cells */
+  /* Cells - Watercolor风格：去掉边框 */
   --wc-table-cell-padding-sm: 6px 12px;
   --wc-table-cell-padding-md: 12px 16px;
   --wc-table-cell-padding-lg: 16px 20px;
-  --wc-table-cell-border: var(--wc-neutral-200);
-  --wc-table-cell-text: var(--wc-neutral-900);
+  --wc-table-cell-border: transparent;
+  --wc-table-cell-text: var(--wc-neutral-900, #111827);
   
-  /* Header */
-  --wc-table-head-bg: var(--wc-neutral-50);
-  --wc-table-head-text: var(--wc-neutral-700);
-  --wc-table-head-border: var(--wc-neutral-200);
+  /* Header - Watercolor风格 */
+  --wc-table-head-bg: var(--wc-neutral-200, #e5e7eb);
+  --wc-table-head-text: var(--wc-neutral-700, #374151);
+  --wc-table-head-border: transparent;
   --wc-table-head-font-weight: 600;
   
-  /* Row */
-  --wc-table-row-hover-bg: var(--wc-neutral-50);
-  --wc-table-row-selected-bg: var(--wc-primary-100);
-  --wc-table-row-striped-bg: var(--wc-neutral-25);
-  --wc-table-row-border: var(--wc-neutral-200);
+  /* Row - Watercolor风格 */
+  --wc-table-row-hover-bg: var(--wc-neutral-200, #e5e7eb);
+  --wc-table-row-selected-bg: var(--wc-primary-100, #dbeafe);
+  --wc-table-row-striped-bg: var(--wc-neutral-50, #f9fafb);
+  --wc-table-row-border: transparent;
   
   /* Sort */
-  --wc-table-sort-color: var(--wc-primary-500);
-  --wc-table-sort-hover-color: var(--wc-primary-600);
+  --wc-table-sort-color: var(--wc-primary-500, #3b82f6);
+  --wc-table-sort-hover-color: var(--wc-primary-600, #2563eb);
   
   /* Transitions */
   --wc-table-transition: all 0.2s ease;
@@ -43,25 +43,26 @@
 
 /* Dark Mode Variables */
 .dark {
-  --wc-table-container-bg: var(--wc-neutral-800);
-  --wc-table-container-border: var(--wc-neutral-700);
-  --wc-table-cell-border: var(--wc-neutral-700);
-  --wc-table-cell-text: var(--wc-neutral-100);
-  --wc-table-head-bg: var(--wc-neutral-700);
-  --wc-table-head-text: var(--wc-neutral-200);
-  --wc-table-head-border: var(--wc-neutral-600);
-  --wc-table-row-hover-bg: var(--wc-neutral-700);
-  --wc-table-row-selected-bg: var(--wc-primary-700);
-  --wc-table-row-striped-bg: var(--wc-neutral-750);
-  --wc-table-row-border: var(--wc-neutral-700);
-  --wc-table-sort-color: var(--wc-primary-400);
-  --wc-table-sort-hover-color: var(--wc-primary-300);
+  --wc-table-container-bg: var(--wc-neutral-800, #1f2937);
+  --wc-table-container-border: transparent;
+  --wc-table-cell-border: transparent;
+  --wc-table-cell-text: var(--wc-neutral-100, #f3f4f6);
+  --wc-table-head-bg: var(--wc-neutral-700, #374151);
+  --wc-table-head-text: var(--wc-neutral-200, #e5e7eb);
+  --wc-table-head-border: transparent;
+  --wc-table-row-hover-bg: var(--wc-neutral-700, #374151);
+  --wc-table-row-selected-bg: var(--wc-primary-700, #1d4ed8);
+  --wc-table-row-striped-bg: var(--wc-neutral-750, #374151);
+  --wc-table-row-border: transparent;
+  --wc-table-sort-color: var(--wc-primary-400, #60a5fa);
+  --wc-table-sort-hover-color: var(--wc-primary-300, #93c5fd);
 }
 
 /* ====== Table Container ====== */
 .wc-table-container {
   overflow-x: auto;
-  border: 1px solid var(--wc-table-container-border);
+  /* Watercolor风格：去掉边框 */
+  border: none;
   border-radius: var(--wc-table-container-border-radius);
   background-color: var(--wc-table-container-bg);
   box-shadow: var(--wc-table-container-shadow);
@@ -135,7 +136,8 @@
 /* ====== Table Head ====== */
 .wc-table-head {
   background-color: var(--wc-table-head-bg);
-  border-bottom: 2px solid var(--wc-table-head-border);
+  /* Watercolor风格：去掉边框 */
+  border-bottom: none;
 }
 
 .wc-table-head--sticky {
@@ -159,13 +161,15 @@
 /* ====== Table Footer ====== */
 .wc-table-footer {
   background-color: var(--wc-table-head-bg);
-  border-top: 1px solid var(--wc-table-head-border);
+  /* Watercolor风格：去掉边框 */
+  border-top: none;
   font-weight: 500;
 }
 
 /* ====== Table Row ====== */
 .wc-table-row {
-  border-bottom: 1px solid var(--wc-table-row-border);
+  /* Watercolor风格：去掉边框 */
+  border-bottom: none;
   transition: var(--wc-table-transition);
 }
 
@@ -192,7 +196,8 @@
 
 /* ====== Table Cell ====== */
 .wc-table-cell {
-  border-bottom: 1px solid var(--wc-table-cell-border);
+  /* Watercolor风格：去掉边框 */
+  border-bottom: none;
   vertical-align: inherit;
   color: var(--wc-table-cell-text);
   line-height: 1.43;

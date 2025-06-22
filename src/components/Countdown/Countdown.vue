@@ -1,5 +1,5 @@
 <template>
-  <div class="wc-countdown" :style="wrapperStyle">
+  <div :class="countdownClasses" :style="wrapperStyle">
     <span>{{ formattedTime }}</span>
   </div>
 </template>
@@ -89,6 +89,15 @@ const wrapperStyle = computed(() => {
     fontSize: props.fontSize,
     color: props.color || defaultColor
   }
+})
+
+/** 根据状态组合 class */
+const countdownClasses = computed(() => {
+  const classes = ['wc-countdown']
+  if (remaining.value === 0) {
+    classes.push('wc-countdown--finished')
+  }
+  return classes
 })
 
 /** 对外暴露方法 */

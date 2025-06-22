@@ -8,10 +8,16 @@
   font-family: var(--wc-font-family);
   transition: all 0.2s ease;
   user-select: none;
+  /* 添加浅色背景 */
+  background-color: var(--wc-neutral-100, #f5f5f5);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--wc-neutral-100, #f5f5f5);
 }
 
 .wc-copy:hover {
-  opacity: 0.8;
+  background-color: var(--wc-neutral-200, #e5e7eb);
+  border-color: var(--wc-neutral-200, #e5e7eb);
 }
 
 /* Variant styles */
@@ -43,25 +49,32 @@
 .wc-copy--sm {
   font-size: 12px;
   gap: 4px;
+  padding: 6px 8px;
 }
 
 .wc-copy--md {
   font-size: 14px;
   gap: 6px;
+  padding: 8px 12px;
 }
 
 .wc-copy--lg {
   font-size: 16px;
   gap: 8px;
+  padding: 10px 16px;
 }
 
 /* State styles */
 .wc-copy--copied {
   color: var(--wc-success-600, #059669);
+  background-color: var(--wc-success-50, #ecfdf5);
+  border-color: var(--wc-success-200, #bbf7d0);
 }
 
 .wc-copy--error {
   color: var(--wc-error-600, #dc2626);
+  background-color: var(--wc-error-50, #fef2f2);
+  border-color: var(--wc-error-200, #fecaca);
 }
 
 /* Elements */
@@ -178,6 +191,16 @@
 
 /* 深色模式 */
 @media (prefers-color-scheme: dark) {
+  .wc-copy {
+    background-color: var(--wc-neutral-800, #1f2937);
+    border-color: var(--wc-neutral-700, #374151);
+  }
+  
+  .wc-copy:hover {
+    background-color: var(--wc-neutral-700, #374151);
+    border-color: var(--wc-neutral-600, #4b5563);
+  }
+  
   .wc-copy--default {
     color: var(--wc-neutral-300, #d1d5db);
   }
@@ -194,4 +217,33 @@
   .wc-copy-tooltip::after {
     border-top-color: var(--wc-neutral-700, #374151);
   }
+}
+
+/* 手动暗色模式类 */
+.dark .wc-copy {
+  background-color: var(--wc-neutral-800, #1f2937);
+  border-color: var(--wc-neutral-700, #374151);
+}
+
+.dark .wc-copy:hover {
+  background-color: var(--wc-neutral-700, #374151);
+  border-color: var(--wc-neutral-600, #4b5563);
+}
+
+.dark .wc-copy--default {
+  color: var(--wc-neutral-300, #d1d5db);
+}
+
+.dark .wc-copy--secondary {
+  color: var(--wc-neutral-400, #9ca3af);
+}
+
+.dark .wc-copy--copied {
+  background-color: var(--wc-success-900, #14532d);
+  border-color: var(--wc-success-700, #15803d);
+}
+
+.dark .wc-copy--error {
+  background-color: var(--wc-error-900, #7f1d1d);
+  border-color: var(--wc-error-700, #b91c1c);
 } 

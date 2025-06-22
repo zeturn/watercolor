@@ -10,6 +10,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import './style.css'
 
 const props = defineProps({
   /** 动画效果。false 表示无动画，pulse 脉冲动画，wave 波浪动画 */

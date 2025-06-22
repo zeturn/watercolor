@@ -1,19 +1,21 @@
-/* Feature 组件样式 */
+/* Feature 组件样式 - Watercolor风格 */
 .wc-feature-card {
   display: flex;
   align-items: flex-start;
   gap: 16px;
   padding: 16px;
-  border: 1px solid var(--wc-neutral-200, #e5e7eb);
+  /* Watercolor风格：沿用card风格，默认浅灰色，无边框 */
+  border: none;
   border-radius: 8px;
-  background: var(--wc-neutral-50, #f9fafb);
+  background: var(--wc-neutral-100, #f5f5f5);
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: var(--wc-font-family);
 }
 
 .wc-feature-card:hover {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  /* Watercolor风格：hover时背景变深 */
+  background: var(--wc-neutral-200, #e5e5e5);
   transform: translateY(-2px);
 }
 
@@ -81,6 +83,13 @@
   width: 64px;
   height: 64px;
   font-size: 2.5rem;
+}
+
+/* 图标背景样式 - 默认为圆形带背景 */
+.wc-feature-icon {
+  background: var(--wc-primary-50, linear-gradient(135deg, #e0e7ff 0%, #f0f9ff 100%));
+  border-radius: 50%;
+  box-shadow: 0 2px 8px 0 rgba(59,130,246,0.08);
 }
 
 .wc-feature-content {
@@ -166,7 +175,7 @@
 
 .wc-feature-card--primary {
   background: var(--wc-primary-50, #eff6ff);
-  border-color: var(--wc-primary-200, #bfdbfe);
+  border: none;
 }
 
 .wc-feature-card--primary .wc-feature-title {
@@ -175,6 +184,34 @@
 
 .wc-feature-card--primary .wc-feature-description {
   color: var(--wc-primary-700, #1d4ed8);
+}
+
+/* Style variants - 兼容Vue模板中的变体 */
+.wc-feature-card--elevated {
+  background: var(--wc-neutral-0, #ffffff);
+  box-shadow: 0 4px 24px 0 rgba(56, 112, 255, 0.08), 0 1.5px 6px 0 rgba(0,0,0,0.04);
+  border: none;
+}
+
+.wc-feature-card--elevated:hover {
+  box-shadow: 0 8px 32px 0 rgba(56, 112, 255, 0.13), 0 2px 8px 0 rgba(0,0,0,0.08);
+  background: var(--wc-primary-25, #f5faff);
+}
+
+.wc-feature-card--minimal {
+  background: transparent;
+  border: 1.5px dashed var(--wc-neutral-300, #d1d5db);
+  box-shadow: none;
+}
+
+.wc-feature-card--minimal:hover {
+  border-color: var(--wc-primary-500, #3b82f6);
+  background: var(--wc-primary-25, rgba(59,130,246,0.03));
+}
+
+.wc-feature-card--minimal .wc-feature-icon {
+  background: none;
+  box-shadow: none;
 }
 
 /* Interactive states */
@@ -195,8 +232,9 @@
 /* 深色模式 */
 @media (prefers-color-scheme: dark) {
   .wc-feature-card {
+    /* Watercolor风格：暗色模式下也保持一致 */
     background: var(--wc-neutral-800, #1f2937);
-    border-color: var(--wc-neutral-700, #374151);
+    border: none;
   }
   
   .wc-feature-title {
@@ -205,6 +243,10 @@
   
   .wc-feature-description {
     color: var(--wc-neutral-400, #9ca3af);
+  }
+  
+  .wc-feature-card:hover {
+    background: var(--wc-neutral-700, #374151);
   }
   
   .wc-feature-card--white {
@@ -217,7 +259,7 @@
   
   .wc-feature-card--primary {
     background: var(--wc-primary-900, #1e3a8a);
-    border-color: var(--wc-primary-700, #1d4ed8);
+    border: none;
   }
   
   .wc-feature-card--primary .wc-feature-title {
@@ -226,5 +268,26 @@
   
   .wc-feature-card--primary .wc-feature-description {
     color: var(--wc-primary-200, #bfdbfe);
+  }
+  
+  .wc-feature-card--elevated {
+    background: var(--wc-neutral-900, #232a3a);
+    box-shadow: 0 4px 24px 0 rgba(56, 112, 255, 0.13), 0 1.5px 6px 0 rgba(0,0,0,0.12);
+    border: none;
+  }
+  
+  .wc-feature-card--elevated:hover {
+    box-shadow: 0 8px 32px 0 rgba(56, 112, 255, 0.18), 0 2px 8px 0 rgba(0,0,0,0.16);
+    background: var(--wc-neutral-850, #1e293b);
+  }
+  
+  .wc-feature-card--minimal {
+    background: transparent;
+    border-color: var(--wc-neutral-600, #374151);
+  }
+  
+  .wc-feature-card--minimal:hover {
+    border-color: var(--wc-primary-400, #60a5fa);
+    background: var(--wc-primary-900, rgba(59,130,246,0.08));
   }
 } 

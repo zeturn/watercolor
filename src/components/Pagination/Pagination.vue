@@ -1,7 +1,7 @@
 <template>
-  <nav v-if="pageCount > 1" class="pagination" aria-label="分页导航">
+  <nav v-if="pageCount > 1" class="wc-pagination" aria-label="分页导航">
     <button 
-      class="page-btn" 
+      class="wc-page-btn" 
       :disabled="currentPageInternal === 1" 
       @click="select(currentPageInternal - 1)"
       aria-label="上一页"
@@ -12,17 +12,17 @@
     <template v-for="page in pageItems" :key="page.key">
       <button 
         v-if="!page.ellipsis" 
-        class="page-btn" 
-        :class="{ active: page.num === currentPageInternal }" 
+        class="wc-page-btn" 
+        :class="{ 'wc-page-btn--active': page.num === currentPageInternal }" 
         @click="select(page.num)"
       >
         {{ page.num }}
       </button>
-      <span v-else class="page-ellipsis">…</span>
+      <span v-else class="wc-page-ellipsis">…</span>
     </template>
 
     <button 
-      class="page-btn" 
+      class="wc-page-btn" 
       :disabled="currentPageInternal === pageCount" 
       @click="select(currentPageInternal + 1)"
       aria-label="下一页"
@@ -34,6 +34,7 @@
 
 <script>
 import { ref, computed, watch } from 'vue'
+import './style.css'
 
 export default {
   name: 'Pagination',
@@ -116,63 +117,4 @@ export default {
 }
 </script>
 
-<style>
-.pagination {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.page-btn {
-  min-width: 32px;
-  height: 32px;
-  padding: 0 6px;
-  border: 1px solid var(--wc-neutral-200);
-  background: var(--wc-neutral-0);
-  color: var(--wc-neutral-900);
-  border-radius: 4px;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.page-btn:hover:not(:disabled) {
-  background: var(--wc-neutral-50);
-  border-color: var(--wc-primary-500);
-  color: var(--wc-primary-500);
-}
-
-.page-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.page-btn.active {
-  background: var(--wc-primary-500);
-  border-color: var(--wc-primary-500);
-  color: var(--wc-neutral-0);
-}
-
-.page-ellipsis {
-  padding: 0 6px;
-  color: var(--wc-neutral-400);
-  user-select: none;
-}
-
-/* Dark mode overrides */
-.dark .page-btn {
-  background: var(--wc-neutral-800);
-  color: var(--wc-neutral-100);
-  border-color: var(--wc-neutral-700);
-}
-.dark .page-btn:hover:not(:disabled) {
-  background: var(--wc-neutral-700);
-  border-color: var(--wc-primary-400);
-}
-.dark .page-btn.active {
-  background: var(--wc-primary-400);
-}
-.dark .page-ellipsis {
-  color: var(--wc-neutral-500);
-}
-</style> 
+ 

@@ -1,4 +1,4 @@
-/* Dropdown 组件样式 */
+/* Dropdown 组件样式 - Watercolor风格 */
 .wc-dropdown {
   position: relative;
   display: inline-block;
@@ -15,8 +15,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 8px 16px;
-  background-color: var(--wc-neutral-0, #ffffff);
-  border: 1px solid var(--wc-neutral-200, #e5e7eb);
+  background-color: transparent;
+  border: none;
   border-radius: 8px;
   font-size: 14px;
   color: var(--wc-neutral-700, #374151);
@@ -27,12 +27,12 @@
 }
 
 .wc-dropdown__button:hover {
-  border-color: var(--wc-primary-300, #93c5fd);
-  background-color: var(--wc-neutral-50, #f9fafb);
+  /* Watercolor风格：hover时背景变深 */
+  background-color: var(--wc-neutral-200, #e5e5e5);
 }
 
 .wc-dropdown__button:focus {
-  border-color: var(--wc-primary-500, #3b82f6);
+  background-color: var(--wc-neutral-200, #e5e5e5);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
@@ -56,8 +56,9 @@
 .wc-dropdown__menu {
   position: absolute;
   z-index: 1000;
-  background-color: var(--wc-neutral-0, #ffffff);
-  border: 1px solid var(--wc-neutral-200, #e5e7eb);
+  /* Watercolor风格：与button一致的背景，无边框 */
+  background-color: var(--wc-neutral-100, #f5f5f5);
+  border: none;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 4px 0;
@@ -116,11 +117,12 @@
 }
 
 .wc-dropdown__item:hover {
-  background-color: var(--wc-neutral-100, #f3f4f6);
+  /* Watercolor风格：hover时背景变深 */
+  background-color: var(--wc-neutral-200, #e5e5e5);
 }
 
 .wc-dropdown__item:active {
-  background-color: var(--wc-neutral-200, #e5e7eb);
+  background-color: var(--wc-neutral-300, #d1d5db);
 }
 
 .wc-dropdown__item--disabled {
@@ -261,4 +263,17 @@
   .wc-dropdown__divider {
     background-color: var(--wc-neutral-600, #4b5563);
   }
+}
+
+/* Vue Transition 动画效果 */
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.2s ease;
+  transform-origin: top;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: scaleY(0.8);
 } 

@@ -1,4 +1,4 @@
-/* ====== Rating Component Styles ====== */
+/* ====== Rating Component Styles - Watercolor风格 ====== */
 
 /* CSS Variables */
 :root {
@@ -13,10 +13,10 @@
   --wc-rating-size-lg: 2rem;
   --wc-rating-size-xl: 2.5rem;
   
-  /* Colors */
-  --wc-rating-empty: var(--wc-neutral-300);
-  --wc-rating-filled: var(--wc-warning-500);
-  --wc-rating-hover: var(--wc-warning-600);
+  /* Colors - Watercolor风格 */
+  --wc-rating-empty: var(--wc-neutral-200, #e5e7eb);
+  --wc-rating-hover: var(--wc-neutral-400, #9ca3af);
+  --wc-rating-filled: var(--wc-warning-500, #f59e0b);
   
   /* Transitions */
   --wc-rating-transition: all 0.2s ease;
@@ -24,9 +24,9 @@
 
 /* Dark Mode Variables */
 .dark {
-  --wc-rating-empty: var(--wc-neutral-500);
-  --wc-rating-filled: var(--wc-warning-400);
-  --wc-rating-hover: var(--wc-warning-300);
+  --wc-rating-empty: var(--wc-neutral-600, #4b5563);
+  --wc-rating-hover: var(--wc-neutral-500, #6b7280);
+  --wc-rating-filled: var(--wc-warning-400, #fbbf24);
 }
 
 /* ====== Main Rating Container ====== */
@@ -59,6 +59,7 @@
   cursor: pointer;
   font-size: var(--wc-rating-size-md);
   line-height: 1;
+  /* Watercolor风格：默认浅灰色 */
   color: var(--wc-rating-empty);
   transition: var(--wc-rating-transition);
   user-select: none;
@@ -67,6 +68,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+/* 星星样式（现在直接在模板中显示） */
+.wc-rating-item,
+.rating-item {
+  /* 稍微调整字体粗细让星星不那么尖 */
+  font-weight: 400;
 }
 
 /* Size Variants */
@@ -85,16 +93,21 @@
   font-size: var(--wc-rating-size-xl);
 }
 
-/* Active (Filled) State */
+/* Active (Filled) State - Watercolor风格：点击后才是黄色 */
 .wc-rating-item.active,
 .rating-item.active {
   color: var(--wc-rating-filled);
 }
 
-/* Hover Effects */
-.wc-rating-item:hover {
-  transform: scale(1.1);
+/* Hover Effects - Watercolor风格：hover时灰色变深 */
+.wc-rating-item:hover:not(.active) {
   color: var(--wc-rating-hover);
+  transform: scale(1.05);
+}
+
+.wc-rating-item:hover.active {
+  transform: scale(1.05);
+  color: var(--wc-warning-600);
 }
 
 .wc-rating-item:active {
@@ -237,6 +250,8 @@
 .dark .rating__value {
   color: var(--wc-neutral-400);
 }
+
+
 
 /* ====== Animation Variants ====== */
 .wc-rating--animated .wc-rating-item,

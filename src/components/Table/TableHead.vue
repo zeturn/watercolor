@@ -6,6 +6,7 @@
 
 <script setup>
 import { computed, inject } from 'vue'
+import './style.css'
 
 const tableContext = inject('tableContext', {
   size: 'md',
@@ -26,20 +27,4 @@ const tableHeadClasses = computed(() => {
 })
 </script>
 
-<style scoped>
-.wc-table-head {
-  background-color: var(--wc-neutral-50);
-  border-bottom: 2px solid var(--wc-neutral-200);
-}
-
-.wc-table-head--sticky {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.dark .wc-table-head {
-  background-color: var(--wc-neutral-700);
-  border-bottom-color: var(--wc-neutral-600);
-}
-</style> 
+ 

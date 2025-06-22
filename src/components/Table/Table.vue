@@ -8,6 +8,7 @@
 
 <script setup>
 import { computed, provide } from 'vue'
+import './style.css'
 
 const props = defineProps({
   size: {
@@ -73,57 +74,4 @@ provide('tableContext', {
 })
 </script>
 
-<style scoped>
-.wc-table-container {
-  overflow-x: auto;
-  border: 1px solid var(--wc-neutral-200);
-  border-radius: 8px;
-  background-color: var(--wc-neutral-0);
-}
-
-.wc-table-container--sticky {
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-.wc-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: var(--wc-font-family);
-}
-
-/* Size variants */
-.wc-table--sm { font-size: 12px; }
-.wc-table--md { font-size: 14px; }
-.wc-table--lg { font-size: 16px; }
-
-/* Hover effect */
-.wc-table--hover :deep(tbody tr:hover) {
-  background-color: var(--wc-neutral-50);
-}
-
-/* Striped rows */
-.wc-table--striped :deep(tbody tr:nth-child(even)) {
-  background-color: var(--wc-neutral-100);
-}
-
-/* Dense table */
-.wc-table--dense :deep(td),
-.wc-table--dense :deep(th) {
-  padding: 8px 12px;
-}
-
-/* Dark mode */
-.dark .wc-table-container {
-  border-color: var(--wc-neutral-700);
-  background-color: var(--wc-neutral-800);
-}
-
-.dark .wc-table--hover :deep(tbody tr:hover) {
-  background-color: var(--wc-neutral-700);
-}
-
-.dark .wc-table--striped :deep(tbody tr:nth-child(even)) {
-  background-color: var(--wc-neutral-700);
-}
-</style> 
+ 

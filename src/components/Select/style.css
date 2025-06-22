@@ -1,4 +1,4 @@
-/* ====== Select Component Styles ====== */
+/* ====== Select Component Styles - Watercolor风格 ====== */
 
 /* CSS Variables */
 :root {
@@ -7,22 +7,22 @@
   --wc-select-height-md: 40px;
   --wc-select-height-lg: 48px;
   
-  /* Colors */
-  --wc-select-bg: var(--wc-neutral-0);
-  --wc-select-border: var(--wc-neutral-300);
-  --wc-select-border-focus: var(--wc-primary-500);
-  --wc-select-text: var(--wc-neutral-900);
-  --wc-select-placeholder: var(--wc-neutral-500);
+  /* Colors - Watercolor风格：与card保持一致 */
+  --wc-select-bg: var(--wc-neutral-100, #f5f5f5);
+  --wc-select-border: transparent;
+  --wc-select-border-focus: transparent;
+  --wc-select-text: var(--wc-neutral-900, #111827);
+  --wc-select-placeholder: var(--wc-neutral-500, #6b7280);
   
-  /* Dropdown */
-  --wc-select-dropdown-bg: var(--wc-neutral-0);
-  --wc-select-dropdown-border: var(--wc-neutral-200);
+  /* Dropdown - Watercolor风格 */
+  --wc-select-dropdown-bg: var(--wc-neutral-100, #f5f5f5);
+  --wc-select-dropdown-border: transparent;
   --wc-select-dropdown-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   
   /* Options */
-  --wc-select-option-hover: var(--wc-neutral-50);
-  --wc-select-option-selected: var(--wc-primary-50);
-  --wc-select-option-active: var(--wc-primary-500);
+  --wc-select-option-hover: var(--wc-neutral-200, #e5e7eb);
+  --wc-select-option-selected: var(--wc-primary-50, #eff6ff);
+  --wc-select-option-active: var(--wc-primary-500, #3b82f6);
   
   /* Spacing */
   --wc-select-padding: 8px 12px;
@@ -34,15 +34,15 @@
 
 /* Dark Mode Variables */
 .dark {
-  --wc-select-bg: var(--wc-neutral-800);
-  --wc-select-border: var(--wc-neutral-600);
-  --wc-select-border-focus: var(--wc-primary-400);
-  --wc-select-text: var(--wc-neutral-100);
-  --wc-select-placeholder: var(--wc-neutral-400);
-  --wc-select-dropdown-bg: var(--wc-neutral-800);
-  --wc-select-dropdown-border: var(--wc-neutral-600);
-  --wc-select-option-hover: var(--wc-neutral-700);
-  --wc-select-option-selected: var(--wc-primary-900);
+  --wc-select-bg: var(--wc-neutral-800, #1f2937);
+  --wc-select-border: transparent;
+  --wc-select-border-focus: transparent;
+  --wc-select-text: var(--wc-neutral-100, #f9fafb);
+  --wc-select-placeholder: var(--wc-neutral-400, #9ca3af);
+  --wc-select-dropdown-bg: var(--wc-neutral-800, #1f2937);
+  --wc-select-dropdown-border: transparent;
+  --wc-select-option-hover: var(--wc-neutral-700, #374151);
+  --wc-select-option-selected: var(--wc-primary-900, #1e3a8a);
 }
 
 /* ====== Main Select Container ====== */
@@ -94,12 +94,17 @@
   position: relative;
   display: flex;
   align-items: center;
+  /* Watercolor风格：与card一致的淡灰色背景，无边框 */
   background: var(--wc-select-bg);
-  border: 1px solid var(--wc-select-border);
+  border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: var(--wc-select-transition);
   min-height: var(--wc-select-height-md);
+}
+
+.wc-select__container:hover {
+  background: var(--wc-neutral-200);
 }
 
 /* Size Variants */
@@ -115,32 +120,32 @@
 
 /* Variant Styles */
 .wc-select__container--outlined {
-  background: transparent;
-  border-width: 2px;
+  background: var(--wc-neutral-100);
+  border: none;
 }
 
 .wc-select__container--filled {
-  background: var(--wc-neutral-50);
+  background: var(--wc-neutral-100);
   border: none;
-  border-bottom: 2px solid var(--wc-select-border);
-  border-radius: 4px 4px 0 0;
+  border-radius: 6px;
 }
 
 .wc-select__container--standard {
-  background: transparent;
+  background: var(--wc-neutral-100);
   border: none;
-  border-bottom: 1px solid var(--wc-select-border);
-  border-radius: 0;
+  border-radius: 6px;
 }
 
 /* States */
 .wc-select__container--focused {
-  border-color: var(--wc-select-border-focus);
+  background: var(--wc-neutral-200);
+  border: none;
   box-shadow: 0 0 0 3px rgba(var(--wc-primary-500-rgb), 0.1);
 }
 
 .wc-select__container--error {
-  border-color: var(--wc-error-500);
+  background: var(--wc-error-50);
+  border: none;
 }
 
 .wc-select__container--error.wc-select__container--focused {
@@ -148,7 +153,8 @@
 }
 
 .wc-select__container--open {
-  border-color: var(--wc-select-border-focus);
+  background: var(--wc-neutral-200);
+  border: none;
 }
 
 /* ====== Select Control ====== */
@@ -267,15 +273,16 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: var(--wc-select-dropdown-bg);
-  border: 1px solid var(--wc-select-dropdown-border);
-  border-radius: 6px;
+  /* Watercolor风格：与select container一致的背景 */
+  background-color: var(--wc-select-dropdown-bg);
+  border: none;
+  border-radius: 8px;
   box-shadow: var(--wc-select-dropdown-shadow);
-  margin-top: 4px;
+  padding: 4px 0;
+  width: 100%;
   max-height: 300px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  overflow-y: auto;
+  margin-top: 4px;
 }
 
 /* Search Input */

@@ -6,6 +6,7 @@
 
 <script setup>
 import { computed, inject } from 'vue'
+import './style.css'
 
 const tableContext = inject('tableContext', {
   size: 'md',
@@ -20,12 +21,4 @@ const tableBodyClasses = computed(() => {
 })
 </script>
 
-<style scoped>
-.wc-table-body {
-  background-color: var(--wc-neutral-0);
-}
-
-.dark .wc-table-body {
-  background-color: var(--wc-neutral-800);
-}
-</style> 
+ 

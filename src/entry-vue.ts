@@ -73,7 +73,7 @@ export { default as TableHead } from './components/Table/TableHead.vue'
 export { default as TableRow } from './components/Table/TableRow.vue'
 export { default as Tabs } from './components/Tabs/Tabs.vue'
 export { default as TextField } from './components/TextField/TextField.vue'
-export { default as Toast } from './components/Toast/Toast.vue'
+// Toast functionality has been integrated into Snackbar
 export { default as Toolbar } from './components/Navigation/Toolbar.vue'
 export { default as Tooltip } from './components/Tooltip/Tooltip.vue'
 export { default as Typography } from './components/Typography/Typography.vue'

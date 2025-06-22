@@ -56,7 +56,7 @@ export { default as Spinner } from './components/Spinner/Spinner.jsx'
 export { default as Switch } from './components/Switch/Switch.jsx'
 export { default as Table } from './components/Table/Table.jsx'
 export { default as Tabs } from './components/Tabs/Tabs.jsx'
-export { default as Toast } from './components/Toast/Toast.jsx'
+// Toast functionality has been integrated into Snackbar
 export { default as Toolbar } from './components/Navigation/Toolbar.jsx'
 export { default as Tooltip } from './components/Tooltip/Tooltip.jsx'
 export { default as Typography } from './components/Typography/Typography.jsx'

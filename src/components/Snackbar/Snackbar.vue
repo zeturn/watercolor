@@ -16,11 +16,23 @@
         aria-live="assertive"
         aria-atomic="true"
       >
-        <div class="flex items-center justify-between w-full">
-          <!-- Message -->
-          <div class="flex-1 min-w-0 mr-3">
+        <div class="flex items-start gap-3 w-full">
+          <!-- Icon -->
+          <div 
+            v-if="showIcon"
+            :class="iconClasses"
+            class="flex-shrink-0 w-5 h-5 flex items-center justify-center font-bold text-lg"
+          >
+            {{ iconText }}
+          </div>
+          
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <div v-if="title" class="font-semibold text-sm mb-1 leading-tight">
+              {{ title }}
+            </div>
             <slot>
-              <p class="text-sm font-medium">{{ message }}</p>
+              <div class="text-sm">{{ message }}</div>
             </slot>
           </div>
           
@@ -39,7 +51,7 @@
           </div>
           
           <!-- Close Button -->
-          <div v-if="closable" class="flex-shrink-0 ml-3">
+          <div v-if="closable" class="flex-shrink-0">
             <button 
               type="button"
               :class="closeButtonClasses"
@@ -52,13 +64,25 @@
             </button>
           </div>
         </div>
+        
+        <!-- Progress Bar -->
+        <div 
+          v-if="showProgress && autoHideDuration > 0"
+          class="mt-3 w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1"
+        >
+          <div 
+            :class="progressBarClasses"
+            class="h-1 rounded-full transition-all duration-100"
+            :style="{ width: `${progress}%` }"
+          />
+        </div>
       </div>
     </transition>
   </teleport>
 </template>
 
 <script setup>
-import { computed, watch, onMounted, onUnmounted } from 'vue'
+import { computed, watch, onMounted, onUnmounted, ref } from 'vue'
 
 const props = defineProps({
   open: {
@@ -66,6 +90,10 @@ const props = defineProps({
     default: false
   },
   message: {
+    type: String,
+    default: ''
+  },
+  title: {
     type: String,
     default: ''
   },
@@ -94,15 +122,32 @@ const props = defineProps({
   closable: {
     type: Boolean,
     default: true
+  },
+  showIcon: {
+    type: Boolean,
+    default: true
+  },
+  showProgress: {
+    type: Boolean,
+    default: false
   }
 })
 
 const emit = defineEmits(['close', 'action'])
 
+const iconMap = {
+  success: '✓',
+  info: 'ℹ',
+  warning: '⚠',
+  error: '✕'
+}
+
 let autoHideTimer = null
+let progressTimer = null
+const progress = ref(100)
 
 const snackbarClasses = computed(() => {
-  const baseClasses = 'fixed z-50 max-w-sm w-full bg-white dark:bg-neutral-800 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700 p-4'
+  const baseClasses = 'fixed z-50 w-full max-w-sm bg-white dark:bg-neutral-800 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700 p-4 transition-all duration-300 ease-in-out'
   const classes = [baseClasses]
   
   // Position classes
@@ -122,21 +167,21 @@ const snackbarClasses = computed(() => {
     classes.push('left-1/2 transform -translate-x-1/2')
   }
   
-  // Severity colors
+  // Variant styles
   if (props.variant === 'filled') {
     const colorMap = {
-      success: 'bg-success-500 text-white border-success-500',
-      info: 'bg-primary-500 text-white border-primary-500',
-      warning: 'bg-warning-500 text-white border-warning-500',
-      error: 'bg-error-500 text-white border-error-500'
+      success: 'bg-success-500 border-success-500',
+      info: 'bg-primary-500 border-primary-500',
+      warning: 'bg-warning-500 border-warning-500',
+      error: 'bg-error-500 border-error-500'
     }
     classes.push(colorMap[props.severity])
   } else if (props.variant === 'outlined') {
     const colorMap = {
-      success: 'border-success-500 text-success-600 dark:text-success-400',
-      info: 'border-primary-500 text-primary-600 dark:text-primary-400',
-      warning: 'border-warning-500 text-warning-600 dark:text-warning-400',
-      error: 'border-error-500 text-error-600 dark:text-error-400'
+      success: 'border-success-500 text-success-600 dark:text-success-400 border-l-4',
+      info: 'border-primary-500 text-primary-600 dark:text-primary-400 border-l-4',
+      warning: 'border-warning-500 text-warning-600 dark:text-warning-400 border-l-4',
+      error: 'border-error-500 text-error-600 dark:text-error-400 border-l-4'
     }
     classes.push(colorMap[props.severity])
   } else {
@@ -151,7 +196,7 @@ const actionClasses = computed(() => {
   const classes = [baseClasses]
   
   if (props.variant === 'filled') {
-    classes.push('text-white hover:bg-white hover:bg-opacity-20 focus:ring-white')
+    classes.push('hover:bg-white hover:bg-opacity-20 focus:ring-white')
   } else {
     const colorMap = {
       success: 'text-success-600 dark:text-success-400 hover:bg-success-50 dark:hover:bg-success-900/20 focus:ring-success-500',
@@ -170,7 +215,7 @@ const closeButtonClasses = computed(() => {
   const classes = [baseClasses]
   
   if (props.variant === 'filled') {
-    classes.push('text-white hover:bg-white hover:bg-opacity-20 focus:ring-white')
+    classes.push('hover:bg-white hover:bg-opacity-20 focus:ring-white')
   } else {
     const colorMap = {
       success: 'text-success-400 hover:text-success-500 focus:ring-success-500',
@@ -184,14 +229,71 @@ const closeButtonClasses = computed(() => {
   return classes
 })
 
+const iconClasses = computed(() => {
+  if (props.variant === 'filled') {
+    return 'text-gray'
+  } else {
+    const colorMap = {
+      success: 'text-success-500',
+      info: 'text-primary-500',
+      warning: 'text-warning-500',
+      error: 'text-error-500'
+    }
+    return colorMap[props.severity]
+  }
+})
+
+const progressBarClasses = computed(() => {
+  if (props.variant === 'filled') {
+    return 'bg-white bg-opacity-30'
+  } else {
+    const colorMap = {
+      success: 'bg-success-500',
+      info: 'bg-primary-500',
+      warning: 'bg-warning-500',
+      error: 'bg-error-500'
+    }
+    return colorMap[props.severity]
+  }
+})
+
+const iconText = computed(() => iconMap[props.severity] || iconMap.info)
+
 const handleClose = () => emit('close')
 const handleActionClick = () => emit('action')
 
 const startAutoHideTimer = () => {
   if (props.autoHideDuration > 0) {
+    progress.value = 100
+    const startTime = Date.now()
+    
     autoHideTimer = setTimeout(() => {
       handleClose()
     }, props.autoHideDuration)
+    
+    // Progress bar animation
+    if (props.showProgress) {
+      progressTimer = setInterval(() => {
+        const elapsed = Date.now() - startTime
+        const remaining = Math.max(0, 100 - (elapsed / props.autoHideDuration) * 100)
+        progress.value = remaining
+        
+        if (remaining <= 0) {
+          clearInterval(progressTimer)
+        }
+      }, 50)
+    }
+  }
+}
+
+const clearTimers = () => {
+  if (autoHideTimer) {
+    clearTimeout(autoHideTimer)
+    autoHideTimer = null
+  }
+  if (progressTimer) {
+    clearInterval(progressTimer)
+    progressTimer = null
   }
 }
 
@@ -199,7 +301,7 @@ watch(() => props.open, (newVal) => {
   if (newVal) {
     startAutoHideTimer()
   } else {
-    clearTimeout(autoHideTimer)
+    clearTimers()
   }
 })
 
@@ -207,5 +309,5 @@ onMounted(() => {
   if (props.open) startAutoHideTimer()
 })
 
-onUnmounted(() => clearTimeout(autoHideTimer))
+onUnmounted(() => clearTimers())
 </script> 

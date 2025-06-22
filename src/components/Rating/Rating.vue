@@ -11,14 +11,14 @@
       role="radio"
       :disabled="readonly"
     >
-      <span v-if="n <= hovered || n <= internalValue">★</span>
-      <span v-else>☆</span>
+      ★
     </button>
   </div>
 </template>
 
 <script>
 import { ref, watch } from 'vue'
+import './style.css'
 export default {
   name: 'Rating',
   props: {
@@ -59,36 +59,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.rating {
-  display: inline-flex;
-  gap: 4px;
-}
-.rating-item {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.5rem;
-  line-height: 1;
-  padding: 0;
-  color: var(--wc-neutral-300);
-  transition: color 0.2s ease;
-}
-.rating-item.active {
-  color: var(--wc-warning-500);
-}
-.rating-item:hover {
-  transform: scale(1.1);
-}
-.rating-item:disabled {
-  cursor: default;
-}
-/* Dark mode */
-.dark .rating-item {
-  color: var(--wc-neutral-500);
-}
-
-.dark .rating-item.active {
-  color: var(--wc-warning-400);
-}
-</style> 
+ 
