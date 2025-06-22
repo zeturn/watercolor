@@ -74,24 +74,57 @@
 /* 子级缩进 */
 .wc-feed-children {
   list-style: none;
-  margin: 12px 0 0 52px;
+  margin: 36px 0 0 50px;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
   position: relative;
+}
+
+/* 这是我见过最傻逼的样式 */
+.wc-feed-children .wc-feed-item {
+  background-color: var(--wc-neutral-25, rgba(243, 244, 246, 0.5));
+}
+
+.wc-feed-children .wc-feed-item:hover {
+  background-color: var(--wc-neutral-100);
+}
+
+.wc-feed-children .wc-feed-children .wc-feed-item {
+  background-color: var(--wc-neutral-50, rgba(243, 244, 246, 0.8));
+}
+
+.wc-feed-children .wc-feed-children .wc-feed-item:hover {
+  background-color: var(--wc-neutral-150, rgba(229, 231, 235, 0.9));
+}
+
+.wc-feed-children .wc-feed-children .wc-feed-children .wc-feed-item {
+  background-color: var(--wc-neutral-75, rgba(229, 231, 235, 0.6));
+}
+
+.wc-feed-children .wc-feed-children .wc-feed-children .wc-feed-item:hover {
+  background-color: var(--wc-neutral-200);
+}
+
+.wc-feed-children .wc-feed-children .wc-feed-children .wc-feed-children .wc-feed-item {
+  background-color: var(--wc-neutral-100);
+}
+
+.wc-feed-children .wc-feed-children .wc-feed-children .wc-feed-children .wc-feed-item:hover {
+  background-color: var(--wc-neutral-250, rgba(209, 213, 219, 0.9));
 }
 
 .wc-feed-children::before {
   content: '';
   position: absolute;
-  left: -26px;
-  top: 0;
-  width: 2px;
-  height: 100%;
-  background: var(--wc-neutral-200);
-  border-radius: 1px;
+  left: -15px;
+  top: -30px;
+  width: var(--feed-line-width, 2px);
+  height: calc(100% + 30px);
+  background: var(--feed-color, var(--wc-neutral-200));
+  border-radius: calc(var(--feed-line-width, 2px) / 2);
 }
+
 
 /* 变体样式 */
 
@@ -108,19 +141,19 @@
 
 /* 时间轴变体 */
 .wc-feed-list.timeline {
-  padding-left: 24px;
+  padding-left: 30px;
   position: relative;
 }
 
 .wc-feed-list.timeline::before {
   content: '';
   position: absolute;
-  left: 12px;
+  left: 15px;
   top: 0;
-  width: 2px;
+  width: var(--feed-line-width, 2px);
   height: 100%;
-  background: var(--wc-primary-200);
-  border-radius: 1px;
+  background: var(--feed-color, var(--wc-primary-200));
+  border-radius: calc(var(--feed-line-width, 2px) / 2);
 }
 
 .wc-feed-list.timeline .wc-feed-item {
@@ -131,18 +164,18 @@
 .wc-feed-list.timeline .wc-feed-item::before {
   content: '';
   position: absolute;
-  left: -13px;
-  top: 20px;
-  width: 8px;
-  height: 8px;
+  left: calc(-14px - var(--feed-dot-size, 12px) / 2);
+  top: 18px;
+  width: var(--feed-dot-size, 12px);
+  height: var(--feed-dot-size, 12px);
   border-radius: 50%;
-  background: var(--wc-primary-500);
+  background: var(--feed-color, var(--wc-primary-500));
   border: 2px solid var(--wc-background, #ffffff);
   z-index: 1;
 }
 
 .wc-feed-list.timeline .wc-feed-avatar {
-  margin-left: 16px;
+  margin-left: 17px;
 }
 
 /* 卡片变体 */
@@ -175,7 +208,7 @@
 }
 
 .wc-feed-list.compact .wc-feed-children {
-  margin-left: 40px;
+  margin-left: 38px;
   gap: 8px;
 }
 
@@ -239,15 +272,15 @@
 /* 媒体查询 */
 @media (max-width: 640px) {
   .wc-feed-children {
-    margin-left: 32px;
+    margin-left: 36px;
   }
   
   .wc-feed-list.timeline .wc-feed-avatar {
-    margin-left: 8px;
+    margin-left: 10px;
   }
   
   .wc-feed-list.compact .wc-feed-children {
-    margin-left: 24px;
+    margin-left: 30px;
   }
 }
 
@@ -255,6 +288,39 @@
 @media (prefers-color-scheme: dark) {
   .wc-feed-item:hover {
     background-color: var(--wc-neutral-800);
+  }
+  
+  /* 暗色模式下的多级嵌套背景色渐深效果 */
+  .wc-feed-children .wc-feed-item {
+    background-color: var(--wc-neutral-900, rgba(17, 24, 39, 0.6));
+  }
+  
+  .wc-feed-children .wc-feed-item:hover {
+    background-color: var(--wc-neutral-800);
+  }
+  
+  .wc-feed-children .wc-feed-children .wc-feed-item {
+    background-color: var(--wc-neutral-850, rgba(31, 41, 55, 0.8));
+  }
+  
+  .wc-feed-children .wc-feed-children .wc-feed-item:hover {
+    background-color: var(--wc-neutral-750, rgba(55, 65, 81, 0.9));
+  }
+  
+  .wc-feed-children .wc-feed-children .wc-feed-children .wc-feed-item {
+    background-color: var(--wc-neutral-825, rgba(55, 65, 81, 0.7));
+  }
+  
+  .wc-feed-children .wc-feed-children .wc-feed-children .wc-feed-item:hover {
+    background-color: var(--wc-neutral-700);
+  }
+  
+  .wc-feed-children .wc-feed-children .wc-feed-children .wc-feed-children .wc-feed-item {
+    background-color: var(--wc-neutral-800);
+  }
+  
+  .wc-feed-children .wc-feed-children .wc-feed-children .wc-feed-children .wc-feed-item:hover {
+    background-color: var(--wc-neutral-650, rgba(75, 85, 99, 0.9));
   }
   
   .wc-feed-author {
@@ -271,11 +337,11 @@
   
   .wc-feed-children::before,
   .wc-feed-list.timeline::before {
-    background: var(--wc-neutral-600);
+    background: var(--feed-color, var(--wc-neutral-600));
   }
   
   .wc-feed-list.timeline .wc-feed-item::before {
-    background: var(--wc-primary-400);
+    background: var(--feed-color, var(--wc-primary-400));
     border-color: var(--wc-background-dark, #1f2937);
   }
   
@@ -288,4 +354,12 @@
     background: var(--wc-primary-900);
     border-color: var(--wc-primary-700);
   }
-} 
+  
+  .wc-feed-list.timeline .wc-feed-item.has-children::after {
+    background: var(--wc-neutral-600);
+    left: -8px;
+    width: 34px;
+  }
+}
+
+ 
