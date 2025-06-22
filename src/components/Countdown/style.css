@@ -1,0 +1,140 @@
+/* Countdown 组件样式 */
+.wc-countdown {
+  display: inline-block;
+  font-family: var(--wc-font-family, 'Inter', sans-serif);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.025em;
+  color: var(--wc-neutral-900, #111827);
+  user-select: none;
+}
+
+/* Size variants */
+.wc-countdown--sm {
+  font-size: 14px;
+}
+
+.wc-countdown--md {
+  font-size: 16px;
+}
+
+.wc-countdown--lg {
+  font-size: 20px;
+}
+
+.wc-countdown--xl {
+  font-size: 24px;
+}
+
+/* Color variants */
+.wc-countdown--primary {
+  color: var(--wc-primary-600, #2563eb);
+}
+
+.wc-countdown--secondary {
+  color: var(--wc-neutral-600, #4b5563);
+}
+
+.wc-countdown--success {
+  color: var(--wc-success-600, #059669);
+}
+
+.wc-countdown--warning {
+  color: var(--wc-warning-600, #d97706);
+}
+
+.wc-countdown--error {
+  color: var(--wc-error-600, #dc2626);
+}
+
+/* State styles */
+.wc-countdown--finished {
+  color: var(--wc-error-600, #dc2626);
+  animation: wc-countdown-pulse 1s ease-in-out infinite;
+}
+
+.wc-countdown--warning-time {
+  color: var(--wc-warning-600, #d97706);
+}
+
+/* Format styles */
+.wc-countdown--with-labels {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wc-countdown__segment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.wc-countdown__number {
+  font-size: inherit;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.wc-countdown__label {
+  font-size: 0.75em;
+  font-weight: 400;
+  color: var(--wc-neutral-500, #6b7280);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wc-countdown__separator {
+  font-size: inherit;
+  font-weight: 600;
+  color: var(--wc-neutral-400, #9ca3af);
+  margin: 0 2px;
+}
+
+/* Card style */
+.wc-countdown--card {
+  background: var(--wc-neutral-50, #f9fafb);
+  border: 1px solid var(--wc-neutral-200, #e5e7eb);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+
+.wc-countdown--card.wc-countdown--with-labels {
+  justify-content: center;
+}
+
+/* Animation */
+@keyframes wc-countdown-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* 深色模式 */
+@media (prefers-color-scheme: dark) {
+  .wc-countdown {
+    color: var(--wc-neutral-100, #f3f4f6);
+  }
+  
+  .wc-countdown--secondary {
+    color: var(--wc-neutral-400, #9ca3af);
+  }
+  
+  .wc-countdown__label {
+    color: var(--wc-neutral-400, #9ca3af);
+  }
+  
+  .wc-countdown__separator {
+    color: var(--wc-neutral-500, #6b7280);
+  }
+  
+  .wc-countdown--card {
+    background: var(--wc-neutral-800, #1f2937);
+    border-color: var(--wc-neutral-700, #374151);
+  }
+} 

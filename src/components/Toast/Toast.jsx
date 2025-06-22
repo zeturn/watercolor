@@ -1,4 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { 
+  getToastClasses, 
+  getToastStyles, 
+  getToastIcon, 
+  handleToastClose,
+  setToastTimer 
+} from './utils.js'
+import './style.css'
 
 const Toast = ({
   message,
@@ -14,50 +22,17 @@ const Toast = ({
 }) => {
   const [visible, setVisible] = useState(true)
 
-  const colorMap = {
-    info: { bg: '#e8f4ff', text: '#0070f3', border: '#1a8cff' },
-    success: { bg: '#ecfdf5', text: '#047857', border: '#10b981' },
-    warning: { bg: '#fffbeb', text: '#b45309', border: '#f59e0b' },
-    error: { bg: '#fef2f2', text: '#b91c1c', border: '#ef4444' }
-  }
-
-  const iconMap = {
-    info: 'ℹ',
-    success: '✓',
-    warning: '⚠',
-    error: '✕'
-  }
-
-  const toastClasses = [
-    'wc-toast',
-    `wc-toast--${type}`,
-    `wc-toast--${position}`,
-    className
-  ].filter(Boolean).join(' ')
-
-  const toastStyles = {
-    backgroundColor: colorMap[type]?.bg || colorMap.info.bg,
-    color: colorMap[type]?.text || colorMap.info.text,
-    borderLeftColor: colorMap[type]?.border || colorMap.info.border,
-    display: visible ? 'flex' : 'none'
-  }
+  const toastClasses = getToastClasses(type, position, className)
+  const toastStyles = getToastStyles(type, visible)
 
   const handleClose = () => {
-    setVisible(false)
-    if (onClose) {
-      setTimeout(() => {
-        onClose()
-      }, 300)
-    }
+    handleToastClose(setVisible, onClose)
   }
 
   useEffect(() => {
-    if (duration > 0) {
-      const timer = setTimeout(() => {
-        handleClose()
-      }, duration)
-
-      return () => clearTimeout(timer)
+    const timer = setToastTimer(duration, handleClose)
+    return () => {
+      if (timer) clearTimeout(timer)
     }
   }, [duration])
 
@@ -71,7 +46,7 @@ const Toast = ({
     >
       {showIcon && (
         <div className="wc-toast__icon">
-          {iconMap[type] || iconMap.info}
+          {getToastIcon(type)}
         </div>
       )}
       

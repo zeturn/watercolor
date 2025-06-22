@@ -1,4 +1,13 @@
 import React from 'react'
+import { 
+  calculateCircleParams, 
+  calculateStrokeDashoffset, 
+  getCircularProgressClasses, 
+  getCircleClasses, 
+  formatDisplayValue,
+  getAriaProps
+} from './utils.js'
+import './style.css'
 
 export default function CircularProgress({
   value = 0,
@@ -10,36 +19,22 @@ export default function CircularProgress({
   className = '',
   ...rest
 }) {
-  const sizeNumber = typeof size === 'string' ? parseInt(size, 10) : size
-  const center = sizeNumber / 2
-  const radius = (sizeNumber - thickness) / 2
-  const circumference = 2 * Math.PI * radius
-  const strokeDashoffset =
-    variant === 'determinate' ? circumference - (value / 100) * circumference : 0
-
-  const progressClasses = [
-    'wc-circular-progress inline-flex relative items-center justify-center',
-    `wc-circular-progress--${color}`,
-    variant === 'indeterminate' && 'wc-circular-progress--indeterminate',
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ')
-
-  const circleClasses = [
-    'wc-circular-progress-circle',
-    variant === 'indeterminate' && 'wc-circular-progress-circle--indeterminate',
-  ]
-    .filter(Boolean)
-    .join(' ')
+  const { sizeNumber, center, radius, circumference } = calculateCircleParams(size, thickness)
+  const strokeDashoffset = calculateStrokeDashoffset(variant, value, circumference)
+  
+  const progressClasses = getCircularProgressClasses({
+    color,
+    variant,
+    className
+  }).join(' ')
+  
+  const circleClasses = getCircleClasses(variant).join(' ')
+  const ariaProps = getAriaProps({ value, variant })
 
   return (
     <div
-      role="progressbar"
-      aria-valuemin={0}
-      aria-valuemax={100}
-      aria-valuenow={value}
       className={progressClasses}
+      {...ariaProps}
       {...rest}
     >
       <svg
@@ -70,7 +65,7 @@ export default function CircularProgress({
         />
       </svg>
       {showValue && (
-        <div className="wc-circular-progress-value">{Math.round(value)}%</div>
+        <div className="wc-circular-progress-value">{formatDisplayValue(value)}%</div>
       )}
     </div>
   )

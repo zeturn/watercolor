@@ -1,13 +1,27 @@
 import React from 'react'
+import { 
+  getFeatureCardClasses,
+  getFeatureIconClasses,
+  getFeatureContentClasses,
+  getFeatureTitleClasses,
+  getFeatureDescriptionClasses,
+  handleFeatureClick,
+  handleCtaClick,
+  renderIcon
+} from './utils.js'
+import './style.css'
 
 const Feature = ({
   title = 'Awesome Feature',
   description = 'Feature description goes here.',
-  icon = '', // string (html/emoji) or ReactNode
+  icon = '',
   iconSize = 48,
-  align = 'left', // left | center
+  size = 'md',
+  align = 'left',
+  background = 'default',
   bgColor = '',
   reverse = false,
+  vertical = false,
   ctaLabel = '',
   ctaHref = '#',
   onClick,
@@ -16,55 +30,48 @@ const Feature = ({
   className = '',
   style = {},
 }) => {
-  const cardStyles = {
-    display: 'flex',
-    alignItems: align === 'center' ? 'center' : 'flex-start',
-    gap: '16px',
-    padding: '16px',
-    border: '1px solid var(--color-border,#e5e7eb)',
-    borderRadius: '8px',
-    background: 'var(--color-gray-50,#f9fafb)',
-    cursor: 'pointer',
-    flexDirection: reverse ? 'row-reverse' : 'row',
-    ...(bgColor ? { background: bgColor } : {}),
-    ...style,
-  }
+  const cardClasses = getFeatureCardClasses({
+    align,
+    size,
+    background,
+    reverse,
+    vertical,
+    clickable: !!onClick,
+    disabled: false,
+    className
+  }).join(' ')
 
-  const iconWrapperStyle = {
-    flexShrink: 0,
-    width: typeof iconSize === 'number' ? `${iconSize}px` : iconSize,
-    height: typeof iconSize === 'number' ? `${iconSize}px` : iconSize,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '2rem',
-    color: 'var(--color-primary,#3b82f6)',
+  const iconClasses = getFeatureIconClasses(iconSize).join(' ')
+  const contentClasses = getFeatureContentClasses(align).join(' ')
+  const titleClasses = getFeatureTitleClasses(size).join(' ')
+  const descriptionClasses = getFeatureDescriptionClasses(size).join(' ')
+
+  const cardStyles = {
+    ...(bgColor ? { background: bgColor } : {}),
+    ...style
   }
 
   return (
-    <div className={`wc-feature-card ${className}`} style={cardStyles} onClick={onClick}>
+    <div 
+      className={cardClasses} 
+      style={cardStyles}
+      onClick={(e) => handleFeatureClick(e, false, onClick)}
+    >
       {icon && (
-        <div style={iconWrapperStyle} className="wc-feature-icon">
-          {typeof icon === 'string' ? (
-            <span dangerouslySetInnerHTML={{ __html: icon }} />
-          ) : (
-            icon
-          )}
+        <div className={iconClasses}>
+          {renderIcon(icon)}
         </div>
       )}
-      <div className="wc-feature-content" style={{ textAlign: align === 'center' ? 'center' : 'left' }}>
-        <h3 style={{ margin: '0 0 4px', fontSize: '1.125rem', fontWeight: 600, color: 'var(--color-text,#111827)' }}>{title}</h3>
-        <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--color-text-secondary,#6b7280)', lineHeight: 1.5 }}>
+      <div className={contentClasses}>
+        <h3 className={titleClasses}>{title}</h3>
+        <p className={descriptionClasses}>
           {children || description}
         </p>
         {ctaLabel && (
           <a
             href={ctaHref}
-            style={{ display: 'inline-block', marginTop: 12, color: 'var(--color-primary,#3b82f6)', fontWeight: 500, textDecoration: 'underline', fontSize: '0.875rem' }}
-            onClick={(e) => {
-              e.stopPropagation()
-              onCtaClick && onCtaClick(e)
-            }}
+            className="wc-feature-cta"
+            onClick={(e) => handleCtaClick(e, onCtaClick)}
           >
             {ctaLabel}
           </a>

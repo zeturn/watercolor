@@ -1,0 +1,468 @@
+/**
+ * Input 组件样式
+ * 输入框组件的完整样式定义
+ */
+
+/* CSS变量定义 */
+:root {
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --input-border-focus: #3b82f6;
+  --input-border-error: #ef4444;
+  --input-text: #111827;
+  --input-text-secondary: #6b7280;
+  --input-placeholder: #9ca3af;
+  --input-label: #374151;
+  --input-disabled-bg: #f9fafb;
+  --input-disabled-border: #e5e7eb;
+  --input-radius: 6px;
+  --input-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --input-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  --input-shadow-error: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  --input-transition: all 0.2s ease;
+}
+
+/* 深色模式变量 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --input-bg: #1f2937;
+    --input-border: #4b5563;
+    --input-border-focus: #60a5fa;
+    --input-border-error: #f87171;
+    --input-text: #f9fafb;
+    --input-text-secondary: #d1d5db;
+    --input-placeholder: #9ca3af;
+    --input-label: #e5e7eb;
+    --input-disabled-bg: #374151;
+    --input-disabled-border: #4b5563;
+    --input-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --input-shadow-focus: 0 0 0 3px rgba(96, 165, 250, 0.2);
+    --input-shadow-error: 0 0 0 3px rgba(248, 113, 113, 0.2);
+  }
+}
+
+/* 容器样式 */
+.wc-input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.wc-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* 标签样式 */
+.wc-input-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--input-label);
+  margin-bottom: 8px;
+  transition: var(--input-transition);
+}
+
+.wc-input-label--active {
+  color: var(--input-border-focus);
+}
+
+.wc-input-label--error {
+  color: var(--input-border-error);
+}
+
+.wc-input-label__required {
+  color: var(--input-border-error);
+  margin-left: 4px;
+}
+
+/* 基础输入框样式 */
+.wc-input {
+  width: 100%;
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-radius);
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  transition: var(--input-transition);
+  box-shadow: var(--input-shadow);
+}
+
+.wc-input::placeholder {
+  color: var(--input-placeholder);
+}
+
+.wc-input:focus {
+  outline: none;
+  border-color: var(--input-border-focus);
+  box-shadow: var(--input-shadow-focus);
+}
+
+/* 尺寸变体 */
+.wc-input--sm {
+  padding: 6px 8px;
+  font-size: 0.75rem;
+}
+
+.wc-input--md {
+  padding: 8px 12px;
+  font-size: 0.875rem;
+}
+
+.wc-input--lg {
+  padding: 12px 16px;
+  font-size: 1rem;
+}
+
+/* 样式变体 */
+.wc-input--outlined {
+  background-color: transparent;
+  border: 1px solid var(--input-border);
+}
+
+.wc-input--filled {
+  background-color: var(--input-disabled-bg);
+  border: 1px solid transparent;
+  border-bottom: 2px solid var(--input-border);
+}
+
+.wc-input--filled:focus {
+  background-color: var(--input-bg);
+  border-bottom-color: var(--input-border-focus);
+}
+
+.wc-input--standard {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--input-border);
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.wc-input--standard:focus {
+  border-bottom: 2px solid var(--input-border-focus);
+}
+
+/* 状态样式 */
+.wc-input--error {
+  border-color: var(--input-border-error);
+}
+
+.wc-input--error:focus {
+  border-color: var(--input-border-error);
+  box-shadow: var(--input-shadow-error);
+}
+
+.wc-input--disabled {
+  background-color: var(--input-disabled-bg);
+  border-color: var(--input-disabled-border);
+  color: var(--input-text-secondary);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.wc-input--readonly {
+  background-color: var(--input-disabled-bg);
+  cursor: default;
+}
+
+.wc-input--focused {
+  border-color: var(--input-border-focus);
+  box-shadow: var(--input-shadow-focus);
+}
+
+.wc-input--has-value {
+  /* 已有值的样式 */
+}
+
+.wc-input--full-width {
+  width: 100%;
+}
+
+/* 装饰器样式 */
+.wc-input-adornment {
+  display: flex;
+  align-items: center;
+  color: var(--input-text-secondary);
+  font-size: 0.875rem;
+}
+
+.wc-input-adornment--start {
+  margin-right: 8px;
+  padding-left: 12px;
+}
+
+.wc-input-adornment--end {
+  margin-left: 8px;
+  padding-right: 12px;
+}
+
+.wc-input--has-start-adornment {
+  padding-left: 0;
+}
+
+.wc-input--has-end-adornment {
+  padding-right: 0;
+}
+
+/* 帮助文本样式 */
+.wc-input-helper-text {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--input-text-secondary);
+}
+
+.wc-input-helper-text--error {
+  color: var(--input-border-error);
+}
+
+/* 多行文本框样式 */
+.wc-input[type="textarea"],
+textarea.wc-input {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+/* 特殊输入类型样式 */
+.wc-input[type="file"] {
+  padding: 4px 8px;
+}
+
+.wc-input[type="range"] {
+  padding: 8px 0;
+}
+
+.wc-input[type="color"] {
+  padding: 4px;
+  height: 40px;
+}
+
+/* 浮动标签样式 */
+.wc-input-container--floating {
+  position: relative;
+}
+
+.wc-input-container--floating .wc-input-label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--input-bg);
+  padding: 0 4px;
+  pointer-events: none;
+  transition: var(--input-transition);
+  z-index: 1;
+}
+
+.wc-input-container--floating .wc-input-label--active {
+  top: 0;
+  font-size: 0.75rem;
+  transform: translateY(-50%);
+}
+
+.wc-input-container--floating .wc-input {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+/* 验证图标 */
+.wc-input-validation-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.wc-input-validation-icon--success {
+  color: #10b981;
+}
+
+.wc-input-validation-icon--error {
+  color: var(--input-border-error);
+}
+
+.wc-input-validation-icon--warning {
+  color: #f59e0b;
+}
+
+/* 清除按钮 */
+.wc-input-clear-button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--input-text-secondary);
+  opacity: 0;
+  transition: var(--input-transition);
+}
+
+.wc-input-container:hover .wc-input-clear-button,
+.wc-input:focus + .wc-input-clear-button {
+  opacity: 1;
+}
+
+.wc-input-clear-button:hover {
+  background-color: var(--input-disabled-bg);
+  color: var(--input-text);
+}
+
+/* 密码显示切换 */
+.wc-input-password-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--input-text-secondary);
+  transition: var(--input-transition);
+}
+
+.wc-input-password-toggle:hover {
+  background-color: var(--input-disabled-bg);
+  color: var(--input-text);
+}
+
+/* 输入组样式 */
+.wc-input-group {
+  display: flex;
+  align-items: stretch;
+}
+
+.wc-input-group .wc-input {
+  border-radius: 0;
+}
+
+.wc-input-group .wc-input:first-child {
+  border-top-left-radius: var(--input-radius);
+  border-bottom-left-radius: var(--input-radius);
+}
+
+.wc-input-group .wc-input:last-child {
+  border-top-right-radius: var(--input-radius);
+  border-bottom-right-radius: var(--input-radius);
+}
+
+.wc-input-group .wc-input:not(:last-child) {
+  border-right: none;
+}
+
+.wc-input-group .wc-input:focus {
+  z-index: 1;
+  position: relative;
+}
+
+/* 前缀/后缀样式 */
+.wc-input-prefix,
+.wc-input-suffix {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background-color: var(--input-disabled-bg);
+  border: 1px solid var(--input-border);
+  color: var(--input-text-secondary);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.wc-input-prefix {
+  border-right: none;
+  border-top-left-radius: var(--input-radius);
+  border-bottom-left-radius: var(--input-radius);
+}
+
+.wc-input-suffix {
+  border-left: none;
+  border-top-right-radius: var(--input-radius);
+  border-bottom-right-radius: var(--input-radius);
+}
+
+/* 搜索输入框样式 */
+.wc-input--search {
+  padding-left: 40px;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: 12px center;
+  background-size: 16px 16px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .wc-input-label {
+    font-size: 0.8rem;
+  }
+  
+  .wc-input--sm {
+    padding: 8px 10px;
+    font-size: 0.875rem;
+  }
+  
+  .wc-input--md {
+    padding: 10px 12px;
+    font-size: 1rem;
+  }
+  
+  .wc-input--lg {
+    padding: 12px 16px;
+    font-size: 1.125rem;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .wc-input {
+    border-width: 2px;
+  }
+  
+  .wc-input:focus {
+    border-width: 3px;
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .wc-input,
+  .wc-input-label,
+  .wc-input-clear-button,
+  .wc-input-password-toggle {
+    transition: none;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .wc-input {
+    border: 1px solid #000 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  
+  .wc-input-clear-button,
+  .wc-input-password-toggle {
+    display: none !important;
+  }
+} 

@@ -1,0 +1,375 @@
+/* Form 共用样式 */
+
+/* FormControl 基础样式 */
+.form-control {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.form-control--full-width {
+  width: 100%;
+}
+
+/* 边距变体 */
+.form-control--margin-none {
+  margin-bottom: 0;
+}
+
+.form-control--margin-dense {
+  margin-bottom: 8px;
+}
+
+.form-control--margin-normal {
+  margin-bottom: 16px;
+}
+
+/* 状态样式 */
+.form-control--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.form-control--error {
+  /* 错误状态由子组件处理 */
+}
+
+/* FormControlLabel 样式 */
+.form-control-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  margin: 0;
+  transition: all 0.2s ease;
+}
+
+.form-control-label:hover {
+  background-color: var(--wc-neutral-25, rgba(0, 0, 0, 0.02));
+  border-radius: 4px;
+}
+
+/* 标签位置变体 */
+.form-control-label--placement-start {
+  flex-direction: row;
+}
+
+.form-control-label--placement-end {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.form-control-label--placement-top {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-control-label--placement-bottom {
+  flex-direction: column-reverse;
+  align-items: flex-start;
+}
+
+/* 标签控件区域 */
+.form-control-label__control {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.form-control-label--placement-start .form-control-label__control {
+  margin-right: 8px;
+}
+
+.form-control-label--placement-end .form-control-label__control {
+  margin-left: 8px;
+}
+
+.form-control-label--placement-top .form-control-label__control {
+  margin-bottom: 4px;
+}
+
+.form-control-label--placement-bottom .form-control-label__control {
+  margin-top: 4px;
+}
+
+/* 标签文本 */
+.form-control-label__text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--wc-text, #374151);
+  user-select: none;
+  cursor: pointer;
+}
+
+.form-control-label__text--disabled {
+  color: var(--wc-text-disabled, #9ca3af);
+  cursor: not-allowed;
+}
+
+/* 必填标记 */
+.form-control-label__required {
+  color: var(--wc-error-500, #ef4444);
+  margin-left: 2px;
+  font-weight: bold;
+}
+
+/* 状态样式 */
+.form-control-label--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-control-label--disabled:hover {
+  background-color: transparent;
+}
+
+/* FormGroup 样式 */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group--row {
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.form-group--column {
+  flex-direction: column;
+}
+
+/* FormHelperText 样式 */
+.form-helper-text {
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--wc-text-muted, #6b7280);
+}
+
+.form-helper-text--error {
+  color: var(--wc-error-500, #ef4444);
+}
+
+.form-helper-text--warning {
+  color: var(--wc-warning-500, #f59e0b);
+}
+
+.form-helper-text--success {
+  color: var(--wc-success-500, #10b981);
+}
+
+.form-helper-text--info {
+  color: var(--wc-info-500, #3b82f6);
+}
+
+/* 表单字段样式 */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-field__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--wc-text, #374151);
+  margin-bottom: 2px;
+}
+
+.form-field__input {
+  /* 由具体输入组件定义 */
+}
+
+.form-field__helper {
+  /* 由 FormHelperText 组件定义 */
+}
+
+/* 表单布局 */
+.form-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-layout--grid {
+  display: grid;
+  gap: 20px;
+}
+
+.form-layout--grid-1 {
+  grid-template-columns: 1fr;
+}
+
+.form-layout--grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.form-layout--grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.form-layout--grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* 表单动作区域 */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 20px;
+  border-top: 1px solid var(--wc-neutral-200, #e5e7eb);
+  margin-top: 20px;
+}
+
+.form-actions--start {
+  justify-content: flex-start;
+}
+
+.form-actions--center {
+  justify-content: center;
+}
+
+.form-actions--space-between {
+  justify-content: space-between;
+}
+
+.form-actions--full-width {
+  flex-direction: column;
+}
+
+.form-actions--full-width > * {
+  width: 100%;
+}
+
+/* 表单验证状态 */
+.form-field--valid .form-field__input {
+  border-color: var(--wc-success-500, #10b981);
+}
+
+.form-field--invalid .form-field__input {
+  border-color: var(--wc-error-500, #ef4444);
+}
+
+.form-field--warning .form-field__input {
+  border-color: var(--wc-warning-500, #f59e0b);
+}
+
+/* 表单组标题 */
+.form-section {
+  border-bottom: 1px solid var(--wc-neutral-200, #e5e7eb);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.form-section__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--wc-text, #111827);
+  margin: 0 0 8px 0;
+}
+
+.form-section__description {
+  font-size: 14px;
+  color: var(--wc-text-muted, #6b7280);
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+
+/* 紧凑变体 */
+.form-layout--compact {
+  gap: 12px;
+}
+
+.form-layout--compact .form-control {
+  margin-bottom: 12px;
+}
+
+.form-layout--compact .form-actions {
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .form-layout--grid-2,
+  .form-layout--grid-3,
+  .form-layout--grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .form-control-label--placement-end {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .form-control-label--placement-end .form-control-label__control {
+    margin-left: 0;
+    margin-bottom: 4px;
+  }
+}
+
+@media (max-width: 640px) {
+  .form-layout {
+    gap: 16px;
+  }
+  
+  .form-section__title {
+    font-size: 16px;
+  }
+  
+  .form-actions {
+    gap: 8px;
+  }
+  
+  .form-layout--compact {
+    gap: 8px;
+  }
+}
+
+/* 暗色模式 */
+@media (prefers-color-scheme: dark) {
+  .form-control-label:hover {
+    background-color: var(--wc-neutral-800, rgba(255, 255, 255, 0.05));
+  }
+  
+  .form-control-label__text {
+    color: var(--wc-text-dark, #f9fafb);
+  }
+  
+  .form-control-label__text--disabled {
+    color: var(--wc-text-disabled-dark, #6b7280);
+  }
+  
+  .form-field__label {
+    color: var(--wc-text-dark, #f9fafb);
+  }
+  
+  .form-helper-text {
+    color: var(--wc-text-muted-dark, #9ca3af);
+  }
+  
+  .form-actions {
+    border-color: var(--wc-neutral-700, #374151);
+  }
+  
+  .form-section {
+    border-color: var(--wc-neutral-700, #374151);
+  }
+  
+  .form-section__title {
+    color: var(--wc-text-dark, #f9fafb);
+  }
+  
+  .form-section__description {
+    color: var(--wc-text-muted-dark, #9ca3af);
+  }
+} 

@@ -1,4 +1,6 @@
 import React from 'react'
+import { getTailwindChipClasses, handleChipClick, handleChipDelete, getDefaultDeleteIcon } from './utils.js'
+import './style.css'
 
 export default function Chip({
   label = '',
@@ -14,47 +16,25 @@ export default function Chip({
   onDelete,
   children,
 }) {
-  const baseClasses = 'wc-chip inline-flex items-center gap-1 font-medium transition-all duration-200'
-  const sizeClass = {
-    sm: 'px-2 py-1 text-xs min-h-[24px]',
-    md: 'px-3 py-1.5 text-sm min-h-[32px]',
-    lg: 'px-4 py-2 text-base min-h-[40px]',
-  }[size]
-
-  const colorMap = (v) => {
-    const filled = {
-      default: 'bg-neutral-200 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200',
-      primary: 'bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200',
-      secondary: 'bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200',
-      success: 'bg-success-100 text-success-800 dark:bg-success-900 dark:text-success-200',
-      warning: 'bg-warning-100 text-warning-800 dark:bg-warning-900 dark:text-warning-200',
-      error: 'bg-error-100 text-error-800 dark:bg-error-900 dark:text-error-200',
-    }
-    const outlined = {
-      default: 'bg-transparent border border-neutral-300 text-neutral-700 dark:border-neutral-600 dark:text-neutral-300',
-      primary: 'bg-transparent border border-primary-300 text-primary-700 dark:border-primary-600 dark:text-primary-300',
-      secondary: 'bg-transparent border border-neutral-300 text-neutral-700 dark:border-neutral-600 dark:text-neutral-300',
-      success: 'bg-transparent border border-success-300 text-success-700 dark:border-success-600 dark:text-success-300',
-      warning: 'bg-transparent border border-warning-300 text-warning-700 dark:border-warning-600 dark:text-warning-300',
-      error: 'bg-transparent border border-error-300 text-error-700 dark:border-error-600 dark:text-error-300',
-    }
-    return variant === 'filled' ? filled[v] : outlined[v]
-  }
-
-  const interactive = clickable && !disabled ? 'cursor-pointer hover:opacity-80' : ''
-  const disabledCls = disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''
+  const chipClasses = getTailwindChipClasses({
+    size,
+    variant,
+    color,
+    clickable,
+    disabled
+  })
 
   const handleClick = (e) => {
-    if (clickable && !disabled) onClick?.(e)
+    handleChipClick(e, clickable, disabled, onClick)
   }
+
   const handleDelete = (e) => {
-    e.stopPropagation()
-    if (!disabled) onDelete?.(e)
+    handleChipDelete(e, disabled, onDelete)
   }
 
   return (
     <div
-      className={`${baseClasses} ${sizeClass} ${colorMap(color)} ${interactive} ${disabledCls}`}
+      className={chipClasses}
       onClick={handleClick}
     >
       {(children && children.avatar) || avatar ? (
@@ -74,15 +54,7 @@ export default function Chip({
           className="wc-chip-delete flex-shrink-0 rounded-full transition-colors duration-200 hover:bg-black/10 dark:hover:bg-white/10 ml-1"
           aria-label="删除"
         >
-          {deleteIcon || (
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          )}
+          {deleteIcon || getDefaultDeleteIcon()}
         </button>
       )}
     </div>

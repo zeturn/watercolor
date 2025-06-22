@@ -41,17 +41,27 @@
 
 <script setup>
 import { computed, ref } from 'vue'
+import { 
+  isValidType, 
+  isValidPosition,
+  getBannerClasses,
+  getBannerIcon,
+  getBannerStyles,
+  handleBannerClose,
+  handleBannerAction
+} from './utils.js'
+import './style.css'
 
 const props = defineProps({
   type: {
     type: String,
     default: 'info',
-    validator: (value) => ['success', 'info', 'warning', 'error'].includes(value)
+    validator: isValidType
   },
   position: {
     type: String,
     default: 'top',
-    validator: (value) => ['top', 'bottom'].includes(value)
+    validator: isValidPosition
   },
   title: {
     type: String,
@@ -91,217 +101,17 @@ const emit = defineEmits(['close', 'action'])
 
 const visible = ref(true)
 
-const bannerClasses = computed(() => {
-  const base = ['wc-banner', `wc-banner--${props.type}`, `wc-banner--${props.position}`]
-  const sticky = props.sticky ? 'wc-banner--sticky' : ''
-  // Flat design color classes based on Tailwind palette & dark mode
-  const typeFlatClasses = {
-    success: 'bg-success-600 dark:bg-success-500 text-neutral-0',
-    info: 'bg-info-600 dark:bg-info-500 text-neutral-0',
-    warning: 'bg-warning-600 dark:bg-warning-500 text-neutral-0',
-    error: 'bg-error-600 dark:bg-error-500 text-neutral-0'
-  }
-  return [...base, sticky, typeFlatClasses[props.type] || typeFlatClasses.info]
-})
+const bannerClasses = computed(() => getBannerClasses(props.type, props.position, props.sticky))
 
-const bannerStyles = computed(() => ({
-  zIndex: props.zIndex
-}))
+const bannerStyles = computed(() => getBannerStyles(props.zIndex))
 
-const iconContent = computed(() => {
-  const icons = {
-    success: '✓',
-    info: '📢',
-    warning: '⚠',
-    error: '✕'
-  }
-  return icons[props.type] || icons.info
-})
+const iconContent = computed(() => getBannerIcon(props.type))
 
 const handleClose = () => {
-  visible.value = false
-  emit('close')
+  handleBannerClose((value) => { visible.value = value }, () => emit('close'))
 }
 
 const handleAction = () => {
-  emit('action')
+  handleBannerAction(() => emit('action'))
 }
-</script>
-
-<style scoped>
-.wc-banner {
-  width: 100%;
-  font-family: var(--wc-font-family);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.wc-banner--sticky {
-  position: fixed;
-  left: 0;
-  right: 0;
-}
-
-.wc-banner--top {
-  top: 0;
-}
-
-.wc-banner--bottom {
-  bottom: 0;
-}
-
-.wc-banner-content {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.wc-banner-icon {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 50%;
-}
-
-.wc-banner-text {
-  flex: 1;
-  min-width: 0;
-}
-
-.wc-banner-title {
-  font-weight: 600;
-  font-size: 16px;
-  margin-bottom: 4px;
-  line-height: 1.4;
-}
-
-.wc-banner-message {
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.wc-banner-actions {
-  flex-shrink: 0;
-  display: flex;
-  gap: 8px;
-}
-
-.wc-banner-action-btn {
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: inherit;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.wc-banner-action-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.wc-banner-close {
-  flex-shrink: 0;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 0;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  color: inherit;
-}
-
-.wc-banner-close:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Success */
-.wc-banner--success {
-  background-color: var(--wc-success-600, #16a34a);
-  color: var(--wc-neutral-0, #ffffff);
-}
-
-/* Info */
-.wc-banner--info {
-  background-color: var(--wc-info-600, #2563eb);
-  color: var(--wc-neutral-0, #ffffff);
-}
-
-/* Warning */
-.wc-banner--warning {
-  background-color: var(--wc-warning-600, #d97706);
-  color: var(--wc-neutral-0, #ffffff);
-}
-
-/* Error */
-.wc-banner--error {
-  background-color: var(--wc-error-600, #dc2626);
-  color: var(--wc-neutral-0, #ffffff);
-}
-
-/* 深色模式覆盖 */
-:deep(.dark) .wc-banner--success { background-color: var(--wc-success-500, #22c55e); }
-:deep(.dark) .wc-banner--info    { background-color: var(--wc-info-500,   #3b82f6); }
-:deep(.dark) .wc-banner--warning { background-color: var(--wc-warning-500,#f59e0b); }
-:deep(.dark) .wc-banner--error   { background-color: var(--wc-error-500,  #ef4444); }
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .wc-banner-content {
-    padding: 12px 16px;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  
-  .wc-banner-title {
-    font-size: 14px;
-  }
-  
-  .wc-banner-message {
-    font-size: 13px;
-  }
-  
-  .wc-banner-actions {
-    width: 100%;
-    margin-top: 8px;
-  }
-  
-  .wc-banner-action-btn {
-    padding: 6px 12px;
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 480px) {
-  .wc-banner-content {
-    padding: 10px 12px;
-  }
-  
-  .wc-banner-icon {
-    width: 20px;
-    height: 20px;
-    font-size: 14px;
-  }
-  
-  .wc-banner-close {
-    width: 20px;
-    height: 20px;
-    font-size: 18px;
-  }
-}
-</style> 
+</script> 

@@ -31,6 +31,8 @@
 
 <script setup>
 import { computed } from 'vue'
+import { isValidSize, isValidVariant, isValidColor, getChipClasses, handleChipClick, handleChipDelete } from './utils.js'
+import './style.css'
 
 const props = defineProps({
   label: {
@@ -56,17 +58,17 @@ const props = defineProps({
   variant: {
     type: String,
     default: 'filled',
-    validator: (value) => ['filled', 'outlined'].includes(value)
+    validator: isValidVariant
   },
   size: {
     type: String,
     default: 'md',
-    validator: (value) => ['sm', 'md', 'lg'].includes(value)
+    validator: isValidSize
   },
   color: {
     type: String,
     default: 'default',
-    validator: (value) => ['default', 'primary', 'secondary', 'success', 'warning', 'error'].includes(value)
+    validator: isValidColor
   },
   deleteIcon: {
     type: String,
@@ -76,44 +78,18 @@ const props = defineProps({
 
 const emit = defineEmits(['click', 'delete'])
 
-const chipClasses = computed(() => {
-  const baseClasses = 'wc-chip inline-flex items-center gap-1 font-medium transition-all duration-200'
-  const classes = [baseClasses]
-  
-  // Size classes
-  classes.push(`wc-chip--${props.size}`)
-  
-  // Variant and color classes
-  classes.push(`wc-chip--${props.variant}`)
-  classes.push(`wc-chip--${props.color}`)
-  
-  // Interactive states
-  if (props.clickable && !props.disabled) {
-    classes.push('wc-chip--clickable')
-  }
-  
-  if (props.disabled) {
-    classes.push('wc-chip--disabled')
-  }
-  
-  return classes
-})
+const chipClasses = computed(() => 
+  getChipClasses(props)
+)
 
 const handleClick = (event) => {
-  if (!props.disabled && props.clickable) {
-    emit('click', event)
-  }
+  handleChipClick(event, props.clickable, props.disabled, (e) => emit('click', e))
 }
 
 const handleDelete = (event) => {
-  if (!props.disabled) {
-    emit('delete', event)
-  }
+  handleChipDelete(event, props.disabled, (e) => emit('delete', e))
 }
 </script>
-
-<style scoped>
-.wc-chip {
   border-radius: 16px;
   border: 1px solid transparent;
   white-space: nowrap;

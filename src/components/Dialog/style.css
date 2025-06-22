@@ -1,0 +1,222 @@
+/* Dialog 共用样式 */
+
+/* 覆盖层和背景 */
+.wc-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow-y: auto;
+}
+
+.wc-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  transition: opacity 0.3s ease;
+}
+
+/* 容器用于居中 */
+.wc-dialog-container {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* 对话框主体 */
+.wc-dialog {
+  position: relative;
+  width: 100%;
+  background-color: var(--wc-background, #ffffff);
+  color: var(--wc-text, #111827);
+  border: 1px solid var(--wc-border, #e5e7eb);
+  border-radius: 8px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* 全屏变体 */
+.wc-dialog--fullscreen {
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+  margin: 0;
+}
+
+/* 尺寸变体 */
+.wc-dialog--xs {
+  max-width: 320px;
+}
+
+.wc-dialog--sm {
+  max-width: 448px;
+}
+
+.wc-dialog--md {
+  max-width: 512px;
+}
+
+.wc-dialog--lg {
+  max-width: 672px;
+}
+
+.wc-dialog--xl {
+  max-width: 896px;
+}
+
+/* 全宽变体 */
+.wc-dialog--full-width {
+  width: 100%;
+}
+
+/* 关闭按钮 */
+.wc-dialog__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--wc-text-secondary, #6b7280);
+  transition: all 0.2s ease;
+}
+
+.wc-dialog__close:hover {
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--wc-text, #111827);
+}
+
+/* 内容区域 */
+.wc-dialog__content {
+  padding: 24px;
+}
+
+.wc-dialog__content--no-padding {
+  padding: 0;
+}
+
+/* 标题 */
+.wc-dialog__title {
+  margin: 0 0 16px 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--wc-text, #111827);
+}
+
+/* 操作区域 */
+.wc-dialog__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding: 16px 24px;
+  border-top: 1px solid var(--wc-border, #e5e7eb);
+  background: var(--wc-background-secondary, #f9fafb);
+}
+
+.wc-dialog__actions--start {
+  justify-content: flex-start;
+}
+
+.wc-dialog__actions--center {
+  justify-content: center;
+}
+
+.wc-dialog__actions--space-between {
+  justify-content: space-between;
+}
+
+/* 过渡动画 */
+.wc-dialog-fade-enter-active,
+.wc-dialog-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.wc-dialog-fade-enter-from,
+.wc-dialog-fade-leave-to {
+  opacity: 0;
+}
+
+.wc-dialog-content-enter-active,
+.wc-dialog-content-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.wc-dialog-content-enter-from,
+.wc-dialog-content-leave-to {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+}
+
+/* 滚动行为 */
+.wc-dialog--scroll-paper {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.wc-dialog--scroll-body .wc-dialog-container {
+  align-items: flex-start;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+/* 暗色模式 */
+@media (prefers-color-scheme: dark) {
+  .wc-dialog {
+    background-color: var(--wc-background-dark, #1f2937);
+    color: var(--wc-text-dark, #f9fafb);
+    border-color: var(--wc-border-dark, #374151);
+  }
+  
+  .wc-dialog__title {
+    color: var(--wc-text-dark, #f9fafb);
+  }
+  
+  .wc-dialog__actions {
+    background: var(--wc-background-secondary-dark, #111827);
+    border-color: var(--wc-border-dark, #374151);
+  }
+  
+  .wc-dialog__close {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--wc-text-secondary-dark, #9ca3af);
+  }
+  
+  .wc-dialog__close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--wc-text-dark, #f9fafb);
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 640px) {
+  .wc-dialog-container {
+    padding: 8px;
+  }
+  
+  .wc-dialog {
+    margin: 0;
+    max-height: calc(100vh - 16px);
+  }
+  
+  .wc-dialog__content {
+    padding: 16px;
+  }
+  
+  .wc-dialog__actions {
+    padding: 12px 16px;
+  }
+} 

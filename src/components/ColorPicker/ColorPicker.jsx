@@ -1,20 +1,40 @@
 import React from 'react'
+import { getColorPickerClasses, handleColorChange, getPreviewStyles } from './utils.js'
+import './style.css'
 
-export default function ColorPicker({ value = '#ffffff', onChange }) {
+export default function ColorPicker({ 
+  value = '#ffffff', 
+  onChange,
+  size = 'md',
+  shape = 'circle',
+  disabled = false,
+  className = ''
+}) {
+  const colorPickerClasses = getColorPickerClasses({
+    size,
+    shape,
+    disabled,
+    className
+  }).join(' ')
+
+  const previewStyles = getPreviewStyles(value)
+
   const handleInput = (e) => {
-    onChange?.(e.target.value)
+    handleColorChange(e, disabled, onChange)
   }
+
   return (
-    <label className="wc-color-picker inline-flex relative cursor-pointer">
+    <label className={colorPickerClasses}>
       <input
         type="color"
         value={value}
         onChange={handleInput}
-        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+        disabled={disabled}
+        className="wc-color-picker__input"
       />
       <span
-        className="wc-color-picker__preview w-10 h-10 rounded-full border-2 border-neutral-200 dark:border-neutral-600 shadow hover:shadow-md transition-transform"
-        style={{ backgroundColor: value }}
+        className="wc-color-picker__preview"
+        style={previewStyles}
       />
     </label>
   )

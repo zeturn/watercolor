@@ -1,9 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { 
+  getDropdownClasses,
+  getDropdownMenuClasses,
+  getDropdownButtonClasses,
+  getDropdownItemClasses,
+  getArrowClasses,
+  handleDropdownToggle,
+  handleItemClick,
+  createOutsideClickListener
+} from './utils.js'
+import './style.css'
 
 const Dropdown = ({
   items = [],
   triggerText = '选择选项',
   placement = 'bottom-start',
+  size = 'md',
+  variant = 'default',
   disabled = false,
   trigger = 'click',
   onSelect,
@@ -19,157 +32,78 @@ const Dropdown = ({
   const dropdownRef = useRef(null)
   const triggerRef = useRef(null)
 
-  const dropdownClasses = [
-    'wc-dropdown__menu',
-    `wc-dropdown__menu--${placement}`,
-    className
-  ].filter(Boolean).join(' ')
+  const dropdownClasses = getDropdownClasses({ size, variant, disabled, className }).join(' ')
+  const menuClasses = getDropdownMenuClasses(placement).join(' ')
+  const buttonClasses = getDropdownButtonClasses({ disabled }).join(' ')
+  const arrowClasses = getArrowClasses(isOpen).join(' ')
 
   const handleToggle = () => {
-    if (disabled) return
-    
-    setIsOpen(!isOpen)
-    
-    if (!isOpen) {
-      onOpen && onOpen()
-    } else {
-      onClose && onClose()
-    }
+    handleDropdownToggle(isOpen, disabled, setIsOpen, onOpen, onClose)
   }
 
-  const handleItemClick = (item, index) => {
-    if (item.disabled || item.divider) return
-    
-    onSelect && onSelect(item, index)
-    setIsOpen(false)
-    onClose && onClose()
+  const handleItemSelect = (item, index) => {
+    handleItemClick(item, index, onSelect, setIsOpen, onClose)
   }
 
-  const handleClickOutside = (event) => {
+  const outsideClickListener = createOutsideClickListener((event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setIsOpen(false)
       onClose && onClose()
     }
-  }
+  })
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside)
-    return () => {
-      document.removeEventListener('click', handleClickOutside)
+    if (isOpen) {
+      outsideClickListener.add()
+    } else {
+      outsideClickListener.remove()
     }
-  }, [])
+    
+    return () => outsideClickListener.remove()
+  }, [isOpen])
 
   return (
-    <div 
-      className="wc-dropdown" 
-      ref={dropdownRef}
-      style={{
-        position: 'relative',
-        display: 'inline-block'
-      }}
-      {...props}
-    >
+    <div className={dropdownClasses} ref={dropdownRef} {...props}>
       <div
         className="wc-dropdown__trigger"
         onClick={handleToggle}
         ref={triggerRef}
-        style={{ cursor: 'pointer' }}
       >
         {triggerContent || children || (
-          <button 
-            className="wc-dropdown__button"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '8px 16px',
-              backgroundColor: '#ffffff',
-              border: '1px solid #e4e4e7',
-              borderRadius: '8px',
-              fontSize: '14px',
-              color: '#3f3f46',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-              minWidth: '120px'
-            }}
-          >
+          <button className={buttonClasses}>
             {triggerText}
-            <span 
-              style={{
-                fontSize: '12px',
-                transition: 'transform 0.2s ease',
-                marginLeft: '8px',
-                transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)'
-              }}
-            >
-              ▼
-            </span>
+            <span className={arrowClasses}>▼</span>
           </button>
         )}
       </div>
 
       {isOpen && (
-        <div
-          className={dropdownClasses}
-          style={{
-            position: 'absolute',
-            zIndex: 1000,
-            backgroundColor: '#ffffff',
-            border: '1px solid #e4e4e7',
-            borderRadius: '8px',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-            padding: '4px 0',
-            minWidth: '120px',
-            top: placement.startsWith('bottom') ? '100%' : 'auto',
-            bottom: placement.startsWith('top') ? '100%' : 'auto',
-            left: placement.endsWith('start') ? 0 : 'auto',
-            right: placement.endsWith('end') ? 0 : 'auto',
-            marginTop: placement.startsWith('bottom') ? '4px' : 0,
-            marginBottom: placement.startsWith('top') ? '4px' : 0
-          }}
-        >
+        <div className={menuClasses}>
           {dropdownContent || (
-            items.map((item, index) => (
-              <div
-                key={item.key || index}
-                onClick={() => handleItemClick(item, index)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: item.divider ? '0' : '8px 16px',
-                  fontSize: '14px',
-                  color: item.disabled ? 'rgba(63, 63, 70, 0.5)' : '#3f3f46',
-                  cursor: item.disabled || item.divider ? 'default' : 'pointer',
-                  transition: 'background-color 0.2s ease',
-                  height: item.divider ? '1px' : 'auto',
-                  margin: item.divider ? '4px 0' : '0',
-                  backgroundColor: item.divider ? '#e4e4e7' : 'transparent'
-                }}
-                onMouseEnter={(e) => {
-                  if (!item.disabled && !item.divider) {
-                    e.target.style.backgroundColor = '#f4f4f5'
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!item.disabled && !item.divider) {
-                    e.target.style.backgroundColor = 'transparent'
-                  }
-                }}
-              >
-                {!item.divider && (
-                  <>
-                    {item.icon && (
-                      <span style={{ marginRight: '8px', fontSize: '16px' }}>
-                        {item.icon}
-                      </span>
-                    )}
-                    <span style={{ flex: 1 }}>
-                      {item.label}
+            items.map((item, index) => {
+              if (item.divider) {
+                return <div key={item.key || index} className="wc-dropdown__divider" />
+              }
+              
+              const itemClasses = getDropdownItemClasses(item).join(' ')
+              
+              return (
+                <div
+                  key={item.key || index}
+                  className={itemClasses}
+                  onClick={() => handleItemSelect(item, index)}
+                >
+                  {item.icon && (
+                    <span className="wc-dropdown__icon">
+                      {item.icon}
                     </span>
-                  </>
-                )}
-              </div>
-            ))
+                  )}
+                  <span className="wc-dropdown__label">
+                    {item.label}
+                  </span>
+                </div>
+              )
+            })
           )}
         </div>
       )}

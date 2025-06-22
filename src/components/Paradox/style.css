@@ -1,0 +1,247 @@
+/* Paradox 组件样式 */
+
+/* CSS 变量定义 */
+:root {
+  --wc-paradox-bg: var(--wc-neutral-50, #f9fafb);
+  --wc-paradox-color: var(--wc-neutral-900, #111827);
+  --wc-paradox-border-color: var(--wc-primary-500, #3b82f6);
+  --wc-paradox-hover-color: var(--wc-primary-600, #2563eb);
+  --wc-paradox-font-style: italic;
+  --wc-paradox-border-width: 4px;
+  --wc-paradox-padding: 12px 16px;
+  --wc-paradox-transition: color 0.3s ease;
+}
+
+/* 深色模式变量 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wc-paradox-bg: var(--wc-neutral-800, #1f2937);
+    --wc-paradox-color: var(--wc-neutral-100, #f3f4f6);
+    --wc-paradox-border-color: var(--wc-primary-400, #60a5fa);
+    --wc-paradox-hover-color: var(--wc-primary-300, #93c5fd);
+  }
+}
+
+.dark {
+  --wc-paradox-bg: var(--wc-neutral-800, #1f2937);
+  --wc-paradox-color: var(--wc-neutral-100, #f3f4f6);
+  --wc-paradox-border-color: var(--wc-primary-400, #60a5fa);
+  --wc-paradox-hover-color: var(--wc-primary-300, #93c5fd);
+}
+
+/* 基础样式 */
+.wc-paradox {
+  font-style: var(--wc-paradox-font-style);
+  position: relative;
+  padding: var(--wc-paradox-padding);
+  border-left: var(--wc-paradox-border-width) solid var(--wc-paradox-border-color);
+  background: var(--wc-paradox-bg);
+  color: var(--wc-paradox-color);
+  cursor: default;
+  user-select: none;
+  transition: var(--wc-paradox-transition);
+  margin: 1rem 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.wc-paradox:hover {
+  color: var(--wc-paradox-hover-color);
+}
+
+/* 尺寸变体 */
+.wc-paradox--sm {
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  border-left-width: 3px;
+}
+
+.wc-paradox--md {
+  padding: 12px 16px;
+  font-size: 1rem;
+  border-left-width: 4px;
+}
+
+.wc-paradox--lg {
+  padding: 16px 20px;
+  font-size: 1.125rem;
+  border-left-width: 5px;
+}
+
+.wc-paradox--xl {
+  padding: 20px 24px;
+  font-size: 1.25rem;
+  border-left-width: 6px;
+}
+
+/* 样式变体 */
+.wc-paradox--primary {
+  --wc-paradox-border-color: var(--wc-primary-500, #3b82f6);
+  --wc-paradox-hover-color: var(--wc-primary-600, #2563eb);
+}
+
+.wc-paradox--success {
+  --wc-paradox-border-color: var(--wc-success-500, #10b981);
+  --wc-paradox-hover-color: var(--wc-success-600, #059669);
+}
+
+.wc-paradox--warning {
+  --wc-paradox-border-color: var(--wc-warning-500, #f59e0b);
+  --wc-paradox-hover-color: var(--wc-warning-600, #d97706);
+}
+
+.wc-paradox--error {
+  --wc-paradox-border-color: var(--wc-error-500, #ef4444);
+  --wc-paradox-hover-color: var(--wc-error-600, #dc2626);
+}
+
+.wc-paradox--info {
+  --wc-paradox-border-color: var(--wc-info-500, #06b6d4);
+  --wc-paradox-hover-color: var(--wc-info-600, #0891b2);
+}
+
+/* 边框变体 */
+.wc-paradox--border-top {
+  border-left: none;
+  border-top: var(--wc-paradox-border-width) solid var(--wc-paradox-border-color);
+  padding-left: 16px;
+  padding-top: 12px;
+}
+
+.wc-paradox--border-bottom {
+  border-left: none;
+  border-bottom: var(--wc-paradox-border-width) solid var(--wc-paradox-border-color);
+  padding-left: 16px;
+  padding-bottom: 12px;
+}
+
+.wc-paradox--border-right {
+  border-left: none;
+  border-right: var(--wc-paradox-border-width) solid var(--wc-paradox-border-color);
+  padding-left: 16px;
+  padding-right: 12px;
+}
+
+.wc-paradox--border-all {
+  border: var(--wc-paradox-border-width) solid var(--wc-paradox-border-color);
+  border-radius: 0.375rem;
+}
+
+/* 特殊效果 */
+.wc-paradox--glow {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.wc-paradox--gradient {
+  background: linear-gradient(135deg, var(--wc-paradox-bg), rgba(59, 130, 246, 0.1));
+}
+
+.wc-paradox--animated {
+  animation: paradoxPulse 3s ease-in-out infinite;
+}
+
+/* 引用符号 */
+.wc-paradox--with-quotes::before {
+  content: '"';
+  font-size: 2em;
+  color: var(--wc-paradox-border-color);
+  position: absolute;
+  left: -0.5em;
+  top: -0.2em;
+  opacity: 0.5;
+}
+
+.wc-paradox--with-quotes::after {
+  content: '"';
+  font-size: 2em;
+  color: var(--wc-paradox-border-color);
+  position: absolute;
+  right: -0.5em;
+  bottom: -0.8em;
+  opacity: 0.5;
+}
+
+/* 作者信息 */
+.wc-paradox__author {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.875em;
+  color: var(--wc-text-secondary, #6b7280);
+  font-style: normal;
+  text-align: right;
+}
+
+.wc-paradox__author::before {
+  content: '— ';
+}
+
+/* 动画关键帧 */
+@keyframes paradoxPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.01);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 640px) {
+  .wc-paradox {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    border-left-width: 3px;
+  }
+  
+  .wc-paradox--xl {
+    padding: 16px 20px;
+    font-size: 1.125rem;
+  }
+  
+  .wc-paradox--with-quotes::before,
+  .wc-paradox--with-quotes::after {
+    font-size: 1.5em;
+  }
+}
+
+/* 可访问性 */
+.wc-paradox:focus {
+  outline: 2px solid var(--wc-paradox-border-color);
+  outline-offset: 2px;
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .wc-paradox {
+    border-left-width: 6px;
+    background: var(--wc-neutral-0, #ffffff);
+    color: var(--wc-neutral-900, #111827);
+  }
+  
+  .dark .wc-paradox {
+    background: var(--wc-neutral-900, #111827);
+    color: var(--wc-neutral-0, #ffffff);
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .wc-paradox,
+  .wc-paradox--animated {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .wc-paradox {
+    background: white !important;
+    color: black !important;
+    border-left: 4px solid #000 !important;
+    box-shadow: none !important;
+    animation: none !important;
+  }
+} 

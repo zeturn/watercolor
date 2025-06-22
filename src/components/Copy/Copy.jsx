@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react'
-
-const baseClasses = 'wc-copy'
+import { 
+  getCopyClasses, 
+  getCurrentIcon, 
+  getCurrentLabel, 
+  getTooltipText,
+  getTooltipClasses,
+  handleCopyOperation 
+} from './utils.js'
+import './style.css'
 
 export function Copy({
   text,
@@ -23,85 +30,46 @@ export function Copy({
   const [copyError, setCopyError] = useState(false)
   const [tooltipVisible, setTooltipVisible] = useState(false)
 
-  const currentIcon = () => {
-    if (copyError) return '❌'
-    if (copied) return '✓'
-    return '📋'
-  }
+  const copyClasses = getCopyClasses({
+    variant,
+    size,
+    copied,
+    copyError,
+    className
+  }).join(' ')
 
-  const currentLabel = () => {
-    if (copyError) return '错误'
-    if (copied) return copiedLabel
-    return copyLabel
-  }
-
-  const tooltipText = () => {
-    if (copyError) return tooltipError
-    if (copied) return tooltipSuccess
-    return ''
-  }
+  const currentIcon = getCurrentIcon(copied, copyError)
+  const currentLabel = getCurrentLabel(copied, copyError, copyLabel, copiedLabel)
+  const tooltipText = getTooltipText(copied, copyError, tooltipSuccess, tooltipError)
+  const tooltipClasses = getTooltipClasses(copied, copyError)
 
   const handleCopy = async () => {
-    try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(text)
-      } else {
-        const ta = document.createElement('textarea')
-        ta.value = text
-        ta.style.position = 'fixed'
-        ta.style.left = '-999999px'
-        ta.style.top = '-999999px'
-        document.body.appendChild(ta)
-        ta.focus()
-        ta.select()
-        document.execCommand('copy')
-        document.body.removeChild(ta)
-      }
-      setCopied(true)
-      setCopyError(false)
-      onCopy(text)
-    } catch (e) {
-      setCopied(false)
-      setCopyError(true)
-      onError(e)
-    }
-
-    if (showTooltip) {
-      setTooltipVisible(true)
-      setTimeout(() => setTooltipVisible(false), 1500)
-    }
-
-    setTimeout(() => {
-      setCopied(false)
-      setCopyError(false)
-    }, resetDelay)
+    await handleCopyOperation(
+      text,
+      onCopy,
+      onError,
+      setCopied,
+      setCopyError,
+      setTooltipVisible,
+      showTooltip,
+      resetDelay
+    )
   }
 
-  const classes = [
-    baseClasses,
-    `wc-copy--${variant}`,
-    `wc-copy--${size}`,
-    copied ? 'wc-copy--copied' : '',
-    copyError ? 'wc-copy--error' : '',
-    className,
-  ].filter(Boolean)
-
   return (
-    <div className={classes.join(' ')} onClick={handleCopy}>
+    <div className={copyClasses} onClick={handleCopy}>
       {children ?? <span className="wc-copy-text">{text}</span>}
       <div className="wc-copy-action">
         {Icon ? (
           <Icon className="wc-copy-icon" />
         ) : (
-          <span className="wc-copy-icon" dangerouslySetInnerHTML={{ __html: currentIcon() }} />
+          <span className="wc-copy-icon" dangerouslySetInnerHTML={{ __html: currentIcon }} />
         )}
-        {showLabel && <span className="wc-copy-label">{currentLabel()}</span>}
+        {showLabel && <span className="wc-copy-label">{currentLabel}</span>}
       </div>
       {showTooltip && tooltipVisible && (
-        <div
-          className={`wc-copy-tooltip ${copied ? 'wc-copy-tooltip--success' : ''}`}
-        >
-          {tooltipText()}
+        <div className={tooltipClasses}>
+          {tooltipText}
         </div>
       )}
     </div>

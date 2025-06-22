@@ -1,0 +1,191 @@
+/* Checkbox 组件样式 */
+.wc-checkbox {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  font-family: var(--wc-font-family);
+}
+
+.wc-checkbox__container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.wc-checkbox__container:focus {
+  box-shadow: 0 0 0 2px var(--wc-primary-100, #dbeafe);
+}
+
+.wc-checkbox__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.wc-checkbox__box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--wc-neutral-300, #d1d5db);
+  border-radius: 4px;
+  background-color: transparent;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.wc-checkbox__icon {
+  width: 100%;
+  height: 100%;
+  color: white;
+  transition: all 0.2s ease;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* Size variants */
+.wc-checkbox--sm .wc-checkbox__box {
+  width: 16px;
+  height: 16px;
+}
+
+.wc-checkbox--sm .wc-checkbox__icon {
+  width: 12px;
+  height: 12px;
+}
+
+.wc-checkbox--md .wc-checkbox__box {
+  width: 20px;
+  height: 20px;
+}
+
+.wc-checkbox--md .wc-checkbox__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.wc-checkbox--lg .wc-checkbox__box {
+  width: 24px;
+  height: 24px;
+}
+
+.wc-checkbox--lg .wc-checkbox__icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Label positioning */
+.wc-checkbox--label-start {
+  flex-direction: row-reverse;
+}
+
+.wc-checkbox--label-start .wc-checkbox__label {
+  margin-right: 8px;
+  margin-left: 0;
+}
+
+.wc-checkbox--label-end .wc-checkbox__label {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+.wc-checkbox__label {
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--wc-neutral-700, #374151);
+}
+
+/* Color variants */
+.wc-checkbox--primary.wc-checkbox--checked .wc-checkbox__box,
+.wc-checkbox--primary.wc-checkbox--indeterminate .wc-checkbox__box {
+  border-color: var(--wc-primary-500, #3b82f6);
+  background-color: var(--wc-primary-500, #3b82f6);
+}
+
+.wc-checkbox--secondary.wc-checkbox--checked .wc-checkbox__box,
+.wc-checkbox--secondary.wc-checkbox--indeterminate .wc-checkbox__box {
+  border-color: var(--wc-neutral-500, #6b7280);
+  background-color: var(--wc-neutral-500, #6b7280);
+}
+
+.wc-checkbox--success.wc-checkbox--checked .wc-checkbox__box,
+.wc-checkbox--success.wc-checkbox--indeterminate .wc-checkbox__box {
+  border-color: var(--wc-success-500, #10b981);
+  background-color: var(--wc-success-500, #10b981);
+}
+
+.wc-checkbox--warning.wc-checkbox--checked .wc-checkbox__box,
+.wc-checkbox--warning.wc-checkbox--indeterminate .wc-checkbox__box {
+  border-color: var(--wc-warning-500, #f59e0b);
+  background-color: var(--wc-warning-500, #f59e0b);
+}
+
+.wc-checkbox--error.wc-checkbox--checked .wc-checkbox__box,
+.wc-checkbox--error.wc-checkbox--indeterminate .wc-checkbox__box {
+  border-color: var(--wc-error-500, #ef4444);
+  background-color: var(--wc-error-500, #ef4444);
+}
+
+/* Checked and indeterminate states */
+.wc-checkbox--checked .wc-checkbox__icon,
+.wc-checkbox--indeterminate .wc-checkbox__icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Disabled state */
+.wc-checkbox--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.wc-checkbox--disabled .wc-checkbox__container {
+  cursor: not-allowed;
+}
+
+.wc-checkbox--disabled .wc-checkbox__label {
+  cursor: not-allowed;
+}
+
+/* Focused state */
+.wc-checkbox--focused .wc-checkbox__container {
+  box-shadow: 0 0 0 2px var(--wc-primary-100, #dbeafe);
+}
+
+/* Hover effects */
+.wc-checkbox__container:hover:not(.wc-checkbox--disabled) .wc-checkbox__box {
+  border-color: var(--wc-primary-400, #60a5fa);
+}
+
+.wc-checkbox--checked .wc-checkbox__container:hover:not(.wc-checkbox--disabled) .wc-checkbox__box,
+.wc-checkbox--indeterminate .wc-checkbox__container:hover:not(.wc-checkbox--disabled) .wc-checkbox__box {
+  filter: brightness(1.1);
+}
+
+/* 深色模式 */
+@media (prefers-color-scheme: dark) {
+  .wc-checkbox__box {
+    border-color: var(--wc-neutral-600, #4b5563);
+    background-color: var(--wc-neutral-800, #1f2937);
+  }
+  
+  .wc-checkbox__label {
+    color: var(--wc-neutral-300, #d1d5db);
+  }
+  
+  .wc-checkbox__container:focus {
+    box-shadow: 0 0 0 2px var(--wc-primary-800, #1e40af);
+  }
+  
+  .wc-checkbox--focused .wc-checkbox__container {
+    box-shadow: 0 0 0 2px var(--wc-primary-800, #1e40af);
+  }
+} 

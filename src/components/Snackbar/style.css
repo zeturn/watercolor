@@ -1,0 +1,581 @@
+/* ====== Snackbar Component Styles ====== */
+
+/* CSS Variables */
+:root {
+  /* Container */
+  --wc-snackbar-bg: var(--wc-neutral-800);
+  --wc-snackbar-text: var(--wc-neutral-0);
+  --wc-snackbar-border-radius: 6px;
+  --wc-snackbar-padding: 12px 16px;
+  --wc-snackbar-min-width: 288px;
+  --wc-snackbar-max-width: 568px;
+  --wc-snackbar-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  
+  /* Positioning */
+  --wc-snackbar-margin: 16px;
+  --wc-snackbar-z-index: 1400;
+  
+  /* Colors */
+  --wc-snackbar-success-bg: var(--wc-success-600);
+  --wc-snackbar-warning-bg: var(--wc-warning-600);
+  --wc-snackbar-error-bg: var(--wc-error-600);
+  --wc-snackbar-info-bg: var(--wc-info-600);
+  
+  /* Action */
+  --wc-snackbar-action-color: var(--wc-primary-300);
+  --wc-snackbar-action-hover: var(--wc-primary-200);
+  
+  /* Close */
+  --wc-snackbar-close-color: var(--wc-neutral-300);
+  --wc-snackbar-close-hover: var(--wc-neutral-100);
+  
+  /* Transitions */
+  --wc-snackbar-transition: all 0.3s ease;
+  --wc-snackbar-slide-distance: 100%;
+}
+
+/* Dark Mode Variables */
+.dark {
+  --wc-snackbar-bg: var(--wc-neutral-700);
+  --wc-snackbar-text: var(--wc-neutral-100);
+  --wc-snackbar-success-bg: var(--wc-success-500);
+  --wc-snackbar-warning-bg: var(--wc-warning-500);
+  --wc-snackbar-error-bg: var(--wc-error-500);
+  --wc-snackbar-info-bg: var(--wc-info-500);
+}
+
+/* ====== Snackbar Container ====== */
+.wc-snackbar-container {
+  position: fixed;
+  z-index: var(--wc-snackbar-z-index);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Position Variants */
+.wc-snackbar-container--top-left {
+  top: var(--wc-snackbar-margin);
+  left: var(--wc-snackbar-margin);
+  align-items: flex-start;
+}
+
+.wc-snackbar-container--top-center {
+  top: var(--wc-snackbar-margin);
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+}
+
+.wc-snackbar-container--top-right {
+  top: var(--wc-snackbar-margin);
+  right: var(--wc-snackbar-margin);
+  align-items: flex-end;
+}
+
+.wc-snackbar-container--bottom-left {
+  bottom: var(--wc-snackbar-margin);
+  left: var(--wc-snackbar-margin);
+  align-items: flex-start;
+  flex-direction: column-reverse;
+}
+
+.wc-snackbar-container--bottom-center {
+  bottom: var(--wc-snackbar-margin);
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+  flex-direction: column-reverse;
+}
+
+.wc-snackbar-container--bottom-right {
+  bottom: var(--wc-snackbar-margin);
+  right: var(--wc-snackbar-margin);
+  align-items: flex-end;
+  flex-direction: column-reverse;
+}
+
+/* ====== Main Snackbar ====== */
+.wc-snackbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--wc-snackbar-bg);
+  color: var(--wc-snackbar-text);
+  padding: var(--wc-snackbar-padding);
+  border-radius: var(--wc-snackbar-border-radius);
+  box-shadow: var(--wc-snackbar-shadow);
+  min-width: var(--wc-snackbar-min-width);
+  max-width: var(--wc-snackbar-max-width);
+  font-family: var(--wc-font-family);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  pointer-events: auto;
+  transition: var(--wc-snackbar-transition);
+}
+
+/* Severity Variants */
+.wc-snackbar--success {
+  background: var(--wc-snackbar-success-bg);
+}
+
+.wc-snackbar--warning {
+  background: var(--wc-snackbar-warning-bg);
+}
+
+.wc-snackbar--error {
+  background: var(--wc-snackbar-error-bg);
+}
+
+.wc-snackbar--info {
+  background: var(--wc-snackbar-info-bg);
+}
+
+/* Variant Styles */
+.wc-snackbar--outlined {
+  background: var(--wc-neutral-0);
+  color: var(--wc-neutral-800);
+  border: 1px solid var(--wc-neutral-300);
+}
+
+.wc-snackbar--outlined.wc-snackbar--success {
+  border-color: var(--wc-success-500);
+  color: var(--wc-success-700);
+}
+
+.wc-snackbar--outlined.wc-snackbar--warning {
+  border-color: var(--wc-warning-500);
+  color: var(--wc-warning-700);
+}
+
+.wc-snackbar--outlined.wc-snackbar--error {
+  border-color: var(--wc-error-500);
+  color: var(--wc-error-700);
+}
+
+.wc-snackbar--outlined.wc-snackbar--info {
+  border-color: var(--wc-info-500);
+  color: var(--wc-info-700);
+}
+
+.dark .wc-snackbar--outlined {
+  background: var(--wc-neutral-800);
+  color: var(--wc-neutral-200);
+  border-color: var(--wc-neutral-600);
+}
+
+/* ====== Snackbar Icon ====== */
+.wc-snackbar__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wc-snackbar__icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+/* ====== Snackbar Content ====== */
+.wc-snackbar__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.wc-snackbar__title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.wc-snackbar__message {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+/* ====== Snackbar Actions ====== */
+.wc-snackbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.wc-snackbar__action {
+  background: none;
+  border: none;
+  color: var(--wc-snackbar-action-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--wc-snackbar-transition);
+  white-space: nowrap;
+}
+
+.wc-snackbar__action:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--wc-snackbar-action-hover);
+}
+
+.wc-snackbar__action:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.wc-snackbar--outlined .wc-snackbar__action {
+  color: var(--wc-primary-600);
+}
+
+.wc-snackbar--outlined .wc-snackbar__action:hover {
+  background: var(--wc-primary-50);
+  color: var(--wc-primary-700);
+}
+
+/* ====== Close Button ====== */
+.wc-snackbar__close {
+  background: none;
+  border: none;
+  color: var(--wc-snackbar-close-color);
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--wc-snackbar-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.wc-snackbar__close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--wc-snackbar-close-hover);
+}
+
+.wc-snackbar__close svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.wc-snackbar--outlined .wc-snackbar__close {
+  color: var(--wc-neutral-500);
+}
+
+.wc-snackbar--outlined .wc-snackbar__close:hover {
+  background: var(--wc-neutral-100);
+  color: var(--wc-neutral-700);
+}
+
+/* ====== Progress Bar ====== */
+.wc-snackbar__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 0 0 var(--wc-snackbar-border-radius) var(--wc-snackbar-border-radius);
+  overflow: hidden;
+}
+
+.wc-snackbar__progress-bar {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  transition: width 0.1s linear;
+  border-radius: inherit;
+}
+
+.wc-snackbar--outlined .wc-snackbar__progress {
+  background: var(--wc-neutral-200);
+}
+
+.wc-snackbar--outlined .wc-snackbar__progress-bar {
+  background: var(--wc-primary-500);
+}
+
+/* ====== Animation States ====== */
+.wc-snackbar--entering {
+  opacity: 0;
+}
+
+.wc-snackbar--entered {
+  opacity: 1;
+}
+
+.wc-snackbar--exiting {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Slide Animations */
+.wc-snackbar--slide-up-enter {
+  transform: translateY(var(--wc-snackbar-slide-distance));
+  opacity: 0;
+}
+
+.wc-snackbar--slide-up-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+  transition: var(--wc-snackbar-transition);
+}
+
+.wc-snackbar--slide-up-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.wc-snackbar--slide-up-exit-active {
+  transform: translateY(var(--wc-snackbar-slide-distance));
+  opacity: 0;
+  transition: var(--wc-snackbar-transition);
+}
+
+.wc-snackbar--slide-down-enter {
+  transform: translateY(calc(-1 * var(--wc-snackbar-slide-distance)));
+  opacity: 0;
+}
+
+.wc-snackbar--slide-down-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+  transition: var(--wc-snackbar-transition);
+}
+
+.wc-snackbar--slide-down-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.wc-snackbar--slide-down-exit-active {
+  transform: translateY(calc(-1 * var(--wc-snackbar-slide-distance)));
+  opacity: 0;
+  transition: var(--wc-snackbar-transition);
+}
+
+.wc-snackbar--slide-left-enter {
+  transform: translateX(var(--wc-snackbar-slide-distance));
+  opacity: 0;
+}
+
+.wc-snackbar--slide-left-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: var(--wc-snackbar-transition);
+}
+
+.wc-snackbar--slide-left-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.wc-snackbar--slide-left-exit-active {
+  transform: translateX(var(--wc-snackbar-slide-distance));
+  opacity: 0;
+  transition: var(--wc-snackbar-transition);
+}
+
+.wc-snackbar--slide-right-enter {
+  transform: translateX(calc(-1 * var(--wc-snackbar-slide-distance)));
+  opacity: 0;
+}
+
+.wc-snackbar--slide-right-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: var(--wc-snackbar-transition);
+}
+
+.wc-snackbar--slide-right-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.wc-snackbar--slide-right-exit-active {
+  transform: translateX(calc(-1 * var(--wc-snackbar-slide-distance)));
+  opacity: 0;
+  transition: var(--wc-snackbar-transition);
+}
+
+/* Fade Animation */
+.wc-snackbar--fade-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.wc-snackbar--fade-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: var(--wc-snackbar-transition);
+}
+
+.wc-snackbar--fade-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.wc-snackbar--fade-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: var(--wc-snackbar-transition);
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+  .wc-snackbar-container {
+    --wc-snackbar-margin: 8px;
+  }
+  
+  .wc-snackbar {
+    --wc-snackbar-min-width: calc(100vw - 32px);
+    --wc-snackbar-max-width: calc(100vw - 32px);
+    --wc-snackbar-padding: 16px;
+  }
+  
+  .wc-snackbar-container--top-left,
+  .wc-snackbar-container--top-center,
+  .wc-snackbar-container--top-right {
+    left: var(--wc-snackbar-margin);
+    right: var(--wc-snackbar-margin);
+    transform: none;
+    align-items: stretch;
+  }
+  
+  .wc-snackbar-container--bottom-left,
+  .wc-snackbar-container--bottom-center,
+  .wc-snackbar-container--bottom-right {
+    left: var(--wc-snackbar-margin);
+    right: var(--wc-snackbar-margin);
+    transform: none;
+    align-items: stretch;
+  }
+  
+  .wc-snackbar__actions {
+    margin-top: 8px;
+    margin-left: 0;
+    justify-content: flex-end;
+  }
+  
+  .wc-snackbar__content {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .wc-snackbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .wc-snackbar__actions {
+    margin-top: 12px;
+    justify-content: space-between;
+  }
+  
+  .wc-snackbar__action {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+  }
+}
+
+/* ====== High Contrast Mode ====== */
+@media (prefers-contrast: high) {
+  .wc-snackbar {
+    border: 2px solid currentColor;
+  }
+  
+  .wc-snackbar__action,
+  .wc-snackbar__close {
+    border: 1px solid currentColor;
+  }
+}
+
+/* ====== Reduced Motion ====== */
+@media (prefers-reduced-motion: reduce) {
+  .wc-snackbar,
+  .wc-snackbar__action,
+  .wc-snackbar__close,
+  .wc-snackbar__progress-bar {
+    transition: none;
+  }
+  
+  .wc-snackbar--slide-up-enter-active,
+  .wc-snackbar--slide-up-exit-active,
+  .wc-snackbar--slide-down-enter-active,
+  .wc-snackbar--slide-down-exit-active,
+  .wc-snackbar--slide-left-enter-active,
+  .wc-snackbar--slide-left-exit-active,
+  .wc-snackbar--slide-right-enter-active,
+  .wc-snackbar--slide-right-exit-active,
+  .wc-snackbar--fade-enter-active,
+  .wc-snackbar--fade-exit-active {
+    transition: none;
+  }
+}
+
+/* ====== Print Styles ====== */
+@media print {
+  .wc-snackbar-container {
+    display: none !important;
+  }
+}
+
+/* ====== Stacking Context ====== */
+.wc-snackbar-container .wc-snackbar {
+  position: relative;
+  z-index: 1;
+}
+
+.wc-snackbar-container .wc-snackbar:hover {
+  z-index: 2;
+}
+
+/* ====== Custom Variants ====== */
+.wc-snackbar--rounded {
+  border-radius: 24px;
+}
+
+.wc-snackbar--square {
+  border-radius: 0;
+}
+
+.wc-snackbar--minimal {
+  box-shadow: none;
+  border: 1px solid var(--wc-neutral-300);
+}
+
+.wc-snackbar--elevated {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* ====== Loading State ====== */
+.wc-snackbar--loading .wc-snackbar__icon {
+  animation: wc-snackbar-spin 1s linear infinite;
+}
+
+@keyframes wc-snackbar-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} 

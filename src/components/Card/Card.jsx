@@ -1,4 +1,6 @@
 import React from 'react'
+import { getCardClasses, getCardStyles, handleCardClick } from './utils.js'
+import './style.css'
 
 const Card = ({
   children,
@@ -22,49 +24,28 @@ const Card = ({
   onMouseLeave,
   ...props
 }) => {
-  const getCardClasses = () => {
-    const classes = ['wc-card']
-    
-    // Variant classes
-    classes.push(`wc-card--${variant}`)
-    
-    // Padding classes
-    classes.push(`wc-card--padding-${padding}`)
-    
-    // Border radius classes
-    classes.push(`wc-card--radius-${borderRadius}`)
-    
-    // State classes
-    if (fullWidth) classes.push('wc-card--full-width')
-    if (hover) classes.push('wc-card--hover')
-    if (clickable) classes.push('wc-card--clickable')
-    if (disabled) classes.push('wc-card--disabled')
-    if (elevation > 0) classes.push(`wc-card--elevation-${elevation}`)
-    
-    return classes.concat(className).filter(Boolean).join(' ')
-  }
+  const cardClasses = getCardClasses({
+    variant,
+    padding,
+    borderRadius,
+    fullWidth,
+    hover,
+    clickable,
+    disabled,
+    elevation,
+    className
+  }).join(' ')
 
-  const getCardStyles = () => {
-    const styles = { ...style }
-    
-    // Use CSS variables for theming
-    styles.backgroundColor = 'var(--wc-neutral-0)'
-    styles.border = '1px solid var(--wc-neutral-200)'
-    styles.color = 'var(--wc-neutral-900)'
-    
-    return styles
-  }
+  const cardStyles = getCardStyles(style)
 
   const handleClick = (e) => {
-    if (!disabled && clickable && onClick) {
-      onClick(e)
-    }
+    handleCardClick(e, disabled, clickable, onClick)
   }
 
   return (
     <div
-      className={getCardClasses()}
-      style={getCardStyles()}
+      className={cardClasses}
+      style={cardStyles}
       onClick={handleClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

@@ -1,0 +1,84 @@
+/* CircularProgress 组件样式 */
+.wc-circular-progress {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.wc-circular-progress-svg {
+  transform: rotate(-90deg);
+}
+
+.wc-circular-progress-bg {
+  opacity: 0.2;
+  color: var(--wc-neutral-300, #d1d5db);
+}
+
+.wc-circular-progress-circle {
+  stroke-linecap: round;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.wc-circular-progress-circle--indeterminate {
+  animation: wc-circular-progress-rotate 1.4s linear infinite;
+}
+
+.wc-circular-progress-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--wc-neutral-700, #374151);
+}
+
+/* Color variants */
+.wc-circular-progress--primary .wc-circular-progress-circle {
+  color: var(--wc-primary-500, #3b82f6);
+}
+
+.wc-circular-progress--secondary .wc-circular-progress-circle {
+  color: var(--wc-neutral-500, #6b7280);
+}
+
+.wc-circular-progress--success .wc-circular-progress-circle {
+  color: var(--wc-success-500, #10b981);
+}
+
+.wc-circular-progress--warning .wc-circular-progress-circle {
+  color: var(--wc-warning-500, #f59e0b);
+}
+
+.wc-circular-progress--error .wc-circular-progress-circle {
+  color: var(--wc-error-500, #ef4444);
+}
+
+/* Indeterminate animation */
+@keyframes wc-circular-progress-rotate {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124;
+  }
+}
+
+/* 深色模式 */
+@media (prefers-color-scheme: dark) {
+  .wc-circular-progress-bg {
+    color: var(--wc-neutral-600, #4b5563);
+  }
+  
+  .wc-circular-progress-value {
+    color: var(--wc-neutral-300, #d1d5db);
+  }
+} 

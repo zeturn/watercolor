@@ -1,4 +1,13 @@
 import React, { useState } from 'react'
+import { 
+  getCheckboxClasses, 
+  getCheckboxStyles, 
+  handleCheckboxChange, 
+  handleCheckboxKeyDown, 
+  renderCheckboxIcon, 
+  generateCheckboxId 
+} from './utils.js'
+import './style.css'
 
 const Checkbox = ({
   checked = false,
@@ -24,48 +33,26 @@ const Checkbox = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false)
 
-  const getCheckboxClasses = () => {
-    const classes = ['wc-checkbox']
-    
-    classes.push(`wc-checkbox--${size}`)
-    classes.push(`wc-checkbox--${color}`)
-    classes.push(`wc-checkbox--label-${labelPlacement}`)
-    
-    if (checked) classes.push('wc-checkbox--checked')
-    if (indeterminate) classes.push('wc-checkbox--indeterminate')
-    if (disabled) classes.push('wc-checkbox--disabled')
-    if (isFocused) classes.push('wc-checkbox--focused')
-    
-    return classes.concat(className).filter(Boolean).join(' ')
-  }
+  const checkboxClasses = getCheckboxClasses({
+    size,
+    color,
+    labelPlacement,
+    checked,
+    indeterminate,
+    disabled,
+    isFocused,
+    className
+  }).join(' ')
 
-  const getCheckboxStyles = () => {
-    const styles = { ...style }
-    
-    // Use CSS variables for theming
-    if (checked || indeterminate) {
-      styles.borderColor = `var(--wc-${color}-500)`
-      styles.backgroundColor = `var(--wc-${color}-500)`
-    } else {
-      styles.borderColor = 'var(--wc-neutral-300)'
-      styles.backgroundColor = 'transparent'
-    }
-    
-    return styles
-  }
+  const checkboxStyles = getCheckboxStyles({
+    checked,
+    indeterminate,
+    color,
+    style
+  })
 
   const handleChange = (e) => {
-    if (!disabled) {
-      onChange?.({ 
-        target: { 
-          name, 
-          value, 
-          checked: !checked 
-        },
-        preventDefault: () => {},
-        stopPropagation: () => {}
-      })
-    }
+    handleCheckboxChange(e, disabled, checked, name, value, onChange)
   }
 
   const handleFocus = (e) => {
@@ -79,31 +66,18 @@ const Checkbox = ({
   }
 
   const handleKeyDown = (e) => {
-    if (e.key === ' ' || e.key === 'Enter') {
-      e.preventDefault()
-      handleChange(e)
-    }
+    handleCheckboxKeyDown(e, handleChange)
   }
 
-  const renderIcon = () => {
-    if (indeterminate) {
-      return indeterminateIcon || (
-        <svg className="wc-checkbox__icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M19 13H5v-2h14v2z"/>
-        </svg>
-      )
-    } else if (checked) {
-      return checkedIcon || (
-        <svg className="wc-checkbox__icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-        </svg>
-      )
-    } else {
-      return icon || null
-    }
-  }
+  const iconElement = renderCheckboxIcon(
+    indeterminate, 
+    checked, 
+    indeterminateIcon, 
+    checkedIcon, 
+    icon
+  )
 
-  const checkboxId = id || name || `checkbox-${Math.random().toString(36).substr(2, 9)}`
+  const checkboxId = generateCheckboxId(id, name)
 
   const checkboxElement = (
     <div
@@ -133,16 +107,16 @@ const Checkbox = ({
       />
       <div 
         className="wc-checkbox__box"
-        style={getCheckboxStyles()}
+        style={checkboxStyles}
       >
-        {renderIcon()}
+        {iconElement}
       </div>
     </div>
   )
 
   if (label) {
     return (
-      <label className={getCheckboxClasses()} htmlFor={checkboxId}>
+      <label className={checkboxClasses} htmlFor={checkboxId}>
         {labelPlacement === 'start' && (
           <span className="wc-checkbox__label">{label}</span>
         )}
@@ -155,7 +129,7 @@ const Checkbox = ({
   }
 
   return (
-    <div className={getCheckboxClasses()}>
+    <div className={checkboxClasses}>
       {checkboxElement}
     </div>
   )

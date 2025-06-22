@@ -1,0 +1,389 @@
+/* Progress 组件样式 */
+
+/* CSS 变量定义 */
+:root {
+  --wc-progress-bg: var(--wc-neutral-200, #e5e7eb);
+  --wc-progress-border-radius: 9999px;
+  --wc-progress-transition: all 0.5s ease;
+  
+  /* 颜色变量 */
+  --wc-progress-primary: var(--wc-primary-500, #3b82f6);
+  --wc-progress-success: var(--wc-success-500, #10b981);
+  --wc-progress-warning: var(--wc-warning-500, #f59e0b);
+  --wc-progress-error: var(--wc-error-500, #ef4444);
+  --wc-progress-purple: var(--wc-purple-500, #a855f7);
+  --wc-progress-orange: var(--wc-orange-500, #f97316);
+  --wc-progress-cyan: var(--wc-cyan-500, #06b6d4);
+  --wc-progress-pink: var(--wc-pink-500, #ec4899);
+  
+  /* 文本颜色 */
+  --wc-progress-label-color: var(--wc-text-primary, #374151);
+  --wc-progress-percent-color: var(--wc-text-secondary, #6b7280);
+}
+
+/* 深色模式变量 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wc-progress-bg: var(--wc-neutral-700, #374151);
+    --wc-progress-label-color: var(--wc-text-primary-dark, #d1d5db);
+    --wc-progress-percent-color: var(--wc-text-secondary-dark, #9ca3af);
+  }
+}
+
+.dark {
+  --wc-progress-bg: var(--wc-neutral-700, #374151);
+  --wc-progress-label-color: var(--wc-text-primary-dark, #d1d5db);
+  --wc-progress-percent-color: var(--wc-text-secondary-dark, #9ca3af);
+}
+
+/* 容器样式 */
+.wc-progress-wrapper {
+  width: 100%;
+}
+
+/* 头部信息 */
+.wc-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.wc-progress-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--wc-progress-label-color);
+  margin: 0;
+}
+
+.wc-progress-percent {
+  font-size: 0.875rem;
+  color: var(--wc-progress-percent-color);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 进度条容器 */
+.wc-progress {
+  width: 100%;
+  background-color: var(--wc-progress-bg);
+  border-radius: var(--wc-progress-border-radius);
+  overflow: hidden;
+  position: relative;
+}
+
+/* 尺寸变体 */
+.wc-progress--sm {
+  height: 4px;
+}
+
+.wc-progress--md {
+  height: 8px;
+}
+
+.wc-progress--lg {
+  height: 12px;
+}
+
+.wc-progress--xl {
+  height: 16px;
+}
+
+/* 进度条 */
+.wc-progress__bar {
+  height: 100%;
+  border-radius: var(--wc-progress-border-radius);
+  transition: var(--wc-progress-transition);
+  position: relative;
+  min-width: 0;
+}
+
+/* 颜色变体 */
+.wc-progress__bar--primary {
+  background-color: var(--wc-progress-primary);
+}
+
+.wc-progress__bar--success {
+  background-color: var(--wc-progress-success);
+}
+
+.wc-progress__bar--warning {
+  background-color: var(--wc-progress-warning);
+}
+
+.wc-progress__bar--error {
+  background-color: var(--wc-progress-error);
+}
+
+.wc-progress__bar--purple {
+  background-color: var(--wc-progress-purple);
+}
+
+.wc-progress__bar--orange {
+  background-color: var(--wc-progress-orange);
+}
+
+.wc-progress__bar--cyan {
+  background-color: var(--wc-progress-cyan);
+}
+
+.wc-progress__bar--pink {
+  background-color: var(--wc-progress-pink);
+}
+
+/* 渐变效果 */
+.wc-progress__bar--gradient {
+  background: linear-gradient(90deg, 
+    var(--wc-progress-primary) 0%, 
+    var(--wc-progress-success) 100%);
+}
+
+.wc-progress__bar--gradient-rainbow {
+  background: linear-gradient(90deg, 
+    #ff0000 0%, 
+    #ff8000 16.66%, 
+    #ffff00 33.33%, 
+    #80ff00 50%, 
+    #00ff80 66.66%, 
+    #0080ff 83.33%, 
+    #8000ff 100%);
+}
+
+/* 动画效果 */
+.wc-progress__bar--animated {
+  animation: progressPulse 1.5s ease-in-out infinite;
+}
+
+.wc-progress__bar--striped {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 16px 16px;
+}
+
+.wc-progress__bar--striped-animated {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 16px 16px;
+  animation: progressStripes 1s linear infinite;
+}
+
+/* 发光效果 */
+.wc-progress__bar--glow {
+  box-shadow: 0 0 10px currentColor;
+}
+
+/* 内部文本 */
+.wc-progress__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+  z-index: 1;
+}
+
+/* 状态样式 */
+.wc-progress--indeterminate .wc-progress__bar {
+  animation: progressIndeterminate 2s ease-in-out infinite;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--wc-progress-primary) 50%,
+    transparent 100%
+  );
+  width: 50% !important;
+}
+
+.wc-progress--loading .wc-progress__bar {
+  animation: progressLoading 1.5s ease-in-out infinite;
+}
+
+/* 圆形进度条 */
+.wc-progress--circular {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--wc-progress-primary) 0deg,
+    var(--wc-progress-bg) 0deg
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.wc-progress--circular::before {
+  content: '';
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  background: var(--wc-neutral-0, #ffffff);
+  border-radius: 50%;
+}
+
+.wc-progress--circular .wc-progress__text {
+  position: relative;
+  color: var(--wc-progress-label-color);
+  font-size: 1rem;
+  font-weight: 600;
+  text-shadow: none;
+}
+
+/* 圆形尺寸变体 */
+.wc-progress--circular.wc-progress--sm {
+  width: 80px;
+  height: 80px;
+}
+
+.wc-progress--circular.wc-progress--md {
+  width: 120px;
+  height: 120px;
+}
+
+.wc-progress--circular.wc-progress--lg {
+  width: 160px;
+  height: 160px;
+}
+
+.wc-progress--circular.wc-progress--xl {
+  width: 200px;
+  height: 200px;
+}
+
+/* 动画关键帧 */
+@keyframes progressPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes progressStripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 16px 0;
+  }
+}
+
+@keyframes progressIndeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes progressLoading {
+  0%, 100% {
+    transform: scaleX(0.8);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 640px) {
+  .wc-progress-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .wc-progress-label,
+  .wc-progress-percent {
+    font-size: 0.75rem;
+  }
+  
+  .wc-progress--circular {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .wc-progress--circular.wc-progress--lg {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* 可访问性 */
+.wc-progress[role="progressbar"] {
+  outline: none;
+}
+
+.wc-progress:focus-visible {
+  outline: 2px solid var(--wc-primary-500, #3b82f6);
+  outline-offset: 2px;
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .wc-progress {
+    border: 1px solid var(--wc-neutral-900, #111827);
+  }
+  
+  .wc-progress__bar {
+    border: 1px solid currentColor;
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .wc-progress__bar,
+  .wc-progress__bar--animated,
+  .wc-progress__bar--striped-animated,
+  .wc-progress--indeterminate .wc-progress__bar,
+  .wc-progress--loading .wc-progress__bar {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .wc-progress {
+    background: white !important;
+    border: 1px solid #000 !important;
+  }
+  
+  .wc-progress__bar {
+    background: #000 !important;
+    animation: none !important;
+  }
+  
+  .wc-progress-label,
+  .wc-progress-percent {
+    color: #000 !important;
+  }
+} 

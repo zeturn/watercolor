@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import './style.css'
+import { buildAccordionClasses, toggleActiveItems } from './utils'
 
 const Accordion = ({
   items = [],
@@ -11,31 +13,11 @@ const Accordion = ({
 }) => {
   const [activeItems, setActiveItems] = useState([])
 
-  // Validate variant
-  const validVariants = ['default', 'bordered', 'filled']
-  const safeVariant = validVariants.includes(variant) ? variant : 'default'
-
-  // Build classes
-  const accordionClasses = [
-    'wc-accordion',
-    safeVariant !== 'default' ? `wc-accordion--${safeVariant}` : '',
-    className
-  ].filter(Boolean).join(' ')
+  // Build classes via shared util
+  const accordionClasses = buildAccordionClasses(variant, className)
 
   const toggleItem = (index) => {
-    let newActiveItems
-    
-    if (multiple) {
-      const activeIndex = activeItems.indexOf(index)
-      if (activeIndex > -1) {
-        newActiveItems = activeItems.filter(item => item !== index)
-      } else {
-        newActiveItems = [...activeItems, index]
-      }
-    } else {
-      newActiveItems = activeItems.includes(index) ? [] : [index]
-    }
-    
+    const newActiveItems = toggleActiveItems(activeItems, index, multiple)
     setActiveItems(newActiveItems)
     onToggle?.(index, newActiveItems.includes(index))
   }

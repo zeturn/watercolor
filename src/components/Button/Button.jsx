@@ -1,4 +1,12 @@
 import React, { useState } from 'react'
+import { 
+  validVariants, 
+  getButtonClasses, 
+  getVariantStyles, 
+  getRoundedClass,
+  handleButtonClick as utilHandleButtonClick 
+} from './utils.js'
+import './style.css'
 
 const Button = ({
   children,
@@ -27,67 +35,32 @@ const Button = ({
   const [isHovered, setIsHovered] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
 
-  // Validate variant
-  const validVariants = ['primary', 'secondary', 'filled', 'outlined', 'text', 'success', 'warning', 'error', 'info', 'purple', 'orange', 'cyan', 'pink']
-  const safeVariant = validVariants.includes(variant) ? variant : 'primary'
+  // 构建CSS类名
+  const buttonClasses = getButtonClasses({
+    variant,
+    size,
+    disabled,
+    loading,
+    fullWidth,
+    uppercase,
+    rounded
+  }).concat(className).filter(Boolean).join(' ')
 
-  // Build classes
-  const buttonClasses = [
-    'wc-btn',
-    `wc-btn--${safeVariant}`,
-    `wc-btn--${size}`,
-    disabled || loading ? 'wc-btn--disabled' : '',
-    loading ? 'wc-btn--loading' : '',
-    fullWidth ? 'wc-btn--full-width' : '',
-    uppercase ? 'wc-btn--uppercase' : '',
-    getRoundedClass(rounded),
-    className
-  ].filter(Boolean).join(' ')
-
-  // Build styles
+  // 构建内联样式
   const buttonStyles = {
-    ...getVariantStyles(safeVariant),
+    ...getVariantStyles(variant),
     ...style
   }
 
-  function getRoundedClass(rounded) {
-    if (rounded === false || rounded === 'none') return 'wc-btn--rounded-none'
-    if (typeof rounded === 'string') return `wc-btn--rounded-${rounded}`
-    return 'wc-btn--rounded'
-  }
-
-  function getVariantStyles(variant) {
-    const styles = {}
-    
-    // Use CSS variables for theming
-    if (variant === 'primary') {
-      styles.backgroundColor = 'var(--wc-primary-500)'
-      styles.color = 'white'
-    } else if (variant === 'secondary') {
-      styles.backgroundColor = 'var(--wc-secondary-500)'
-      styles.color = 'white'
-    } else if (variant === 'outlined') {
-      styles.backgroundColor = 'transparent'
-      styles.color = 'var(--wc-primary-500)'
-      styles.border = '1px solid var(--wc-primary-500)'
-    } else if (variant === 'text') {
-      styles.backgroundColor = 'transparent'
-      styles.color = 'var(--wc-primary-500)'
-    } else if (['success', 'warning', 'error', 'info'].includes(variant)) {
-      styles.backgroundColor = `var(--wc-${variant}-500)`
-      styles.color = 'white'
-    }
-    
-    return styles
-  }
-
   const handleClick = (event) => {
-    if (!disabled && !loading) {
-      if (href) {
-        window.open(href, target)
-      }
-      onClick?.(event)
-    }
+    utilHandleButtonClick({
+      event,
+      disabled,
+      loading,
+      href,
+      target,
+      onClick
+    })
   }
 
   const handleMouseOver = (event) => {

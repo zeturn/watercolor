@@ -1,0 +1,561 @@
+/* ====== Table Component Styles ====== */
+
+/* CSS Variables */
+:root {
+  /* Container */
+  --wc-table-container-bg: var(--wc-neutral-0);
+  --wc-table-container-border: var(--wc-neutral-200);
+  --wc-table-container-border-radius: 8px;
+  --wc-table-container-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+  /* Table */
+  --wc-table-font-family: var(--wc-font-family);
+  --wc-table-font-size-sm: 0.75rem;
+  --wc-table-font-size-md: 0.875rem;
+  --wc-table-font-size-lg: 1rem;
+  
+  /* Cells */
+  --wc-table-cell-padding-sm: 6px 12px;
+  --wc-table-cell-padding-md: 12px 16px;
+  --wc-table-cell-padding-lg: 16px 20px;
+  --wc-table-cell-border: var(--wc-neutral-200);
+  --wc-table-cell-text: var(--wc-neutral-900);
+  
+  /* Header */
+  --wc-table-head-bg: var(--wc-neutral-50);
+  --wc-table-head-text: var(--wc-neutral-700);
+  --wc-table-head-border: var(--wc-neutral-200);
+  --wc-table-head-font-weight: 600;
+  
+  /* Row */
+  --wc-table-row-hover-bg: var(--wc-neutral-50);
+  --wc-table-row-selected-bg: var(--wc-primary-100);
+  --wc-table-row-striped-bg: var(--wc-neutral-25);
+  --wc-table-row-border: var(--wc-neutral-200);
+  
+  /* Sort */
+  --wc-table-sort-color: var(--wc-primary-500);
+  --wc-table-sort-hover-color: var(--wc-primary-600);
+  
+  /* Transitions */
+  --wc-table-transition: all 0.2s ease;
+}
+
+/* Dark Mode Variables */
+.dark {
+  --wc-table-container-bg: var(--wc-neutral-800);
+  --wc-table-container-border: var(--wc-neutral-700);
+  --wc-table-cell-border: var(--wc-neutral-700);
+  --wc-table-cell-text: var(--wc-neutral-100);
+  --wc-table-head-bg: var(--wc-neutral-700);
+  --wc-table-head-text: var(--wc-neutral-200);
+  --wc-table-head-border: var(--wc-neutral-600);
+  --wc-table-row-hover-bg: var(--wc-neutral-700);
+  --wc-table-row-selected-bg: var(--wc-primary-700);
+  --wc-table-row-striped-bg: var(--wc-neutral-750);
+  --wc-table-row-border: var(--wc-neutral-700);
+  --wc-table-sort-color: var(--wc-primary-400);
+  --wc-table-sort-hover-color: var(--wc-primary-300);
+}
+
+/* ====== Table Container ====== */
+.wc-table-container {
+  overflow-x: auto;
+  border: 1px solid var(--wc-table-container-border);
+  border-radius: var(--wc-table-container-border-radius);
+  background-color: var(--wc-table-container-bg);
+  box-shadow: var(--wc-table-container-shadow);
+  position: relative;
+}
+
+.wc-table-container--sticky {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.wc-table-container--no-border {
+  border: none;
+  box-shadow: none;
+}
+
+.wc-table-container--rounded {
+  border-radius: 12px;
+}
+
+.wc-table-container--flat {
+  border-radius: 0;
+}
+
+/* ====== Main Table ====== */
+.wc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--wc-table-font-family);
+  background: transparent;
+  table-layout: auto;
+}
+
+.wc-table--fixed {
+  table-layout: fixed;
+}
+
+/* Size Variants */
+.wc-table--sm {
+  font-size: var(--wc-table-font-size-sm);
+}
+
+.wc-table--md {
+  font-size: var(--wc-table-font-size-md);
+}
+
+.wc-table--lg {
+  font-size: var(--wc-table-font-size-lg);
+}
+
+/* Hover Effect */
+.wc-table--hover tbody tr:hover {
+  background-color: var(--wc-table-row-hover-bg);
+}
+
+/* Striped Rows */
+.wc-table--striped tbody tr:nth-child(even) {
+  background-color: var(--wc-table-row-striped-bg);
+}
+
+.wc-table--striped.wc-table--hover tbody tr:nth-child(even):hover {
+  background-color: var(--wc-table-row-hover-bg);
+}
+
+/* Dense Table */
+.wc-table--dense td,
+.wc-table--dense th {
+  padding: var(--wc-table-cell-padding-sm);
+}
+
+/* ====== Table Head ====== */
+.wc-table-head {
+  background-color: var(--wc-table-head-bg);
+  border-bottom: 2px solid var(--wc-table-head-border);
+}
+
+.wc-table-head--sticky {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.wc-table-head th {
+  font-weight: var(--wc-table-head-font-weight);
+  color: var(--wc-table-head-text);
+  text-align: left;
+  line-height: 1.5;
+}
+
+/* ====== Table Body ====== */
+.wc-table-body {
+  background: transparent;
+}
+
+/* ====== Table Footer ====== */
+.wc-table-footer {
+  background-color: var(--wc-table-head-bg);
+  border-top: 1px solid var(--wc-table-head-border);
+  font-weight: 500;
+}
+
+/* ====== Table Row ====== */
+.wc-table-row {
+  border-bottom: 1px solid var(--wc-table-row-border);
+  transition: var(--wc-table-transition);
+}
+
+.wc-table-row:last-child {
+  border-bottom: none;
+}
+
+.wc-table-row--hover:hover {
+  background-color: var(--wc-table-row-hover-bg);
+}
+
+.wc-table-row--selected {
+  background-color: var(--wc-table-row-selected-bg);
+}
+
+.wc-table-row--clickable {
+  cursor: pointer;
+}
+
+.wc-table-row--clickable:active {
+  background-color: var(--wc-table-row-hover-bg);
+  transform: scale(0.999);
+}
+
+/* ====== Table Cell ====== */
+.wc-table-cell {
+  border-bottom: 1px solid var(--wc-table-cell-border);
+  vertical-align: inherit;
+  color: var(--wc-table-cell-text);
+  line-height: 1.43;
+  transition: var(--wc-table-transition);
+}
+
+/* Alignment */
+.wc-table-cell--align-left {
+  text-align: left;
+}
+
+.wc-table-cell--align-center {
+  text-align: center;
+}
+
+.wc-table-cell--align-right {
+  text-align: right;
+}
+
+.wc-table-cell--align-justify {
+  text-align: justify;
+}
+
+/* Vertical Alignment */
+.wc-table-cell--valign-top {
+  vertical-align: top;
+}
+
+.wc-table-cell--valign-middle {
+  vertical-align: middle;
+}
+
+.wc-table-cell--valign-bottom {
+  vertical-align: bottom;
+}
+
+/* Variants */
+.wc-table-cell--head {
+  font-weight: var(--wc-table-head-font-weight);
+  color: var(--wc-table-head-text);
+  line-height: 1.5;
+  background-color: var(--wc-table-head-bg);
+}
+
+.wc-table-cell--body {
+  font-weight: 400;
+}
+
+.wc-table-cell--footer {
+  font-weight: 500;
+  border-bottom: none;
+  background-color: var(--wc-table-head-bg);
+}
+
+/* Sizes */
+.wc-table-cell--small {
+  padding: var(--wc-table-cell-padding-sm);
+  font-size: var(--wc-table-font-size-sm);
+}
+
+.wc-table-cell--medium {
+  padding: var(--wc-table-cell-padding-md);
+  font-size: var(--wc-table-font-size-md);
+}
+
+.wc-table-cell--large {
+  padding: var(--wc-table-cell-padding-lg);
+  font-size: var(--wc-table-font-size-lg);
+}
+
+/* Padding Variants */
+.wc-table-cell--padding-normal {
+  /* Default padding handled by size variants */
+}
+
+.wc-table-cell--padding-checkbox {
+  padding-left: 12px;
+  padding-right: 12px;
+  width: 48px;
+  text-align: center;
+}
+
+.wc-table-cell--padding-none {
+  padding: 0;
+}
+
+.wc-table-cell--padding-dense {
+  padding: 4px 8px;
+}
+
+/* Numeric cells */
+.wc-table-cell--numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Sticky columns */
+.wc-table-cell--sticky-left {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: inherit;
+}
+
+.wc-table-cell--sticky-right {
+  position: sticky;
+  right: 0;
+  z-index: 1;
+  background: inherit;
+}
+
+/* ====== Sortable Cells ====== */
+.wc-table-cell--sortable {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  padding-right: 32px;
+  transition: var(--wc-table-transition);
+}
+
+.wc-table-cell--sortable:hover {
+  color: var(--wc-table-sort-hover-color);
+  background-color: rgba(var(--wc-primary-500-rgb), 0.05);
+}
+
+.wc-table-cell--sortable:active {
+  background-color: rgba(var(--wc-primary-500-rgb), 0.1);
+}
+
+.wc-table-cell--sortable::after {
+  content: '';
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  opacity: 0.3;
+  border-bottom: 4px solid currentColor;
+  transition: var(--wc-table-transition);
+}
+
+/* Sort Indicators */
+.wc-table-cell--sort-asc {
+  color: var(--wc-table-sort-color);
+}
+
+.wc-table-cell--sort-asc::after {
+  border-bottom: 4px solid currentColor;
+  border-top: none;
+  opacity: 1;
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.wc-table-cell--sort-desc {
+  color: var(--wc-table-sort-color);
+}
+
+.wc-table-cell--sort-desc::after {
+  border-top: 4px solid currentColor;
+  border-bottom: none;
+  opacity: 1;
+  transform: translateY(-50%) rotate(0deg);
+}
+
+/* ====== Selection ====== */
+.wc-table-cell--selectable {
+  width: 48px;
+  padding: 8px 12px;
+}
+
+.wc-table-row--selected .wc-table-cell {
+  background-color: var(--wc-table-row-selected-bg);
+}
+
+/* ====== Loading State ====== */
+.wc-table--loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.wc-table--loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.dark .wc-table--loading::after {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* ====== Empty State ====== */
+.wc-table-empty {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--wc-neutral-500);
+  font-style: italic;
+}
+
+.wc-table-empty__icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.wc-table-empty__text {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+  .wc-table-container {
+    border-radius: 4px;
+  }
+  
+  .wc-table-container--sticky {
+    max-height: 300px;
+  }
+  
+  .wc-table-cell--small {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+  
+  .wc-table-cell--medium {
+    padding: 8px 12px;
+    font-size: 0.8125rem;
+  }
+  
+  .wc-table-cell--large {
+    padding: 12px 16px;
+    font-size: 0.875rem;
+  }
+  
+  .wc-table-cell--sortable {
+    padding-right: 24px;
+  }
+  
+  .wc-table-cell--sortable::after {
+    right: 4px;
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-top-width: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wc-table-container {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .wc-table-cell {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+  }
+  
+  .wc-table-cell--padding-checkbox {
+    width: 40px;
+    padding: 4px 8px;
+  }
+}
+
+/* ====== High Contrast Mode ====== */
+@media (prefers-contrast: high) {
+  .wc-table-container {
+    border: 2px solid currentColor;
+  }
+  
+  .wc-table-cell {
+    border-bottom: 1px solid currentColor;
+  }
+  
+  .wc-table-head {
+    border-bottom: 2px solid currentColor;
+  }
+  
+  .wc-table-row--selected {
+    outline: 2px solid currentColor;
+  }
+}
+
+/* ====== Reduced Motion ====== */
+@media (prefers-reduced-motion: reduce) {
+  .wc-table-cell,
+  .wc-table-row,
+  .wc-table-cell--sortable,
+  .wc-table-cell--sortable::after {
+    transition: none;
+  }
+  
+  .wc-table-row--clickable:active {
+    transform: none;
+  }
+}
+
+/* ====== Print Styles ====== */
+@media print {
+  .wc-table-container {
+    border: 1px solid #000;
+    box-shadow: none;
+    overflow: visible;
+  }
+  
+  .wc-table {
+    font-size: 10pt;
+  }
+  
+  .wc-table-cell--sortable::after {
+    display: none;
+  }
+  
+  .wc-table-row--hover:hover,
+  .wc-table--hover tbody tr:hover {
+    background: transparent !important;
+  }
+}
+
+/* ====== Accessibility ====== */
+.wc-table-cell--sortable:focus {
+  outline: 2px solid var(--wc-primary-500);
+  outline-offset: -2px;
+}
+
+.wc-table-row:focus-within {
+  outline: 2px solid var(--wc-primary-500);
+  outline-offset: -2px;
+}
+
+/* ====== Utilities ====== */
+.wc-table--compact {
+  --wc-table-cell-padding-sm: 4px 8px;
+  --wc-table-cell-padding-md: 6px 12px;
+  --wc-table-cell-padding-lg: 8px 16px;
+}
+
+.wc-table--spacious {
+  --wc-table-cell-padding-sm: 12px 16px;
+  --wc-table-cell-padding-md: 16px 20px;
+  --wc-table-cell-padding-lg: 20px 24px;
+}
+
+.wc-table--no-wrap {
+  white-space: nowrap;
+}
+
+.wc-table--break-all {
+  word-break: break-all;
+}
+
+.wc-table--break-word {
+  word-break: break-word;
+}
