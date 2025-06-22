@@ -135,7 +135,7 @@ export const Error = {
     message: '网络连接异常，请检查网络设置后重试。',
     closable: true,
     showIcon: true,
-    variant: 'filled',
+    variant: 'standard',
   },
   render: (args) => ({
     components: { AlertVue },
@@ -165,7 +165,7 @@ export const WithoutTitle = {
     message: '这是一个没有标题的简单警告信息。',
     closable: false,
     showIcon: true,
-    variant: 'filled',
+    variant: 'standard',
   },
   render: (args) => ({
     components: { AlertVue },
