@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { getPlacementClass } from './utils'
+import './style.css'
 
 export default function Tooltip({
   text,
@@ -8,12 +10,7 @@ export default function Tooltip({
 }) {
   const [show, setShow] = useState(false)
 
-  const placementClass = {
-    top: 'mb-1 left-1/2 -translate-x-1/2 bottom-full',
-    bottom: 'mt-1 left-1/2 -translate-x-1/2 top-full',
-    left: 'mr-1 right-full top-1/2 -translate-y-1/2',
-    right: 'ml-1 left-full top-1/2 -translate-y-1/2',
-  }[placement]
+  const placementClass = getPlacementClass(placement)
 
   return (
     <span

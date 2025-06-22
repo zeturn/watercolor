@@ -19,6 +19,8 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { getPlacementClass } from './utils'
+import './style.css'
 
 const props = defineProps({
   text: { type: String, required: true },
@@ -31,18 +33,7 @@ const props = defineProps({
 
 const show = ref(false)
 
-const placementClass = computed(() => {
-  switch (props.placement) {
-    case 'bottom':
-      return 'mt-1 left-1/2 -translate-x-1/2 top-full'
-    case 'left':
-      return 'mr-1 right-full top-1/2 -translate-y-1/2'
-    case 'right':
-      return 'ml-1 left-full top-1/2 -translate-y-1/2'
-    default: // top
-      return 'mb-1 left-1/2 -translate-x-1/2 bottom-full'
-  }
-})
+const placementClass = computed(() => getPlacementClass(props.placement))
 </script>
 
 <style scoped>
