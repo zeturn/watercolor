@@ -11,6 +11,7 @@ import './style.css'
 const Button = ({
   children,
   variant = 'primary',
+  buttonStyle = 'filled',
   size = 'md',
   disabled = false,
   loading = false,
@@ -38,6 +39,7 @@ const Button = ({
   // 构建CSS类名
   const buttonClasses = getButtonClasses({
     variant,
+    buttonStyle,
     size,
     disabled,
     loading,
@@ -48,7 +50,6 @@ const Button = ({
 
   // 构建内联样式
   const buttonStyles = {
-    ...getVariantStyles(variant),
     ...style
   }
 

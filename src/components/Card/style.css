@@ -1,158 +1,136 @@
 /* Card 组件样式 */
 .wc-card {
-  background-color: var(--wc-neutral-0, #ffffff);
-  border: 1px solid var(--wc-neutral-200, #e5e7eb);
-  color: var(--wc-neutral-900, #111827);
-  border-radius: 8px;
-  transition: all 0.2s ease;
+  padding: 24px;
+  border-radius: 12px;
+  margin: 0;
+  background-color: var(--wc-neutral-100, #f5f5f5);
+  color: var(--wc-neutral-800, #374151);
+  transition: all 0.2s ease-in-out;
+  position: relative;
   display: flex;
   flex-direction: column;
-  position: relative;
-  overflow: hidden;
+  border: none;
 }
 
-/* Variant styles */
-.wc-card--default {
-  /* Default styles already applied */
+/* 有边框样式（当明确指定时） */
+.wc-card:not(.wc-card--no-border) {
+  /* 默认不再有边框，只有在特定变体时才有 */
 }
 
-.wc-card--elevated {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+/* 无边框样式 */
+.wc-card--no-border {
+  border: none;
 }
 
-/* Padding variants */
-.wc-card--padding-none {
-  padding: 0;
+/* 交互效果 */
+.wc-card--interactive:hover {
+  background-color: var(--wc-neutral-200, #e5e5e5);
 }
 
-.wc-card--padding-sm {
+/* 变体样式 */
+.wc-card--outlined {
+  background-color: transparent;
+  border: 2px solid var(--wc-neutral-300, #d1d5db);
+}
+
+.wc-card--outlined.wc-card--interactive:hover {
+  background-color: var(--wc-neutral-50, #f9fafb);
+  border-color: var(--wc-neutral-400, #9ca3af);
+}
+
+.wc-card--minimal {
+  background-color: transparent;
+  border: none;
   padding: 16px;
 }
 
-.wc-card--padding-md {
-  padding: 24px;
+.wc-card--minimal.wc-card--interactive:hover {
+  background-color: var(--wc-neutral-100, #f5f5f5);
 }
 
-.wc-card--padding-lg {
+.wc-card--elevated {
+  background-color: var(--wc-neutral-50, #f9fafb);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--wc-neutral-200, #e5e7eb);
+}
+
+.wc-card--elevated.wc-card--interactive:hover {
+  background-color: var(--wc-neutral-100, #f5f5f5);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* 颜色变体 */
+.wc-card--primary {
+  background-color: var(--wc-primary-50, #e8eaf6);
+  color: var(--wc-primary-800, #1565c0);
+}
+
+.wc-card--primary.wc-card--interactive:hover {
+  background-color: var(--wc-primary-100, #c5cae9);
+}
+
+.wc-card--success {
+  background-color: var(--wc-success-50, #f0f9f4);
+  color: var(--wc-success-800, #166534);
+}
+
+.wc-card--success.wc-card--interactive:hover {
+  background-color: var(--wc-success-100, #dcfce7);
+}
+
+.wc-card--warning {
+  background-color: var(--wc-warning-50, #fffbeb);
+  color: var(--wc-warning-800, #92400e);
+}
+
+.wc-card--warning.wc-card--interactive:hover {
+  background-color: var(--wc-warning-100, #fef3c7);
+}
+
+.wc-card--error {
+  background-color: var(--wc-error-50, #fef2f2);
+  color: var(--wc-error-800, #991b1b);
+}
+
+.wc-card--error.wc-card--interactive:hover {
+  background-color: var(--wc-error-100, #fee2e2);
+}
+
+.wc-card--info {
+  background-color: var(--wc-info-50, #f0f9ff);
+  color: var(--wc-info-800, #075985);
+}
+
+.wc-card--info.wc-card--interactive:hover {
+  background-color: var(--wc-info-100, #e0f2fe);
+}
+
+/* 尺寸变体 */
+.wc-card--small {
+  padding: 16px;
+}
+
+.wc-card--large {
   padding: 32px;
 }
 
-/* Border radius variants */
-.wc-card--radius-none {
-  border-radius: 0;
-}
-
-.wc-card--radius-sm {
-  border-radius: 4px;
-}
-
-.wc-card--radius-md {
-  border-radius: 8px;
-}
-
-.wc-card--radius-lg {
-  border-radius: 12px;
-}
-
-.wc-card--radius-xl {
-  border-radius: 16px;
-}
-
-/* State styles */
-.wc-card--full-width {
-  width: 100%;
-}
-
-.wc-card--hover:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  transform: translateY(-2px);
-}
-
-.wc-card--clickable {
-  cursor: pointer;
-  user-select: none;
-}
-
-.wc-card--clickable:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-.wc-card--disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-/* Elevation styles */
-.wc-card--elevation-1 {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-}
-
-.wc-card--elevation-2 {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-.wc-card--elevation-3 {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-.wc-card--elevation-4 {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-.wc-card--elevation-5 {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-/* Card sections */
-.wc-card__media {
-  flex-shrink: 0;
-  overflow: hidden;
-}
-
-.wc-card__header {
-  flex-shrink: 0;
-  padding-bottom: 16px;
-}
-
-.wc-card__title-section {
-  flex-shrink: 0;
-  margin-bottom: 16px;
-}
-
-.wc-card__title {
-  margin: 0 0 8px 0;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--wc-neutral-900, #111827);
-}
-
-.wc-card__subtitle {
-  margin: 0;
-  font-size: 14px;
-  color: var(--wc-neutral-600, #4b5563);
-  line-height: 1.5;
-}
-
-.wc-card__content {
-  flex: 1;
-}
-
-.wc-card__footer {
-  flex-shrink: 0;
-  padding-top: 16px;
-  border-top: 1px solid var(--wc-neutral-200, #e5e7eb);
-  margin-top: 16px;
-}
-
-/* Vue版本的特定样式 */
+/* Card 内容区域 */
 .wc-card-header {
   margin-bottom: 16px;
 }
 
+.wc-card__title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: inherit;
+}
+
 .wc-card-content {
   flex: 1;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .wc-card-footer {
@@ -161,24 +139,129 @@
   border-top: 1px solid var(--wc-neutral-200, #e5e7eb);
 }
 
-/* 深色模式 */
+/* 颜色变体的标题颜色 */
+.wc-card--primary .wc-card__title {
+  color: var(--wc-primary-900, #0d47a1);
+}
+
+.wc-card--success .wc-card__title {
+  color: var(--wc-success-900, #14532d);
+}
+
+.wc-card--warning .wc-card__title {
+  color: var(--wc-warning-900, #78350f);
+}
+
+.wc-card--error .wc-card__title {
+  color: var(--wc-error-900, #7f1d1d);
+}
+
+.wc-card--info .wc-card__title {
+  color: var(--wc-info-900, #0c4a6e);
+}
+
+/* 颜色变体的边框线 */
+.wc-card--primary .wc-card-footer {
+  border-top-color: var(--wc-primary-200, #c5cae9);
+}
+
+.wc-card--success .wc-card-footer {
+  border-top-color: var(--wc-success-200, #bbf7d0);
+}
+
+.wc-card--warning .wc-card-footer {
+  border-top-color: var(--wc-warning-200, #fef3c7);
+}
+
+.wc-card--error .wc-card-footer {
+  border-top-color: var(--wc-error-200, #fecaca);
+}
+
+.wc-card--info .wc-card-footer {
+  border-top-color: var(--wc-info-200, #bae6fd);
+}
+
+/* 暗色模式 */
 @media (prefers-color-scheme: dark) {
   .wc-card {
-    background-color: var(--wc-neutral-800, #1f2937);
-    border-color: var(--wc-neutral-700, #374151);
-    color: var(--wc-neutral-100, #f3f4f6);
+    background-color: var(--wc-neutral-800, #374151);
+    color: var(--wc-neutral-50, #f9fafb);
   }
   
-  .wc-card__title {
-    color: var(--wc-neutral-100, #f3f4f6);
+  .wc-card--interactive:hover {
+    background-color: var(--wc-neutral-700, #4b5563);
   }
   
-  .wc-card__subtitle {
-    color: var(--wc-neutral-400, #9ca3af);
+  .wc-card--outlined {
+    background-color: transparent;
+    border-color: var(--wc-neutral-600, #6b7280);
   }
   
-  .wc-card__footer,
+  .wc-card--outlined.wc-card--interactive:hover {
+    background-color: var(--wc-neutral-800, #374151);
+    border-color: var(--wc-neutral-500, #6b7280);
+  }
+  
+  .wc-card--minimal.wc-card--interactive:hover {
+    background-color: var(--wc-neutral-800, #374151);
+  }
+  
+  .wc-card--elevated {
+    background-color: var(--wc-neutral-800, #374151);
+    border-color: var(--wc-neutral-700, #4b5563);
+  }
+  
+  .wc-card--elevated.wc-card--interactive:hover {
+    background-color: var(--wc-neutral-700, #4b5563);
+  }
+  
+  /* 暗色模式下的颜色变体 */
+  .wc-card--primary {
+    background-color: var(--wc-primary-900, #0d47a1);
+    color: var(--wc-primary-100, #c5cae9);
+  }
+  
+  .wc-card--primary.wc-card--interactive:hover {
+    background-color: var(--wc-primary-800, #1565c0);
+  }
+  
+  .wc-card--success {
+    background-color: var(--wc-success-900, #14532d);
+    color: var(--wc-success-100, #dcfce7);
+  }
+  
+  .wc-card--success.wc-card--interactive:hover {
+    background-color: var(--wc-success-800, #166534);
+  }
+  
+  .wc-card--warning {
+    background-color: var(--wc-warning-900, #78350f);
+    color: var(--wc-warning-100, #fef3c7);
+  }
+  
+  .wc-card--warning.wc-card--interactive:hover {
+    background-color: var(--wc-warning-800, #92400e);
+  }
+  
+  .wc-card--error {
+    background-color: var(--wc-error-900, #7f1d1d);
+    color: var(--wc-error-100, #fee2e2);
+  }
+  
+  .wc-card--error.wc-card--interactive:hover {
+    background-color: var(--wc-error-800, #991b1b);
+  }
+  
+  .wc-card--info {
+    background-color: var(--wc-info-900, #0c4a6e);
+    color: var(--wc-info-100, #e0f2fe);
+  }
+  
+  .wc-card--info.wc-card--interactive:hover {
+    background-color: var(--wc-info-800, #075985);
+  }
+  
   .wc-card-footer {
-    border-top-color: var(--wc-neutral-700, #374151);
+    border-top-color: var(--wc-neutral-700, #4b5563);
   }
 } 

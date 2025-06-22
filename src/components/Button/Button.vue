@@ -35,6 +35,7 @@ import {
   isValidSize, 
   isValidType, 
   isValidRounded,
+  isValidButtonStyle,
   getButtonClasses,
   getVariantStyles,
   handleButtonClick as utilHandleButtonClick
@@ -46,6 +47,11 @@ const props = defineProps({
     type: String,
     default: 'primary',
     validator: isValidVariant
+  },
+  buttonStyle: {
+    type: String,
+    default: 'filled',
+    validator: isValidButtonStyle
   },
   size: {
     type: String,
@@ -107,7 +113,7 @@ const isFocused = ref(false)
 
 const buttonClasses = computed(() => getButtonClasses(props))
 
-const buttonStyles = computed(() => getVariantStyles(props.variant))
+const buttonStyles = computed(() => ({}))
 
 const handleClick = (event) => {
   utilHandleButtonClick({

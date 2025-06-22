@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue'
+import './style.css'
 
 const props = defineProps({
   /** 倒计时秒数 */
@@ -92,11 +93,4 @@ const wrapperStyle = computed(() => {
 
 /** 对外暴露方法 */
 defineExpose({ start, clear })
-</script>
-
-<style scoped>
-.wc-countdown {
-  display: inline-block;
-  font-family: var(--wc-font-mono);
-}
-</style> 
+</script> 

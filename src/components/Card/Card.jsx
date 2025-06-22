@@ -1,87 +1,61 @@
 import React from 'react'
-import { getCardClasses, getCardStyles, handleCardClick } from './utils.js'
+import { getCardClasses } from './utils.js'
 import './style.css'
 
 const Card = ({
   children,
-  variant = 'default',
-  padding = 'md',
-  fullWidth = false,
-  hover = false,
-  clickable = false,
-  disabled = false,
-  elevation = 0,
-  borderRadius = 'md',
-  title = null,
-  subtitle = null,
+  title = '',
+  variant = 'filled',
+  color = 'default',
+  size = 'medium',
+  interactive = true,
+  noBorder = true,
+  className = '',
   header = null,
   footer = null,
-  media = null,
-  className = '',
   style = {},
   onClick,
   onMouseEnter,
   onMouseLeave,
   ...props
 }) => {
-  const cardClasses = getCardClasses({
-    variant,
-    padding,
-    borderRadius,
-    fullWidth,
-    hover,
-    clickable,
-    disabled,
-    elevation,
-    className
-  }).join(' ')
-
-  const cardStyles = getCardStyles(style)
+  const cardClasses = getCardClasses(className, variant, color, size, interactive, noBorder)
 
   const handleClick = (e) => {
-    handleCardClick(e, disabled, clickable, onClick)
+    if (interactive && onClick) {
+      onClick(e)
+    }
   }
 
   return (
     <div
       className={cardClasses}
-      style={cardStyles}
+      style={style}
       onClick={handleClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      role={clickable ? 'button' : undefined}
-      tabIndex={clickable ? 0 : undefined}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
       {...props}
     >
-      {media && (
-        <div className="wc-card__media">
-          {media}
-        </div>
-      )}
-      
       {header && (
-        <div className="wc-card__header">
+        <div className="wc-card-header">
           {header}
         </div>
       )}
       
-      {(title || subtitle) && (
-        <div className="wc-card__title-section">
-          {title && (
-            <h3 className="wc-card__title">{title}</h3>
-          )}
-          {subtitle && (
-            <p className="wc-card__subtitle">{subtitle}</p>
-          )}
+      {title && (
+        <div className="wc-card-header">
+          <h3 className="wc-card__title">{title}</h3>
         </div>
       )}
       
-      <div className="wc-card__content">
+      <div className="wc-card-content">
         {children}
       </div>
       
       {footer && (
-        <div className="wc-card__footer">
+        <div className="wc-card-footer">
           {footer}
         </div>
       )}

@@ -9,6 +9,11 @@ export const validVariants = [
 ]
 
 /**
+ * 有效的Button样式模式
+ */
+export const validStyles = ['default', 'outlined', 'filled']
+
+/**
  * 有效的Button尺寸
  */
 export const validSizes = ['xs', 'sm', 'md', 'lg', 'xl']
@@ -60,6 +65,15 @@ export function isValidRounded(rounded) {
 }
 
 /**
+ * 验证Button样式模式
+ * @param {string} buttonStyle - 要验证的样式模式
+ * @returns {boolean} 是否为有效样式模式
+ */
+export function isValidButtonStyle(buttonStyle) {
+  return validStyles.includes(buttonStyle)
+}
+
+/**
  * 获取安全的Button变体
  * @param {string} variant - 输入的变体
  * @returns {string} 安全的变体名称
@@ -74,8 +88,11 @@ export function getSafeVariant(variant) {
  * @returns {Array<string>} CSS类名数组
  */
 export function getButtonClasses(props) {
-  const { variant, size, disabled, loading, fullWidth, uppercase, rounded } = props
+  const { variant, size, disabled, loading, fullWidth, uppercase, rounded, buttonStyle = 'filled' } = props
   const classes = ['wc-btn']
+  
+  // 样式模式类名
+  classes.push(`wc-btn--style-${buttonStyle}`)
   
   // 变体类名
   classes.push(`wc-btn--${getSafeVariant(variant)}`)
@@ -107,28 +124,9 @@ export function getButtonClasses(props) {
  * @returns {Object} 内联样式对象
  */
 export function getVariantStyles(variant) {
-  const styles = {}
-  
-  // 使用CSS变量进行主题化
-  if (variant === 'primary') {
-    styles.backgroundColor = 'var(--wc-primary-500)'
-    styles.color = 'white'
-  } else if (variant === 'secondary') {
-    styles.backgroundColor = 'var(--wc-secondary-500)'
-    styles.color = 'white'
-  } else if (variant === 'outlined') {
-    styles.backgroundColor = 'transparent'
-    styles.color = 'var(--wc-primary-500)'
-    styles.border = '1px solid var(--wc-primary-500)'
-  } else if (variant === 'text') {
-    styles.backgroundColor = 'transparent'
-    styles.color = 'var(--wc-primary-500)'
-  } else if (['success', 'warning', 'error', 'info'].includes(variant)) {
-    styles.backgroundColor = `var(--wc-${variant}-500)`
-    styles.color = 'white'
-  }
-  
-  return styles
+  // 不再返回内联样式，全部使用CSS类名控制样式
+  // 这样可以避免内联样式覆盖CSS类样式
+  return {}
 }
 
 /**

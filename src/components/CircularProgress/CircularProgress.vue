@@ -36,6 +36,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import './style.css'
 
 const props = defineProps({
   value: {
@@ -89,46 +90,4 @@ const progressClasses = computed(() => {
 })
 
 const circleClasses = computed(() => (props.variant === 'indeterminate' ? ['wc-circular-progress-circle--indeterminate'] : []))
-</script>
-
-<style scoped>
-.wc-circular-progress {
-  color: theme('colors.neutral.300');
-}
-.wc-circular-progress-svg {
-  display: block;
-  transform: rotate(-90deg);
-}
-.wc-circular-progress-bg {
-  opacity: 0.3;
-}
-.wc-circular-progress-circle {
-  transition: stroke-dashoffset 0.3s ease-in-out;
-  stroke-linecap: round;
-}
-.wc-circular-progress-value {
-  position: absolute;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: theme('colors.neutral.600');
-}
-.dark .wc-circular-progress-value {
-  color: theme('colors.neutral.400');
-}
-/* Color variants */
-.wc-circular-progress--primary { color: theme('colors.primary.500'); }
-.wc-circular-progress--secondary { color: theme('colors.neutral.500'); }
-.wc-circular-progress--success { color: theme('colors.success.500'); }
-.wc-circular-progress--warning { color: theme('colors.warning.500'); }
-.wc-circular-progress--error { color: theme('colors.error.500'); }
-.wc-circular-progress--inherit { color: inherit; }
-/* Indeterminate animation */
-.wc-circular-progress--indeterminate .wc-circular-progress-svg { animation: wc-circular-rotate 1.4s linear infinite; }
-.wc-circular-progress-circle--indeterminate { stroke-dasharray: 80px, 200px; stroke-dashoffset: 0px; animation: wc-circular-dash 1.4s ease-in-out infinite; }
-@keyframes wc-circular-rotate { 100% { transform: rotate(270deg); } }
-@keyframes wc-circular-dash {
-  0% { stroke-dasharray: 1px, 200px; stroke-dashoffset: 0px; }
-  50% { stroke-dasharray: 100px, 200px; stroke-dashoffset: -15px; }
-  100% { stroke-dasharray: 100px, 200px; stroke-dashoffset: -125px; }
-}
-</style> 
+</script> 

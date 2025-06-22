@@ -44,44 +44,55 @@ export function isValidBorderRadius(borderRadius) {
 
 /**
  * 获取Card的CSS类名
- * @param {Object} props - Card的props
- * @returns {Array<string>} CSS类名数组
+ * @param {string} className - 额外的CSS类名
+ * @param {string} variant - 变体样式 ('filled', 'outlined', 'minimal', 'elevated')
+ * @param {string} color - 颜色 ('default', 'primary', 'success', 'warning', 'error', 'info')
+ * @param {string} size - 尺寸 ('small', 'medium', 'large')
+ * @param {boolean} interactive - 是否启用交互效果
+ * @param {boolean} noBorder - 是否无边框
+ * @returns {string} 完整的CSS类名字符串
  */
-export function getCardClasses(props) {
-  const {
-    variant = 'default',
-    padding = 'md',
-    borderRadius = 'md',
-    fullWidth = false,
-    hover = false,
-    clickable = false,
-    disabled = false,
-    elevation = 0,
-    className = ''
-  } = props
-
+export function getCardClasses(
+  className = '', 
+  variant = 'filled', 
+  color = 'default', 
+  size = 'medium', 
+  interactive = true, 
+  noBorder = true
+) {
   const classes = ['wc-card']
   
-  // Variant classes
-  classes.push(`wc-card--${variant}`)
+  // 添加变体类名
+  if (variant && variant !== 'filled') {
+    classes.push(`wc-card--${variant}`)
+  }
   
-  // Padding classes
-  classes.push(`wc-card--padding-${padding}`)
+  // 添加颜色类名
+  if (color && color !== 'default') {
+    classes.push(`wc-card--${color}`)
+  }
   
-  // Border radius classes
-  classes.push(`wc-card--radius-${borderRadius}`)
+  // 添加尺寸类名
+  if (size && size !== 'medium') {
+    classes.push(`wc-card--${size}`)
+  }
   
-  // State classes
-  if (fullWidth) classes.push('wc-card--full-width')
-  if (hover) classes.push('wc-card--hover')
-  if (clickable) classes.push('wc-card--clickable')
-  if (disabled) classes.push('wc-card--disabled')
-  if (elevation > 0) classes.push(`wc-card--elevation-${elevation}`)
+  // 添加交互效果类名
+  if (interactive) {
+    classes.push('wc-card--interactive')
+  }
   
-  // Custom className
-  if (className) classes.push(className)
+  // 添加无边框类名
+  if (noBorder) {
+    classes.push('wc-card--no-border')
+  }
   
-  return classes.filter(Boolean)
+  // 添加自定义类名
+  if (className) {
+    classes.push(className)
+  }
+  
+  return classes.filter(Boolean).join(' ')
 }
 
 /**

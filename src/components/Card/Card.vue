@@ -20,7 +20,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { isValidVariant, isValidPadding, getVueCardClasses } from './utils.js'
+import { getCardClasses } from './utils.js'
 import './style.css'
 
 const props = defineProps({
@@ -30,15 +30,34 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: 'default',
-    validator: isValidVariant
+    default: 'filled',
+    validator: (value) => ['filled', 'outlined', 'minimal', 'elevated'].includes(value)
   },
-  padding: {
+  color: {
     type: String,
-    default: 'md',
-    validator: isValidPadding
+    default: 'default',
+    validator: (value) => ['default', 'primary', 'success', 'warning', 'error', 'info'].includes(value)
+  },
+  size: {
+    type: String,
+    default: 'medium',
+    validator: (value) => ['small', 'medium', 'large'].includes(value)
+  },
+  interactive: {
+    type: Boolean,
+    default: true
+  },
+  noBorder: {
+    type: Boolean,
+    default: true
+  },
+  className: {
+    type: String,
+    default: ''
   }
 })
 
-const cardClasses = computed(() => getVueCardClasses(props))
+const cardClasses = computed(() => 
+  getCardClasses(props.className, props.variant, props.color, props.size, props.interactive, props.noBorder)
+)
 </script> 
