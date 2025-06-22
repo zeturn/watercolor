@@ -170,7 +170,6 @@
   height: var(--feed-dot-size, 12px);
   border-radius: 50%;
   background: var(--feed-color, var(--wc-primary-500));
-  border: 2px solid var(--wc-background, #ffffff);
   z-index: 1;
 }
 
