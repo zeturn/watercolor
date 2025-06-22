@@ -45,7 +45,7 @@ export const Success = {
     message: '您的操作已成功完成！数据已保存到系统中。',
     closable: true,
     showIcon: true,
-    variant: 'filled',
+    variant: 'standard',
   },
   render: (args) => ({
     components: { AlertVue },
@@ -75,7 +75,7 @@ export const Info = {
     message: '系统将在今晚11点进行维护升级，预计持续2小时。',
     closable: true,
     showIcon: true,
-    variant: 'filled',
+    variant: 'standard',
   },
   render: (args) => ({
     components: { AlertVue },
@@ -105,7 +105,7 @@ export const Warning = {
     message: '您的账户余额不足，请及时充值以确保服务正常使用。',
     closable: true,
     showIcon: true,
-    variant: 'filled',
+    variant: 'standard',
   },
   render: (args) => ({
     components: { AlertVue },
