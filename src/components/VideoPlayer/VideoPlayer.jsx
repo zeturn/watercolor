@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react'
+import { formatTime, calculateSeekPosition, toggleFullscreen } from './utils'
+import './style.css'
 
 const VideoPlayer = ({
   src,
@@ -16,14 +18,8 @@ const VideoPlayer = ({
   const [duration, setDuration] = useState(0)
   const [current, setCurrent] = useState(0)
 
-  const formattedTime = useCallback((s) => {
-    const m = Math.floor(s / 60)
-    const sec = Math.floor(s % 60).toString().padStart(2, '0')
-    return `${m}:${sec}`
-  }, [])
-
-  const formattedCurrent = formattedTime(current)
-  const formattedDuration = formattedTime(duration)
+  const formattedCurrent = formatTime(current)
+  const formattedDuration = formatTime(duration)
 
   const togglePlay = () => {
     const v = videoRef.current
@@ -45,10 +41,10 @@ const VideoPlayer = ({
   }
 
   const seek = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const percent = (e.clientX - rect.left) / rect.width
     const v = videoRef.current
-    if (v) v.currentTime = percent * duration
+    if (v) {
+      v.currentTime = calculateSeekPosition(e, duration)
+    }
   }
 
   const toggleMute = () => {
@@ -59,14 +55,8 @@ const VideoPlayer = ({
     })
   }
 
-  const toggleFullscreen = () => {
-    const el = videoRef.current?.parentElement
-    if (!el) return
-    if (!document.fullscreenElement) {
-      el.requestFullscreen?.()
-    } else {
-      document.exitFullscreen?.()
-    }
+  const handleFullscreen = () => {
+    toggleFullscreen(videoRef.current?.parentElement)
   }
 
   // sync volume
@@ -99,21 +89,8 @@ const VideoPlayer = ({
         <span className="time">{formattedCurrent} / {formattedDuration}</span>
         <button className="ctrl-btn" onClick={toggleMute}>{muted ? '🔇' : '🔊'}</button>
         <input className="volume" type="range" min="0" max="1" step="0.05" value={volume} onChange={(e)=>setVolume(Number(e.target.value))} />
-        <button className="ctrl-btn" onClick={toggleFullscreen}>⛶</button>
+        <button className="ctrl-btn" onClick={handleFullscreen}>⛶</button>
       </div>
-      <style>{`
-        .video-wrapper { width: 100%; max-width: 640px; margin: 0 auto; }
-        .video-el { width: 100%; border-radius: 8px; background: black; }
-        .controls { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 0.875rem; color: var(--wc-neutral-700); }
-        .ctrl-btn { background: none; border: none; cursor: pointer; font-size: 1rem; }
-        .progress { flex: 1 1 auto; height: 6px; background: var(--wc-neutral-300); border-radius: 3px; cursor: pointer; position: relative; }
-        .progress-bar { height: 100%; background: var(--wc-primary-500); border-radius: 3px; }
-        .volume { width: 80px; }
-        .time { min-width: 60px; text-align: center; }
-        .dark .controls { color: var(--wc-neutral-200); }
-        .dark .progress { background: var(--wc-neutral-600); }
-        .dark .progress-bar { background: var(--wc-primary-400); }
-      `}</style>
     </div>
   )
 }
