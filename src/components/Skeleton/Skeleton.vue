@@ -1,14 +1,14 @@
 <template>
   <component
-    v-if="loading"
     :is="component"
+    v-if="loading"
     :class="skeletonClasses"
     :style="skeletonStyles"
     role="status"
     aria-live="polite"
   />
   <template v-else>
-    <slot></slot>
+    <slot />
   </template>
 </template>
 

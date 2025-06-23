@@ -1,8 +1,14 @@
 <template>
   <div class="switch-wrapper">
-    <label v-if="label" class="switch-label">
+    <label
+      v-if="label"
+      class="switch-label"
+    >
       {{ label }}
-      <span v-if="required" class="switch-required">*</span>
+      <span
+        v-if="required"
+        class="switch-required"
+      >*</span>
     </label>
     
     <div class="switch-container">
@@ -10,17 +16,23 @@
         class="switch"
         :class="switchClasses"
         :disabled="disabled"
-        @click="handleToggle"
         type="button"
         role="switch"
         :aria-checked="modelValue"
         :aria-labelledby="labelId"
+        @click="handleToggle"
       >
-        <span class="switch__track"></span>
-        <span class="switch__thumb" :class="thumbClasses"></span>
+        <span class="switch__track" />
+        <span
+          class="switch__thumb"
+          :class="thumbClasses"
+        />
       </button>
       
-      <span v-if="description" class="switch-description">
+      <span
+        v-if="description"
+        class="switch-description"
+      >
         {{ description }}
       </span>
     </div>

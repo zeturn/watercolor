@@ -28,16 +28,24 @@
           
           <!-- Content -->
           <div class="flex-1 min-w-0">
-            <div v-if="title" class="font-semibold text-sm mb-1 leading-tight">
+            <div
+              v-if="title"
+              class="font-semibold text-sm mb-1 leading-tight"
+            >
               {{ title }}
             </div>
             <slot>
-              <div class="text-sm">{{ message }}</div>
+              <div class="text-sm">
+                {{ message }}
+              </div>
             </slot>
           </div>
           
           <!-- Action -->
-          <div v-if="$slots.action || action" class="flex-shrink-0">
+          <div
+            v-if="$slots.action || action"
+            class="flex-shrink-0"
+          >
             <slot name="action">
               <button
                 v-if="action"
@@ -51,15 +59,26 @@
           </div>
           
           <!-- Close Button -->
-          <div v-if="closable" class="flex-shrink-0">
+          <div
+            v-if="closable"
+            class="flex-shrink-0"
+          >
             <button 
               type="button"
               :class="closeButtonClasses"
-              @click="handleClose"
               aria-label="关闭"
+              @click="handleClose"
             >
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+              <svg
+                class="w-4 h-4"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
               </svg>
             </button>
           </div>

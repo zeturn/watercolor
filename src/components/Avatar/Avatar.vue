@@ -1,7 +1,19 @@
 <template>
-  <div :class="avatarClasses" :style="avatarStyles">
-    <img v-if="src && !imgError" :src="src" :alt="alt" @error="handleImgError" @load="handleImgLoad" />
-    <span v-else-if="!src && children" class="wc-avatar-text">
+  <div
+    :class="avatarClasses"
+    :style="avatarStyles"
+  >
+    <img
+      v-if="src && !imgError"
+      :src="src"
+      :alt="alt"
+      @error="handleImgError"
+      @load="handleImgLoad"
+    >
+    <span
+      v-else-if="!src && children"
+      class="wc-avatar-text"
+    >
       {{ avatarText }}
     </span>
     <slot v-else />

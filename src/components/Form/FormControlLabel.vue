@@ -1,17 +1,35 @@
 <template>
-  <label class="form-control-label" :class="formControlLabelClasses" @click="handleClick">
-    <span v-if="labelPlacement === 'start'" class="form-control-label__text" :class="labelClasses">
+  <label
+    class="form-control-label"
+    :class="formControlLabelClasses"
+    @click="handleClick"
+  >
+    <span
+      v-if="labelPlacement === 'start'"
+      class="form-control-label__text"
+      :class="labelClasses"
+    >
       {{ label }}
-      <span v-if="required" class="form-control-label__required">*</span>
+      <span
+        v-if="required"
+        class="form-control-label__required"
+      >*</span>
     </span>
     
     <span class="form-control-label__control">
       <slot />
     </span>
     
-    <span v-if="labelPlacement !== 'start'" class="form-control-label__text" :class="labelClasses">
+    <span
+      v-if="labelPlacement !== 'start'"
+      class="form-control-label__text"
+      :class="labelClasses"
+    >
       {{ label }}
-      <span v-if="required" class="form-control-label__required">*</span>
+      <span
+        v-if="required"
+        class="form-control-label__required"
+      >*</span>
     </span>
   </label>
 </template>

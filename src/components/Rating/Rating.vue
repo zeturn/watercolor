@@ -1,15 +1,19 @@
 <template>
-  <div class="rating" role="radiogroup" aria-label="评分组件">
+  <div
+    class="rating"
+    role="radiogroup"
+    aria-label="评分组件"
+  >
     <button
       v-for="n in max"
       :key="n"
       :class="['rating-item', n <= hovered || n <= internalValue ? 'active' : '']"
-      @mouseenter="hover(n)"
-      @mouseleave="hover(0)"
-      @click="select(n)"
       :aria-checked="n === internalValue ? 'true' : 'false'"
       role="radio"
       :disabled="readonly"
+      @mouseenter="hover(n)"
+      @mouseleave="hover(0)"
+      @click="select(n)"
     >
       ★
     </button>

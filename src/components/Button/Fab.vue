@@ -7,14 +7,23 @@
     @blur="handleBlur"
   >
     <!-- Icon -->
-    <span v-if="$slots.icon || icon" class="fab-icon">
+    <span
+      v-if="$slots.icon || icon"
+      class="fab-icon"
+    >
       <slot name="icon">
-        <span v-if="icon" v-html="icon"></span>
+        <span
+          v-if="icon"
+          v-html="icon"
+        />
       </slot>
     </span>
     
     <!-- Label (for extended variant) -->
-    <span v-if="variant === 'extended' && ($slots.default || label)" class="fab-label">
+    <span
+      v-if="variant === 'extended' && ($slots.default || label)"
+      class="fab-label"
+    >
       <slot>{{ label }}</slot>
     </span>
   </button>

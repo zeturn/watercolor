@@ -148,7 +148,7 @@ export function setFonts(fonts: FontConfig): void {
   const root = document.documentElement
   
   // Build font stack
-  let fontStack: string[] = []
+  const fontStack: string[] = []
   
   // Add Chinese fonts
   if (fonts.chinese) {

@@ -87,6 +87,7 @@ FeedItem.components = { FeedItem };
 
 export default {
   name: 'Feed',
+  components: { FeedItem },
   props: {
     items: { type: Array, default: () => [] },
     variant: { type: String, default: 'timeline' }, // timeline 默认
@@ -95,7 +96,6 @@ export default {
     dotSize: { type: [String, Number], default: 12 }, // 圆点大小
     lineWidth: { type: [String, Number], default: 3 }, // 线条粗细
   },
-  components: { FeedItem },
   emits: ['item-click'],
   setup(props) {
     const feedListStyles = computed(() => {

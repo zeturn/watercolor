@@ -6,7 +6,7 @@
       :value="modelValue"
       :disabled="disabled"
       @input="handleInput"
-    />
+    >
     <span
       class="wc-color-picker__preview"
       :style="previewStyles"

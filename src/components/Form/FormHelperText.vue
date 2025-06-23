@@ -1,5 +1,9 @@
 <template>
-  <p class="form-helper-text" :class="helperTextClasses" :id="id">
+  <p
+    :id="id"
+    class="form-helper-text"
+    :class="helperTextClasses"
+  >
     <slot />
   </p>
 </template>

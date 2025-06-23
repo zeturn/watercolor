@@ -8,7 +8,7 @@
       @change="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
-    />
+    >
     <span :class="checkmarkClasses">
       <svg
         v-if="isChecked && !indeterminate"
@@ -18,14 +18,17 @@
         stroke="currentColor"
         stroke-width="3"
       >
-        <polyline points="20,6 9,17 4,12"></polyline>
+        <polyline points="20,6 9,17 4,12" />
       </svg>
       <div
         v-else-if="indeterminate"
         class="indeterminate-icon"
-      ></div>
+      />
     </span>
-    <span v-if="$slots.default || label" class="checkbox-label">
+    <span
+      v-if="$slots.default || label"
+      class="checkbox-label"
+    >
       <slot>{{ label }}</slot>
     </span>
   </label>

@@ -1,6 +1,17 @@
 <template>
-  <div :class="progressClasses" role="progressbar" :aria-valuenow="value" :aria-valuemin="0" :aria-valuemax="100">
-    <svg :width="size" :height="size" :viewBox="viewBox" class="wc-circular-progress-svg">
+  <div
+    :class="progressClasses"
+    role="progressbar"
+    :aria-valuenow="value"
+    :aria-valuemin="0"
+    :aria-valuemax="100"
+  >
+    <svg
+      :width="size"
+      :height="size"
+      :viewBox="viewBox"
+      class="wc-circular-progress-svg"
+    >
       <!-- Background circle -->
       <circle
         :cx="center"
@@ -28,7 +39,10 @@
     </svg>
     
     <!-- Value text -->
-    <div v-if="showValue" class="wc-circular-progress-value">
+    <div
+      v-if="showValue"
+      class="wc-circular-progress-value"
+    >
       {{ Math.round(value) }}%
     </div>
   </div>

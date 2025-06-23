@@ -8,9 +8,15 @@
     </slot>
     <div class="wc-copy-action">
       <slot name="icon">
-        <span class="wc-copy-icon" v-html="currentIcon"></span>
+        <span
+          class="wc-copy-icon"
+          v-html="currentIcon"
+        />
       </slot>
-      <span v-if="showLabel" class="wc-copy-label">{{ currentLabel }}</span>
+      <span
+        v-if="showLabel"
+        class="wc-copy-label"
+      >{{ currentLabel }}</span>
     </div>
     <div
       v-if="showTooltip && tooltipVisible"

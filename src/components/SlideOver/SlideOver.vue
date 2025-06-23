@@ -1,19 +1,43 @@
 <template>
   <teleport to="body">
     <transition name="slideover">
-      <div v-if="model" class="slideover-wrapper" @keydown.esc="close" tabindex="-1">
-        <div class="slideover-overlay" @click="close"></div>
-        <div class="slideover-panel" :class="[`slideover-${placement}`]" :style="panelStyle">
-          <header v-if="$slots.header" class="slideover-header">
+      <div
+        v-if="model"
+        class="slideover-wrapper"
+        tabindex="-1"
+        @keydown.esc="close"
+      >
+        <div
+          class="slideover-overlay"
+          @click="close"
+        />
+        <div
+          class="slideover-panel"
+          :class="[`slideover-${placement}`]"
+          :style="panelStyle"
+        >
+          <header
+            v-if="$slots.header"
+            class="slideover-header"
+          >
             <slot name="header" />
           </header>
           <div class="slideover-body">
             <slot />
           </div>
-          <footer v-if="$slots.footer" class="slideover-footer">
+          <footer
+            v-if="$slots.footer"
+            class="slideover-footer"
+          >
             <slot name="footer" />
           </footer>
-          <button class="slideover-close" @click="close" aria-label="关闭">✕</button>
+          <button
+            class="slideover-close"
+            aria-label="关闭"
+            @click="close"
+          >
+            ✕
+          </button>
         </div>
       </div>
     </transition>

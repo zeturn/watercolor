@@ -1,15 +1,27 @@
 <template>
   <div class="wc-progress-wrapper">
-    <div v-if="label || showPercent" class="wc-progress-header">
-      <label v-if="label" class="wc-progress-label">
+    <div
+      v-if="label || showPercent"
+      class="wc-progress-header"
+    >
+      <label
+        v-if="label"
+        class="wc-progress-label"
+      >
         {{ label }}
       </label>
-      <span v-if="showPercent" class="wc-progress-percent">
+      <span
+        v-if="showPercent"
+        class="wc-progress-percent"
+      >
         {{ Math.round(value) }}%
       </span>
     </div>
     
-    <div :class="progressClasses" :style="progressBgStyle">
+    <div
+      :class="progressClasses"
+      :style="progressBgStyle"
+    >
       <div 
         class="wc-progress__bar"
         :style="barStyle"

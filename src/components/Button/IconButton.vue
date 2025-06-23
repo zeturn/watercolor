@@ -8,7 +8,10 @@
   >
     <span class="icon-button-icon">
       <slot>
-        <span v-if="icon" v-html="icon"></span>
+        <span
+          v-if="icon"
+          v-html="icon"
+        />
       </slot>
     </span>
   </button>

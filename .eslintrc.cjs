@@ -51,9 +51,15 @@ module.exports = {
     {
       files: ['tests/**/*', '*.test.*', '*.spec.*'],
       env: {
-        vitest: true,
+        jest: true,
       },
-      extends: ['plugin:vitest/recommended'],
+      plugins: ['vitest'],
+      rules: {
+        'vitest/expect-expect': 'error',
+        'vitest/no-disabled-tests': 'warn',
+        'vitest/no-focused-tests': 'error',
+        'vitest/valid-expect': 'error',
+      },
     },
   ],
 } 

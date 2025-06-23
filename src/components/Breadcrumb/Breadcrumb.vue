@@ -17,7 +17,11 @@
           :aria-current="index === processedItems.length - 1 ? 'page' : undefined"
           @click="handleClick($event, item, index)"
         >
-          <span v-if="item.icon" class="wc-breadcrumb-icon" v-html="item.icon"></span>
+          <span
+            v-if="item.icon"
+            class="wc-breadcrumb-icon"
+            v-html="item.icon"
+          />
           {{ item.label }}
         </component>
         <span

@@ -1,7 +1,18 @@
 <template>
-  <div class="popover-container" ref="triggerWrapper">
-    <slot name="trigger" :open="open" :close="close">
-      <button class="popover-trigger" @click="toggle" :aria-expanded="isOpen.toString()">
+  <div
+    ref="triggerWrapper"
+    class="popover-container"
+  >
+    <slot
+      name="trigger"
+      :open="open"
+      :close="close"
+    >
+      <button
+        class="popover-trigger"
+        :aria-expanded="isOpen.toString()"
+        @click="toggle"
+      >
         {{ triggerText }}
       </button>
     </slot>
@@ -13,8 +24,8 @@
           ref="popoverRef"
           class="popover-content"
           :class="[`popover-${placement}`]"
-          @click.outside="close"
           role="dialog"
+          @click.outside="close"
         >
           <slot>
             这是默认的弹出内容。

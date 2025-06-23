@@ -1,15 +1,18 @@
 <template>
   <li 
     :class="listItemClasses"
-    @click="handleClick"
     role="listitem"
     :tabindex="button ? 0 : -1"
     :disabled="disabled"
+    @click="handleClick"
     @keydown.enter="handleClick"
     @keydown.space="handleClick"
   >
     <!-- Leading content -->
-    <div v-if="$slots.icon" class="flex-shrink-0 mr-3">
+    <div
+      v-if="$slots.icon"
+      class="flex-shrink-0 mr-3"
+    >
       <slot name="icon" />
     </div>
     
@@ -19,7 +22,10 @@
     </div>
     
     <!-- Trailing content -->
-    <div v-if="$slots.action" class="flex-shrink-0 ml-3">
+    <div
+      v-if="$slots.action"
+      class="flex-shrink-0 ml-3"
+    >
       <slot name="action" />
     </div>
   </li>

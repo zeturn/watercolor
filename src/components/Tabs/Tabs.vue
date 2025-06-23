@@ -5,16 +5,19 @@
         v-for="(tab, index) in tabs"
         :key="tab.key || index"
         :class="getTabClasses(index)"
-        @click="handleTabClick(index)"
         :disabled="tab.disabled"
         type="button"
+        @click="handleTabClick(index)"
       >
         {{ tab.title }}
       </button>
     </div>
     
     <div class="wc-tab-content mt-6">
-      <slot :activeTab="activeTab" :activeIndex="activeIndex" />
+      <slot
+        :active-tab="activeTab"
+        :active-index="activeIndex"
+      />
     </div>
   </div>
 </template>

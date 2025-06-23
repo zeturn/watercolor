@@ -7,36 +7,56 @@
       :class="labelClasses"
     >
       {{ label }}
-      <span v-if="required" class="wc-select__required">*</span>
+      <span
+        v-if="required"
+        class="wc-select__required"
+      >*</span>
     </label>
     
     <!-- Select Container -->
-    <div :class="selectContainerClasses" @click="toggleDropdown">
+    <div
+      :class="selectContainerClasses"
+      @click="toggleDropdown"
+    >
       <!-- Display Value -->
       <div class="wc-select__value">
         <span v-if="displayValue">{{ displayValue }}</span>
-        <span v-else class="wc-select__placeholder">{{ placeholder }}</span>
+        <span
+          v-else
+          class="wc-select__placeholder"
+        >{{ placeholder }}</span>
       </div>
       
       <!-- Arrow Icon -->
       <div class="wc-select__indicators">
         <div :class="['wc-select__arrow', { 'wc-select__arrow--open': open }]">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6,9 12,15 18,9"></polyline>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="6,9 12,15 18,9" />
           </svg>
         </div>
       </div>
     </div>
     
     <!-- Dropdown -->
-    <div v-if="open" class="wc-select__dropdown">
-      <div v-if="searchable" class="wc-select__search">
+    <div
+      v-if="open"
+      class="wc-select__dropdown"
+    >
+      <div
+        v-if="searchable"
+        class="wc-select__search"
+      >
         <input
           v-model="searchQuery"
           class="wc-select__search-input"
           placeholder="搜索..."
           @click.stop
-        />
+        >
       </div>
       
       <div class="wc-select__options">
@@ -55,11 +75,14 @@
             stroke="currentColor"
             stroke-width="2"
           >
-            <polyline points="20,6 9,17 4,12"></polyline>
+            <polyline points="20,6 9,17 4,12" />
           </svg>
         </div>
         
-        <div v-if="filteredOptions.length === 0" class="wc-select__no-options">
+        <div
+          v-if="filteredOptions.length === 0"
+          class="wc-select__no-options"
+        >
           没有找到选项
         </div>
       </div>
@@ -67,8 +90,18 @@
     
     <!-- Helper Text -->
     <div v-if="error || helperText">
-      <p v-if="error" class="wc-select__error">{{ error }}</p>
-      <p v-else-if="helperText" class="wc-select__helper">{{ helperText }}</p>
+      <p
+        v-if="error"
+        class="wc-select__error"
+      >
+        {{ error }}
+      </p>
+      <p
+        v-else-if="helperText"
+        class="wc-select__helper"
+      >
+        {{ helperText }}
+      </p>
     </div>
   </div>
 </template>

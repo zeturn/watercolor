@@ -1,10 +1,28 @@
 <template>
-  <div :class="cardClasses" :style="cardStyle" @click="$emit('click')">
-    <div v-if="icon" class="wc-feature-icon" :style="iconStyle" v-html="icon"></div>
+  <div
+    :class="cardClasses"
+    :style="cardStyle"
+    @click="$emit('click')"
+  >
+    <div
+      v-if="icon"
+      class="wc-feature-icon"
+      :style="iconStyle"
+      v-html="icon"
+    />
     <div class="wc-feature-content">
-      <h3 class="wc-feature-title">{{ title }}</h3>
-      <p class="wc-feature-description"><slot>{{ description }}</slot></p>
-      <a v-if="ctaLabel" :href="ctaHref" class="wc-feature-cta" @click.stop="$emit('cta-click')">{{ ctaLabel }}</a>
+      <h3 class="wc-feature-title">
+        {{ title }}
+      </h3>
+      <p class="wc-feature-description">
+        <slot>{{ description }}</slot>
+      </p>
+      <a
+        v-if="ctaLabel"
+        :href="ctaHref"
+        class="wc-feature-cta"
+        @click.stop="$emit('cta-click')"
+      >{{ ctaLabel }}</a>
     </div>
   </div>
 </template>

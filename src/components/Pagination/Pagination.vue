@@ -1,18 +1,25 @@
 <template>
-  <nav v-if="pageCount > 1" :class="paginationClasses" aria-label="分页导航">
+  <nav
+    v-if="pageCount > 1"
+    :class="paginationClasses"
+    aria-label="分页导航"
+  >
     <!-- 上一页按钮 -->
     <button 
       class="wc-pagination__prev" 
       :class="{ 'disabled': currentPageInternal === 1 }"
       :disabled="currentPageInternal === 1" 
-      @click="select(currentPageInternal - 1)"
       aria-label="上一页"
+      @click="select(currentPageInternal - 1)"
     >
       ‹
     </button>
 
     <!-- 页面按钮 -->
-    <template v-for="page in pageItems" :key="page.key">
+    <template
+      v-for="page in pageItems"
+      :key="page.key"
+    >
       <button 
         v-if="!page.ellipsis" 
         class="wc-pagination__page" 
@@ -21,7 +28,10 @@
       >
         {{ page.num }}
       </button>
-      <span v-else class="wc-pagination__ellipsis">…</span>
+      <span
+        v-else
+        class="wc-pagination__ellipsis"
+      >…</span>
     </template>
 
     <!-- 下一页按钮 -->
@@ -29,31 +39,42 @@
       class="wc-pagination__next" 
       :class="{ 'disabled': currentPageInternal === pageCount }"
       :disabled="currentPageInternal === pageCount" 
-      @click="select(currentPageInternal + 1)"
       aria-label="下一页"
+      @click="select(currentPageInternal + 1)"
     >
       ›
     </button>
 
     <!-- 页面大小选择器 -->
-    <div v-if="showSizeChanger" class="wc-pagination__size-changer">
+    <div
+      v-if="showSizeChanger"
+      class="wc-pagination__size-changer"
+    >
       <select @change="handleSizeChange">
-        <option v-for="size in pageSizeOptions" :key="size" :value="size" :selected="size === pageSize">
+        <option
+          v-for="size in pageSizeOptions"
+          :key="size"
+          :value="size"
+          :selected="size === pageSize"
+        >
           {{ size }} / 页
         </option>
       </select>
     </div>
 
     <!-- 快速跳转器 -->
-    <div v-if="showQuickJumper" class="wc-pagination__quick-jumper">
+    <div
+      v-if="showQuickJumper"
+      class="wc-pagination__quick-jumper"
+    >
       <span>跳转到</span>
       <input 
         type="number" 
         :min="1" 
         :max="pageCount"
-        @keyup.enter="handleQuickJump"
         placeholder="页码"
-      />
+        @keyup.enter="handleQuickJump"
+      >
     </div>
   </nav>
 </template>

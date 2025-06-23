@@ -1,7 +1,14 @@
 <template>
   <blockquote :class="blockquoteClasses">
-    <p class="quote-text"><slot>这里是引用内容</slot></p>
-    <footer v-if="cite" class="quote-cite">— {{ cite }}</footer>
+    <p class="quote-text">
+      <slot>这里是引用内容</slot>
+    </p>
+    <footer
+      v-if="cite"
+      class="quote-cite"
+    >
+      — {{ cite }}
+    </footer>
   </blockquote>
 </template>
 

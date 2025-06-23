@@ -1,5 +1,8 @@
 <template>
-  <h2 :class="dialogTitleClasses" :id="titleId">
+  <h2
+    :id="titleId"
+    :class="dialogTitleClasses"
+  >
     <slot />
   </h2>
 </template>

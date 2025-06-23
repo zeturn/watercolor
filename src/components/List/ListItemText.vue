@@ -8,7 +8,10 @@
     </div>
     
     <!-- Secondary text -->
-    <div v-if="secondary || $slots.secondary" :class="secondaryClasses">
+    <div
+      v-if="secondary || $slots.secondary"
+      :class="secondaryClasses"
+    >
       <slot name="secondary">
         {{ secondary }}
       </slot>

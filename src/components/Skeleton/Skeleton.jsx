@@ -10,7 +10,7 @@ const variants = {
 
 const Skeleton = ({ animation = 'pulse', component: Component = 'div', height, width, variant = 'text', style = {}, className = '', ...rest }) => {
   const classes = useMemo(() => {
-    let cls = ['wc-skeleton', variants[variant] || variants.text]
+    const cls = ['wc-skeleton', variants[variant] || variants.text]
     if (animation === 'pulse') cls.push('wc-skeleton--pulse')
     if (animation === 'wave') cls.push('wc-skeleton--wave')
     return cls.join(' ')

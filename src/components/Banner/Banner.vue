@@ -5,22 +5,33 @@
     :style="bannerStyles"
   >
     <div class="wc-banner-content">
-      <div v-if="showIcon" class="wc-banner-icon">
-        <span v-html="iconContent"></span>
+      <div
+        v-if="showIcon"
+        class="wc-banner-icon"
+      >
+        <span v-html="iconContent" />
       </div>
       <div class="wc-banner-text">
-        <div v-if="title" class="wc-banner-title">{{ title }}</div>
+        <div
+          v-if="title"
+          class="wc-banner-title"
+        >
+          {{ title }}
+        </div>
         <div class="wc-banner-message">
           <slot>{{ message }}</slot>
         </div>
       </div>
-      <div v-if="$slots.actions || showDefaultAction" class="wc-banner-actions">
+      <div
+        v-if="$slots.actions || showDefaultAction"
+        class="wc-banner-actions"
+      >
         <slot name="actions">
           <button
             v-if="showDefaultAction"
-            @click="handleAction"
             class="wc-banner-action-btn"
             type="button"
+            @click="handleAction"
           >
             {{ actionText }}
           </button>
@@ -28,10 +39,10 @@
       </div>
       <button
         v-if="closable"
-        @click="handleClose"
         class="wc-banner-close"
         type="button"
         aria-label="关闭"
+        @click="handleClose"
       >
         ×
       </button>

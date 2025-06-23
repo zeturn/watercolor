@@ -1,5 +1,8 @@
 <template>
-  <div :class="countdownClasses" :style="wrapperStyle">
+  <div
+    :class="countdownClasses"
+    :style="wrapperStyle"
+  >
     <span>{{ formattedTime }}</span>
   </div>
 </template>

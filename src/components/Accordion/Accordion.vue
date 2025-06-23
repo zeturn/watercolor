@@ -7,8 +7,8 @@
     >
       <button
         :class="['wc-accordion-header', { 'wc-accordion-header--active': activeItems.includes(index) }]"
-        @click="toggleItem(index)"
         type="button"
+        @click="toggleItem(index)"
       >
         <span class="wc-accordion-title">{{ item.title }}</span>
         <span
@@ -21,7 +21,10 @@
         :class="['wc-accordion-content', { 'wc-accordion-content--open': activeItems.includes(index) }]"
       >
         <div class="wc-accordion-content-inner">
-          <slot :name="`content-${index}`" :item="item">
+          <slot
+            :name="`content-${index}`"
+            :item="item"
+          >
             {{ item.content }}
           </slot>
         </div>

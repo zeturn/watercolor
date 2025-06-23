@@ -1,5 +1,8 @@
 <template>
-  <div class="wc-datepicker" ref="datePickerRef">
+  <div
+    ref="datePickerRef"
+    class="wc-datepicker"
+  >
     <div
       :class="inputClasses"
       @click="togglePicker"
@@ -12,7 +15,7 @@
         :disabled="disabled"
         readonly
         class="wc-datepicker-input"
-      />
+      >
       <span class="wc-datepicker-icon">📅</span>
     </div>
     
@@ -57,14 +60,17 @@
           :key="`${day.month}-${day.day}`"
           type="button"
           :class="getDayClasses(day)"
-          @click="selectDate(day)"
           :disabled="isDateDisabled(day)"
+          @click="selectDate(day)"
         >
           {{ day.day }}
         </button>
       </div>
       
-      <div v-if="showToday" class="wc-datepicker-footer">
+      <div
+        v-if="showToday"
+        class="wc-datepicker-footer"
+      >
         <button
           type="button"
           class="wc-datepicker-today"

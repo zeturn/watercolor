@@ -1,8 +1,14 @@
 <template>
   <div :class="cardClasses">
-    <div v-if="title || $slots.header" class="wc-card-header">
+    <div
+      v-if="title || $slots.header"
+      class="wc-card-header"
+    >
       <slot name="header">
-        <h3 v-if="title" class="wc-card__title">
+        <h3
+          v-if="title"
+          class="wc-card__title"
+        >
           {{ title }}
         </h3>
       </slot>
@@ -12,7 +18,10 @@
       <slot />
     </div>
     
-    <div v-if="$slots.footer" class="wc-card-footer">
+    <div
+      v-if="$slots.footer"
+      class="wc-card-footer"
+    >
       <slot name="footer" />
     </div>
   </div>

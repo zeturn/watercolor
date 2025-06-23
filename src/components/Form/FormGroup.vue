@@ -1,5 +1,8 @@
 <template>
-  <div class="form-group" :class="formGroupClasses">
+  <div
+    class="form-group"
+    :class="formGroupClasses"
+  >
     <slot />
   </div>
 </template>

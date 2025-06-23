@@ -7,13 +7,19 @@
       :class="labelClasses"
     >
       {{ label }}
-      <span v-if="required" class="required-indicator">*</span>
+      <span
+        v-if="required"
+        class="required-indicator"
+      >*</span>
     </label>
     
     <!-- Input Container -->
     <div :class="inputContainerClasses">
       <!-- Start Adornment -->
-      <div v-if="$slots.startAdornment || startAdornment" class="adornment start-adornment">
+      <div
+        v-if="$slots.startAdornment || startAdornment"
+        class="adornment start-adornment"
+      >
         <slot name="startAdornment">
           <span>{{ startAdornment }}</span>
         </slot>
@@ -31,12 +37,12 @@
         :required="required"
         :value="modelValue"
         :autocomplete="autocomplete"
+        v-bind="$attrs"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
         @keydown="handleKeydown"
-        v-bind="$attrs"
-      />
+      >
       
       <!-- Textarea for multiline -->
       <textarea
@@ -49,17 +55,29 @@
         :required="required"
         :rows="rows"
         :value="modelValue"
+        v-bind="$attrs"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
-        v-bind="$attrs"
-      ></textarea>
+      />
       
       <!-- End Adornment -->
-      <div v-if="$slots.endAdornment || endAdornment || error" class="adornment end-adornment">
+      <div
+        v-if="$slots.endAdornment || endAdornment || error"
+        class="adornment end-adornment"
+      >
         <!-- Error Icon -->
-        <svg v-if="error" class="error-icon" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+        <svg
+          v-if="error"
+          class="error-icon"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+            clip-rule="evenodd"
+          />
         </svg>
         
         <slot name="endAdornment">
@@ -69,9 +87,22 @@
     </div>
     
     <!-- Helper Text -->
-    <div v-if="error || helperText" class="helper-text">
-      <p v-if="error" class="error-text">{{ error }}</p>
-      <p v-else-if="helperText" class="helper-text-content">{{ helperText }}</p>
+    <div
+      v-if="error || helperText"
+      class="helper-text"
+    >
+      <p
+        v-if="error"
+        class="error-text"
+      >
+        {{ error }}
+      </p>
+      <p
+        v-else-if="helperText"
+        class="helper-text-content"
+      >
+        {{ helperText }}
+      </p>
     </div>
   </div>
 </template>

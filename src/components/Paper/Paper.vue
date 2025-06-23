@@ -1,5 +1,8 @@
 <template>
-  <component :is="component" :class="paperClasses">
+  <component
+    :is="component"
+    :class="paperClasses"
+  >
     <slot />
   </component>
 </template>

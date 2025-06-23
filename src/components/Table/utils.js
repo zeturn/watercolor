@@ -580,7 +580,7 @@ export function formatCellValue(value, options = {}) {
       });
       
     case 'boolean':
-      return Boolean(value) ? 'Yes' : 'No';
+      return value ? 'Yes' : 'No';
       
     default:
       return String(value);

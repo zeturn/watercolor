@@ -1,6 +1,9 @@
 <template>
   <div class="wc-slider">
-    <div v-if="label" class="wc-slider__label">
+    <div
+      v-if="label"
+      class="wc-slider__label"
+    >
       {{ label }}
     </div>
     
@@ -9,27 +12,30 @@
       class="wc-slider__track"
       @click="handleTrackClick"
     >
-      <div class="wc-slider__rail"></div>
+      <div class="wc-slider__rail" />
       <div 
         class="wc-slider__track-active"
         :style="{ width: percentage + '%' }"
-      ></div>
+      />
       <div 
         class="wc-slider__thumb"
         :style="{ left: percentage + '%' }"
         :tabindex="disabled ? -1 : 0"
-        @keydown="handleKeyDown"
-        @mousedown="handleThumbMouseDown"
         role="slider"
         :aria-valuemin="min"
         :aria-valuemax="max"
         :aria-valuenow="modelValue"
+        @keydown="handleKeyDown"
+        @mousedown="handleThumbMouseDown"
       >
-        <div class="wc-slider__thumb-inner"></div>
+        <div class="wc-slider__thumb-inner" />
       </div>
     </div>
     
-    <div v-if="valueLabelDisplay !== 'off'" class="wc-slider__value">
+    <div
+      v-if="valueLabelDisplay !== 'off'"
+      class="wc-slider__value"
+    >
       {{ modelValue }}
     </div>
   </div>

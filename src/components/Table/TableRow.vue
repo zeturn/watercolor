@@ -1,5 +1,8 @@
 <template>
-  <tr :class="tableRowClasses" @click="handleClick">
+  <tr
+    :class="tableRowClasses"
+    @click="handleClick"
+  >
     <slot />
   </tr>
 </template>

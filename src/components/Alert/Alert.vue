@@ -4,21 +4,29 @@
     :class="alertClasses"
     role="alert"
   >
-    <div class="wc-alert-icon" v-if="showIcon">
-      <span v-html="iconContent"></span>
+    <div
+      v-if="showIcon"
+      class="wc-alert-icon"
+    >
+      <span v-html="iconContent" />
     </div>
     <div class="wc-alert-content">
-      <div v-if="title" class="wc-alert-title">{{ title }}</div>
+      <div
+        v-if="title"
+        class="wc-alert-title"
+      >
+        {{ title }}
+      </div>
       <div class="wc-alert-message">
         <slot>{{ message }}</slot>
       </div>
     </div>
     <button
       v-if="closable"
-      @click="handleClose"
       class="wc-alert-close"
       type="button"
       aria-label="关闭"
+      @click="handleClose"
     >
       ×
     </button>

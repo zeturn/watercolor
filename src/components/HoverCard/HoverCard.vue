@@ -39,33 +39,58 @@
           v-if="showArrow"
           class="hover-card-arrow"
           :class="`hover-card-arrow-${position}`"
-        ></div>
+        />
 
         <!-- 卡片内容 -->
         <div class="hover-card-content">
           <!-- 自定义内容插槽 -->
-          <slot name="card" :data="cardData">
+          <slot
+            name="card"
+            :data="cardData"
+          >
             <!-- 默认卡片布局 -->
-            <div v-if="cardData.image" class="hover-card-image">
-              <img :src="cardData.image" :alt="cardData.imageAlt || cardData.title" />
+            <div
+              v-if="cardData.image"
+              class="hover-card-image"
+            >
+              <img
+                :src="cardData.image"
+                :alt="cardData.imageAlt || cardData.title"
+              >
             </div>
             
             <div class="hover-card-body">
-              <h3 v-if="cardData.title" class="hover-card-title">
+              <h3
+                v-if="cardData.title"
+                class="hover-card-title"
+              >
                 {{ cardData.title }}
               </h3>
               
-              <p v-if="cardData.description" class="hover-card-description">
+              <p
+                v-if="cardData.description"
+                class="hover-card-description"
+              >
                 {{ cardData.description }}
               </p>
               
-              <div v-if="cardData.meta" class="hover-card-meta">
-                <span v-for="(item, index) in cardData.meta" :key="index" class="hover-card-meta-item">
+              <div
+                v-if="cardData.meta"
+                class="hover-card-meta"
+              >
+                <span
+                  v-for="(item, index) in cardData.meta"
+                  :key="index"
+                  class="hover-card-meta-item"
+                >
                   {{ item }}
                 </span>
               </div>
               
-              <div v-if="cardData.actions" class="hover-card-actions">
+              <div
+                v-if="cardData.actions"
+                class="hover-card-actions"
+              >
                 <button 
                   v-for="(action, index) in cardData.actions"
                   :key="index"

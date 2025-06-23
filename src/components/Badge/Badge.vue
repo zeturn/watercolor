@@ -1,5 +1,8 @@
 <template>
-  <span :class="badgeClasses" :style="badgeStyles">
+  <span
+    :class="badgeClasses"
+    :style="badgeStyles"
+  >
     <slot v-if="!dot" />
   </span>
 </template>

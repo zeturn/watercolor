@@ -1,6 +1,13 @@
 <template>
-  <div v-if="visible" :class="spinnerClasses" :style="combinedStyle">
-    <div v-if="text || $slots.default" class="wc-spinner__text">
+  <div
+    v-if="visible"
+    :class="spinnerClasses"
+    :style="combinedStyle"
+  >
+    <div
+      v-if="text || $slots.default"
+      class="wc-spinner__text"
+    >
       <slot>{{ text }}</slot>
     </div>
   </div>

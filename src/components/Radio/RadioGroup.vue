@@ -1,17 +1,36 @@
 <template>
   <div class="wc-radio-group">
-    <label v-if="label" class="wc-radio-group-label">
+    <label
+      v-if="label"
+      class="wc-radio-group-label"
+    >
       {{ label }}
-      <span v-if="required" class="text-error-500">*</span>
+      <span
+        v-if="required"
+        class="text-error-500"
+      >*</span>
     </label>
     
     <div :class="radioGroupClasses">
       <slot />
     </div>
     
-    <div v-if="error || helperText" class="mt-2">
-      <p v-if="error" class="text-sm text-error-500">{{ error }}</p>
-      <p v-else-if="helperText" class="text-sm text-neutral-500">{{ helperText }}</p>
+    <div
+      v-if="error || helperText"
+      class="mt-2"
+    >
+      <p
+        v-if="error"
+        class="text-sm text-error-500"
+      >
+        {{ error }}
+      </p>
+      <p
+        v-else-if="helperText"
+        class="text-sm text-neutral-500"
+      >
+        {{ helperText }}
+      </p>
     </div>
   </div>
 </template>

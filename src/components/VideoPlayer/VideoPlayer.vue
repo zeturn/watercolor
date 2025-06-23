@@ -1,15 +1,49 @@
 <template>
   <div class="video-wrapper">
-    <video ref="video" class="video-el" :src="src" @timeupdate="updateProgress" @ended="onEnded"></video>
+    <video
+      ref="video"
+      class="video-el"
+      :src="src"
+      @timeupdate="updateProgress"
+      @ended="onEnded"
+    />
     <div class="controls">
-      <button class="ctrl-btn" @click="togglePlay">{{ playing ? '❚❚' : '▶️' }}</button>
-      <div class="progress" @click="seek($event)">
-        <div class="progress-bar" :style="{ width: progress + '%' }"></div>
+      <button
+        class="ctrl-btn"
+        @click="togglePlay"
+      >
+        {{ playing ? '❚❚' : '▶️' }}
+      </button>
+      <div
+        class="progress"
+        @click="seek($event)"
+      >
+        <div
+          class="progress-bar"
+          :style="{ width: progress + '%' }"
+        />
       </div>
       <span class="time">{{ formattedCurrent }} / {{ formattedDuration }}</span>
-      <button class="ctrl-btn" @click="toggleMute">{{ muted ? '🔇' : '🔊' }}</button>
-      <input class="volume" type="range" min="0" max="1" step="0.05" v-model.number="volume" />
-      <button class="ctrl-btn" @click="handleFullscreen">⛶</button>
+      <button
+        class="ctrl-btn"
+        @click="toggleMute"
+      >
+        {{ muted ? '🔇' : '🔊' }}
+      </button>
+      <input
+        v-model.number="volume"
+        class="volume"
+        type="range"
+        min="0"
+        max="1"
+        step="0.05"
+      >
+      <button
+        class="ctrl-btn"
+        @click="handleFullscreen"
+      >
+        ⛶
+      </button>
     </div>
   </div>
 </template>

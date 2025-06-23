@@ -1,9 +1,12 @@
 <template>
-  <div class="wc-dropdown" ref="dropdownRef">
+  <div
+    ref="dropdownRef"
+    class="wc-dropdown"
+  >
     <div
+      ref="triggerRef"
       class="wc-dropdown__trigger"
       @click="handleToggle"
-      ref="triggerRef"
     >
       <slot name="trigger">
         <button class="wc-dropdown__button">
@@ -18,9 +21,9 @@
     <Transition name="dropdown">
       <div
         v-if="isOpen"
+        ref="menuRef"
         :class="dropdownClasses"
         :style="dropdownStyles"
-        ref="menuRef"
       >
         <slot name="content">
           <div
@@ -34,7 +37,10 @@
             ]"
             @click="handleItemClick(item, index)"
           >
-            <span v-if="item.icon" class="wc-dropdown__icon">{{ item.icon }}</span>
+            <span
+              v-if="item.icon"
+              class="wc-dropdown__icon"
+            >{{ item.icon }}</span>
             <span class="wc-dropdown__label">{{ item.label }}</span>
           </div>
         </slot>

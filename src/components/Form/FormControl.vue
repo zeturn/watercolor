@@ -1,5 +1,8 @@
 <template>
-  <div class="form-control" :class="formControlClasses">
+  <div
+    class="form-control"
+    :class="formControlClasses"
+  >
     <slot />
   </div>
 </template>

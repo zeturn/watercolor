@@ -1,40 +1,66 @@
 <template>
-  <Transition name="modal" appear>
-    <div v-if="open" :class="modalWrapperClasses" :style="modalWrapperStyles" @click="handleOverlayClick">
+  <Transition
+    name="modal"
+    appear
+  >
+    <div
+      v-if="open"
+      :class="modalWrapperClasses"
+      :style="modalWrapperStyles"
+      @click="handleOverlayClick"
+    >
       <!-- 叠加层 -->
-      <div v-if="showOverlay" class="wc-modal__overlay"></div>
+      <div
+        v-if="showOverlay"
+        class="wc-modal__overlay"
+      />
       
       <!-- 模态框主体 -->
-      <div :class="modalClasses" :style="modalStyles" @click.stop>
-          <!-- 关闭按钮 -->
-          <button
-            v-if="closable"
-            class="wc-modal__close"
-            @click="handleClose"
-            aria-label="关闭"
-          >
-            ×
-          </button>
+      <div
+        :class="modalClasses"
+        :style="modalStyles"
+        @click.stop
+      >
+        <!-- 关闭按钮 -->
+        <button
+          v-if="closable"
+          class="wc-modal__close"
+          aria-label="关闭"
+          @click="handleClose"
+        >
+          ×
+        </button>
 
-          <!-- 头部 -->
-          <div v-if="title || $slots.header" class="wc-modal__header">
-            <slot name="header">
-              <h3 v-if="title" class="wc-modal__title">{{ title }}</h3>
-            </slot>
-          </div>
+        <!-- 头部 -->
+        <div
+          v-if="title || $slots.header"
+          class="wc-modal__header"
+        >
+          <slot name="header">
+            <h3
+              v-if="title"
+              class="wc-modal__title"
+            >
+              {{ title }}
+            </h3>
+          </slot>
+        </div>
 
-          <!-- 内容 -->
-          <div class="wc-modal__body">
-            <slot />
-          </div>
+        <!-- 内容 -->
+        <div class="wc-modal__body">
+          <slot />
+        </div>
 
-          <!-- 底部 -->
-          <div v-if="$slots.footer" class="wc-modal__footer">
-            <slot name="footer" />
-          </div>
+        <!-- 底部 -->
+        <div
+          v-if="$slots.footer"
+          class="wc-modal__footer"
+        >
+          <slot name="footer" />
         </div>
       </div>
-    </Transition>
+    </div>
+  </Transition>
 </template>
 
 <script setup>

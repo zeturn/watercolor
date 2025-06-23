@@ -1,5 +1,8 @@
 <template>
-  <div class="wc-code-input" @paste.prevent="handlePaste">
+  <div
+    class="wc-code-input"
+    @paste.prevent="handlePaste"
+  >
     <input
       v-for="(_, index) in boxes"
       :key="index"
@@ -12,7 +15,7 @@
       @input="onInput(index, $event)"
       @keydown.backspace.prevent="onBackspace(index, $event)"
       @focus="selectContent($event)"
-    />
+    >
   </div>
 </template>
 

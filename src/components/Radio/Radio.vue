@@ -10,11 +10,17 @@
       @change="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
-    />
+    >
     <span :class="radioButtonClasses">
-      <span v-if="isChecked" class="radio-dot"></span>
+      <span
+        v-if="isChecked"
+        class="radio-dot"
+      />
     </span>
-    <span v-if="$slots.default || label" class="radio-label">
+    <span
+      v-if="$slots.default || label"
+      class="radio-label"
+    >
       <slot>{{ label }}</slot>
     </span>
   </label>

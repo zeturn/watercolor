@@ -8,9 +8,9 @@
       paused && 'marquee-paused',
       loading && 'marquee-loading'
     ]"
+    :style="containerStyle"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
-    :style="containerStyle"
   >
     <!-- 滚动内容 -->
     <div 
@@ -24,21 +24,33 @@
       </div>
       
       <!-- 重复内容（用于无缝循环） -->
-      <div v-if="loop" class="marquee-item marquee-clone">
+      <div
+        v-if="loop"
+        class="marquee-item marquee-clone"
+      >
         <slot>{{ text }}</slot>
       </div>
     </div>
 
     <!-- 渐变遮罩 -->
-    <div v-if="showGradient" class="marquee-gradient marquee-gradient-left"></div>
-    <div v-if="showGradient" class="marquee-gradient marquee-gradient-right"></div>
+    <div
+      v-if="showGradient"
+      class="marquee-gradient marquee-gradient-left"
+    />
+    <div
+      v-if="showGradient"
+      class="marquee-gradient marquee-gradient-right"
+    />
     
     <!-- 控制按钮 -->
-    <div v-if="showControls" class="marquee-controls">
+    <div
+      v-if="showControls"
+      class="marquee-controls"
+    >
       <button 
         class="marquee-control-btn"
-        @click="togglePause"
         :aria-label="isPaused ? '播放' : '暂停'"
+        @click="togglePause"
       >
         {{ isPaused ? '▶️' : '⏸️' }}
       </button>
@@ -46,8 +58,8 @@
       <button 
         v-if="allowReverse"
         class="marquee-control-btn"
-        @click="toggleDirection"
         aria-label="改变方向"
+        @click="toggleDirection"
       >
         🔄
       </button>
@@ -55,16 +67,19 @@
       <button 
         v-if="allowSpeedControl"
         class="marquee-control-btn"
-        @click="toggleSpeed"
         aria-label="改变速度"
+        @click="toggleSpeed"
       >
         ⚡
       </button>
     </div>
 
     <!-- 加载状态 -->
-    <div v-if="loading" class="marquee-loading-overlay">
-      <div class="marquee-loading-spinner"></div>
+    <div
+      v-if="loading"
+      class="marquee-loading-overlay"
+    >
+      <div class="marquee-loading-spinner" />
       <span class="marquee-loading-text">加载中...</span>
     </div>
   </div>

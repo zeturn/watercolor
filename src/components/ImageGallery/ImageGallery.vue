@@ -8,11 +8,19 @@
     ]"
   >
     <!-- 画廊标题 -->
-    <div v-if="title || $slots.title" class="gallery-header">
+    <div
+      v-if="title || $slots.title"
+      class="gallery-header"
+    >
       <slot name="title">
-        <h2 class="gallery-title">{{ title }}</h2>
+        <h2 class="gallery-title">
+          {{ title }}
+        </h2>
       </slot>
-      <div v-if="showCount" class="gallery-count">
+      <div
+        v-if="showCount"
+        class="gallery-count"
+      >
         {{ images.length }} 张图片
       </div>
     </div>
@@ -27,12 +35,12 @@
         :key="image.id || index"
         class="gallery-item"
         :class="{ 'gallery-item-selected': selectedIndex === index }"
-        @click="selectImage(index)"
-        @keydown.enter="selectImage(index)"
-        @keydown.space.prevent="selectImage(index)"
         :tabindex="0"
         role="button"
         :aria-label="`查看图片 ${index + 1}: ${image.alt || image.title || '无描述'}`"
+        @click="selectImage(index)"
+        @keydown.enter="selectImage(index)"
+        @keydown.space.prevent="selectImage(index)"
       >
         <!-- 图片容器 -->
         <div class="gallery-image-container">
@@ -43,11 +51,14 @@
             :loading="lazyLoad ? 'lazy' : 'eager'"
             @load="onImageLoad(index)"
             @error="onImageError(index)"
-          />
+          >
           
           <!-- 加载状态 -->
-          <div v-if="!loadedImages[index] && loading" class="gallery-image-placeholder">
-            <div class="gallery-loading-spinner"></div>
+          <div
+            v-if="!loadedImages[index] && loading"
+            class="gallery-image-placeholder"
+          >
+            <div class="gallery-loading-spinner" />
           </div>
           
           <!-- 悬停遮罩 -->
@@ -55,16 +66,16 @@
             <div class="gallery-overlay-content">
               <button 
                 class="gallery-action-btn gallery-view-btn"
-                @click.stop="openLightbox(index)"
                 :aria-label="`在灯箱中查看图片 ${index + 1}`"
+                @click.stop="openLightbox(index)"
               >
                 👁️
               </button>
               <button 
                 v-if="showDownload"
                 class="gallery-action-btn gallery-download-btn"
-                @click.stop="downloadImage(image)"
                 :aria-label="`下载图片 ${index + 1}`"
+                @click.stop="downloadImage(image)"
               >
                 📥
               </button>
@@ -72,16 +83,32 @@
           </div>
           
           <!-- 图片信息 -->
-          <div v-if="showInfo" class="gallery-info">
-            <div v-if="image.title" class="gallery-info-title">{{ image.title }}</div>
-            <div v-if="image.description" class="gallery-info-description">{{ image.description }}</div>
+          <div
+            v-if="showInfo"
+            class="gallery-info"
+          >
+            <div
+              v-if="image.title"
+              class="gallery-info-title"
+            >
+              {{ image.title }}
+            </div>
+            <div
+              v-if="image.description"
+              class="gallery-info-description"
+            >
+              {{ image.description }}
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- 分页 -->
-    <div v-if="showPagination && totalPages > 1" class="gallery-pagination">
+    <div
+      v-if="showPagination && totalPages > 1"
+      class="gallery-pagination"
+    >
       <button 
         class="gallery-page-btn"
         :disabled="currentPage === 1"
@@ -108,15 +135,18 @@
       <div 
         v-if="lightboxVisible"
         class="gallery-lightbox"
+        tabindex="-1"
         @click="closeLightbox"
         @keydown.esc="closeLightbox"
-        tabindex="-1"
       >
-        <div class="gallery-lightbox-content" @click.stop>
+        <div
+          class="gallery-lightbox-content"
+          @click.stop
+        >
           <button 
             class="gallery-lightbox-close"
-            @click="closeLightbox"
             aria-label="关闭灯箱"
+            @click="closeLightbox"
           >
             ✕
           </button>
@@ -126,14 +156,20 @@
               :src="currentLightboxImage?.src"
               :alt="currentLightboxImage?.alt"
               class="gallery-lightbox-image"
-            />
+            >
           </div>
           
           <div class="gallery-lightbox-info">
-            <h3 v-if="currentLightboxImage?.title" class="gallery-lightbox-title">
+            <h3
+              v-if="currentLightboxImage?.title"
+              class="gallery-lightbox-title"
+            >
               {{ currentLightboxImage.title }}
             </h3>
-            <p v-if="currentLightboxImage?.description" class="gallery-lightbox-description">
+            <p
+              v-if="currentLightboxImage?.description"
+              class="gallery-lightbox-description"
+            >
               {{ currentLightboxImage.description }}
             </p>
           </div>
@@ -142,8 +178,8 @@
             <button 
               class="gallery-lightbox-nav gallery-lightbox-prev"
               :disabled="lightboxIndex === 0"
-              @click="previousImage"
               aria-label="上一张图片"
+              @click="previousImage"
             >
               ‹
             </button>
@@ -153,8 +189,8 @@
             <button 
               class="gallery-lightbox-nav gallery-lightbox-next"
               :disabled="lightboxIndex === images.length - 1"
-              @click="nextImage"
               aria-label="下一张图片"
+              @click="nextImage"
             >
               ›
             </button>

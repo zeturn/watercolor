@@ -1,9 +1,15 @@
 <template>
   <teleport to="body">
     <transition name="wc-dialog-fade">
-      <div v-if="open" class="wc-dialog-overlay">
+      <div
+        v-if="open"
+        class="wc-dialog-overlay"
+      >
         <!-- Backdrop -->
-        <div class="wc-dialog-backdrop" @click="handleBackdropClick"></div>
+        <div
+          class="wc-dialog-backdrop"
+          @click="handleBackdropClick"
+        />
         
         <!-- Dialog Container -->
         <div class="wc-dialog-container">

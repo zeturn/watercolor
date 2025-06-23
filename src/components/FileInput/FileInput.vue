@@ -10,12 +10,21 @@
       :multiple="multiple"
       :accept="accept"
       @change="onChange"
-    />
-    <div v-if="variant==='block'" class="wc-file-input-content">
+    >
+    <div
+      v-if="variant==='block'"
+      class="wc-file-input-content"
+    >
       <slot>{{ label }}</slot>
     </div>
-    <span v-else-if="variant==='button'" class="wc-file-button">{{ label }}</span>
-    <span v-else-if="variant==='icon'" class="wc-file-icon">⬆️</span>
+    <span
+      v-else-if="variant==='button'"
+      class="wc-file-button"
+    >{{ label }}</span>
+    <span
+      v-else-if="variant==='icon'"
+      class="wc-file-icon"
+    >⬆️</span>
   </label>
 </template>
 

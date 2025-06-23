@@ -1,11 +1,23 @@
 <template>
   <template v-if="subheader">
-    <div class="wc-list-subheader">{{ subheader }}</div>
-    <component :is="component" :class="listClasses" role="list">
+    <div class="wc-list-subheader">
+      {{ subheader }}
+    </div>
+    <component
+      :is="component"
+      :class="listClasses"
+      role="list"
+    >
       <slot />
     </component>
   </template>
-  <component v-else :is="component" :class="listClasses" role="list" v-bind="$attrs">
+  <component
+    :is="component"
+    v-else
+    :class="listClasses"
+    role="list"
+    v-bind="$attrs"
+  >
     <slot />
   </component>
 </template>

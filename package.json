@@ -53,6 +53,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "eslint-plugin-storybook": "^0.6.15",
+    "eslint-plugin-vitest": "^0.5.4",
     "eslint-plugin-vue": "^9.19.2",
     "jsdom": "^23.2.0",
     "postcss": "^8.4.33",
