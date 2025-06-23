@@ -235,7 +235,12 @@ export function handleCtaClick(e, onCtaClick) {
  */
 export function renderIcon(icon) {
   if (typeof icon === 'string') {
-    return <span dangerouslySetInnerHTML={{ __html: icon }} />
+    // 返回一个创建 span 元素的函数，而不是 JSX
+    return () => {
+      const span = document.createElement('span')
+      span.innerHTML = icon
+      return span
+    }
   }
   return icon
 } 

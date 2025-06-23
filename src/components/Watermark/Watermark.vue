@@ -51,7 +51,11 @@ async function generate() {
 
 watch(() => ({ ...props }), generate, { immediate: true, deep: true })
 
-const watermarkStyle = computed(() => createWatermarkStyle(props, url.value))
+const watermarkStyle = computed(() => {
+  const style = createWatermarkStyle(props, url.value)
+  // 修复 TypeScript 类型问题：使用类型断言
+  return style as any
+})
 </script>
 
 <style scoped>

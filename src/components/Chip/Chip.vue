@@ -50,7 +50,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { isValidSize, isValidVariant, isValidColor, getChipClasses, handleChipClick, handleChipDelete } from './utils.js'
+import { isValidSize, isValidVariant, isValidColor, getChipClasses, handleChipClick, handleChipDelete } from './utils.jsx'
 import './style.css'
 
 const props = defineProps({
