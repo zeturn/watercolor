@@ -4,6 +4,7 @@
     @click="handleClick"
     role="listitem"
     :tabindex="button ? 0 : -1"
+    :disabled="disabled"
     @keydown.enter="handleClick"
     @keydown.space="handleClick"
   >
@@ -51,6 +52,11 @@ const props = defineProps({
   disableGutters: {
     type: Boolean,
     default: false
+  },
+  alignItems: {
+    type: String,
+    default: 'center',
+    validator: (value) => ['flex-start', 'center', 'flex-end'].includes(value)
   }
 })
 
@@ -63,36 +69,57 @@ const isDense = computed(() => {
 })
 
 const listItemClasses = computed(() => {
-  const baseClasses = 'flex items-center w-full transition-colors duration-150'
-  const classes = [baseClasses]
+  const classes = ['wc-list-item', 'flex', 'w-full', 'transition-colors', 'duration-150']
+  
+  // Alignment
+  if (props.alignItems === 'flex-start') {
+    classes.push('items-start', 'wc-list-item--align-start')
+  } else if (props.alignItems === 'flex-end') {
+    classes.push('items-end', 'wc-list-item--align-end')
+  } else {
+    classes.push('items-center')
+  }
   
   // Padding
   if (!props.disableGutters) {
     if (isDense.value) {
-      classes.push('px-4 py-1')
+      classes.push('px-4', 'py-1')
     } else {
-      classes.push('px-4 py-2')
+      classes.push('px-4', 'py-2')
     }
   }
   
-  // Interactive states
-  if (props.button && !props.disabled) {
-    classes.push('cursor-pointer focus:outline-none')
+  // Button state
+  if (props.button) {
+    classes.push('wc-list-item--button', 'cursor-pointer', 'focus:outline-none')
     
-    if (props.selected) {
-      classes.push('bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400')
-    } else {
-      classes.push('hover:bg-neutral-50 dark:hover:bg-neutral-800 focus:bg-neutral-100 dark:focus:bg-neutral-700')
+    if (!props.disabled) {
+      if (props.selected) {
+        classes.push('bg-primary-50', 'dark:bg-primary-900/20', 'text-primary-600', 'dark:text-primary-400')
+      } else {
+        classes.push('hover:bg-neutral-50', 'dark:hover:bg-neutral-800', 'focus:bg-neutral-100', 'dark:focus:bg-neutral-700')
+      }
     }
   }
   
+  // Selected state
+  if (props.selected) {
+    classes.push('wc-list-item--selected')
+  }
+  
+  // Dense state
+  if (isDense.value) {
+    classes.push('wc-list-item--dense')
+  }
+  
+  // Disabled state
   if (props.disabled) {
-    classes.push('opacity-50 cursor-not-allowed')
+    classes.push('wc-list-item--disabled', 'opacity-50', 'cursor-not-allowed')
   }
   
   // Divider
   if (props.divider) {
-    classes.push('border-b border-neutral-200 dark:border-neutral-700')
+    classes.push('wc-list-item--divider', 'border-b', 'border-neutral-200', 'dark:border-neutral-700')
   }
   
   return classes

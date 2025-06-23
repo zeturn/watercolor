@@ -1,7 +1,7 @@
 <template>
-  <div :class="paperClasses">
+  <component :is="component" :class="paperClasses">
     <slot />
-  </div>
+  </component>
 </template>
 
 <script setup>
@@ -21,27 +21,41 @@ const props = defineProps({
   square: {
     type: Boolean,
     default: false
+  },
+  rounded: {
+    type: Boolean,
+    default: false
+  },
+  component: {
+    type: String,
+    default: 'div'
   }
 })
 
 const paperClasses = computed(() => {
-  const baseClasses = 'transition-all duration-250 bg-[var(--wc-neutral-0)] dark:bg-[var(--wc-neutral-800)]'
+  const baseClasses = 'wc-paper transition-all duration-250 bg-[var(--wc-neutral-0)] dark:bg-[var(--wc-neutral-800)]'
   
   const classes = [baseClasses]
   
-  // Border radius
-  if (!props.square) {
-    classes.push('rounded-lg')
-  }
-  
   // Variant styles
   if (props.variant === 'outlined') {
+    classes.push('wc-paper--outlined')
     classes.push('border border-[var(--wc-neutral-200)] dark:border-[var(--wc-neutral-700)]')
   } else {
-    // 扁平化设计：移除阴影，仅在 elevation > 0 时使用浅色描边
+    // Elevation styles
     if (props.elevation > 0) {
+      classes.push(`wc-paper--elevation-${props.elevation}`)
       classes.push('border border-[var(--wc-neutral-200)] dark:border-[var(--wc-neutral-700)]')
     }
+  }
+  
+  // Border radius
+  if (props.rounded) {
+    classes.push('wc-paper--rounded')
+  }
+  
+  if (!props.square && !props.rounded) {
+    classes.push('rounded-lg')
   }
   
   return classes

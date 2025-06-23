@@ -1,11 +1,21 @@
 <template>
-  <ul :class="listClasses" role="list">
+  <template v-if="subheader">
+    <div class="wc-list-subheader">{{ subheader }}</div>
+    <component :is="component" :class="listClasses" role="list">
+      <slot />
+    </component>
+  </template>
+  <component v-else :is="component" :class="listClasses" role="list" v-bind="$attrs">
     <slot />
-  </ul>
+  </component>
 </template>
 
 <script setup>
 import { computed, provide } from 'vue'
+
+defineOptions({
+  inheritAttrs: false
+})
 
 const props = defineProps({
   dense: {
@@ -19,15 +29,32 @@ const props = defineProps({
   subheader: {
     type: String,
     default: ''
+  },
+  component: {
+    type: String,
+    default: 'ul'
+  },
+  nav: {
+    type: Boolean,
+    default: false
   }
 })
 
 const listClasses = computed(() => {
-  const baseClasses = 'w-full'
-  const classes = [baseClasses]
+  const classes = ['wc-list', 'w-full']
   
-  if (!props.disablePadding) {
+  if (props.dense) {
+    classes.push('wc-list--dense')
+  }
+  
+  if (props.disablePadding) {
+    classes.push('wc-list--no-padding')
+  } else {
     classes.push('py-2')
+  }
+  
+  if (props.nav) {
+    classes.push('wc-list--nav')
   }
   
   return classes

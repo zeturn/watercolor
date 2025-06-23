@@ -1,5 +1,5 @@
 <template>
-  <div class="wc-input-wrapper">
+  <div :class="wrapperClasses">
     <label v-if="label" :for="inputId" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
       {{ label }}
       <span v-if="required" class="text-error-500 ml-1">*</span>
@@ -85,23 +85,45 @@ const emit = defineEmits(['update:modelValue', 'focus', 'blur'])
 const instance = getCurrentInstance()
 const inputId = ref(`input-${instance?.uid || Math.random().toString(36).substr(2, 9)}`)
 
+const wrapperClasses = computed(() => {
+  const classes = ['wc-input-wrapper']
+  if (props.disabled) {
+    classes.push('opacity-50', 'cursor-not-allowed')
+  }
+  return classes
+})
+
 const inputClasses = computed(() => {
-  const baseClasses = 'wc-input'
+  const baseClasses = [
+    'wc-input',
+    'w-full',
+    'border',
+    'border-neutral-300',
+    'rounded-md',
+    'focus:ring-2',
+    'focus:ring-primary-500',
+    'focus:border-primary-500',
+    'transition-colors',
+    'duration-200'
+  ]
   
   const sizeClasses = {
-    sm: 'px-2 py-1 text-sm',
-    md: 'px-3 py-2 text-sm',
-    lg: 'px-4 py-3 text-base'
+    sm: ['px-2', 'py-1', 'text-sm'],
+    md: ['px-3', 'py-2', 'text-sm'],
+    lg: ['px-4', 'py-3', 'text-base']
   }
   
-  return [
-    baseClasses,
-    sizeClasses[props.size],
-    {
-      'ring-error-500 focus:ring-error-500': props.error,
-      'opacity-50 cursor-not-allowed': props.disabled
-    }
-  ]
+  baseClasses.push(...sizeClasses[props.size])
+  
+  if (props.error) {
+    baseClasses.push('ring-error-500', 'focus:ring-error-500', 'border-error-500')
+  }
+  
+  if (props.disabled) {
+    baseClasses.push('opacity-50', 'cursor-not-allowed')
+  }
+  
+  return baseClasses
 })
 
 const handleInput = (event) => {

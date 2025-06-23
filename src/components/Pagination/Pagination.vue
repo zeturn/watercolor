@@ -1,7 +1,9 @@
 <template>
-  <nav v-if="pageCount > 1" class="wc-pagination" aria-label="分页导航">
+  <nav v-if="pageCount > 1" :class="paginationClasses" aria-label="分页导航">
+    <!-- 上一页按钮 -->
     <button 
-      class="wc-page-btn" 
+      class="wc-pagination__prev" 
+      :class="{ 'disabled': currentPageInternal === 1 }"
       :disabled="currentPageInternal === 1" 
       @click="select(currentPageInternal - 1)"
       aria-label="上一页"
@@ -9,26 +11,50 @@
       ‹
     </button>
 
+    <!-- 页面按钮 -->
     <template v-for="page in pageItems" :key="page.key">
       <button 
         v-if="!page.ellipsis" 
-        class="wc-page-btn" 
-        :class="{ 'wc-page-btn--active': page.num === currentPageInternal }" 
+        class="wc-pagination__page" 
+        :class="{ 'wc-pagination__page--active': page.num === currentPageInternal }" 
         @click="select(page.num)"
       >
         {{ page.num }}
       </button>
-      <span v-else class="wc-page-ellipsis">…</span>
+      <span v-else class="wc-pagination__ellipsis">…</span>
     </template>
 
+    <!-- 下一页按钮 -->
     <button 
-      class="wc-page-btn" 
+      class="wc-pagination__next" 
+      :class="{ 'disabled': currentPageInternal === pageCount }"
       :disabled="currentPageInternal === pageCount" 
       @click="select(currentPageInternal + 1)"
       aria-label="下一页"
     >
       ›
     </button>
+
+    <!-- 页面大小选择器 -->
+    <div v-if="showSizeChanger" class="wc-pagination__size-changer">
+      <select @change="handleSizeChange">
+        <option v-for="size in pageSizeOptions" :key="size" :value="size" :selected="size === pageSize">
+          {{ size }} / 页
+        </option>
+      </select>
+    </div>
+
+    <!-- 快速跳转器 -->
+    <div v-if="showQuickJumper" class="wc-pagination__quick-jumper">
+      <span>跳转到</span>
+      <input 
+        type="number" 
+        :min="1" 
+        :max="pageCount"
+        @keyup.enter="handleQuickJump"
+        placeholder="页码"
+      />
+    </div>
   </nav>
 </template>
 
@@ -40,6 +66,10 @@ export default {
   name: 'Pagination',
   props: {
     modelValue: {
+      type: Number,
+      default: 1
+    },
+    currentPage: {
       type: Number,
       default: 1
     },
@@ -58,14 +88,43 @@ export default {
     boundaryCount: {
       type: Number,
       default: 1
+    },
+    showSizeChanger: {
+      type: Boolean,
+      default: false
+    },
+    showQuickJumper: {
+      type: Boolean,
+      default: false
+    },
+    pageSizeOptions: {
+      type: Array,
+      default: () => [10, 20, 50, 100]
+    },
+    size: {
+      type: String,
+      default: 'md',
+      validator: (value) => ['sm', 'md', 'lg'].includes(value)
     }
   },
-  emits: ['update:modelValue', 'change'],
+  emits: ['update:modelValue', 'change', 'page-change', 'size-change'],
   setup(props, { emit }) {
-    const currentPageInternal = ref(props.modelValue)
+    const currentPageInternal = ref(props.currentPage || props.modelValue)
 
     watch(() => props.modelValue, (val) => {
       currentPageInternal.value = val
+    })
+
+    watch(() => props.currentPage, (val) => {
+      currentPageInternal.value = val
+    })
+
+    const paginationClasses = computed(() => {
+      const classes = ['wc-pagination']
+      if (props.size !== 'md') {
+        classes.push(`wc-pagination--${props.size}`)
+      }
+      return classes
     })
 
     const pageCount = computed(() => Math.max(1, Math.ceil(props.total / props.pageSize)))
@@ -110,9 +169,31 @@ export default {
       currentPageInternal.value = page
       emit('update:modelValue', page)
       emit('change', page)
+      emit('page-change', page)
     }
 
-    return { currentPageInternal, pageCount, pageItems, select }
+    const handleSizeChange = (event) => {
+      const newSize = parseInt(event.target.value)
+      emit('size-change', newSize)
+    }
+
+    const handleQuickJump = (event) => {
+      const page = parseInt(event.target.value)
+      if (page >= 1 && page <= pageCount.value) {
+        select(page)
+        event.target.value = ''
+      }
+    }
+
+    return { 
+      currentPageInternal, 
+      pageCount, 
+      pageItems, 
+      select, 
+      paginationClasses,
+      handleSizeChange,
+      handleQuickJump
+    }
   }
 }
 </script>

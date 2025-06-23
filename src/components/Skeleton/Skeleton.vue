@@ -1,11 +1,15 @@
 <template>
   <component
+    v-if="loading"
     :is="component"
     :class="skeletonClasses"
     :style="skeletonStyles"
     role="status"
     aria-live="polite"
   />
+  <template v-else>
+    <slot></slot>
+  </template>
 </template>
 
 <script setup lang="ts">
@@ -13,6 +17,11 @@ import { computed } from 'vue'
 import './style.css'
 
 const props = defineProps({
+  /** 是否显示加载状态 */
+  loading: {
+    type: Boolean,
+    default: true
+  },
   /** 动画效果。false 表示无动画，pulse 脉冲动画，wave 波浪动画 */
   animation: {
     type: [String, Boolean],
