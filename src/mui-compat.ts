@@ -76,11 +76,11 @@ export const TableContainer = PaperComponent
 
 // 工具函数
 export const createTheme = (theme: any) => theme
-export const ThemeProvider = ({ theme, children }: { theme: any, children: any }) => children
+export const ThemeProvider = ({ theme: _theme, children }: { theme: any, children: any }) => children
 export const CssBaseline = () => null
 
 // 样式系统兼容
-export const styled = (component: any) => (styles: any) => component
+export const styled = (component: any) => (_styles: any) => component
 export const useTheme = () => ({
   palette: {
     primary: { main: '#1a8cff' },
