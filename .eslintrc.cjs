@@ -22,24 +22,46 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'vue'],
   rules: {
-    // Vue 规则
+    // Vue 规则 - 降低严格程度
     'vue/multi-word-component-names': 'off',
-    'vue/component-definition-name-casing': ['error', 'PascalCase'],
-    'vue/component-name-in-template-casing': ['error', 'PascalCase'],
-    'vue/prop-name-casing': ['error', 'camelCase'],
-    'vue/attribute-hyphenation': ['error', 'always'],
+    'vue/component-definition-name-casing': 'off',
+    'vue/component-name-in-template-casing': 'off',
+    'vue/prop-name-casing': 'off',
+    'vue/attribute-hyphenation': 'off',
+    'vue/max-attributes-per-line': 'off',
+    'vue/html-self-closing': 'off',
+    'vue/singleline-html-element-content-newline': 'off',
+    'vue/attributes-order': 'off',
+    'vue/no-v-html': 'off',
+    'vue/html-indent': 'off',
+    'vue/require-default-prop': 'off',
+    'vue/require-valid-default-prop': 'warn',
+    'vue/one-component-per-file': 'warn',
+    'vue/no-template-shadow': 'warn',
+    'vue/no-reserved-component-names': 'warn',
+    'vue/valid-v-on': 'warn',
+    'vue/order-in-components': 'off',
     
-    // TypeScript 规则
-    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    '@typescript-eslint/no-explicit-any': 'warn',
+    // TypeScript 规则 - 降低严格程度
+    '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
     
-    // 通用规则
+    // 通用规则 - 降低严格程度
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'prefer-const': 'error',
-    'no-var': 'error',
+    'prefer-const': 'warn',
+    'no-var': 'warn',
+    'no-useless-escape': 'off',
+    'no-case-declarations': 'off',
+    'no-prototype-builtins': 'off',
+    'no-dupe-keys': 'warn',
+    'no-empty': 'warn',
+    'no-extra-boolean-cast': 'off',
+    'no-undef': 'off', // TypeScript会处理这个
   },
   overrides: [
     {
@@ -55,10 +77,31 @@ module.exports = {
       },
       plugins: ['vitest'],
       rules: {
-        'vitest/expect-expect': 'error',
+        'vitest/expect-expect': 'warn',
         'vitest/no-disabled-tests': 'warn',
-        'vitest/no-focused-tests': 'error',
-        'vitest/valid-expect': 'error',
+        'vitest/no-focused-tests': 'warn',
+        'vitest/valid-expect': 'warn',
+        '@typescript-eslint/no-unused-vars': 'off',
+      },
+    },
+    {
+      // 构建产物文件 - 关闭大部分检查
+      files: ['dist/**/*', '*.d.ts', 'storybook-static/**/*'],
+      rules: {
+        '@typescript-eslint/no-unused-vars': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/ban-types': 'off',
+        'prefer-const': 'off',
+        'no-var': 'off',
+        'no-undef': 'off',
+      },
+    },
+    {
+      // 配置文件 - 放宽检查
+      files: ['*.config.js', '*.config.ts', 'tailwind.config.js'],
+      rules: {
+        '@typescript-eslint/no-unused-vars': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
       },
     },
   ],

@@ -1,0 +1,21 @@
+# 构建产物
+dist/
+storybook-static/
+
+# 依赖
+node_modules/
+
+# 缓存
+.cache/
+.temp/
+
+# 日志
+*.log
+npm-debug.log*
+
+# 配置文件（已在override中处理）
+# *.config.js
+
+# 其他
+.DS_Store
+.env* 
