@@ -439,18 +439,6 @@ Watercolor UI provides **60+** high-quality components, completely covering all 
 | Grid | ✅ | ✅ | ✅ | Grid layout |
 | Paper | ✅ | ✅ | ✅ | Paper container |
 
-### 🧭 Navigation Components
-
-| Component | Vue | React | Material-UI Compatible | Description |
-|------|:---:|:-----:|:----------------:|------|
-| AppBar | ✅ | ✅ | ✅ | Application bar |
-| Toolbar | ✅ | ✅ | ✅ | Toolbar |
-| Menu | ✅ | ✅ | ✅ | Menu |
-| MenuItem | ✅ | ✅ | ✅ | Menu item |
-| Tabs | ✅ | ✅ | ✅ | Tab navigation |
-| Breadcrumb | ✅ | ✅ | ✅ | Breadcrumb navigation |
-| Pagination | ✅ | ✅ | ✅ | Pagination |
-
 ### 💬 Feedback Components
 
 | Component | Vue | React | Material-UI Compatible | Description |
