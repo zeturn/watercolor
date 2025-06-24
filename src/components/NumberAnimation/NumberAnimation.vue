@@ -8,7 +8,8 @@ import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 const props = defineProps({
   value: {
     type: Number,
-    required: true
+    required: false,
+    default: undefined
   },
   from: {
     type: Number,
@@ -46,6 +47,26 @@ const props = defineProps({
   autoPlay: {
     type: Boolean,
     default: true
+  },
+  active: {
+    type: Boolean,
+    default: undefined // 如果传入则覆盖 autoPlay
+  },
+  to: {
+    type: Number,
+    default: undefined
+  },
+  precision: {
+    type: Number,
+    default: undefined
+  },
+  showSeparator: {
+    type: Boolean,
+    default: false
+  },
+  locale: {
+    type: String,
+    default: ''
   }
 })
 
@@ -55,6 +76,8 @@ const currentValue = ref(props.from)
 const isAnimating = ref(false)
 let animationFrame = null
 
+const isAutoPlay = computed(() => props.active !== undefined ? props.active : props.autoPlay)
+
 const numberAnimationClasses = computed(() => {
   const classes = ['wc-number-animation']
   
@@ -62,11 +85,29 @@ const numberAnimationClasses = computed(() => {
     classes.push(`wc-number-animation--${props.easing}`)
   }
   
-  if (isAnimating.value || props.autoPlay) {
+  if (isAnimating.value || isAutoPlay.value) {
     classes.push('wc-number-animation--playing')
   }
   
   return classes
+})
+
+const finalValue = computed(() => {
+  // 优先使用 to，其次使用 value
+  return props.to !== undefined ? props.to : props.value
+})
+
+const decimalsComputed = computed(() => {
+  // precision 优先生效
+  return props.precision !== undefined ? props.precision : props.decimals
+})
+
+const separatorComputed = computed(() => {
+  if (props.showSeparator) {
+    // showSeparator==true 且未自定义 separator 时，使用逗号
+    return props.separator || ','
+  }
+  return props.separator
 })
 
 const displayValue = computed(() => {
@@ -78,16 +119,16 @@ const displayValue = computed(() => {
   }
   
   // 应用小数位数
-  if (props.decimals > 0) {
-    value = value.toFixed(props.decimals)
+  if (decimalsComputed.value > 0) {
+    value = value.toFixed(decimalsComputed.value)
   } else {
     value = Math.round(value).toString()
   }
   
   // 添加千位分隔符
-  if (props.separator) {
+  if (separatorComputed.value) {
     const parts = value.toString().split('.')
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, props.separator)
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, separatorComputed.value)
     value = parts.join('.')
   }
   
@@ -98,8 +139,8 @@ const displayValue = computed(() => {
 const animate = () => {
   const startTime = Date.now()
   const startValue = currentValue.value
-  const targetValue = props.value
-  const valueChange = targetValue - startValue
+  const target = finalValue.value
+  const valueChange = target - startValue
   
   isAnimating.value = true
   
@@ -135,7 +176,7 @@ const animate = () => {
         animationFrame = setTimeout(step, 16) // 约60fps
       }
     } else {
-      currentValue.value = targetValue
+      currentValue.value = target
       isAnimating.value = false
       emit('complete')
     }
@@ -157,14 +198,20 @@ const stopAnimation = () => {
 }
 
 // 监听value变化
-watch(() => props.value, () => {
+watch(() => finalValue.value, () => {
   stopAnimation()
-  animate()
-}, { immediate: true })
+  if (isAutoPlay.value) {
+    animate()
+  } else {
+    currentValue.value = finalValue.value
+  }
+})
 
 onMounted(() => {
-  if (props.autoPlay) {
+  if (isAutoPlay.value) {
     animate()
+  } else {
+    currentValue.value = finalValue.value
   }
 })
 
