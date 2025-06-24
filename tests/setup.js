@@ -1,5 +1,6 @@
 import { beforeEach } from 'vitest'
 import 'vitest-canvas-mock'
+import '@testing-library/jest-dom'
 
 // 全局测试配置
 beforeEach(() => {
