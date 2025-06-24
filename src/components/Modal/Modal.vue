@@ -1,75 +1,95 @@
 <template>
-  <Transition
-    name="modal"
-    appear
-  >
-    <div
-      v-if="open"
-      :class="modalWrapperClasses"
-      :style="modalWrapperStyles"
-      @click="handleOverlayClick"
+  <Teleport to="body">
+    <Transition
+      name="modal"
+      appear
     >
-      <!-- 叠加层 -->
       <div
-        v-if="showOverlay"
-        class="wc-modal__overlay"
-      />
-      
-      <!-- 模态框主体 -->
-      <div
-        :class="modalClasses"
-        :style="modalStyles"
-        @click.stop
+        v-if="isOpen"
+        :class="modalWrapperClasses"
+        :style="modalWrapperStyles"
+        @click="handleOverlayClick"
       >
-        <!-- 关闭按钮 -->
-        <button
-          v-if="closable"
-          class="wc-modal__close"
-          aria-label="关闭"
-          @click="handleClose"
-        >
-          ×
-        </button>
-
-        <!-- 头部 -->
+        <!-- 遮罩层 -->
         <div
-          v-if="title || $slots.header"
-          class="wc-modal__header"
-        >
-          <slot name="header">
-            <h3
-              v-if="title"
-              class="wc-modal__title"
-            >
-              {{ title }}
-            </h3>
-          </slot>
-        </div>
-
-        <!-- 内容 -->
-        <div class="wc-modal__body">
-          <slot />
-        </div>
-
-        <!-- 底部 -->
+          v-if="showOverlay"
+          class="wc-modal__overlay"
+        />
+        
+        <!-- 模态框主体 -->
         <div
-          v-if="$slots.footer"
-          class="wc-modal__footer"
+          ref="modalRef"
+          :class="modalClasses"
+          :style="modalStyles"
+          role="dialog"
+          aria-modal="true"
+          :aria-labelledby="title ? titleId : undefined"
+          tabindex="-1"
+          @click.stop
         >
-          <slot name="footer" />
+          <!-- 关闭按钮 -->
+          <Button
+            v-if="shouldShowCloseButton"
+            variant="text"
+            size="sm"
+            class="wc-modal__close"
+            aria-label="关闭"
+            @click="handleClose"
+          >
+            ×
+          </Button>
+
+          <!-- 头部 -->
+          <div
+            v-if="title || $slots.header"
+            class="wc-modal__header"
+          >
+            <slot name="header">
+              <h3
+                v-if="title"
+                :id="titleId"
+                class="wc-modal__title"
+              >
+                {{ title }}
+              </h3>
+            </slot>
+          </div>
+
+          <!-- 内容 -->
+          <div class="wc-modal__body">
+            <slot />
+          </div>
+
+          <!-- 底部 -->
+          <div
+            v-if="$slots.footer"
+            class="wc-modal__footer"
+          >
+            <slot name="footer" />
+          </div>
         </div>
       </div>
-    </div>
-  </Transition>
+    </Transition>
+  </Teleport>
 </template>
 
 <script setup>
-import { computed, watch, onMounted, onUnmounted } from 'vue'
+import { computed, watch, onMounted, onUnmounted, ref, nextTick, getCurrentInstance } from 'vue'
+import Button from '../Button/Button.vue'
 
 const props = defineProps({
+  // 基础属性
+  visible: {
+    type: Boolean,
+    default: undefined
+  },
   open: {
     type: Boolean,
-    default: false
+    default: undefined
+  },
+  modelValue: {
+    type: Boolean,
+    default: undefined
   },
   title: {
     type: String,
@@ -78,14 +98,24 @@ const props = defineProps({
   size: {
     type: String,
     default: 'md',
-    validator: (value) => ['sm', 'md', 'lg', 'xl'].includes(value)
+    validator: (value) => ['xs', 'sm', 'md', 'lg', 'xl'].includes(value)
   },
-  position: {
+  maxWidth: {
     type: String,
-    default: 'center',
-    validator: (value) => ['center', 'top', 'bottom'].includes(value)
+    default: null,
+    validator: (value) => value === null || ['xs', 'sm', 'md', 'lg', 'xl'].includes(value)
   },
+  
+  // 显示控制
   closable: {
+    type: Boolean,
+    default: true
+  },
+  showCloseButton: {
+    type: Boolean,
+    default: true
+  },
+  maskClosable: {
     type: Boolean,
     default: true
   },
@@ -93,46 +123,117 @@ const props = defineProps({
     type: Boolean,
     default: true
   },
-  showOverlay: {
+  disableBackdropClick: {
+    type: Boolean,
+    default: false
+  },
+  disableEscapeKeyDown: {
+    type: Boolean,
+    default: false
+  },
+  
+  // 布局
+  centered: {
     type: Boolean,
     default: true
   },
-  fullscreen: {
+  fullWidth: {
     type: Boolean,
     default: false
+  },
+  fullScreen: {
+    type: Boolean,
+    default: false
+  },
+  position: {
+    type: String,
+    default: 'center',
+    validator: (value) => ['center', 'top', 'bottom'].includes(value)
+  },
+  
+  // 滚动
+  scroll: {
+    type: String,
+    default: 'paper',
+    validator: (value) => ['paper', 'body'].includes(value)
   },
   lockScroll: {
     type: Boolean,
     default: true
   },
+  
+  // 样式
   zIndex: {
     type: Number,
     default: 1000
+  },
+  showOverlay: {
+    type: Boolean,
+    default: true
   }
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'update:modelValue'])
 
+const instance = getCurrentInstance()
+const titleId = `modal-title-${instance?.uid || Math.random().toString(36).substr(2, 9)}`
+const modalRef = ref(null)
+const previousActiveElement = ref(null)
+
+// 统一处理 visible/open/modelValue
+const isOpen = computed({
+  get() {
+    if (props.modelValue !== undefined) return props.modelValue
+    if (props.visible !== undefined) return props.visible
+    if (props.open !== undefined) return props.open
+    return false
+  },
+  set(val) {
+    emit('update:modelValue', val)
+    emit('close')
+  }
+})
+
+// 计算实际使用的尺寸
+const actualSize = computed(() => props.maxWidth || props.size)
+
+// 计算样式类名
 const modalWrapperClasses = computed(() => {
-  const classes = ['wc-modal']
-  
-  if (props.size) {
-    classes.push(`wc-modal--${props.size}`)
+  const classes = ['wc-modal-overlay']
+  if (props.position === 'center' && props.centered) {
+    classes.push('wc-modal-overlay--centered')
+  } else if (props.position && props.position !== 'center') {
+    classes.push(`wc-modal-overlay--${props.position}`)
   }
-  
-  if (props.position) {
-    classes.push(`wc-modal--${props.position}`)
-  }
-  
-  if (props.fullscreen) {
-    classes.push('wc-modal--fullscreen')
-  }
-  
   return classes
 })
 
 const modalClasses = computed(() => {
-  return ['wc-modal__content']
+  const classes = ['wc-modal']
+  
+  // 尺寸
+  if (actualSize.value && !props.fullScreen) {
+    classes.push(`wc-modal--${actualSize.value}`)
+  }
+  
+  // 全屏
+  if (props.fullScreen) {
+    classes.push('wc-modal--fullscreen')
+  }
+  
+  // 全宽
+  if (props.fullWidth && !props.fullScreen) {
+    classes.push('wc-modal--full-width')
+  }
+  
+  // 滚动行为
+  if (props.scroll === 'body') {
+    classes.push('wc-modal--scroll-body')
+  } else {
+    classes.push('wc-modal--scroll-paper')
+  }
+  
+  return classes
 })
 
 const modalWrapperStyles = computed(() => {
@@ -144,7 +245,7 @@ const modalWrapperStyles = computed(() => {
 const modalStyles = computed(() => {
   const styles = {}
   
-  if (props.fullscreen) {
+  if (props.fullScreen) {
     styles.width = '100vw'
     styles.height = '100vh'
     styles.maxWidth = 'none'
@@ -154,13 +255,76 @@ const modalStyles = computed(() => {
   return styles
 })
 
+// 决定是否显示关闭按钮
+const shouldShowCloseButton = computed(() => {
+  return props.closable && props.showCloseButton
+})
+
 const handleClose = () => {
+  // emit close 事件
   emit('close')
+  // v-model 兼容
+  emit('update:modelValue', false)
 }
 
 const handleOverlayClick = () => {
-  if (props.closeOnOverlay) {
+  if (props.maskClosable && props.closeOnOverlay && !props.disableBackdropClick) {
     handleClose()
+  }
+}
+
+// 键盘事件处理
+const handleKeyDown = (event) => {
+  if (event.key === 'Escape' && props.closable && !props.disableEscapeKeyDown) {
+    handleClose()
+  }
+}
+
+// 焦点管理
+const focusDialog = (element) => {
+  if (element) {
+    const focusableElements = element.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+    
+    if (focusableElements.length > 0) {
+      focusableElements[0].focus()
+    } else {
+      element.focus()
+    }
+  }
+}
+
+const createFocusTrap = (element) => {
+  if (!element) return () => {}
+
+  const focusableElements = element.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  )
+  
+  const firstElement = focusableElements[0]
+  const lastElement = focusableElements[focusableElements.length - 1]
+
+  const handleTabKeyDown = (e) => {
+    if (e.key === 'Tab') {
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          e.preventDefault()
+          lastElement?.focus()
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          e.preventDefault()
+          firstElement?.focus()
+        }
+      }
+    }
+  }
+
+  element.addEventListener('keydown', handleTabKeyDown)
+  
+  return () => {
+    element.removeEventListener('keydown', handleTabKeyDown)
   }
 }
 
@@ -179,148 +343,58 @@ const unlockBodyScroll = () => {
   }
 }
 
-// 监听open状态变化
-watch(() => props.open, (newVal) => {
-  if (newVal) {
+let focusTrapCleanup = null
+
+// 监听 open 状态变化
+watch(isOpen, async (newOpen) => {
+  if (newOpen) {
+    // 保存当前焦点元素
+    previousActiveElement.value = document.activeElement
+    
+    // 锁定滚动
     lockBodyScroll()
+    
+    // 下一帧设置焦点
+    await nextTick()
+    setTimeout(() => {
+      if (modalRef.value) {
+        focusDialog(modalRef.value)
+        focusTrapCleanup = createFocusTrap(modalRef.value)
+      }
+    }, 100)
+    
+    // 添加键盘事件监听
+    document.addEventListener('keydown', handleKeyDown)
   } else {
+    // 移除键盘事件监听
+    document.removeEventListener('keydown', handleKeyDown)
+    
+    // 清理焦点陷阱
+    if (focusTrapCleanup) {
+      focusTrapCleanup()
+      focusTrapCleanup = null
+    }
+    
+    // 恢复焦点
+    if (previousActiveElement.value && previousActiveElement.value.focus) {
+      previousActiveElement.value.focus()
+    }
+    
+    // 解锁滚动
     unlockBodyScroll()
   }
 }, { immediate: true })
 
-// 组件卸载时恢复滚动
+// 组件卸载时清理
 onUnmounted(() => {
+  document.removeEventListener('keydown', handleKeyDown)
+  if (focusTrapCleanup) {
+    focusTrapCleanup()
+  }
   unlockBodyScroll()
 })
 </script>
 
 <style scoped>
-.wc-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.wc-modal--top {
-  align-items: flex-start;
-  padding-top: 60px;
-}
-
-.wc-modal--bottom {
-  align-items: flex-end;
-  padding-bottom: 60px;
-}
-
-.wc-modal--fullscreen {
-  padding: 0;
-}
-
-.wc-modal__overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: -1;
-}
-
-.wc-modal__content {
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  width: 100%;
-  max-width: 500px;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-}
-
-.wc-modal--sm .wc-modal__content {
-  max-width: 400px;
-}
-
-.wc-modal--md .wc-modal__content {
-  max-width: 500px;
-}
-
-.wc-modal--lg .wc-modal__content {
-  max-width: 700px;
-}
-
-.wc-modal--xl .wc-modal__content {
-  max-width: 900px;
-}
-
-.wc-modal--fullscreen .wc-modal__content {
-  border-radius: 0;
-  width: 100vw;
-  height: 100vh;
-  max-width: none;
-  max-height: none;
-}
-
-.wc-modal__close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #71717a;
-  transition: color 0.2s ease;
-  padding: 4px;
-  line-height: 1;
-  z-index: 10;
-}
-
-.wc-modal__close:hover {
-  color: #3f3f46;
-}
-
-.wc-modal__header {
-  padding: 24px 24px 16px 24px;
-  border-bottom: 1px solid #e4e4e7;
-}
-
-.wc-modal__title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #18181b;
-  margin: 0;
-}
-
-.wc-modal__body {
-  padding: 24px;
-  color: #3f3f46;
-  line-height: 1.6;
-  min-height: 40px;
-}
-
-.wc-modal__footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  padding: 16px 24px 24px 24px;
-  border-top: 1px solid #e4e4e7;
-}
-
-/* 动画效果 */
-.modal-enter-active,
-.modal-leave-active {
-  transition: all 0.3s ease;
-}
-
-.modal-enter-from,
-.modal-leave-to {
-  opacity: 0;
-  transform: scale(0.9);
-}
-</style> 
+@import './style.css';
+</style>
