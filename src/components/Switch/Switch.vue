@@ -191,7 +191,7 @@ const handleToggle = () => {
   background-color: #d1d5db;
   border-radius: 12px;
   transition: all 0.2s ease-in-out;
-  border: 1px solid #e5e7eb;
+  border: none;
 }
 
 .dark .switch__track {
@@ -209,7 +209,7 @@ const handleToggle = () => {
   background-color: #ffffff;
   border-radius: 10px;
   transition: all 0.2s ease-in-out;
-  border: 1px solid #e5e7eb;
+  border: none;
   z-index: 1;
 }
 
