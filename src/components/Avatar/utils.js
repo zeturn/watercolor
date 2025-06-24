@@ -93,14 +93,25 @@ export function getAvatarStyles(size) {
 export function generateAvatarText(children) {
   if (!children) return ''
   
-  // 从文本中生成首字母
-  const words = children.trim().split(' ')
+  // 去除首尾空白
+  const trimmed = children.trim()
+  const firstChar = trimmed.charAt(0)
+
+  // 判断是否为中文字符 (基本汉字区 4E00-9FA5)
+  const isChinese = /[\u4e00-\u9fa5]/.test(firstChar)
+
+  // 如果首字符是中文，则始终返回该字符
+  if (isChinese) {
+    return firstChar
+  }
+
+  // 对英文或其它语言，按空格分词，生成首字母（最多两个）
+  const words = trimmed.split(/\s+/).filter(Boolean)
   if (words.length === 1) {
     return words[0].charAt(0).toUpperCase()
-  } else if (words.length >= 2) {
-    return (words[0].charAt(0) + words[1].charAt(0)).toUpperCase()
   }
-  return ''
+  // words.length >= 2
+  return (words[0].charAt(0) + words[1].charAt(0)).toUpperCase()
 }
 
 /**
