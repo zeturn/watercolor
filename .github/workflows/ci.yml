@@ -77,7 +77,13 @@ jobs:
         run: npm run build
         
       - name: Build Storybook
-        run: npm run build-storybook
+        run: |
+          npm run build-storybook:vue
+          npm run build-storybook:react
+          mkdir -p storybook-static/vue
+          mkdir -p storybook-static/react
+          cp -r storybook-static-vue/* storybook-static/vue/
+          cp -r storybook-static-react/* storybook-static/react/
         
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -112,7 +118,13 @@ jobs:
         run: npm ci
         
       - name: Build Storybook
-        run: npm run build-storybook
+        run: |
+          npm run build-storybook:vue
+          npm run build-storybook:react
+          mkdir -p storybook-static/vue
+          mkdir -p storybook-static/react
+          cp -r storybook-static-vue/* storybook-static/vue/
+          cp -r storybook-static-react/* storybook-static/react/
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
