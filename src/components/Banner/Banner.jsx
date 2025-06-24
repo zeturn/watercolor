@@ -42,6 +42,9 @@ export default function Banner({
     handleBannerAction(onAction)
   }
 
+  // 检查是否有自定义的操作按钮内容
+  const hasCustomActions = children && React.Children.count(children) > 0
+
   return (
     <div
       className={bannerClasses}
@@ -55,12 +58,12 @@ export default function Banner({
         )}
         <div className="wc-banner-text">
           {title && <div className="wc-banner-title">{title}</div>}
-          <div className="wc-banner-message">{children || message}</div>
+          <div className="wc-banner-message">{message}</div>
         </div>
-        {(children && children.actions) || showDefaultAction ? (
+        {(hasCustomActions || showDefaultAction) && (
           <div className="wc-banner-actions">
-            {children && children.actions ? (
-              children.actions
+            {hasCustomActions ? (
+              children
             ) : (
               <button
                 onClick={handleAction}
@@ -70,7 +73,7 @@ export default function Banner({
               </button>
             )}
           </div>
-        ) : null}
+        )}
         {closable && (
           <button
             onClick={handleClose}

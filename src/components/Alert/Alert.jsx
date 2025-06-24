@@ -1,46 +1,55 @@
 import React, { useState } from 'react'
-import { colorMap } from './utils.js'
+import { getAlertClasses, getIconContent } from './utils.js'
 import './style.css'
 
 export function Alert({
-  severity = 'info',
+  type = 'info',
   variant = 'standard',
   title = '',
   closable = false,
-  hideIcon = false,
+  showIcon = true,
   className = '',
   children,
   onClose = () => {},
 }) {
-  const [closed, setClosed] = useState(false)
+  const [visible, setVisible] = useState(true)
 
-  if (closed) return null
+  if (!visible) return null
 
   const handleClose = () => {
-    setClosed(true)
+    setVisible(false)
     onClose()
   }
 
+  const alertClasses = getAlertClasses(type, variant)
+  const iconContent = getIconContent(type)
+
   const classes = [
-    'flex items-start p-4 rounded-lg border transition-all duration-200',
-    colorMap[severity][variant],
+    ...alertClasses,
     className,
-  ].join(' ')
+  ].filter(Boolean).join(' ')
 
   return (
     <div className={classes} role="alert">
-      {!hideIcon && <span className="mr-2">⚠️</span>}
-      <div className="flex-1 min-w-0">
-        {title && <div className="font-medium mb-1">{title}</div>}
-        <div className="text-sm">{children}</div>
+      {showIcon && (
+        <div className="wc-alert-icon">
+          <span>{iconContent}</span>
+        </div>
+      )}
+      <div className="wc-alert-content">
+        {title && <div className="wc-alert-title">{title}</div>}
+        <div className="wc-alert-message">
+          {children}
+        </div>
       </div>
       {closable && (
         <button
           type="button"
-          className="ml-3 inline-flex rounded-md p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2"
+          className="wc-alert-close"
+          aria-label="关闭"
           onClick={handleClose}
         >
-          ✖️
+          ×
         </button>
       )}
     </div>

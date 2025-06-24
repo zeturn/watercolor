@@ -6,7 +6,7 @@ import {
   handleCheckboxKeyDown, 
   renderCheckboxIcon, 
   generateCheckboxId 
-} from './utils.js'
+} from './utils.jsx'
 import './style.css'
 
 const Checkbox = ({
