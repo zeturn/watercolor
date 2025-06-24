@@ -20,7 +20,7 @@ export const validTriggers = ['click', 'hover']
 /**
  * 有效的Dropdown变体
  */
-export const validVariants = ['default', 'text', 'outlined']
+export const validVariants = ['default', 'text', 'outlined', 'card']
 
 /**
  * 验证Dropdown放置位置

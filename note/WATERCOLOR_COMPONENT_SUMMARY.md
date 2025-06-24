@@ -292,6 +292,57 @@ import {
 - ✨ 边距和对齐控制
 - ✨ 分割线支持
 
+## Dropdown - 下拉菜单
+
+支持多种样式和布局的下拉菜单组件。
+
+### 新增功能：卡片变种 (Card Variant)
+
+新增了 `variant="card"` 选项，可以展示一个更大的卡片样式下拉菜单：
+- 左半边：示意图和描述信息
+- 右半边：选项列表
+- 适合用于产品介绍、功能展示等场景
+
+### Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| variant | string | 'default' | 变种样式：'default', 'text', 'outlined', 'card' |
+| illustration | string | '' | 卡片变种的示意图URL |
+| illustrationAlt | string | '示意图' | 示意图的alt文本 |
+| cardTitle | string | '' | 卡片变种的标题 |
+| cardDescription | string | '' | 卡片变种的描述文本 |
+
+### 使用示例
+
+```jsx
+// React 卡片变种
+<Dropdown
+  variant="card"
+  triggerText="了解更多"
+  illustration="https://example.com/image.png"
+  cardTitle="Watercolor UI"
+  cardDescription="现代化的水彩风格组件库"
+  items={[
+    { label: '快速开始', icon: '🚀', key: 'quickstart' },
+    { label: '文档', icon: '📚', key: 'docs' },
+    { label: '模板', icon: '📄', key: 'templates' }
+  ]}
+/>
+```
+
+```vue
+<!-- Vue 卡片变种 -->
+<Dropdown
+  variant="card"
+  trigger-text="了解更多"
+  :illustration="imageUrl"
+  card-title="Watercolor UI"
+  card-description="现代化的水彩风格组件库"
+  :items="menuItems"
+/>
+```
+
 ## 📈 项目统计
 
 - **总组件数**: 55+

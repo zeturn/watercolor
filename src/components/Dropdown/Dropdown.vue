@@ -26,22 +26,67 @@
         :style="dropdownStyles"
       >
         <slot name="content">
-          <div
-            v-for="(item, index) in items"
-            :key="item.key || index"
-            :class="[
-              item.divider ? 'wc-dropdown__divider' : 'wc-dropdown__item',
-              {
-                'wc-dropdown__item--disabled': item.disabled && !item.divider
-              }
-            ]"
-            @click="handleItemClick(item, index)"
-          >
-            <span
-              v-if="item.icon"
-              class="wc-dropdown__icon"
-            >{{ item.icon }}</span>
-            <span class="wc-dropdown__label">{{ item.label }}</span>
+          <div v-if="variant === 'card'" class="wc-dropdown__card">
+            <!-- 左侧示意图区域 -->
+            <div class="wc-dropdown__card-illustration">
+              <slot name="illustration">
+                <img 
+                  v-if="illustration" 
+                  :src="illustration" 
+                  :alt="illustrationAlt"
+                  class="wc-dropdown__illustration-image"
+                />
+                <div v-else class="wc-dropdown__illustration-placeholder">
+                  <span>🎨</span>
+                </div>
+              </slot>
+              <div v-if="cardTitle || cardDescription" class="wc-dropdown__card-info">
+                <h4 v-if="cardTitle" class="wc-dropdown__card-title">{{ cardTitle }}</h4>
+                <p v-if="cardDescription" class="wc-dropdown__card-description">{{ cardDescription }}</p>
+              </div>
+            </div>
+            
+            <!-- 右侧列表区域 -->
+            <div class="wc-dropdown__card-list">
+              <div
+                v-for="(item, index) in items"
+                :key="item.key || index"
+                :class="[
+                  item.divider ? 'wc-dropdown__divider' : 'wc-dropdown__item',
+                  {
+                    'wc-dropdown__item--disabled': item.disabled && !item.divider
+                  }
+                ]"
+                @click="handleItemClick(item, index)"
+              >
+                <span
+                  v-if="item.icon"
+                  class="wc-dropdown__icon"
+                >{{ item.icon }}</span>
+                <span class="wc-dropdown__label">{{ item.label }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 默认样式 -->
+          <div v-else>
+            <div
+              v-for="(item, index) in items"
+              :key="item.key || index"
+              :class="[
+                item.divider ? 'wc-dropdown__divider' : 'wc-dropdown__item',
+                {
+                  'wc-dropdown__item--disabled': item.disabled && !item.divider
+                }
+              ]"
+              @click="handleItemClick(item, index)"
+            >
+              <span
+                v-if="item.icon"
+                class="wc-dropdown__icon"
+              >{{ item.icon }}</span>
+              <span class="wc-dropdown__label">{{ item.label }}</span>
+            </div>
           </div>
         </slot>
       </div>
@@ -75,6 +120,27 @@ const props = defineProps({
     type: String,
     default: 'click',
     validator: (value) => ['click', 'hover'].includes(value)
+  },
+  variant: {
+    type: String,
+    default: 'default',
+    validator: (value) => ['default', 'card'].includes(value)
+  },
+  illustration: {
+    type: String,
+    default: ''
+  },
+  illustrationAlt: {
+    type: String,
+    default: '示意图'
+  },
+  cardTitle: {
+    type: String,
+    default: ''
+  },
+  cardDescription: {
+    type: String,
+    default: ''
   }
 })
 
@@ -86,10 +152,20 @@ const triggerRef = ref(null)
 const menuRef = ref(null)
 
 const dropdownClasses = computed(() => {
-  return ['wc-dropdown__menu', `wc-dropdown__menu--${props.placement}`]
+  const classes = ['wc-dropdown__menu', `wc-dropdown__menu--${props.placement}`]
+  if (props.variant === 'card') {
+    classes.push('wc-dropdown__menu--card')
+  }
+  return classes
 })
 
 const dropdownStyles = computed(() => {
+  if (props.variant === 'card') {
+    return {
+      minWidth: '320px',
+      maxWidth: '450px'
+    }
+  }
   return {
     minWidth: '120px'
   }

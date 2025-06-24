@@ -19,6 +19,10 @@ const Dropdown = ({
   variant = 'default',
   disabled = false,
   trigger = 'click',
+  illustration = '',
+  illustrationAlt = '示意图',
+  cardTitle = '',
+  cardDescription = '',
   onSelect,
   onOpen,
   onClose,
@@ -33,9 +37,11 @@ const Dropdown = ({
   const triggerRef = useRef(null)
 
   const dropdownClasses = getDropdownClasses({ size, variant, disabled, className }).join(' ')
-  const menuClasses = getDropdownMenuClasses(placement).join(' ')
+  const menuClasses = getDropdownMenuClasses(placement, variant === 'card' ? 'wc-dropdown__menu--card' : '').join(' ')
   const buttonClasses = getDropdownButtonClasses({ disabled }).join(' ')
   const arrowClasses = getArrowClasses(isOpen).join(' ')
+
+  const menuStyles = variant === 'card' ? { minWidth: '320px', maxWidth: '450px' } : { minWidth: '120px' }
 
   const handleToggle = () => {
     handleDropdownToggle(isOpen, disabled, setIsOpen, onOpen, onClose)
@@ -78,32 +84,85 @@ const Dropdown = ({
       </div>
 
       {isOpen && (
-        <div className={menuClasses}>
+        <div className={menuClasses} style={menuStyles}>
           {dropdownContent || (
-            items.map((item, index) => {
-              if (item.divider) {
-                return <div key={item.key || index} className="wc-dropdown__divider" />
-              }
-              
-              const itemClasses = getDropdownItemClasses(item).join(' ')
-              
-              return (
-                <div
-                  key={item.key || index}
-                  className={itemClasses}
-                  onClick={() => handleItemSelect(item, index)}
-                >
-                  {item.icon && (
-                    <span className="wc-dropdown__icon">
-                      {item.icon}
-                    </span>
+            variant === 'card' ? (
+              <div className="wc-dropdown__card">
+                {/* 左侧示意图区域 */}
+                <div className="wc-dropdown__card-illustration">
+                  {illustration ? (
+                    <img 
+                      src={illustration}
+                      alt={illustrationAlt}
+                      className="wc-dropdown__illustration-image"
+                    />
+                  ) : (
+                    <div className="wc-dropdown__illustration-placeholder">
+                      <span>🎨</span>
+                    </div>
                   )}
-                  <span className="wc-dropdown__label">
-                    {item.label}
-                  </span>
+                  {(cardTitle || cardDescription) && (
+                    <div className="wc-dropdown__card-info">
+                      {cardTitle && <h4 className="wc-dropdown__card-title">{cardTitle}</h4>}
+                      {cardDescription && <p className="wc-dropdown__card-description">{cardDescription}</p>}
+                    </div>
+                  )}
                 </div>
-              )
-            })
+                
+                {/* 右侧列表区域 */}
+                <div className="wc-dropdown__card-list">
+                  {items.map((item, index) => {
+                    if (item.divider) {
+                      return <div key={item.key || index} className="wc-dropdown__divider" />
+                    }
+                    
+                    const itemClasses = getDropdownItemClasses(item).join(' ')
+                    
+                    return (
+                      <div
+                        key={item.key || index}
+                        className={itemClasses}
+                        onClick={() => handleItemSelect(item, index)}
+                      >
+                        {item.icon && (
+                          <span className="wc-dropdown__icon">
+                            {item.icon}
+                          </span>
+                        )}
+                        <span className="wc-dropdown__label">
+                          {item.label}
+                        </span>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            ) : (
+              items.map((item, index) => {
+                if (item.divider) {
+                  return <div key={item.key || index} className="wc-dropdown__divider" />
+                }
+                
+                const itemClasses = getDropdownItemClasses(item).join(' ')
+                
+                return (
+                  <div
+                    key={item.key || index}
+                    className={itemClasses}
+                    onClick={() => handleItemSelect(item, index)}
+                  >
+                    {item.icon && (
+                      <span className="wc-dropdown__icon">
+                        {item.icon}
+                      </span>
+                    )}
+                    <span className="wc-dropdown__label">
+                      {item.label}
+                    </span>
+                  </div>
+                )
+              })
+            )
           )}
         </div>
       )}
