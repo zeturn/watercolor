@@ -201,3 +201,6 @@ export interface SelectOption {
   value: string | number
   disabled?: boolean
 }
+
+export { provideTheme, useTheme as useVueTheme } from './composables/useTheme'
+export { ThemeProvider, useTheme as useReactTheme } from './contexts/ThemeContext'

@@ -1,0 +1,66 @@
+import { addons } from '@storybook/manager-api'
+import { themes } from '@storybook/theming'
+
+// 检测系统主题偏好
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+// 获取保存的主题设置
+const savedTheme = localStorage.getItem('storybook-theme')
+
+const isDark = savedTheme ? savedTheme === 'dark' : prefersDark
+
+addons.setConfig({
+  theme: isDark ? {
+    ...themes.dark,
+    brandTitle: 'Watercolor UI',
+    brandUrl: 'https://github.com',
+    brandImage: './img/watercolorui.png',
+    brandTarget: '_self',
+
+    // 深色主题颜色
+    colorPrimary: '#60A5FA',
+    colorSecondary: '#34D399',
+
+    appBg: '#111827',
+    appContentBg: '#1F2937',
+    appBorderColor: '#374151',
+    appBorderRadius: 8,
+
+    textColor: '#F3F4F6',
+    textInverseColor: '#111827',
+
+    barTextColor: '#9CA3AF',
+    barSelectedColor: '#60A5FA',
+    barBg: '#1F2937',
+
+    inputBg: '#374151',
+    inputBorder: '#4B5563',
+    inputTextColor: '#F3F4F6',
+    inputBorderRadius: 6,
+  } : {
+    ...themes.light,
+    brandTitle: 'Watercolor UI',
+    brandUrl: 'https://github.com',
+    brandImage: './img/watercolorui.png',
+    brandTarget: '_self',
+
+    colorPrimary: '#3B82F6',
+    colorSecondary: '#10B981',
+
+    appBg: '#F9FAFB',
+    appContentBg: '#FFFFFF',
+    appBorderColor: '#E5E7EB',
+    appBorderRadius: 8,
+
+    textColor: '#374151',
+    textInverseColor: '#FFFFFF',
+
+    barTextColor: '#6B7280',
+    barSelectedColor: '#3B82F6',
+    barBg: '#FFFFFF',
+
+    inputBg: '#FFFFFF',
+    inputBorder: '#D1D5DB',
+    inputTextColor: '#374151',
+    inputBorderRadius: 6,
+  },
+})

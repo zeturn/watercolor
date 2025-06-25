@@ -44,6 +44,23 @@ const preview = {
         dynamicTitle: true,
       },
     },
+    colorTheme: {
+      description: '颜色主题',
+      defaultValue: 'theme-ocean',
+      toolbar: {
+        title: '配色',
+        icon: 'paintbrush',
+        items: [
+          { value: 'theme-ocean', title: 'Ocean' },
+          { value: 'theme-forest', title: 'Forest' },
+          { value: 'theme-sunset', title: 'Sunset' },
+          { value: 'theme-violet', title: 'Violet' },
+          { value: 'theme-rose', title: 'Rose' },
+        ],
+        showName: true,
+        dynamicTitle: true,
+      },
+    },
   },
   decorators: [
     /**
@@ -51,15 +68,22 @@ const preview = {
      * @param {any} context - Storybook 上下文
      */
     (story, context) => {
-      const theme = context.globals.theme;
+      const { theme, colorTheme } = context.globals;
 
-      // 设置根节点主题 class
       const root = document.documentElement;
+
+      // 处理明暗模式
       root.classList.remove('light', 'dark');
       root.classList.add(theme);
 
-      // 持久化主题
+      // 处理颜色主题
+      const colorThemes = ['theme-ocean', 'theme-forest', 'theme-sunset', 'theme-violet', 'theme-rose'];
+      colorThemes.forEach((cls) => root.classList.remove(cls));
+      root.classList.add(colorTheme);
+
+      // 持久化设置
       localStorage.setItem('storybook-theme', theme);
+      localStorage.setItem('storybook-color-theme', colorTheme);
 
       // 返回包装组件
       return {
@@ -74,7 +98,7 @@ const preview = {
                     : 'bg-neutral-0 text-neutral-900'
                 }`,
               },
-              [h(story())] // 调用 story() 获取要渲染的组件
+              [h(story())]
             );
         },
       };
