@@ -18,7 +18,6 @@ export { default as Container } from './components/Container/Container.jsx'
 export { default as Copy } from './components/Copy/Copy.jsx'
 export { default as Countdown } from './components/Countdown/Countdown.jsx'
 export { default as DatePicker } from './components/DatePicker/DatePicker.jsx'
-// Dialog 组件已合并到 Modal 中
 export { default as Feed } from './components/Feed/Feed.jsx'
 export { default as Feature } from './components/Feature/Feature.jsx'
 export { default as FileInput } from './components/FileInput/FileInput.jsx'
@@ -63,3 +62,6 @@ export { default as Watermark } from './components/Watermark/Watermark.jsx'
 
 // 主题工具 & 类型
 export * from './utils/theme' 
+
+// 主题 Provider
+export { ThemeProvider, useTheme } from './ThemeReact.tsx'

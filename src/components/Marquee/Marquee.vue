@@ -352,7 +352,7 @@ export default {
 
 /* 变体样式 */
 .marquee-default {
-  background: var(--color-gray-50, #f9fafb);
+  background: var(--wc-neutral-50, #f9fafb);
   border: 1px solid var(--color-border, #e5e7eb);
 }
 
@@ -536,7 +536,7 @@ export default {
 .marquee-loading-spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid var(--color-gray-300, #d1d5db);
+  border: 2px solid var(--wc-neutral-300, #d1d5db);
   border-top: 2px solid var(--color-primary, #3b82f6);
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -629,7 +629,7 @@ export default {
 /* 深色模式 */
 @media (prefers-color-scheme: dark) {
   .marquee-default {
-    background: var(--color-dark-surface, #1f2937);
+    background: var(--wc-neutral-800, #1f2937);
     border-color: var(--color-dark-border, #374151);
     color: var(--color-dark-text, #f9fafb);
   }
@@ -641,13 +641,13 @@ export default {
   
   .marquee-gradient-left {
     background: linear-gradient(to right, 
-      var(--color-dark-surface, #1f2937) 0%, 
+      var(--wc-neutral-800, #1f2937) 0%, 
       transparent 100%);
   }
   
   .marquee-gradient-right {
     background: linear-gradient(to left, 
-      var(--color-dark-surface, #1f2937) 0%, 
+      var(--wc-neutral-800, #1f2937) 0%, 
       transparent 100%);
   }
   
@@ -657,7 +657,7 @@ export default {
   }
   
   .marquee-control-btn:hover {
-    background: var(--color-dark-surface, #1f2937);
+    background: var(--wc-neutral-800, #1f2937);
   }
   
   .marquee-loading-overlay {

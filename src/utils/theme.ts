@@ -18,6 +18,15 @@ export interface FontConfig {
   fallback?: string
 }
 
+export interface RadiusConfig {
+  sm?: string
+  md?: string
+  lg?: string
+  xl?: string
+  '2xl'?: string
+  full?: string
+}
+
 export interface WatercolorTheme {
   primary: Partial<ColorPalette>
   secondary?: Partial<ColorPalette>
@@ -32,6 +41,7 @@ export interface WatercolorTheme {
   teal?: Partial<ColorPalette>
   indigo?: Partial<ColorPalette>
   fonts?: FontConfig
+  radius?: RadiusConfig
 }
 
 /**
@@ -121,6 +131,14 @@ export function setTheme(theme: WatercolorTheme): void {
   // Set fonts
   if (theme.fonts) {
     setFonts(theme.fonts)
+  }
+
+  // Set border radius variables
+  if (theme.radius) {
+    Object.entries(theme.radius).forEach(([name, value]) => {
+      const varName = `--wc-radius-${name}`
+      root.style.setProperty(varName, value as string)
+    })
   }
 }
 
@@ -442,4 +460,29 @@ export function getCurrentFonts(): FontConfig {
     english: root.style.getPropertyValue('--wc-font-english') || undefined,
     fallback: root.style.getPropertyValue('--wc-font-family') || undefined
   }
+}
+
+/**
+ * 动态加载根目录的 theme.config.json 并应用
+ * 该配置文件允许最终用户无需修改源码即可自定义主题。
+ */
+export async function loadThemeConfig(configPath: string = '/theme.config.json'): Promise<void> {
+  if (typeof window === 'undefined' || typeof fetch === 'undefined') return
+
+  try {
+    const res = await fetch(configPath, { cache: 'no-store' })
+    if (!res.ok) return
+
+    const cfg: WatercolorTheme = await res.json()
+    setTheme(cfg)
+  } catch (err) {
+    // 静默失败，保持默认主题
+    console.warn('[Watercolor] 无法加载自定义 theme.config.json:', err)
+  }
+}
+
+// 在浏览器环境下自动尝试加载配置
+if (typeof window !== 'undefined') {
+  // 不阻塞主线程，异步加载
+  loadThemeConfig()
 } 

@@ -60,7 +60,7 @@ const FileInput = ({
       padding: 32,
       border: '2px dashed var(--color-border,#d1d5db)',
       borderRadius: 8,
-      background: 'var(--color-gray-50,#f9fafb)',
+      background: 'var(--wc-neutral-50,#f9fafb)',
       textAlign: 'center',
     },
     button: {
@@ -82,7 +82,7 @@ const FileInput = ({
       justifyContent: 'center',
       border: '1px solid var(--color-border,#d1d5db)',
       borderRadius: '50%',
-      background: 'var(--color-gray-50,#f9fafb)',
+      background: 'var(--wc-neutral-50,#f9fafb)',
       fontSize: 18,
     },
   }

@@ -23,7 +23,6 @@ export { default as Container } from './components/Container/Container.vue'
 export { default as Copy } from './components/Copy/Copy.vue'
 export { default as Countdown } from './components/Countdown/Countdown.vue'
 export { default as DatePicker } from './components/DatePicker/DatePicker.vue'
-// Dialog 组件已合并到 Modal 中
 export { default as Dropdown } from './components/Dropdown/Dropdown.vue'
 export { default as Fab } from './components/Button/Fab.vue'
 export { default as Feed } from './components/Feed/Feed.vue'
@@ -70,7 +69,6 @@ export { default as TableHead } from './components/Table/TableHead.vue'
 export { default as TableRow } from './components/Table/TableRow.vue'
 export { default as Tabs } from './components/Tabs/Tabs.vue'
 export { default as TextField } from './components/TextField/TextField.vue'
-// Toast functionality has been integrated into Snackbar
 export { default as Toolbar } from './components/Navigation/Toolbar.vue'
 export { default as Tooltip } from './components/Tooltip/Tooltip.vue'
 export { default as Typography } from './components/Typography/Typography.vue'
@@ -80,4 +78,7 @@ export { default as VideoPlayer } from './components/VideoPlayer/VideoPlayer.vue
 export { default as Watermark } from './components/Watermark/Watermark.vue'
 
 // 主题工具 & 类型
-export * from './utils/theme' 
+export * from './utils/theme'
+
+// 主题 Provider
+export { ThemeProvider, useTheme } from './ThemeVUE.ts'

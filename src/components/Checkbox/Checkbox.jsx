@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import { 
-  getCheckboxClasses, 
-  getCheckboxStyles, 
-  handleCheckboxChange, 
-  handleCheckboxKeyDown, 
-  renderCheckboxIcon, 
-  generateCheckboxId 
-} from './utils.jsx'
+import React, { useId, useState } from 'react'
 import './style.css'
+
+/**
+ * React Checkbox 组件
+ * 结构、类名与 Vue 版保持一致，复用相同样式。
+ */
+
+const VALID_COLORS = ['primary', 'secondary', 'success', 'warning', 'error', 'info']
+const VALID_SIZES = ['sm', 'md', 'lg']
 
 const Checkbox = ({
   checked = false,
@@ -18,120 +18,105 @@ const Checkbox = ({
   size = 'md',
   color = 'primary',
   label = '',
-  labelPlacement = 'end',
-  value = '',
-  name = '',
-  id = '',
-  icon = null,
-  checkedIcon = null,
-  indeterminateIcon = null,
+  labelPlacement = 'end', // 'start' | 'end'
+  value = true,
+  name,
   className = '',
-  style = {},
-  onFocus,
-  onBlur,
   ...props
 }) => {
+  const inputId = useId()
   const [isFocused, setIsFocused] = useState(false)
 
-  const checkboxClasses = getCheckboxClasses({
-    size,
-    color,
-    labelPlacement,
-    checked,
-    indeterminate,
-    disabled,
-    isFocused,
-    className
-  }).join(' ')
+  // 安全校验
+  const safeColor = VALID_COLORS.includes(color) ? color : 'primary'
+  const safeSize = VALID_SIZES.includes(size) ? size : 'md'
 
-  const checkboxStyles = getCheckboxStyles({
-    checked,
-    indeterminate,
-    color,
-    style
-  })
+  /* ========== 类名计算 ========= */
+  const containerClasses = [
+    'wc-checkbox',
+    `wc-checkbox--${safeSize}`,
+    (checked || indeterminate) && (indeterminate ? 'wc-checkbox--indeterminate' : 'wc-checkbox--checked'),
+    disabled && 'wc-checkbox--disabled',
+    isFocused && 'wc-checkbox--focused',
+    labelPlacement === 'start' ? 'wc-checkbox--label-start' : 'wc-checkbox--label-end',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ')
 
-  const handleChange = (e) => {
-    handleCheckboxChange(e, disabled, checked, name, value, onChange)
+  const checkmarkClasses = [
+    'wc-checkbox__checkmark',
+    `wc-checkbox__checkmark--${safeColor}`,
+    `wc-checkbox__checkmark--${safeSize}`,
+    (checked || indeterminate) && 'wc-checkbox__checkmark--checked',
+    indeterminate && 'wc-checkbox__checkmark--indeterminate',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  /* ========== 事件处理 ========= */
+  const handleInputChange = (e) => {
+    if (disabled) return
+    const newChecked = e.target.checked
+    onChange?.({
+      target: {
+        name,
+        value,
+        checked: newChecked,
+      },
+      preventDefault: () => {},
+      stopPropagation: () => {},
+    })
   }
 
-  const handleFocus = (e) => {
-    setIsFocused(true)
-    onFocus?.(e)
-  }
-
-  const handleBlur = (e) => {
-    setIsFocused(false)
-    onBlur?.(e)
-  }
-
-  const handleKeyDown = (e) => {
-    handleCheckboxKeyDown(e, handleChange)
-  }
-
-  const iconElement = renderCheckboxIcon(
-    indeterminate, 
-    checked, 
-    indeterminateIcon, 
-    checkedIcon, 
-    icon
-  )
-
-  const checkboxId = generateCheckboxId(id, name)
-
-  const checkboxElement = (
-    <div
-      className="wc-checkbox__container"
-      onClick={handleChange}
-      onKeyDown={handleKeyDown}
-      tabIndex={disabled ? -1 : 0}
-      role="checkbox"
-      aria-checked={indeterminate ? 'mixed' : checked}
-      aria-disabled={disabled}
-      aria-required={required}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
+  /* ========== 渲染 ========= */
+  const icon = indeterminate ? (
+    <div className="indeterminate-icon" />
+  ) : checked ? (
+    <svg
+      className="checkmark-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
     >
+      <polyline points="20,6 9,17 4,12" />
+    </svg>
+  ) : null
+
+  const labelContent = label ? (
+    <span className="checkbox-label">{label}</span>
+  ) : null
+
+  return (
+    <label className={containerClasses} htmlFor={inputId}>
+      {labelPlacement === 'start' && labelContent}
+
       <input
+        id={inputId}
         type="checkbox"
         className="wc-checkbox__input"
         checked={checked}
-        onChange={() => {}} // Controlled by container click
         disabled={disabled}
         required={required}
         value={value}
         name={name}
-        id={checkboxId}
-        tabIndex={-1}
+        aria-checked={indeterminate ? 'mixed' : checked}
+        aria-disabled={disabled}
+        aria-required={required}
+        onChange={handleInputChange}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        ref={(el) => {
+          if (el) el.indeterminate = indeterminate
+        }}
         {...props}
       />
-      <div 
-        className="wc-checkbox__box"
-        style={checkboxStyles}
-      >
-        {iconElement}
-      </div>
-    </div>
-  )
 
-  if (label) {
-    return (
-      <label className={checkboxClasses} htmlFor={checkboxId}>
-        {labelPlacement === 'start' && (
-          <span className="wc-checkbox__label">{label}</span>
-        )}
-        {checkboxElement}
-        {labelPlacement === 'end' && (
-          <span className="wc-checkbox__label">{label}</span>
-        )}
-      </label>
-    )
-  }
+      <span className={checkmarkClasses}>{icon}</span>
 
-  return (
-    <div className={checkboxClasses}>
-      {checkboxElement}
-    </div>
+      {labelPlacement === 'end' && labelContent}
+    </label>
   )
 }
 

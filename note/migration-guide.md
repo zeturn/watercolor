@@ -88,7 +88,6 @@ import 'watercolor-ui/styles'
 | `Chip` | `Chip` | ✅ 完全兼容 |
 | `CircularProgress` | `CircularProgress` | ✅ 完全兼容 |
 | `Container` | `Container` | ✅ 完全兼容 |
-| `Dialog` | `Dialog` | ✅ 完全兼容 |
 | `Fab` | `Fab` | ✅ 完全兼容 |
 | `FormControl` | `FormControl` | ✅ 完全兼容 |
 | `FormControlLabel` | `FormControlLabel` | ✅ 完全兼容 |

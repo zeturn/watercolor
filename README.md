@@ -160,7 +160,7 @@ import {
   InputReact, 
   CardReact, 
   TableReact,
-  useTheme,
+  themeVUE,
   useToast
 } from 'watercolor-ui'
 
@@ -169,7 +169,7 @@ function App() {
   const [form, setForm] = useState({ username: '' })
   const [errors, setErrors] = useState({})
   
-  const theme = useTheme()
+  const theme = themeVUE()
   const toast = useToast()
 
   const tableData = [
@@ -445,7 +445,6 @@ Watercolor UI provides **60+** high-quality components, completely covering all 
 |------|:---:|:-----:|:----------------:|------|
 | Alert | ✅ | ✅ | ✅ | Alert message |
 | Snackbar | ✅ | ✅ | ✅ | Toast notification |
-| Dialog | ✅ | ✅ | ✅ | Modal dialog |
 | Tooltip | ✅ | ✅ | ✅ | Tooltip |
 | Progress | ✅ | ✅ | ✅ | Progress indicator |
 | Skeleton | ✅ | ✅ | ✅ | Loading skeleton |

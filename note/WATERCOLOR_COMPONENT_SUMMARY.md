@@ -58,7 +58,6 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 |--------|----------|------------|------|------------------|
 | Alert | ✅ Alert.vue | - | 完成 | ✅ |
 | Snackbar | ✅ Snackbar.vue | - | 完成 | ✅ |
-| Dialog | ✅ Dialog.vue | - | 完成 | ✅ |
 | DialogTitle | ✅ DialogTitle.vue | - | 🆕 完成 | ✅ |
 | DialogContent | ✅ DialogContent.vue | - | 🆕 完成 | ✅ |
 | DialogActions | ✅ DialogActions.vue | - | 🆕 完成 | ✅ |
@@ -131,7 +130,6 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 #### 反馈组件
 - ✅ Alert
 - ✅ Snackbar
-- ✅ Dialog
 - ✅ DialogTitle
 - ✅ DialogContent
 - ✅ DialogActions
@@ -271,13 +269,6 @@ import {
 - ✨ 悬停效果
 - ✨ 条纹行
 - ✨ 多种大小变体
-
-### Dialog 扩展组件
-- ✨ DialogTitle - 对话框标题
-- ✨ DialogContent - 可滚动内容区域
-- ✨ DialogActions - 操作按钮区域
-- ✨ 分割线支持
-- ✨ 无边距选项
 
 ### CircularProgress 组件
 - ✨ 确定和不确定进度

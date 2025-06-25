@@ -490,7 +490,7 @@ export default {
 .gallery-loading-spinner {
   width: 24px;
   height: 24px;
-  border: 2px solid var(--color-gray-300, #d1d5db);
+  border: 2px solid var(--wc-neutral-300, #d1d5db);
   border-top: 2px solid var(--color-primary, #3b82f6);
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -595,7 +595,7 @@ export default {
 }
 
 .gallery-page-btn:hover:not(:disabled) {
-  background: var(--color-gray-50, #f9fafb);
+  background: var(--wc-neutral-50, #f9fafb);
   border-color: var(--color-primary, #3b82f6);
 }
 
@@ -683,7 +683,7 @@ export default {
   justify-content: center;
   gap: 16px;
   padding: 16px;
-  background: var(--color-gray-50, #f9fafb);
+  background: var(--wc-neutral-50, #f9fafb);
 }
 
 .gallery-lightbox-nav {
@@ -802,7 +802,7 @@ export default {
   }
   
   .gallery-page-btn {
-    background: var(--color-dark-surface, #1f2937);
+    background: var(--wc-neutral-800, #1f2937);
     border-color: var(--color-dark-border, #374151);
     color: var(--color-dark-text, #f9fafb);
   }
@@ -816,7 +816,7 @@ export default {
   }
   
   .gallery-lightbox-content {
-    background: var(--color-dark-surface, #1f2937);
+    background: var(--wc-neutral-800, #1f2937);
   }
   
   .gallery-lightbox-title {
@@ -832,7 +832,7 @@ export default {
   }
   
   .gallery-lightbox-nav {
-    background: var(--color-dark-surface, #1f2937);
+    background: var(--wc-neutral-800, #1f2937);
     border-color: var(--color-dark-border, #374151);
     color: var(--color-dark-text, #f9fafb);
   }

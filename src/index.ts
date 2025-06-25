@@ -186,14 +186,26 @@ export interface BreadcrumbItem {
 
 export interface WatercolorTheme {
   primary: Record<string, string>
-  neutral: Record<string, string>
-  success: Record<string, string>
-  warning: Record<string, string>
-  error: Record<string, string>
+  secondary?: Record<string, string>
+  neutral?: Record<string, string>
+  success?: Record<string, string>
+  warning?: Record<string, string>
+  error?: Record<string, string>
+  info?: Record<string, string>
+  danger?: Record<string, string>
   purple?: Record<string, string>
   orange?: Record<string, string>
   cyan?: Record<string, string>
   pink?: Record<string, string>
+  /** 圆角配置，与 --wc-radius-xxx 变量对应 */
+  radius?: {
+    sm?: string
+    md?: string
+    lg?: string
+    xl?: string
+    '2xl'?: string
+    full?: string
+  }
 }
 
 export interface SelectOption {
@@ -202,5 +214,5 @@ export interface SelectOption {
   disabled?: boolean
 }
 
-export { provideTheme, useTheme as useVueTheme } from './composables/useTheme'
-export { ThemeProvider, useTheme as useReactTheme } from './contexts/ThemeContext'
+export { provideTheme, themeVUE as useVueTheme } from './ThemeVUE.ts'
+export { ThemeProvider, useTheme as useReactTheme } from './ThemeReact.tsx'

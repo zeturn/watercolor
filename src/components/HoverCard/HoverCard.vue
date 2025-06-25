@@ -486,7 +486,7 @@ export default {
 }
 
 .hover-card-action-btn:hover {
-  background: var(--color-gray-50, #f9fafb);
+  background: var(--wc-neutral-50, #f9fafb);
   border-color: var(--color-primary, #3b82f6);
 }
 
@@ -509,24 +509,24 @@ export default {
 /* 深色模式 */
 @media (prefers-color-scheme: dark) {
   .hover-card-popup {
-    background: var(--color-dark-surface, #1f2937);
+    background: var(--wc-neutral-800, #1f2937);
     border-color: var(--color-dark-border, #374151);
   }
   
   .hover-card-arrow-top {
-    border-top-color: var(--color-dark-surface, #1f2937);
+    border-top-color: var(--wc-neutral-800, #1f2937);
   }
   
   .hover-card-arrow-bottom {
-    border-bottom-color: var(--color-dark-surface, #1f2937);
+    border-bottom-color: var(--wc-neutral-800, #1f2937);
   }
   
   .hover-card-arrow-left {
-    border-left-color: var(--color-dark-surface, #1f2937);
+    border-left-color: var(--wc-neutral-800, #1f2937);
   }
   
   .hover-card-arrow-right {
-    border-right-color: var(--color-dark-surface, #1f2937);
+    border-right-color: var(--wc-neutral-800, #1f2937);
   }
   
   .hover-card-title {
@@ -543,7 +543,7 @@ export default {
   }
   
   .hover-card-action-btn {
-    background: var(--color-dark-surface, #1f2937);
+    background: var(--wc-neutral-800, #1f2937);
     border-color: var(--color-dark-border, #374151);
     color: var(--color-dark-text, #f9fafb);
   }
