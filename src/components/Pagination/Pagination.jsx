@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react'
+import './style.css'
 
 /**
  * Pagination component – React version
@@ -9,6 +10,7 @@ import React, { useState, useMemo, useEffect, useCallback } from 'react'
  *   pageSize     每页条数
  *   siblingCount 同级页码数量
  *   boundaryCount 边界页码数量
+ *   size         尺寸
  */
 export default function Pagination({
   value = 1,
@@ -17,6 +19,7 @@ export default function Pagination({
   pageSize = 10,
   siblingCount = 1,
   boundaryCount = 1,
+  size = 'md', // sm | md | lg | xl
   className = '',
   ...rest
 }) {
@@ -71,10 +74,18 @@ export default function Pagination({
 
   if (pageCount <= 1) return null
 
+  // 组装根元素类
+  const rootClasses = [
+    'pagination',
+    'wc-pagination',
+    size !== 'md' ? `wc-pagination--${size}` : '',
+    className
+  ].filter(Boolean).join(' ')
+
   return (
-    <nav className={`pagination ${className}`.trim()} aria-label="分页导航" {...rest}>
+    <nav className={rootClasses} aria-label="分页导航" {...rest}>
       <button
-        className="page-btn"
+        className="page-btn wc-page-btn wc-page-btn--prev wc-page-btn--nav"
         disabled={currentPage === 1}
         onClick={() => select(currentPage - 1)}
         aria-label="上一页"
@@ -90,7 +101,7 @@ export default function Pagination({
         ) : (
           <button
             key={page.key}
-            className={`page-btn${page.num === currentPage ? ' active' : ''}`}
+            className={`page-btn wc-page-btn${page.num === currentPage ? ' active wc-page-btn--active' : ''}`}
             onClick={() => select(page.num)}
           >
             {page.num}
@@ -99,7 +110,7 @@ export default function Pagination({
       )}
 
       <button
-        className="page-btn"
+        className="page-btn wc-page-btn wc-page-btn--next wc-page-btn--nav"
         disabled={currentPage === pageCount}
         onClick={() => select(currentPage + 1)}
         aria-label="下一页"

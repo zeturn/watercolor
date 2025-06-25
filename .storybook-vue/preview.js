@@ -46,23 +46,37 @@ const preview = {
     },
   },
   decorators: [
+    /**
+     * @param {Function} story - 返回要渲染的组件的函数
+     * @param {any} context - Storybook 上下文
+     */
     (story, context) => {
       const theme = context.globals.theme;
-      
-      // 在组件挂载时设置主题
+
+      // 设置根节点主题 class
       const root = document.documentElement;
       root.classList.remove('light', 'dark');
       root.classList.add(theme);
-      
-      // 保存主题选择到 localStorage
+
+      // 持久化主题
       localStorage.setItem('storybook-theme', theme);
-      
+
+      // 返回包装组件
       return {
         setup() {
-          return () => h('div', {
-            class: `p-4 min-h-screen ${theme === 'dark' ? 'bg-neutral-900 text-neutral-100' : 'bg-neutral-0 text-neutral-900'}`
-          }, h(story));
-        }
+          return () =>
+            h(
+              'div',
+              {
+                class: `p-4 min-h-screen ${
+                  theme === 'dark'
+                    ? 'bg-neutral-900 text-neutral-100'
+                    : 'bg-neutral-0 text-neutral-900'
+                }`,
+              },
+              [h(story())] // 调用 story() 获取要渲染的组件
+            );
+        },
       };
     },
   ],

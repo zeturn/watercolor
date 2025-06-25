@@ -33,6 +33,11 @@ export default {
     boundaryCount: {
       control: 'number',
       description: '首尾显示的页码数量'
+    },
+    size: {
+      control: { type: 'select' },
+      options: ['sm', 'md', 'lg', 'xl'],
+      description: '尺寸大小'
     }
   },
 };
@@ -42,6 +47,7 @@ export const Basic = {
     total: 120,
     pageSize: 10,
     value: 1,
+    size: 'md',
   },
   render: (args) => {
     const [page, setPage] = useState(args.value);

@@ -42,20 +42,23 @@ const preview = {
   decorators: [
     (Story, context) => {
       const theme = context.globals.theme;
-      
+
       React.useEffect(() => {
         const root = document.documentElement;
         root.classList.remove('light', 'dark');
         root.classList.add(theme);
-        
+
         // 保存主题选择到 localStorage
         localStorage.setItem('storybook-theme', theme);
       }, [theme]);
-      
-      return (
-        <div className={`p-4 min-h-screen ${theme === 'dark' ? 'bg-neutral-900 text-neutral-100' : 'bg-neutral-0 text-neutral-900'}`}>
-          <Story />
-        </div>
+
+      // 使用 React.createElement 避免在 .js 文件中直接书写 JSX，防止 Vite 解析错误
+      return React.createElement(
+        'div',
+        {
+          className: `p-4 min-h-screen ${theme === 'dark' ? 'bg-neutral-900 text-neutral-100' : 'bg-neutral-0 text-neutral-900'}`,
+        },
+        React.createElement(Story, null)
       );
     },
   ],
