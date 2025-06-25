@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Watermark from '../../src/components/Watermark/Watermark.vue'
+import Watermark from '@/components/Watermark/Watermark.vue'
 
 // Mock canvas相关API
 beforeEach(() => {

@@ -166,7 +166,7 @@ export const WithoutTitle = {
 
 export const Variants = {
   render: () => (
-    <div className="space-y-4 w-full max-w-lg">
+    <div className="space-y-4 w-full max-w-lg mb-10 dark:bg-neutral-900 dark:p-4 dark:rounded-lg">
       <Alert 
         type="info"
         title="填充样式"
@@ -192,9 +192,15 @@ export const Variants = {
   ),
 }
 
+export const Divider = () => (
+  <div className="w-full flex justify-center my-4">
+    <div className="h-0.5 w-32 bg-gray-200 dark:bg-gray-700 rounded-full" />
+  </div>
+);
+
 export const AllTypes = {
   render: () => (
-    <div className="space-y-4 w-full max-w-lg">
+    <div className="space-y-4 w-full max-w-lg mb-6 dark:bg-neutral-900 dark:p-4 dark:rounded-lg">
       <Alert 
         type="success"
         title="成功"
@@ -229,7 +235,7 @@ export const AllTypes = {
 
 export const WithCustomContent = {
   render: () => (
-    <div className="w-full max-w-lg">
+    <div className="w-full max-w-lg mb-6 dark:bg-neutral-900 dark:p-4 dark:rounded-lg">
       <Alert 
         type="info"
         title="自定义内容"

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import CircularProgress from '../../src/components/CircularProgress/CircularProgress.vue'
+import CircularProgress from '@/components/CircularProgress/CircularProgress.vue'
 
 describe('CircularProgress 组件', () => {
   it('正确渲染圆形进度条', () => {

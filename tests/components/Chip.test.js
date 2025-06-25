@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Chip from '../../src/components/Chip/Chip.vue'
+import Chip from '@/components/Chip/Chip.vue'
 
 describe('Chip 组件', () => {
   it('正确渲染标签组件', () => {

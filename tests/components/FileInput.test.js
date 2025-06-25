@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import FileInput from '../../src/components/FileInput/FileInput.vue'
+import FileInput from '@/components/FileInput/FileInput.vue'
 
 describe('FileInput Component', () => {
   it('renders correctly', () => {

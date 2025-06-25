@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Rating from '../../src/components/Rating/Rating.vue'
+import Rating from '@/components/Rating/Rating.vue'
 
 describe('Rating Component', () => {
   it('renders correctly', () => {

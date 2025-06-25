@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Paradox from '../../src/components/Paradox/Paradox.vue'
+import Paradox from '@/components/Paradox/Paradox.vue'
 
 describe('Paradox组件测试', () => {
   it('应该正确渲染悖论组件', () => {

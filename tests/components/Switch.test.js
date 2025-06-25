@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Switch from '../../src/components/Switch/Switch.vue'
+import Switch from '@/components/Switch/Switch.vue'
 
 describe('Switch Component', () => {
   it('应该正确渲染Switch组件', () => {

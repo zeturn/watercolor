@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Paper from '../../src/components/Paper/Paper.vue'
+import Paper from '@/components/Paper/Paper.vue'
 
 describe('Paper Component', () => {
   it('renders correctly', () => {

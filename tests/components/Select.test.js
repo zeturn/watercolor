@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Select from '../../src/components/Select/Select.vue'
+import Select from '@/components/Select/Select.vue'
 
 describe('Select Component', () => {
   const defaultOptions = [

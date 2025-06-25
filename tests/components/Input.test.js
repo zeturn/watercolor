@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Input from '../../src/components/Input/Input.vue'
+import Input from '@/components/Input/Input.vue'
 
 describe('Input 组件', () => {
   it('正确渲染输入框', () => {

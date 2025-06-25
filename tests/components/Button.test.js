@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Button from '../../src/components/Button/Button.vue'
+import Button from '@/components/Button/Button.vue'
 
 describe('Button Component', () => {
   it('renders correctly', () => {

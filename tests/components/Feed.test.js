@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Feed from '../../src/components/Feed/Feed.vue'
+import Feed from '@/components/Feed/Feed.vue'
 
 describe('Feed组件测试', () => {
   it('应该正确渲染动态流组件', () => {

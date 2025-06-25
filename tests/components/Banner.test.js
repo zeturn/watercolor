@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Banner from '../../src/components/Banner/Banner.vue'
+import Banner from '@/components/Banner/Banner.vue'
 
 describe('Banner 组件', () => {
   it('正确渲染横幅', () => {

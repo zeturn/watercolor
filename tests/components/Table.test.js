@@ -1,10 +1,10 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Table from '../../src/components/Table/Table.vue'
-import TableBody from '../../src/components/Table/TableBody.vue'
-import TableHead from '../../src/components/Table/TableHead.vue'
-import TableRow from '../../src/components/Table/TableRow.vue'
-import TableCell from '../../src/components/Table/TableCell.vue'
+import Table from '@/components/Table/Table.vue'
+import TableBody from '@/components/Table/TableBody.vue'
+import TableHead from '@/components/Table/TableHead.vue'
+import TableRow from '@/components/Table/TableRow.vue'
+import TableCell from '@/components/Table/TableCell.vue'
 
 describe('Table组件测试', () => {
   it('应该正确渲染基本表格', () => {

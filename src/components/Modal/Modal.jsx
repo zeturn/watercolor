@@ -156,6 +156,7 @@ const Modal = ({
       className={overlayClasses}
       style={{ zIndex }}
       onClick={handleOverlayClick}
+      data-testid="modal-overlay"
     >
       {/* 遮罩层 */}
       {showOverlay && (

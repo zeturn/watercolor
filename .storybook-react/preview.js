@@ -18,6 +18,10 @@ const preview = {
         { name: 'dark', value: '#171717' },
       ],
     },
+    darkMode: {
+      current: 'light',
+      stylePreview: true,
+    }
   },
   globalTypes: {
     theme: {
@@ -37,10 +41,22 @@ const preview = {
   },
   decorators: [
     (Story, context) => {
-      const theme = context.globals.theme
-      document.documentElement.className = theme === 'dark' ? 'dark' : ''
-      const className = `p-4 min-h-screen ${theme === 'dark' ? 'bg-neutral-900 text-neutral-100' : 'bg-neutral-0 text-neutral-900'}`
-      return React.createElement('div', { className }, React.createElement(Story))
+      const theme = context.globals.theme;
+      
+      React.useEffect(() => {
+        const root = document.documentElement;
+        root.classList.remove('light', 'dark');
+        root.classList.add(theme);
+        
+        // 保存主题选择到 localStorage
+        localStorage.setItem('storybook-theme', theme);
+      }, [theme]);
+      
+      return (
+        <div className={`p-4 min-h-screen ${theme === 'dark' ? 'bg-neutral-900 text-neutral-100' : 'bg-neutral-0 text-neutral-900'}`}>
+          <Story />
+        </div>
+      );
     },
   ],
 }

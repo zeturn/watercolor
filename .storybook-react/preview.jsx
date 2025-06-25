@@ -1,5 +1,5 @@
-import React from 'react'
 import '../src/styles/index.css'
+import React from 'react'
 
 /** @type { import('@storybook/react').Preview } */
 const preview = {
@@ -18,6 +18,10 @@ const preview = {
         { name: 'dark', value: '#171717' },
       ],
     },
+    darkMode: {
+      current: 'light',
+      stylePreview: true,
+    }
   },
   globalTypes: {
     theme: {
@@ -34,16 +38,49 @@ const preview = {
         dynamicTitle: true,
       },
     },
+    colorTheme: {
+      description: '颜色主题',
+      defaultValue: 'theme-ocean',
+      toolbar: {
+        title: '配色',
+        icon: 'paintbrush',
+        items: [
+          { value: 'theme-ocean', title: 'Ocean' },
+          { value: 'theme-forest', title: 'Forest' },
+          { value: 'theme-sunset', title: 'Sunset' },
+          { value: 'theme-violet', title: 'Violet' },
+          { value: 'theme-rose', title: 'Rose' },
+        ],
+        showName: true,
+        dynamicTitle: true,
+      },
+    },
   },
   decorators: [
     (Story, context) => {
-      const theme = context.globals.theme
-      document.documentElement.className = theme === 'dark' ? 'dark' : ''
+      const { theme, colorTheme } = context.globals;
+      
+      React.useEffect(() => {
+        const root = document.documentElement;
+        // 处理明暗模式
+        root.classList.remove('light', 'dark');
+        root.classList.add(theme);
+
+        // 处理颜色主题
+        const colorThemes = ['theme-ocean', 'theme-forest', 'theme-sunset', 'theme-violet', 'theme-rose'];
+        colorThemes.forEach((cls) => root.classList.remove(cls));
+        root.classList.add(colorTheme);
+
+        // 持久化
+        localStorage.setItem('storybook-theme', theme);
+        localStorage.setItem('storybook-color-theme', colorTheme);
+      }, [theme, colorTheme]);
+      
       return (
         <div className={`p-4 min-h-screen ${theme === 'dark' ? 'bg-neutral-900 text-neutral-100' : 'bg-neutral-0 text-neutral-900'}`}>
           <Story />
         </div>
-      )
+      );
     },
   ],
 }

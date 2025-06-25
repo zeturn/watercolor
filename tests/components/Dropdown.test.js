@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Dropdown from '../../src/components/Dropdown/Dropdown.vue'
+import Dropdown from '@/components/Dropdown/Dropdown.vue'
 
 describe('Dropdown 组件', () => {
   const mockItems = [

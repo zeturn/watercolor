@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Typography from '../../src/components/Typography/Typography.vue'
+import Typography from '@/components/Typography/Typography.vue'
 
 describe('Typography Component', () => {
   it('应该正确渲染排版组件', () => {

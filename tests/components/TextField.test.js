@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import TextField from '../../src/components/TextField/TextField.vue'
+import TextField from '@/components/TextField/TextField.vue'
 
 describe('TextField Component', () => {
   it('应该正确渲染文本字段', () => {

@@ -192,7 +192,7 @@ export const Variants = {
   render: () => ({
     components: { AlertVue },
     template: `
-      <div class="space-y-4 w-full max-w-lg">
+      <div class="space-y-4 w-full max-w-lg mb-10 dark:bg-neutral-900 dark:p-4 dark:rounded-lg">
         <AlertVue 
           type="info"
           title="填充样式"
@@ -216,34 +216,48 @@ export const Variants = {
   }),
 }
 
+export const Divider = {
+  render: () => ({
+    template: `
+      <div class="w-full flex justify-center my-4">
+        <div class="h-0.5 w-32 bg-gray-200 dark:bg-gray-700 rounded-full" />
+      </div>
+    `,
+  }),
+}
+
 export const AllTypes = {
   render: () => ({
     components: { AlertVue },
     template: `
-      <div class="space-y-4 w-full max-w-lg">
+      <div class="space-y-4 w-full max-w-lg mb-6 dark:bg-neutral-900 dark:p-4 dark:rounded-lg">
         <AlertVue 
           type="success"
           title="成功"
           message="操作执行成功！"
           :closable="true"
+          variant="standard"
         />
         <AlertVue 
           type="info"
           title="信息"
           message="这是一条信息提醒。"
           :closable="true"
+          variant="standard"
         />
         <AlertVue 
           type="warning"
           title="警告"
           message="请注意这个重要提醒。"
           :closable="true"
+          variant="standard"
         />
         <AlertVue 
           type="error"
           title="错误"
           message="发生了一个错误，请重试。"
           :closable="true"
+          variant="standard"
         />
       </div>
     `,
@@ -254,7 +268,7 @@ export const WithCustomContent = {
   render: () => ({
     components: { AlertVue },
     template: `
-      <div class="w-full max-w-lg">
+      <div class="w-full max-w-lg mb-6 dark:bg-neutral-900 dark:p-4 dark:rounded-lg">
         <AlertVue 
           type="info"
           title="自定义内容"

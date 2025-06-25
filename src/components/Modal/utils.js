@@ -142,12 +142,16 @@ export function getModalStyles({
  * @param {Function} onClose - 关闭回调函数
  * @param {number} delay - 延迟时间（毫秒）
  */
-export function handleModalClose(setIsVisible, onClose, delay = 300) {
+export function handleModalClose(setIsVisible, onClose, delay = 0) {
   setIsVisible(false)
   if (onClose) {
-    setTimeout(() => {
+    if (delay > 0) {
+      setTimeout(() => {
+        onClose()
+      }, delay)
+    } else {
       onClose()
-    }, delay)
+    }
   }
 }
 

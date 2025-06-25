@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Snackbar from '../../src/components/Snackbar/Snackbar.vue'
+import Snackbar from '@/components/Snackbar/Snackbar.vue'
 
 describe('Snackbar Component', () => {
   beforeEach(() => {

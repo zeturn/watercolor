@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Accordion from '../../src/components/Accordion/Accordion.vue'
+import Accordion from '@/components/Accordion/Accordion.vue'
 
 describe('Accordion 组件', () => {
   const mockItems = [

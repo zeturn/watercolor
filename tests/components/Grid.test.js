@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Grid from '../../src/components/Grid/Grid.vue'
+import Grid from '@/components/Grid/Grid.vue'
 
 describe('Grid 组件', () => {
   it('正确渲染网格容器', () => {

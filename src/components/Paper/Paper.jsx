@@ -1,4 +1,6 @@
 import React from 'react'
+import { getPaperClasses } from './utils.js'
+import './style.css'
 
 /**
  * Paper – React 组件
@@ -6,36 +8,58 @@ import React from 'react'
  *  variant   elevation | outlined
  *  elevation 0-24
  *  square    boolean – 是否直角
+ *  hoverable boolean – 是否有悬停效果
+ *  clickable boolean – 是否可点击
+ *  color     string – 颜色主题
+ *  size      string – 尺寸
  */
 export default function Paper({
   variant = 'elevation',
   elevation = 1,
   square = false,
+  hoverable = false,
+  clickable = false,
+  color = 'default',
+  size = null,
   className = '',
   children,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
   ...rest
 }) {
-  const classes = []
+  // 验证并标准化阴影等级（0-24）
+  const validElevation = Math.max(0, Math.min(24, Math.floor(Number(elevation) || 0)))
+  
+  const paperClasses = getPaperClasses({
+    variant,
+    elevation: validElevation,
+    square,
+    hoverable,
+    clickable,
+    color,
+    size,
+    className
+  })
 
-  // 基本样式
-  classes.push('transition-all duration-250 bg-[var(--wc-neutral-0)] dark:bg-[var(--wc-neutral-800)]')
-
-  if (!square) {
-    classes.push('rounded-lg')
-  }
-
-  if (variant === 'outlined') {
-    classes.push('border border-[var(--wc-neutral-200)] dark:border-[var(--wc-neutral-700)]')
-  } else {
-    if (elevation > 0) {
-      classes.push('border border-[var(--wc-neutral-200)] dark:border-[var(--wc-neutral-700)]')
+  const handleClick = (e) => {
+    if (clickable && onClick) {
+      onClick(e)
     }
   }
 
-  if (className) classes.push(className)
-
   return (
-    <div className={classes.join(' ')} {...rest}>
+    <div 
+      className={paperClasses}
+      onClick={handleClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      style={{
+        cursor: clickable ? 'pointer' : 'default',
+        ...rest.style
+      }}
+      {...rest}
+    >
       {children}
     </div>
   )

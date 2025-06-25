@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Copy from '../../src/components/Copy/Copy.vue'
+import Copy from '@/components/Copy/Copy.vue'
 
 // Mock clipboard API
 Object.defineProperty(navigator, 'clipboard', {

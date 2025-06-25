@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import List from '../../src/components/List/List.vue'
-import ListItem from '../../src/components/List/ListItem.vue'
+import List from '@/components/List/List.vue'
+import ListItem from '@/components/List/ListItem.vue'
 
 describe('List组件测试', () => {
   it('应该正确渲染基本列表', () => {

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import SlideOver from '../../src/components/SlideOver/SlideOver.vue'
+import SlideOver from '@/components/SlideOver/SlideOver.vue'
 
 describe('SlideOver组件测试', () => {
   it('应该正确渲染组件', () => {

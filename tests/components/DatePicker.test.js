@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import DatePicker from '../../src/components/DatePicker/DatePicker.vue'
+import DatePicker from '@/components/DatePicker/DatePicker.vue'
 
 describe('DatePicker 组件', () => {
   it('正确渲染日期选择器', () => {

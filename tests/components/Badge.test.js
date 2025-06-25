@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Badge from '../../src/components/Badge/Badge.vue'
+import Badge from '@/components/Badge/Badge.vue'
 
 describe('Badge 组件', () => {
   it('正确渲染徽章', () => {

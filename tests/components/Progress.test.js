@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Progress from '../../src/components/Progress/Progress.vue'
+import Progress from '@/components/Progress/Progress.vue'
 
 describe('Progress Component', () => {
   it('renders correctly', () => {

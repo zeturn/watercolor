@@ -5,6 +5,7 @@ const config = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
+    "@chromatic-com/storybook"
   ],
   framework: {
     name: '@storybook/vue3-vite',
@@ -20,9 +21,7 @@ const config = {
       },
     };
   },
-  docs: {
-    autodocs: 'tag',
-  },
+  docs: {},
   staticDirs: ['../public'],
 };
 

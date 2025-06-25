@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Alert from '../../src/components/Alert/Alert.vue'
+import Alert from '@/components/Alert/Alert.vue'
 
 describe('Alert 组件', () => {
   it('正确渲染基本内容', () => {

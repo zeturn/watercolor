@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Countdown from '../../src/components/Countdown/Countdown.vue'
+import Countdown from '@/components/Countdown/Countdown.vue'
 
 describe('Countdown 组件', () => {
   beforeEach(() => {

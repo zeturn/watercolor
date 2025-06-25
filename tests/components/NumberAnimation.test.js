@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
-import NumberAnimation from '../../src/components/NumberAnimation/NumberAnimation.vue'
+import NumberAnimation from '@/components/NumberAnimation/NumberAnimation.vue'
 
 describe('NumberAnimation Component', () => {
   beforeEach(() => {

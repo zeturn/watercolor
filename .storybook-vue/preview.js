@@ -1,4 +1,5 @@
 import '../src/styles/index.css';
+import { h } from 'vue';
 
 /** @type { import('@storybook/vue3').Preview } */
 const preview = {
@@ -23,6 +24,10 @@ const preview = {
         },
       ],
     },
+    darkMode: {
+      current: 'light',
+      stylePreview: true,
+    }
   },
   globalTypes: {
     theme: {
@@ -43,15 +48,21 @@ const preview = {
   decorators: [
     (story, context) => {
       const theme = context.globals.theme;
-      document.documentElement.className = theme === 'dark' ? 'dark' : '';
+      
+      // 在组件挂载时设置主题
+      const root = document.documentElement;
+      root.classList.remove('light', 'dark');
+      root.classList.add(theme);
+      
+      // 保存主题选择到 localStorage
+      localStorage.setItem('storybook-theme', theme);
       
       return {
-        components: { story },
-        template: `
-          <div class="p-4 min-h-screen ${theme === 'dark' ? 'bg-neutral-900 text-neutral-100' : 'bg-neutral-0 text-neutral-900'}">
-            <story />
-          </div>
-        `,
+        setup() {
+          return () => h('div', {
+            class: `p-4 min-h-screen ${theme === 'dark' ? 'bg-neutral-900 text-neutral-100' : 'bg-neutral-0 text-neutral-900'}`
+          }, h(story));
+        }
       };
     },
   ],

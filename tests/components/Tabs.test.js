@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Tabs from '../../src/components/Tabs/Tabs.vue'
+import Tabs from '@/components/Tabs/Tabs.vue'
 
 describe('Tabs Component', () => {
   const mockTabs = [

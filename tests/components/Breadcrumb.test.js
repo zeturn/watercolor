@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Breadcrumb from '../../src/components/Breadcrumb/Breadcrumb.vue'
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.vue'
 
 describe('Breadcrumb Component', () => {
   const mockItems = [

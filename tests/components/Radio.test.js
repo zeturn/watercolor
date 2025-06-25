@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Radio from '../../src/components/Radio/Radio.vue'
+import Radio from '@/components/Radio/Radio.vue'
 
 describe('Radio Component', () => {
   it('renders correctly', () => {

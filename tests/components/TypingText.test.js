@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
-import TypingText from '../../src/components/TypingText/TypingText.vue'
+import TypingText from '@/components/TypingText/TypingText.vue'
 
 describe('TypingText组件测试', () => {
   beforeEach(() => {

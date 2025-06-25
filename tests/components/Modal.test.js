@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Modal from '../../src/components/Modal/Modal.vue'
+import Modal from '@/components/Modal/Modal.vue'
 
 // 每次测试后清理 body，避免污染
 afterEach(() => {

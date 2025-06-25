@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Spinner from '../../src/components/Spinner/Spinner.vue'
+import Spinner from '@/components/Spinner/Spinner.vue'
 
 describe('Spinner Component', () => {
   it('应该正确渲染加载器组件', () => {

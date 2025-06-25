@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import Input from '@/components/Input/Input.jsx'
+import { action } from '@storybook/addon-actions'
 
 export default {
-  title: 'Components/Input (React)',
+  title: 'Components/Input',
   component: Input,
   parameters: {
     layout: 'centered',
@@ -24,23 +25,36 @@ export default {
     required: { control: 'boolean', description: '是否必填' },
     label: { control: 'text', description: '标签文本' },
     placeholder: { control: 'text', description: '占位符文本' },
-    helperText: { control: 'text', description: '帮助文本' },
+    helpText: { control: 'text', description: '帮助文本' },
     error: { control: 'text', description: '错误信息' },
-    onChange: { action: 'changed' },
+    value: {
+      control: 'text',
+      description: '输入框的值（受控'
+    },
+    onChange: {
+      action: 'changed',
+      description: '值变化事件'
+    }
   },
 }
 
-const ControlledTemplate = (args) => {
-  const [value, setValue] = useState('')
+const Template = (args) => {
+  const [value, setValue] = useState(args.value || '')
+  
+  const handleChange = (e) => {
+    setValue(e.target.value)
+    args.onChange(e)
+  }
+  
   return (
     <div className="w-80">
-      <Input {...args} value={value} onChange={(e) => setValue(e.target.value)} />
+      <Input {...args} value={value} onChange={handleChange} />
       <p className="mt-2 text-sm text-neutral-500">当前值: {value}</p>
     </div>
   )
 }
 
-export const Default = ControlledTemplate.bind({})
+export const Default = Template.bind({})
 Default.args = {
   label: '用户名',
   placeholder: '请输入用户名',
@@ -49,61 +63,104 @@ Default.args = {
   disabled: false,
   readonly: false,
   required: false,
-  helperText: '',
+  helpText: '',
   error: '',
+  onChange: action('changed'),
 }
 
-export const WithLabel = () => {
-  const [value, setValue] = useState('')
-  return (
-    <div className="w-80">
-      <Input
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        label="电子邮箱"
-        type="email"
-        placeholder="请输入邮箱地址"
-        helperText="我们将向此邮箱发送确认信息"
-        required
-      />
-    </div>
-  )
+export const WithLabel = {
+  render: () => {
+    const [value, setValue] = useState('')
+    return (
+      <div className="w-80">
+        <Input
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          label="电子邮箱"
+          type="email"
+          placeholder="请输入邮箱地址"
+          helpText="我们将向此邮箱发送确认信息"
+          required
+        />
+      </div>
+    )
+  }
 }
 
-export const WithError = () => {
-  const [value, setValue] = useState('invalid-email')
-  return (
-    <div className="w-80">
-      <Input
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        label="电子邮箱"
-        type="email"
-        placeholder="请输入邮箱地址"
-        error="请输入有效的邮箱地址"
-        required
-      />
-    </div>
-  )
+export const WithError = {
+  render: () => {
+    const [value, setValue] = useState('invalid-email')
+    return (
+      <div className="w-80">
+        <Input
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          label="电子邮箱"
+          type="email"
+          placeholder="请输入邮箱地址"
+          error="请输入有效的邮箱地址"
+          required
+        />
+      </div>
+    )
+  }
 }
 
-export const Sizes = () => {
-  const [small, setSmall] = useState('')
-  const [medium, setMedium] = useState('')
-  const [large, setLarge] = useState('')
-  return (
-    <div className="space-y-4 w-80">
-      <Input value={small} onChange={(e) => setSmall(e.target.value)} label="小尺寸" size="sm" placeholder="小尺寸输入框" />
-      <Input value={medium} onChange={(e) => setMedium(e.target.value)} label="中等尺寸" size="md" placeholder="中等尺寸输入框" />
-      <Input value={large} onChange={(e) => setLarge(e.target.value)} label="大尺寸" size="lg" placeholder="大尺寸输入框" />
-    </div>
-  )
+export const Sizes = {
+  render: () => {
+    const [smallValue, setSmallValue] = useState('')
+    const [mediumValue, setMediumValue] = useState('')
+    const [largeValue, setLargeValue] = useState('')
+    return (
+      <div className="space-y-4 w-80">
+        <Input
+          value={smallValue}
+          onChange={(e) => setSmallValue(e.target.value)}
+          label="小尺寸"
+          size="sm"
+          placeholder="小尺寸输入框"
+        />
+        <Input
+          value={mediumValue}
+          onChange={(e) => setMediumValue(e.target.value)}
+          label="中等尺寸"
+          size="md"
+          placeholder="中等尺寸输入框"
+        />
+        <Input
+          value={largeValue}
+          onChange={(e) => setLargeValue(e.target.value)}
+          label="大尺寸"
+          size="lg"
+          placeholder="大尺寸输入框"
+        />
+      </div>
+    )
+  }
 }
 
-export const States = () => (
-  <div className="space-y-4 w-80">
-    <Input label="正常状态" placeholder="可正常输入" />
-    <Input label="禁用状态" disabled value="禁用状态" />
-    <Input label="只读状态" readonly value="只读状态" />
-  </div>
-)
+export const States = {
+  render: () => {
+    const [normalValue, setNormalValue] = useState('')
+    return (
+      <div className="space-y-4 w-80">
+        <Input
+          value={normalValue}
+          onChange={(e) => setNormalValue(e.target.value)}
+          label="正常状态"
+          placeholder="可正常输入"
+        />
+        <Input
+          value="禁用状态"
+          label="禁用状态"
+          disabled
+        />
+        <Input
+          value="只读状态"
+          label="只读状态"
+          readonly
+        />
+      </div>
+    )
+  }
+}

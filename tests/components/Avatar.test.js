@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Avatar from '../../src/components/Avatar/Avatar.vue'
+import Avatar from '@/components/Avatar/Avatar.vue'
 
 describe('Avatar 组件', () => {
   it('正确渲染头像', () => {

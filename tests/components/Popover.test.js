@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Popover from '../../src/components/Popover/Popover.vue'
+import Popover from '@/components/Popover/Popover.vue'
 
 describe('Popover Component', () => {
   it('renders correctly', () => {

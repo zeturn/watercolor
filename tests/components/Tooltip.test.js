@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Tooltip from '../../src/components/Tooltip/Tooltip.vue'
+import Tooltip from '@/components/Tooltip/Tooltip.vue'
 
 describe('Tooltip Component', () => {
   it('应该正确渲染工具提示组件', () => {

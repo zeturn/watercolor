@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Marquee from '../../src/components/Marquee/Marquee.vue'
+import Marquee from '@/components/Marquee/Marquee.vue'
 
 describe('Marquee组件测试', () => {
   it('应该正确渲染跑马灯组件', () => {

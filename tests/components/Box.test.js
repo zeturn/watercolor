@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Box from '../../src/components/Box/Box.vue'
+import Box from '@/components/Box/Box.vue'
 
 describe('Box Component', () => {
   it('renders correctly', () => {

@@ -107,12 +107,19 @@ const ImageGallery = ({
       )}
 
       {selected !== -1 && (
-        <div className="gallery-lightbox" onClick={() => setSelected(-1)}>
+        <div 
+          className="gallery-lightbox" 
+          onClick={() => setSelected(-1)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="lightbox-title"
+        >
           <div className="gallery-lightbox-content" onClick={e => e.stopPropagation()}>
             <button className="gallery-lightbox-close" onClick={() => setSelected(-1)}>✕</button>
             <div className="gallery-lightbox-image-container">
               <img src={displayedImages[selected].src} alt={displayedImages[selected].alt} className="gallery-lightbox-image" />
             </div>
+            <h3 id="lightbox-title" className="sr-only">{displayedImages[selected].title}</h3>
             {showDownload && (
               <button className="gallery-action-btn gallery-download-btn" onClick={() => handleDownload(displayedImages[selected])}>下载</button>
             )}

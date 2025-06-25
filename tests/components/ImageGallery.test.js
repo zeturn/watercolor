@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import ImageGallery from '../../src/components/ImageGallery/ImageGallery.vue'
+import ImageGallery from '@/components/ImageGallery/ImageGallery.vue'
 
 describe('ImageGallery Component', () => {
   const mockImages = [

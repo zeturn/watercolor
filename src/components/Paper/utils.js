@@ -76,10 +76,9 @@ export function getPaperClasses(options = {}) {
   } else {
     classes.push('wc-paper--elevation')
     
-    // 阴影等级
-    if (elevation >= 0 && elevation <= 6) {
-      classes.push(`wc-paper--elevation-${elevation}`)
-    }
+    // 阴影等级 (0-24)
+    const validElevation = Math.max(0, Math.min(24, Math.floor(Number(elevation) || 0)))
+    classes.push(`wc-paper--elevation-${validElevation}`)
   }
 
   // 形状处理
@@ -131,18 +130,18 @@ export function getPaperClasses(options = {}) {
 
 /**
  * 验证阴影等级
- * @param {number} elevation - 阴影等级
+ * @param {number} elevation - 阴影等级 (0-24)
  * @returns {number} 有效的阴影等级
  */
 export function validateElevation(elevation) {
   const level = Number(elevation)
   if (isNaN(level)) return 1
-  return Math.max(0, Math.min(6, Math.floor(level)))
+  return Math.max(0, Math.min(24, Math.floor(level)))
 }
 
 /**
  * 获取阴影等级对应的CSS类名
- * @param {number} elevation - 阴影等级
+ * @param {number} elevation - 阴影等级 (0-24)
  * @returns {string} CSS类名
  */
 export function getElevationClass(elevation) {
@@ -184,9 +183,9 @@ export function getRecommendedElevation(options = {}) {
 
   // 特殊用途调整
   if (isModal) {
-    baseElevation = 6
+    baseElevation = 24
   } else if (isFloating) {
-    baseElevation = Math.max(baseElevation, 4)
+    baseElevation = Math.max(baseElevation, 12)
   }
 
   return validateElevation(baseElevation)
@@ -198,36 +197,26 @@ export function getRecommendedElevation(options = {}) {
 export const themeUtils = {
   /**
    * 检测当前主题
-   * @returns {string} 主题名称
+   * @returns {string} 当前主题名称
    */
   getCurrentTheme() {
-    if (document.documentElement.classList.contains('dark')) {
-      return 'dark'
-    }
-    
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark'
-    }
-    
-    return 'light'
+    return document.documentElement.getAttribute('data-theme') || 
+           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
   },
 
   /**
-   * 切换主题
+   * 设置主题
    * @param {string} theme - 主题名称
    */
   setTheme(theme) {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('wc-theme', theme)
   },
 
   /**
-   * 获取主题相关的CSS变量值
-   * @param {string} varName - 变量名
-   * @returns {string} 变量值
+   * 获取CSS变量值
+   * @param {string} varName - CSS变量名
+   * @returns {string} CSS变量值
    */
   getCSSVariable(varName) {
     return getComputedStyle(document.documentElement)
@@ -237,19 +226,16 @@ export const themeUtils = {
 }
 
 /**
- * 可访问性工具函数
+ * 无障碍辅助函数
  */
-export const a11yUtils = {
+export const accessibilityUtils = {
   /**
-   * 为可点击的Paper添加键盘支持
-   * @param {HTMLElement} element - Paper元素
+   * 添加键盘支持
+   * @param {HTMLElement} element - 目标元素
    * @param {Function} clickHandler - 点击处理函数
    */
   addKeyboardSupport(element, clickHandler) {
     if (!element || typeof clickHandler !== 'function') return
-
-    element.setAttribute('tabindex', '0')
-    element.setAttribute('role', 'button')
 
     const handleKeyDown = (event) => {
       if (event.key === 'Enter' || event.key === ' ') {
@@ -259,34 +245,35 @@ export const a11yUtils = {
     }
 
     element.addEventListener('keydown', handleKeyDown)
+    element.setAttribute('tabindex', '0')
+    element.setAttribute('role', 'button')
 
-    // 返回清理函数
     return () => {
       element.removeEventListener('keydown', handleKeyDown)
     }
   },
 
   /**
-   * 设置ARIA标签
-   * @param {HTMLElement} element - Paper元素
+   * 设置无障碍标签
+   * @param {HTMLElement} element - 目标元素
    * @param {Object} labels - 标签配置
    */
   setAriaLabels(element, labels = {}) {
-    if (!element) return
-
     const {
       label,
-      labelledBy,
       describedBy,
       expanded,
-      controls
+      haspopup,
+      selected,
+      disabled
     } = labels
 
     if (label) element.setAttribute('aria-label', label)
-    if (labelledBy) element.setAttribute('aria-labelledby', labelledBy)
     if (describedBy) element.setAttribute('aria-describedby', describedBy)
     if (expanded !== undefined) element.setAttribute('aria-expanded', expanded)
-    if (controls) element.setAttribute('aria-controls', controls)
+    if (haspopup) element.setAttribute('aria-haspopup', haspopup)
+    if (selected !== undefined) element.setAttribute('aria-selected', selected)
+    if (disabled !== undefined) element.setAttribute('aria-disabled', disabled)
   }
 }
 
@@ -295,7 +282,7 @@ export const a11yUtils = {
  */
 export const animationUtils = {
   /**
-   * 检测是否应该减少动画
+   * 检查是否应该减少动画
    * @returns {boolean}
    */
   shouldReduceMotion() {
@@ -303,32 +290,25 @@ export const animationUtils = {
   },
 
   /**
-   * 创建悬浮动画
+   * 创建悬停动画
    * @param {HTMLElement} element - 目标元素
    * @param {Object} options - 动画选项
    */
   createHoverAnimation(element, options = {}) {
-    if (!element || this.shouldReduceMotion()) return
-
-    const {
-      translateY = -2,
-      duration = 200,
-      easing = 'ease'
-    } = options
+    const { scale = 1.02, duration = 200 } = options
 
     const handleMouseEnter = () => {
-      element.style.transform = `translateY(${translateY}px)`
-      element.style.transition = `transform ${duration}ms ${easing}`
+      element.style.transform = `scale(${scale})`
     }
 
     const handleMouseLeave = () => {
-      element.style.transform = 'translateY(0)'
+      element.style.transform = 'scale(1)'
     }
 
+    element.style.transition = `transform ${duration}ms ease`
     element.addEventListener('mouseenter', handleMouseEnter)
     element.addEventListener('mouseleave', handleMouseLeave)
 
-    // 返回清理函数
     return () => {
       element.removeEventListener('mouseenter', handleMouseEnter)
       element.removeEventListener('mouseleave', handleMouseLeave)
@@ -337,59 +317,50 @@ export const animationUtils = {
 }
 
 /**
- * 调试工具函数
+ * 开发工具函数
  */
-export const debugUtils = {
+export const devUtils = {
   /**
-   * 打印Paper配置信息
-   * @param {Object} config - 配置对象
+   * 记录组件配置
+   * @param {Object} config - 组件配置
    */
   logConfig(config) {
     if (process.env.NODE_ENV === 'development') {
-      console.group('Paper Component Config')
-      console.table(config)
-      console.groupEnd()
+      console.log('Paper Config:', config)
     }
   },
 
   /**
-   * 验证配置
-   * @param {Object} config - 配置对象
-   * @returns {Array} 警告信息数组
+   * 验证组件配置
+   * @param {Object} config - 组件配置
+   * @returns {Object} 验证结果
    */
   validateConfig(config) {
+    const errors = []
     const warnings = []
 
-    if (config.elevation && (config.elevation < 0 || config.elevation > 6)) {
-      warnings.push(`Invalid elevation: ${config.elevation}. Must be between 0 and 6.`)
+    if (config.elevation < 0 || config.elevation > 24) {
+      warnings.push('Elevation should be between 0 and 24')
     }
 
     if (config.variant && !Object.values(variants).includes(config.variant)) {
-      warnings.push(`Invalid variant: ${config.variant}. Must be one of: ${Object.values(variants).join(', ')}.`)
+      errors.push(`Invalid variant: ${config.variant}`)
     }
 
-    if (config.color && !Object.values(colors).includes(config.color)) {
-      warnings.push(`Invalid color: ${config.color}. Must be one of: ${Object.values(colors).join(', ')}.`)
-    }
-
-    if (process.env.NODE_ENV === 'development' && warnings.length > 0) {
-      console.warn('Paper Component Warnings:', warnings)
-    }
-
-    return warnings
+    return { errors, warnings, isValid: errors.length === 0 }
   }
 }
 
-// 默认导出
+// 默认导出所有工具函数
 export default {
   getPaperClasses,
   validateElevation,
   getElevationClass,
   getRecommendedElevation,
   themeUtils,
-  a11yUtils,
+  accessibilityUtils,
   animationUtils,
-  debugUtils,
+  devUtils,
   variants,
   shapes,
   sizes,

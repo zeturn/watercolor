@@ -512,4 +512,7 @@
 .dark .form-helper-text--disabled{color:var(--color-dark-disabled-text,#6b7280);}
 .form-helper-text--focused{color:var(--color-primary,#3b82f6);}
 .dark .form-helper-text--focused{color:var(--color-dark-primary,#60a5fa);}
-@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-2px);}75%{transform:translateX(2px);}} 
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-2px);}75%{transform:translateX(2px);}}
+
+/* Import component styles */
+@import '../components/TextField/style.css'; 

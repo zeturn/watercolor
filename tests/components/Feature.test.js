@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Feature from '../../src/components/Feature/Feature.vue'
+import Feature from '@/components/Feature/Feature.vue'
 
 describe('Feature组件测试', () => {
   it('应该正确渲染特性组件', () => {

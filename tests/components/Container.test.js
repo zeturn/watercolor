@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Container from '../../src/components/Container/Container.vue'
+import Container from '@/components/Container/Container.vue'
 
 describe('Container 组件', () => {
   it('正确渲染容器组件', () => {

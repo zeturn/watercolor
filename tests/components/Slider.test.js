@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Slider from '../../src/components/Slider/Slider.vue'
+import Slider from '@/components/Slider/Slider.vue'
 
 describe('Slider Component', () => {
   it('renders correctly', () => {

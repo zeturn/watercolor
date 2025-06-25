@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import ColorPicker from '../../src/components/ColorPicker/ColorPicker.vue'
+import ColorPicker from '@/components/ColorPicker/ColorPicker.vue'
 
 describe('ColorPicker 组件', () => {
   it('正确渲染颜色选择器', () => {

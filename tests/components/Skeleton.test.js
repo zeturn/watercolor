@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Skeleton from '../../src/components/Skeleton/Skeleton.vue'
+import Skeleton from '@/components/Skeleton/Skeleton.vue'
 
 describe('Skeleton Component', () => {
   it('应该正确渲染骨架屏组件', () => {

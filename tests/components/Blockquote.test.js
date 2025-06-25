@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Blockquote from '../../src/components/Blockquote/Blockquote.vue'
+import Blockquote from '@/components/Blockquote/Blockquote.vue'
 
 describe('Blockquote 组件', () => {
   it('正确渲染引用内容', () => {

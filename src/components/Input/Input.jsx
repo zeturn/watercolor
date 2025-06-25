@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useId } from 'react'
 
 const Input = ({
   value = '',
@@ -24,7 +24,7 @@ const Input = ({
   rows = 4,
   autoComplete = 'off',
   name = '',
-  id = '',
+  id: providedId = '',
   className = '',
   style = {},
   onFocus,
@@ -37,6 +37,8 @@ const Input = ({
   const [isFocused, setIsFocused] = useState(false)
   const [hasValue, setHasValue] = useState(Boolean(value))
   const inputRef = useRef(null)
+  const autoId = useId();
+  const id = providedId || autoId;
 
   useEffect(() => {
     setHasValue(Boolean(value))
@@ -118,7 +120,7 @@ const Input = ({
     <div className="wc-input-container">
       {label && (
         <label 
-          htmlFor={id || name}
+          htmlFor={id}
           className={`wc-input-label ${isFocused || hasValue ? 'wc-input-label--active' : ''} ${error ? 'wc-input-label--error' : ''}`}
         >
           {label}
@@ -154,7 +156,7 @@ const Input = ({
           rows={multiline ? rows : undefined}
           autoComplete={autoComplete}
           name={name}
-          id={id || name}
+          id={id}
           {...props}
         />
         
@@ -165,9 +167,9 @@ const Input = ({
         )}
       </div>
       
-      {helperText && (
+      {(helperText || error) && (
         <div className={`wc-input-helper-text ${error ? 'wc-input-helper-text--error' : ''}`}>
-          {helperText}
+          {error || helperText}
         </div>
       )}
     </div>
