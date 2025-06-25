@@ -1,3 +1,4 @@
+// .storybook-react/manager.js
 import { addons } from '@storybook/manager-api'
 import { themes } from '@storybook/theming'
 
@@ -25,13 +26,16 @@ addons.setConfig({
     appBorderColor: '#374151',
     appBorderRadius: 8,
 
+    // 文本颜色
     textColor: '#F3F4F6',
     textInverseColor: '#111827',
 
+    // 工具栏默认和活动颜色
     barTextColor: '#9CA3AF',
     barSelectedColor: '#60A5FA',
     barBg: '#1F2937',
 
+    // 表单颜色
     inputBg: '#374151',
     inputBorder: '#4B5563',
     inputTextColor: '#F3F4F6',
@@ -43,21 +47,26 @@ addons.setConfig({
     brandImage: './img/watercolorui.png',
     brandTarget: '_self',
 
+    // 浅色主题颜色
     colorPrimary: '#3B82F6',
     colorSecondary: '#10B981',
 
+    // 浅色主题背景颜色
     appBg: '#F9FAFB',
     appContentBg: '#FFFFFF',
     appBorderColor: '#E5E7EB',
     appBorderRadius: 8,
 
+    // 文本颜色
     textColor: '#374151',
     textInverseColor: '#FFFFFF',
 
+    // 工具栏默认和活动颜色
     barTextColor: '#6B7280',
     barSelectedColor: '#3B82F6',
     barBg: '#FFFFFF',
 
+    // 表单颜色
     inputBg: '#FFFFFF',
     inputBorder: '#D1D5DB',
     inputTextColor: '#374151',

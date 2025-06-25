@@ -511,7 +511,7 @@
 @media print {
   .wc-slider {
     -webkit-print-color-adjust: exact;
-    color-adjust: exact;
+    print-color-adjust: exact;
   }
   
   .wc-slider__tooltip,

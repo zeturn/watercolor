@@ -432,7 +432,7 @@
 @media print {
   .wc-switch {
     -webkit-print-color-adjust: exact;
-    color-adjust: exact;
+    print-color-adjust: exact;
   }
   
   .wc-switch__track {

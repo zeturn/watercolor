@@ -496,7 +496,7 @@
   .wc-skeleton {
     background: #f0f0f0 !important;
     -webkit-print-color-adjust: exact;
-    color-adjust: exact;
+    print-color-adjust: exact;
   }
   
   .wc-skeleton--wave,
