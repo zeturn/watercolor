@@ -76,9 +76,16 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
-/* 深色模式 */
-@media (prefers-color-scheme: dark) {
-  .wc-color-picker__preview {
-    border-color: var(--wc-neutral-600, #4b5563);
-  }
+/* 暗色模式 - 使用 .dark 类选择器 */
+.dark .wc-color-picker__preview {
+  border-color: var(--wc-neutral-400, #737373);
+  box-shadow: 0 1px 3px 0 rgba(255, 255, 255, 0.1), 0 1px 2px 0 rgba(255, 255, 255, 0.06);
+}
+
+.dark .wc-color-picker__preview:hover {
+  box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.15), 0 2px 4px -1px rgba(255, 255, 255, 0.1);
+}
+
+.dark .wc-color-picker--disabled .wc-color-picker__preview:hover {
+  box-shadow: 0 1px 3px 0 rgba(255, 255, 255, 0.1), 0 1px 2px 0 rgba(255, 255, 255, 0.06);
 } 

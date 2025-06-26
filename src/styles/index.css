@@ -298,20 +298,152 @@
 
 /* Dark mode */
 .dark {
+  /* Primary colors - 暗色模式调整 */
+  --wc-primary-50: #1e2a47;
+  --wc-primary-100: #243046;
+  --wc-primary-200: #2a3752;
+  --wc-primary-300: #4965a6;
+  --wc-primary-400: #5b82c7;
+  --wc-primary-500: #7ba3e8;
+  --wc-primary-600: #9bc4ff;
+  --wc-primary-700: #bbdaff;
+  --wc-primary-800: #dceeff;
+  --wc-primary-900: #eff7ff;
+  
+  /* Secondary colors - 暗色模式调整 */
+  --wc-secondary-50: #1b2a14;
+  --wc-secondary-100: #2d3f20;
+  --wc-secondary-200: #3e5730;
+  --wc-secondary-300: #5a7a47;
+  --wc-secondary-400: #6d9454;
+  --wc-secondary-500: #85b568;
+  --wc-secondary-600: #a5d084;
+  --wc-secondary-700: #c4e5a5;
+  --wc-secondary-800: #ddf3c7;
+  --wc-secondary-900: #f0fce8;
+
   /* Neutral colors mapping in dark mode */
-  --wc-neutral-0: #252525;
-  --wc-neutral-50: #353535;
-  --wc-neutral-100: #444444;
-  --wc-neutral-200: #5e5e5e;
-  --wc-neutral-300: #707070;
-  --wc-neutral-400: #919191;
-  --wc-neutral-500: #b5b5b5;
-  --wc-neutral-600: #dedede;
-  --wc-neutral-700: #ebebeb;
-  --wc-neutral-800: #f8f8f8;
-  --wc-neutral-900: #fcfcfc;
+  --wc-neutral-0: #1a1a1a;
+  --wc-neutral-50: #252525;
+  --wc-neutral-100: #2f2f2f;
+  --wc-neutral-200: #404040;
+  --wc-neutral-300: #525252;
+  --wc-neutral-400: #737373;
+  --wc-neutral-500: #a3a3a3;
+  --wc-neutral-600: #d4d4d4;
+  --wc-neutral-700: #e5e5e5;
+  --wc-neutral-800: #f5f5f5;
+  --wc-neutral-900: #fafafa;
   --wc-neutral-950: #ffffff;
   
+  /* Success colors - 暗色模式调整 */
+  --wc-success-50: #0d2818;
+  --wc-success-100: #1a3c27;
+  --wc-success-200: #295438;
+  --wc-success-300: #3a704b;
+  --wc-success-400: #4a8c5e;
+  --wc-success-500: #5da673;
+  --wc-success-600: #7bc491;
+  --wc-success-700: #9dd8b0;
+  --wc-success-800: #c3e8d1;
+  --wc-success-900: #e8f5ed;
+  
+  /* Info colors - 暗色模式调整 */
+  --wc-info-50: #0f2849;
+  --wc-info-100: #1a3b5c;
+  --wc-info-200: #265070;
+  --wc-info-300: #3568a0;
+  --wc-info-400: #4a7fb8;
+  --wc-info-500: #629ad4;
+  --wc-info-600: #82b7ea;
+  --wc-info-700: #a7d0f5;
+  --wc-info-800: #cee7ff;
+  --wc-info-900: #f0f8ff;
+  
+  /* Warning colors - 暗色模式调整 */
+  --wc-warning-50: #2d1f0d;
+  --wc-warning-100: #3e2b15;
+  --wc-warning-200: #52381e;
+  --wc-warning-300: #7a5529;
+  --wc-warning-400: #9a6d36;
+  --wc-warning-500: #c1894a;
+  --wc-warning-600: #e4a965;
+  --wc-warning-700: #f2c584;
+  --wc-warning-800: #fadea9;
+  --wc-warning-900: #fef4e6;
+  
+  /* Error/Danger colors - 暗色模式调整 */
+  --wc-error-50: #2d1215;
+  --wc-error-100: #3e1d22;
+  --wc-error-200: #522930;
+  --wc-error-300: #7a3a44;
+  --wc-error-400: #9a4d59;
+  --wc-error-500: #c16574;
+  --wc-error-600: #e48194;
+  --wc-error-700: #f2a1b4;
+  --wc-error-800: #fac5d3;
+  --wc-error-900: #fee8ed;
+  
+  /* Danger (alias) */
+  --wc-danger-50: var(--wc-error-50);
+  --wc-danger-100: var(--wc-error-100);
+  --wc-danger-200: var(--wc-error-200);
+  --wc-danger-300: var(--wc-error-300);
+  --wc-danger-400: var(--wc-error-400);
+  --wc-danger-500: var(--wc-error-500);
+  --wc-danger-600: var(--wc-error-600);
+  --wc-danger-700: var(--wc-error-700);
+  --wc-danger-800: var(--wc-error-800);
+  --wc-danger-900: var(--wc-error-900);
+  
+  /* Extended color palette - 暗色模式调整 */
+  /* Purple color palette */
+  --wc-purple-50: #2d1e3e;
+  --wc-purple-100: #3e2952;
+  --wc-purple-200: #523670;
+  --wc-purple-300: #7a54a0;
+  --wc-purple-400: #9a71b8;
+  --wc-purple-500: #c192d4;
+  --wc-purple-600: #e4b7ea;
+  --wc-purple-700: #f2d0f5;
+  --wc-purple-800: #fae7ff;
+  --wc-purple-900: #fef4ff;
+  
+  /* Pink color palette */
+  --wc-pink-50: #2d1a25;
+  --wc-pink-100: #3e2633;
+  --wc-pink-200: #523344;
+  --wc-pink-300: #7a4a64;
+  --wc-pink-400: #9a627e;
+  --wc-pink-500: #c1829c;
+  --wc-pink-600: #e4a7be;
+  --wc-pink-700: #f2c5d9;
+  --wc-pink-800: #faddea;
+  --wc-pink-900: #fef0f5;
+  
+  /* Teal color palette */
+  --wc-teal-50: #0d2825;
+  --wc-teal-100: #1a3b35;
+  --wc-teal-200: #295047;
+  --wc-teal-300: #3a7066;
+  --wc-teal-400: #4a8c80;
+  --wc-teal-500: #5da69c;
+  --wc-teal-600: #7bc4ba;
+  --wc-teal-700: #9dd8d0;
+  --wc-teal-800: #c3e8e2;
+  --wc-teal-900: #e8f5f3;
+  
+  /* Indigo color palette */
+  --wc-indigo-50: #1e2247;
+  --wc-indigo-100: #292e52;
+  --wc-indigo-200: #363c70;
+  --wc-indigo-300: #545aa0;
+  --wc-indigo-400: #7176b8;
+  --wc-indigo-500: #9296d4;
+  --wc-indigo-600: #b7baea;
+  --wc-indigo-700: #d0d3f5;
+  --wc-indigo-800: #e7e9ff;
+  --wc-indigo-900: #f4f5ff;
 }
 
 @layer base {

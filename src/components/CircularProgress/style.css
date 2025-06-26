@@ -72,13 +72,32 @@
   }
 }
 
-/* 深色模式 */
-@media (prefers-color-scheme: dark) {
-  .wc-circular-progress-bg {
-    color: var(--wc-neutral-600, #4b5563);
-  }
-  
-  .wc-circular-progress-value {
-    color: var(--wc-neutral-300, #d1d5db);
-  }
+/* 暗色模式 - 使用 .dark 类选择器 */
+.dark .wc-circular-progress-bg {
+  color: var(--wc-neutral-400, #737373);
+}
+
+.dark .wc-circular-progress-value {
+  color: var(--wc-neutral-600, #d4d4d4);
+}
+
+/* 暗色模式下的颜色变体 */
+.dark .wc-circular-progress--primary .wc-circular-progress-circle {
+  color: var(--wc-primary-500, #7ba3e8);
+}
+
+.dark .wc-circular-progress--secondary .wc-circular-progress-circle {
+  color: var(--wc-secondary-500, #85b568);
+}
+
+.dark .wc-circular-progress--success .wc-circular-progress-circle {
+  color: var(--wc-success-500, #5da673);
+}
+
+.dark .wc-circular-progress--warning .wc-circular-progress-circle {
+  color: var(--wc-warning-500, #c1894a);
+}
+
+.dark .wc-circular-progress--error .wc-circular-progress-circle {
+  color: var(--wc-error-500, #c16574);
 } 

@@ -91,4 +91,38 @@
   .wc-breadcrumb-separator {
     color: var(--wc-neutral-500, #6b7280);
   }
+}
+
+/* 暗色模式 - 使用 .dark 类选择器 */
+.dark .wc-breadcrumb {
+  color: var(--wc-neutral-300, #d1d5db);
+}
+
+.dark .wc-breadcrumb-item {
+  color: var(--wc-neutral-400, #9ca3af);
+}
+
+.dark .wc-breadcrumb-item--active {
+  color: var(--wc-neutral-100, #f3f4f6);
+}
+
+.dark .wc-breadcrumb-link {
+  color: var(--wc-primary-400, #60a5fa);
+}
+
+.dark .wc-breadcrumb-link:hover {
+  color: var(--wc-primary-300, #93c5fd);
+}
+
+.dark .wc-breadcrumb-separator {
+  color: var(--wc-neutral-600, #4b5563);
+}
+
+/* 暗色模式下的尺寸变体 */
+.dark .wc-breadcrumb--sm .wc-breadcrumb-item {
+  color: var(--wc-neutral-400, #9ca3af);
+}
+
+.dark .wc-breadcrumb--lg .wc-breadcrumb-item {
+  color: var(--wc-neutral-300, #d1d5db);
 } 

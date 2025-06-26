@@ -242,4 +242,62 @@
   .quote-cite {
     color: var(--wc-neutral-400, #9ca3af);
   }
+}
+
+/* 暗色模式 - 使用 .dark 类选择器 */
+.dark .wc-blockquote {
+  background-color: var(--wc-neutral-800, #1f2937);
+  border-left-color: var(--wc-primary-400, #60a5fa);
+  color: var(--wc-neutral-100, #f3f4f6);
+}
+
+.dark .wc-blockquote--style-bordered {
+  border-color: var(--wc-neutral-700, #374151);
+}
+
+.dark .wc-blockquote--style-filled {
+  background-color: var(--wc-neutral-800, #1f2937);
+  color: var(--wc-neutral-100, #f3f4f6);
+}
+
+.dark .wc-blockquote--style-minimal {
+  border-left-color: var(--wc-primary-400, #60a5fa);
+  color: var(--wc-neutral-200, #e5e7eb);
+}
+
+.dark .wc-blockquote-content {
+  color: var(--wc-neutral-100, #f3f4f6);
+}
+
+.dark .wc-blockquote-author {
+  color: var(--wc-neutral-400, #9ca3af);
+}
+
+.dark .wc-blockquote-cite {
+  color: var(--wc-neutral-500, #6b7280);
+}
+
+/* 暗色模式下的颜色变体 */
+.dark .wc-blockquote--primary {
+  border-left-color: var(--wc-primary-400, #60a5fa);
+}
+
+.dark .wc-blockquote--secondary {
+  border-left-color: var(--wc-secondary-400, #73d13d);
+}
+
+.dark .wc-blockquote--success {
+  border-left-color: var(--wc-success-400, #4ade80);
+}
+
+.dark .wc-blockquote--warning {
+  border-left-color: var(--wc-warning-400, #fbbf24);
+}
+
+.dark .wc-blockquote--error {
+  border-left-color: var(--wc-error-400, #f87171);
+}
+
+.dark .wc-blockquote--info {
+  border-left-color: var(--wc-info-400, #60a5fa);
 } 

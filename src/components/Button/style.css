@@ -143,97 +143,222 @@
   outline-offset: 2px;
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .wc-btn--outlined:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-primary-900, #1e3a8a);
-  }
-  
-  .wc-btn--text:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-primary-900, #1e3a8a);
-  }
-  
-  /* 暗色模式下的样式模式 */
-  .wc-btn--style-default.wc-btn--primary:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-primary-900, #1e3a8a);
-  }
-  
-  .wc-btn--style-default.wc-btn--secondary:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-secondary-800, #374151);
-  }
-  
-  .wc-btn--style-default.wc-btn--success:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-success-900, #065f46);
-  }
-  
-  .wc-btn--style-default.wc-btn--warning:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-warning-900, #78350f);
-  }
-  
-  .wc-btn--style-default.wc-btn--error:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-error-900, #7f1d1d);
-  }
-  
-  .wc-btn--style-default.wc-btn--info:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-info-900, #164e63);
-  }
-  
-  .wc-btn--style-default.wc-btn--purple:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-purple-900, #4c1d95);
-  }
-  
-  .wc-btn--style-default.wc-btn--orange:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-orange-900, #7c2d12);
-  }
-  
-  .wc-btn--style-default.wc-btn--cyan:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-cyan-900, #164e63);
-  }
-  
-  .wc-btn--style-default.wc-btn--pink:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-pink-900, #831843);
-  }
-  
-  /* Outlined 样式在暗色模式下的 hover 效果 */
-  .wc-btn--style-outlined.wc-btn--primary:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-primary-900, #1e3a8a);
-  }
-  
-  .wc-btn--style-outlined.wc-btn--secondary:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-secondary-800, #374151);
-  }
-  
-  .wc-btn--style-outlined.wc-btn--success:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-success-900, #065f46);
-  }
-  
-  .wc-btn--style-outlined.wc-btn--warning:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-warning-900, #78350f);
-  }
-  
-  .wc-btn--style-outlined.wc-btn--error:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-error-900, #7f1d1d);
-  }
-  
-  .wc-btn--style-outlined.wc-btn--info:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-info-900, #164e63);
-  }
-  
-  .wc-btn--style-outlined.wc-btn--purple:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-purple-900, #4c1d95);
-  }
-  
-  .wc-btn--style-outlined.wc-btn--orange:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-orange-900, #7c2d12);
-  }
-  
-  .wc-btn--style-outlined.wc-btn--cyan:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-cyan-900, #164e63);
-  }
-  
-  .wc-btn--style-outlined.wc-btn--pink:hover:not(.wc-btn--disabled) {
-    background-color: var(--wc-pink-900, #831843);
-  }
+/* 暗色模式 - 使用 .dark 类选择器 */
+.dark .wc-btn:focus-visible {
+  outline-color: var(--wc-primary-400, #60a5fa);
+}
+
+/* Default Style - 暗色模式 */
+.dark .wc-btn--style-default.wc-btn--primary {
+  color: var(--wc-primary-300, #93c5fd);
+}
+
+.dark .wc-btn--style-default.wc-btn--primary:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-primary-900, #1e3a8a);
+  color: var(--wc-primary-200, #bfdbfe);
+}
+
+.dark .wc-btn--style-default.wc-btn--secondary {
+  color: var(--wc-secondary-300, #95de64);
+}
+
+.dark .wc-btn--style-default.wc-btn--secondary:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-secondary-800, #374151);
+  color: var(--wc-secondary-200, #b7eb8f);
+}
+
+.dark .wc-btn--style-default.wc-btn--success {
+  color: var(--wc-success-300, #86efac);
+}
+
+.dark .wc-btn--style-default.wc-btn--success:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-success-900, #14532d);
+  color: var(--wc-success-200, #bbf7d0);
+}
+
+.dark .wc-btn--style-default.wc-btn--warning {
+  color: var(--wc-warning-300, #fcd34d);
+}
+
+.dark .wc-btn--style-default.wc-btn--warning:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-warning-900, #78350f);
+  color: var(--wc-warning-200, #fde68a);
+}
+
+.dark .wc-btn--style-default.wc-btn--error {
+  color: var(--wc-error-300, #fca5a5);
+}
+
+.dark .wc-btn--style-default.wc-btn--error:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-error-900, #7f1d1d);
+  color: var(--wc-error-200, #fecaca);
+}
+
+.dark .wc-btn--style-default.wc-btn--info {
+  color: var(--wc-info-300, #7dd3fc);
+}
+
+.dark .wc-btn--style-default.wc-btn--info:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-info-900, #0c4a6e);
+  color: var(--wc-info-200, #bae6fd);
+}
+
+/* Outlined Style - 暗色模式 */
+.dark .wc-btn--style-outlined.wc-btn--primary {
+  border-color: var(--wc-primary-400, #60a5fa);
+  color: var(--wc-primary-300, #93c5fd);
+}
+
+.dark .wc-btn--style-outlined.wc-btn--primary:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-primary-900, #1e3a8a);
+  border-color: var(--wc-primary-300, #93c5fd);
+  color: var(--wc-primary-200, #bfdbfe);
+}
+
+.dark .wc-btn--style-outlined.wc-btn--secondary {
+  border-color: var(--wc-secondary-400, #73d13d);
+  color: var(--wc-secondary-300, #95de64);
+}
+
+.dark .wc-btn--style-outlined.wc-btn--secondary:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-secondary-800, #374151);
+  border-color: var(--wc-secondary-300, #95de64);
+  color: var(--wc-secondary-200, #b7eb8f);
+}
+
+.dark .wc-btn--style-outlined.wc-btn--success {
+  border-color: var(--wc-success-400, #4ade80);
+  color: var(--wc-success-300, #86efac);
+}
+
+.dark .wc-btn--style-outlined.wc-btn--success:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-success-900, #14532d);
+  border-color: var(--wc-success-300, #86efac);
+  color: var(--wc-success-200, #bbf7d0);
+}
+
+.dark .wc-btn--style-outlined.wc-btn--warning {
+  border-color: var(--wc-warning-400, #fbbf24);
+  color: var(--wc-warning-300, #fcd34d);
+}
+
+.dark .wc-btn--style-outlined.wc-btn--warning:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-warning-900, #78350f);
+  border-color: var(--wc-warning-300, #fcd34d);
+  color: var(--wc-warning-200, #fde68a);
+}
+
+.dark .wc-btn--style-outlined.wc-btn--error {
+  border-color: var(--wc-error-400, #f87171);
+  color: var(--wc-error-300, #fca5a5);
+}
+
+.dark .wc-btn--style-outlined.wc-btn--error:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-error-900, #7f1d1d);
+  border-color: var(--wc-error-300, #fca5a5);
+  color: var(--wc-error-200, #fecaca);
+}
+
+.dark .wc-btn--style-outlined.wc-btn--info {
+  border-color: var(--wc-info-400, #38bdf8);
+  color: var(--wc-info-300, #7dd3fc);
+}
+
+.dark .wc-btn--style-outlined.wc-btn--info:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-info-900, #0c4a6e);
+  border-color: var(--wc-info-300, #7dd3fc);
+  color: var(--wc-info-200, #bae6fd);
+}
+
+/* Filled Style - 暗色模式 */
+.dark .wc-btn--style-filled.wc-btn--primary {
+  background-color: var(--wc-primary-600, #2563eb);
+  color: var(--wc-neutral-0, #ffffff);
+}
+
+.dark .wc-btn--style-filled.wc-btn--primary:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-primary-500, #3b82f6);
+}
+
+.dark .wc-btn--style-filled.wc-btn--secondary {
+  background-color: var(--wc-secondary-600, #389e0d);
+  color: var(--wc-neutral-0, #ffffff);
+}
+
+.dark .wc-btn--style-filled.wc-btn--secondary:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-secondary-500, #52c41a);
+}
+
+.dark .wc-btn--style-filled.wc-btn--success {
+  background-color: var(--wc-success-600, #16a34a);
+  color: var(--wc-neutral-0, #ffffff);
+}
+
+.dark .wc-btn--style-filled.wc-btn--success:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-success-500, #22c55e);
+}
+
+.dark .wc-btn--style-filled.wc-btn--warning {
+  background-color: var(--wc-warning-600, #d97706);
+  color: var(--wc-neutral-0, #ffffff);
+}
+
+.dark .wc-btn--style-filled.wc-btn--warning:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-warning-500, #f59e0b);
+}
+
+.dark .wc-btn--style-filled.wc-btn--error {
+  background-color: var(--wc-error-600, #dc2626);
+  color: var(--wc-neutral-0, #ffffff);
+}
+
+.dark .wc-btn--style-filled.wc-btn--error:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-error-500, #ef4444);
+}
+
+.dark .wc-btn--style-filled.wc-btn--info {
+  background-color: var(--wc-info-600, #0284c7);
+  color: var(--wc-neutral-0, #ffffff);
+}
+
+.dark .wc-btn--style-filled.wc-btn--info:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-info-500, #0ea5e9);
+}
+
+.dark .wc-btn--style-filled.wc-btn--purple {
+  background-color: var(--wc-purple-600, #7c3aed);
+  color: var(--wc-neutral-0, #ffffff);
+}
+
+.dark .wc-btn--style-filled.wc-btn--purple:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-purple-500, #8b5cf6);
+}
+
+.dark .wc-btn--style-filled.wc-btn--orange {
+  background-color: var(--wc-orange-600, #ea580c);
+  color: var(--wc-neutral-0, #ffffff);
+}
+
+.dark .wc-btn--style-filled.wc-btn--orange:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-orange-500, #f97316);
+}
+
+.dark .wc-btn--style-filled.wc-btn--cyan {
+  background-color: var(--wc-cyan-600, #0891b2);
+  color: var(--wc-neutral-0, #ffffff);
+}
+
+.dark .wc-btn--style-filled.wc-btn--cyan:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-cyan-500, #06b6d4);
+}
+
+.dark .wc-btn--style-filled.wc-btn--pink {
+  background-color: var(--wc-pink-600, #db2777);
+  color: var(--wc-neutral-0, #ffffff);
+}
+
+.dark .wc-btn--style-filled.wc-btn--pink:hover:not(.wc-btn--disabled) {
+  background-color: var(--wc-pink-500, #ec4899);
 }
 
 /* 样式模式 - Default: watercolor风格，只有彩色的字，没有背景，hover时才有浅色的背景，没有边框 */
