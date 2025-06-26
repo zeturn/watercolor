@@ -9,7 +9,8 @@ interface ThemeContextValue {
   color: _ColorTheme
   setColor: (c: _ColorTheme) => void
   dark: boolean
-  setDark: (d: boolean) => void
+  /** 与 Vue 端保持一致，切换暗黑模式 */
+  toggleDark: () => void
 }
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined)
@@ -25,14 +26,13 @@ export const ThemeProvider: React.FC<React.PropsWithChildren> = ({ children }) =
     setColorState(c)
   }
 
-  const setDark = (d: boolean) => {
-    if (d === dark) return
+  const toggleDark = () => {
     manager.toggleDark()
     setDarkState(manager.dark)
   }
 
   return (
-    <ThemeContext.Provider value={{ color, setColor, dark, setDark }}>
+    <ThemeContext.Provider value={{ color, setColor, dark, toggleDark }}>
       {children}
     </ThemeContext.Provider>
   )

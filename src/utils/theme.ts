@@ -45,6 +45,7 @@ export interface WatercolorTheme {
 }
 
 /**
+ * 通过读取到的json设置主题颜色和字体
  * Set theme colors and fonts
  * @param theme Theme configuration object
  */
@@ -220,31 +221,30 @@ export const themes = {
   // Default theme - using new oklch colors
   default: {
     primary: {
-      50: 'oklch(0.97 0.014 254.604)',
-      100: 'oklch(0.932 0.032 255.585)',
-      200: 'oklch(0.882 0.059 254.128)',
-      300: 'oklch(0.809 0.105 251.813)',
-      400: 'oklch(0.707 0.165 254.624)',
-      500: 'oklch(0.623 0.214 259.815)',
-      600: 'oklch(0.546 0.245 262.881)',
-      700: 'oklch(0.488 0.243 264.376)',
-      800: 'oklch(0.424 0.199 265.638)',
-      900: 'oklch(0.379 0.146 265.522)'
+        50: '#F7F8FF',
+        100: '#EEF0FF',
+        200: '#E1E5FF',
+        300: '#C7D1FF',
+        400: '#A5B4FF',
+        500: '#7C91FF',
+        600: '#5A6FE8',
+        700: '#4A5CD1',
+        800: '#3F4CA3',
+        900: '#374282'
     },
     secondary: {
-      50: 'oklch(0.979 0.021 166.113)',
-      100: 'oklch(0.95 0.052 163.051)',
-      200: 'oklch(0.905 0.093 164.15)',
-      300: 'oklch(0.845 0.143 164.978)',
-      400: 'oklch(0.765 0.177 163.223)',
-      500: 'oklch(0.696 0.17 162.48)',
-      600: 'oklch(0.596 0.145 163.225)',
-      700: 'oklch(0.508 0.118 165.612)',
-      800: 'oklch(0.432 0.095 166.913)',
-      900: 'oklch(0.378 0.077 168.94)'
+        50: '#F6FFED',
+        100: '#D9F7BE',
+        200: '#B7EB8F',
+        300: '#95DE64',
+        400: '#73D13D',
+        500: '#52C41A',
+        600: '#389E0D',
+        700: '#237804',
+        800: '#135200',
+        900: '#092B00'
     }
   },
-  
   // Ocean blue theme
   ocean: {
     primary: {
@@ -272,7 +272,6 @@ export const themes = {
       900: '#002329'
     }
   },
-  
   // Forest green theme
   forest: {
     primary: {
@@ -300,7 +299,6 @@ export const themes = {
       900: '#0F1100'
     }
   },
-  
   // Sunset orange theme
   sunset: {
     primary: {
@@ -328,7 +326,6 @@ export const themes = {
       900: '#5C0011'
     }
   },
-  
   // Violet theme
   violet: {
     primary: {
@@ -356,7 +353,6 @@ export const themes = {
       900: '#311B92'
     }
   },
-  
   // Rose pink theme
   rose: {
     primary: {
@@ -387,6 +383,7 @@ export const themes = {
 } as const
 
 /**
+ * 应用预定义主题
  * Apply predefined theme - using CSS class method
  * @param themeName Theme name
  */
@@ -395,6 +392,7 @@ export function applyTheme(themeName: keyof typeof themes): void {
 }
 
 /**
+ * 预定义字体主题
  * Predefined font themes
  */
 export const fontThemes = {
@@ -443,6 +441,7 @@ export const fontThemes = {
 } as const
 
 /**
+ * 应用预定义字体主题
  * Apply predefined font theme
  * @param fontThemeName Font theme name
  */
@@ -451,6 +450,7 @@ export function applyFontTheme(fontThemeName: keyof typeof fontThemes): void {
 }
 
 /**
+ * 获取当前字体配置
  * Get current font configuration
  */
 export function getCurrentFonts(): FontConfig {
@@ -464,7 +464,9 @@ export function getCurrentFonts(): FontConfig {
 
 /**
  * 动态加载根目录的 theme.config.json 并应用
- * 该配置文件允许最终用户无需修改源码即可自定义主题。
+ * 该配置文件允许最终用户无需修改style.css即可自定义主题。
+ * Dynamic load theme.config.json and apply theme
+ * @param configPath 配置文件路径
  */
 export async function loadThemeConfig(configPath: string = '/theme.config.json'): Promise<void> {
   if (typeof window === 'undefined' || typeof fetch === 'undefined') return
@@ -477,7 +479,7 @@ export async function loadThemeConfig(configPath: string = '/theme.config.json')
     setTheme(cfg)
   } catch (err) {
     // 静默失败，保持默认主题
-    console.warn('[Watercolor] 无法加载自定义 theme.config.json:', err)
+    console.warn('[Watercolor][utils/theme.ts] 无法加载自定义 theme.config.json:', err)
   }
 }
 

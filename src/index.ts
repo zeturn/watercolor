@@ -38,7 +38,6 @@ export { default as Countdown } from './components/Countdown/Countdown.vue'
 export { default as CountdownReact } from './components/Countdown/Countdown.jsx'
 export { default as DatePickerVue } from './components/DatePicker/DatePicker.vue'
 export { default as DatePickerReact } from './components/DatePicker/DatePicker.jsx'
-// Dialog 组件已合并到 Modal 中，请使用 Modal 组件
 export { default as DropdownVue } from './components/Dropdown/Dropdown.vue'
 export { default as FabVue } from './components/Button/Fab.vue'
 export { default as Feed } from './components/Feed/Feed.vue'
@@ -150,7 +149,6 @@ export type CopySize = 'sm' | 'md' | 'lg'
 export type CardVariant = 'default' | 'elevated'
 export type CardPadding = 'none' | 'sm' | 'md' | 'lg'
 export type ContainerMaxWidth = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | false
-// Dialog 组件已合并到 Modal 中
 export type ModalSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type DatePickerVariant = 'default' | 'outlined' | 'filled'
 export type DatePickerSize = 'sm' | 'md' | 'lg'
@@ -214,5 +212,5 @@ export interface SelectOption {
   disabled?: boolean
 }
 
-export { provideTheme, themeVUE as useVueTheme } from './ThemeVUE.ts'
+export { provideTheme, useTheme as useVueTheme } from './ThemeVUE.ts'
 export { ThemeProvider, useTheme as useReactTheme } from './ThemeReact.tsx'

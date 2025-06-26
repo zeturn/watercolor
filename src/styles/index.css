@@ -1,5 +1,3 @@
-@import '../components/TextField/style.css';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,17 +22,17 @@
   --wc-primary-800: #165fc5;
   --wc-primary-900: #164e9e;
 
-  /* Secondary colors - using new emerald scheme */
-  --wc-secondary-50: oklch(0.979 0.021 166.113);
-  --wc-secondary-100: oklch(0.95 0.052 163.051);
-  --wc-secondary-200: oklch(0.905 0.093 164.15);
-  --wc-secondary-300: oklch(0.845 0.143 164.978);
-  --wc-secondary-400: oklch(0.765 0.177 163.223);
-  --wc-secondary-500: oklch(0.696 0.17 162.48);
-  --wc-secondary-600: oklch(0.596 0.145 163.225);
-  --wc-secondary-700: oklch(0.508 0.118 165.612);
-  --wc-secondary-800: oklch(0.432 0.095 166.913);
-  --wc-secondary-900: oklch(0.378 0.077 168.94);
+  /* Secondary colors - using new green scheme */
+  --wc-secondary-50: #F6FFED;
+  --wc-secondary-100: #D9F7BE;
+  --wc-secondary-200: #B7EB8F;
+  --wc-secondary-300: #95DE64;
+  --wc-secondary-400: #73D13D;
+  --wc-secondary-500: #52C41A;
+  --wc-secondary-600: #389E0D;
+  --wc-secondary-700: #237804;
+  --wc-secondary-800: #135200;
+  --wc-secondary-900: #092B00;
 
   /* Neutral colors - using new neutral scheme */
   --wc-neutral-0: #ffffff;

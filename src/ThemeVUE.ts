@@ -2,6 +2,9 @@ import { ref, provide, inject, type Ref, defineComponent } from 'vue'
 import { themes } from '@/utils/theme'
 import { createThemeManager, type ColorTheme } from '@/utils/themeManager'
 
+// 与 utils/theme.ts 中的 themes 保持同步
+type _ColorTheme = keyof typeof themes // 本文件内部使用，但实际已通过 utils 提供
+
 // 复用主题类型
 
 export interface ThemeStore {
