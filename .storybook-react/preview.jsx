@@ -12,16 +12,38 @@ const preview = {
       },
     },
     backgrounds: {
-      default: 'light',
+      default: 'auto',
       values: [
+        { name: 'auto', value: 'transparent' },
         { name: 'light', value: '#ffffff' },
-        { name: 'dark', value: '#171717' },
+        { name: 'dark', value: '#0f0f0f' },
+        { name: 'gray', value: '#f5f5f5' },
       ],
+      grid: {
+        cellSize: 20,
+        opacity: 0.5,
+        cellAmount: 5,
+      },
     },
     darkMode: {
       current: 'light',
       stylePreview: true,
-    }
+      classTarget: 'html',
+      darkClass: 'dark',
+      lightClass: 'light',
+    },
+    layout: 'fullscreen',
+    viewport: {
+      viewports: {
+        responsive: {
+          name: 'Responsive',
+          styles: {
+            width: '100%',
+            height: '100%',
+          },
+        },
+      },
+    },
   },
   globalTypes: {
     theme: {
@@ -62,6 +84,8 @@ const preview = {
       
       React.useEffect(() => {
         const root = document.documentElement;
+        const body = document.body;
+        
         // 处理明暗模式
         root.classList.remove('light', 'dark');
         root.classList.add(theme);
@@ -71,13 +95,100 @@ const preview = {
         colorThemes.forEach((cls) => root.classList.remove(cls));
         root.classList.add(colorTheme);
 
+        // 设置CSS变量来控制Storybook的UI颜色
+        if (theme === 'dark') {
+          root.style.setProperty('--sb-color-bg', '#0f0f0f');
+          root.style.setProperty('--sb-color-bg-alt', '#1a1a1a');
+          root.style.setProperty('--sb-color-border', '#2a2a2a');
+          root.style.setProperty('--sb-color-text', '#f5f5f5');
+          root.style.setProperty('--sb-color-text-inverse', '#0f0f0f');
+        } else {
+          root.style.setProperty('--sb-color-bg', '#ffffff');
+          root.style.setProperty('--sb-color-bg-alt', '#f8f8f8');
+          root.style.setProperty('--sb-color-border', '#e5e5e5');
+          root.style.setProperty('--sb-color-text', '#1f1f1f');
+          root.style.setProperty('--sb-color-text-inverse', '#ffffff');
+        }
+
+        // 同步 Storybook 的背景色
+        const storybookRoot = document.getElementById('storybook-root');
+        if (storybookRoot) {
+          storybookRoot.style.backgroundColor = theme === 'dark' ? '#0f0f0f' : '#ffffff';
+        }
+
+        // 设置 body 背景色以确保完整的暗黑模式体验
+        body.style.backgroundColor = theme === 'dark' ? '#0f0f0f' : '#ffffff';
+        body.style.color = theme === 'dark' ? '#f5f5f5' : '#1f1f1f';
+
+        // 特别处理组件预览区域的背景
+        const previewIframe = document.querySelector('#storybook-preview-iframe');
+        if (previewIframe) {
+          const iframeDoc = previewIframe.contentDocument || previewIframe.contentWindow.document;
+          if (iframeDoc && iframeDoc.body) {
+            iframeDoc.body.style.backgroundColor = theme === 'dark' ? '#0f0f0f' : '#ffffff';
+            iframeDoc.body.style.color = theme === 'dark' ? '#f5f5f5' : '#1f1f1f';
+            if (iframeDoc.documentElement) {
+              iframeDoc.documentElement.classList.remove('light', 'dark');
+              iframeDoc.documentElement.classList.add(theme);
+              colorThemes.forEach((cls) => iframeDoc.documentElement.classList.remove(cls));
+              iframeDoc.documentElement.classList.add(colorTheme);
+            }
+          }
+        }
+
+        // 添加自定义样式来处理边框和背景
+        const existingStyle = document.getElementById('storybook-theme-style');
+        if (existingStyle) {
+          existingStyle.remove();
+        }
+
+        const style = document.createElement('style');
+        style.id = 'storybook-theme-style';
+        style.textContent = `
+          .sb-show-main {
+            background-color: ${theme === 'dark' ? '#0f0f0f' : '#ffffff'} !important;
+          }
+          
+          .sb-main-padded {
+            background-color: ${theme === 'dark' ? '#0f0f0f' : '#ffffff'} !important;
+            border: ${theme === 'dark' ? '1px solid #2a2a2a' : '1px solid #e5e5e5'} !important;
+          }
+
+          #storybook-preview-iframe {
+            background-color: ${theme === 'dark' ? '#0f0f0f' : '#ffffff'} !important;
+            border: ${theme === 'dark' ? '1px solid #2a2a2a' : '1px solid #e5e5e5'} !important;
+          }
+
+          .sb-show-main .sb-main-padded {
+            background: ${theme === 'dark' ? '#0f0f0f' : '#ffffff'} !important;
+          }
+
+          [data-side="right"] {
+            background-color: ${theme === 'dark' ? '#1a1a1a' : '#ffffff'} !important;
+            border-left: ${theme === 'dark' ? '1px solid #2a2a2a' : '1px solid #e5e5e5'} !important;
+          }
+        `;
+        document.head.appendChild(style);
+
         // 持久化
         localStorage.setItem('storybook-theme', theme);
         localStorage.setItem('storybook-color-theme', colorTheme);
       }, [theme, colorTheme]);
       
       return (
-        <div className={`p-4 min-h-screen ${theme === 'dark' ? 'bg-neutral-900 text-neutral-100' : 'bg-neutral-0 text-neutral-900'}`}>
+        <div 
+          className={`min-h-screen transition-colors duration-200 ${
+            theme === 'dark' 
+              ? 'bg-neutral-900 text-neutral-100' 
+              : 'bg-white text-neutral-900'
+          }`}
+          style={{
+            padding: '1rem',
+            minHeight: '100vh',
+            backgroundColor: theme === 'dark' ? '#0f0f0f' : '#ffffff',
+            color: theme === 'dark' ? '#f5f5f5' : '#1f1f1f',
+          }}
+        >
           <Story />
         </div>
       );
