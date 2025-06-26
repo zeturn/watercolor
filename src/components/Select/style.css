@@ -497,4 +497,106 @@
   .wc-select__value {
     background: #fff;
   }
+}
+
+.dark .wc-select__container:hover {
+  background: var(--wc-neutral-700);
+}
+
+.dark .wc-select__container--outlined {
+  background: var(--wc-neutral-800);
+}
+
+.dark .wc-select__container--filled {
+  background: var(--wc-neutral-800);
+}
+
+.dark .wc-select__container--standard {
+  background: var(--wc-neutral-800);
+}
+
+.dark .wc-select__container--focused {
+  background: var(--wc-neutral-700);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+}
+
+.dark .wc-select__container--error {
+  background: var(--wc-error-950);
+}
+
+.dark .wc-select__container--error.wc-select__container--focused {
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.2);
+}
+
+.dark .wc-select__container--open {
+  background: var(--wc-neutral-700);
+}
+
+.dark .wc-select__chip {
+  background: var(--wc-primary-900);
+  color: var(--wc-primary-200);
+}
+
+.dark .wc-select__chip-remove {
+  color: var(--wc-primary-300);
+}
+
+.dark .wc-select__chip-remove:hover {
+  background: var(--wc-primary-800);
+}
+
+.dark .wc-select__clear {
+  color: var(--wc-neutral-500);
+}
+
+.dark .wc-select__clear:hover {
+  color: var(--wc-neutral-300);
+  background: var(--wc-neutral-700);
+}
+
+.dark .wc-select__arrow {
+  color: var(--wc-neutral-400);
+}
+
+.dark .wc-select__search-input {
+  background: var(--wc-neutral-700);
+  color: var(--wc-neutral-200);
+  border-color: var(--wc-neutral-600);
+}
+
+.dark .wc-select__search-input:focus {
+  border-color: var(--wc-primary-400);
+}
+
+.dark .wc-select__option:hover {
+  background: var(--wc-neutral-700);
+}
+
+.dark .wc-select__option--selected {
+  background: var(--wc-primary-900);
+  color: var(--wc-primary-200);
+}
+
+.dark .wc-select__option--disabled {
+  color: var(--wc-neutral-600);
+}
+
+.dark .wc-select__option-check {
+  color: var(--wc-primary-400);
+}
+
+.dark .wc-select__no-options {
+  color: var(--wc-neutral-400);
+}
+
+.dark .wc-select__helper {
+  color: var(--wc-neutral-400);
+}
+
+.dark .wc-select__error {
+  color: var(--wc-error-400);
+}
+
+.dark .wc-select__loading {
+  color: var(--wc-neutral-400);
 } 

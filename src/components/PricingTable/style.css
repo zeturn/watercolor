@@ -481,4 +481,95 @@
   .plan-btn {
     display: none;
   }
+}
+
+.dark .plan-card--filled {
+  background: var(--wc-primary-900);
+  border-color: var(--wc-primary-700);
+}
+
+.dark .plan-card--minimal {
+  background: transparent;
+}
+
+.dark .plan-card--minimal:hover {
+  background: var(--wc-neutral-900);
+}
+
+.dark .plan-card--elevated {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.dark .plan-price__period {
+  color: var(--wc-neutral-400);
+}
+
+.dark .plan-price__original {
+  color: var(--wc-neutral-500);
+}
+
+.dark .plan-features li.unavailable {
+  color: var(--wc-neutral-600);
+}
+
+.dark .plan-btn {
+  background: var(--wc-primary-600);
+  color: var(--wc-neutral-100);
+}
+
+.dark .plan-btn:hover {
+  background: var(--wc-primary-700);
+}
+
+.dark .plan-btn--outlined {
+  background: transparent;
+  border-color: var(--wc-primary-400);
+  color: var(--wc-primary-400);
+}
+
+.dark .plan-btn--outlined:hover {
+  background: var(--wc-primary-900);
+  color: var(--wc-primary-200);
+}
+
+.dark .plan-btn--ghost {
+  background: transparent;
+  color: var(--wc-neutral-300);
+}
+
+.dark .plan-btn--ghost:hover {
+  background: var(--wc-neutral-700);
+  color: var(--wc-neutral-100);
+}
+
+.dark .plan-btn--secondary {
+  background: var(--wc-neutral-700);
+  color: var(--wc-neutral-200);
+}
+
+.dark .plan-btn--secondary:hover {
+  background: var(--wc-neutral-600);
+}
+
+.dark .plan-card--gradient {
+  background: linear-gradient(135deg, var(--wc-primary-900) 0%, var(--wc-primary-800) 100%);
+}
+
+.dark .plan-card--gradient .plan-name,
+.dark .plan-card--gradient .plan-price {
+  color: var(--wc-neutral-100);
+}
+
+.dark .plan-card--gradient .plan-btn {
+  background: var(--wc-neutral-100);
+  color: var(--wc-primary-900);
+}
+
+.dark .plan-card--gradient .plan-btn:hover {
+  background: var(--wc-neutral-200);
+}
+
+.dark .plan-badge {
+  background: var(--wc-primary-700);
+  color: var(--wc-neutral-100);
 } 

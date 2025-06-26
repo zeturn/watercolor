@@ -374,4 +374,84 @@
   .radio-dot {
     background-color: #fff !important;
   }
+}
+
+.dark .wc-radio:not(.wc-radio--disabled):hover .wc-radio__button:not(.wc-radio__button--checked) {
+  background: var(--wc-neutral-500);
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.15);
+}
+
+.dark .wc-radio:not(.wc-radio--disabled):hover .wc-radio__button.wc-radio__button--checked {
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.15);
+}
+
+.dark .wc-radio__button--primary.wc-radio__button--checked {
+  border-color: var(--wc-primary-400);
+  background-color: var(--wc-primary-400);
+}
+
+.dark .wc-radio__button--secondary.wc-radio__button--checked {
+  border-color: var(--wc-secondary-400);
+  background-color: var(--wc-secondary-400);
+}
+
+.dark .wc-radio__button--success.wc-radio__button--checked {
+  border-color: var(--wc-success-400);
+  background-color: var(--wc-success-400);
+}
+
+.dark .wc-radio__button--error.wc-radio__button--checked {
+  border-color: var(--wc-error-400);
+  background-color: var(--wc-error-400);
+}
+
+.dark .wc-radio__button--warning.wc-radio__button--checked {
+  border-color: var(--wc-warning-400);
+  background-color: var(--wc-warning-400);
+}
+
+.dark .wc-radio__button--info.wc-radio__button--checked {
+  border-color: var(--wc-info-400);
+  background-color: var(--wc-info-400);
+}
+
+.dark .wc-radio--outlined .wc-radio__button {
+  border-color: var(--wc-neutral-500);
+  background: transparent;
+}
+
+.dark .wc-radio--outlined .wc-radio__button--checked {
+  border-color: var(--wc-primary-400);
+  background: var(--wc-primary-400);
+}
+
+.dark .wc-radio--card {
+  background: var(--wc-neutral-800);
+  border-color: var(--wc-neutral-600);
+}
+
+.dark .wc-radio--card:hover {
+  background: var(--wc-neutral-700);
+  border-color: var(--wc-primary-400);
+}
+
+.dark .wc-radio--card.wc-radio--checked {
+  background: var(--wc-primary-900);
+  border-color: var(--wc-primary-400);
+}
+
+.dark .wc-radio--button {
+  background: var(--wc-neutral-800);
+  color: var(--wc-neutral-200);
+  border-color: var(--wc-neutral-600);
+}
+
+.dark .wc-radio--button:hover {
+  background: var(--wc-neutral-700);
+}
+
+.dark .wc-radio--button.wc-radio--checked {
+  background: var(--wc-primary-600);
+  color: var(--wc-neutral-100);
+  border-color: var(--wc-primary-500);
 } 

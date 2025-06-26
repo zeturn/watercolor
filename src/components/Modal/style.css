@@ -237,39 +237,38 @@
 }
 
 /* 暗色模式 */
-@media (prefers-color-scheme: dark) {
-  .wc-modal {
-    background-color: var(--wc-background-dark, #1f2937);
-    color: var(--wc-text-dark, #f9fafb);
-    border-color: var(--wc-border-dark, #374151);
-  }
-  
-  .wc-modal__title {
-    color: var(--wc-text-dark, #f9fafb);
-  }
-  
-  .wc-modal__body {
-    color: var(--wc-text-secondary-dark, #d1d5db);
-  }
-  
-  .wc-modal__footer {
-    background: var(--wc-background-secondary-dark, #111827);
-    border-color: var(--wc-border-dark, #374151);
-  }
-  
-  .wc-modal__close {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--wc-text-secondary-dark, #9ca3af);
-  }
-  
-  .wc-modal__close:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: var(--wc-text-dark, #f9fafb);
-  }
-  
-  .wc-modal__overlay {
-    background-color: rgba(0, 0, 0, 0.35);
-  }
+.dark .wc-modal {
+  background-color: var(--wc-neutral-800);
+  color: var(--wc-neutral-100);
+  border-color: var(--wc-neutral-600);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.dark .wc-modal__title {
+  color: var(--wc-neutral-100);
+}
+
+.dark .wc-modal__body {
+  color: var(--wc-neutral-300);
+}
+
+.dark .wc-modal__footer {
+  border-top-color: var(--wc-neutral-600);
+  background: var(--wc-neutral-700);
+}
+
+.dark .wc-modal__close {
+  background: var(--wc-neutral-700);
+  color: var(--wc-neutral-300);
+}
+
+.dark .wc-modal__close:hover {
+  background: var(--wc-neutral-600);
+  color: var(--wc-neutral-100);
+}
+
+.dark .wc-modal__overlay {
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* 响应式调整 */

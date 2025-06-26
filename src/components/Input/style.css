@@ -24,23 +24,89 @@
   --input-transition: all 0.2s ease;
 }
 
-/* 深色模式变量 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --input-bg: var(--wc-neutral-800, #1f2937);
-    --input-border: transparent;
-    --input-border-focus: transparent;
-    --input-border-error: transparent;
-    --input-text: #f9fafb;
-    --input-text-secondary: #d1d5db;
-    --input-placeholder: #9ca3af;
-    --input-label: #e5e7eb;
-    --input-disabled-bg: var(--wc-neutral-700, #374151);
-    --input-disabled-border: transparent;
-    --input-shadow: none;
-    --input-shadow-focus: 0 0 0 3px rgba(96, 165, 250, 0.2);
-    --input-shadow-error: 0 0 0 3px rgba(248, 113, 113, 0.2);
-  }
+/* 暗色模式变量 */
+.dark {
+  --input-bg: var(--wc-neutral-800);
+  --input-border: transparent;
+  --input-border-focus: transparent;
+  --input-border-error: transparent;
+  --input-text: var(--wc-neutral-100);
+  --input-text-secondary: var(--wc-neutral-300);
+  --input-placeholder: var(--wc-neutral-500);
+  --input-label: var(--wc-neutral-200);
+  --input-disabled-bg: var(--wc-neutral-700);
+  --input-disabled-border: transparent;
+  --input-shadow: none;
+  --input-shadow-focus: 0 0 0 3px rgba(96, 165, 250, 0.2);
+  --input-shadow-error: 0 0 0 3px rgba(248, 113, 113, 0.2);
+}
+
+.dark .wc-input:focus {
+  background-color: var(--wc-neutral-700);
+}
+
+.dark .wc-input--outlined:focus {
+  background-color: var(--wc-neutral-700);
+}
+
+.dark .wc-input--filled:focus {
+  background-color: var(--wc-neutral-700);
+}
+
+.dark .wc-input--standard:focus {
+  background-color: var(--wc-neutral-700);
+}
+
+.dark .wc-input--error {
+  background-color: var(--wc-error-950);
+}
+
+.dark .wc-input--error:focus {
+  background-color: var(--wc-error-900);
+}
+
+.dark .wc-input-container--floating .wc-input-label {
+  color: var(--wc-neutral-400);
+}
+
+.dark .wc-input-container--floating .wc-input-label--active {
+  color: var(--wc-primary-400);
+}
+
+.dark .wc-input-validation-icon--success {
+  color: var(--wc-success-400);
+}
+
+.dark .wc-input-validation-icon--error {
+  color: var(--wc-error-400);
+}
+
+.dark .wc-input-validation-icon--warning {
+  color: var(--wc-warning-400);
+}
+
+.dark .wc-input-clear-button {
+  color: var(--wc-neutral-400);
+}
+
+.dark .wc-input-clear-button:hover {
+  color: var(--wc-neutral-200);
+  background-color: var(--wc-neutral-700);
+}
+
+.dark .wc-input-password-toggle {
+  color: var(--wc-neutral-400);
+}
+
+.dark .wc-input-password-toggle:hover {
+  color: var(--wc-neutral-200);
+  background-color: var(--wc-neutral-700);
+}
+
+.dark .wc-input-prefix,
+.dark .wc-input-suffix {
+  color: var(--wc-neutral-400);
+  background-color: var(--wc-neutral-700);
 }
 
 /* 容器样式 */

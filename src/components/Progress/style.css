@@ -21,19 +21,10 @@
   --wc-progress-percent-color: var(--wc-text-secondary, #6b7280);
 }
 
-/* 深色模式变量 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --wc-progress-bg: var(--wc-neutral-700, #374151);
-    --wc-progress-label-color: var(--wc-text-primary-dark, #d1d5db);
-    --wc-progress-percent-color: var(--wc-text-secondary-dark, #9ca3af);
-  }
-}
-
 .dark {
-  --wc-progress-bg: var(--wc-neutral-700, #374151);
-  --wc-progress-label-color: var(--wc-text-primary-dark, #d1d5db);
-  --wc-progress-percent-color: var(--wc-text-secondary-dark, #9ca3af);
+  --wc-progress-bg: var(--wc-neutral-700);
+  --wc-progress-label-color: var(--wc-neutral-200);
+  --wc-progress-percent-color: var(--wc-neutral-400);
 }
 
 /* 容器样式 */
@@ -386,4 +377,13 @@
   .wc-progress-percent {
     color: #000 !important;
   }
+}
+
+/* 暗色模式变量 - 已集成到.dark类中 */
+.dark .wc-progress--circular::before {
+  background: var(--wc-neutral-800);
+}
+
+.dark .wc-progress--circular .wc-progress__text {
+  color: var(--wc-neutral-200);
 } 

@@ -224,45 +224,98 @@
   }
 }
 
-/* 深色模式 */
-@media (prefers-color-scheme: dark) {
-  .wc-dropdown__button {
-    background-color: var(--wc-neutral-800, #1f2937);
-    border-color: var(--wc-neutral-600, #4b5563);
-    color: var(--wc-neutral-200, #e5e7eb);
-  }
-  
-  .wc-dropdown__button:hover {
-    background-color: var(--wc-neutral-700, #374151);
-    border-color: var(--wc-primary-400, #60a5fa);
-  }
-  
-  .wc-dropdown__menu {
-    background-color: var(--wc-neutral-800, #1f2937);
-    border-color: var(--wc-neutral-600, #4b5563);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-  
-  .wc-dropdown__item {
-    color: var(--wc-neutral-200, #e5e7eb);
-  }
-  
-  .wc-dropdown__item:hover {
-    background-color: var(--wc-neutral-700, #374151);
-  }
-  
-  .wc-dropdown__item--disabled {
-    color: var(--wc-neutral-500, #6b7280);
-  }
-  
-  .wc-dropdown__item--selected {
-    background-color: var(--wc-primary-900, #1e3a8a);
-    color: var(--wc-primary-200, #bfdbfe);
-  }
-  
-  .wc-dropdown__divider {
-    background-color: var(--wc-neutral-600, #4b5563);
-  }
+/* 暗色模式 */
+.dark .wc-dropdown__button {
+  background-color: var(--wc-neutral-800);
+  border-color: var(--wc-neutral-600);
+  color: var(--wc-neutral-200);
+}
+
+.dark .wc-dropdown__button:hover {
+  background-color: var(--wc-neutral-700);
+  border-color: var(--wc-primary-400);
+}
+
+.dark .wc-dropdown__button:focus {
+  background-color: var(--wc-neutral-700);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+}
+
+.dark .wc-dropdown__menu {
+  background-color: var(--wc-neutral-800);
+  border-color: var(--wc-neutral-600);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .wc-dropdown__item {
+  color: var(--wc-neutral-200);
+}
+
+.dark .wc-dropdown__item:hover {
+  background-color: var(--wc-neutral-700);
+}
+
+.dark .wc-dropdown__item:active {
+  background-color: var(--wc-neutral-600);
+}
+
+.dark .wc-dropdown__item--disabled {
+  color: var(--wc-neutral-500);
+}
+
+.dark .wc-dropdown__item--selected {
+  background-color: var(--wc-primary-900);
+  color: var(--wc-primary-200);
+}
+
+.dark .wc-dropdown__item--danger {
+  color: var(--wc-error-400);
+}
+
+.dark .wc-dropdown__item--danger:hover {
+  background-color: var(--wc-error-900);
+}
+
+.dark .wc-dropdown__divider {
+  background-color: var(--wc-neutral-600);
+}
+
+.dark .wc-dropdown--text .wc-dropdown__button {
+  color: var(--wc-primary-400);
+}
+
+.dark .wc-dropdown--text .wc-dropdown__button:hover {
+  background-color: var(--wc-primary-900);
+}
+
+.dark .wc-dropdown--outlined .wc-dropdown__button {
+  background: transparent;
+  border-color: var(--wc-neutral-600);
+}
+
+.dark .wc-dropdown__card {
+  background-color: var(--wc-neutral-800);
+}
+
+.dark .wc-dropdown__card-illustration {
+  background: linear-gradient(135deg, var(--wc-primary-900) 0%, var(--wc-primary-800) 100%);
+}
+
+.dark .wc-dropdown__illustration-placeholder {
+  background-color: var(--wc-neutral-700);
+  color: var(--wc-neutral-400);
+}
+
+.dark .wc-dropdown__card-title {
+  color: var(--wc-neutral-200);
+}
+
+.dark .wc-dropdown__card-description {
+  color: var(--wc-neutral-400);
+}
+
+.dark .wc-dropdown__card-list .wc-dropdown__item:hover {
+  background-color: var(--wc-neutral-700);
 }
 
 /* Vue Transition */
@@ -368,32 +421,4 @@
 
 .wc-dropdown__card-list .wc-dropdown__divider {
   margin: 8px 16px;
-}
-
-/* 深色模式适配 */
-@media (prefers-color-scheme: dark) {
-  .wc-dropdown__card {
-    background-color: var(--wc-neutral-800, #1f2937);
-  }
-  
-  .wc-dropdown__card-illustration {
-    background: linear-gradient(135deg, var(--wc-primary-900, #1e3a8a) 0%, var(--wc-primary-800, #1e40af) 100%);
-  }
-  
-  .wc-dropdown__illustration-placeholder {
-    background-color: var(--wc-neutral-700, #374151);
-    color: var(--wc-neutral-400, #9ca3af);
-  }
-  
-  .wc-dropdown__card-title {
-    color: var(--wc-neutral-200, #e5e7eb);
-  }
-  
-  .wc-dropdown__card-description {
-    color: var(--wc-neutral-400, #9ca3af);
-  }
-  
-  .wc-dropdown__card-list .wc-dropdown__item:hover {
-    background-color: var(--wc-neutral-700, #374151);
-  }
 } 

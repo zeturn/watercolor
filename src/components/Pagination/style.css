@@ -23,27 +23,40 @@
   --wc-pagination-transition: all 0.2s ease;
 }
 
-/* 深色模式变量 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --wc-pagination-button-bg: transparent;
-    --wc-pagination-button-border: transparent;
-    --wc-pagination-button-color: var(--wc-neutral-300, #d1d5db);
-    --wc-pagination-button-hover-bg: var(--wc-neutral-700, #374151);
-    --wc-pagination-button-hover-border: transparent;
-    --wc-pagination-button-active-bg: var(--wc-primary-400, #60a5fa);
-    --wc-pagination-button-active-border: var(--wc-primary-400, #60a5fa);
-  }
+/* 深色模式变量 - 已集成到.dark类中 */
+.dark .wc-page-ellipsis {
+  color: var(--wc-neutral-400);
 }
 
-.dark {
-  --wc-pagination-button-bg: transparent;
-  --wc-pagination-button-border: transparent;
-  --wc-pagination-button-color: var(--wc-neutral-300, #d1d5db);
-  --wc-pagination-button-hover-bg: var(--wc-neutral-700, #374151);
-  --wc-pagination-button-hover-border: transparent;
-  --wc-pagination-button-active-bg: var(--wc-primary-400, #60a5fa);
-  --wc-pagination-button-active-border: var(--wc-primary-400, #60a5fa);
+.dark .wc-pagination--success {
+  --wc-pagination-button-hover-border: var(--wc-success-400);
+  --wc-pagination-button-hover-color: var(--wc-success-400);
+  --wc-pagination-button-active-bg: var(--wc-success-500);
+  --wc-pagination-button-active-border: var(--wc-success-500);
+}
+
+.dark .wc-pagination--warning {
+  --wc-pagination-button-hover-border: var(--wc-warning-400);
+  --wc-pagination-button-hover-color: var(--wc-warning-400);
+  --wc-pagination-button-active-bg: var(--wc-warning-500);
+  --wc-pagination-button-active-border: var(--wc-warning-500);
+}
+
+.dark .wc-pagination--error {
+  --wc-pagination-button-hover-border: var(--wc-error-400);
+  --wc-pagination-button-hover-color: var(--wc-error-400);
+  --wc-pagination-button-active-bg: var(--wc-error-500);
+  --wc-pagination-button-active-border: var(--wc-error-500);
+}
+
+.dark .wc-pagination-info {
+  color: var(--wc-neutral-300);
+}
+
+.dark .wc-pagination-size-selector select {
+  background: var(--wc-neutral-800);
+  color: var(--wc-neutral-200);
+  border-color: var(--wc-neutral-600);
 }
 
 /* 分页容器 */
