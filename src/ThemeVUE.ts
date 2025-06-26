@@ -1,29 +1,29 @@
 import { ref, provide, inject, type Ref, defineComponent } from 'vue'
 import { themes } from '@/utils/theme'
-import { createThemeManager, type ColorTheme } from '@/utils/themeManager'
+import { createThemeManager } from '@/utils/themeManager'
 
-// 与 utils/theme.ts 中的 themes 保持同步
+// 与 React 端保持一致的类型定义
 type _ColorTheme = keyof typeof themes // 本文件内部使用，但实际已通过 utils 提供
 
 // 复用主题类型
 
 export interface ThemeStore {
-  color: Ref<ColorTheme>
+  color: Ref<_ColorTheme>
   dark: Ref<boolean>
-  setColor: (c: ColorTheme) => void
+  setColor: (c: _ColorTheme) => void
   toggleDark: () => void
 }
 
-const THEME_KEY = Symbol('WatercolorTheme')
+const THEME_KEY = Symbol('Water_ColorTheme')
 
 // 创建全局主题管理器（单例）
 const manager = createThemeManager()
 
 function createThemeStore (): ThemeStore {
-  const color = ref<ColorTheme>(manager.color as ColorTheme)
+  const color = ref<_ColorTheme>(manager.color as _ColorTheme)
   const dark = ref<boolean>(manager.dark)
 
-  const setColor = (c: ColorTheme): void => {
+  const setColor = (c: _ColorTheme): void => {
     manager.setColor(c)
     color.value = c
   }
