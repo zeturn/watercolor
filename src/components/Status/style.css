@@ -1,0 +1,277 @@
+/* Status 组件样式 */
+.wc-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  font-family: var(--wc-font-family);
+}
+
+.wc-status::before {
+  content: '';
+  display: block;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* 尺寸 */
+.wc-status--sm::before {
+  width: 8px;
+  height: 8px;
+}
+
+.wc-status--md::before {
+  width: 12px;
+  height: 12px;
+}
+
+.wc-status--lg::before {
+  width: 16px;
+  height: 16px;
+}
+
+/* 状态颜色 */
+.wc-status--default::before {
+  background-color: var(--wc-neutral-400, #9ca3af);
+}
+
+.wc-status--success::before {
+  background-color: var(--wc-success-500, #10b981);
+}
+
+.wc-status--error::before {
+  background-color: var(--wc-error-500, #ef4444);
+}
+
+.wc-status--warning::before {
+  background-color: var(--wc-warning-500, #f59e0b);
+}
+
+.wc-status--info::before {
+  background-color: var(--wc-primary-500, #3b82f6);
+}
+
+.wc-status--pending::before {
+  background-color: var(--wc-purple-500, #8b5cf6);
+}
+
+.wc-status--processing::before {
+  background-color: var(--wc-cyan-500, #06b6d4);
+}
+
+.wc-status--cancelled::before {
+  background-color: var(--wc-neutral-500, #64748b);
+}
+
+/* 文字样式 */
+.wc-status__text {
+  font-size: 14px;
+  color: var(--wc-text-primary, #374151);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.wc-status--sm .wc-status__text {
+  font-size: 12px;
+}
+
+.wc-status--lg .wc-status__text {
+  font-size: 16px;
+}
+
+/* 动画效果 */
+.wc-status--pulse::before {
+  animation: wc-status-pulse 2s infinite;
+}
+
+.wc-status--spin::before {
+  animation: wc-status-spin 1s linear infinite;
+}
+
+.wc-status--bounce::before {
+  animation: wc-status-bounce 1.5s infinite;
+}
+
+.wc-status--blink::before {
+  animation: wc-status-blink 1s infinite;
+}
+
+.wc-status--shake::before {
+  animation: wc-status-shake 0.8s infinite;
+}
+
+.wc-status--breathe::before {
+  animation: wc-status-breathe 3s infinite;
+}
+
+.wc-status--ripple::before {
+  animation: wc-status-ripple 2s infinite;
+}
+
+.wc-status--glow::before {
+  animation: wc-status-glow 2.5s infinite;
+}
+
+@keyframes wc-status-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes wc-status-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wc-status-bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-6px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes wc-status-blink {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes wc-status-shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-2px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes wc-status-breathe {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes wc-status-ripple {
+  0% {
+    box-shadow: 0 0 0 0 currentColor;
+    opacity: 1;
+  }
+  70% {
+    box-shadow: 0 0 0 6px transparent;
+    opacity: 0;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+    opacity: 0;
+  }
+}
+
+@keyframes wc-status-glow {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.5);
+  }
+}
+
+/* 暗色模式 - 使用 .dark 类选择器 */
+.dark .wc-status__text {
+  color: var(--wc-text-primary-dark, #f9fafb);
+}
+
+.dark .wc-status--default::before {
+  background-color: var(--wc-neutral-400, #6b7280);
+}
+
+.dark .wc-status--success::before {
+  background-color: var(--wc-success-400, #059669);
+}
+
+.dark .wc-status--error::before {
+  background-color: var(--wc-error-400, #dc2626);
+}
+
+.dark .wc-status--warning::before {
+  background-color: var(--wc-warning-400, #d97706);
+}
+
+.dark .wc-status--info::before {
+  background-color: var(--wc-primary-400, #2563eb);
+}
+
+.dark .wc-status--pending::before {
+  background-color: var(--wc-purple-400, #7c3aed);
+}
+
+.dark .wc-status--processing::before {
+  background-color: var(--wc-cyan-400, #0891b2);
+}
+
+.dark .wc-status--cancelled::before {
+  background-color: var(--wc-neutral-500, #475569);
+}
+
+/* media query for prefers-color-scheme */
+@media (prefers-color-scheme: dark) {
+  .wc-status__text {
+    color: var(--wc-text-primary-dark, #f9fafb);
+  }
+  
+  .wc-status--default::before {
+    background-color: var(--wc-neutral-400, #6b7280);
+  }
+  
+  .wc-status--success::before {
+    background-color: var(--wc-success-400, #059669);
+  }
+  
+  .wc-status--error::before {
+    background-color: var(--wc-error-400, #dc2626);
+  }
+  
+  .wc-status--warning::before {
+    background-color: var(--wc-warning-400, #d97706);
+  }
+  
+  .wc-status--info::before {
+    background-color: var(--wc-primary-400, #2563eb);
+  }
+  
+  .wc-status--pending::before {
+    background-color: var(--wc-purple-400, #7c3aed);
+  }
+  
+  .wc-status--processing::before {
+    background-color: var(--wc-cyan-400, #0891b2);
+  }
+  
+  .wc-status--cancelled::before {
+    background-color: var(--wc-neutral-500, #475569);
+  }
+} 
