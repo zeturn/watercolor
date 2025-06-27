@@ -1,8 +1,16 @@
 import VideoPlayerVue from '../src/components/VideoPlayer/VideoPlayer.vue'
 
 export default {
-  title: 'Components/VideoPlayer',
+  title: 'Components/VideoPlayer (Vue)',
   component: VideoPlayerVue,
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        component: 'VideoPlayer 视频播放器组件，支持视频播放、暂停、循环播放等功能。',
+      },
+    },
+  },
   tags: ['autodocs'],
   argTypes: {
     src: { control: 'text' },

@@ -6,10 +6,15 @@
   flex-direction: column;
   position: relative;
   margin-bottom: 16px;
+  font-family: var(--wc-font-family);
 }
 
 .wc-textfield--full-width {
   width: 100%;
+}
+
+.wc-textfield--multiline {
+  /* Additional styles for multiline variant */
 }
 
 /* 标签 */
@@ -43,7 +48,8 @@
   color: #3b82f6;
 }
 
-.wc-textfield__required {
+.wc-textfield__required,
+.required-indicator {
   color: #ef4444;
   margin-left: 2px;
 }
@@ -70,6 +76,14 @@
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
+.wc-textfield__container--full-width {
+  width: 100%;
+}
+
+.wc-textfield__container--has-value {
+  /* Styles for containers with value */
+}
+
 /* 尺寸变体 */
 .wc-textfield__container--sm {
   padding: 8px 12px;
@@ -93,15 +107,18 @@
 .wc-textfield__container--outlined {
   background: #ffffff;
   border: 2px solid #e5e7eb;
+  padding: 0 12px;
 }
 
 .wc-textfield__container--outlined:hover {
   border-color: #d1d5db;
+  background: #f1f3f4;
 }
 
 .wc-textfield__container--outlined.wc-textfield__container--focused {
   border-color: #3b82f6;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+  background: #e9ecef;
 }
 
 .wc-textfield__container--filled {
@@ -109,6 +126,7 @@
   border: none;
   border-bottom: 2px solid #e5e7eb;
   border-radius: 8px 8px 0 0;
+  padding: 8px 12px 4px;
 }
 
 .wc-textfield__container--filled:hover {
@@ -129,6 +147,7 @@
   border-radius: 0;
   padding-left: 0;
   padding-right: 0;
+  padding: 4px 0;
 }
 
 .wc-textfield__container--standard:hover {
@@ -150,6 +169,10 @@
   border-color: #e5e7eb;
 }
 
+.wc-textfield__container--disabled:hover {
+  border-color: #e5e7eb;
+}
+
 .wc-textfield__container--error {
   border-color: #ef4444;
   background: #fef2f2;
@@ -165,6 +188,19 @@
   box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
 }
 
+.wc-textfield__container--error.wc-textfield__container--outlined {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.wc-textfield__container--error.wc-textfield__container--filled {
+  border-bottom-color: #ef4444;
+}
+
+.wc-textfield__container--error.wc-textfield__container--standard {
+  border-bottom-color: #ef4444;
+}
+
 /* 输入框 */
 .wc-textfield__input {
   flex: 1;
@@ -178,12 +214,25 @@
   font-family: inherit;
 }
 
+.wc-textfield__input--sm {
+  font-size: 12px;
+}
+
+.wc-textfield__input--md {
+  font-size: 14px;
+}
+
+.wc-textfield__input--lg {
+  font-size: 16px;
+}
+
 .wc-textfield__input::placeholder {
   color: #9ca3af;
 }
 
 .wc-textfield__input:disabled {
   cursor: not-allowed;
+  color: #9ca3af;
 }
 
 /* 多行文本框 */
@@ -191,10 +240,12 @@
   min-height: 80px;
   resize: vertical;
   font-family: inherit;
+  padding: 8px 0;
 }
 
-/* 装饰器 */
-.wc-textfield__adornment {
+/* 装饰器 - 支持两种命名方式 */
+.wc-textfield__adornment,
+.adornment {
   display: flex;
   align-items: center;
   color: #6b7280;
@@ -202,17 +253,28 @@
   font-size: 14px;
 }
 
-.wc-textfield__adornment--start {
+.wc-textfield__adornment--start,
+.start-adornment {
   margin-right: 8px;
 }
 
-.wc-textfield__adornment--end {
+.wc-textfield__adornment--end,
+.end-adornment {
   margin-left: 8px;
 }
 
 .wc-textfield__adornment .wc-icon {
   width: 20px;
   height: 20px;
+}
+
+/* 错误图标 */
+.wc-textfield__error-icon,
+.error-icon {
+  width: 20px;
+  height: 20px;
+  color: #ef4444;
+  margin-right: 4px;
 }
 
 /* 字段集（用于outlined变体的标签） */
@@ -263,23 +325,25 @@
   opacity: 1;
 }
 
-/* 辅助文本 */
-.wc-textfield__helper-text {
+/* 辅助文本 - 支持两种命名方式 */
+.wc-textfield__helper-text,
+.helper-text {
   margin-top: 6px;
   font-size: 12px;
   line-height: 1.4;
   color: #6b7280;
 }
 
-.wc-textfield__helper-text--error {
+.wc-textfield__helper-text--error,
+.error-text {
   color: #ef4444;
+  margin: 0;
 }
 
-/* 错误图标 */
-.wc-textfield__error-icon {
-  width: 16px;
-  height: 16px;
-  color: #ef4444;
+.helper-text-content {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0;
 }
 
 /* 浮动标签变体 */
@@ -336,6 +400,20 @@
     border-color: #4b5563;
   }
   
+  .wc-textfield__container--outlined:hover {
+    background: #4b5563;
+  }
+  
+  .wc-textfield__container--outlined.wc-textfield__container--focused {
+    background: #111827;
+    border-color: #3b82f6;
+  }
+  
+  .wc-textfield__container--error.wc-textfield__container--outlined {
+    background: #450a0a;
+    border-color: #ef4444;
+  }
+  
   .wc-textfield__container--filled {
     background: #374151;
     border-bottom-color: #4b5563;
@@ -343,6 +421,11 @@
   
   .wc-textfield__container--standard {
     border-bottom-color: #4b5563;
+  }
+  
+  .wc-textfield__container--disabled {
+    background: #374151;
+    border-color: #4b5563;
   }
   
   .wc-textfield__input {

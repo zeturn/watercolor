@@ -1,7 +1,7 @@
 import TextField from '../src/components/TextField/TextField.vue'
 
 export default {
-  title: 'Components/TextField',
+  title: 'Components/TextField (Vue)',
   component: TextField,
   parameters: {
     docs: {
