@@ -310,30 +310,54 @@ module.exports = {
 
 ## 🎨 Theme Customization
 
-### 🎯 Preset Themes
+### 📁 File-Based Theme System
 
-```js
-import { applyTheme, getAvailableThemes } from 'watercolor-ui'
+Watercolor UI now uses a **file-based theme system** for maximum flexibility. Create a `theme.config.json` file in your project root:
 
-// View all available themes
-console.log(getAvailableThemes())
-// ['default', 'ocean', 'forest', 'sunset', 'violet', 'rose']
-
-// Apply preset themes
-applyTheme('default')   // Blue theme (default)
-applyTheme('ocean')     // Ocean blue theme
-applyTheme('forest')    // Forest green theme
-applyTheme('sunset')    // Sunset orange theme
-applyTheme('violet')    // Violet theme
-applyTheme('rose')      // Rose pink theme
+```json
+{
+  "primary": {
+    "50": "#eff6ff",
+    "100": "#dbeafe",
+    "200": "#bfdbfe", 
+    "300": "#93c5fd",
+    "400": "#60a5fa",
+    "500": "#3b82f6",
+    "600": "#2563eb",
+    "700": "#1d4ed8",
+    "800": "#1e40af",
+    "900": "#1e3a8a"
+  },
+  "secondary": {
+    "50": "#f3f4ff",
+    "100": "#e5e7ff",
+    "200": "#c7d2fe",
+    "300": "#a5b4fc", 
+    "400": "#818cf8",
+    "500": "#6366f1",
+    "600": "#4f46e5",
+    "700": "#4338ca",
+    "800": "#3730a3",
+    "900": "#312e81"
+  },
+  "fonts": {
+    "chinese": "Noto Sans SC",
+    "english": "Inter",
+    "fallback": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+  }
+}
 ```
 
-### 🎭 Custom Themes
+### 🎭 Programmatic Theme Control
 
 ```js
-import { setTheme, createTheme } from 'watercolor-ui'
+import { setTheme, loadThemeConfig } from 'watercolor-ui'
 
-// Method 1: Direct theme color setting
+// Method 1: Load from file (recommended)
+await loadThemeConfig()  // Loads /theme.config.json
+await loadThemeConfig('/custom-theme.json')  // Custom path
+
+// Method 2: Direct theme setting
 setTheme({
   primary: {
     50: '#f0f9ff',
@@ -345,8 +369,7 @@ setTheme({
     600: '#0284c7',
     700: '#0369a1',
     800: '#075985',
-    900: '#0c4a6e',
-    950: '#082f49'
+    900: '#0c4a6e'
   },
   secondary: {
     50: '#fafaf9',
@@ -358,20 +381,24 @@ setTheme({
     600: '#57534e',
     700: '#44403c',
     800: '#292524',
-    900: '#1c1917',
-    950: '#0c0a09'
+    900: '#1c1917'
+  },
+  fonts: {
+    chinese: 'PingFang SC',
+    english: 'SF Pro Display',
+    fallback: 'system-ui, sans-serif'
   }
 })
+```
 
-// Method 2: Using theme generator
-const customTheme = createTheme({
-  primaryColor: '#6366f1',
-  secondaryColor: '#8b5cf6',
-  radius: 'md',
-  fontFamily: 'Inter'
-})
+### 🔄 Dynamic Theme Switching
 
-applyTheme(customTheme)
+```js
+// Switch between different theme files
+await loadThemeConfig('/themes/blue.json')    // Blue theme
+await loadThemeConfig('/themes/green.json')   // Green theme  
+await loadThemeConfig('/themes/orange.json')  // Orange theme
+await loadThemeConfig('/themes/brand.json')   // Brand theme
 ```
 
 ### 🌙 Dark Mode

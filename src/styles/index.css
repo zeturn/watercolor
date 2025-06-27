@@ -170,131 +170,8 @@
   --color-dark-text-secondary: var(--wc-neutral-400);
 }
 
-/* Theme variants */
-/* Ocean blue theme */
-.theme-ocean {
-  --wc-primary-50: #E6F7FF;
-  --wc-primary-100: #BAE7FF;
-  --wc-primary-200: #91D5FF;
-  --wc-primary-300: #69C0FF;
-  --wc-primary-400: #40A9FF;
-  --wc-primary-500: #1890FF;
-  --wc-primary-600: #096DD9;
-  --wc-primary-700: #0050B3;
-  --wc-primary-800: #003A8C;
-  --wc-primary-900: #002766;
-
-  --wc-secondary-50: #E6FFFB;
-  --wc-secondary-100: #B5F5EC;
-  --wc-secondary-200: #87E8DE;
-  --wc-secondary-300: #5CDBD3;
-  --wc-secondary-400: #36CFC9;
-  --wc-secondary-500: #13C2C2;
-  --wc-secondary-600: #08979C;
-  --wc-secondary-700: #006D75;
-  --wc-secondary-800: #00474F;
-  --wc-secondary-900: #002329;
-}
-
-/* Forest green theme */
-.theme-forest {
-  --wc-primary-50: #F6FFED;
-  --wc-primary-100: #D9F7BE;
-  --wc-primary-200: #B7EB8F;
-  --wc-primary-300: #95DE64;
-  --wc-primary-400: #73D13D;
-  --wc-primary-500: #52C41A;
-  --wc-primary-600: #389E0D;
-  --wc-primary-700: #237804;
-  --wc-primary-800: #135200;
-  --wc-primary-900: #092B00;
-
-  --wc-secondary-50: #F9FFED;
-  --wc-secondary-100: #EAFF99;
-  --wc-secondary-200: #DEFF66;
-  --wc-secondary-300: #D4FF33;
-  --wc-secondary-400: #CBFF00;
-  --wc-secondary-500: #A6CC00;
-  --wc-secondary-600: #7D9900;
-  --wc-secondary-700: #546600;
-  --wc-secondary-800: #2B3300;
-  --wc-secondary-900: #0F1100;
-}
-
-/* Sunset orange theme */
-.theme-sunset {
-  --wc-primary-50: #FFF7E6;
-  --wc-primary-100: #FFE7BA;
-  --wc-primary-200: #FFD591;
-  --wc-primary-300: #FFC069;
-  --wc-primary-400: #FFA940;
-  --wc-primary-500: #FA8C16;
-  --wc-primary-600: #D46B08;
-  --wc-primary-700: #AD4E00;
-  --wc-primary-800: #873800;
-  --wc-primary-900: #612500;
-
-  --wc-secondary-50: #FFF2E8;
-  --wc-secondary-100: #FFD8BF;
-  --wc-secondary-200: #FFBB96;
-  --wc-secondary-300: #FF9C6E;
-  --wc-secondary-400: #FF7A45;
-  --wc-secondary-500: #FF4D4F;
-  --wc-secondary-600: #CF1322;
-  --wc-secondary-700: #A8071A;
-  --wc-secondary-800: #820014;
-  --wc-secondary-900: #5C0011;
-}
-
-/* Violet theme */
-.theme-violet {
-  --wc-primary-50: #F9F0FF;
-  --wc-primary-100: #EFDBFF;
-  --wc-primary-200: #D3ADF7;
-  --wc-primary-300: #B37FEB;
-  --wc-primary-400: #9254DE;
-  --wc-primary-500: #722ED1;
-  --wc-primary-600: #531DAB;
-  --wc-primary-700: #391085;
-  --wc-primary-800: #22075E;
-  --wc-primary-900: #120338;
-
-  --wc-secondary-50: #F4F0FF;
-  --wc-secondary-100: #E6D7FF;
-  --wc-secondary-200: #D2B3FF;
-  --wc-secondary-300: #BD8CFF;
-  --wc-secondary-400: #A866FF;
-  --wc-secondary-500: #9340FF;
-  --wc-secondary-600: #7B1FA2;
-  --wc-secondary-700: #6A1B9A;
-  --wc-secondary-800: #4A148C;
-  --wc-secondary-900: #311B92;
-}
-
-/* Rose pink theme */
-.theme-rose {
-  --wc-primary-50: #FFF0F6;
-  --wc-primary-100: #FFD6E7;
-  --wc-primary-200: #FFADD2;
-  --wc-primary-300: #FF85C0;
-  --wc-primary-400: #F759AB;
-  --wc-primary-500: #EB2F96;
-  --wc-primary-600: #C41D7F;
-  --wc-primary-700: #9E1068;
-  --wc-primary-800: #780650;
-  --wc-primary-900: #520339;
-
-  --wc-secondary-50: #FFF2F6;
-  --wc-secondary-100: #FFE0EC;
-  --wc-secondary-200: #FFCDD2;
-  --wc-secondary-300: #F8BBD9;
-  --wc-secondary-400: #F06292;
-  --wc-secondary-500: #E91E63;
-  --wc-secondary-600: #AD1457;
-  --wc-secondary-700: #880E4F;
-  --wc-secondary-800: #560027;
-  --wc-secondary-900: #37001C;
-}
+/* Theme system is now file-based via theme.config.json */
+/* No hardcoded theme classes needed */
 
 /* Dark mode */
 .dark {
@@ -701,6 +578,156 @@
   background: #4a4a4a;
 }
 
+/* Storybook autodoc 暗色模式样式 */
+.dark .sbdocs {
+  background-color: #0f0f0f !important;
+  color: #f5f5f5 !important;
+}
+
+.dark .sbdocs-wrapper {
+  background-color: #0f0f0f !important;
+}
+
+.dark .sbdocs-content {
+  background-color: #0f0f0f !important;
+  color: #a5a5a5 !important;
+}
+
+/* autodoc 中的展示框 */
+.dark .docblock-preview {
+  background-color: #1a1a1a !important;
+  border-color: #2a2a2a !important;
+}
+
+/* autodoc 中的控制面板 */
+.dark .docblock-argstable {
+  background-color: #1a1a1a !important;
+  color: #a5a5a5 !important;
+}
+
+.dark .docblock-argstable-head {
+  background-color: #2a2a2a !important;
+  color: #a5a5a5 !important;
+}
+
+.dark .docblock-argstable-body {
+  background-color: #1a1a1a !important;
+  color: #a5a5a5 !important;
+}
+
+.dark .docblock-argstable tr,
+.dark .docblock-argstable td,
+.dark .docblock-argstable th {
+  border-color: #2a2a2a !important;
+  background-color: #1a1a1a !important;
+  color: #a5a5a5 !important;
+}
+
+.dark .docblock-argstable span,
+.dark .docblock-argstable select,
+.dark .docblock-argstable textarea,
+.dark .docblock-argstable button,
+.dark .docblock-argstable select,
+.dark .docblock-argstable option,
+.dark .docblock-argstable optgroup,
+.dark .docblock-argstable legend,
+.dark .docblock-argstable fieldset {
+  background-color: #1a1a1a !important;
+  color: #a5a5a5 !important;
+}
+
+.dark .docblock-argstable label {
+  background-color: #757575 !important;
+}
+
+/* Controls 面板样式 */
+.dark .sidebar-container {
+  background-color: #0f0f0f !important;
+}
+
+.dark .panel-content {
+  background-color: #1a1a1a !important;
+  color: #a5a5a5 !important;
+}
+
+.dark .input-field {
+  background-color: #2a2a2a !important;
+  border-color: #3a3a3a !important;
+  color: #a5a5a5 !important;
+}
+
+.dark .control-select,
+.dark .control-text,
+.dark .control-number {
+  background-color: #2a2a2a !important;
+  border-color: #3a3a3a !important;
+  color: #f5f5f5 !important;
+}
+
+.dark .sb-bar{
+  background-color: #1a1a1a !important;
+  color: #f5f5f5 !important;
+}
+
+/* Storybook Canvas 区域 */
+.dark #storybook-preview-iframe {
+  background-color: #0f0f0f !important;
+}
+
+.dark .sb-show-main {
+  background-color: #0f0f0f !important;
+}
+
+/* Table 样式 for autodoc */
+.dark table {
+  background-color: #1a1a1a !important;
+  color: #f5f5f5 !important;
+}
+
+.dark table th {
+  background-color: #2a2a2a !important;
+  color: #f5f5f5 !important;
+  border-color: #3a3a3a !important;
+}
+
+.dark table td {
+  border-color: #2a2a2a !important;
+  color: #f5f5f5 !important;
+}
+
+.dark .sb-unstyled {
+  color: #f5f5f5 !important;
+}
+
+/* Code blocks in autodoc */
+.dark pre {
+  background-color: #1a1a1a !important;
+  color: #f5f5f5 !important;
+  border-color: #2a2a2a !important;
+}
+
+.dark code {
+  background-color: #2a2a2a !important;
+  color: #f5f5f5 !important;
+}
+
+/* ArgsTable 特定样式 */
+.dark .docblock-argstable-name {
+  color: #3f95ff !important;
+}
+
+.dark .docblock-argstable-description {
+  color: #d1d5db !important;
+}
+
+.dark .docblock-argstable-type {
+  color: #2fffb3 !important;
+}
+
+.dark .docblock-argstable-default {
+  color: #ffc93f !important;
+}
+
 /* Enhanced contrast for better visibility in dark mode */
 .dark .wc-button--outlined {
   border-color: #3a3a3a !important;
@@ -724,7 +751,7 @@
 .dark .wc-select:focus,
 .dark .wc-textarea:focus {
   border-color: var(--wc-primary-400) !important;
-  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2) !important;
+  box-shadow: 0 0 0 2px hsl(213, 100%, 50%) !important;
 }
 
 /* Dark mode for cards and panels */

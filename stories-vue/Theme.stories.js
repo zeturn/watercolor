@@ -36,12 +36,7 @@ export const 主题切换器 = {
       const themeList = Object.keys(themes)
       
       const themeInfo = {
-        default: { name: '默认主题', desc: '经典蓝紫色配色，适合现代应用' },
-        ocean: { name: '海洋蓝主题', desc: '清新的海洋色调，营造专业氛围' },
-        forest: { name: '森林绿主题', desc: '自然绿色系，健康环保感' },
-        sunset: { name: '夕阳橙主题', desc: '温暖橙色调，充满活力' },
-        violet: { name: '紫罗兰主题', desc: '优雅紫色系，神秘高贵' },
-        rose: { name: '玫瑰粉主题', desc: '温柔粉色调，浪漫优雅' }
+        default: { name: '默认主题', desc: '基于 theme.config.json 文件的主题系统' }
       }
       
       return { 

@@ -144,19 +144,12 @@ export function setTheme(theme: WatercolorTheme): void {
 }
 
 /**
- * Apply CSS class theme
+ * Apply CSS class theme (deprecated - now using file-based themes)
+ * @deprecated Use loadThemeConfig() instead for file-based themes
  * @param themeName Theme name
  */
 export function applyCSSTheme(themeName: string): void {
-  const root = document.documentElement
-  
-  // Remove all theme classes
-  root.classList.remove('theme-ocean', 'theme-forest', 'theme-sunset', 'theme-violet', 'theme-rose')
-  
-  // Apply new theme class
-  if (themeName !== 'default') {
-    root.classList.add(`theme-${themeName}`)
-  }
+  console.warn('applyCSSTheme is deprecated. Use loadThemeConfig() for file-based themes.')
 }
 
 /**
@@ -215,180 +208,58 @@ export function isDarkMode(): boolean {
 }
 
 /**
- * 6 theme configurations - Default theme updated to oklch format
+ * 预定义主题配置 (已弃用 - 现在使用基于文件的主题系统)
+ * Predefined theme configurations (deprecated - now using file-based theme system)
+ * @deprecated Use theme.config.json file for theme configuration
  */
 export const themes = {
-  // Default theme - using new oklch colors
+  // 保留默认主题作为fallback
   default: {
     primary: {
-        50: '#F7F8FF',
-        100: '#EEF0FF',
-        200: '#E1E5FF',
-        300: '#C7D1FF',
-        400: '#A5B4FF',
-        500: '#7C91FF',
-        600: '#5A6FE8',
-        700: '#4A5CD1',
-        800: '#3F4CA3',
-        900: '#374282'
+      50: '#eff6ff',
+      100: '#dbeafe',
+      200: '#bfdbfe',
+      300: '#93c5fd',
+      400: '#60a5fa',
+      500: '#3b82f6',
+      600: '#2563eb',
+      700: '#1d4ed8',
+      800: '#1e40af',
+      900: '#1e3a8a'
     },
     secondary: {
-        50: '#F6FFED',
-        100: '#D9F7BE',
-        200: '#B7EB8F',
-        300: '#95DE64',
-        400: '#73D13D',
-        500: '#52C41A',
-        600: '#389E0D',
-        700: '#237804',
-        800: '#135200',
-        900: '#092B00'
-    }
-  },
-  // Ocean blue theme
-  ocean: {
-    primary: {
-      50: '#E6F7FF',
-      100: '#BAE7FF',
-      200: '#91D5FF',
-      300: '#69C0FF',
-      400: '#40A9FF',
-      500: '#1890FF',
-      600: '#096DD9',
-      700: '#0050B3',
-      800: '#003A8C',
-      900: '#002766'
-    },
-    secondary: {
-      50: '#E6FFFB',
-      100: '#B5F5EC',
-      200: '#87E8DE',
-      300: '#5CDBD3',
-      400: '#36CFC9',
-      500: '#13C2C2',
-      600: '#08979C',
-      700: '#006D75',
-      800: '#00474F',
-      900: '#002329'
-    }
-  },
-  // Forest green theme
-  forest: {
-    primary: {
-      50: '#F6FFED',
-      100: '#D9F7BE',
-      200: '#B7EB8F',
-      300: '#95DE64',
-      400: '#73D13D',
-      500: '#52C41A',
-      600: '#389E0D',
-      700: '#237804',
-      800: '#135200',
-      900: '#092B00'
-    },
-    secondary: {
-      50: '#F9FFED',
-      100: '#EAFF99',
-      200: '#DEFF66',
-      300: '#D4FF33',
-      400: '#CBFF00',
-      500: '#A6CC00',
-      600: '#7D9900',
-      700: '#546600',
-      800: '#2B3300',
-      900: '#0F1100'
-    }
-  },
-  // Sunset orange theme
-  sunset: {
-    primary: {
-      50: '#FFF7E6',
-      100: '#FFE7BA',
-      200: '#FFD591',
-      300: '#FFC069',
-      400: '#FFA940',
-      500: '#FA8C16',
-      600: '#D46B08',
-      700: '#AD4E00',
-      800: '#873800',
-      900: '#612500'
-    },
-    secondary: {
-      50: '#FFF2E8',
-      100: '#FFD8BF',
-      200: '#FFBB96',
-      300: '#FF9C6E',
-      400: '#FF7A45',
-      500: '#FF4D4F',
-      600: '#CF1322',
-      700: '#A8071A',
-      800: '#820014',
-      900: '#5C0011'
-    }
-  },
-  // Violet theme
-  violet: {
-    primary: {
-      50: '#F9F0FF',
-      100: '#EFDBFF',
-      200: '#D3ADF7',
-      300: '#B37FEB',
-      400: '#9254DE',
-      500: '#722ED1',
-      600: '#531DAB',
-      700: '#391085',
-      800: '#22075E',
-      900: '#120338'
-    },
-    secondary: {
-      50: '#F4F0FF',
-      100: '#E6D7FF',
-      200: '#D2B3FF',
-      300: '#BD8CFF',
-      400: '#A866FF',
-      500: '#9340FF',
-      600: '#7B1FA2',
-      700: '#6A1B9A',
-      800: '#4A148C',
-      900: '#311B92'
-    }
-  },
-  // Rose pink theme
-  rose: {
-    primary: {
-      50: '#FFF0F6',
-      100: '#FFD6E7',
-      200: '#FFADD2',
-      300: '#FF85C0',
-      400: '#F759AB',
-      500: '#EB2F96',
-      600: '#C41D7F',
-      700: '#9E1068',
-      800: '#780650',
-      900: '#520339'
-    },
-    secondary: {
-      50: '#FFF2F6',
-      100: '#FFE0EC',
-      200: '#FFCDD2',
-      300: '#F8BBD9',
-      400: '#F06292',
-      500: '#E91E63',
-      600: '#AD1457',
-      700: '#880E4F',
-      800: '#560027',
-      900: '#37001C'
+      50: '#f3f4ff',
+      100: '#e5e7ff',
+      200: '#c7d2fe',
+      300: '#a5b4fc',
+      400: '#818cf8',
+      500: '#6366f1',
+      600: '#4f46e5',
+      700: '#4338ca',
+      800: '#3730a3',
+      900: '#312e81'
     }
   }
 } as const
 
 /**
- * 应用预定义主题
- * Apply predefined theme - using CSS class method
+ * Apply theme configuration (deprecated - use file-based themes)
+ * @deprecated Use loadThemeConfig() instead for file-based themes
  * @param themeName Theme name
  */
 export function applyTheme(themeName: keyof typeof themes): void {
-  applyCSSTheme(themeName)
+  console.warn('applyTheme is deprecated. Use loadThemeConfig() for file-based themes.')
+  
+  // 只保留默认主题的支持作为fallback
+  if (themeName === 'default') {
+    const theme = themes[themeName]
+    setTheme({
+      primary: theme.primary,
+      secondary: theme.secondary
+    })
+  } else {
+    console.warn(`Theme "${themeName}" is no longer supported. Please use theme.config.json file.`)
+  }
 }
 
 /**
@@ -473,13 +344,23 @@ export async function loadThemeConfig(configPath: string = '/theme.config.json')
 
   try {
     const res = await fetch(configPath, { cache: 'no-store' })
-    if (!res.ok) return
+    if (!res.ok) {
+      console.info('[Watercolor UI] theme.config.json not found, using default theme')
+      return
+    }
 
     const cfg: WatercolorTheme = await res.json()
     setTheme(cfg)
+    
+    // 设置字体配置
+    if (cfg.fonts) {
+      setFonts(cfg.fonts)
+    }
+    
+    console.info('[Watercolor UI] Theme loaded from theme.config.json')
   } catch (err) {
-    // 静默失败，保持默认主题
-    console.warn('[Watercolor][utils/theme.ts] 无法加载自定义 theme.config.json:', err)
+    console.warn('[Watercolor UI] 无法加载自定义 theme.config.json:', err)
+    console.info('[Watercolor UI] Using default theme')
   }
 }
 

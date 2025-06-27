@@ -1,5 +1,7 @@
 import '../src/styles/index.css'
 import React from 'react'
+import { themes } from '@storybook/theming'
+import { useDarkMode } from 'storybook-dark-mode'
 
 /** @type { import('@storybook/react').Preview } */
 const preview = {
@@ -14,7 +16,6 @@ const preview = {
     backgrounds: {
       default: 'auto',
       values: [
-        { name: 'auto', value: 'transparent' },
         { name: 'light', value: '#ffffff' },
         { name: 'dark', value: '#0f0f0f' },
         { name: 'gray', value: '#f5f5f5' },
@@ -25,173 +26,175 @@ const preview = {
         cellAmount: 5,
       },
     },
+    // 配置 storybook-dark-mode 插件
     darkMode: {
+      // 自定义暗色主题
+      dark: { 
+        ...themes.dark,
+        brandTitle: 'Watercolor UI',
+        brandUrl: 'https://github.com',
+        brandImage: './img/watercolorui.png',
+        brandTarget: '_self',
+    
+        // 深色主题颜色
+        colorPrimary: '#60A5FA',
+        colorSecondary: '#34D399',
+    
+        // 应用程序背景 - 使用更深的黑色
+        appBg: '#0f0f0f',
+        appContentBg: '#1a1a1a',
+        appBorderColor: '#2a2a2a',
+        appBorderRadius: 8,
+    
+        // 文本颜色
+        textColor: '#f5f5f5',
+        textInverseColor: '#0f0f0f',
+    
+        // 工具栏默认和活动颜色
+        barTextColor: '#b3b3b3',
+        barSelectedColor: '#60A5FA',
+        barBg: '#1a1a1a',
+    
+        // 表单颜色
+        inputBg: '#2a2a2a',
+        inputBorder: '#3a3a3a',
+        inputTextColor: '#f5f5f5',
+        inputBorderRadius: 6,
+    
+        // 控制台颜色
+        controlBg: '#2a2a2a',
+        controlBorder: '#3a3a3a',
+        controlTextColor: '#f5f5f5',
+        controlBorderRadius: 6,
+
+        // 文档页面样式
+        docsBg: '#0f0f0f',
+        docsTextColor: '#f5f5f5',
+        
+        // Base 样式
+        base: 'dark',
+      },
+      // 自定义亮色主题  
+      light: { 
+        ...themes.light,
+        brandTitle: 'Watercolor UI',
+        brandUrl: 'https://github.com',
+        brandImage: './img/watercolorui.png',
+        brandTarget: '_self',
+    
+        // 浅色主题颜色
+        colorPrimary: '#3B82F6',
+        colorSecondary: '#10B981',
+    
+        // 浅色主题背景颜色
+        appBg: '#ffffff',
+        appContentBg: '#ffffff',
+        appBorderColor: '#e5e5e5',
+        appBorderRadius: 8,
+    
+        // 文本颜色
+        textColor: '#1f1f1f',
+        textInverseColor: '#ffffff',
+    
+        // 工具栏默认和活动颜色
+        barTextColor: '#666666',
+        barSelectedColor: '#3B82F6',
+        barBg: '#ffffff',
+    
+        // 表单颜色
+        inputBg: '#ffffff',
+        inputBorder: '#d1d1d1',
+        inputTextColor: '#1f1f1f',
+        inputBorderRadius: 6,
+
+        // 文档页面样式
+        docsBg: '#ffffff',
+        docsTextColor: '#1f1f1f',
+        
+        // Base 样式
+        base: 'light',
+      },
+      // 设置初始主题
       current: 'light',
+      // 启用预览样式
       stylePreview: true,
+      // 设置类目标
       classTarget: 'html',
+      // 自定义类名
       darkClass: 'dark',
       lightClass: 'light',
-    },
-    layout: 'fullscreen',
-    viewport: {
-      viewports: {
-        responsive: {
-          name: 'Responsive',
-          styles: {
-            width: '100%',
-            height: '100%',
-          },
-        },
-      },
-    },
+    }
   },
-  globalTypes: {
-    theme: {
-      description: '主题模式',
-      defaultValue: 'light',
-      toolbar: {
-        title: '主题',
-        icon: 'circlehollow',
-        items: [
-          { value: 'light', icon: 'circlehollow', title: '浅色模式' },
-          { value: 'dark', icon: 'circle', title: '深色模式' },
-        ],
-        showName: true,
-        dynamicTitle: true,
-      },
-    },
-    colorTheme: {
-      description: '颜色主题',
-      defaultValue: 'theme-ocean',
-      toolbar: {
-        title: '配色',
-        icon: 'paintbrush',
-        items: [
-          { value: 'theme-ocean', title: 'Ocean' },
-          { value: 'theme-forest', title: 'Forest' },
-          { value: 'theme-sunset', title: 'Sunset' },
-          { value: 'theme-violet', title: 'Violet' },
-          { value: 'theme-rose', title: 'Rose' },
-        ],
-        showName: true,
-        dynamicTitle: true,
-      },
-    },
+  // 设置初始全局状态，确保背景与主题同步
+  initialGlobals: {
+    backgrounds: { value: 'light' },
   },
   decorators: [
     (Story, context) => {
-      const { theme, colorTheme } = context.globals;
+      // 使用 storybook-dark-mode 的 hook 来获取当前模式
+      const isDark = useDarkMode()
       
       React.useEffect(() => {
-        const root = document.documentElement;
-        const body = document.body;
+        const root = document.documentElement
+        const body = document.body
+        
+        // 根据 dark mode 状态设置主题
+        const theme = isDark ? 'dark' : 'light'
         
         // 处理明暗模式
-        root.classList.remove('light', 'dark');
-        root.classList.add(theme);
+        root.classList.remove('light', 'dark')
+        root.classList.add(theme)
 
-        // 处理颜色主题
-        const colorThemes = ['theme-ocean', 'theme-forest', 'theme-sunset', 'theme-violet', 'theme-rose'];
-        colorThemes.forEach((cls) => root.classList.remove(cls));
-        root.classList.add(colorTheme);
-
-        // 设置CSS变量来控制Storybook的UI颜色
-        if (theme === 'dark') {
-          root.style.setProperty('--sb-color-bg', '#0f0f0f');
-          root.style.setProperty('--sb-color-bg-alt', '#1a1a1a');
-          root.style.setProperty('--sb-color-border', '#2a2a2a');
-          root.style.setProperty('--sb-color-text', '#f5f5f5');
-          root.style.setProperty('--sb-color-text-inverse', '#0f0f0f');
-        } else {
-          root.style.setProperty('--sb-color-bg', '#ffffff');
-          root.style.setProperty('--sb-color-bg-alt', '#f8f8f8');
-          root.style.setProperty('--sb-color-border', '#e5e5e5');
-          root.style.setProperty('--sb-color-text', '#1f1f1f');
-          root.style.setProperty('--sb-color-text-inverse', '#ffffff');
+        // 同步更新 Storybook 的背景选择器
+        const backgroundValue = isDark ? 'dark' : 'light'
+        
+        // 更新背景全局状态
+        if (context.globals.backgrounds?.value !== backgroundValue) {
+          context.globals.backgrounds = { value: backgroundValue }
         }
 
         // 同步 Storybook 的背景色
-        const storybookRoot = document.getElementById('storybook-root');
+        const storybookRoot = document.getElementById('storybook-root')
         if (storybookRoot) {
-          storybookRoot.style.backgroundColor = theme === 'dark' ? '#0f0f0f' : '#ffffff';
+          storybookRoot.style.backgroundColor = isDark ? '#0f0f0f' : '#ffffff'
         }
 
         // 设置 body 背景色以确保完整的暗黑模式体验
-        body.style.backgroundColor = theme === 'dark' ? '#0f0f0f' : '#ffffff';
-        body.style.color = theme === 'dark' ? '#f5f5f5' : '#1f1f1f';
+        body.style.backgroundColor = isDark ? '#0f0f0f' : '#ffffff'
+        body.style.color = isDark ? '#f5f5f5' : '#1f1f1f'
 
-        // 特别处理组件预览区域的背景
-        const previewIframe = document.querySelector('#storybook-preview-iframe');
-        if (previewIframe) {
-          const iframeDoc = previewIframe.contentDocument || previewIframe.contentWindow.document;
-          if (iframeDoc && iframeDoc.body) {
-            iframeDoc.body.style.backgroundColor = theme === 'dark' ? '#0f0f0f' : '#ffffff';
-            iframeDoc.body.style.color = theme === 'dark' ? '#f5f5f5' : '#1f1f1f';
-            if (iframeDoc.documentElement) {
-              iframeDoc.documentElement.classList.remove('light', 'dark');
-              iframeDoc.documentElement.classList.add(theme);
-              colorThemes.forEach((cls) => iframeDoc.documentElement.classList.remove(cls));
-              iframeDoc.documentElement.classList.add(colorTheme);
-            }
-          }
-        }
-
-        // 添加自定义样式来处理边框和背景
-        const existingStyle = document.getElementById('storybook-theme-style');
-        if (existingStyle) {
-          existingStyle.remove();
-        }
-
-        const style = document.createElement('style');
-        style.id = 'storybook-theme-style';
-        style.textContent = `
-          .sb-show-main {
-            background-color: ${theme === 'dark' ? '#0f0f0f' : '#ffffff'} !important;
-          }
+        // 特殊处理 autodoc 页面
+        const interval = setInterval(() => {
+          // 查找 autodoc 相关元素并应用样式
+          const sbdocs = document.querySelector('.sbdocs')
+          const sbdocsWrapper = document.querySelector('.sbdocs-wrapper')
+          const sbdocsContent = document.querySelector('.sbdocs-content')
           
-          .sb-main-padded {
-            background-color: ${theme === 'dark' ? '#0f0f0f' : '#ffffff'} !important;
-            border: ${theme === 'dark' ? '1px solid #2a2a2a' : '1px solid #e5e5e5'} !important;
+          if (sbdocs || sbdocsWrapper || sbdocsContent) {
+            // 确保 autodoc 页面也应用暗色模式类
+            if (sbdocs) {
+              sbdocs.classList.remove('light', 'dark')
+              sbdocs.classList.add(theme)
+            }
+            if (sbdocsWrapper) {
+              sbdocsWrapper.classList.remove('light', 'dark')
+              sbdocsWrapper.classList.add(theme)
+            }
+            if (sbdocsContent) {
+              sbdocsContent.classList.remove('light', 'dark')
+              sbdocsContent.classList.add(theme)
+            }
+            clearInterval(interval)
           }
+        }, 100)
 
-          #storybook-preview-iframe {
-            background-color: ${theme === 'dark' ? '#0f0f0f' : '#ffffff'} !important;
-            border: ${theme === 'dark' ? '1px solid #2a2a2a' : '1px solid #e5e5e5'} !important;
-          }
-
-          .sb-show-main .sb-main-padded {
-            background: ${theme === 'dark' ? '#0f0f0f' : '#ffffff'} !important;
-          }
-
-          [data-side="right"] {
-            background-color: ${theme === 'dark' ? '#1a1a1a' : '#ffffff'} !important;
-            border-left: ${theme === 'dark' ? '1px solid #2a2a2a' : '1px solid #e5e5e5'} !important;
-          }
-        `;
-        document.head.appendChild(style);
-
-        // 持久化
-        localStorage.setItem('storybook-theme', theme);
-        localStorage.setItem('storybook-color-theme', colorTheme);
-      }, [theme, colorTheme]);
+        // 5秒后清除间隔，避免内存泄漏
+        setTimeout(() => clearInterval(interval), 5000)
+      }, [isDark])
       
       return (
-        <div 
-          className={`min-h-screen transition-colors duration-200 ${
-            theme === 'dark' 
-              ? 'bg-neutral-900 text-neutral-100' 
-              : 'bg-white text-neutral-900'
-          }`}
-          style={{
-            padding: '1rem',
-            minHeight: '100vh',
-            backgroundColor: theme === 'dark' ? '#0f0f0f' : '#ffffff',
-            color: theme === 'dark' ? '#f5f5f5' : '#1f1f1f',
-          }}
-        >
-          <Story />
-        </div>
-      );
+          <Story style={{ width: '100%', height: '100%' }} />
+      )
     },
   ],
 }

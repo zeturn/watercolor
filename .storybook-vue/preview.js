@@ -1,5 +1,8 @@
 import '../src/styles/index.css';
-import { h } from 'vue';
+import { h, ref, watch } from 'vue';
+import { themes } from '@storybook/theming';
+import { addons } from '@storybook/preview-api';
+import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
 
 /** @type { import('@storybook/vue3').Preview } */
 const preview = {
@@ -12,9 +15,8 @@ const preview = {
       },
     },
     backgrounds: {
-      default: 'auto',
+      default: 'light',
       values: [
-        { name: 'auto', value: 'transparent' },
         { name: 'light', value: '#ffffff' },
         { name: 'dark', value: '#0f0f0f' },
         { name: 'gray', value: '#f5f5f5' },
@@ -25,58 +27,86 @@ const preview = {
         cellAmount: 5,
       },
     },
+    // 配置 storybook-dark-mode 插件
     darkMode: {
+      // 自定义暗色主题
+      dark: { 
+        ...themes.dark, 
+        appBg: '#0f0f0f',
+        appContentBg: '#0f0f0f',
+        barBg: '#1a1a1a',
+        
+        // 深色主题颜色
+        colorPrimary: '#60A5FA',
+        colorSecondary: '#34D399',
+        
+        // 文本颜色
+        textColor: '#f5f5f5',
+        textInverseColor: '#0f0f0f',
+        
+        // 工具栏默认和活动颜色
+        barTextColor: '#b3b3b3',
+        barSelectedColor: '#60A5FA',
+        
+        // 表单颜色
+        inputBg: '#2a2a2a',
+        inputBorder: '#3a3a3a',
+        inputTextColor: '#f5f5f5',
+        inputBorderRadius: 6,
+        
+        // 文档页面样式
+        docsBg: '#0f0f0f',
+        docsTextColor: '#f5f5f5',
+        
+        // Base 样式
+        base: 'dark',
+      },
+      // 自定义亮色主题  
+      light: { 
+        ...themes.light, 
+        appBg: '#ffffff',
+        appContentBg: '#ffffff',
+        barBg: '#f6f9fc',
+        
+        // 浅色主题颜色
+        colorPrimary: '#3B82F6',
+        colorSecondary: '#10B981',
+        
+        // 文本颜色
+        textColor: '#1f1f1f',
+        textInverseColor: '#ffffff',
+        
+        // 工具栏默认和活动颜色
+        barTextColor: '#666666',
+        barSelectedColor: '#3B82F6',
+        
+        // 表单颜色
+        inputBg: '#ffffff',
+        inputBorder: '#d1d1d1',
+        inputTextColor: '#1f1f1f',
+        inputBorderRadius: 6,
+        
+        // 文档页面样式
+        docsBg: '#ffffff',
+        docsTextColor: '#1f1f1f',
+        
+        // Base 样式
+        base: 'light',
+      },
+      // 设置初始主题
       current: 'light',
+      // 启用预览样式
       stylePreview: true,
+      // 设置类目标
       classTarget: 'html',
+      // 自定义类名
       darkClass: 'dark',
       lightClass: 'light',
-    },
-    layout: 'fullscreen',
-    viewport: {
-      viewports: {
-        responsive: {
-          name: 'Responsive',
-          styles: {
-            width: '100%',
-            height: '100%',
-          },
-        },
-      },
-    },
+    }
   },
-  globalTypes: {
-    theme: {
-      description: '主题模式',
-      defaultValue: 'light',
-      toolbar: {
-        title: '主题',
-        icon: 'circlehollow',
-        items: [
-          { value: 'light', icon: 'circlehollow', title: '浅色模式' },
-          { value: 'dark', icon: 'circle', title: '深色模式' },
-        ],
-        showName: true,
-        dynamicTitle: true,
-      },
-    },
-    colorTheme: {
-      description: '颜色主题',
-      defaultValue: 'theme-ocean',
-      toolbar: {
-        title: '配色',
-        icon: 'paintbrush',
-        items: [
-          { value: 'theme-ocean', title: 'Ocean' },
-          { value: 'theme-forest', title: 'Forest' },
-          { value: 'theme-sunset', title: 'Sunset' },
-          { value: 'theme-violet', title: 'Violet' },
-          { value: 'theme-rose', title: 'Rose' },
-        ],
-        showName: true,
-        dynamicTitle: true,
-      },
-    },
+  // 设置初始全局状态，确保背景与主题同步
+  initialGlobals: {
+    backgrounds: { value: 'light' },
   },
   decorators: [
     /**
@@ -84,98 +114,78 @@ const preview = {
      * @param {any} context - Storybook 上下文
      */
     (story, context) => {
-      const { theme, colorTheme } = context.globals;
-
-      const root = document.documentElement;
-      const body = document.body;
-
-      // 处理明暗模式
-      root.classList.remove('light', 'dark');
-      root.classList.add(theme);
-
-      // 处理颜色主题
-      const colorThemes = ['theme-ocean', 'theme-forest', 'theme-sunset', 'theme-violet', 'theme-rose'];
-      colorThemes.forEach((cls) => root.classList.remove(cls));
-      root.classList.add(colorTheme);
-
-      // 设置CSS变量来控制Storybook的UI颜色
-      if (theme === 'dark') {
-        root.style.setProperty('--sb-color-bg', '#0f0f0f');
-        root.style.setProperty('--sb-color-bg-alt', '#1a1a1a');
-        root.style.setProperty('--sb-color-border', '#2a2a2a');
-        root.style.setProperty('--sb-color-text', '#f5f5f5');
-        root.style.setProperty('--sb-color-text-inverse', '#0f0f0f');
-      } else {
-        root.style.setProperty('--sb-color-bg', '#ffffff');
-        root.style.setProperty('--sb-color-bg-alt', '#f8f8f8');
-        root.style.setProperty('--sb-color-border', '#e5e5e5');
-        root.style.setProperty('--sb-color-text', '#1f1f1f');
-        root.style.setProperty('--sb-color-text-inverse', '#ffffff');
-      }
-
-      // 同步 Storybook 的背景色
-      const storybookRoot = document.getElementById('storybook-root');
-      if (storybookRoot) {
-        storybookRoot.style.backgroundColor = theme === 'dark' ? '#0f0f0f' : '#ffffff';
-      }
-
-      // 设置 body 背景色以确保完整的暗黑模式体验
-      body.style.backgroundColor = theme === 'dark' ? '#0f0f0f' : '#ffffff';
-      body.style.color = theme === 'dark' ? '#f5f5f5' : '#1f1f1f';
-
-      // 特别处理组件预览区域的背景
-      const previewIframe = document.querySelector('#storybook-preview-iframe');
-      if (previewIframe) {
-        const iframeDoc = previewIframe.contentDocument || previewIframe.contentWindow.document;
-        if (iframeDoc && iframeDoc.body) {
-          iframeDoc.body.style.backgroundColor = theme === 'dark' ? '#0f0f0f' : '#ffffff';
-          iframeDoc.body.style.color = theme === 'dark' ? '#f5f5f5' : '#1f1f1f';
-          if (iframeDoc.documentElement) {
-            iframeDoc.documentElement.classList.remove('light', 'dark');
-            iframeDoc.documentElement.classList.add(theme);
-            colorThemes.forEach((cls) => iframeDoc.documentElement.classList.remove(cls));
-            iframeDoc.documentElement.classList.add(colorTheme);
-          }
-        }
-      }
-
-      // 添加自定义样式来处理边框和背景
-      const existingStyle = document.getElementById('storybook-theme-style');
-      if (existingStyle) {
-        existingStyle.remove();
-      }
-
-      const style = document.createElement('style');
-      style.id = 'storybook-theme-style';
-      style.textContent = `
-        .sb-show-main {
-          background-color: ${theme === 'dark' ? '#0f0f0f' : '#ffffff'} !important;
-        }
+      // 创建响应式的 dark mode 状态
+      const isDark = ref(false);
+      
+      // 获取 addons channel 来监听 dark mode 变化
+      const channel = addons.getChannel();
+      
+      // 监听 dark mode 事件
+      const handleDarkModeChange = (darkMode) => {
+        isDark.value = darkMode;
+      };
+      
+      // 设置事件监听器
+      channel.on(DARK_MODE_EVENT_NAME, handleDarkModeChange);
+      
+      // 监听 isDark 变化
+      watch(isDark, (darkMode) => {
+        const root = document.documentElement;
+        const body = document.body;
         
-        .sb-main-padded {
-          background-color: ${theme === 'dark' ? '#0f0f0f' : '#ffffff'} !important;
-          border: ${theme === 'dark' ? '1px solid #2a2a2a' : '1px solid #e5e5e5'} !important;
+        // 根据 dark mode 状态设置主题
+        const currentTheme = darkMode ? 'dark' : 'light';
+        
+        // 处理明暗模式
+        root.classList.remove('light', 'dark');
+        root.classList.add(currentTheme);
+
+        // 同步更新 Storybook 的背景选择器
+        const backgroundValue = darkMode ? 'dark' : 'light';
+        
+        // 更新背景全局状态
+        if (context.globals.backgrounds?.value !== backgroundValue) {
+          context.globals.backgrounds = { value: backgroundValue };
         }
 
-        #storybook-preview-iframe {
-          background-color: ${theme === 'dark' ? '#0f0f0f' : '#ffffff'} !important;
-          border: ${theme === 'dark' ? '1px solid #2a2a2a' : '1px solid #e5e5e5'} !important;
+        // 同步 Storybook 的背景色
+        const storybookRoot = document.getElementById('storybook-root');
+        if (storybookRoot) {
+          storybookRoot.style.backgroundColor = darkMode ? '#0f0f0f' : '#ffffff';
         }
 
-        .sb-show-main .sb-main-padded {
-          background: ${theme === 'dark' ? '#0f0f0f' : '#ffffff'} !important;
-        }
+        // 设置 body 背景色以确保完整的暗黑模式体验
+        body.style.backgroundColor = darkMode ? '#0f0f0f' : '#ffffff';
+        body.style.color = darkMode ? '#f5f5f5' : '#1f1f1f';
 
-        [data-side="right"] {
-          background-color: ${theme === 'dark' ? '#1a1a1a' : '#ffffff'} !important;
-          border-left: ${theme === 'dark' ? '1px solid #2a2a2a' : '1px solid #e5e5e5'} !important;
-        }
-      `;
-      document.head.appendChild(style);
+        // 特殊处理 autodoc 页面
+        const interval = setInterval(() => {
+          // 查找 autodoc 相关元素并应用样式
+          const sbdocs = document.querySelector('.sbdocs');
+          const sbdocsWrapper = document.querySelector('.sbdocs-wrapper');
+          const sbdocsContent = document.querySelector('.sbdocs-content');
+          
+          if (sbdocs || sbdocsWrapper || sbdocsContent) {
+            // 确保 autodoc 页面也应用暗色模式类
+            if (sbdocs) {
+              sbdocs.classList.remove('light', 'dark');
+              sbdocs.classList.add(currentTheme);
+            }
+            if (sbdocsWrapper) {
+              sbdocsWrapper.classList.remove('light', 'dark');
+              sbdocsWrapper.classList.add(currentTheme);
+            }
+            if (sbdocsContent) {
+              sbdocsContent.classList.remove('light', 'dark');
+              sbdocsContent.classList.add(currentTheme);
+            }
+            clearInterval(interval);
+          }
+        }, 100);
 
-      // 持久化设置
-      localStorage.setItem('storybook-theme', theme);
-      localStorage.setItem('storybook-color-theme', colorTheme);
+        // 5秒后清除间隔，避免内存泄漏
+        setTimeout(() => clearInterval(interval), 5000);
+      }, { immediate: true });
 
       // 返回包装组件
       return {
@@ -185,20 +195,24 @@ const preview = {
               'div',
               {
                 class: `min-h-screen transition-colors duration-200 ${
-                  theme === 'dark'
+                  isDark.value
                     ? 'bg-neutral-900 text-neutral-100'
                     : 'bg-white text-neutral-900'
                 }`,
                 style: {
                   padding: '1rem',
                   minHeight: '100vh',
-                  backgroundColor: theme === 'dark' ? '#0f0f0f' : '#ffffff',
-                  color: theme === 'dark' ? '#f5f5f5' : '#1f1f1f',
+                  backgroundColor: isDark.value ? '#0f0f0f' : '#ffffff',
+                  color: isDark.value ? '#f5f5f5' : '#1f1f1f',
                 },
               },
               [h(story())]
             );
         },
+        beforeUnmount() {
+          // 清理事件监听器
+          channel.off(DARK_MODE_EVENT_NAME, handleDarkModeChange);
+        }
       };
     },
   ],
