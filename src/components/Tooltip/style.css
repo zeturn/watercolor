@@ -1,18 +1,34 @@
 /* Tooltip 组件样式 */
 .wc-tooltip {
-  background: var(--wc-neutral-900);
-  color: var(--wc-neutral-0);
+  background: var(--wc-neutral-900, #1f2937);
+  color: var(--wc-neutral-0, #ffffff);
   pointer-events: none;
   opacity: 0.9;
-}
-
-/* Vue 版本的过渡动画 */
-.fade-enter-active,
-.fade-leave-active {
   transition: opacity 0.15s ease;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+/* Vue 版本的过渡动画 */
+.tooltip-fade-enter-active,
+.tooltip-fade-leave-active {
+  transition: opacity 0.15s ease;
+}
+
+.tooltip-fade-enter-from,
+.tooltip-fade-leave-to {
   opacity: 0;
+}
+
+.tooltip-fade-enter-to {
+  opacity: 0.9;
+}
+
+/* React 版本的动画类 */
+.wc-tooltip.tooltip-fade-enter-to {
+  opacity: 0.9;
+  transition: opacity 0.15s ease;
+}
+
+.wc-tooltip.tooltip-fade-leave-to {
+  opacity: 0;
+  transition: opacity 0.15s ease;
 }

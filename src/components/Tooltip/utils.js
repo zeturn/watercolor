@@ -6,6 +6,14 @@ export const placementClasses = {
   right: 'ml-1 left-full top-1/2 -translate-y-1/2'
 }
 
+// 有效的位置选项
+export const validPlacements = ['top', 'bottom', 'left', 'right']
+
+// 验证位置参数
+export function validatePlacement(placement) {
+  return validPlacements.includes(placement)
+}
+
 // 获取位置类名
 export function getPlacementClass(placement) {
   return placementClasses[placement] || placementClasses.top
