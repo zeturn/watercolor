@@ -1,5 +1,5 @@
 <template>
-  <div :class="accordionClasses">
+  <div :class="accordionClasses" :style="style">
     <div
       v-for="(item, index) in items"
       :key="index"
@@ -51,6 +51,14 @@ const props = defineProps({
     type: String,
     default: 'default',
     validator: (value) => ['default', 'bordered', 'filled'].includes(value)
+  },
+  class: {
+    type: [String, Array, Object],
+    default: ''
+  },
+  style: {
+    type: [String, Object],
+    default: () => ({})
   }
 })
 
@@ -58,7 +66,7 @@ const emit = defineEmits(['toggle'])
 
 const activeItems = ref([])
 
-const accordionClasses = computed(() => buildAccordionClasses(props.variant))
+const accordionClasses = computed(() => buildAccordionClasses(props.variant, props.class))
 
 const toggleItem = (index) => {
   activeItems.value = toggleActiveItems(activeItems.value, index, props.multiple)

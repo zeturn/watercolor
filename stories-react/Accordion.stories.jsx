@@ -2,7 +2,7 @@ import Accordion from '@/components/Accordion/Accordion.jsx'
 import React from 'react'
 
 export default {
-  title: 'Components/Accordion (React)',
+  title: 'Components/Accordion',
   component: Accordion,
   parameters: {
     layout: 'centered',
@@ -21,6 +21,14 @@ export default {
       control: { type: 'select' },
       options: ['default', 'bordered', 'filled'],
       description: '手风琴变体',
+    },
+    className: {
+      control: 'text',
+      description: '额外的CSS类名',
+    },
+    style: {
+      control: { type: 'object' },
+      description: '内联样式对象',
     },
     onToggle: { action: 'toggle' },
   },
@@ -90,6 +98,16 @@ SimpleItems.args = {
   variant: 'default',
 }
 
+export const WithCustomStyling = Template.bind({})
+WithCustomStyling.args = {
+  ...Default.args,
+  className: 'bg-gray-50 rounded-lg p-4',
+  style: {
+    border: '2px solid #e5e7eb',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+  }
+}
+
 export const WithCustomContent = () => {
   const items = [
     {
@@ -113,16 +131,17 @@ export const WithCustomContent = () => {
           <a href="#" className="text-blue-600 hover:underline">
             了解更多
           </a>
+          <br />
+          <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+            点击按钮
+          </button>
         </div>
       ),
     },
   ]
   return (
-    <div className="w-full max-w-2xl space-y-2">
-      <Accordion items={items}>
-        {/* 自定义内容直接作为 React 节点传递 */}
-        {/* 由于 Accordion 组件会渲染 item.content，这里结构已在 items 定义中完成 */}
-      </Accordion>
+    <div className="w-full max-w-2xl">
+      <Accordion items={items} />
     </div>
   )
 }

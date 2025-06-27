@@ -200,8 +200,6 @@ const preview = {
                     : 'bg-white text-neutral-900'
                 }`,
                 style: {
-                  padding: '1rem',
-                  minHeight: '100vh',
                   backgroundColor: isDark.value ? '#0f0f0f' : '#ffffff',
                   color: isDark.value ? '#f5f5f5' : '#1f1f1f',
                 },

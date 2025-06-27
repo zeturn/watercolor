@@ -12,18 +12,45 @@ export function normalizeVariant(variant = 'default') {
 }
 
 /**
+ * 将 Vue 中的各种 class 格式转换为字符串
+ * @param {string|Array|Object} classes - Vue 中的 class prop
+ * @returns {string}
+ */
+function normalizeClasses(classes) {
+  if (!classes) return '';
+  
+  if (typeof classes === 'string') {
+    return classes;
+  }
+  
+  if (Array.isArray(classes)) {
+    return classes.filter(Boolean).join(' ');
+  }
+  
+  if (typeof classes === 'object') {
+    return Object.entries(classes)
+      .filter(([, value]) => value)
+      .map(([key]) => key)
+      .join(' ');
+  }
+  
+  return '';
+}
+
+/**
  * 根据传入参数生成组合后的 class 字符串
  * @param {string} variant - 组件样式变体
- * @param {string} extra   - 额外附加的 className，可为空
+ * @param {string|Array|Object} extra - 额外附加的 className，可为空（支持 Vue 的多种格式）
  * @returns {string}
  */
 export function buildAccordionClasses(variant = 'default', extra = '') {
   const safeVariant = normalizeVariant(variant);
+  const extraClasses = normalizeClasses(extra);
 
   return [
     'wc-accordion',
     safeVariant !== 'default' ? `wc-accordion--${safeVariant}` : '',
-    extra,
+    extraClasses,
   ]
     .filter(Boolean)
     .join(' ');

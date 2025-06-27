@@ -21,6 +21,14 @@ export default {
       options: ['default', 'bordered', 'filled'],
       description: '手风琴变体',
     },
+    class: {
+      control: 'text',
+      description: '额外的CSS类名',
+    },
+    style: {
+      control: { type: 'object' },
+      description: '内联样式对象',
+    },
     onToggle: { action: 'toggle' },
   },
 }
@@ -44,175 +52,113 @@ const defaultItems = [
   }
 ]
 
-export const Default = {
-  args: {
-    items: defaultItems,
-    multiple: false,
-    variant: 'default',
+const Template = (args) => ({
+  components: { AccordionVue },
+  setup() {
+    return { args }
   },
-  render: (args) => ({
-    components: { AccordionVue },
-    setup() {
-      return { args }
-    },
-    template: `
-      <div class="w-full max-w-2xl">
-        <AccordionVue 
-          :items="args.items"
-          :multiple="args.multiple"
-          :variant="args.variant"
-          @toggle="args.onToggle"
-        />
-      </div>
-    `,
-  }),
+  template: `
+    <div class="w-full max-w-2xl">
+      <AccordionVue 
+        :items="args.items"
+        :multiple="args.multiple"
+        :variant="args.variant"
+        :class="args.class"
+        :style="args.style"
+        @toggle="args.onToggle"
+      />
+    </div>
+  `,
+})
+
+export const Default = Template.bind({})
+Default.args = {
+  items: defaultItems,
+  multiple: false,
+  variant: 'default',
 }
 
-export const Multiple = {
-  args: {
-    items: defaultItems,
-    multiple: true,
-    variant: 'default',
-  },
-  render: (args) => ({
-    components: { AccordionVue },
-    setup() {
-      return { args }
-    },
-    template: `
-      <div class="w-full max-w-2xl">
-        <AccordionVue 
-          :items="args.items"
-          :multiple="args.multiple"
-          :variant="args.variant"
-          @toggle="args.onToggle"
-        />
-      </div>
-    `,
-  }),
+export const Multiple = Template.bind({})
+Multiple.args = {
+  ...Default.args,
+  multiple: true,
 }
 
-export const Bordered = {
-  args: {
-    items: defaultItems,
-    multiple: false,
-    variant: 'bordered',
-  },
-  render: (args) => ({
-    components: { AccordionVue },
-    setup() {
-      return { args }
-    },
-    template: `
-      <div class="w-full max-w-2xl">
-        <AccordionVue 
-          :items="args.items"
-          :multiple="args.multiple"
-          :variant="args.variant"
-          @toggle="args.onToggle"
-        />
-      </div>
-    `,
-  }),
+export const Bordered = Template.bind({})
+Bordered.args = {
+  ...Default.args,
+  variant: 'bordered',
 }
 
-export const Filled = {
-  args: {
-    items: defaultItems,
-    multiple: false,
-    variant: 'filled',
-  },
-  render: (args) => ({
-    components: { AccordionVue },
-    setup() {
-      return { args }
-    },
-    template: `
-      <div class="w-full max-w-2xl">
-        <AccordionVue 
-          :items="args.items"
-          :multiple="args.multiple"
-          :variant="args.variant"
-          @toggle="args.onToggle"
-        />
-      </div>
-    `,
-  }),
+export const Filled = Template.bind({})
+Filled.args = {
+  ...Default.args,
+  variant: 'filled',
 }
 
-export const SimpleItems = {
-  args: {
-    items: [
+export const SimpleItems = Template.bind({})
+SimpleItems.args = {
+  items: [
+    {
+      title: '基础使用',
+      content: '这是一个简单的手风琴示例。'
+    },
+    {
+      title: '高级功能',
+      content: '支持多种样式和交互模式。'
+    }
+  ],
+  multiple: false,
+  variant: 'default',
+}
+
+export const WithCustomStyling = Template.bind({})
+WithCustomStyling.args = {
+  ...Default.args,
+  class: 'bg-gray-50 rounded-lg p-4',
+  style: {
+    border: '2px solid #e5e7eb',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+  }
+}
+
+export const WithCustomContent = () => ({
+  components: { AccordionVue },
+  setup() {
+    const items = [
       {
-        title: '基础使用',
-        content: '这是一个简单的手风琴示例。'
+        title: '包含富文本内容',
+        content: ''
       },
       {
-        title: '高级功能',
-        content: '支持多种样式和交互模式。'
+        title: '包含链接和按钮',
+        content: ''
       }
-    ],
-    multiple: false,
-    variant: 'default',
+    ]
+    return { items }
   },
-  render: (args) => ({
-    components: { AccordionVue },
-    setup() {
-      return { args }
-    },
-    template: `
-      <div class="w-full max-w-2xl">
-        <AccordionVue 
-          :items="args.items"
-          :multiple="args.multiple"
-          :variant="args.variant"
-          @toggle="args.onToggle"
-        />
-      </div>
-    `,
-  }),
-}
-
-export const WithCustomContent = {
-  render: () => ({
-    components: { AccordionVue },
-    setup() {
-      const items = [
-        {
-          title: '包含富文本内容',
-          content: ''
-        },
-        {
-          title: '包含链接和按钮',
-          content: ''
-        }
-      ]
-      return { items }
-    },
-    template: `
-      <div class="w-full max-w-2xl">
-        <AccordionVue :items="items">
-          <template #content-0>
-            <div class="space-y-2">
-              <p>这里可以包含<strong>粗体文本</strong>和<em>斜体文本</em>。</p>
-              <ul class="list-disc pl-4">
-                <li>列表项 1</li>
-                <li>列表项 2</li>
-                <li>列表项 3</li>
-              </ul>
-            </div>
-          </template>
-          <template #content-1>
-            <div class="space-y-3">
-              <p>您可以在这里添加任何内容，包括：</p>
-              <div class="flex gap-2">
-                <button class="px-3 py-1 bg-blue-500 text-white rounded text-sm">按钮</button>
-                <a href="#" class="text-blue-500 underline">链接</a>
-              </div>
-            </div>
-          </template>
-        </AccordionVue>
-      </div>
-    `,
-  }),
-} 
+  template: `
+    <div class="w-full max-w-2xl">
+      <AccordionVue :items="items">
+        <template #content-0>
+          <div class="space-y-2">
+            <p>这里可以包含<strong>粗体文本</strong>和<em>斜体文本</em>。</p>
+            <ul class="list-disc pl-4">
+              <li>列表项 1</li>
+              <li>列表项 2</li>
+            </ul>
+          </div>
+        </template>
+        <template #content-1>
+          <div class="space-y-2">
+            <a href="#" class="text-blue-600 hover:underline">了解更多</a>
+            <br />
+            <button class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+              点击按钮
+            </button>
+          </div>
+        </template>
+      </AccordionVue>
+    </div>
+  `,
+}) 
