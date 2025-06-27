@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './style.css'
 import { 
   validVariants, 
   getButtonClasses, 
@@ -6,7 +7,6 @@ import {
   getRoundedClass,
   handleButtonClick as utilHandleButtonClick 
 } from './utils.js'
-import './style.css'
 
 const Button = ({
   children,

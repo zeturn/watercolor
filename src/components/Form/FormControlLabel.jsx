@@ -1,4 +1,6 @@
 import React from 'react'
+import './style.css'
+import { getFormControlLabelClasses } from './utils.js'
 
 const FormControlLabel = ({
   label,

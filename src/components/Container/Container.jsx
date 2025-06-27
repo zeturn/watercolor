@@ -1,6 +1,6 @@
 import React from 'react'
-import { getTailwindContainerClasses } from './utils.js'
 import './style.css'
+import { getTailwindContainerClasses } from './utils.js'
 
 export function Container({
   maxWidth = 'lg',

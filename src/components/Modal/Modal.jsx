@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import Button from '../Button/Button.jsx'
+import './style.css'
 import { 
   getModalClasses, 
   getOverlayClasses,
@@ -10,7 +11,6 @@ import {
   focusDialog,
   createFocusTrap
 } from './utils.js'
-import './style.css'
 
 const Modal = ({
   // 基础属性

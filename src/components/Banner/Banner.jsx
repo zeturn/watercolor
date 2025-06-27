@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './style.css'
 import { 
   getBannerClasses, 
   getBannerIcon, 
@@ -6,7 +7,6 @@ import {
   handleBannerClose,
   handleBannerAction
 } from './utils.js'
-import './style.css'
 
 /**
  * Banner 组件 (React 版)

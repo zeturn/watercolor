@@ -1,4 +1,6 @@
 import React from 'react'
+import './style.css'
+import { getFeedClasses } from './utils.js'
 
 const FeedItem = ({ 
   item, 

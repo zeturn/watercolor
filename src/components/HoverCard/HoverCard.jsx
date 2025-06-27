@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
+import './style.css'
+import { getHoverCardClasses } from './utils.js'
 
 const HoverCard = ({
   triggerText = 'Hover me',

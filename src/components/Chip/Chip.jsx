@@ -1,6 +1,6 @@
 import React from 'react'
-import { getTailwindChipClasses, handleChipClick, handleChipDelete, getDefaultDeleteIcon } from './utils.jsx'
 import './style.css'
+import { getTailwindChipClasses, handleChipClick, handleChipDelete, getDefaultDeleteIcon } from './utils.jsx'
 
 export default function Chip({
   label = '',

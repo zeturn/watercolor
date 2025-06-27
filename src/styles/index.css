@@ -47,9 +47,7 @@
   --wc-neutral-800: #444444;
   --wc-neutral-900: #333333;
   --wc-neutral-950: #222222;
-  
 
-  /* Semantic colors - unchanged */
   /* Success colors */
   --wc-success-50: #F0FFF4;
   --wc-success-100: #EEFFCC;
@@ -341,102 +339,6 @@
   }
 }
 
-/* Base styles - using native CSS for compatibility */
-
-/* Input styles - flat design */
-.wc-input {
-  width: 100%;
-  padding: 12px 16px;
-  background-color: var(--wc-neutral-50);
-  color: var(--wc-neutral-900);
-  border: none;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  outline: none;
-  font-size: 14px;
-  font-family: var(--wc-font-family);
-}
-
-.wc-input::placeholder {
-  color: var(--wc-neutral-400);
-}
-
-.wc-input:focus {
-  background-color: var(--wc-neutral-100);
-  outline: none;
-}
-
-/* Dark mode input */
-.dark .wc-input {
-  background-color: var(--wc-neutral-800);
-  color: var(--wc-neutral-100);
-}
-
-.dark .wc-input::placeholder {
-  color: var(--wc-neutral-500);
-}
-
-.dark .wc-input:focus {
-  background-color: var(--wc-neutral-700);
-}
-
-/* Card styles - flat design, no shadows */
-.wc-card {
-  background-color: var(--wc-neutral-0);
-  border-radius: 12px;
-  padding: 24px;
-  border: 1px solid var(--wc-neutral-200);
-  transition: all 0.2s ease;
-}
-
-.dark .wc-card {
-  background-color: var(--wc-neutral-800);
-  border-color: var(--wc-neutral-700);
-}
-
-/* Tab styles - flat design */
-.wc-tabs {
-  display: flex;
-  gap: 4px;
-  border-radius: 8px;
-  background-color: var(--wc-neutral-100);
-  padding: 4px;
-}
-
-.dark .wc-tabs {
-  background-color: var(--wc-neutral-800);
-}
-
-.wc-tab {
-  width: 100%;
-  border-radius: 6px;
-  padding: 10px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.25;
-  color: var(--wc-neutral-600);
-  transition: all 0.2s ease;
-  cursor: pointer;
-  border: none;
-  background: transparent;
-  outline: none;
-  font-family: var(--wc-font-family);
-}
-
-.wc-tab--active {
-  background-color: var(--wc-neutral-0);
-  color: var(--wc-primary-500);
-}
-
-.dark .wc-tab {
-  color: var(--wc-neutral-400);
-}
-
-.dark .wc-tab--active {
-  background-color: var(--wc-neutral-700);
-  color: var(--wc-primary-400);
-}
-
 /* Global component font styles */
 .wc-toast,
 .wc-modal,
@@ -448,11 +350,6 @@
 .wc-select,
 .wc-textarea {
   font-family: var(--wc-font-family);
-}
-
-/* Modal component global styles - no backdrop blur for flat design */
-.wc-modal-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Font utility classes */

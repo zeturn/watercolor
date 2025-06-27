@@ -18,7 +18,7 @@ export default {
     fontSize: { control: 'number', description: '字体大小' },
     fontColor: { control: 'color', description: '字体颜色' },
     rotate: { control: { type: 'number', min: -90, max: 90, step: 5 }, description: '旋转角度' },
-    showSeparator: { control: 'boolean', description: '是否显示分隔符' }
+    fullscreen: { control: 'boolean', description: '是否全屏覆盖' }
   }
 }
 

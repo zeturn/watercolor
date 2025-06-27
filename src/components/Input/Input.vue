@@ -12,7 +12,7 @@
       >*</span>
     </label>
     
-    <div class="relative">
+    <div class="wc-input-wrapper">
       <input
         :id="inputId"
         :class="inputClasses"
@@ -114,7 +114,7 @@ const instance = getCurrentInstance()
 const inputId = ref(`input-${instance?.uid || Math.random().toString(36).substr(2, 9)}`)
 
 const wrapperClasses = computed(() => {
-  const classes = ['wc-input-wrapper']
+  const classes = ['wc-input-container']
   if (props.disabled) {
     classes.push('opacity-50', 'cursor-not-allowed')
   }
@@ -122,36 +122,17 @@ const wrapperClasses = computed(() => {
 })
 
 const inputClasses = computed(() => {
-  const baseClasses = [
-    'wc-input',
-    'w-full',
-    'border',
-    'border-neutral-300',
-    'rounded-md',
-    'focus:ring-2',
-    'focus:ring-primary-500',
-    'focus:border-primary-500',
-    'transition-colors',
-    'duration-200'
-  ]
-  
-  const sizeClasses = {
-    sm: ['px-2', 'py-1', 'text-sm'],
-    md: ['px-3', 'py-2', 'text-sm'],
-    lg: ['px-4', 'py-3', 'text-base']
-  }
-  
-  baseClasses.push(...sizeClasses[props.size])
-  
+  const classes = ['wc-input', `wc-input--${props.size}`, 'wc-input--filled']
+
   if (props.error) {
-    baseClasses.push('ring-error-500', 'focus:ring-error-500', 'border-error-500')
+    classes.push('wc-input--error')
   }
-  
+
   if (props.disabled) {
-    baseClasses.push('opacity-50', 'cursor-not-allowed')
+    classes.push('wc-input--disabled')
   }
-  
-  return baseClasses
+
+  return classes
 })
 
 const handleInput = (event) => {
@@ -166,3 +147,5 @@ const handleBlur = (event) => {
   emit('blur', event)
 }
 </script> 
+
+<style src="./style.css"></style> 

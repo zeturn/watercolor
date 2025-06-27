@@ -1,4 +1,6 @@
 import React, { useRef } from 'react'
+import './style.css'
+import { getFileInputClasses } from './utils.js'
 
 const FileInput = ({
   multiple = false,

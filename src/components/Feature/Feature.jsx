@@ -1,4 +1,5 @@
 import React from 'react'
+import './style.css'
 import { 
   getFeatureCardClasses,
   getFeatureIconClasses,
@@ -9,7 +10,6 @@ import {
   handleCtaClick,
   renderIcon
 } from './utils.js'
-import './style.css'
 
 const Feature = ({
   title = 'Awesome Feature',

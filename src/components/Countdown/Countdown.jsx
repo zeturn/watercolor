@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } from 'react'
+import './style.css'
 import { 
   getCountdownClasses, 
   formatTime, 
   createTimer,
   getDefaultColor 
 } from './utils.js'
-import './style.css'
 
 export const Countdown = forwardRef(function Countdown(
   {

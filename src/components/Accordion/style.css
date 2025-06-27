@@ -1,3 +1,9 @@
+/* ==========================================================================
+   Accordion Component Styles
+   ========================================================================== */
+
+/* 基础容器样式
+   ========================================================================== */
 .wc-accordion {
   width: 100%;
   font-family: var(--wc-font-family);
@@ -5,6 +11,8 @@
   overflow: hidden;
 }
 
+/* 手风琴项目样式
+   ========================================================================== */
 .wc-accordion-item {
   border-bottom: 1px solid var(--wc-neutral-200, #e5e7eb);
 }
@@ -13,6 +21,8 @@
   border-bottom: none;
 }
 
+/* 头部按钮样式
+   ========================================================================== */
 .wc-accordion-header {
   width: 100%;
   display: flex;
@@ -22,14 +32,11 @@
   background: none;
   border: none;
   cursor: pointer;
-  transition: 
-    background-color 0.3s ease-out,
-    color 0.3s ease-out,
-    transform 0.3s ease-out;
   font-size: 16px;
   font-weight: 500;
   color: var(--wc-neutral-700, #374151);
   text-align: left;
+  transition: all 0.3s ease-out;
 }
 
 .wc-accordion-header:hover {
@@ -43,6 +50,8 @@
   transform: translateY(0);
 }
 
+/* 标题和图标样式
+   ========================================================================== */
 .wc-accordion-title {
   flex: 1;
   transition: transform 0.3s ease-out;
@@ -53,24 +62,23 @@
 }
 
 .wc-accordion-icon {
-  transition: transform 0.3s ease-out;
   font-size: 12px;
   color: var(--wc-neutral-400, #9ca3af);
+  transition: transform 0.3s ease-out;
 }
 
 .wc-accordion-icon--rotated {
   transform: rotate(180deg);
 }
 
+/* 内容展开动画
+   ========================================================================== */
 .wc-accordion-content {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
   transform: translateY(-10px);
-  transition:
-    max-height 0.3s ease-out,
-    opacity 0.3s ease-out,
-    transform 0.3s ease-out;
+  transition: all 0.3s ease-out;
 }
 
 .wc-accordion-content--open {
@@ -83,16 +91,96 @@
   padding: 16px 20px 20px;
   color: var(--wc-neutral-600, #6b7280);
   line-height: 1.6;
-  transform: translateY(0);
-  transition: transform 0.3s ease-out;
 }
 
-/* 当内容展开时，给内容一个轻微的向下滑动效果 */
-.wc-accordion-content--open .wc-accordion-content-inner {
-  transform: translateY(0);
+/* 变体样式
+   ========================================================================== */
+
+/* Bordered 变体 */
+.wc-accordion--bordered .wc-accordion-item {
+  border: 1px solid var(--wc-neutral-200, #e5e7eb);
+  border-radius: 8px;
+  margin-bottom: 8px;
 }
 
-/* 深色模式 */
+.wc-accordion--bordered .wc-accordion-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Filled 变体 */
+.wc-accordion--filled .wc-accordion-header {
+  background-color: var(--wc-neutral-100, #f3f4f6);
+}
+
+.wc-accordion--filled .wc-accordion-header:hover {
+  background-color: var(--wc-neutral-200, #e5e7eb);
+}
+
+/* 暗色模式适配
+   ========================================================================== */
+.dark .wc-accordion-item,
+.wc-accordion-item:where([data-theme="dark"] *) {
+  border-bottom-color: var(--wc-neutral-700, #374151);
+}
+
+.dark .wc-accordion-header,
+.wc-accordion-header:where([data-theme="dark"] *) {
+  color: var(--wc-neutral-100, #f3f4f6);
+}
+
+.dark .wc-accordion-title{
+  color: var(--wc-neutral-800, #f3f4f6);
+}
+
+.dark .wc-accordion-header:hover,
+.wc-accordion-header:hover:where([data-theme="dark"] *) {
+  background-color: var(--wc-neutral-800, #1f2937);
+}
+
+.dark .wc-accordion-header--active,
+.wc-accordion-header--active:where([data-theme="dark"] *) {
+  color: var(--wc-primary-400, #60a5fa);
+  background-color: var(--wc-primary-900, #1e3a8a);
+}
+
+.dark .wc-accordion-content-inner,
+.wc-accordion-content-inner:where([data-theme="dark"] *) {
+  color: var(--wc-neutral-300, #d1d5db);
+}
+
+.dark .wc-accordion-icon,
+.wc-accordion-icon:where([data-theme="dark"] *) {
+  color: var(--wc-neutral-500, #6b7280);
+}
+
+/* 暗色模式变体样式 */
+.dark .wc-accordion--bordered .wc-accordion-item,
+.wc-accordion--bordered .wc-accordion-item:where([data-theme="dark"] *) {
+  border-color: var(--wc-neutral-700, #374151);
+}
+
+.dark .wc-accordion--filled .wc-accordion-header,
+.wc-accordion--filled .wc-accordion-header:where([data-theme="dark"] *) {
+  background-color: var(--wc-neutral-800, #1f2937);
+}
+
+.dark .wc-accordion--filled .wc-accordion-header:hover,
+.wc-accordion--filled .wc-accordion-header:hover:where([data-theme="dark"] *) {
+  background-color: var(--wc-neutral-700, #374151);
+}
+
+/* 响应式设计
+   ========================================================================== */
+@media (max-width: 640px) {
+  .wc-accordion-header,
+  .wc-accordion-content-inner {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* 媒体查询暗色模式 (系统偏好)
+   ========================================================================== */
 @media (prefers-color-scheme: dark) {
   .wc-accordion-item {
     border-bottom-color: var(--wc-neutral-700, #374151);
@@ -108,7 +196,7 @@
   
   .wc-accordion-header--active {
     color: var(--wc-primary-400, #60a5fa);
-    background-color: var(--wc-primary-800, #1e3a8a);
+    background-color: var(--wc-primary-900, #1e3a8a);
   }
   
   .wc-accordion-content-inner {
@@ -118,75 +206,16 @@
   .wc-accordion-icon {
     color: var(--wc-neutral-500, #6b7280);
   }
-}
-
-/* 变体样式 */
-.wc-accordion.wc-accordion--bordered .wc-accordion-item {
-  border: 1px solid var(--wc-neutral-200, #e5e7eb);
-  border-radius: 8px;
-  margin-bottom: 8px;
-}
-
-.wc-accordion.wc-accordion--bordered .wc-accordion-item:last-child {
-  margin-bottom: 0;
-}
-
-.wc-accordion.wc-accordion--filled .wc-accordion-header {
-  background-color: var(--wc-neutral-100, #f3f4f6);
-}
-
-.wc-accordion.wc-accordion--filled .wc-accordion-header:hover {
-  background-color: var(--wc-neutral-200, #e5e7eb);
-}
-
-@media (prefers-color-scheme: dark) {
-  .wc-accordion.wc-accordion--bordered .wc-accordion-item {
+  
+  .wc-accordion--bordered .wc-accordion-item {
     border-color: var(--wc-neutral-700, #374151);
   }
   
-  .wc-accordion.wc-accordion--filled .wc-accordion-header {
-    background-color: var(--wc-neutral-800, #374151);
+  .wc-accordion--filled .wc-accordion-header {
+    background-color: var(--wc-neutral-800, #1f2937);
   }
   
-  .wc-accordion.wc-accordion--filled .wc-accordion-header:hover {
-    background-color: var(--wc-neutral-700, #4b5563);
+  .wc-accordion--filled .wc-accordion-header:hover {
+    background-color: var(--wc-neutral-700, #374151);
   }
-}
-
-/* 使用 .dark 类适配暗黑模式，与系统主题切换保持一致 */
-.dark .wc-accordion-item {
-  border-bottom-color: var(--wc-neutral-700, #374151);
-}
-
-.dark .wc-accordion-header {
-  color: var(--wc-neutral-100, #f3f4f6);
-}
-
-.dark .wc-accordion-header:hover {
-  background-color: var(--wc-neutral-800, #1f2937);
-}
-
-.dark .wc-accordion-header--active {
-  color: var(--wc-primary-400, #60a5fa);
-  background-color: var(--wc-primary-800, #1e3a8a);
-}
-
-.dark .wc-accordion-content-inner {
-  color: var(--wc-neutral-300, #d1d5db);
-}
-
-.dark .wc-accordion-icon {
-  color: var(--wc-neutral-500, #6b7280);
-}
-
-.dark .wc-accordion.wc-accordion--bordered .wc-accordion-item {
-  border-color: var(--wc-neutral-700, #374151);
-}
-
-.dark .wc-accordion.wc-accordion--filled .wc-accordion-header {
-  background-color: var(--wc-neutral-800, #374151);
-}
-
-.dark .wc-accordion.wc-accordion--filled .wc-accordion-header:hover {
-  background-color: var(--wc-neutral-700, #4b5563);
 } 

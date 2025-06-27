@@ -1,6 +1,6 @@
 import React from 'react'
-import { getBlockquoteClasses } from './utils.js'
 import './style.css'
+import { getBlockquoteClasses } from './utils.js'
 
 export default function Blockquote({ 
   cite = '', 

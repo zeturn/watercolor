@@ -6,7 +6,7 @@
 /* CSS变量定义 */
 :root {
   /* Watercolor风格：淡灰色背景，无边框 */
-  --input-bg: var(--wc-neutral-100, #f5f5f5);
+  --input-bg: var(--wc-neutral-200, #e5e5e5);
   --input-border: transparent;
   --input-border-focus: transparent;
   --input-border-error: transparent;
@@ -165,8 +165,8 @@
 
 .wc-input:focus {
   outline: none;
-  /* Watercolor风格：focus时背景变深 */
-  background-color: var(--wc-neutral-200, #e5e5e5);
+  /* Watercolor风格：focus时背景再加深 */
+  background-color: var(--wc-neutral-300, #d4d4d4);
   box-shadow: var(--input-shadow-focus);
 }
 
@@ -194,7 +194,7 @@
 }
 
 .wc-input--outlined:focus {
-  background-color: var(--wc-neutral-200, #e5e5e5);
+  background-color: var(--wc-neutral-300, #d4d4d4);
 }
 
 .wc-input--filled {
@@ -204,7 +204,7 @@
 }
 
 .wc-input--filled:focus {
-  background-color: var(--wc-neutral-200, #e5e5e5);
+  background-color: var(--wc-neutral-300, #d4d4d4);
 }
 
 .wc-input--standard {
@@ -216,7 +216,7 @@
 }
 
 .wc-input--standard:focus {
-  background-color: var(--wc-neutral-200, #e5e5e5);
+  background-color: var(--wc-neutral-300, #d4d4d4);
 }
 
 /* 状态样式 */
@@ -540,3 +540,41 @@ textarea.wc-input {
     display: none !important;
   }
 } 
+
+
+/* Input styles - flat design */
+.wc-input {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: var(--wc-neutral-500);
+  color: var(--wc-neutral-900);
+  border: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  outline: none;
+  font-size: 14px;
+  font-family: var(--wc-font-family);
+}
+
+.wc-input::placeholder {
+  color: var(--wc-neutral-400);
+}
+
+.wc-input:focus {
+  background-color: var(--wc-neutral-100);
+  outline: none;
+}
+
+/* Dark mode input */
+.dark .wc-input {
+  background-color: var(--wc-neutral-800);
+  color: var(--wc-neutral-100);
+}
+
+.dark .wc-input::placeholder {
+  color: var(--wc-neutral-500);
+}
+
+.dark .wc-input:focus {
+  background-color: var(--wc-neutral-700);
+}

@@ -1,6 +1,6 @@
 import React from 'react'
-import { getBoxClasses, getBoxStyles } from './utils.js'
 import './style.css'
+import { getBoxClasses, getBoxStyles } from './utils.js'
 
 /**
  * 通用布局组件 Box (React)

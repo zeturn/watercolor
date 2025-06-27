@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import './style.css'
 import { 
   getCopyClasses, 
   getCurrentIcon, 
@@ -7,7 +8,6 @@ import {
   getTooltipClasses,
   handleCopyOperation 
 } from './utils.js'
-import './style.css'
 
 export function Copy({
   text,

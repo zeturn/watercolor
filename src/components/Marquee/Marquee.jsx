@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './style.css'
+import { getMarqueeClasses } from './utils.js'
 
 /**
  * React 版本的 Marquee 组件

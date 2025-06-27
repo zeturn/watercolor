@@ -13,6 +13,11 @@
   border: none;
 }
 
+.dark .wc-card {
+  background-color: var(--wc-neutral-800);
+  border-color: var(--wc-neutral-700);
+}
+
 /* 去掉所有边框 */
 .wc-card:not(.wc-card--no-border) {
   border: none;

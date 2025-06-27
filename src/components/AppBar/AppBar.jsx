@@ -1,6 +1,7 @@
 import React from 'react'
-import { getAppBarClasses } from './utils.js'
 import './style.css'
+import { getAppBarClasses } from './utils.js'
+
 
 const AppBar = ({
   children,
@@ -12,7 +13,7 @@ const AppBar = ({
   style = {},
   ...rest
 }) => {
-  const classes = getAppBarClasses(position, color, elevation, variant, className)
+  const classes = `${getAppBarClasses(position, color, elevation, variant, className)} flex items-center`
 
   return (
     <div className={classes} style={style} {...rest}>

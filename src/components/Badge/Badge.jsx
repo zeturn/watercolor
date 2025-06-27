@@ -1,6 +1,6 @@
 import React from 'react'
-import { getBadgeClasses } from './utils.js'
 import './style.css'
+import { getBadgeClasses } from './utils.js'
 
 const Badge = ({
   children,

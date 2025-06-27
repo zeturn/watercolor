@@ -1,6 +1,6 @@
 import React from 'react'
-import { getColorPickerClasses, handleColorChange, getPreviewStyles } from './utils.js'
 import './style.css'
+import { getColorPickerClasses, handleColorChange, getPreviewStyles } from './utils.js'
 
 export default function ColorPicker({ 
   value = '#ffffff', 

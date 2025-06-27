@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { getMenuClasses, computeMenuPosition } from './utils.js'
 import './style.css'
+import { getMenuClasses, computeMenuPosition } from './utils.js'
 
 const Menu = ({
   open = false,

@@ -8,7 +8,7 @@ export const defaultProps = {
   fontStyle: 'normal',
   fontVariant: '',
   fontWeight: 400,
-  fontColor: 'rgba(128,128,128,.3)',
+  fontColor: 'var(--wc-neutral-500, rgba(128,128,128,.3))',
   fullscreen: false,
   globalRotate: 0,
   lineHeight: 14,

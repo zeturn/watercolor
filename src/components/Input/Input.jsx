@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect, useId } from 'react'
+import './style.css'
+import { getInputClasses } from './utils.js'
 
 const Input = ({
   value = '',
@@ -89,29 +91,8 @@ const Input = ({
   }
 
   const getInputStyles = () => {
-    const styles = { ...style }
-    
-    // Use CSS variables for theming
-    if (variant === 'outlined') {
-      styles.border = `1px solid var(--wc-${color}-500)`
-      styles.backgroundColor = 'transparent'
-    } else if (variant === 'filled') {
-      styles.backgroundColor = 'var(--wc-neutral-50)'
-      styles.border = 'none'
-    } else if (variant === 'standard') {
-      styles.borderTop = 'none'
-      styles.borderLeft = 'none'
-      styles.borderRight = 'none'
-      styles.borderBottom = `1px solid var(--wc-${color}-500)`
-      styles.backgroundColor = 'transparent'
-      styles.borderRadius = '0'
-    }
-    
-    if (error) {
-      styles.borderColor = 'var(--wc-error-500)'
-    }
-    
-    return styles
+    // 统一交由全局 CSS 控制，保留用户自定义的 style 覆盖
+    return { ...style }
   }
 
   const InputComponent = multiline ? 'textarea' : 'input'

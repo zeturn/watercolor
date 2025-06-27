@@ -1,4 +1,5 @@
 import React from 'react'
+import './style.css'
 import { 
   calculateCircleParams, 
   calculateStrokeDashoffset, 
@@ -7,7 +8,6 @@ import {
   formatDisplayValue,
   getAriaProps
 } from './utils.js'
-import './style.css'
 
 export default function CircularProgress({
   value = 0,

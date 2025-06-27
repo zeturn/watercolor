@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './style.css'
 import { 
   getAvatarClasses, 
   getAvatarStyles, 
@@ -6,7 +7,6 @@ import {
   handleImageError,
   handleImageLoad
 } from './utils.js'
-import './style.css'
 
 const Avatar = ({
   src = '',

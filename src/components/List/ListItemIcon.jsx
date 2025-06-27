@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
+import './style.css'
 import { ListContext } from './List'
+import { getListItemIconClasses } from './utils.js'
 
 const ListItemIcon = ({ children, className = '', ...rest }) => {
   const { dense } = useContext(ListContext)

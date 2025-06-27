@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
+import './style.css'
 import { ListContext } from './List'
+import { getListItemTextClasses } from './utils.js'
 
 const ListItemText = ({
   primary = '',

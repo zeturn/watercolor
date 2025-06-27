@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { getAlertClasses, getIconContent } from './utils.js'
 import './style.css'
+import { getAlertClasses, getIconContent } from './utils.js'
+
 
 export function Alert({
   type = 'info',

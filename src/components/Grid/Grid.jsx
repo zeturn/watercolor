@@ -1,4 +1,6 @@
 import React from 'react'
+import './style.css'
+import { getGridClasses } from './utils.js'
 
 const Grid = ({
   container = false,

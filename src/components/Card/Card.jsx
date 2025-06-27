@@ -1,6 +1,6 @@
 import React from 'react'
-import { getCardClasses } from './utils.js'
 import './style.css'
+import { getCardClasses } from './utils.js'
 
 const Card = ({
   children,

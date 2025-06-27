@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { getPlacementClass } from './utils'
 import './style.css'
+import { getPlacementClass } from './utils'
 
 export default function Tooltip({
   text,

@@ -1,4 +1,6 @@
 import React from 'react'
+import './style.css'
+import { getFormGroupClasses } from './utils.js'
 
 const FormGroup = ({
   row = false,

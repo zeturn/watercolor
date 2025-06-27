@@ -576,10 +576,6 @@
   outline-offset: 2px;
 }
 
-.wc-tab[aria-selected="true"] {
-  /* Active state handled by .wc-tab--active */
-}
-
 .wc-tab-content[role="tabpanel"] {
   outline: none;
 }
@@ -587,4 +583,47 @@
 .wc-tab-content[role="tabpanel"]:focus {
   outline: 2px solid var(--wc-primary-500);
   outline-offset: 2px;
+}
+
+/* Tab styles - flat design */
+.wc-tabs {
+  display: flex;
+  gap: 4px;
+  border-radius: 8px;
+  background-color: var(--wc-neutral-100);
+  padding: 4px;
+}
+
+.dark .wc-tabs {
+  background-color: var(--wc-neutral-800);
+}
+
+.wc-tab {
+  width: 100%;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--wc-neutral-600);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: var(--wc-font-family);
+}
+
+.wc-tab--active {
+  background-color: var(--wc-neutral-0);
+  color: var(--wc-primary-500);
+}
+
+.dark .wc-tab {
+  color: var(--wc-neutral-400);
+}
+
+.dark .wc-tab--active {
+  background-color: var(--wc-neutral-700);
+  color: var(--wc-primary-400);
 }

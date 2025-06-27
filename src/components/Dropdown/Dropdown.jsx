@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import './style.css'
 import { 
   getDropdownClasses,
   getDropdownMenuClasses,
@@ -9,7 +10,6 @@ import {
   handleItemClick,
   createOutsideClickListener
 } from './utils.js'
-import './style.css'
 
 const Dropdown = ({
   items = [],

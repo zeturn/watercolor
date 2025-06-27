@@ -1,4 +1,5 @@
 import React from 'react'
+import './style.css'
 import { 
   processBreadcrumbItems,
   getBreadcrumbClasses,
@@ -7,7 +8,6 @@ import {
   handleBreadcrumbClick,
   shouldRenderAsLink
 } from './utils.js'
-import './style.css'
 
 export default function Breadcrumb({ 
   items = [], 
