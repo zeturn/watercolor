@@ -238,40 +238,4 @@
 }
 
 /* media query for prefers-color-scheme */
-@media (prefers-color-scheme: dark) {
-  .wc-status__text {
-    color: var(--wc-text-primary-dark, #f9fafb);
-  }
-  
-  .wc-status--default::before {
-    background-color: var(--wc-neutral-400, #6b7280);
-  }
-  
-  .wc-status--success::before {
-    background-color: var(--wc-success-400, #059669);
-  }
-  
-  .wc-status--error::before {
-    background-color: var(--wc-error-400, #dc2626);
-  }
-  
-  .wc-status--warning::before {
-    background-color: var(--wc-warning-400, #d97706);
-  }
-  
-  .wc-status--info::before {
-    background-color: var(--wc-primary-400, #2563eb);
-  }
-  
-  .wc-status--pending::before {
-    background-color: var(--wc-purple-400, #7c3aed);
-  }
-  
-  .wc-status--processing::before {
-    background-color: var(--wc-cyan-400, #0891b2);
-  }
-  
-  .wc-status--cancelled::before {
-    background-color: var(--wc-neutral-500, #475569);
-  }
-} 
+/* 已移除 prefers-color-scheme 媒体查询，避免与Storybook主题切换冲突 */ 

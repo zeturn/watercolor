@@ -336,43 +336,7 @@
 }
 
 /* 暗色模式 */
-@media (prefers-color-scheme: dark) {
-  .form-control-label:hover {
-    background-color: var(--wc-neutral-800, rgba(255, 255, 255, 0.05));
-  }
-  
-  .form-control-label__text {
-    color: var(--wc-text-dark, #f9fafb);
-  }
-  
-  .form-control-label__text--disabled {
-    color: var(--wc-text-disabled-dark, #6b7280);
-  }
-  
-  .form-field__label {
-    color: var(--wc-text-dark, #f9fafb);
-  }
-  
-  .form-helper-text {
-    color: var(--wc-text-muted-dark, #9ca3af);
-  }
-  
-  .form-actions {
-    border-color: var(--wc-neutral-700, #374151);
-  }
-  
-  .form-section {
-    border-color: var(--wc-neutral-700, #374151);
-  }
-  
-  .form-section__title {
-    color: var(--wc-text-dark, #f9fafb);
-  }
-  
-  .form-section__description {
-    color: var(--wc-text-muted-dark, #9ca3af);
-  }
-} 
+/* 已移除 prefers-color-scheme 媒体查询，避免与Storybook主题切换冲突 */ 
 
 
 /* === Watercolor Form Components (React) === */

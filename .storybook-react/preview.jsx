@@ -2,6 +2,15 @@ import '../src/styles/index.css'
 import React, { useEffect } from 'react'
 
 /** @type { import('@storybook/react-vite').Preview } */
+const getInitialTheme = () => {
+  const savedTheme = localStorage.getItem('storybook-theme');
+  if (savedTheme) return savedTheme;
+  
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  return prefersDark ? 'dark' : 'light';
+};
+const savedTheme = getInitialTheme();
+
 const preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
@@ -12,7 +21,7 @@ const preview = {
       },
     },
     backgrounds: {
-      default: 'light',
+      default: savedTheme,
       values: [
         { name: 'light', value: '#ffffff' },
         { name: 'dark', value: '#0f0f0f' },
@@ -29,13 +38,21 @@ const preview = {
     theme: {
       name: 'Theme',
       description: 'Global theme for components',
-      defaultValue: 'light',
+      defaultValue: (() => {
+        // check system theme preference
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        // get saved theme
+        const savedTheme = localStorage.getItem('storybook-theme');
+        // determine the theme to use
+        return savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+      })(),
       toolbar: {
         icon: 'circlehollow',
         items: [
           { value: 'light', title: 'Light' },
           { value: 'dark', title: 'Dark' },
         ],
+        dynamicTitle: true,
       },
     },
   },
@@ -45,6 +62,8 @@ const preview = {
 
       // watchEffect will run once and whenever theme changes
       useEffect(() => {
+        console.log('[Preview] Theme changed to:', theme)
+        
         const root = document.documentElement
         root.classList.remove('light', 'dark')
         root.classList.add(theme)
@@ -53,6 +72,30 @@ const preview = {
         const sbRoot = document.getElementById('storybook-root')
         if (sbRoot) {
           sbRoot.style.backgroundColor = theme === 'dark' ? '#0f0f0f' : '#ffffff'
+        }
+
+        // save theme to localStorage and trigger manager reload
+        const currentTheme = localStorage.getItem('storybook-theme')
+        console.log('[Preview] Current localStorage theme:', currentTheme)
+        console.log('[Preview] New theme to save:', theme)
+        
+        if (currentTheme !== theme) {
+          localStorage.setItem('storybook-theme', theme)
+          console.log('[Preview] Saved theme to localStorage:', theme)
+          
+          // 确保localStorage已保存
+          const savedTheme = localStorage.getItem('storybook-theme')
+          console.log('[Preview] Verified saved theme:', savedTheme)
+          
+          // trigger storage event to notify manager
+          const storageEvent = new StorageEvent('storage', {
+            key: 'storybook-theme',
+            newValue: theme,
+            oldValue: currentTheme
+          })
+          
+          console.log('[Preview] Dispatching storage event:', storageEvent)
+          window.dispatchEvent(storageEvent)
         }
       }, [theme])
 

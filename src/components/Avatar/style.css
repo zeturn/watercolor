@@ -96,34 +96,4 @@
 }
 
 /* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .wc-avatar--default {
-    background-color: var(--wc-neutral-700, #374151);
-    color: var(--wc-neutral-300, #d1d5db);
-  }
-  
-  .wc-avatar--primary {
-    background-color: var(--wc-primary-900, #1e3a8a);
-    color: var(--wc-primary-300, #93c5fd);
-  }
-  
-  .wc-avatar--secondary {
-    background-color: var(--wc-neutral-800, #1f2937);
-    color: var(--wc-neutral-300, #d1d5db);
-  }
-  
-  .wc-avatar--success {
-    background-color: var(--wc-success-900, #14532d);
-    color: var(--wc-success-300, #86efac);
-  }
-  
-  .wc-avatar--warning {
-    background-color: var(--wc-warning-900, #78350f);
-    color: var(--wc-warning-300, #fcd34d);
-  }
-  
-  .wc-avatar--error {
-    background-color: var(--wc-error-900, #7f1d1d);
-    color: var(--wc-error-300, #fca5a5);
-  }
-} 
+/* 已移除 prefers-color-scheme 媒体查询，避免与Storybook主题切换冲突 */ 

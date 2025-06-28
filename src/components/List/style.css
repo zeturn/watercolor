@@ -21,21 +21,7 @@
 }
 
 /* 深色模式变量 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --list-bg: #1f2937;
-    --list-border: #374151;
-    --list-text: #f9fafb;
-    --list-text-secondary: #d1d5db;
-    --list-hover-bg: #374151;
-    --list-selected-bg: #1e3a8a;
-    --list-selected-text: #60a5fa;
-    --list-focus-bg: #4b5563;
-    --list-divider: #4b5563;
-    --list-disabled-text: #6b7280;
-    --list-primary: #60a5fa;
-  }
-}
+/* 已移除 prefers-color-scheme 媒体查询，避免与Storybook主题切换冲突 */
 
 /* 列表容器 */
 .list-container {

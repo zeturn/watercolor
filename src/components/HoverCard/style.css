@@ -21,21 +21,7 @@
 }
 
 /* 深色模式变量 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --hover-card-bg: #1f2937;
-    --hover-card-border: #374151;
-    --hover-card-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    --hover-card-text: #f9fafb;
-    --hover-card-text-secondary: #d1d5db;
-    --hover-card-text-tertiary: #9ca3af;
-    --hover-card-primary: #60a5fa;
-    --hover-card-primary-hover: #3b82f6;
-    --hover-card-primary-light: #1e3a8a;
-    --hover-card-gray-50: #374151;
-    --hover-card-gray-100: #4b5563;
-  }
-}
+/* 已移除 prefers-color-scheme 媒体查询，避免与Storybook主题切换冲突 */
 
 /* 基础容器样式 */
 .hover-card-container {

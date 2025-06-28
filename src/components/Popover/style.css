@@ -23,15 +23,7 @@
 }
 
 /* 深色模式变量 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --wc-popover-bg: var(--wc-neutral-800, #1f2937);
-    --wc-popover-border-color: var(--wc-neutral-700, #374151);
-    --wc-popover-trigger-bg: var(--wc-neutral-800, #1f2937);
-    --wc-popover-trigger-border: var(--wc-neutral-700, #374151);
-    --wc-popover-trigger-hover-bg: var(--wc-neutral-700, #374151);
-  }
-}
+/* 已移除 prefers-color-scheme 媒体查询，避免与Storybook主题切换冲突 */
 
 .dark {
   --wc-popover-bg: var(--wc-neutral-800, #1f2937);
