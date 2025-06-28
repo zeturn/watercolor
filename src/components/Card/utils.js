@@ -127,17 +127,17 @@ export function handleCardClick(e, disabled, clickable, onClick) {
  */
 export const vueVariantClasses = {
   default: '',
-  elevated: 'shadow-hover'
+  elevated: 'wc-card--elevated'
 }
 
 /**
  * Vue版本的padding类名映射
  */
 export const vuePaddingClasses = {
-  none: 'p-0',
-  sm: 'p-4',
-  md: 'p-6',
-  lg: 'p-8'
+  none: 'wc-padding-none',
+  sm: 'wc-padding-normal',
+  md: 'wc-padding-comfortable',
+  lg: 'wc-padding-2'
 }
 
 /**

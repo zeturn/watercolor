@@ -139,12 +139,227 @@
   flex: 1;
   font-size: 1rem;
   line-height: 1.6;
+  display: block;
+}
+
+.wc-card-content:not(:first-child) {
+  padding-top: 0;
+}
+
+.wc-card-content:not(:last-child) {
+  padding-bottom: 0;
 }
 
 .wc-card-footer {
   margin-top: 16px;
   padding-top: 16px;
   border-top: none;
+}
+
+/* Card Actions 样式 */
+.wc-card-actions {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid transparent;
+}
+
+.wc-card-actions:not(:first-child) {
+  border-top: 1px solid rgb(229 229 229);
+}
+
+.dark .wc-card-actions:not(:first-child) {
+  border-top-color: rgb(64 64 64);
+}
+
+/* Button spacing override for direct button children */
+.wc-card-actions .wc-btn:not(:first-child) {
+  margin-left: 8px;
+}
+
+/* 原生CSS类替代Tailwind - Padding */
+.wc-padding-none {
+  padding: 0;
+}
+
+.wc-padding-dense {
+  padding: 12px;
+}
+
+.wc-padding-normal {
+  padding: 16px;
+}
+
+.wc-padding-comfortable {
+  padding: 24px;
+}
+
+.wc-padding-2 {
+  padding: 8px;
+}
+
+/* 原生CSS类替代Tailwind - Flex */
+.wc-flex {
+  display: flex;
+}
+
+.wc-items-center {
+  align-items: center;
+}
+
+.wc-gap-2 {
+  gap: 8px;
+}
+
+/* 原生CSS类替代Tailwind - Justify Content */
+.wc-justify-start {
+  justify-content: flex-start;
+}
+
+.wc-justify-center {
+  justify-content: center;
+}
+
+.wc-justify-end {
+  justify-content: flex-end;
+}
+
+.wc-justify-between {
+  justify-content: space-between;
+}
+
+.wc-justify-around {
+  justify-content: space-around;
+}
+
+/* 原生CSS类替代Tailwind - Stories布局样式 */
+.wc-w-96 {
+  width: 24rem;
+}
+
+.wc-max-w-md {
+  max-width: 28rem;
+}
+
+.wc-max-w-2xl {
+  max-width: 42rem;
+}
+
+.wc-max-w-4xl {
+  max-width: 56rem;
+}
+
+.wc-grid {
+  display: grid;
+}
+
+.wc-grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.wc-grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .wc-md-grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.wc-gap-6 {
+  gap: 1.5rem;
+}
+
+.wc-space-y-2 > * + * {
+  margin-top: 0.5rem;
+}
+
+.wc-space-y-4 > * + * {
+  margin-top: 1rem;
+}
+
+.wc-space-y-6 > * + * {
+  margin-top: 1.5rem;
+}
+
+.wc-space-y-8 > * + * {
+  margin-top: 2rem;
+}
+
+.wc-space-x-2 > * + * {
+  margin-left: 0.5rem;
+}
+
+.wc-space-x-3 > * + * {
+  margin-left: 0.75rem;
+}
+
+/* 原生CSS类替代Tailwind - 排版样式 */
+.wc-text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.wc-text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.wc-font-semibold {
+  font-weight: 600;
+}
+
+.wc-font-medium {
+  font-weight: 500;
+}
+
+.wc-mb-3 {
+  margin-bottom: 0.75rem;
+}
+
+.wc-mb-4 {
+  margin-bottom: 1rem;
+}
+
+.wc-opacity-75 {
+  opacity: 0.75;
+}
+
+.wc-opacity-80 {
+  opacity: 0.8;
+}
+
+/* 原生CSS类替代Tailwind - Flex布局 */
+.wc-items-start {
+  align-items: flex-start;
+}
+
+.wc-w-12 {
+  width: 3rem;
+}
+
+.wc-h-12 {
+  height: 3rem;
+}
+
+.wc-bg-white\/20 {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.wc-rounded-full {
+  border-radius: 9999px;
+}
+
+.wc-min-w-0 {
+  min-width: 0;
+}
+
+.wc-flex-1 {
+  flex: 1 1 0%;
+}
+
+.wc-flex-shrink-0 {
+  flex-shrink: 0;
 }
 
 /* 颜色变体的标题颜色 */
