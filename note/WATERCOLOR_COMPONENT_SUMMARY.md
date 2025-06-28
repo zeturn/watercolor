@@ -2,7 +2,7 @@
 
 ## 🎨 项目概述
 
-Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Material-UI 兼容层，支持无缝从 @mui/material 迁移。采用水彩画风格的设计语言，基于 Tailwind CSS 构建。
+Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Material-UI 兼容层，支持无缝从 @mui/material 迁移。采用水彩画风格的设计语言。
 
 ## 📦 完整组件清单
 
@@ -347,7 +347,6 @@ import {
 - **Vue 3** - 渐进式框架
 - **React 18** - 用户界面库
 - **TypeScript** - 类型安全
-- **Tailwind CSS** - 实用优先的样式
 - **Vite** - 快速构建工具
 - **Storybook** - 组件文档
 

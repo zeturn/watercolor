@@ -149,12 +149,6 @@ import ContainerVue from '../src/components/Container/Container.vue'
 import ButtonVue from '../src/components/Button/Button.vue'
 ```
 
-### 样式应用
-使用 Tailwind CSS 类名进行样式设计：
-```html
-<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-```
-
 ### 响应式布局
 ```html
 <GridVue container spacing="lg">

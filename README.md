@@ -256,10 +256,6 @@ function App() {
 export default App
 ```
 
-### 🎨 TailwindCSS Configuration
-
-If you're using TailwindCSS, we recommend extending your `tailwind.config.js`:
-
 ```js
 /** @type {import('tailwindcss').Config} */
 module.exports = {

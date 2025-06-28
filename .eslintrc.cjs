@@ -98,7 +98,7 @@ module.exports = {
     },
     {
       // 配置文件 - 放宽检查
-      files: ['*.config.js', '*.config.ts', 'tailwind.config.js'],
+      files: ['*.config.js', '*.config.ts'],
       rules: {
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-var-requires': 'off',

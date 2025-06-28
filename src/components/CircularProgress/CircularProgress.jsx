@@ -14,7 +14,7 @@ export default function CircularProgress({
   size = 40,
   thickness = 3.6,
   variant = 'indeterminate', // 'determinate' | 'indeterminate'
-  color = 'primary', // tailwind 颜色 key
+  color = 'primary',
   showValue = false,
   className = '',
   ...rest
