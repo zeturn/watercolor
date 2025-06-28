@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Input from '@/components/Input/Input.jsx'
-import { action } from '@storybook/addon-actions'
+import { action } from 'storybook/actions'
 
 export default {
   title: 'Components/Input',

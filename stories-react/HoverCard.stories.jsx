@@ -1,6 +1,6 @@
 import React from 'react';
 import HoverCard from '@/components/HoverCard/HoverCard';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 export default {
   title: 'Components/HoverCard',

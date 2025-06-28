@@ -1,6 +1,6 @@
 import React from 'react';
 import Marquee from '@/components/Marquee/Marquee.jsx';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 export default {
   title: 'Components/Marquee',

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from '@/components/Modal/Modal';
 import Button from '@/components/Button/Button';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 export default {
   title: 'Components/Modal',

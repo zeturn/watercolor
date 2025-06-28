@@ -148,7 +148,7 @@ export function setTheme(theme: WatercolorTheme): void {
  * @deprecated Use loadThemeConfig() instead for file-based themes
  * @param themeName Theme name
  */
-export function applyCSSTheme(themeName: string): void {
+export function applyCSSTheme(_themeName: string): void {
   console.warn('applyCSSTheme is deprecated. Use loadThemeConfig() for file-based themes.')
 }
 

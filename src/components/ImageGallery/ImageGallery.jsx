@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import './style.css'
-import { getImageGalleryClasses } from './utils.js'
 
 const ImageGallery = ({
   images = [],

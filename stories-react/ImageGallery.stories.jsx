@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ImageGallery from '@/components/ImageGallery/ImageGallery.jsx';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 const sampleImages = [
     {
