@@ -13,9 +13,13 @@
   border: none;
 }
 
-.dark .wc-card {
-  background-color: var(--wc-neutral-800);
-  border-color: var(--wc-neutral-700);
+/* Start of Selection */
+/* Dark mode for cards and panels */
+.dark .wc-card,
+.dark .wc-panel {
+  background-color: #1a1a1a !important;
+  border-color: #2a2a2a !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* 去掉所有边框 */

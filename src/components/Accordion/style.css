@@ -2,7 +2,7 @@
    Accordion Component Styles
    ========================================================================== */
 
-/* 基础容器样式
+/* basic container style
    ========================================================================== */
 .wc-accordion {
   width: 100%;
@@ -11,7 +11,7 @@
   overflow: hidden;
 }
 
-/* 手风琴项目样式
+/* accordion item style
    ========================================================================== */
 .wc-accordion-item {
   border-bottom: 1px solid var(--wc-neutral-200, #e5e7eb);
@@ -21,7 +21,7 @@
   border-bottom: none;
 }
 
-/* 头部按钮样式
+/* header button style
    ========================================================================== */
 .wc-accordion-header {
   width: 100%;
@@ -50,7 +50,7 @@
   transform: translateY(0);
 }
 
-/* 标题和图标样式
+/* title and icon style
    ========================================================================== */
 .wc-accordion-title {
   flex: 1;
@@ -71,7 +71,7 @@
   transform: rotate(180deg);
 }
 
-/* 内容展开动画
+/* content expand animation
    ========================================================================== */
 .wc-accordion-content {
   max-height: 0;
@@ -93,10 +93,10 @@
   line-height: 1.6;
 }
 
-/* 变体样式
+/* variant style
    ========================================================================== */
 
-/* Bordered 变体 */
+/* Bordered variant */
 .wc-accordion--bordered .wc-accordion-item {
   border: 1px solid var(--wc-neutral-200, #e5e7eb);
   border-radius: 8px;
@@ -107,7 +107,7 @@
   margin-bottom: 0;
 }
 
-/* Filled 变体 */
+/* Filled variant */
 .wc-accordion--filled .wc-accordion-header {
   background-color: var(--wc-neutral-100, #f3f4f6);
 }
@@ -116,7 +116,7 @@
   background-color: var(--wc-neutral-200, #e5e7eb);
 }
 
-/* 暗色模式适配
+/* dark mode adaption
    ========================================================================== */
 .dark .wc-accordion-item,
 .wc-accordion-item:where([data-theme="dark"] *) {
@@ -153,7 +153,7 @@
   color: var(--wc-neutral-500, #6b7280);
 }
 
-/* 暗色模式变体样式 */
+/* dark mode variant style */
 .dark .wc-accordion--bordered .wc-accordion-item,
 .wc-accordion--bordered .wc-accordion-item:where([data-theme="dark"] *) {
   border-color: var(--wc-neutral-700, #374151);
@@ -169,7 +169,7 @@
   background-color: var(--wc-neutral-700, #374151);
 }
 
-/* 响应式设计
+/* responsive design
    ========================================================================== */
 @media (max-width: 640px) {
   .wc-accordion-header,
@@ -179,6 +179,3 @@
   }
 }
 
-/* 移除了媒体查询暗色模式，因为会与Storybook主题切换冲突
-   现在完全依赖 .dark 类来控制暗色模式样式
-   ========================================================================== */ 
