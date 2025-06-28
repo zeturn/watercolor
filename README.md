@@ -24,7 +24,6 @@ A modern minimalist cross-framework component library supporting Vue 3 and React
 - 🎯 **Cross-Framework Compatible** - Supports both Vue 3 and React 18+
 - 🔄 **Material-UI Compatibility Layer** - Complete Material-UI API compatibility for zero-cost migration
 - 🎭 **Theme System** - Fully customizable color system and theme presets
-- 📦 **Lightweight** - Based on TailwindCSS with tree-shaking, minimal bundle size
 - 🛠️ **TypeScript First** - Complete type support and IntelliSense
 - 📚 **Storybook Documentation** - Complete component documentation and interactive demos
 - 🚀 **Zero-Config Migration** - Seamless migration from Material-UI with minimal code changes
@@ -257,7 +256,6 @@ export default App
 ```
 
 ```js
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx,vue}",

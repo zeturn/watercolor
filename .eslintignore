@@ -1,21 +1,21 @@
-# 构建产物
+# Build
 dist/
 storybook-static/
 
-# 依赖
+# Dependencies
 node_modules/
 
-# 缓存
+# Cache
 .cache/
 .temp/
 
-# 日志
+# Logs
 *.log
 npm-debug.log*
 
-# 配置文件（已在override中处理）
+# Configuration files (already handled in override)
 # *.config.js
 
-# 其他
+# Others
 .DS_Store
 .env* 

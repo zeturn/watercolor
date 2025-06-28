@@ -22,7 +22,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'vue'],
   rules: {
-    // Vue 规则 - 降低严格程度
+    // Vue rules - lower strictness
     'vue/multi-word-component-names': 'off',
     'vue/component-definition-name-casing': 'off',
     'vue/component-name-in-template-casing': 'off',
@@ -42,7 +42,7 @@ module.exports = {
     'vue/valid-v-on': 'warn',
     'vue/order-in-components': 'off',
     
-    // TypeScript 规则 - 降低严格程度
+    // TypeScript rules - lower strictness
     '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -50,7 +50,7 @@ module.exports = {
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     
-    // 通用规则 - 降低严格程度
+    // General rules - lower strictness
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'prefer-const': 'warn',
@@ -61,7 +61,7 @@ module.exports = {
     'no-dupe-keys': 'warn',
     'no-empty': 'warn',
     'no-extra-boolean-cast': 'off',
-    'no-undef': 'off', // TypeScript会处理这个
+    'no-undef': 'off', // TypeScript will handle this
   },
   overrides: [
     {
@@ -85,7 +85,7 @@ module.exports = {
       },
     },
     {
-      // 构建产物文件 - 关闭大部分检查
+      // Build artifacts - close most checks
       files: ['dist/**/*', '*.d.ts', 'storybook-static/**/*'],
       rules: {
         '@typescript-eslint/no-unused-vars': 'off',
@@ -97,7 +97,7 @@ module.exports = {
       },
     },
     {
-      // 配置文件 - 放宽检查
+      // Configuration files - loosen checks
       files: ['*.config.js', '*.config.ts'],
       rules: {
         '@typescript-eslint/no-unused-vars': 'off',
