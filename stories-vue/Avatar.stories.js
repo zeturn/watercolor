@@ -2,7 +2,7 @@ import Avatar from '../src/components/Avatar/Avatar.vue'
 import { ref } from 'vue'
 
 export default {
-  title: 'Components/Avatar',
+  title: 'Components/Avatar (Vue)',
   component: Avatar,
   parameters: {
     docs: {

@@ -13,7 +13,7 @@ A modern minimalist cross-framework component library supporting Vue 3 and React
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 [![Storybook](https://img.shields.io/badge/Storybook-Ready-FF4785?logo=storybook)](https://storybook.js.org/)
 
-[🚀 Quick Start](#-quick-start) • [📚 Documentation](https://watercolor-ui.dev) • [🎨 Live Demo](https://storybook.watercolor-ui.dev) • [🔧 Components](##-component-overview)
+[🚀 Quick Start](#-quick-start) • [📚 Documentation](https://watercolor-ui.dev) • [🎨 Live Demo](https://zeturn.github.io/watercolor/vue/) • [🔧 Components](##-component-overview)
 
 </div>
 
