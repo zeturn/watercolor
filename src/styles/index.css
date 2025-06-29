@@ -297,8 +297,8 @@
   --wc-bg-surface-active: var(--wc-neutral-200); /* 表面激活背景 */
   --wc-bg-overlay: rgba(0, 0, 0, 0.5);           /* 遮罩背景 */
   --wc-bg-brand: var(--wc-primary-500);          /* 品牌色背景 */
-  --wc-bg-brand-hover: var(--wc-primary-600);    /* 品牌色悬停背景 */
-  --wc-bg-brand-active: var(--wc-primary-700);   /* 品牌色激活背景 */
+  --wc-bg-brand-hover: var(--wc-primary-200);    /* 品牌色悬停背景 */
+  --wc-bg-brand-active: var(--wc-primary-100);   /* 品牌色激活背景 */
   --wc-bg-success: var(--wc-success-500);        /* 成功状态背景 */
   --wc-bg-success-subtle: var(--wc-success-50);  /* 成功状态浅背景 */
   --wc-bg-warning: var(--wc-warning-500);        /* 警告状态背景 */
@@ -515,10 +515,10 @@
    * ============================================================================= */
   
   /* 文本颜色 - 暗色模式映射 */
-  --wc-text-primary: var(--wc-neutral-100);      /* 主要文本 - 浅色 */
-  --wc-text-secondary: var(--wc-neutral-400);    /* 次要文本 - 中等浅色 */
-  --wc-text-tertiary: var(--wc-neutral-500);     /* 第三级文本 */
-  --wc-text-disabled: var(--wc-neutral-600);     /* 禁用文本 - 更浅 */
+  --wc-text-primary: var(--wc-neutral-600);      /* 主要文本 - 浅色 */
+  --wc-text-secondary: var(--wc-neutral-500);    /* 次要文本 - 中等浅色 */
+  --wc-text-tertiary: var(--wc-neutral-400);     /* 第三级文本 */
+  --wc-text-disabled: var(--wc-neutral-300);     /* 禁用文本 - 更浅 */
   --wc-text-inverse: var(--wc-neutral-900);      /* 反色文本（用于浅色背景） */
   --wc-text-brand: var(--wc-primary-400);        /* 品牌色文本 - 暗色模式调整 */
   --wc-text-success: var(--wc-success-400);      /* 成功状态文本 */
@@ -530,12 +530,12 @@
   --wc-bg-canvas: var(--wc-neutral-0);           /* 主画布背景 - 深色 */
   --wc-bg-surface: var(--wc-neutral-50);         /* 表面背景 - 略浅 */
   --wc-bg-surface-secondary: var(--wc-neutral-100); /* 次级表面背景 */
-  --wc-bg-surface-hover: var(--wc-neutral-100);  /* 表面悬停背景 */
+  --wc-bg-surface-hover: var(--wc-neutral-200);  /* 表面悬停背景 */
   --wc-bg-surface-active: var(--wc-neutral-200); /* 表面激活背景 */
   --wc-bg-overlay: rgba(0, 0, 0, 0.8);           /* 遮罩背景 - 更深 */
   --wc-bg-brand: var(--wc-primary-600);          /* 品牌色背景 */
-  --wc-bg-brand-hover: var(--wc-primary-700);    /* 品牌色悬停背景 */
-  --wc-bg-brand-active: var(--wc-primary-800);   /* 品牌色激活背景 */
+  --wc-bg-brand-hover: var(--wc-primary-200);    /* 品牌色悬停背景 */
+  --wc-bg-brand-active: var(--wc-primary-300);   /* 品牌色激活背景 */
   --wc-bg-success: var(--wc-success-600);        /* 成功状态背景 */
   --wc-bg-success-subtle: var(--wc-success-100); /* 成功状态浅背景 */
   --wc-bg-warning: var(--wc-warning-600);        /* 警告状态背景 */
