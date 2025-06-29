@@ -35,12 +35,6 @@ jobs:
         
       - name: Run Vue tests
         run: npm run test:vue
-        
-      - name: Upload coverage (Vue)
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          flags: vue
 
   # React 单元测试
   test-react:
@@ -64,12 +58,6 @@ jobs:
         
       - name: Run React tests
         run: npm run test:react
-        
-      - name: Upload coverage (React)
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          flags: react
 
   # 构建测试
   build:
