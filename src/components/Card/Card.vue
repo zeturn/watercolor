@@ -30,6 +30,7 @@
 <script setup>
 import { computed } from 'vue'
 import { getCardClasses } from './utils.js'
+import { validVariants, validColors, validSizes } from './utils.js'
 import './style.css'
 
 const props = defineProps({
@@ -40,17 +41,17 @@ const props = defineProps({
   variant: {
     type: String,
     default: 'filled',
-    validator: (value) => ['filled', 'outlined', 'minimal', 'elevated'].includes(value)
+    validator: (value) => validVariants.includes(value)
   },
   color: {
     type: String,
     default: 'default',
-    validator: (value) => ['default', 'primary', 'success', 'warning', 'error', 'info'].includes(value)
+    validator: (value) => validColors.includes(value)
   },
   size: {
     type: String,
     default: 'medium',
-    validator: (value) => ['small', 'medium', 'large'].includes(value)
+    validator: (value) => validSizes.includes(value)
   },
   interactive: {
     type: Boolean,

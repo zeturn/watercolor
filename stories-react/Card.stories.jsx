@@ -6,42 +6,42 @@ export default {
   component: Card,
   parameters: {
     layout: 'centered',
+    docs: {
+      description: { component: 'Card is a versatile container presenting content and actions on a single subject.' }
+    }
   },
   tags: ['autodocs'],
   argTypes: {
-    title: {
-      control: 'text',
-      description: '卡片标题',
-    },
+    title: { control: 'text', description: 'Card title' },
     variant: {
       control: { type: 'select' },
       options: ['filled', 'outlined', 'minimal', 'elevated'],
-      description: '卡片变体样式',
+      description: 'Card variant style',
     },
     color: {
       control: { type: 'select' },
       options: ['default', 'primary', 'success', 'warning', 'error', 'info'],
-      description: '颜色主题',
+      description: 'Color theme',
     },
     size: {
       control: { type: 'select' },
       options: ['small', 'medium', 'large'],
-      description: '尺寸大小',
+      description: 'Card size',
     },
     interactive: {
       control: 'boolean',
-      description: '是否启用交互效果（hover动画）',
+      description: 'Enable hover interaction',
     },
     noBorder: {
       control: 'boolean',
-      description: '是否无边框（默认无边框）',
+      description: 'Remove border',
     },
   },
 }
 
 export const Default = {
   args: {
-    title: '卡片标题',
+    title: 'Card Title',
     variant: 'filled',
     color: 'default',
     size: 'medium',
@@ -59,8 +59,7 @@ export const Default = {
         noBorder={args.noBorder}
       >
         <p className="wc-opacity-80">
-          这是一个简洁现代的卡片组件，默认无边框无阴影的设计。
-          浅灰色背景，hover时颜色会变深，并带有轻微的上移动画效果。
+          A clean and modern card component with no border or shadow by default. Light gray background darkens on hover with a subtle lift.
         </p>
       </Card>
     </div>

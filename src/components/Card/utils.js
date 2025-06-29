@@ -3,7 +3,17 @@
 /**
  * 有效的Card变体
  */
-export const validVariants = ['default', 'elevated']
+export const validVariants = ['filled', 'outlined', 'minimal', 'elevated']
+
+/**
+ * 有效的Card颜色
+ */
+export const validColors = ['default', 'primary', 'success', 'warning', 'error', 'info']
+
+/**
+ * 有效的Card尺寸
+ */
+export const validSizes = ['small', 'medium', 'large']
 
 /**
  * 有效的Card内边距
@@ -22,6 +32,24 @@ export const validBorderRadius = ['none', 'sm', 'md', 'lg', 'xl']
  */
 export function isValidVariant(variant) {
   return validVariants.includes(variant)
+}
+
+/**
+ * 验证Card颜色
+ * @param {string} color - 要验证的颜色
+ * @returns {boolean} 是否为有效颜色
+ */
+export function isValidColor(color) {
+  return validColors.includes(color)
+}
+
+/**
+ * 验证Card尺寸
+ * @param {string} size - 要验证的尺寸
+ * @returns {boolean} 是否为有效尺寸
+ */
+export function isValidSize(size) {
+  return validSizes.includes(size)
 }
 
 /**

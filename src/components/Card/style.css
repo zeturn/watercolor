@@ -5,7 +5,7 @@
   margin: 0;
   /* Watercolor风格：默认浅灰色，无边框 */
   background-color: var(--wc-neutral-100, #f5f5f5);
-  color: var(--wc-neutral-800, #374151);
+  color: var(--wc-text-primary, #1f2937);
   transition: all 0.2s ease-in-out;
   position: relative;
   display: flex;
