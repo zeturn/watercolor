@@ -17,9 +17,14 @@ const config = {
   staticDirs: ['../public'],
 
   viteFinal: async (config) => {
-    // 合并 Vite 配置
+    // Storybook 在打包时会复用库的 Vite 配置，这里手动去掉 vite-plugin-dts 以避免生成声明文件造成的巨大内存占用。
+    const filteredPlugins = (config.plugins || []).filter(
+      (p) => !(p && (p.name === 'vite:dts' || p?.name?.includes('vite-plugin-dts')))
+    );
+
     return {
       ...config,
+      plugins: filteredPlugins,
       define: {
         ...config.define,
         global: 'globalThis',

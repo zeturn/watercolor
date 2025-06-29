@@ -14,6 +14,18 @@ const config = {
     options: {},
   },
 
+  viteFinal: async (config) => {
+    // 移除 vite-plugin-dts，防止在 Storybook 打包时生成声明文件导致内存激增
+    const filteredPlugins = (config.plugins || []).filter(
+      (p) => !(p && (p.name === 'vite:dts' || p?.name?.includes('vite-plugin-dts')))
+    );
+
+    return {
+      ...config,
+      plugins: filteredPlugins,
+    };
+  },
+
   staticDirs: ['../public']
 }
 
