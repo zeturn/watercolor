@@ -60,6 +60,8 @@ export { default as GridVue } from './components/Grid/Grid.vue'
 export { default as GridReact } from './components/Grid/Grid.jsx'
 export { default as HoverCard } from './components/HoverCard/HoverCard.vue'
 export { default as HoverCardReact } from './components/HoverCard/HoverCard.jsx'
+export { default as IconVue } from './components/Icon/Icon.vue'
+export { default as IconReact } from './components/Icon/Icon.jsx'
 export { default as IconButtonVue } from './components/Button/IconButton.vue'
 export { default as ImageGallery } from './components/ImageGallery/ImageGallery.vue'
 export { default as ImageGalleryReact } from './components/ImageGallery/ImageGallery.jsx'
@@ -135,6 +137,9 @@ export { default as WatermarkReact } from './components/Watermark/Watermark.jsx'
 
 // 主题工具
 export * from './utils/theme'
+
+// Icon工具
+export * from './utils/icons'
 
 export type AccordionVariant = 'default' | 'bordered' | 'filled'
 export type AppBarPosition = 'fixed' | 'absolute' | 'sticky' | 'static' | 'relative'

@@ -1,0 +1,427 @@
+# 图标集成指南
+
+Watercolor UI 现已集成多个流行的开源图标库，为您的项目提供丰富的图标选择。
+
+## 🎯 支持的图标库
+
+### 1. **Lucide Icons** ⭐ (推荐)
+- **特点**: 现代、轻量、支持树摇优化
+- **图标数量**: 1000+ 
+- **风格**: 简洁线性风格
+- **官网**: [lucide.dev](https://lucide.dev)
+
+### 2. **Heroicons** 
+- **特点**: Tailwind CSS 团队制作，设计精美
+- **图标数量**: 300+
+- **风格**: 支持 outline、solid、mini 三种样式
+- **官网**: [heroicons.com](https://heroicons.com)
+
+### 3. **Tabler Icons**
+- **特点**: 超过4000个免费图标
+- **图标数量**: 4000+
+- **风格**: 清晰的线性图标
+- **官网**: [tabler-icons.io](https://tabler-icons.io)
+
+### 4. **Phosphor Icons**
+- **特点**: 多种风格的图标系统
+- **图标数量**: 6000+
+- **风格**: 支持多种粗细和样式
+- **官网**: [phosphoricons.com](https://phosphoricons.com)
+
+### 5. **Feather Icons**
+- **特点**: 简洁轻量的图标
+- **图标数量**: 280+
+- **风格**: 极简线性设计
+- **官网**: [feathericons.com](https://feathericons.com)
+
+## 🚀 快速开始
+
+### Vue 3 使用示例
+
+```vue
+<template>
+  <div class="icon-examples">
+    <!-- 基础使用 -->
+    <IconVue library="lucide" name="heart" size="md" />
+    
+    <!-- 不同尺寸 -->
+    <IconVue library="lucide" name="star" size="xs" />
+    <IconVue library="lucide" name="star" size="sm" />
+    <IconVue library="lucide" name="star" size="md" />
+    <IconVue library="lucide" name="star" size="lg" />
+    <IconVue library="lucide" name="star" size="xl" />
+    
+    <!-- 自定义颜色 -->
+    <IconVue library="lucide" name="heart" color="#ef4444" />
+    <IconVue library="lucide" name="star" color="#f59e0b" />
+    
+    <!-- Heroicons 不同样式 -->
+    <IconVue library="heroicons" name="heart" variant="outline" />
+    <IconVue library="heroicons" name="heart" variant="solid" />
+    <IconVue library="heroicons" name="heart" variant="mini" />
+    
+    <!-- 带动画效果 -->
+    <IconVue library="lucide" name="loader" className="wc-icon--spinning" />
+    <IconVue library="lucide" name="heart" className="wc-icon--pulse" />
+    
+    <!-- 自定义 SVG -->
+    <IconVue 
+      library="html" 
+      :html="customSVG" 
+      size="lg" 
+    />
+    
+    <!-- 在按钮中使用 -->
+    <button class="btn-primary">
+      <IconVue library="lucide" name="download" size="sm" />
+      下载文件
+    </button>
+  </div>
+</template>
+
+<script setup>
+import { IconVue } from 'watercolor-ui'
+
+const customSVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+  <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+  <path d="m2 17 10 5 10-5"/>
+  <path d="m2 12 10 5 10-5"/>
+</svg>`
+</script>
+```
+
+### React 使用示例
+
+```jsx
+import React from 'react'
+import { IconReact } from 'watercolor-ui'
+
+function IconExamples() {
+  const customSVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+    <path d="m2 17 10 5 10-5"/>
+    <path d="m2 12 10 5 10-5"/>
+  </svg>`
+
+  return (
+    <div className="icon-examples">
+      {/* 基础使用 */}
+      <IconReact library="lucide" name="Heart" size="md" />
+      
+      {/* 不同尺寸 */}
+      <IconReact library="lucide" name="Star" size="xs" />
+      <IconReact library="lucide" name="Star" size="sm" />
+      <IconReact library="lucide" name="Star" size="md" />
+      <IconReact library="lucide" name="Star" size="lg" />
+      <IconReact library="lucide" name="Star" size="xl" />
+      
+      {/* 自定义颜色 */}
+      <IconReact library="lucide" name="Heart" color="#ef4444" />
+      <IconReact library="lucide" name="Star" color="#f59e0b" />
+      
+      {/* Heroicons 不同样式 */}
+      <IconReact library="heroicons" name="heart" variant="outline" />
+      <IconReact library="heroicons" name="heart" variant="solid" />
+      <IconReact library="heroicons" name="heart" variant="mini" />
+      
+      {/* 带动画效果 */}
+      <IconReact library="lucide" name="Loader" className="wc-icon--spinning" />
+      <IconReact library="lucide" name="Heart" className="wc-icon--pulse" />
+      
+      {/* 自定义 SVG */}
+      <IconReact 
+        library="html" 
+        html={customSVG} 
+        size="lg" 
+      />
+      
+      {/* 在按钮中使用 */}
+      <button className="btn-primary">
+        <IconReact library="lucide" name="Download" size="sm" />
+        下载文件
+      </button>
+    </div>
+  )
+}
+```
+
+## 📖 API 参考
+
+### Props
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `library` | `'lucide' \| 'heroicons' \| 'tabler' \| 'phosphor' \| 'feather' \| 'html'` | `'lucide'` | 图标库类型 |
+| `name` | `string` | `''` | 图标名称 |
+| `html` | `string` | `''` | 自定义 HTML 内容（library 为 'html' 时使用） |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| number \| string` | `'md'` | 图标尺寸 |
+| `color` | `string` | `'currentColor'` | 图标颜色 |
+| `strokeWidth` | `number \| string` | `2` | 描边宽度（适用于支持的图标库） |
+| `variant` | `'outline' \| 'solid' \| 'mini'` | `'outline'` | 图标变体（适用于 Heroicons） |
+| `className` | `string` | `''` | 自定义 CSS 类名 |
+
+### 预设尺寸
+
+```css
+xs: 16px
+sm: 20px
+md: 24px (默认)
+lg: 32px
+xl: 48px
+```
+
+### 预设 CSS 类
+
+```css
+/* 动画效果 */
+.wc-icon--spinning    /* 旋转动画 */
+.wc-icon--pulse       /* 脉冲动画 */
+.wc-icon--clickable   /* 可点击样式 */
+
+/* 颜色预设 */
+.wc-icon--primary     /* 主色 */
+.wc-icon--secondary   /* 辅助色 */
+.wc-icon--success     /* 成功色 */
+.wc-icon--warning     /* 警告色 */
+.wc-icon--error       /* 错误色 */
+.wc-icon--info        /* 信息色 */
+.wc-icon--muted       /* 静音色 */
+
+/* 状态 */
+.wc-icon--disabled    /* 禁用状态 */
+```
+
+## 🔧 工具函数
+
+### 图标预设
+
+```javascript
+import { LUCIDE_ICONS, HEROICONS, ICON_PRESETS } from 'watercolor-ui'
+
+// 使用预设图标名称
+const iconName = LUCIDE_ICONS.heart // 'heart'
+const heroiconName = HEROICONS.heart // 'heart'
+
+// 使用预设配置
+const loadingIcon = ICON_PRESETS.loading // 带旋转动画的加载图标
+const successIcon = ICON_PRESETS.success // 绿色成功图标
+```
+
+### 创建图标配置
+
+```javascript
+import { createIconConfig, createPresetIcon } from 'watercolor-ui'
+
+// 创建自定义图标配置
+const config = createIconConfig({
+  name: 'heart',
+  library: 'lucide',
+  size: 'lg',
+  color: '#ef4444'
+})
+
+// 创建预设图标
+const heartIcon = createPresetIcon('heart', {
+  size: 'lg',
+  color: '#ef4444'
+})
+```
+
+## 🎨 实际应用案例
+
+### 1. 导航菜单
+
+```vue
+<template>
+  <nav class="navigation">
+    <router-link to="/" class="nav-item">
+      <IconVue library="lucide" name="home" size="sm" />
+      首页
+    </router-link>
+    <router-link to="/profile" class="nav-item">
+      <IconVue library="lucide" name="user" size="sm" />
+      个人中心
+    </router-link>
+    <router-link to="/settings" class="nav-item">
+      <IconVue library="lucide" name="settings" size="sm" />
+      设置
+    </router-link>
+  </nav>
+</template>
+```
+
+### 2. 状态指示器
+
+```vue
+<template>
+  <div class="status-list">
+    <div class="status-item success">
+      <IconVue library="lucide" name="check-circle" size="sm" color="#10b981" />
+      操作成功
+    </div>
+    <div class="status-item warning">
+      <IconVue library="lucide" name="alert-triangle" size="sm" color="#f59e0b" />
+      注意警告
+    </div>
+    <div class="status-item error">
+      <IconVue library="lucide" name="x-circle" size="sm" color="#ef4444" />
+      操作失败
+    </div>
+    <div class="status-item loading">
+      <IconVue library="lucide" name="loader" size="sm" className="wc-icon--spinning" />
+      正在处理...
+    </div>
+  </div>
+</template>
+```
+
+### 3. 表单控件
+
+```vue
+<template>
+  <form class="form">
+    <div class="form-field">
+      <label class="form-label">
+        <IconVue library="lucide" name="mail" size="sm" />
+        邮箱地址
+      </label>
+      <div class="input-group">
+        <input type="email" class="form-input" />
+        <button type="button" class="input-action">
+          <IconVue library="lucide" name="eye" size="sm" />
+        </button>
+      </div>
+    </div>
+    
+    <div class="form-actions">
+      <button type="submit" class="btn-primary">
+        <IconVue library="lucide" name="save" size="sm" />
+        保存
+      </button>
+      <button type="button" class="btn-secondary">
+        <IconVue library="lucide" name="x" size="sm" />
+        取消
+      </button>
+    </div>
+  </form>
+</template>
+```
+
+### 4. 数据表格
+
+```vue
+<template>
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>
+            用户名
+            <IconVue library="lucide" name="arrow-up-down" size="xs" className="sort-icon" />
+          </th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in users" :key="user.id">
+          <td>{{ user.name }}</td>
+          <td>
+            <span class="status-badge" :class="user.status">
+              <IconVue 
+                library="lucide" 
+                :name="getStatusIcon(user.status)" 
+                size="xs" 
+              />
+              {{ user.statusText }}
+            </span>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn" title="编辑">
+                <IconVue library="lucide" name="edit" size="sm" />
+              </button>
+              <button class="action-btn" title="删除">
+                <IconVue library="lucide" name="trash-2" size="sm" />
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+```
+
+## 🎯 最佳实践
+
+### 1. 选择合适的图标库
+- **Lucide**: 适合现代简洁的设计，树摇优化好
+- **Heroicons**: 适合 Tailwind CSS 项目，设计精美
+- **Tabler**: 适合需要大量图标的企业应用
+- **Phosphor**: 适合需要多种样式的项目
+
+### 2. 保持一致性
+```javascript
+// 在项目中统一使用一种图标库
+const ICON_CONFIG = {
+  library: 'lucide',
+  size: 'md',
+  strokeWidth: 2
+}
+
+// 创建统一的图标组件
+const ProjectIcon = ({ name, ...props }) => (
+  <IconReact {...ICON_CONFIG} name={name} {...props} />
+)
+```
+
+### 3. 语义化使用
+```vue
+<!-- 好的做法 -->
+<IconVue library="lucide" name="trash-2" /> <!-- 删除操作 -->
+<IconVue library="lucide" name="edit" />    <!-- 编辑操作 -->
+<IconVue library="lucide" name="save" />    <!-- 保存操作 -->
+
+<!-- 避免的做法 -->
+<IconVue library="lucide" name="x" />       <!-- 用于删除，语义不清 -->
+```
+
+### 4. 性能优化
+```javascript
+// 按需导入，避免全量导入
+import { IconReact } from 'watercolor-ui'
+
+// 使用懒加载
+const LazyIcon = lazy(() => import('./components/Icon'))
+```
+
+### 5. 主题适配
+```css
+/* 在CSS中使用主题变量 */
+.icon-primary {
+  color: var(--wc-primary-500);
+}
+
+.icon-success {
+  color: var(--wc-success-500);
+}
+
+/* 暗色模式适配 */
+.dark .icon-muted {
+  color: var(--wc-text-muted);
+}
+```
+
+## 🔗 相关资源
+
+- [Lucide Icons 官方文档](https://lucide.dev)
+- [Heroicons 官方文档](https://heroicons.com)
+- [Tabler Icons 官方文档](https://tabler-icons.io)
+- [Phosphor Icons 官方文档](https://phosphoricons.com)
+- [Feather Icons 官方文档](https://feathericons.com)
+- [Watercolor UI Storybook](https://storybook.watercolor-ui.dev)
+
+---
+
+如果您在使用过程中遇到任何问题，请查看我们的 [FAQ](./FAQ.md) 或提交 [Issue](https://github.com/your-repo/watercolor-ui/issues)。 

@@ -98,7 +98,7 @@ export const CardVariant = {
     items: cardItems,
     placement: 'bottom-start',
     variant: 'card',
-    illustration: 'https://via.placeholder.com/120x80/4F46E5/FFFFFF?text=UI+Kit',
+    illustration: './img/watercolorui.png',
     illustrationAlt: 'UI组件库示意图',
     cardTitle: 'Watercolor UI',
     cardDescription: '现代化的水彩风格组件库'

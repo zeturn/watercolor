@@ -1,3 +1,6 @@
+/* Import Icon component styles */
+@import '../components/Icon/style.css';
+
 /**
  * =============================================================================
  * WATERCOLOR UI - 全局样式表
