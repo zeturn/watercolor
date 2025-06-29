@@ -145,11 +145,11 @@ export const LucideIcons = {
           'circle', 'square', 'triangle', 'diamond', 'hexagon', 'octagon'
         ],
         '箭头&导航': [
-          'arrow-up', 'arrow-down', 'arrow-left', 'arrow-right', 'chevron-up', 'chevron-down',
-          'chevron-left', 'chevron-right', 'arrow-up-circle', 'arrow-down-circle', 'move', 'navigation'
+          'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ChevronUp', 'ChevronDown',
+          'ChevronLeft', 'ChevronRight', 'ArrowUpCircle', 'ArrowDownCircle', 'Move', 'Navigation'
         ],
         '状态&反馈': [
-          'info', 'alert-triangle', 'alert-circle', 'check-circle', 'help-circle', 'x-circle',
+          'info', 'alert-triangle', 'alert-circle', 'check-circle', 'CircleQuestionMark', 'x-circle',
           'alert-octagon', 'shield', 'shield-check', 'shield-alert', 'eye', 'eye-off'
         ],
         '操作&工具': [

@@ -138,7 +138,7 @@ export const LucideIcons = () => {
       'ChevronLeft', 'ChevronRight', 'ArrowUpCircle', 'ArrowDownCircle', 'Move', 'Navigation'
     ],
     '状态&反馈': [
-      'Info', 'AlertTriangle', 'AlertCircle', 'CheckCircle', 'HelpCircle', 'XCircle',
+      'Info', 'AlertTriangle', 'AlertCircle', 'CheckCircle', 'CircleQuestionMark', 'XCircle',
       'AlertOctagon', 'Shield', 'ShieldCheck', 'ShieldAlert', 'Eye', 'EyeOff'
     ],
     '操作&工具': [
@@ -189,8 +189,8 @@ export const TablerIcons = () => {
       'circle', 'square', 'triangle', 'diamond', 'hexagon', 'octagon'
     ],
     '箭头&导航': [
-      'arrow-up', 'arrow-down', 'arrow-left', 'arrow-right', 'chevron-up', 'chevron-down',
-      'chevrons-up', 'chevrons-down', 'arrow-narrow-up', 'arrow-narrow-down', 'navigation', 'compass'
+      'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ChevronUp', 'ChevronDown',
+      'ChevronsUp', 'ChevronsDown', 'ArrowNarrowUp', 'ArrowNarrowDown', 'Navigation', 'Compass'
     ],
     '商业&购物': [
       'shopping-cart', 'shopping-bag', 'credit-card', 'coin', 'currency-dollar', 'receipt',
