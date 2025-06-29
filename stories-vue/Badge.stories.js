@@ -1,7 +1,7 @@
 import BadgeVue from '../src/components/Badge/Badge.vue'
 
 export default {
-  title: 'Components/Badge',
+  title: 'Components/Badge (Vue)',
   component: BadgeVue,
   parameters: {
     layout: 'centered',

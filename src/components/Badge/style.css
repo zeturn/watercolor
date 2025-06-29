@@ -8,6 +8,7 @@
   border-radius: 6px;
   white-space: nowrap;
   vertical-align: middle;
+  color: var(--wc-text-inverse);
 }
 
 /* Size variants */
@@ -52,93 +53,13 @@
 }
 
 /* Color variants */
-.wc-badge--primary {
-  background-color: var(--wc-primary-500, #3b82f6);
-  color: white;
-}
-
-.wc-badge--secondary {
-  background-color: var(--wc-secondary-500, #6b7280);
-  color: white;
-}
-
-.wc-badge--success {
-  background-color: var(--wc-success-500, #10b981);
-  color: white;
-}
-
-.wc-badge--warning {
-  background-color: var(--wc-warning-500, #f59e0b);
-  color: white;
-}
-
-.wc-badge--error {
-  background-color: var(--wc-error-500, #ef4444);
-  color: white;
-}
-
-.wc-badge--purple {
-  background-color: var(--wc-purple-500, #8b5cf6);
-  color: white;
-}
-
-.wc-badge--orange {
-  background-color: var(--wc-orange-500, #f97316);
-  color: white;
-}
-
-.wc-badge--cyan {
-  background-color: var(--wc-cyan-500, #06b6d4);
-  color: white;
-}
-
-.wc-badge--pink {
-  background-color: var(--wc-pink-500, #ec4899);
-  color: white;
-}
-
-/* 暗色模式 - 使用 .dark 类选择器 */
-.dark .wc-badge--primary {
-  background-color: var(--wc-primary-400, #60a5fa);
-  color: var(--wc-neutral-900, #111827);
-}
-
-.dark .wc-badge--secondary {
-  background-color: var(--wc-secondary-400, #73d13d);
-  color: var(--wc-neutral-900, #111827);
-}
-
-.dark .wc-badge--success {
-  background-color: var(--wc-success-400, #4ade80);
-  color: var(--wc-neutral-900, #111827);
-}
-
-.dark .wc-badge--warning {
-  background-color: var(--wc-warning-400, #fbbf24);
-  color: var(--wc-neutral-900, #111827);
-}
-
-.dark .wc-badge--error {
-  background-color: var(--wc-error-400, #f87171);
-  color: var(--wc-neutral-900, #111827);
-}
-
-.dark .wc-badge--purple {
-  background-color: var(--wc-purple-400, #a78bfa);
-  color: var(--wc-neutral-900, #111827);
-}
-
-.dark .wc-badge--orange {
-  background-color: var(--wc-orange-400, #fb923c);
-  color: var(--wc-neutral-900, #111827);
-}
-
-.dark .wc-badge--cyan {
-  background-color: var(--wc-cyan-400, #22d3ee);
-  color: var(--wc-neutral-900, #111827);
-}
-
-.dark .wc-badge--pink {
-  background-color: var(--wc-pink-400, #f472b6);
-  color: var(--wc-neutral-900, #111827);
-} 
+/* 基础色板变量——背景色会随主题自动调整 */
+.wc-badge--primary   { background-color: var(--wc-primary-500, #3b82f6); }
+.wc-badge--secondary { background-color: var(--wc-secondary-500, #6b7280); }
+.wc-badge--success   { background-color: var(--wc-success-500,   #10b981); }
+.wc-badge--warning   { background-color: var(--wc-warning-500,   #f59e0b); }
+.wc-badge--error     { background-color: var(--wc-error-500,     #ef4444); }
+.wc-badge--purple    { background-color: var(--wc-purple-500,    #8b5cf6); }
+.wc-badge--orange    { background-color: var(--wc-orange-500,    #f97316); }
+.wc-badge--cyan      { background-color: var(--wc-cyan-500,      #06b6d4); }
+.wc-badge--pink      { background-color: var(--wc-pink-500,      #ec4899); } 
