@@ -6,6 +6,11 @@ export default {
   component: Banner,
   parameters: {
     layout: 'fullscreen',
+    docs: {
+      description: {
+        component: 'A Banner displays important messages and allows users to take actions or dismiss them.'
+      }
+    }
   },
   tags: ['autodocs'],
   argTypes: {

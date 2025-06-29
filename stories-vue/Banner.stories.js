@@ -1,7 +1,7 @@
 import BannerVue from '../src/components/Banner/Banner.vue'
 
 export default {
-  title: 'Components/Banner',
+  title: 'Components/Banner (Vue)',
   component: BannerVue,
   parameters: {
     layout: 'fullscreen',

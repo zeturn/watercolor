@@ -3,6 +3,7 @@
   width: 100%;
   font-family: var(--wc-font-family);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: var(--wc-text-inverse);
 }
 
 .wc-banner--sticky {
@@ -101,26 +102,11 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Type variants */
-.wc-banner--success {
-  background-color: var(--wc-success-600, #16a34a);
-  color: var(--wc-neutral-0, #ffffff);
-}
-
-.wc-banner--info {
-  background-color: var(--wc-info-600, #2563eb);
-  color: var(--wc-neutral-0, #ffffff);
-}
-
-.wc-banner--warning {
-  background-color: var(--wc-warning-600, #d97706);
-  color: var(--wc-neutral-0, #ffffff);
-}
-
-.wc-banner--error {
-  background-color: var(--wc-error-600, #dc2626);
-  color: var(--wc-neutral-0, #ffffff);
-}
+/* Type variants — background color uses palette variable; text color inherited */
+.wc-banner--success  { background-color: var(--wc-success-600,  #16a34a); }
+.wc-banner--info     { background-color: var(--wc-info-600,    #2563eb); }
+.wc-banner--warning  { background-color: var(--wc-warning-600, #d97706); }
+.wc-banner--error    { background-color: var(--wc-error-600,   #dc2626); }
 
 /* 暗色模式 - 使用 .dark 类选择器 */
 .dark .wc-banner {
@@ -142,22 +128,6 @@
 
 .dark .wc-banner-close:hover {
   background-color: rgba(0, 0, 0, 0.2);
-}
-
-.dark .wc-banner--success { 
-  background-color: var(--wc-success-500, #22c55e); 
-}
-
-.dark .wc-banner--info { 
-  background-color: var(--wc-info-500, #3b82f6); 
-}
-
-.dark .wc-banner--warning { 
-  background-color: var(--wc-warning-500, #f59e0b); 
-}
-
-.dark .wc-banner--error { 
-  background-color: var(--wc-error-500, #ef4444); 
 }
 
 /* 响应式设计 */
