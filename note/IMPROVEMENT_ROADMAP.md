@@ -83,7 +83,7 @@
 - 屏幕阅读器兼容性
 
 #### 2.3 React 支持完善
-- [ ] 补充缺失的 React 组件
+- [x] 补充缺失的 React 组件
 - [ ] React 性能优化
 - [ ] React Hooks 集成
 - [ ] React 专用工具

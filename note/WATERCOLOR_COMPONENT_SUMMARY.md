@@ -11,19 +11,19 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 | 组件名 | Vue 文件 | React 文件 | 状态 | Material-UI 兼容 |
 |--------|----------|------------|------|------------------|
 | Button | ✅ Button.vue | ✅ Button.jsx | 完成 | ✅ |
-| TextField | ✅ TextField.vue | - | 完成 | ✅ |
-| FormControl | ✅ FormControl.vue | - | 完成 | ✅ |
-| Select | ✅ Select.vue | - | 完成 | ✅ |
-| Checkbox | ✅ Checkbox.vue | - | 🆕 完成 | ✅ |
-| Radio | ✅ Radio.vue | - | 🆕 完成 | ✅ |
+| TextField | ✅ TextField.vue | ✅ TextField.jsx | 完成 | ✅ |
+| FormControl | ✅ FormControl.vue | ✅ FormControl.jsx | 完成 | ✅ |
+| Select | ✅ Select.vue | ✅ Select.jsx | 完成 | ✅ |
+| Checkbox | ✅ Checkbox.vue | ✅ Checkbox.jsx | 🆕 完成 | ✅ |
+| Radio | ✅ Radio.vue | ✅ Radio.jsx | 🆕 完成 | ✅ |
 | RadioGroup | ✅ RadioGroup.vue | - | 🆕 完成 | ✅ |
 | Switch | ✅ Switch.vue | ✅ Switch.jsx | 完成 | ✅ |
 | Input | ✅ Input.vue | ✅ Input.jsx | 完成 | ✅ |
 | DatePicker | ✅ DatePicker.vue | ✅ DatePicker.jsx | 🆕 完成 | 🔄 |
 | ColorPicker | ✅ ColorPicker.vue | ✅ ColorPicker.jsx | 🆕 完成 | 🔄 |
 | FileInput | ✅ FileInput.vue | ✅ FileInput.jsx | 🆕 完成 | 🔄 |
-| Slider | ✅ Slider.vue | ✅ Slider.jsx | 🆕 完成 | 🔄 |
-| Rating | ✅ Rating.vue | ✅ Rating.jsx | 🆕 完成 | 🔄 |
+| Slider | ✅ Slider.vue | ✅ Slider.jsx | 🆕 完成 | ✅ |
+| Rating | ✅ Rating.vue | ✅ Rating.jsx | 🆕 完成 | ✅ |
 | FormControlLabel | ✅ FormControlLabel.vue | ✅ FormControlLabel.jsx | 🆕 完成 | ✅ |
 | FormGroup | ✅ FormGroup.vue | ✅ FormGroup.jsx | 🆕 完成 | ✅ |
 | FormHelperText | ✅ FormHelperText.vue | ✅ FormHelperText.jsx | 🆕 完成 | ✅ |
@@ -34,36 +34,31 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 
 | 组件名 | Vue 文件 | React 文件 | 状态 | Material-UI 兼容 |
 |--------|----------|------------|------|------------------|
-| Container | ✅ Container.vue | - | 完成 | ✅ |
-| Box | ✅ Box.vue | - | 完成 | ✅ |
-| Grid | ✅ Grid.vue | - | 完成 | ✅ |
-| Paper | ✅ Paper.vue | - | 完成 | ✅ |
+| Container | ✅ Container.vue | ✅ Container.jsx | 完成 | ✅ |
+| Box | ✅ Box.vue | ✅ Box.jsx | 完成 | ✅ |
+| Grid | ✅ Grid.vue | ✅ Grid.jsx | 完成 | ✅ |
+| Paper | ✅ Paper.vue | ✅ Paper.jsx | 完成 | ✅ |
 
 ### 🧭 导航组件 (Navigation Components)
 
 | 组件名 | Vue 文件 | React 文件 | 状态 | Material-UI 兼容 |
 |--------|----------|------------|------|------------------|
-| AppBar | ✅ AppBar.vue | - | 完成 | ✅ |
-| Toolbar | ✅ Toolbar.vue | - | 完成 | ✅ |
-| Menu | ✅ Menu.vue | - | 完成 | ✅ |
-| MenuItem | ✅ MenuItem.vue | - | 完成 | ✅ |
+| AppBar | ✅ AppBar.vue | ✅ AppBar.jsx | 完成 | ✅ |
+| Toolbar | ✅ Toolbar.vue | ✅ Toolbar.jsx | 完成 | ✅ |
+| Menu | - | ✅ Menu.jsx | 完成 | ✅ |
 | Tabs | ✅ Tabs.vue | ✅ Tabs.jsx | 完成 | ✅ |
 | Dropdown | ✅ Dropdown.vue | ✅ Dropdown.jsx | 完成 | 🔄 |
-| Breadcrumb | ✅ Breadcrumb.vue | - | 🆕 完成 | ✅ |
+| Breadcrumb | ✅ Breadcrumb.vue | ✅ Breadcrumb.jsx | 🆕 完成 | ✅ |
 | Pagination | ✅ Pagination.vue | ✅ Pagination.jsx | 🆕 完成 | ✅ |
 
 ### 💬 反馈组件 (Feedback Components)
 
 | 组件名 | Vue 文件 | React 文件 | 状态 | Material-UI 兼容 |
 |--------|----------|------------|------|------------------|
-| Alert | ✅ Alert.vue | - | 完成 | ✅ |
-| Snackbar | ✅ Snackbar.vue | - | 完成 | ✅ |
-| DialogTitle | ✅ DialogTitle.vue | - | 🆕 完成 | ✅ |
-| DialogContent | ✅ DialogContent.vue | - | 🆕 完成 | ✅ |
-| DialogActions | ✅ DialogActions.vue | - | 🆕 完成 | ✅ |
-| CircularProgress | ✅ CircularProgress.vue | - | 🆕 完成 | ✅ |
-| LinearProgress | ✅ Progress.vue | ✅ Progress.jsx | 完成 | ✅ |
-| Toast | ✅ Toast.vue | ✅ Toast.jsx | 完成 | 🔄 |
+| Alert | ✅ Alert.vue | ✅ Alert.jsx | 完成 | ✅ |
+| Snackbar | ✅ Snackbar.vue | ✅ Snackbar.jsx | 完成 | ✅ |
+| CircularProgress | ✅ CircularProgress.vue | ✅ CircularProgress.jsx | 🆕 完成 | ✅ |
+| Progress | ✅ Progress.vue | ✅ Progress.jsx | 完成 | ✅ |
 | Modal | ✅ Modal.vue | ✅ Modal.jsx | 完成 | 🔄 |
 | Skeleton | ✅ Skeleton.vue | ✅ Skeleton.jsx | 🆕 完成 | ✅ |
 | Tooltip | ✅ Tooltip.vue | ✅ Tooltip.jsx | 🆕 完成 | ✅ |
@@ -73,13 +68,13 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 
 | 组件名 | Vue 文件 | React 文件 | 状态 | Material-UI 兼容 |
 |--------|----------|------------|------|------------------|
-| Typography | ✅ Typography.vue | - | 完成 | ✅ |
-| List | ✅ List.vue | - | 完成 | ✅ |
-| ListItem | ✅ ListItem.vue | - | 完成 | ✅ |
-| ListItemText | ✅ ListItemText.vue | - | 完成 | ✅ |
-| Table | ✅ Table.vue | - | 🆕 完成 | ✅ |
-| Avatar | ✅ Avatar.vue | - | 🆕 完成 | ✅ |
-| Chip | ✅ Chip.vue | - | 🆕 完成 | ✅ |
+| Typography | ✅ Typography.vue | ✅ Typography.jsx | 完成 | ✅ |
+| List | ✅ List.vue | ✅ List.jsx | 完成 | ✅ |
+| ListItem | ✅ ListItem.vue | ✅ ListItem.jsx | 完成 | ✅ |
+| ListItemText | ✅ ListItemText.vue | ✅ ListItemText.jsx | 完成 | ✅ |
+| Table | ✅ Table.vue | ✅ Table.jsx | 🆕 完成 | ✅ |
+| Avatar | ✅ Avatar.vue | ✅ Avatar.jsx | 🆕 完成 | ✅ |
+| Chip | ✅ Chip.vue | ✅ Chip.jsx | 🆕 完成 | ✅ |
 | Card | ✅ Card.vue | ✅ Card.jsx | 完成 | ✅ |
 | CardContent | ✅ CardContent.vue | - | 🆕 完成 | ✅ |
 | CardActions | ✅ CardActions.vue | - | 🆕 完成 | ✅ |
@@ -122,7 +117,6 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 - ✅ AppBar
 - ✅ Toolbar
 - ✅ Menu
-- ✅ MenuItem
 - ✅ Tabs
 - ✅ Breadcrumbs
 - ✅ Pagination
@@ -130,9 +124,6 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 #### 反馈组件
 - ✅ Alert
 - ✅ Snackbar
-- ✅ DialogTitle
-- ✅ DialogContent
-- ✅ DialogActions
 - ✅ CircularProgress
 - ✅ LinearProgress
 - ✅ Skeleton
@@ -171,6 +162,9 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 - 🔜 ListItemButton
 - 🔜 TableContainer
 - 🔜 TablePagination
+- 🔜 DialogTitle
+- 🔜 DialogContent
+- 🔜 DialogActions
 
 #### 反馈组件
 - 🔜 （暂无）
@@ -183,6 +177,7 @@ Watercolor UI 是一个现代化的 Vue.js/React 组件库，提供完整的 Mat
 - 🔜 Tab
 - 🔜 TabPanel
 - 🔜 Link
+- 🔜 MenuItem
 
 #### 主题组件
 - 🔜 ThemeProvider
@@ -336,10 +331,10 @@ import {
 
 ## 📈 项目统计
 
-- **总组件数**: 55+
-- **Vue 组件**: 50+
-- **React 组件**: 30+
-- **Material-UI 兼容**: 35+
+- **总组件数**: 60+
+- **Vue 组件**: 55+
+- **React 组件**: 50+
+- **Material-UI 兼容**: 40+
 - **覆盖率**: 90%+
 
 ## 🔧 开发工具
@@ -362,8 +357,10 @@ import {
 
 - 📖 [完整文档](./README.md)
 - 🚀 [迁移指南](./src/migration-guide.md)
-- 🎨 [Storybook 示例](./stories)
-- 💻 [在线演示](http://localhost:6006)
+- 🎨 [Storybook 示例（Vue）](./stories-vue)
+- 🎨 [Storybook 示例（React）](./stories-react)
+- 💻 [在线演示（Vue）](http://localhost:6006)
+- 💻 [在线演示（React）](http://localhost:6007)
 
 ---
 
