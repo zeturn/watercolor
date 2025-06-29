@@ -12,6 +12,18 @@ export default defineConfig({
       insertTypesEntry: true,
     }),
   ],
+  optimizeDeps: {
+    exclude: [
+      '@heroicons/react',
+      '@heroicons/vue',
+      '@phosphor-icons/react',
+      '@phosphor-icons/vue',
+      '@tabler/icons-react',
+      '@tabler/icons-vue',
+      'lucide-react',
+      'lucide-vue-next',
+    ],
+  },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
@@ -20,7 +32,19 @@ export default defineConfig({
       fileName: (format) => `watercolor-ui.${format}.js`,
     },
     rollupOptions: {
-      external: ['vue', 'react', 'react-dom'],
+      external: [
+        'vue', 'react', 'react-dom',
+        '@heroicons/react',
+        '@heroicons/vue',
+        '@phosphor-icons/react',
+        '@phosphor-icons/vue',
+        '@tabler/icons-react',
+        '@tabler/icons-vue',
+        'feather-icons',
+        'lucide',
+        'lucide-react',
+        'lucide-vue-next',
+      ],
       output: {
         globals: {
           vue: 'Vue',

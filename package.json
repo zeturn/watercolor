@@ -30,7 +30,17 @@
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "@heroicons/react": "^2.2.0",
+    "@heroicons/vue": "^2.2.0",
+    "@phosphor-icons/react": "^2.1.10",
+    "@phosphor-icons/vue": "^2.2.1",
+    "@tabler/icons-react": "^3.34.0",
+    "@tabler/icons-vue": "^3.34.0",
+    "feather-icons": "^4.29.2",
+    "lucide": "^0.525.0",
+    "lucide-react": "^0.525.0",
+    "lucide-vue-next": "^0.525.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.1",
@@ -81,16 +91,6 @@
   "author": "watercolor-ui",
   "license": "MIT",
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
-    "@heroicons/vue": "^2.2.0",
-    "@phosphor-icons/react": "^2.1.10",
-    "@phosphor-icons/vue": "^2.2.1",
-    "@tabler/icons-react": "^3.34.0",
-    "@tabler/icons-vue": "^3.34.0",
-    "feather-icons": "^4.29.2",
-    "lucide": "^0.525.0",
-    "lucide-react": "^0.525.0",
-    "lucide-vue-next": "^0.525.0",
     "node-fetch": "^2.7.0",
     "prop-types": "^15.8.1"
   }
