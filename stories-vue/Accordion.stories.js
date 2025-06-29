@@ -1,7 +1,7 @@
 import AccordionVue from '../src/components/Accordion/Accordion.vue'
 
 export default {
-  title: 'Components/Accordion',
+  title: 'Components/Accordion (Vue)',
   component: AccordionVue,
   parameters: {
     layout: 'centered',

@@ -2,7 +2,7 @@ import Accordion from '@/components/Accordion/Accordion.jsx'
 import React from 'react'
 
 export default {
-  title: 'Components/Accordion',
+  title: 'Components/Accordion (React)',
   component: Accordion,
   parameters: {
     layout: 'centered',
