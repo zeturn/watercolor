@@ -49,7 +49,7 @@ export const Success = {
     variant: 'standard',
   },
   render: (args) => (
-    <div className="w-full max-w-lg">
+    <div style={{ width: '100%', maxWidth: '32rem' }}>
       <Alert 
         type={args.type}
         title={args.title}
@@ -74,7 +74,7 @@ export const Info = {
     variant: 'standard',
   },
   render: (args) => (
-    <div className="w-full max-w-lg">
+    <div style={{ width: '100%', maxWidth: '32rem' }}>
       <Alert 
         type={args.type}
         title={args.title}
@@ -99,7 +99,7 @@ export const Warning = {
     variant: 'standard',
   },
   render: (args) => (
-    <div className="w-full max-w-lg">
+    <div style={{ width: '100%', maxWidth: '32rem' }}>
       <Alert 
         type={args.type}
         title={args.title}
@@ -124,7 +124,7 @@ export const Error = {
     variant: 'standard',
   },
   render: (args) => (
-    <div className="w-full max-w-lg">
+    <div style={{ width: '100%', maxWidth: '32rem' }}>
       <Alert 
         type={args.type}
         title={args.title}
@@ -149,7 +149,7 @@ export const WithoutTitle = {
     variant: 'standard',
   },
   render: (args) => (
-    <div className="w-full max-w-lg">
+    <div style={{ width: '100%', maxWidth: '32rem' }}>
       <Alert 
         type={args.type}
         title={args.title}
@@ -166,7 +166,7 @@ export const WithoutTitle = {
 
 export const Variants = {
   render: () => (
-    <div className="space-y-4 w-full max-w-lg mb-10 dark:bg-neutral-900 dark:p-4 dark:rounded-lg">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%', maxWidth: '32rem', marginBottom: '40px' }}>
       <Alert 
         type="info"
         title="填充样式"
@@ -193,14 +193,14 @@ export const Variants = {
 }
 
 export const Divider = () => (
-  <div className="w-full flex justify-center my-4">
-    <div className="h-0.5 w-32 bg-gray-200 dark:bg-gray-700 rounded-full" />
+  <div style={{ width: '100%', display: 'flex', justifyContent: 'center', margin: '1rem 0' }}>
+    <div style={{ height: '2px', width: '8rem', backgroundColor: 'var(--wc-border-default)', borderRadius: '9999px' }} />
   </div>
 );
 
 export const AllTypes = {
   render: () => (
-    <div className="space-y-4 w-full max-w-lg mb-6 dark:bg-neutral-900 dark:p-4 dark:rounded-lg">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', maxWidth: '32rem', marginBottom: '1.5rem', padding: '1rem', borderRadius: '8px' }}>
       <Alert 
         type="success"
         title="成功"
@@ -235,18 +235,18 @@ export const AllTypes = {
 
 export const WithCustomContent = {
   render: () => (
-    <div className="w-full max-w-lg mb-6 dark:bg-neutral-900 dark:p-4 dark:rounded-lg">
+    <div style={{ width: '100%', maxWidth: '32rem', marginBottom: '1.5rem', padding: '1rem', borderRadius: '8px' }}>
       <Alert 
         type="info"
         title="自定义内容"
         closable={true}
       >
-        <div className="space-y-2">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           <p>您可以在这里添加自定义内容：</p>
-          <ul className="list-disc pl-4">
+          <ul style={{ listStyleType: 'disc', paddingLeft: '1rem' }}>
             <li>支持 HTML 标签</li>
             <li>可以添加<strong>粗体</strong>和<em>斜体</em></li>
-            <li>支持<a href="#" className="text-blue-500 underline">链接</a></li>
+            <li>支持<a href="#" style={{ color: 'var(--wc-text-brand)', textDecoration: 'underline' }}>链接</a></li>
           </ul>
         </div>
       </Alert>

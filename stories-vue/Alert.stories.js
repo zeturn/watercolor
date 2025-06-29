@@ -1,7 +1,7 @@
 import AlertVue from '../src/components/Alert/Alert.vue'
 
 export default {
-  title: 'Components/Alert',
+  title: 'Components/Alert (Vue)',
   component: AlertVue,
   parameters: {
     layout: 'centered',
@@ -53,7 +53,7 @@ export const Success = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-lg">
+      <div style="width: 100%; max-width: 32rem;">
         <AlertVue 
           :type="args.type"
           :title="args.title"
@@ -83,7 +83,7 @@ export const Info = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-lg">
+      <div style="width: 100%; max-width: 32rem;">
         <AlertVue 
           :type="args.type"
           :title="args.title"
@@ -113,7 +113,7 @@ export const Warning = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-lg">
+      <div style="width: 100%; max-width: 32rem;">
         <AlertVue 
           :type="args.type"
           :title="args.title"
@@ -143,7 +143,7 @@ export const Error = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-lg">
+      <div style="width: 100%; max-width: 32rem;">
         <AlertVue 
           :type="args.type"
           :title="args.title"
@@ -173,7 +173,7 @@ export const WithoutTitle = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-lg">
+      <div style="width: 100%; max-width: 32rem;">
         <AlertVue 
           :type="args.type"
           :title="args.title"
@@ -192,7 +192,7 @@ export const Variants = {
   render: () => ({
     components: { AlertVue },
     template: `
-      <div class="space-y-4 w-full max-w-lg mb-10 dark:bg-neutral-900 dark:p-4 dark:rounded-lg">
+      <div style="display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 32rem; margin-bottom: 40px; padding: 16px; border-radius: 8px;">
         <AlertVue 
           type="info"
           title="填充样式"
@@ -219,8 +219,8 @@ export const Variants = {
 export const Divider = {
   render: () => ({
     template: `
-      <div class="w-full flex justify-center my-4">
-        <div class="h-0.5 w-32 bg-gray-200 dark:bg-gray-700 rounded-full" />
+      <div style="width: 100%; display: flex; justify-content: center; margin: 16px 0;">
+        <div style="height: 2px; width: 128px; border-radius: 9999px;" />
       </div>
     `,
   }),
@@ -230,7 +230,7 @@ export const AllTypes = {
   render: () => ({
     components: { AlertVue },
     template: `
-      <div class="space-y-4 w-full max-w-lg mb-6 dark:bg-neutral-900 dark:p-4 dark:rounded-lg">
+      <div style="display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 32rem; margin-bottom: 24px; padding: 16px; border-radius: 8px;">
         <AlertVue 
           type="success"
           title="成功"
@@ -268,18 +268,18 @@ export const WithCustomContent = {
   render: () => ({
     components: { AlertVue },
     template: `
-      <div class="w-full max-w-lg mb-6 dark:bg-neutral-900 dark:p-4 dark:rounded-lg">
+      <div style="width: 100%; max-width: 32rem; margin-bottom: 24px; padding: 16px; border-radius: 8px;">
         <AlertVue 
           type="info"
           title="自定义内容"
           :closable="true"
         >
-          <div class="space-y-2">
+          <div style="display: flex; flex-direction: column; gap: 8px;">
             <p>您可以在这里添加自定义内容：</p>
-            <ul class="list-disc pl-4">
+            <ul style="list-style-type: disc; padding-left: 16px;">
               <li>支持 HTML 标签</li>
               <li>可以添加<strong>粗体</strong>和<em>斜体</em></li>
-              <li>支持<a href="#" class="text-blue-500 underline">链接</a></li>
+              <li>支持<a href="#" style="color: var(--wc-text-brand); text-decoration: underline;">链接</a></li>
             </ul>
           </div>
         </AlertVue>

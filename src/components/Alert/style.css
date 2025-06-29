@@ -55,262 +55,135 @@
 }
 
 .wc-alert-close:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--wc-bg-surface-hover);
 }
 
 /* Success Alert */
 .wc-alert--success.wc-alert--filled {
-  background-color: var(--wc-success-50, #f0fdf4);
-  color: var(--wc-success-800, #166534);
-  border: 1px solid var(--wc-success-200, #bbf7d0);
+  background-color: var(--wc-bg-success-subtle);
+  color: var(--wc-text-success);
+  border: 1px solid var(--wc-border-success);
 }
 
 .wc-alert--success.wc-alert--filled .wc-alert-icon {
-  background-color: var(--wc-success-500, #22c55e);
-  color: white;
+  background-color: var(--wc-bg-success);
+  color: var(--wc-neutral-0);
 }
 
 .wc-alert--success.wc-alert--outlined {
   background-color: transparent;
-  color: var(--wc-success-800, #166534);
-  border: 1px solid var(--wc-success-500, #22c55e);
+  color: var(--wc-text-success);
+  border: 1px solid var(--wc-border-success);
 }
 
 .wc-alert--success.wc-alert--outlined .wc-alert-icon {
-  color: var(--wc-success-500, #22c55e);
+  color: var(--wc-text-success);
 }
 
 .wc-alert--success.wc-alert--standard {
-  background-color: var(--wc-success-50, #f0fdf4);
-  color: var(--wc-success-800, #166534);
+  background-color: var(--wc-bg-success-subtle);
+  color: var(--wc-text-success);
   border: none;
 }
 
 .wc-alert--success.wc-alert--standard .wc-alert-icon {
-  color: var(--wc-success-500, #22c55e);
+  color: var(--wc-text-success);
 }
 
 /* Info Alert */
 .wc-alert--info.wc-alert--filled {
-  background-color: var(--wc-info-50, #eff6ff);
-  color: var(--wc-info-800, #1e40af);
-  border: 1px solid var(--wc-info-200, #bae6fd);
+  background-color: var(--wc-bg-info-subtle);
+  color: var(--wc-text-info);
+  border: 1px solid var(--wc-border-info);
 }
 
 .wc-alert--info.wc-alert--filled .wc-alert-icon {
-  background-color: var(--wc-info-500, #3b82f6);
-  color: white;
+  background-color: var(--wc-bg-info);
+  color: var(--wc-neutral-0);
 }
 
 .wc-alert--info.wc-alert--outlined {
   background-color: transparent;
-  color: var(--wc-info-800, #1e40af);
-  border: 1px solid var(--wc-info-500, #3b82f6);
+  color: var(--wc-text-info);
+  border: 1px solid var(--wc-border-info);
 }
 
 .wc-alert--info.wc-alert--outlined .wc-alert-icon {
-  color: var(--wc-info-500, #3b82f6);
+  color: var(--wc-text-info);
 }
 
 .wc-alert--info.wc-alert--standard {
-  background-color: var(--wc-info-50, #eff6ff);
-  color: var(--wc-info-800, #1e40af);
+  background-color: var(--wc-bg-info-subtle);
+  color: var(--wc-text-info);
   border: none;
 }
 
 .wc-alert--info.wc-alert--standard .wc-alert-icon {
-  color: var(--wc-info-500, #3b82f6);
+  color: var(--wc-text-info);
 }
 
 /* Warning Alert */
 .wc-alert--warning.wc-alert--filled {
-  background-color: var(--wc-warning-50, #fffbeb);
-  color: var(--wc-warning-800, #92400e);
-  border: 1px solid var(--wc-warning-200, #fde68a);
+  background-color: var(--wc-bg-warning-subtle);
+  color: var(--wc-text-warning);
+  border: 1px solid var(--wc-border-warning);
 }
 
 .wc-alert--warning.wc-alert--filled .wc-alert-icon {
-  background-color: var(--wc-warning-500, #f59e0b);
-  color: white;
+  background-color: var(--wc-bg-warning);
+  color: var(--wc-neutral-0);
 }
 
 .wc-alert--warning.wc-alert--outlined {
   background-color: transparent;
-  color: var(--wc-warning-800, #92400e);
-  border: 1px solid var(--wc-warning-500, #f59e0b);
+  color: var(--wc-text-warning);
+  border: 1px solid var(--wc-border-warning);
 }
 
 .wc-alert--warning.wc-alert--outlined .wc-alert-icon {
-  color: var(--wc-warning-500, #f59e0b);
+  color: var(--wc-text-warning);
 }
 
 .wc-alert--warning.wc-alert--standard {
-  background-color: var(--wc-warning-50, #fffbeb);
-  color: var(--wc-warning-800, #92400e);
+  background-color: var(--wc-bg-warning-subtle);
+  color: var(--wc-text-warning);
   border: none;
 }
 
 .wc-alert--warning.wc-alert--standard .wc-alert-icon {
-  color: var(--wc-warning-500, #f59e0b);
+  color: var(--wc-text-warning);
 }
 
 /* Error Alert */
 .wc-alert--error.wc-alert--filled {
-  background-color: var(--wc-error-50, #fef2f2);
-  color: var(--wc-error-800, #991b1b);
-  border: 1px solid var(--wc-error-200, #fecaca);
+  background-color: var(--wc-bg-error-subtle);
+  color: var(--wc-text-error);
+  border: 1px solid var(--wc-border-error);
 }
 
 .wc-alert--error.wc-alert--filled .wc-alert-icon {
-  background-color: var(--wc-error-500, #ef4444);
-  color: white;
+  background-color: var(--wc-bg-error);
+  color: var(--wc-neutral-0);
 }
 
 .wc-alert--error.wc-alert--outlined {
   background-color: transparent;
-  color: var(--wc-error-800, #991b1b);
-  border: 1px solid var(--wc-error-500, #ef4444);
+  color: var(--wc-text-error);
+  border: 1px solid var(--wc-border-error);
 }
 
 .wc-alert--error.wc-alert--outlined .wc-alert-icon {
-  color: var(--wc-error-500, #ef4444);
+  color: var(--wc-text-error);
 }
 
 .wc-alert--error.wc-alert--standard {
-  background-color: var(--wc-error-50, #fef2f2);
-  color: var(--wc-error-800, #991b1b);
+  background-color: var(--wc-bg-error-subtle);
+  color: var(--wc-text-error);
   border: none;
 }
 
 .wc-alert--error.wc-alert--standard .wc-alert-icon {
-  color: var(--wc-error-500, #ef4444);
+  color: var(--wc-text-error);
 }
 
-/* 暗色模式 - 使用 .dark 类选择器 */
-.dark .wc-alert-close:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Success 暗色模式 */
-.dark .wc-alert--success.wc-alert--filled {
-  background-color: var(--wc-success-900, #14532d);
-  color: var(--wc-success-100, #dcfce7);
-  border-color: var(--wc-success-700, #15803d);
-}
-
-.dark .wc-alert--success.wc-alert--filled .wc-alert-icon {
-  background-color: var(--wc-success-600, #16a34a);
-  color: white;
-}
-
-.dark .wc-alert--success.wc-alert--outlined {
-  background-color: transparent;
-  color: var(--wc-success-200, #bbf7d0);
-  border-color: var(--wc-success-600, #16a34a);
-}
-
-.dark .wc-alert--success.wc-alert--outlined .wc-alert-icon {
-  color: var(--wc-success-400, #4ade80);
-}
-
-.dark .wc-alert--success.wc-alert--standard {
-  background-color: var(--wc-success-950, #052e16);
-  color: var(--wc-success-200, #bbf7d0);
-}
-
-.dark .wc-alert--success.wc-alert--standard .wc-alert-icon {
-  color: var(--wc-success-400, #4ade80);
-}
-
-/* Info 暗色模式 */
-.dark .wc-alert--info.wc-alert--filled {
-  background-color: var(--wc-info-900, #1e3a8a);
-  color: var(--wc-info-100, #dbeafe);
-  border-color: var(--wc-info-700, #1d4ed8);
-}
-
-.dark .wc-alert--info.wc-alert--filled .wc-alert-icon {
-  background-color: var(--wc-info-600, #2563eb);
-  color: white;
-}
-
-.dark .wc-alert--info.wc-alert--outlined {
-  background-color: transparent;
-  color: var(--wc-info-200, #bfdbfe);
-  border-color: var(--wc-info-600, #2563eb);
-}
-
-.dark .wc-alert--info.wc-alert--outlined .wc-alert-icon {
-  color: var(--wc-info-400, #60a5fa);
-}
-
-.dark .wc-alert--info.wc-alert--standard {
-  background-color: var(--wc-info-950, #172554);
-  color: var(--wc-info-200, #bfdbfe);
-}
-
-.dark .wc-alert--info.wc-alert--standard .wc-alert-icon {
-  color: var(--wc-info-400, #60a5fa);
-}
-
-/* Warning 暗色模式 */
-.dark .wc-alert--warning.wc-alert--filled {
-  background-color: var(--wc-warning-900, #78350f);
-  color: var(--wc-warning-100, #fef3c7);
-  border-color: var(--wc-warning-700, #b45309);
-}
-
-.dark .wc-alert--warning.wc-alert--filled .wc-alert-icon {
-  background-color: var(--wc-warning-600, #d97706);
-  color: white;
-}
-
-.dark .wc-alert--warning.wc-alert--outlined {
-  background-color: transparent;
-  color: var(--wc-warning-200, #fde68a);
-  border-color: var(--wc-warning-600, #d97706);
-}
-
-.dark .wc-alert--warning.wc-alert--outlined .wc-alert-icon {
-  color: var(--wc-warning-400, #fbbf24);
-}
-
-.dark .wc-alert--warning.wc-alert--standard {
-  background-color: var(--wc-warning-950, #451a03);
-  color: var(--wc-warning-200, #fde68a);
-}
-
-.dark .wc-alert--warning.wc-alert--standard .wc-alert-icon {
-  color: var(--wc-warning-400, #fbbf24);
-}
-
-/* Error 暗色模式 */
-.dark .wc-alert--error.wc-alert--filled {
-  background-color: var(--wc-error-900, #7f1d1d);
-  color: var(--wc-error-100, #fee2e2);
-  border-color: var(--wc-error-700, #b91c1c);
-}
-
-.dark .wc-alert--error.wc-alert--filled .wc-alert-icon {
-  background-color: var(--wc-error-600, #dc2626);
-  color: white;
-}
-
-.dark .wc-alert--error.wc-alert--outlined {
-  background-color: transparent;
-  color: var(--wc-error-200, #fecaca);
-  border-color: var(--wc-error-600, #dc2626);
-}
-
-.dark .wc-alert--error.wc-alert--outlined .wc-alert-icon {
-  color: var(--wc-error-400, #f87171);
-}
-
-.dark .wc-alert--error.wc-alert--standard {
-  background-color: var(--wc-error-950, #450a0a);
-  color: var(--wc-error-200, #fecaca);
-}
-
-.dark .wc-alert--error.wc-alert--standard .wc-alert-icon {
-  color: var(--wc-error-400, #f87171);
-} 
+/* The component now relies on global semantic variables to switch between light and dark themes automatically. No additional .dark overrides are required. */ 
