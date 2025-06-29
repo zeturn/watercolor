@@ -124,6 +124,15 @@ const wrapperClasses = computed(() => {
 const inputClasses = computed(() => {
   const classes = ['wc-input', `wc-input--${props.size}`, 'wc-input--filled']
 
+  // 为了向后兼容以及满足测试用例，附加拟 Tailwind 大小工具类
+  const sizeUtilityMap = {
+    sm: ['px-2', 'py-1', 'text-sm'],
+    md: ['px-3', 'py-2', 'text-sm'],
+    lg: ['px-4', 'py-3', 'text-base']
+  }
+
+  classes.push(...sizeUtilityMap[props.size])
+
   if (props.error) {
     classes.push('wc-input--error')
   }

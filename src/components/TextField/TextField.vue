@@ -9,7 +9,7 @@
       {{ label }}
       <span
         v-if="required"
-        class="wc-textfield__required"
+        class="wc-textfield__required required-indicator"
       >*</span>
     </label>
     
@@ -18,7 +18,7 @@
       <!-- Start Adornment -->
       <div
         v-if="$slots.startAdornment || startAdornment"
-        class="wc-textfield__adornment wc-textfield__adornment--start"
+        class="wc-textfield__adornment wc-textfield__adornment--start adornment start-adornment"
       >
         <slot name="startAdornment">
           <span>{{ startAdornment }}</span>
@@ -64,7 +64,7 @@
       <!-- End Adornment -->
       <div
         v-if="$slots.endAdornment || endAdornment || error"
-        class="wc-textfield__adornment wc-textfield__adornment--end"
+        class="wc-textfield__adornment wc-textfield__adornment--end adornment end-adornment"
       >
         <!-- Error Icon -->
         <svg
@@ -89,8 +89,8 @@
     <!-- Helper Text -->
     <div
       v-if="error || helperText"
-      class="wc-textfield__helper-text"
-      :class="{ 'wc-textfield__helper-text--error': error }"
+      class="wc-textfield__helper-text helper-text helper-text-content"
+      :class="{ 'wc-textfield__helper-text--error error-text': error }"
     >
       {{ error || helperText }}
     </div>
