@@ -52,7 +52,7 @@ export const VueDefault = {
       return { args }
     },
     template: `
-      <div class="w-80">
+      <div style="width: 400px;">
         <ProgressVue 
           :value="args.value"
           :color="args.color"
@@ -70,7 +70,7 @@ export const VueColors = {
   render: () => ({
     components: { ProgressVue },
     template: `
-      <div class="space-y-4 w-80">
+      <div style="width: 400px; display:flex; flex-direction:column; gap:1rem;">
         <ProgressVue :value="75" color="primary" label="主色调" show-percent />
         <ProgressVue :value="60" color="success" label="成功色" show-percent />
         <ProgressVue :value="45" color="warning" label="警告色" show-percent />
@@ -88,7 +88,7 @@ export const VueSizes = {
   render: () => ({
     components: { ProgressVue },
     template: `
-      <div class="space-y-4 w-80">
+      <div style="width: 400px; display:flex; flex-direction:column; gap:1rem;">
         <ProgressVue :value="65" size="sm" label="小尺寸" show-percent />
         <ProgressVue :value="65" size="md" label="中尺寸" show-percent />
         <ProgressVue :value="65" size="lg" label="大尺寸" show-percent />
@@ -101,7 +101,7 @@ export const VueAnimated = {
   render: () => ({
     components: { ProgressVue },
     template: `
-      <div class="space-y-4 w-80">
+      <div style="width: 400px; display:flex; flex-direction:column; gap:1rem;">
         <ProgressVue :value="45" color="primary" label="正在加载..." animated show-percent />
         <ProgressVue :value="75" color="success" label="上传中..." animated show-percent />
         <ProgressVue :value="30" color="warning" label="处理中..." animated show-percent />

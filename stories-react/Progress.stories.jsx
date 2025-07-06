@@ -57,7 +57,7 @@ export const Default = {
     label: '完成进度',
   },
   render: (args) => (
-    <div className="w-80">
+    <div style={{ width: '400px' }}>
       <Progress {...args} />
     </div>
   ),
@@ -76,7 +76,7 @@ export const Colors = () => {
   ]
 
   return (
-    <div className="space-y-4 w-80">
+    <div style={{ width: '400px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       {colors.map(({ color, value, label }) => (
         <Progress
           key={color}
@@ -98,7 +98,7 @@ export const Sizes = () => {
   ]
 
   return (
-    <div className="space-y-4 w-80">
+    <div style={{ width: '400px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       {sizes.map(({ size, label }) => (
         <Progress
           key={size}
@@ -120,7 +120,7 @@ export const Animated = () => {
   ]
 
   return (
-    <div className="space-y-4 w-80">
+    <div style={{ width: '400px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       {progressItems.map(({ value, color, label }, index) => (
         <Progress
           key={index}
@@ -167,7 +167,7 @@ export const InteractiveDemo = () => {
   }
 
   return (
-    <div className="w-80 space-y-4">
+    <div style={{ width: '400px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <Progress
         value={progress}
         color="primary"
@@ -231,7 +231,7 @@ export const MultiStepProcess = () => {
   const overallProgress = ((currentStep * 100 + stepProgress) / steps.length)
 
   return (
-    <div className="w-96 space-y-6">
+    <div style={{ width: '400px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <div>
         <h3 className="text-lg font-semibold mb-4">多步骤处理流程</h3>
         
@@ -290,7 +290,7 @@ export const DashboardStats = () => {
   ]
 
   return (
-    <div className="grid grid-cols-2 gap-4 w-96">
+    <div style={{ width: '400px', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
       {stats.map((stat, index) => (
         <div key={index} className="p-4 border rounded-lg">
           <h4 className="font-semibold text-sm mb-2">{stat.label}</h4>

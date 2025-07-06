@@ -1,4 +1,5 @@
 import React from 'react'
+import './style.css'
 
 const Progress = ({
   value = 0,
@@ -15,18 +16,12 @@ const Progress = ({
   
   const safeValue = Math.max(0, Math.min(100, value))
   
-  const progressClasses = ['wc-progress']
-  const sizeClasses = {
-    sm: 'h-1',
-    md: 'h-2',
-    lg: 'h-3'
-  }
-  progressClasses.push(sizeClasses[size])
+  const progressClasses = ['wc-progress', `wc-progress--${size}`]
   
   const barClasses = [
     'wc-progress__bar',
-    `bg-${safeColor}-500`,
-    animated && 'animate-pulse'
+    `wc-progress__bar--${safeColor}`,
+    animated && 'wc-progress__bar--animated'
   ].filter(Boolean).join(' ')
   
   const barStyle = {
@@ -36,14 +31,14 @@ const Progress = ({
   return (
     <div className={`wc-progress-wrapper ${className}`} {...props}>
       {(label || showPercent) && (
-        <div className="flex justify-between items-center mb-2">
+        <div className="wc-progress-header">
           {label && (
-            <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+            <label className="wc-progress-label">
               {label}
             </label>
           )}
           {showPercent && (
-            <span className="text-sm text-neutral-500 dark:text-neutral-400">
+            <span className="wc-progress-percent">
               {Math.round(safeValue)}%
             </span>
           )}

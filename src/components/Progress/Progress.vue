@@ -20,12 +20,10 @@
     
     <div
       :class="progressClasses"
-      :style="progressBgStyle"
     >
       <div 
-        class="wc-progress__bar"
+        :class="barClasses"
         :style="barStyle"
-        :class="{ 'wc-progress__bar--animated': animated }"
       />
     </div>
   </div>
@@ -64,32 +62,17 @@ const props = defineProps({
   }
 })
 
-const colorMap = {
-  primary: '#1a8cff',
-  success: '#10b981',
-  warning: '#f59e0b',
-  error: '#ef4444',
-  purple: '#a855f7',
-  orange: '#f97316',
-  cyan: '#06b6d4',
-  pink: '#ec4899'
-}
+const progressClasses = computed(() => ['wc-progress', `wc-progress--${props.size}`])
 
-const progressClasses = computed(() => {
-  return ['wc-progress', `wc-progress--${props.size}`]
-})
+const barClasses = computed(() => [
+  'wc-progress__bar',
+  `wc-progress__bar--${props.color}`,
+  props.animated && 'wc-progress__bar--animated'
+].filter(Boolean))
 
-const progressBgStyle = computed(() => ({
-  backgroundColor: '#e4e4e7'
+const barStyle = computed(() => ({
+  width: `${Math.max(0, Math.min(100, props.value))}%`
 }))
-
-const barStyle = computed(() => {
-  const color = colorMap[props.color] || colorMap.primary
-  return {
-    width: `${Math.max(0, Math.min(100, props.value))}%`,
-    backgroundColor: color
-  }
-})
 </script>
 
 <style scoped>
