@@ -1,7 +1,7 @@
 import BreadcrumbVue from '../src/components/Breadcrumb/Breadcrumb.vue'
 
 export default {
-  title: 'Components/Breadcrumb',
+  title: 'Components/Breadcrumb (Vue)',
   component: BreadcrumbVue,
   parameters: {
     layout: 'centered',
