@@ -63,23 +63,11 @@ export function isValidVariant(variant) {
  * @param {Object} props - Dropdown的props
  * @returns {Array<string>} CSS类名数组
  */
-export function getDropdownClasses(props) {
-  const {
-    size = 'md',
-    variant = 'default',
-    disabled = false,
-    className = ''
-  } = props
-
-  const classes = ['wc-dropdown']
-  
-  if (size !== 'md') classes.push(`wc-dropdown--${size}`)
-  if (variant !== 'default') classes.push(`wc-dropdown--${variant}`)
+export const getDropdownClasses = ({ size, variant, disabled, className }) => {
+  const classes = ['wc-dropdown', `wc-dropdown--${size}`, `wc-dropdown--${variant}`]
   if (disabled) classes.push('wc-dropdown--disabled')
-  
   if (className) classes.push(className)
-  
-  return classes.filter(Boolean)
+  return classes
 }
 
 /**
@@ -88,14 +76,8 @@ export function getDropdownClasses(props) {
  * @param {string} className - 额外类名
  * @returns {Array<string>} CSS类名数组
  */
-export function getDropdownMenuClasses(placement, className = '') {
-  const classes = ['wc-dropdown__menu']
-  
-  classes.push(`wc-dropdown__menu--${placement}`)
-  
-  if (className) classes.push(className)
-  
-  return classes.filter(Boolean)
+export const getDropdownMenuClasses = (placement, variantClass) => {
+  return ['wc-dropdown__menu', `wc-dropdown__menu--${placement}`, variantClass]
 }
 
 /**
@@ -103,13 +85,8 @@ export function getDropdownMenuClasses(placement, className = '') {
  * @param {Object} props - 按钮props
  * @returns {Array<string>} CSS类名数组
  */
-export function getDropdownButtonClasses(props) {
-  const { disabled = false } = props
-  const classes = ['wc-dropdown__button']
-  
-  if (disabled) classes.push('wc-dropdown__button--disabled')
-  
-  return classes.filter(Boolean)
+export const getDropdownButtonClasses = ({ disabled }) => {
+  return ['wc-dropdown__button', disabled ? 'wc-dropdown__button--disabled' : '']
 }
 
 /**
@@ -117,14 +94,11 @@ export function getDropdownButtonClasses(props) {
  * @param {Object} item - 项目数据
  * @returns {Array<string>} CSS类名数组
  */
-export function getDropdownItemClasses(item) {
+export const getDropdownItemClasses = (item) => {
   const classes = ['wc-dropdown__item']
-  
+  if (item.divider) classes.push('wc-dropdown__divider')
   if (item.disabled) classes.push('wc-dropdown__item--disabled')
-  if (item.selected) classes.push('wc-dropdown__item--selected')
-  if (item.danger) classes.push('wc-dropdown__item--danger')
-  
-  return classes.filter(Boolean)
+  return classes
 }
 
 /**
@@ -132,12 +106,8 @@ export function getDropdownItemClasses(item) {
  * @param {boolean} isOpen - 是否打开
  * @returns {Array<string>} CSS类名数组
  */
-export function getArrowClasses(isOpen) {
-  const classes = ['wc-dropdown__arrow']
-  
-  if (isOpen) classes.push('wc-dropdown__arrow--open')
-  
-  return classes
+export const getArrowClasses = (isOpen) => {
+  return ['wc-dropdown__arrow', isOpen ? 'wc-dropdown__arrow--open' : '']
 }
 
 /**
@@ -160,13 +130,10 @@ export function handleClickOutside(event, dropdownRef, onClose) {
  * @param {Function} onOpen - 打开回调
  * @param {Function} onClose - 关闭回调
  */
-export function handleDropdownToggle(isOpen, disabled, setIsOpen, onOpen, onClose) {
+export const handleDropdownToggle = (isOpen, disabled, setIsOpen, onOpen, onClose) => {
   if (disabled) return
-  
-  const newState = !isOpen
-  setIsOpen(newState)
-  
-  if (newState) {
+  setIsOpen(!isOpen)
+  if (!isOpen) {
     onOpen && onOpen()
   } else {
     onClose && onClose()
@@ -181,9 +148,8 @@ export function handleDropdownToggle(isOpen, disabled, setIsOpen, onOpen, onClos
  * @param {Function} setIsOpen - 设置打开状态
  * @param {Function} onClose - 关闭回调
  */
-export function handleItemClick(item, index, onSelect, setIsOpen, onClose) {
+export const handleItemClick = (item, index, onSelect, setIsOpen, onClose) => {
   if (item.disabled || item.divider) return
-  
   onSelect && onSelect(item, index)
   setIsOpen(false)
   onClose && onClose()
@@ -194,18 +160,14 @@ export function handleItemClick(item, index, onSelect, setIsOpen, onClose) {
  * @param {Function} callback - 回调函数
  * @returns {Object} 监听器管理对象
  */
-export function createOutsideClickListener(callback) {
-  const handleClick = callback
-  
-  const add = () => {
-    document.addEventListener('click', handleClick, true)
+export const createOutsideClickListener = (callback) => {
+  const listener = (event) => {
+    callback(event)
   }
-  
-  const remove = () => {
-    document.removeEventListener('click', handleClick, true)
+  return {
+    add: () => document.addEventListener('click', listener),
+    remove: () => document.removeEventListener('click', listener)
   }
-  
-  return { add, remove }
 }
 
 /**

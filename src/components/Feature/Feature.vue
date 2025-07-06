@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="cardClasses"
+    :class="[cardClasses, { 'dark': isDarkMode }]"
     :style="cardStyle"
     @click="$emit('click')"
   >
@@ -43,6 +43,7 @@ export default {
     ctaLabel: { type: String, default: '' },
     ctaHref: { type: String, default: '#' },
     variant: { type: String, default: 'default', validator: v => ['default','elevated','minimal'].includes(v) },
+    isDarkMode: { type: Boolean, default: false },
   },
   emits: ['click', 'cta-click'],
   computed: {

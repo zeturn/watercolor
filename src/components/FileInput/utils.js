@@ -7,30 +7,8 @@
  * @param {Object} options - 配置选项
  * @returns {string} 类名字符串
  */
-export function getFileInputClasses({
-  variant = 'block',
-  disabled = false,
-  loading = false,
-  error = false,
-  success = false,
-  dragActive = false,
-  dragReject = false,
-  className = ''
-} = {}) {
-  const classes = [
-    'wc-file-input-wrapper',
-    `variant-${variant}`
-  ]
-  
-  if (disabled) classes.push('wc-file-input-wrapper--disabled')
-  if (loading) classes.push('wc-file-input-wrapper--loading')
-  if (error) classes.push('wc-file-input-wrapper--error')
-  if (success) classes.push('wc-file-input-wrapper--success')
-  if (dragActive) classes.push('drag-active')
-  if (dragReject) classes.push('drag-reject')
-  if (className) classes.push(className)
-  
-  return classes.filter(Boolean).join(' ')
+export const getFileInputClasses = (variant) => {
+  return `wc-file-input-wrapper variant-${variant}`
 }
 
 /**

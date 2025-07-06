@@ -1,7 +1,7 @@
 import DropdownVue from '../src/components/Dropdown/Dropdown.vue'
 
 export default {
-  title: 'Components/Dropdown',
+  title: 'Components/Dropdown (Vue)',
   component: DropdownVue,
   parameters: {
     layout: 'centered',
@@ -51,6 +51,10 @@ export default {
     disabled: {
       control: { type: 'boolean' },
       description: '是否禁用'
+    },
+    isDarkMode: {
+      control: { type: 'boolean' },
+      description: '是否为暗色模式'
     }
   }
 }
@@ -159,6 +163,25 @@ export const TopPlacement = {
     docs: {
       description: {
         story: '下拉菜单在顶部弹出的示例。'
+      }
+    }
+  }
+}
+
+export const DarkMode = {
+  name: '暗色模式',
+  args: {
+    triggerText: '选择选项',
+    items: sampleItems,
+    placement: 'bottom-start',
+    variant: 'default',
+    disabled: false,
+    isDarkMode: true
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: '展示组件在暗色模式下的外观。'
       }
     }
   }

@@ -1,11 +1,11 @@
-/* FileInput 共用样式 - Watercolor风格 */
+/* FileInput 组件样式 - Watercolor 风格 */
 
 /* 隐藏原生文件输入 */
 .wc-file-input {
   display: none;
 }
 
-/* 基础包装器 */
+/* 基础包装器样式 */
 .wc-file-input-wrapper {
   display: inline-flex;
   position: relative;
@@ -14,32 +14,32 @@
   outline: none;
   text-decoration: none;
   user-select: none;
+  max-width: 100%;
 }
 
 .wc-file-input-wrapper:focus-visible {
-  outline: 2px solid var(--wc-primary-500, #3b82f6);
+  outline: 2px solid var(--wc-primary-600, #2563eb);
   outline-offset: 2px;
 }
 
 /* 变体样式 */
 
-/* 块状变体 - Watercolor风格 */
+/* 块状变体 - Watercolor 风格 */
 .wc-file-input-wrapper.variant-block {
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 32px;
-  /* Watercolor风格：去掉边框，使用淡灰色背景 */
   border: none;
   border-radius: 8px;
-  background: var(--wc-neutral-100, #f5f5f5);
+  background: var(--wc-neutral-200, #e5e5e5);
   text-align: center;
   min-height: 120px;
   width: 100%;
+  max-width: 600px;
 }
 
 .wc-file-input-wrapper.variant-block:hover {
-  /* Watercolor风格：hover时背景变深 */
   background: var(--wc-neutral-200, #e5e5e5);
 }
 
@@ -65,6 +65,7 @@
   gap: 8px;
   font-size: 14px;
   min-height: 36px;
+  max-width: 200px;
 }
 
 .wc-file-input-wrapper.variant-button:hover {
@@ -79,18 +80,18 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 图标变体 - Watercolor风格 */
+/* 图标变体 - Watercolor 风格 */
 .wc-file-input-wrapper.variant-icon {
   width: 40px;
   height: 40px;
   align-items: center;
   justify-content: center;
-  /* Watercolor风格：去掉边框，使用淡灰色背景 */
   border: none;
   border-radius: 50%;
   background: var(--wc-neutral-100, #f5f5f5);
   font-size: 18px;
   color: var(--wc-neutral-600, #4b5563);
+  max-width: 50px;
 }
 
 .wc-file-input-wrapper.variant-icon:hover {
@@ -99,10 +100,9 @@
   transform: scale(1.1);
 }
 
-/* 紧凑变体 - Watercolor风格 */
+/* 紧凑变体 - Watercolor 风格 */
 .wc-file-input-wrapper.variant-compact {
   padding: 6px 12px;
-  /* Watercolor风格：去掉边框，使用淡灰色背景 */
   border: none;
   border-radius: 4px;
   background: var(--wc-neutral-100, #f5f5f5);
@@ -173,7 +173,7 @@
   background: var(--wc-success-25, #f0fdf4);
 }
 
-/* 文件列表 - Watercolor风格 */
+/* 文件列表 - Watercolor 风格 */
 .wc-file-input-list {
   margin-top: 12px;
   list-style: none;
@@ -187,11 +187,10 @@
   align-items: center;
   gap: 8px;
   padding: 8px;
-  /* Watercolor风格：去掉边框，使用淡灰色背景 */
   border: none;
   border-radius: 4px;
   margin-bottom: 4px;
-  background: var(--wc-neutral-100, #f5f5f5);
+  background: var(--wc-neutral-500);
 }
 
 .wc-file-input-item__icon {
@@ -328,62 +327,31 @@
 }
 
 /* 暗色模式 */
+.dark .wc-file-input-wrapper {
+  background: var(--wc-neutral-200, #1f2937);
+  color: var(--wc-neutral-300, #f5f5f5);
+}
+
 .dark .wc-file-input-wrapper.variant-block {
-  background: var(--wc-neutral-800);
-}
-
-.dark .wc-file-input-wrapper.variant-block:hover {
-  background: var(--wc-neutral-700);
-}
-
-.dark .wc-file-input-wrapper.variant-block:active {
-  background: var(--wc-neutral-600);
-}
-
-.dark .wc-file-input-wrapper.variant-block.drag-over {
-  background: var(--wc-primary-900);
+  background: var(--wc-neutral-200, #111827);
+  color: var(--wc-neutral-300, #f5f5f5);
 }
 
 .dark .wc-file-input-wrapper.variant-button {
-  background: var(--wc-primary-600);
-}
-
-.dark .wc-file-input-wrapper.variant-button:hover {
-  background: var(--wc-primary-700);
-}
-
-.dark .wc-file-input-wrapper.variant-button:active {
-  background: var(--wc-primary-800);
+  background: var(--wc-primary-700, #1d4ed8);
 }
 
 .dark .wc-file-input-wrapper.variant-icon {
-  background: var(--wc-neutral-800);
-  color: var(--wc-neutral-400);
-}
-
-.dark .wc-file-input-wrapper.variant-icon:hover {
-  background: var(--wc-neutral-700);
-  color: var(--wc-primary-400);
-}
-
-.dark .wc-file-input-wrapper.variant-compact {
-  background: var(--wc-neutral-800);
-}
-
-.dark .wc-file-input-wrapper.variant-compact:hover {
-  background: var(--wc-neutral-700);
-}
-
-.dark .wc-file-input-content__icon {
-  color: var(--wc-neutral-500);
+  background: var(--wc-neutral-200, #111827);
+  color: var(--wc-primary-500, #3b82f6);
 }
 
 .dark .wc-file-input-content__title {
-  color: var(--wc-neutral-100);
+  color: var(--wc-neutral-100, #f5f5f5);
 }
 
 .dark .wc-file-input-content__subtitle {
-  color: var(--wc-neutral-400);
+  color: var(--wc-neutral-400, #9ca3af);
 }
 
 .dark .wc-file-input-wrapper--error {
@@ -448,4 +416,4 @@
 
 .dark .wc-file-input-preview__remove {
   background: rgba(0, 0, 0, 0.7);
-} 
+}

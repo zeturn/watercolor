@@ -29,6 +29,7 @@ const Feature = ({
   children,
   className = '',
   style = {},
+  isDarkMode = false,
 }) => {
   const cardClasses = getFeatureCardClasses({
     align,
@@ -53,7 +54,7 @@ const Feature = ({
 
   return (
     <div 
-      className={cardClasses} 
+      className={`${cardClasses} ${isDarkMode ? 'dark' : ''}`} 
       style={cardStyles}
       onClick={(e) => handleFeatureClick(e, false, onClick)}
     >

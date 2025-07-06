@@ -30,19 +30,15 @@ const FileInput = ({
     return true
   }
 
-  const handleFiles = (files) => {
-    if (validateFiles(files)) {
-      onChange && onChange(files)
-    }
-  }
-
   const handleInputChange = (e) => {
-    handleFiles(e.target.files)
+    const files = e.target.files
+    if (validateFiles(files)) onChange && onChange(files)
   }
 
   const handleDrop = (e) => {
     e.preventDefault()
-    handleFiles(e.dataTransfer.files)
+    const files = e.dataTransfer.files
+    if (validateFiles(files)) onChange && onChange(files)
   }
 
   const triggerSelect = () => {
@@ -51,61 +47,24 @@ const FileInput = ({
 
   const baseWrapperStyle = {
     cursor: 'pointer',
-    ...style,
   }
 
-  const variantStyles = {
-    block: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 32,
-      border: '2px dashed var(--color-border,#d1d5db)',
-      borderRadius: 8,
-      background: 'var(--wc-neutral-50,#f9fafb)',
-      textAlign: 'center',
-    },
-    button: {
-      display: 'inline-flex',
-      padding: '8px 16px',
-      borderRadius: 6,
-      background: 'var(--color-primary,#3b82f6)',
-      color: '#fff',
-      border: 'none',
-      fontWeight: 500,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    icon: {
-      display: 'inline-flex',
-      width: 40,
-      height: 40,
-      alignItems: 'center',
-      justifyContent: 'center',
-      border: '1px solid var(--color-border,#d1d5db)',
-      borderRadius: '50%',
-      background: 'var(--wc-neutral-50,#f9fafb)',
-      fontSize: 18,
-    },
-  }
-
-  const wrapperStyle = { ...baseWrapperStyle, ...variantStyles[variant] }
+  const wrapperStyle = baseWrapperStyle
 
   const renderContent = () => {
     switch (variant) {
       case 'button':
-        return label
+        return <span className="wc-file-button">{label}</span>
       case 'icon':
-        return '⬆️'
+        return <span className="wc-file-icon">⬆️</span>
       default:
-        return <strong>{label}</strong>
+        return <strong className="wc-file-input-content__title">{label}</strong>
     }
   }
 
   return (
     <label
       className={`wc-file-input-wrapper variant-${variant} ${className}`}
-      style={wrapperStyle}
       onDragOver={(e) => e.preventDefault()}
       onDrop={handleDrop}
       onClick={variant !== 'block' ? triggerSelect : undefined}

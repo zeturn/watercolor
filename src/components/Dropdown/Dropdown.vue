@@ -1,7 +1,8 @@
 <template>
   <div
     ref="dropdownRef"
-    class="wc-dropdown"
+    :class="['wc-dropdown', { 'dark': isDarkMode }]"
+    :style="{ backgroundColor: 'var(--wc-bg-surface)', color: 'var(--wc-text-primary)' }"
   >
     <div
       ref="triggerRef"
@@ -141,6 +142,10 @@ const props = defineProps({
   cardDescription: {
     type: String,
     default: ''
+  },
+  isDarkMode: {
+    type: Boolean,
+    default: false
   }
 })
 

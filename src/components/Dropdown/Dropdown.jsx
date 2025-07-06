@@ -69,7 +69,7 @@ const Dropdown = ({
   }, [isOpen])
 
   return (
-    <div className={dropdownClasses} ref={dropdownRef} {...props}>
+    <div className={dropdownClasses} ref={dropdownRef} {...props} style={{ backgroundColor: 'var(--wc-bg-surface)', color: 'var(--wc-text-primary)' }}>
       <div
         className="wc-dropdown__trigger"
         onClick={handleToggle}

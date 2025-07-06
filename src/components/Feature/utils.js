@@ -47,92 +47,80 @@ export function isValidBackground(background) {
  * @param {Object} props - Feature的props
  * @returns {Array<string>} CSS类名数组
  */
-export function getFeatureCardClasses(props) {
-  const {
-    align = 'left',
-    size = 'md',
-    background = 'default',
-    reverse = false,
-    vertical = false,
-    clickable = false,
-    disabled = false,
-    className = ''
-  } = props
-
-  const classes = ['wc-feature-card']
-  
-  classes.push(`wc-feature-card--${align}`)
-  classes.push(`wc-feature-card--${size}`)
-  
-  if (background !== 'default') {
-    classes.push(`wc-feature-card--${background}`)
-  }
-  
-  if (reverse) classes.push('wc-feature-card--reverse')
-  if (vertical) classes.push('wc-feature-card--vertical')
-  if (clickable) classes.push('wc-feature-card--clickable')
-  if (disabled) classes.push('wc-feature-card--disabled')
-  
-  if (className) classes.push(className)
-  
+export const getFeatureCardClasses = ({ align, size, background, reverse, vertical, clickable, disabled, className, isDarkMode }) => {
+  const classes = [
+    'wc-feature-card',
+    clickable && 'wc-feature-card--clickable',
+    disabled && 'wc-feature-card--disabled',
+    reverse && 'wc-feature-card--reverse',
+    vertical && 'wc-feature-card--vertical',
+    `wc-feature-card--${size}`,
+    `wc-feature-card--${background}`,
+    `wc-feature-card--${align}`,
+    className,
+    isDarkMode && 'dark'
+  ]
   return classes.filter(Boolean)
 }
 
 /**
  * 获取Feature图标的CSS类名
  * @param {string|number} iconSize - 图标尺寸
+ * @param {boolean} isDarkMode - 是否为暗模式
  * @returns {Array<string>} CSS类名数组
  */
-export function getFeatureIconClasses(iconSize) {
-  const classes = ['wc-feature-icon']
-  
-  // 根据尺寸添加对应的类名
-  if (typeof iconSize === 'number') {
-    if (iconSize <= 32) classes.push('wc-feature-icon--sm')
-    else if (iconSize <= 48) classes.push('wc-feature-icon--md')
-    else classes.push('wc-feature-icon--lg')
-  }
-  
-  return classes
+export function getFeatureIconClasses(iconSize, isDarkMode) {
+  const classes = [
+    'wc-feature-icon',
+    `wc-feature-icon--${iconSize}`,
+    isDarkMode && 'dark'
+  ]
+  return classes.filter(Boolean)
 }
 
 /**
  * 获取Feature内容的CSS类名
  * @param {string} align - 对齐方式
+ * @param {boolean} isDarkMode - 是否为暗模式
  * @returns {Array<string>} CSS类名数组
  */
-export function getFeatureContentClasses(align) {
-  const classes = ['wc-feature-content']
-  
-  classes.push(`wc-feature-content--${align}`)
-  
-  return classes
+export function getFeatureContentClasses(align, isDarkMode) {
+  const classes = [
+    'wc-feature-content',
+    `wc-feature-content--${align}`,
+    isDarkMode && 'dark'
+  ]
+  return classes.filter(Boolean)
 }
 
 /**
  * 获取Feature标题的CSS类名
  * @param {string} size - 尺寸
+ * @param {boolean} isDarkMode - 是否为暗模式
  * @returns {Array<string>} CSS类名数组
  */
-export function getFeatureTitleClasses(size) {
-  const classes = ['wc-feature-title']
-  
-  classes.push(`wc-feature-title--${size}`)
-  
-  return classes
+export function getFeatureTitleClasses(size, isDarkMode) {
+  const classes = [
+    'wc-feature-title',
+    `wc-feature-title--${size}`,
+    isDarkMode && 'dark'
+  ]
+  return classes.filter(Boolean)
 }
 
 /**
  * 获取Feature描述的CSS类名
  * @param {string} size - 尺寸
+ * @param {boolean} isDarkMode - 是否为暗模式
  * @returns {Array<string>} CSS类名数组
  */
-export function getFeatureDescriptionClasses(size) {
-  const classes = ['wc-feature-description']
-  
-  classes.push(`wc-feature-description--${size}`)
-  
-  return classes
+export const getFeatureDescriptionClasses = (size, isDarkMode) => {
+  const classes = [
+    'wc-feature-description',
+    `wc-feature-description--${size}`,
+    isDarkMode && 'dark'
+  ]
+  return classes.filter(Boolean)
 }
 
 /**
