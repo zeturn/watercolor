@@ -1,7 +1,7 @@
 import HoverCardVue from '../src/components/HoverCard/HoverCard.vue'
 
 export default {
-  title: 'Components/HoverCard',
+  title: 'Components/HoverCard (Vue)',
   component: HoverCardVue,
   parameters: {
     layout: 'centered',
