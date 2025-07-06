@@ -46,7 +46,7 @@ export const Default = {
     color: 'default',
   },
   render: (args) => (
-    <div className="p-8 max-w-2xl">
+    <div style={{ padding: '16px', maxWidth: '600px' }}>
       <Blockquote 
         cite={args.cite}
         variant={args.variant}
@@ -63,44 +63,44 @@ export const Default = {
 
 export const Colors = {
   render: () => (
-    <div className="p-8 space-y-6 max-w-2xl">
+    <div style={{ padding: '16px', maxWidth: '600px' }}>
       <div>
-        <h3 className="text-lg font-semibold mb-3">默认色（灰色）</h3>
+        <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px' }}>默认色（灰色）</h3>
         <Blockquote cite="Steve Jobs" color="default">
           Stay hungry, stay foolish. 保持饥饿，保持愚蠢。
         </Blockquote>
       </div>
       
       <div>
-        <h3 className="text-lg font-semibold mb-3">主题色（蓝色）</h3>
+        <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px' }}>主题色（蓝色）</h3>
         <Blockquote cite="Albert Einstein" color="primary">
           Imagination is more important than knowledge. 想象力比知识更重要。
         </Blockquote>
       </div>
       
       <div>
-        <h3 className="text-lg font-semibold mb-3">成功色（绿色）</h3>
+        <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px' }}>成功色（绿色）</h3>
         <Blockquote cite="Winston Churchill" color="success">
           Success is not final, failure is not fatal: it is the courage to continue that counts. 成功不是终点，失败也不是致命的，重要的是继续前进的勇气。
         </Blockquote>
       </div>
       
       <div>
-        <h3 className="text-lg font-semibold mb-3">警告色（橙色）</h3>
+        <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px' }}>警告色（橙色）</h3>
         <Blockquote cite="Benjamin Franklin" color="warning">
           By failing to prepare, you are preparing to fail. 不准备就是在准备失败。
         </Blockquote>
       </div>
       
       <div>
-        <h3 className="text-lg font-semibold mb-3">错误色（红色）</h3>
+        <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px' }}>错误色（红色）</h3>
         <Blockquote cite="Thomas Edison" color="error">
           I have not failed. I've just found 10,000 ways that won't work. 我没有失败，我只是找到了一万种行不通的方法。
         </Blockquote>
       </div>
       
       <div>
-        <h3 className="text-lg font-semibold mb-3">信息色（青色）</h3>
+        <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px' }}>信息色（青色）</h3>
         <Blockquote cite="Maya Angelou" color="info">
           I've learned that people will forget what you said, but they will never forget how you made them feel. 人们会忘记你说过什么，但永远不会忘记你给他们的感受。
         </Blockquote>
@@ -111,10 +111,10 @@ export const Colors = {
 
 export const ColoredVariants = {
   render: () => (
-    <div className="p-8 space-y-8 max-w-2xl">
+    <div style={{ padding: '16px', maxWidth: '600px' }}>
       <div>
-        <h3 className="text-lg font-semibold mb-4">成功主题 - 不同变体</h3>
-        <div className="space-y-4">
+        <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px' }}>成功主题 - 不同变体</h3>
+        <div style={{ marginBottom: '12px' }}>
           <Blockquote cite="Vince Lombardi" color="success" variant="default">
             The only place success comes before work is in the dictionary. 只有在字典里，成功才会出现在工作之前。
           </Blockquote>
@@ -128,8 +128,8 @@ export const ColoredVariants = {
       </div>
       
       <div>
-        <h3 className="text-lg font-semibold mb-4">主题色 - 不同尺寸</h3>
-        <div className="space-y-4">
+        <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px' }}>主题色 - 不同尺寸</h3>
+        <div style={{ marginBottom: '12px' }}>
           <Blockquote cite="孔子" color="primary" size="small">
             学而时习之，不亦说乎？
           </Blockquote>
@@ -147,30 +147,30 @@ export const ColoredVariants = {
 
 export const Variants = {
   render: () => (
-    <div className="p-8 space-y-6 max-w-2xl">
+    <div style={{ padding: '16px', maxWidth: '600px' }}>
       <div>
-        <h3 className="text-lg font-semibold mb-3">默认样式（浅灰背景，无边框）</h3>
+        <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px' }}>默认样式（浅灰背景，无边框）</h3>
         <Blockquote cite="Steve Jobs" variant="default" noBorder={true}>
           Stay hungry, stay foolish. 这是默认的新样式，背景为浅灰色，hover时会变深。
         </Blockquote>
       </div>
       
       <div>
-        <h3 className="text-lg font-semibold mb-3">简约样式</h3>
+        <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px' }}>简约样式</h3>
         <Blockquote cite="Albert Einstein" variant="minimal">
           Imagination is more important than knowledge. 简约样式更加轻量化。
         </Blockquote>
       </div>
       
       <div>
-        <h3 className="text-lg font-semibold mb-3">卡片样式</h3>
+        <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px' }}>卡片样式</h3>
         <Blockquote cite="Maya Angelou" variant="card">
           I've learned that people will forget what you said, but they will never forget how you made them feel.
         </Blockquote>
       </div>
       
       <div>
-        <h3 className="text-lg font-semibold mb-3">传统样式（有左边框）</h3>
+        <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px' }}>传统样式（有左边框）</h3>
         <Blockquote cite="Winston Churchill" noBorder={false}>
           Success is not final, failure is not fatal: it is the courage to continue that counts.
         </Blockquote>
@@ -181,9 +181,9 @@ export const Variants = {
 
 export const Sizes = {
   render: () => (
-    <div className="p-8 space-y-6 max-w-2xl">
+    <div style={{ padding: '16px', maxWidth: '600px' }}>
       <div>
-        <h3 className="text-lg font-semibold mb-3">小尺寸</h3>
+        <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px' }}>小尺寸</h3>
         <Blockquote cite="Confucius" size="small">
           It does not matter how slowly you go as long as you do not stop.
         </Blockquote>

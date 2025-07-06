@@ -160,7 +160,7 @@
   height: 16px;
 }
 
-/* 暗色模式 - 使用 .dark 类选择器 */
+/* Dark mode styles for Chip component */
 .dark .wc-chip--filled.wc-chip--default {
   background-color: var(--wc-neutral-200, #404040);
   color: var(--wc-neutral-700, #e5e5e5);
@@ -191,7 +191,7 @@
   color: var(--wc-error-700, #f2a1b4);
 }
 
-/* 暗色模式下的 outlined 样式 */
+/* Dark mode styles for outlined variant */
 .dark .wc-chip--outlined.wc-chip--default {
   border-color: var(--wc-neutral-400, #737373);
   color: var(--wc-neutral-600, #d4d4d4);
@@ -222,7 +222,7 @@
   color: var(--wc-error-600, #e48194);
 }
 
-/* 暗色模式下的删除按钮 hover 效果 */
+/* Dark mode hover effect for delete button */
 .dark .wc-chip-delete:hover {
   background-color: rgba(255, 255, 255, 0.1);
 } 

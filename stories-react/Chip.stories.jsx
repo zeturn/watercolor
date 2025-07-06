@@ -238,53 +238,121 @@ export const Interactive = {
   }
 }
 
-export const FilterTags = {
+export const UseCases = {
   render: () => {
-    const [selectedTags, setSelectedTags] = useState(['React', 'JavaScript'])
-    
-    const allTags = ['React', 'Vue', 'Angular', 'JavaScript', 'TypeScript', 'Node.js', 'Python', 'Go']
-    
-    const skillColor = (skill) => {
+    /* 标签过滤器状态 */
+    const [selectedTags, setSelectedTags] = useState(['Vue.js', 'React'])
+
+    const availableTags = ['Vue.js', 'React', 'Angular', 'JavaScript', 'TypeScript', 'Node.js']
+
+    /* 技能列表 */
+    const skills = [
+      { name: 'JavaScript', level: 'expert' },
+      { name: 'Vue.js', level: 'advanced' },
+      { name: 'React', level: 'intermediate' },
+      { name: 'Node.js', level: 'beginner' }
+    ]
+
+    /* 根据技能等级返回颜色 */
+    const skillColor = (level) => {
       const colors = {
-        'React': 'primary',
-        'Vue': 'success',
-        'Angular': 'error',
-        'JavaScript': 'warning',
-        'TypeScript': 'primary',
-        'Node.js': 'success',
-        'Python': 'warning',
-        'Go': 'primary'
+        expert: 'success',
+        advanced: 'primary',
+        intermediate: 'warning',
+        beginner: 'error',
       }
-      return colors[skill] || 'default'
+      return colors[level] || 'default'
     }
 
+    /* 切换标签选择 */
     const toggleTag = (tag) => {
-      setSelectedTags(prev => 
-        prev.includes(tag) 
-          ? prev.filter(t => t !== tag)
-          : [...prev, tag]
-      )
+      setSelectedTags(prev => prev.includes(tag)
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag])
     }
 
     return (
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold">技能标签筛选器</h3>
-        <div className="flex flex-wrap gap-2">
-          {allTags.map(tag => (
-            <Chip
-              key={tag}
-              label={tag}
-              color={skillColor(tag)}
-              variant={selectedTags.includes(tag) ? 'filled' : 'outlined'}
-              clickable
-              onClick={() => toggleTag(tag)}
-            />
-          ))}
+      <div className="space-y-8">
+        {/* 标签过滤器 */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4">标签过滤器</h3>
+          <p className="text-sm text-gray-600 mb-4">点击标签来切换选择状态</p>
+          <div className="space-y-3">
+            <div>
+              <h4 className="text-sm font-medium mb-2">可选标签：</h4>
+              <div className="flex flex-wrap gap-2">
+                {availableTags.map(tag => (
+                  <Chip
+                    key={tag}
+                    label={tag}
+                    variant={selectedTags.includes(tag) ? 'filled' : 'outlined'}
+                    color={selectedTags.includes(tag) ? 'primary' : 'default'}
+                    clickable
+                    onClick={() => toggleTag(tag)}
+                  />
+                ))}
+              </div>
+            </div>
+            <div>
+              <h4 className="text-sm font-medium mb-2">已选择的标签：</h4>
+              <div className="flex flex-wrap gap-2 min-h-[40px] p-2 bg-gray-50 rounded">
+                {selectedTags.length > 0 ? (
+                  selectedTags.map(tag => (
+                    <Chip
+                      key={tag + '-selected'}
+                      label={tag}
+                      color="primary"
+                      deletable
+                      onDelete={() => toggleTag(tag)}
+                    />
+                  ))
+                ) : (
+                  <span className="text-gray-500 text-sm self-center">暂未选择标签</span>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="mt-4 p-4 bg-gray-100 rounded-lg">
-          <p className="text-sm text-gray-600">
-            已选择: {selectedTags.length > 0 ? selectedTags.join(', ') : '无'}
-          </p>
+
+        {/* 技能等级标签 */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4">技能等级标签</h3>
+          <div className="flex flex-wrap gap-2">
+            {skills.map(skill => (
+              <Chip
+                key={skill.name}
+                label={`${skill.name} (${skill.level})`}
+                color={skillColor(skill.level)}
+                size="sm"
+              />
+            ))}
+          </div>
+          <div className="mt-2 text-xs text-gray-600">
+            <span className="inline-block mr-4">🟢 Expert</span>
+            <span className="inline-block mr-4">🔵 Advanced</span>
+            <span className="inline-block mr-4">🟡 Intermediate</span>
+            <span className="inline-block mr-4">🔴 Beginner</span>
+          </div>
+        </div>
+
+        {/* 状态标签 */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4">状态标签</h3>
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <span className="w-20 text-sm">任务状态:</span>
+              <Chip label="进行中" color="primary" size="sm" />
+              <Chip label="已完成" color="success" size="sm" />
+              <Chip label="待审核" color="warning" size="sm" />
+              <Chip label="已取消" color="error" size="sm" />
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-20 text-sm">优先级:</span>
+              <Chip label="高" color="error" variant="outlined" size="sm" />
+              <Chip label="中" color="warning" variant="outlined" size="sm" />
+              <Chip label="低" color="success" variant="outlined" size="sm" />
+            </div>
+          </div>
         </div>
       </div>
     )

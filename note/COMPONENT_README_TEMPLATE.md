@@ -1,5 +1,5 @@
 # Component Name
-
+! USING ENGLISH ONLY
 ## Introduction
 A brief introduction to the component's functionality and purpose.
 

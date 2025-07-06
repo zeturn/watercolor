@@ -21,7 +21,7 @@ export function getBlockquoteClasses(
   const classes = ['wc-blockquote']
   
   // 添加变体类名
-  if (variant && variant !== 'default') {
+  if (variant && variant !== 'default' && variant !== 'card') {
     classes.push(`wc-blockquote--${variant}`)
   }
   

@@ -2,7 +2,7 @@ import Checkbox from '../src/components/Checkbox/Checkbox.vue'
 import { ref } from 'vue'
 
 export default {
-  title: 'Components/Checkbox',
+  title: 'Components/Checkbox (Vue)',
   component: Checkbox,
   parameters: {
     docs: {

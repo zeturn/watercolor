@@ -25,7 +25,7 @@
     
     <!-- Delete Icon -->
     <button 
-      v-if="deletable || onDelete"
+      v-if="deletable"
       type="button"
       class="wc-chip-delete"
       :aria-label="deleteIcon || '删除'"

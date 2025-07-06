@@ -121,16 +121,7 @@
   background-color: var(--wc-neutral-50, #f9fafb);
 }
 
-.wc-blockquote--card {
-  background-color: var(--wc-neutral-50, #f9fafb);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  border: 1px solid var(--wc-neutral-200, #e5e7eb);
-}
-
-.wc-blockquote--card:hover {
-  background-color: var(--wc-neutral-100, #f5f5f5);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
+/* card 变体已复用 Card 组件，不再需要专属样式 */
 
 /* 尺寸变体 */
 .wc-blockquote--small {
@@ -165,9 +156,9 @@
 
 /* 暗色模式 - 使用 .dark 类选择器 */
 .dark .wc-blockquote {
-  background-color: var(--wc-neutral-800, #1f2937);
+  background-color: var(--wc-neutral-200, #1f2937);
   border-left-color: var(--wc-primary-400, #60a5fa);
-  color: var(--wc-neutral-100, #f3f4f6);
+  color: var(--wc-neutral-800, #f3f4f6);
 }
 
 .dark .wc-blockquote--style-bordered {

@@ -2,7 +2,7 @@ import Chip from '../src/components/Chip/Chip.vue'
 import Avatar from '../src/components/Avatar/Avatar.vue'
 
 export default {
-  title: 'Components/Chip',
+  title: 'Components/Chip (Vue)',
   component: Chip,
   parameters: {
     docs: {
