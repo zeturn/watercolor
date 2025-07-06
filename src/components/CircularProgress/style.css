@@ -17,11 +17,11 @@
 
 .wc-circular-progress-circle {
   stroke-linecap: round;
-  stroke-dashoffset: 0;
   transition: stroke-dashoffset 0.3s ease;
 }
 
 .wc-circular-progress-circle--indeterminate {
+  stroke-dashoffset: 0;
   animation: wc-circular-progress-rotate 1.4s linear infinite;
 }
 
@@ -54,6 +54,16 @@
 
 .wc-circular-progress--error .wc-circular-progress-circle {
   color: var(--wc-error-500, #ef4444);
+}
+
+/* Inherit variant (uses currentColor) */
+.wc-circular-progress--inherit .wc-circular-progress-circle {
+  color: currentColor;
+}
+
+/* Dark mode inherit variant */
+.dark .wc-circular-progress--inherit .wc-circular-progress-circle {
+  color: currentColor;
 }
 
 /* Indeterminate animation */

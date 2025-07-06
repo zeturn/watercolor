@@ -2,7 +2,7 @@
   <div
     :class="progressClasses"
     role="progressbar"
-    :aria-valuenow="value"
+    :aria-valuenow="variantAriaValueNow"
     :aria-valuemin="0"
     :aria-valuemax="100"
   >
@@ -104,4 +104,6 @@ const progressClasses = computed(() => {
 })
 
 const circleClasses = computed(() => (props.variant === 'indeterminate' ? ['wc-circular-progress-circle--indeterminate'] : []))
+
+const variantAriaValueNow = computed(() => (props.variant === 'determinate' ? props.value : undefined))
 </script> 

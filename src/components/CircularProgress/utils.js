@@ -8,7 +8,7 @@ export const validVariants = ['determinate', 'indeterminate']
 /**
  * 有效的CircularProgress颜色
  */
-export const validColors = ['primary', 'secondary', 'success', 'warning', 'error']
+export const validColors = ['primary', 'secondary', 'success', 'warning', 'error', 'inherit']
 
 /**
  * 验证CircularProgress变体
