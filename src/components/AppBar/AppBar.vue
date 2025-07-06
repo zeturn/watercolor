@@ -1,12 +1,10 @@
 <template>
-  <div :class="appBarClasses" :style="style">
+  <div :class="['wc-appbar', `wc-appbar--${props.position}`, `wc-appbar--${props.color}`, `wc-appbar--elevation-${props.elevation}`, `wc-appbar--${props.variant}`]" :style="style">
     <slot />
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { getAppBarClasses } from './utils.js'
 import './style.css'
 
 const props = defineProps({
@@ -37,21 +35,6 @@ const props = defineProps({
     type: [String, Object],
     default: () => ({})
   }
-})
-
-function normalizeClasses(classes) {
-  if (!classes) return ''
-  if (typeof classes === 'string') return classes
-  if (Array.isArray(classes)) return classes.filter(Boolean).join(' ')
-  if (typeof classes === 'object') {
-    return Object.entries(classes).filter(([, v]) => v).map(([k]) => k).join(' ')
-  }
-  return ''
-}
-
-const appBarClasses = computed(() => {
-  const extra = normalizeClasses(props.class)
-  return `${getAppBarClasses(props.position, props.color, props.elevation, props.variant, extra)} flex items-center`
 })
 </script>
 

@@ -2,7 +2,7 @@ import AppBarVue from '../src/components/AppBar/AppBar.vue'
 import DropdownVue from '../src/components/Dropdown/Dropdown.vue'
 
 export default {
-  title: 'Components/AppBar',
+  title: 'Components/AppBar (Vue)',
   component: AppBarVue,
   tags: ['autodocs'],
 }
@@ -21,7 +21,7 @@ export const Navbar = {
     },
     template: `
       <AppBarVue position="static" color="primary" style="padding:0 16px;">
-        <div class="flex gap-6">
+        <div style="display: flex; gap: 16px;">
           <DropdownVue trigger-text="菜单一" :items="sampleItems" />
           <DropdownVue trigger-text="菜单二" :items="sampleItems" />
           <DropdownVue trigger-text="菜单三" :items="sampleItems" />

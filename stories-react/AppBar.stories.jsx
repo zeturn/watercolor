@@ -17,7 +17,7 @@ export default {
 export const Navbar = {
   render: () => (
     <AppBar position="static" color="primary" style={{ padding: '0 16px' }}>
-      <div className="flex gap-6">
+      <div style={{ display: 'flex', gap: '16px' }}>
         <Dropdown triggerText="菜单一" items={sampleItems} />
         <Dropdown triggerText="菜单二" items={sampleItems} />
         <Dropdown triggerText="菜单三" items={sampleItems} />
