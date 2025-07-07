@@ -2,7 +2,7 @@ import React from 'react';
 import NumberAnimation from '@/components/NumberAnimation/NumberAnimation.jsx';
 
 export default {
-  title: 'Components/NumberAnimation',
+  title: 'Components/NumberAnimation (React)',
   component: NumberAnimation,
   parameters: {
     docs: {

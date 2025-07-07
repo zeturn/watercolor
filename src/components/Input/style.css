@@ -26,7 +26,7 @@
 
 /* 暗色模式变量 */
 .dark {
-  --input-bg: var(--wc-neutral-800);
+  --input-bg: var(--wc-neutral-200);
   --input-border: transparent;
   --input-border-focus: transparent;
   --input-border-error: transparent;
@@ -246,10 +246,6 @@
 .wc-input--focused {
   border-color: var(--input-border-focus);
   box-shadow: var(--input-shadow-focus);
-}
-
-.wc-input--has-value {
-  /* 已有值的样式 */
 }
 
 .wc-input--full-width {
@@ -567,7 +563,7 @@ textarea.wc-input {
 
 /* Dark mode input */
 .dark .wc-input {
-  background-color: var(--wc-neutral-800);
+  background-color: var(--wc-neutral-200);
   color: var(--wc-neutral-100);
 }
 
@@ -577,4 +573,28 @@ textarea.wc-input {
 
 .dark .wc-input:focus {
   background-color: var(--wc-neutral-700);
+}
+
+/* VerificationCodeInput styles (follow Input naming convention) */
+.wc-input-code {
+  display: flex;
+  gap: 8px;
+}
+
+.wc-input-code__box {
+  width: 44px;
+  height: 48px;
+  text-align: center;
+  font-size: 1rem; /* match md input font size */
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--wc-neutral-300, #d1d5db);
+  border-radius: var(--input-radius);
+  outline: none;
+  transition: var(--input-transition);
+}
+
+.wc-input-code__box:focus {
+  border-color: var(--wc-primary-500, #5b9eff);
+  box-shadow: 0 0 0 2px rgba(91, 158, 255, 0.25);
 }

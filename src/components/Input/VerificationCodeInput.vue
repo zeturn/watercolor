@@ -1,13 +1,15 @@
 <template>
   <div
-    class="wc-code-input"
+    class="wc-input-code"
     @paste.prevent="handlePaste"
   >
     <input
       v-for="(_, index) in boxes"
       :key="index"
       ref="inputs"
-      class="wc-code-input__box"
+      :id="`wc-input-code-${index}`"
+      :name="`wc-input-code-${index}`"
+      class="wc-input-code__box"
       type="text"
       maxlength="1"
       autocomplete="one-time-code"
@@ -20,7 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick } from 'vue'
+import { ref, watch, nextTick, onMounted } from 'vue'
+import '@/components/Input/style.css'
 
 const props = defineProps({
   length: {
@@ -30,6 +33,10 @@ const props = defineProps({
   modelValue: {
     type: String,
     default: ''
+  },
+  autoFocus: {
+    type: Boolean,
+    default: false
   }
 })
 const emit = defineEmits(['update:modelValue', 'complete'])
@@ -96,26 +103,10 @@ function handlePaste(e: ClipboardEvent) {
   emit('update:modelValue', text)
   if (text.length === props.length) emit('complete', text)
 }
+
+onMounted(() => {
+  if (props.autoFocus) {
+    focusBox(0)
+  }
+})
 </script>
-
-<style scoped>
-.wc-code-input {
-  display: flex;
-  gap: 8px;
-}
-
-.wc-code-input__box {
-  width: 40px;
-  height: 48px;
-  text-align: center;
-  font-size: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  outline: none;
-}
-
-.wc-code-input__box:focus {
-  border-color: #409eff;
-  box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2);
-}
-</style> 

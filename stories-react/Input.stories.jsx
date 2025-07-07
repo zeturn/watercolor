@@ -3,7 +3,7 @@ import Input from '@/components/Input/Input.jsx'
 import { action } from 'storybook/actions'
 
 export default {
-  title: 'Components/Input',
+  title: 'Components/Input (React)',
   component: Input,
   parameters: {
     layout: 'centered',
@@ -47,7 +47,7 @@ const Template = (args) => {
   }
   
   return (
-    <div className="w-80">
+    <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px' }}>
       <Input {...args} value={value} onChange={handleChange} />
       <p className="mt-2 text-sm text-neutral-500">当前值: {value}</p>
     </div>
@@ -72,7 +72,7 @@ export const WithLabel = {
   render: () => {
     const [value, setValue] = useState('')
     return (
-      <div className="w-80">
+      <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px' }}>
         <Input
           value={value}
           onChange={(e) => setValue(e.target.value)}
@@ -112,7 +112,7 @@ export const Sizes = {
     const [mediumValue, setMediumValue] = useState('')
     const [largeValue, setLargeValue] = useState('')
     return (
-      <div className="space-y-4 w-80">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <Input
           value={smallValue}
           onChange={(e) => setSmallValue(e.target.value)}
@@ -143,7 +143,7 @@ export const States = {
   render: () => {
     const [normalValue, setNormalValue] = useState('')
     return (
-      <div className="space-y-4 w-80">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}  >
         <Input
           value={normalValue}
           onChange={(e) => setNormalValue(e.target.value)}

@@ -3,7 +3,7 @@ import InputReact from '../src/components/Input/Input.jsx'
 import { ref } from 'vue'
 
 export default {
-  title: 'Components/Input',
+  title: 'Components/Input (Vue)',
   component: InputVue,
   parameters: {
     layout: 'centered',

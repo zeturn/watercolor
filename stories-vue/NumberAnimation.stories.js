@@ -1,7 +1,7 @@
 import NumberAnimation from '../src/components/NumberAnimation/NumberAnimation.vue'
 
 export default {
-  title: 'Components/NumberAnimation',
+  title: 'Components/NumberAnimation (Vue)',
   component: NumberAnimation,
   tags: ['autodocs'],
   argTypes: {
