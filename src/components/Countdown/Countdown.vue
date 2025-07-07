@@ -1,44 +1,44 @@
 <template>
-  <div
+  <span
     :class="countdownClasses"
     :style="wrapperStyle"
   >
-    <span>{{ formattedTime }}</span>
-  </div>
+    {{ formattedTime }}
+  </span>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue'
+import { getCountdownClasses, formatTime, getDefaultColor } from './utils.js'
 import './style.css'
 
-const props = defineProps({
-  /** 倒计时秒数 */
-  seconds: {
-    type: Number,
-    required: true,
-    validator: (v: number) => v >= 0
-  },
-  /** 是否自动开始 */
-  autoStart: {
-    type: Boolean,
-    default: true
-  },
-  /** 字体大小 */
-  fontSize: {
-    type: String,
-    default: '16px'
-  },
-  /** 文本颜色 */
-  color: {
-    type: String,
-    default: '' // 若未指定，则自动使用主题中性色
-  }
+interface Props {
+  seconds: number
+  autoStart?: boolean
+  size?: 'sm' | 'md' | 'lg' | 'xl'
+  color?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error'
+  customColor?: string
+  fontSize?: string
+  format?: 'simple' | 'detailed' | 'card'
+  warningTime?: number | null
+  className?: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  autoStart: true,
+  size: 'md',
+  color: 'default',
+  customColor: '',
+  fontSize: '',
+  format: 'simple',
+  warningTime: null,
+  className: ''
 })
 
-const emit = defineEmits(['finish'])
+const emit = defineEmits<{ finish: [] }>()
 
 const remaining = ref(props.seconds)
-let timer: number | undefined
+let timer: number | null = null
 
 const start = () => {
   if (timer) return
@@ -55,7 +55,7 @@ const start = () => {
 const clear = () => {
   if (timer) {
     clearInterval(timer)
-    timer = undefined
+    timer = null
   }
 }
 
@@ -73,36 +73,28 @@ watch(() => props.seconds, (val) => {
   if (props.autoStart) start()
 })
 
-const formattedTime = computed(() => {
-  const sec = remaining.value
-  const hours = Math.floor(sec / 3600)
-  const minutes = Math.floor((sec % 3600) / 60)
-  const seconds = sec % 60
-  const pad = (n: number) => String(n).padStart(2, '0')
-  if (hours > 0) return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`
-  else return `${pad(minutes)}:${pad(seconds)}`
-})
+const formattedTime = computed(() => formatTime(remaining.value))
+
+const finalColor = computed(() => props.customColor || (props.fontSize ? getDefaultColor() : undefined))
 
 const wrapperStyle = computed(() => {
-  // 当未显式设置颜色时，使用主题中性色；暗色模式下使用浅色
-  const defaultColor = document.documentElement.classList.contains('dark')
-    ? 'var(--wc-neutral-100)'
-    : 'var(--wc-neutral-900)'
-  return {
-    fontSize: props.fontSize,
-    color: props.color || defaultColor
-  }
+  const style: Record<string, string> = {}
+  if (props.fontSize) style.fontSize = props.fontSize
+  if (finalColor.value) style.color = finalColor.value
+  return style
 })
 
-/** 根据状态组合 class */
-const countdownClasses = computed(() => {
-  const classes = ['wc-countdown']
-  if (remaining.value === 0) {
-    classes.push('wc-countdown--finished')
-  }
-  return classes
-})
+const countdownClasses = computed(() =>
+  getCountdownClasses({
+    size: props.size,
+    color: props.color,
+    format: props.format,
+    finished: remaining.value === 0,
+    warningTime: props.warningTime,
+    remaining: remaining.value,
+    className: props.className,
+  }).join(' ')
+)
 
-/** 对外暴露方法 */
 defineExpose({ start, clear })
 </script> 
