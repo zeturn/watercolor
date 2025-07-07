@@ -1,0 +1,1 @@
+.wc-toolbar{@apply flex items-center w-full;}.wc-toolbar--regular{@apply min-h-16 py-3;}.wc-toolbar--dense{@apply min-h-12 py-2;}.wc-toolbar--gutters{@apply px-4 sm:px-6 lg:px-8;}

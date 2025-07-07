@@ -1,0 +1,1 @@
+.typing-wrapper{display:inline-flex;align-items:center}.typing-cursor{display:inline-block;width:1px;height:1em;background:currentColor;margin-left:2px;animation:blink 1s steps(1) infinite}@keyframes blink{0%,50%{opacity:1}51%,to{opacity:0}}
