@@ -1,47 +1,62 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './style.css'
-import { getMarqueeClasses } from './utils.js'
+import {
+  getMarqueeClasses,
+  getContentStyle,
+  getContainerStyle,
+  getNextSpeed,
+  ANIMATION_NAMES,
+} from './utils.js'
 
 /**
- * React 版本的 Marquee 组件
- *
- * 目前实现：
- *  - 支持左右/上下滚动方向
- *  - 支持速度、循环、暂停/继续
- *  - 支持暗色模式和主题变量
- *
- * 注意：更复杂的控制按钮、渐变遮罩等可继续参考 Vue 版实现。
+ * Marquee (React)
+ * 与 Vue 版本保持统一的 props / 样式。
  */
 const Marquee = ({
   text = 'This is a scrolling marquee text',
   speed = 50,
-  direction = 'left', // 'left' | 'right' | 'up' | 'down'
-  loop = true,
+  direction = 'left',
+  variant = 'default',
+  size = 'md',
   pauseOnHover = false,
+  loop = true,
+  showGradient = true,
+  showControls = false,
+  allowReverse = true,
+  allowSpeedControl = true,
+  autoStart = true,
+  loading = false,
+  height = 'auto',
+  backgroundColor = '',
+  textColor = '',
   className = '',
-  style = {},
   children,
+  onStart,
+  onPause,
+  onResume,
+  onComplete,
+  onDirectionChange,
+  onSpeedChange,
   ...rest
 }) => {
   const containerRef = useRef(null)
-  const contentRef = useRef(null)
-  const [isPaused, setPaused] = useState(false)
+  const [isPaused, setPaused] = useState(!autoStart)
+  const [currentDirection, setCurrentDirection] = useState(direction)
+  const [currentSpeed, setCurrentSpeed] = useState(speed)
 
-  // 生成 keyframe 名称
-  const animationName = {
-    left: 'marquee-scroll-left',
-    right: 'marquee-scroll-right',
-    up: 'marquee-scroll-up',
-    down: 'marquee-scroll-down'
-  }[direction]
+  // event emit helpers
+  const emit = (fn, ...args) => typeof fn === 'function' && fn(...args)
 
-  // 计算持续时间：速度越大 -> 时间越短
-  const duration = 100 / speed
+  // notify start on mount
+  useEffect(() => {
+    if (autoStart) emit(onStart)
+  }, [])
 
+  // hover pause
   useEffect(() => {
     const node = containerRef.current
-    if (!node) return
-    const handleEnter = () => pauseOnHover && setPaused(true)
+    if (!node || !pauseOnHover) return
+    const handleEnter = () => setPaused(true)
     const handleLeave = () => setPaused(false)
     node.addEventListener('mouseenter', handleEnter)
     node.addEventListener('mouseleave', handleLeave)
@@ -51,31 +66,110 @@ const Marquee = ({
     }
   }, [pauseOnHover])
 
-  const contentStyle = {
-    animationName,
-    animationDuration: `${duration}s`,
-    animationTimingFunction: 'linear',
-    animationIterationCount: loop ? 'infinite' : 1,
-    animationPlayState: isPaused ? 'paused' : 'running'
+  // emit pause / resume events
+  useEffect(() => {
+    if (isPaused) emit(onPause)
+    else emit(onResume)
+  }, [isPaused])
+
+  // classes & styles
+  const containerClasses = getMarqueeClasses({
+    variant,
+    size,
+    direction: currentDirection,
+    paused: isPaused,
+    loading,
+    className,
+  }).join(' ')
+
+  const containerStyle = {
+    ...getContainerStyle({ height, backgroundColor, textColor }),
+  }
+
+  const contentStyle = getContentStyle({
+    direction: currentDirection,
+    speed: currentSpeed,
+    paused: isPaused,
+    loading,
+    loop,
+  })
+
+  // control handlers
+  const togglePause = () => setPaused((p) => !p)
+  const toggleDirection = () => {
+    if (!allowReverse) return
+    const newDir = {
+      left: 'right',
+      right: 'left',
+      up: 'down',
+      down: 'up',
+    }[currentDirection]
+    setCurrentDirection(newDir)
+    emit(onDirectionChange, newDir)
+  }
+
+  const toggleSpeed = () => {
+    if (!allowSpeedControl) return
+    const newSpeed = getNextSpeed(currentSpeed)
+    setCurrentSpeed(newSpeed)
+    emit(onSpeedChange, newSpeed)
   }
 
   return (
     <div
       ref={containerRef}
-      className={`marquee-container marquee-direction-${direction} ${className}`}
-      style={style}
+      className={containerClasses}
+      style={containerStyle}
       {...rest}
     >
-      <div ref={contentRef} className="marquee-content" style={contentStyle}>
-        <div className="marquee-item">
-          {children || text}
-        </div>
-        {loop && (
-          <div className="marquee-item marquee-clone">
-            {children || text}
-          </div>
-        )}
+      {/* content */}
+      <div className="marquee-content" style={contentStyle}>
+        <div className="marquee-item">{children || text}</div>
+        {loop && <div className="marquee-item marquee-clone">{children || text}</div>}
       </div>
+
+      {/* gradient */}
+      {showGradient && <div className="marquee-gradient marquee-gradient-left" />}
+      {showGradient && <div className="marquee-gradient marquee-gradient-right" />}
+
+      {/* controls */}
+      {showControls && (
+        <div className="marquee-controls">
+          <button
+            className="marquee-control-btn"
+            aria-label={isPaused ? '播放' : '暂停'}
+            onClick={togglePause}
+          >
+            {isPaused ? '▶️' : '⏸️'}
+          </button>
+          {allowReverse && (
+            <button
+              className="marquee-control-btn"
+              aria-label="改变方向"
+              onClick={toggleDirection}
+            >
+              🔄
+            </button>
+          )}
+          {allowSpeedControl && (
+            <button
+              className="marquee-control-btn"
+              aria-label="改变速度"
+              onClick={toggleSpeed}
+            >
+              ⚡
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* loading overlay */}
+      {loading && (
+        <div className="marquee-loading-overlay">
+          <div className="marquee-loading-spinner" />
+          <span className="marquee-loading-text">加载中...</span>
+        </div>
+      )}
     </div>
   )
 }

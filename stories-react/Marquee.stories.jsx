@@ -1,9 +1,9 @@
 import React from 'react';
 import Marquee from '@/components/Marquee/Marquee.jsx';
-import { action } from 'storybook/actions';
+import { action } from '@storybook/addon-actions';
 
 export default {
-  title: 'Components/Marquee',
+  title: 'Components/Marquee (React)',
   component: Marquee,
   parameters: {
     layout: 'fullscreen',

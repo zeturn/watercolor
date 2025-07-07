@@ -1,7 +1,7 @@
 import MarqueeVue from '../src/components/Marquee/Marquee.vue'
 
 export default {
-  title: 'Components/Marquee',
+  title: 'Components/Marquee (Vue)',
   component: MarqueeVue,
   parameters: {
     layout: 'fullscreen',
