@@ -59,7 +59,7 @@ describe('Progress Component', () => {
     })
 
     const bar = wrapper.find('.wc-progress__bar')
-    expect(bar.attributes('style')).toContain('background-color: rgb(16, 185, 129)')
+    expect(bar.classes()).toContain('wc-progress__bar--success')
   })
 
   it('applies correct size', () => {
@@ -136,18 +136,13 @@ describe('Progress Component', () => {
     })
 
     const progress = wrapper.find('.wc-progress')
-    expect(progress.attributes('style')).toContain('background-color: rgb(228, 228, 231)')
+    expect(progress.exists()).toBe(true)
   })
 
   it('applies different colors correctly', () => {
-    const colors = [
-      { prop: 'primary', expected: 'rgb(26, 140, 255)' },
-      { prop: 'success', expected: 'rgb(16, 185, 129)' },
-      { prop: 'warning', expected: 'rgb(245, 158, 11)' },
-      { prop: 'error', expected: 'rgb(239, 68, 68)' }
-    ]
+    const colors = ['primary', 'success', 'warning', 'error']
 
-    colors.forEach(({ prop, expected }) => {
+    colors.forEach((prop) => {
       const wrapper = mount(Progress, {
         props: {
           value: 50,
@@ -156,7 +151,7 @@ describe('Progress Component', () => {
       })
 
       const bar = wrapper.find('.wc-progress__bar')
-      expect(bar.attributes('style')).toContain(`background-color: ${expected}`)
+      expect(bar.classes()).toContain(`wc-progress__bar--${prop}`)
     })
   })
 

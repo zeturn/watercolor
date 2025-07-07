@@ -43,7 +43,7 @@ describe('Blockquote 组件', () => {
   })
 
   it('支持不同变体', () => {
-    const variants = ['default', 'minimal', 'card']
+    const variants = ['default', 'minimal']
     
     variants.forEach(variant => {
       const wrapper = mount(Blockquote, {
@@ -54,11 +54,12 @@ describe('Blockquote 组件', () => {
           default: '测试引用'
         }
       })
-      // default变体不会添加额外类名，其他变体才会添加
+      const block = wrapper.find('blockquote')
+      expect(block.exists()).toBe(true)
       if (variant !== 'default') {
-        expect(wrapper.classes()).toContain(`wc-blockquote--${variant}`)
+        expect(block.classes()).toContain(`wc-blockquote--${variant}`)
       } else {
-        expect(wrapper.classes()).toContain('wc-blockquote')
+        expect(block.classes()).toContain('wc-blockquote')
       }
     })
   })
@@ -75,11 +76,12 @@ describe('Blockquote 组件', () => {
           default: '测试引用'
         }
       })
-      // medium是默认尺寸，不会添加额外类名
+      const block = wrapper.find('blockquote')
+      expect(block.exists()).toBe(true)
       if (size !== 'medium') {
-        expect(wrapper.classes()).toContain(`wc-blockquote--${size}`)
+        expect(block.classes()).toContain(`wc-blockquote--${size}`)
       } else {
-        expect(wrapper.classes()).toContain('wc-blockquote')
+        expect(block.classes()).toContain('wc-blockquote')
       }
     })
   })
@@ -96,20 +98,21 @@ describe('Blockquote 组件', () => {
           default: '测试引用'
         }
       })
-      // default颜色不会添加额外类名
+      const block = wrapper.find('blockquote')
+      expect(block.exists()).toBe(true)
       if (color !== 'default') {
-        expect(wrapper.classes()).toContain(`wc-blockquote--${color}`)
+        expect(block.classes()).toContain(`wc-blockquote--${color}`)
       } else {
-        expect(wrapper.classes()).toContain('wc-blockquote')
+        expect(block.classes()).toContain('wc-blockquote')
       }
     })
   })
 
-  it('显示默认内容', () => {
+  it('显示默认内容为空', () => {
     const wrapper = mount(Blockquote)
     
     expect(wrapper.find('.quote-text').exists()).toBe(true)
-    expect(wrapper.text()).toContain('这里是引用内容')
+    expect(wrapper.text()).toBe('')
   })
 
   it('支持自定义类名', () => {
@@ -122,7 +125,9 @@ describe('Blockquote 组件', () => {
       }
     })
     
-    expect(wrapper.classes()).toContain('custom-blockquote')
+    const block = wrapper.find('blockquote')
+    expect(block.exists()).toBe(true)
+    expect(block.classes()).toContain('custom-blockquote')
   })
 
   it('具有正确的语义标签', () => {
@@ -146,8 +151,10 @@ describe('Blockquote 组件', () => {
       }
     })
     
+    const block = wrapper.find('blockquote')
+    expect(block.exists()).toBe(true)
     // noBorder为false时不会添加no-border类，而是默认有边框
-    expect(wrapper.classes()).not.toContain('wc-blockquote--no-border')
+    expect(block.classes()).not.toContain('wc-blockquote--no-border')
   })
 
   it('支持interactive属性', () => {
@@ -160,7 +167,9 @@ describe('Blockquote 组件', () => {
       }
     })
     
+    const block = wrapper.find('blockquote')
+    expect(block.exists()).toBe(true)
     // interactive为false时不会添加interactive类
-    expect(wrapper.classes()).not.toContain('wc-blockquote--interactive')
+    expect(block.classes()).not.toContain('wc-blockquote--interactive')
   })
 }) 

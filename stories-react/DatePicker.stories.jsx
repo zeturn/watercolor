@@ -60,7 +60,7 @@ const Template = (args) => {
   }
 
   return (
-    <div className="w-full max-w-sm">
+    <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px' }}>
       <DatePicker {...args} value={date} onChange={handleChange} />
       <div className="mt-4 text-sm text-gray-600">
         选中日期: {date ? date.toLocaleDateString() : '无'}
@@ -95,8 +95,8 @@ export const WithMinMaxDates = () => {
   const [date, setDate] = useState(null)
 
   return (
-    <div className="w-full max-w-sm">
-      <h3 className="text-sm font-medium text-gray-700 mb-2">限制日期范围</h3>
+    <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px' }}>
+      <h3 style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '8px' }}>限制日期范围</h3>
       <DatePicker
         value={date}
         onChange={setDate}
@@ -104,7 +104,7 @@ export const WithMinMaxDates = () => {
         minDate={min}
         maxDate={max}
       />
-      <div className="mt-4 text-xs text-gray-500">
+      <div style={{ marginTop: '16px', fontSize: '12px', color: 'gray' }}>
         <div>最小日期: {min.toLocaleDateString()}</div>
         <div>最大日期: {max.toLocaleDateString()}</div>
       </div>
@@ -125,17 +125,17 @@ export const Sizes = () => {
   const [d3, setD3] = useState(null)
 
   return (
-    <div className="space-y-4 w-full max-w-sm">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div>
-        <h3 className="text-sm font-medium text-gray-700 mb-2">小尺寸</h3>
+        <h3 style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '8px' }}>小尺寸</h3>
         <DatePicker value={d1} onChange={setD1} placeholder="小尺寸日期选择器" size="sm" />
       </div>
       <div>
-        <h3 className="text-sm font-medium text-gray-700 mb-2">中等尺寸</h3>
+        <h3 style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '8px' }}>中等尺寸</h3>
         <DatePicker value={d2} onChange={setD2} placeholder="中等尺寸日期选择器" size="md" />
       </div>
       <div>
-        <h3 className="text-sm font-medium text-gray-700 mb-2">大尺寸</h3>
+        <h3 style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '8px' }}>大尺寸</h3>
         <DatePicker value={d3} onChange={setD3} placeholder="大尺寸日期选择器" size="lg" />
       </div>
     </div>

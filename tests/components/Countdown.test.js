@@ -2,6 +2,15 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import Countdown from '@/components/Countdown/Countdown.vue'
 
+// Add matchMedia stub for JSDOM environments that lack it
+if (!window.matchMedia) {
+  window.matchMedia = vi.fn().mockReturnValue({
+    matches: false,
+    addListener: vi.fn(),
+    removeListener: vi.fn()
+  })
+}
+
 describe('Countdown 组件', () => {
   beforeEach(() => {
     vi.useFakeTimers()
@@ -139,11 +148,11 @@ describe('Countdown 组件', () => {
     const wrapper = mount(Countdown, {
       props: {
         seconds: 60,
-        color: '#ff0000',
+        customColor: '#ff0000',
         autoStart: false
       }
     })
-    
+    // JSDOM 会将 #ff0000 解析为 rgb(255, 0, 0)
     expect(wrapper.element.style.color).toBe('rgb(255, 0, 0)')
   })
 

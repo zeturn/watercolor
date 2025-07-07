@@ -56,7 +56,7 @@ describe('Badge 组件', () => {
       }
     })
     
-    expect(wrapper.classes()).toContain('wc-badge--dot')
+    expect(wrapper.classes()).toContain('wc-badge--dot-md')
     expect(wrapper.text()).toBe('')
   })
 

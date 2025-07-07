@@ -154,7 +154,8 @@ describe('CircularProgress 组件', () => {
   it('具有正确的可访问性属性', () => {
     const wrapper = mount(CircularProgress, {
       props: {
-        value: 75
+        value: 75,
+        variant: 'determinate'
       }
     })
     
