@@ -155,6 +155,24 @@
   animation: numberCountUp 0.5s ease-out;
 }
 
+/* 运行时状态 */
+.wc-number-animation--playing {
+  transform: scale(1.05);
+}
+
+/* 缓动方式映射到 transition-timing-function */
+.wc-number-animation--ease-in {
+  transition-timing-function: ease-in;
+}
+
+.wc-number-animation--ease-out {
+  transition-timing-function: ease-out;
+}
+
+.wc-number-animation--ease-in-out {
+  transition-timing-function: ease-in-out;
+}
+
 /* 响应式设计 */
 @media (max-width: 640px) {
   .wc-number-animation--2xl {

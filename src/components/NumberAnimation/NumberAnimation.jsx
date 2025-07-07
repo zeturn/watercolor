@@ -11,12 +11,18 @@ const NumberAnimation = ({
   locale = '',
   precision = 0,
   showSeparator = false,
+  prefix = '',
+  suffix = '',
+  separator = '',
+  formatter = null,
+  easing = 'linear',
   onFinish,
   className = '',
   style = {},
   ...rest
 }) => {
   const [value, setValue] = useState(from)
+  const [isAnimating, setIsAnimating] = useState(false)
   const startTimeRef = useRef(null)
   const rafRef = useRef(null)
 
@@ -28,6 +34,7 @@ const NumberAnimation = ({
       rafRef.current = requestAnimationFrame(step)
     } else {
       setValue(to)
+      setIsAnimating(false)
       onFinish?.()
     }
   }
@@ -36,9 +43,11 @@ const NumberAnimation = ({
     cancel()
     startTimeRef.current = null
     if (active) {
+      setIsAnimating(true)
       rafRef.current = requestAnimationFrame(step)
     } else {
       setValue(to)
+      setIsAnimating(false)
     }
   }
 
@@ -56,19 +65,42 @@ const NumberAnimation = ({
   }, [active, from, to, duration])
 
   const formatNumber = (val) => {
-    const fixed = val.toFixed(precision)
-    if (showSeparator) {
-      const num = Number(fixed)
-      return num.toLocaleString(locale || undefined, {
-        minimumFractionDigits: precision,
-        maximumFractionDigits: precision
-      })
+    if (formatter) {
+      return formatter(val)
     }
-    return fixed
+
+    const fixed = val.toFixed(precision)
+
+    let formatted = fixed
+
+    // 千分位分隔符
+    if (showSeparator || separator) {
+      if (separator) {
+        const parts = fixed.split('.')
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, separator)
+        formatted = parts.join('.')
+      } else {
+        formatted = Number(fixed).toLocaleString(locale || undefined, {
+          minimumFractionDigits: precision,
+          maximumFractionDigits: precision
+        })
+      }
+    }
+
+    return `${prefix}${formatted}${suffix}`
   }
 
+  const classes = [
+    'wc-number-animation',
+    isAnimating ? 'wc-number-animation--playing' : '',
+    easing && ['ease-in', 'ease-out', 'ease-in-out'].includes(easing) ? `wc-number-animation--${easing}` : '',
+    className
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   return (
-    <span className={`wc-number-animation ${className}`} style={style} {...rest}>
+    <span className={classes} style={style} {...rest}>
       {formatNumber(value)}
     </span>
   )
