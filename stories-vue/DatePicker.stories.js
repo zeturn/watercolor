@@ -2,7 +2,7 @@ import DatePickerVue from '../src/components/DatePicker/DatePicker.vue'
 import { ref } from 'vue'
 
 export default {
-  title: 'Components/DatePicker',
+  title: 'Components/DatePicker (Vue)',
   component: DatePickerVue,
   parameters: {
     layout: 'centered',
