@@ -1,7 +1,7 @@
 import CopyVue from '../src/components/Copy/Copy.vue'
 
 export default {
-  title: 'Components/Copy',
+  title: 'Components/Copy (Vue)',
   component: CopyVue,
   parameters: {
     layout: 'centered',
