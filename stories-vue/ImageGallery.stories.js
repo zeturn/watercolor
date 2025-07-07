@@ -1,7 +1,7 @@
 import ImageGalleryVue from '../src/components/ImageGallery/ImageGallery.vue'
 
 export default {
-  title: 'Components/ImageGallery',
+  title: 'Components/ImageGallery (Vue)',
   component: ImageGalleryVue,
   parameters: {
     layout: 'fullscreen',
@@ -167,7 +167,7 @@ export const Default = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-6xl mx-auto p-8">
+      <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px' }}>
         <ImageGalleryVue 
           :images="args.images"
           :title="args.title"
@@ -214,7 +214,7 @@ export const WithPagination = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-6xl mx-auto p-8">
+      <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px' }}>
         <ImageGalleryVue 
           :images="args.images"
           :title="args.title"
@@ -265,7 +265,7 @@ export const MasonryLayout = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-6xl mx-auto p-8">
+      <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px' }}>
         <ImageGalleryVue 
           :images="args.images"
           :title="args.title"
@@ -345,7 +345,7 @@ export const ProductGallery = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-4xl mx-auto p-8">
+      <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px' }}>
         <ImageGalleryVue 
           :images="args.images"
           :title="args.title"
@@ -378,7 +378,7 @@ export const Sizes = {
       return { smallImages }
     },
     template: `
-      <div class="w-full max-w-6xl mx-auto p-8 space-y-12">
+      <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <div>
           <h3 class="text-lg font-semibold mb-4">小尺寸画廊</h3>
           <ImageGalleryVue 
@@ -391,7 +391,7 @@ export const Sizes = {
         </div>
         
         <div>
-          <h3 class="text-lg font-semibold mb-4">中等尺寸画廊</h3>
+          <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '16px' }}>中等尺寸画廊</h3>
           <ImageGalleryVue 
             :images="smallImages"
             title="中等尺寸"
@@ -402,7 +402,7 @@ export const Sizes = {
         </div>
         
         <div>
-          <h3 class="text-lg font-semibold mb-4">大尺寸画廊</h3>
+          <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '16px' }}>大尺寸画廊</h3>
           <ImageGalleryVue 
             :images="smallImages"
             title="大尺寸"
@@ -413,7 +413,7 @@ export const Sizes = {
         </div>
         
         <div>
-          <h3 class="text-lg font-semibold mb-4">特大尺寸画廊</h3>
+          <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '16px' }}>特大尺寸画廊</h3>
           <ImageGalleryVue 
             :images="smallImages"
             title="特大尺寸"
@@ -449,7 +449,7 @@ export const LoadingState = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-6xl mx-auto p-8">
+      <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px' }}>
         <ImageGalleryVue 
           :images="args.images"
           :title="args.title"
@@ -496,7 +496,7 @@ export const EmptyGallery = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-6xl mx-auto p-8">
+      <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px' }}>
         <ImageGalleryVue 
           :images="args.images"
           :title="args.title"
@@ -533,7 +533,7 @@ export const CustomTitle = {
       return { images }
     },
     template: `
-      <div class="w-full max-w-6xl mx-auto p-8">
+      <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px' }}>
         <ImageGalleryVue 
           :images="images"
           :columns="3"

@@ -2,84 +2,8 @@ import React, { useState } from 'react';
 import ImageGallery from '@/components/ImageGallery/ImageGallery.jsx';
 import { action } from 'storybook/actions';
 
-const sampleImages = [
-    {
-      id: 1,
-      src: 'https://picsum.photos/800/600?random=1',
-      thumbnail: 'https://picsum.photos/400/300?random=1',
-      title: '美丽的风景',
-      description: '这是一张美丽的自然风景照片，展现了大自然的壮丽。',
-      alt: '风景照片'
-    },
-    {
-      id: 2,
-      src: 'https://picsum.photos/800/600?random=2',
-      thumbnail: 'https://picsum.photos/400/300?random=2',
-      title: '城市建筑',
-      description: '现代城市建筑的精美拍摄，展现了都市的繁华。',
-      alt: '建筑照片'
-    },
-    {
-      id: 3,
-      src: 'https://picsum.photos/800/600?random=3',
-      thumbnail: 'https://picsum.photos/400/300?random=3',
-      title: '艺术创作',
-      description: '独特的艺术作品，融合了传统与现代的元素。',
-      alt: '艺术照片'
-    },
-    {
-      id: 4,
-      src: 'https://picsum.photos/800/600?random=4',
-      thumbnail: 'https://picsum.photos/400/300?random=4',
-      title: '自然生态',
-      description: '野生动物在自然环境中的珍贵瞬间。',
-      alt: '生态照片'
-    },
-    {
-      id: 5,
-      src: 'https://picsum.photos/800/600?random=5',
-      thumbnail: 'https://picsum.photos/400/300?random=5',
-      title: '人文纪实',
-      description: '记录人们日常生活中的真实瞬间。',
-      alt: '人文照片'
-    },
-    {
-      id: 6,
-      src: 'https://picsum.photos/800/600?random=6',
-      thumbnail: 'https://picsum.photos/400/300?random=6',
-      title: '科技创新',
-      description: '展现现代科技发展的成果和未来趋势。',
-      alt: '科技照片'
-    },
-    {
-      id: 7,
-      src: 'https://picsum.photos/800/600?random=7',
-      thumbnail: 'https://picsum.photos/400/300?random=7',
-      title: '食物美学',
-      description: '精心制作的美食，色香味俱全。',
-      alt: '美食照片'
-    },
-    {
-      id: 8,
-      src: 'https://picsum.photos/800/600?random=8',
-      thumbnail: 'https://picsum.photos/400/300?random=8',
-      title: '运动瞬间',
-      description: '捕捉运动员的精彩瞬间和拼搏精神。',
-      alt: '运动照片'
-    },
-    {
-      id: 9,
-      src: 'https://picsum.photos/800/600?random=9',
-      thumbnail: 'https://picsum.photos/400/300?random=9',
-      title: '旅行记忆',
-      description: '世界各地的美丽景点和文化体验。',
-      alt: '旅行照片'
-    }
-  ];
-  
-
 export default {
-  title: 'Components/ImageGallery',
+  title: 'Components/ImageGallery (React)',
   component: ImageGallery,
   parameters: {
     layout: 'fullscreen',
@@ -148,10 +72,86 @@ export default {
 };
 
 const Template = (args) => (
-    <div className="w-full max-w-6xl mx-auto p-8">
+    <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px' }}>
         <ImageGallery {...args} />
     </div>
 );
+
+const sampleImages = [
+  {
+    id: 1,
+    src: 'https://picsum.photos/800/600?random=1',
+    thumbnail: 'https://picsum.photos/400/300?random=1',
+    title: '美丽的风景',
+    description: '这是一张美丽的自然风景照片，展现了大自然的壮丽。',
+    alt: '风景照片'
+  },
+  {
+    id: 2,
+    src: 'https://picsum.photos/800/600?random=2',
+    thumbnail: 'https://picsum.photos/400/300?random=2',
+    title: '城市建筑',
+    description: '现代城市建筑的精美拍摄，展现了都市的繁华。',
+    alt: '建筑照片'
+  },
+  {
+    id: 3,
+    src: 'https://picsum.photos/800/600?random=3',
+    thumbnail: 'https://picsum.photos/400/300?random=3',
+    title: '艺术创作',
+    description: '独特的艺术作品，融合了传统与现代的元素。',
+    alt: '艺术照片'
+  },
+  {
+    id: 4,
+    src: 'https://picsum.photos/800/600?random=4',
+    thumbnail: 'https://picsum.photos/400/300?random=4',
+    title: '自然生态',
+    description: '野生动物在自然环境中的珍贵瞬间。',
+    alt: '生态照片'
+  },
+  {
+    id: 5,
+    src: 'https://picsum.photos/800/600?random=5',
+    thumbnail: 'https://picsum.photos/400/300?random=5',
+    title: '人文纪实',
+    description: '记录人们日常生活中的真实瞬间。',
+    alt: '人文照片'
+  },
+  {
+    id: 6,
+    src: 'https://picsum.photos/800/600?random=6',
+    thumbnail: 'https://picsum.photos/400/300?random=6',
+    title: '科技创新',
+    description: '展现现代科技发展的成果和未来趋势。',
+    alt: '科技照片'
+  },
+  {
+    id: 7,
+    src: 'https://picsum.photos/800/600?random=7',
+    thumbnail: 'https://picsum.photos/400/300?random=7',
+    title: '食物美学',
+    description: '精心制作的美食，色香味俱全。',
+    alt: '美食照片'
+  },
+  {
+    id: 8,
+    src: 'https://picsum.photos/800/600?random=8',
+    thumbnail: 'https://picsum.photos/400/300?random=8',
+    title: '运动瞬间',
+    description: '捕捉运动员的精彩瞬间和拼搏精神。',
+    alt: '运动照片'
+  },
+  {
+    id: 9,
+    src: 'https://picsum.photos/800/600?random=9',
+    thumbnail: 'https://picsum.photos/400/300?random=9',
+    title: '旅行记忆',
+    description: '世界各地的美丽景点和文化体验。',
+    alt: '旅行照片'
+  }
+];
+
 
 export const Default = Template.bind({});
 Default.args = {
@@ -225,11 +225,11 @@ export const WithCustomHeader = (args) => {
     });
   
     return (
-      <div className="w-full max-w-6xl mx-auto p-8">
-        <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold">{args.title}</h2>
+      <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+            <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>{args.title}</h2>
             <div>
-                <button className={`px-3 py-1 text-sm rounded ${filter === 'all' ? 'bg-blue-500 text-white' : ''}`} onClick={() => setFilter('all')}>全部</button>
+                <button style={{ padding: '8px 16px', fontSize: '14px', borderRadius: '4px', backgroundColor: filter === 'all' ? 'blue' : 'white', color: filter === 'all' ? 'white' : 'black' }} onClick={() => setFilter('all')}>全部</button>
                 <button className={`px-3 py-1 text-sm rounded ml-2 ${filter === '风景' ? 'bg-blue-500 text-white' : ''}`} onClick={() => setFilter('风景')}>风景</button>
                 <button className={`px-3 py-1 text-sm rounded ml-2 ${filter === '城市' ? 'bg-blue-500 text-white' : ''}`} onClick={() => setFilter('城市')}>城市</button>
             </div>

@@ -19,6 +19,8 @@ const ImageGallery = ({
   style = {},
   onSelect,
   onDownload,
+  onLightboxOpen,
+  onLightboxClose,
   ...props
 }) => {
   const [selected, setSelected] = useState(-1)
@@ -32,8 +34,11 @@ const ImageGallery = ({
     : images
 
   const handleSelect = (idx) => {
-    setSelected(idx)
-    onSelect?.({ index: idx, image: displayedImages[idx] })
+    const globalIdx = showPagination ? (page - 1) * itemsPerPage + idx : idx
+    setSelected(globalIdx)
+    const image = images[globalIdx]
+    onSelect?.({ index: globalIdx, image })
+    onLightboxOpen?.({ index: globalIdx, image })
   }
 
   const handleDownload = (image) => {
@@ -46,14 +51,26 @@ const ImageGallery = ({
     document.body.removeChild(link)
   }
 
+  const closeLightbox = () => {
+    setSelected(-1)
+    onLightboxClose?.()
+  }
+
+  const handlePrev = () => setSelected((idx) => (idx > 0 ? idx - 1 : idx))
+  const handleNext = () => setSelected((idx) => (idx < images.length - 1 ? idx + 1 : idx))
+
   // Simple lightbox
   useEffect(() => {
     const onKey = (e) => {
-      if (e.key === 'Escape') setSelected(-1)
+      if (e.key === 'Escape') closeLightbox()
+      if (selected !== -1) {
+        if (e.key === 'ArrowLeft') handlePrev()
+        if (e.key === 'ArrowRight') handleNext()
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [])
+  }, [selected])
 
   return (
     <div className={[
@@ -71,7 +88,14 @@ const ImageGallery = ({
         </div>
       )}
 
-      <div className="gallery-grid" style={{ gridTemplateColumns: `repeat(${columns},1fr)`, gap }}>
+      <div
+        className="gallery-grid"
+        style={layout === 'grid'
+          ? { gridTemplateColumns: `repeat(${columns},1fr)`, gap }
+          : layout === 'masonry'
+            ? { columnCount: columns, columnGap: gap }
+            : { gap }}
+      >
         {displayedImages.map((img, idx) => (
           <div
             key={img.id || idx}
@@ -88,6 +112,32 @@ const ImageGallery = ({
                 className="gallery-image"
                 loading={lazyLoad ? 'lazy' : 'eager'}
               />
+              <div className="gallery-overlay">
+                <div className="gallery-overlay-content">
+                  <button
+                    className="gallery-action-btn gallery-view-btn"
+                    aria-label={`在灯箱中查看图片 ${idx + 1}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSelect(idx)
+                    }}
+                  >
+                    👁️
+                  </button>
+                  {showDownload && (
+                    <button
+                      className="gallery-action-btn gallery-download-btn"
+                      aria-label={`下载图片 ${idx + 1}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDownload(img)
+                      }}
+                    >
+                      📥
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
             {showInfo && (img.title || img.description) && (
               <div className="gallery-info">
@@ -110,19 +160,43 @@ const ImageGallery = ({
       {selected !== -1 && (
         <div 
           className="gallery-lightbox" 
-          onClick={() => setSelected(-1)}
+          onClick={closeLightbox}
           role="dialog"
           aria-modal="true"
           aria-labelledby="lightbox-title"
         >
           <div className="gallery-lightbox-content" onClick={e => e.stopPropagation()}>
-            <button className="gallery-lightbox-close" onClick={() => setSelected(-1)}>✕</button>
+            <button className="gallery-lightbox-close" onClick={closeLightbox}>✕</button>
             <div className="gallery-lightbox-image-container">
-              <img src={displayedImages[selected].src} alt={displayedImages[selected].alt} className="gallery-lightbox-image" />
+              <img src={images[selected].src} alt={images[selected].alt} className="gallery-lightbox-image" />
             </div>
-            <h3 id="lightbox-title" className="sr-only">{displayedImages[selected].title}</h3>
+            {(images[selected].title || images[selected].description) && (
+              <div className="gallery-lightbox-info">
+                {images[selected].title && <h3 id="lightbox-title" className="gallery-lightbox-title">{images[selected].title}</h3>}
+                {images[selected].description && <p className="gallery-lightbox-description">{images[selected].description}</p>}
+              </div>
+            )}
+            <div className="gallery-lightbox-navigation">
+              <button
+                className="gallery-lightbox-nav gallery-lightbox-prev"
+                disabled={selected === 0}
+                aria-label="上一张图片"
+                onClick={handlePrev}
+              >
+                ‹
+              </button>
+              <span className="gallery-lightbox-counter">{selected + 1} / {images.length}</span>
+              <button
+                className="gallery-lightbox-nav gallery-lightbox-next"
+                disabled={selected === images.length - 1}
+                aria-label="下一张图片"
+                onClick={handleNext}
+              >
+                ›
+              </button>
+            </div>
             {showDownload && (
-              <button className="gallery-action-btn gallery-download-btn" onClick={() => handleDownload(displayedImages[selected])}>下载</button>
+              <button className="gallery-action-btn gallery-download-btn" onClick={() => handleDownload(images[selected])}>下载</button>
             )}
           </div>
         </div>

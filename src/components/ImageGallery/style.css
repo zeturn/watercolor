@@ -18,6 +18,17 @@
   --gallery-transition: all 0.3s ease;
 }
 
+/* 暗色模式变量 - 通过 .dark 类触发，与其它组件保持一致 */
+.dark {
+  --gallery-bg: #1f2937; /* slate-800 */
+  --gallery-border: #374151; /* slate-700 */
+  --gallery-text: #f9fafb; /* slate-50 */
+  --gallery-text-secondary: #9ca3af; /* slate-400 */
+  --gallery-primary: #3b82f6; /* primary remains */
+  --gallery-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  --gallery-overlay: rgba(0, 0, 0, 0.55);
+}
+
 /* 深色模式变量 */
 /* 已移除 prefers-color-scheme 媒体查询，避免与Storybook主题切换冲突 */
 
