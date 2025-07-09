@@ -1,7 +1,7 @@
 import Skeleton from '../src/components/Skeleton/Skeleton.vue'
 
 export default {
-  title: 'Components/Skeleton',
+  title: 'Components/Skeleton (Vue)',
   component: Skeleton,
   parameters: {
     layout: 'centered',
