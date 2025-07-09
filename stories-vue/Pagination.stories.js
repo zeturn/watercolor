@@ -1,7 +1,7 @@
 import PaginationVue from '../src/components/Pagination/Pagination.vue'
 
 export default {
-  title: 'Components/Pagination',
+  title: 'Components/Pagination (Vue)',
   component: PaginationVue,
   tags: ['autodocs'],
   argTypes: {

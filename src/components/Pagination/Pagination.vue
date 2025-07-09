@@ -6,8 +6,7 @@
   >
     <!-- 上一页按钮 -->
     <button 
-      class="wc-pagination__prev" 
-      :class="{ 'disabled': currentPageInternal === 1 }"
+      class="page-btn wc-page-btn wc-page-btn--prev wc-page-btn--nav"
       :disabled="currentPageInternal === 1" 
       aria-label="上一页"
       @click="select(currentPageInternal - 1)"
@@ -22,22 +21,20 @@
     >
       <button 
         v-if="!page.ellipsis" 
-        class="wc-pagination__page" 
-        :class="{ 'wc-pagination__page--active': page.num === currentPageInternal }" 
+        :class="['page-btn', 'wc-page-btn', { active: page.num === currentPageInternal, 'wc-page-btn--active': page.num === currentPageInternal }]" 
         @click="select(page.num)"
       >
         {{ page.num }}
       </button>
       <span
         v-else
-        class="wc-pagination__ellipsis"
+        class="page-ellipsis wc-page-ellipsis"
       >…</span>
     </template>
 
     <!-- 下一页按钮 -->
     <button 
-      class="wc-pagination__next" 
-      :class="{ 'disabled': currentPageInternal === pageCount }"
+      class="page-btn wc-page-btn wc-page-btn--next wc-page-btn--nav" 
       :disabled="currentPageInternal === pageCount" 
       aria-label="下一页"
       @click="select(currentPageInternal + 1)"
@@ -48,7 +45,7 @@
     <!-- 页面大小选择器 -->
     <div
       v-if="showSizeChanger"
-      class="wc-pagination__size-changer"
+      class="wc-pagination-size-selector"
     >
       <select @change="handleSizeChange">
         <option
@@ -65,7 +62,7 @@
     <!-- 快速跳转器 -->
     <div
       v-if="showQuickJumper"
-      class="wc-pagination__quick-jumper"
+      class="wc-pagination-quick-jumper"
     >
       <span>跳转到</span>
       <input 
@@ -125,7 +122,7 @@ export default {
     size: {
       type: String,
       default: 'md',
-      validator: (value) => ['sm', 'md', 'lg'].includes(value)
+      validator: (value) => ['sm', 'md', 'lg', 'xl'].includes(value)
     }
   },
   emits: ['update:modelValue', 'change', 'page-change', 'size-change'],
@@ -141,7 +138,7 @@ export default {
     })
 
     const paginationClasses = computed(() => {
-      const classes = ['wc-pagination']
+      const classes = ['pagination', 'wc-pagination']
       if (props.size !== 'md') {
         classes.push(`wc-pagination--${props.size}`)
       }
