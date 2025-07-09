@@ -1,7 +1,7 @@
 import TypingTextVue from '../src/components/TypingText/TypingText.vue'
 
 export default {
-  title: 'Components/TypingText',
+  title: 'Components/TypingText (Vue)',
   component: TypingTextVue,
   tags: ['autodocs'],
   argTypes: {
