@@ -2,7 +2,7 @@ import Slider from '../src/components/Slider/Slider.vue'
 import { ref } from 'vue'
 
 export default {
-  title: 'Components/Slider',
+  title: 'Components/Slider (Vue)',
   component: Slider,
   parameters: {
     docs: {
