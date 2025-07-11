@@ -2,7 +2,7 @@ import TabsVue from '../src/components/Tabs/Tabs.vue'
 import { ref } from 'vue'
 
 export default {
-  title: 'Components/Tabs',
+  title: 'Components/Tabs (vue)',
   component: TabsVue,
   parameters: {
     layout: 'centered',

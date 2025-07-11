@@ -2,7 +2,7 @@ import ToolbarVue from '../src/components/Toolbar/Toolbar.vue'
 import ButtonVue from '../src/components/Button/Button.vue'
 
 export default {
-  title: 'Components/Toolbar',
+  title: 'Components/Toolbar (vue)',
   component: ToolbarVue,
   tags: ['autodocs'],
   argTypes: {

@@ -23,6 +23,7 @@
 </template>
 
 <script setup>
+import './style.css'
 import { computed, ref, watch } from 'vue'
 
 const props = defineProps({
@@ -49,19 +50,36 @@ const activeIndex = ref(props.modelValue)
 const activeTab = computed(() => props.tabs[activeIndex.value])
 
 const tabsClasses = computed(() => {
-  const baseClasses = 'wc-tabs'
-  const variantClass = props.variant === 'pills' ? 'wc-tabs--pills' : ''
-  const underlineClass = props.variant === 'underline' ? 'wc-tabs--underline' : ''
-  
-  return [baseClasses, variantClass, underlineClass]
+  const classes = ['wc-tabs']
+
+  switch (props.variant) {
+    case 'pills':
+      classes.push('wc-tabs--pills')
+      break
+    case 'underline':
+      classes.push('wc-tabs--underline')
+      break
+    default:
+      classes.push('wc-tabs--default')
+  }
+
+  return classes
 })
 
 const getTabClasses = (index) => {
   const baseClasses = 'wc-tab'
   const activeClass = activeIndex.value === index ? 'wc-tab--active' : ''
   const disabledClass = props.tabs[index]?.disabled ? 'opacity-50 cursor-not-allowed' : ''
-  
-  return [baseClasses, activeClass, disabledClass]
+
+  let variantClasses = ''
+  if (props.variant === 'underline') {
+    variantClasses = 'border-b-2 border-transparent rounded-none px-4 py-2 -mb-px'
+    if (activeIndex.value === index) {
+      variantClasses += ' border-primary-500 bg-transparent text-primary-600 dark:text-primary-400'
+    }
+  }
+
+  return [baseClasses, activeClass, disabledClass, variantClasses]
 }
 
 const handleTabClick = (index) => {
@@ -79,21 +97,3 @@ watch(
   }
 )
 </script>
-
-<style scoped>
-.wc-tabs--pills {
-  @apply bg-neutral-100 dark:bg-neutral-800 rounded-xl p-1;
-}
-
-.wc-tabs--underline {
-  @apply bg-transparent border-b border-neutral-200 dark:border-neutral-700 p-0 space-x-0;
-}
-
-.wc-tabs--underline .wc-tab {
-  @apply border-b-2 border-transparent rounded-none px-4 py-2 -mb-px;
-}
-
-.wc-tabs--underline .wc-tab--active {
-  @apply border-primary-500 bg-transparent text-primary-600 dark:text-primary-400;
-}
-</style> 

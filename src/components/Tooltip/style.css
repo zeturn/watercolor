@@ -1,5 +1,14 @@
 /* Tooltip 组件样式 */
 .wc-tooltip {
+  /* 保证浮层位于最上层 */
+  z-index: var(--wc-z-index-tooltip, 9999);
+  position: absolute;
+  /* 避免文本换行导致宽度不可控 */
+  white-space: nowrap;
+  /* 圆角 */
+  border-radius: var(--wc-radius-sm, 4px);
+  /* 内边距，避免完全依赖外部类库 */
+  padding: 0.25rem 0.5rem; /* 4px 8px */
   background: var(--wc-neutral-900, #1f2937);
   color: var(--wc-neutral-0, #ffffff);
   pointer-events: none;
@@ -31,4 +40,39 @@
 .wc-tooltip.tooltip-fade-leave-to {
   opacity: 0;
   transition: opacity 0.15s ease;
+}
+
+/* 触发元素包裹，保证相对定位 */
+.wc-tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* 位置修饰类 */
+.wc-tooltip--top {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0.5rem; /* 与触发元素的距离 */
+}
+
+.wc-tooltip--bottom {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0.5rem;
+}
+
+.wc-tooltip--left {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 0.5rem;
+}
+
+.wc-tooltip--right {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 0.5rem;
 }

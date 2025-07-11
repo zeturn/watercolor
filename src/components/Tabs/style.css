@@ -81,25 +81,38 @@
 
 /* ====== Tab Variants ====== */
 
-/* Default Variant */
 .wc-tabs--default {
   background: transparent;
-  border-bottom: 1px solid var(--wc-tabs-border);
   padding: 0;
   gap: 0;
-  border-radius: 0;
+  border-radius: var(--wc-tabs-border-radius); /* 全圆角 */
+  border: none;
+  box-shadow: none;
+  overflow: hidden;
 }
 
+/* 未激活标签 */
 .wc-tabs--default .wc-tab {
-  border-radius: 0;
-  border-bottom: var(--wc-tab-indicator-height) solid transparent;
-  margin-bottom: calc(-1 * var(--wc-tab-indicator-height));
+  background: var(--wc-tab-bg);
+  color: var(--wc-neutral-800);
+  border: none;
+  border-radius: var(--wc-tabs-border-radius);
+  margin: 0 2px;
+  box-shadow: none;
 }
 
+/* 激活标签 */
 .wc-tabs--default .wc-tab--active {
-  background: transparent;
-  color: var(--wc-tab-text-active);
-  border-bottom-color: var(--wc-tab-indicator-color);
+  background: #ffffff; /* 白色 */
+  color: #2563eb; /* 蓝色 */
+  border: none;
+  border-radius: var(--wc-tabs-border-radius);
+  box-shadow: none;
+}
+
+/* 悬浮交互：稍微加深背景 */
+.wc-tabs--default .wc-tab:hover:not(.wc-tab--active):not(:disabled) {
+  background: #e5e7eb;
 }
 
 /* Pills Variant */

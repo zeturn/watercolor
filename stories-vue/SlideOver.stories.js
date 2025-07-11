@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import SlideOverVue from '../src/components/SlideOver/SlideOver.vue'
 
 export default {
-  title: 'Components/SlideOver',
+  title: 'Components/SlideOver (vue)',
   component: SlideOverVue,
   tags: ['autodocs'],
   argTypes: {

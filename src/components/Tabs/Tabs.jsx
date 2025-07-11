@@ -21,27 +21,22 @@ const Tabs = ({
     }
   }, [controlledActiveIndex, isControlled])
   
+  // 统一使用原生 CSS 类而非 Tailwind 工具类
   const tabsClasses = [
     'wc-tabs',
-    variant === 'pills' && 'bg-neutral-100 dark:bg-neutral-800 rounded-xl p-1',
-    variant === 'underline' && 'bg-transparent border-b border-neutral-200 dark:border-neutral-700 p-0 space-x-0',
-    className
-  ].filter(Boolean).join(' ')
+    variant === 'pills' && 'wc-tabs--pills',
+    variant === 'underline' && 'wc-tabs--underline',
+    (variant === 'default' || !['pills', 'underline'].includes(variant)) && 'wc-tabs--default',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ')
   
   const getTabClasses = (index, disabled) => {
-    const baseClasses = 'wc-tab'
-    const activeClass = activeIndex === index ? 'wc-tab--active' : ''
-    const disabledClass = disabled ? 'opacity-50 cursor-not-allowed' : ''
-    
-    let variantClasses = ''
-    if (variant === 'underline') {
-      variantClasses = 'border-b-2 border-transparent rounded-none px-4 py-2 -mb-px'
-      if (activeIndex === index) {
-        variantClasses += ' border-primary-500 bg-transparent text-primary-600 dark:text-primary-400'
-      }
-    }
-    
-    return [baseClasses, activeClass, disabledClass, variantClasses].filter(Boolean).join(' ')
+    const classes = ['wc-tab']
+    if (activeIndex === index) classes.push('wc-tab--active')
+    if (disabled) classes.push('opacity-50 cursor-not-allowed') // 额外语义化 class，可考虑移除
+    return classes.join(' ')
   }
   
   const handleTabClick = (index, tab) => {

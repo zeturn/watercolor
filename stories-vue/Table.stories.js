@@ -5,7 +5,7 @@ import TableRow from '../src/components/Table/TableRow.vue'
 import TableCell from '../src/components/Table/TableCell.vue'
 
 export default {
-  title: 'Components/Table',
+  title: 'Components/Table (vue)',
   component: Table,
   parameters: {
     layout: 'centered',

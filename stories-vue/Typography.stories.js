@@ -1,7 +1,7 @@
 import Typography from '../src/components/Typography/Typography.vue'
 
 export default {
-  title: 'Components/Typography',
+  title: 'Components/Typography (vue)',
   component: Typography,
   parameters: {
     docs: {
