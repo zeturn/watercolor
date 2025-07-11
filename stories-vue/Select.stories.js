@@ -2,7 +2,7 @@ import Select from '../src/components/Select/Select.vue'
 import { ref } from 'vue'
 
 export default {
-  title: 'Components/Select',
+  title: 'Components/Select (vue)',
   component: Select,
   parameters: {
     docs: {

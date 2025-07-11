@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import './style.css'
 
 const Select = ({
   value = '',
@@ -164,21 +165,44 @@ const Select = ({
     }
   }
 
+  const getLabelClasses = () => {
+    const classes = ['wc-select__label']
+    classes.push(`wc-select__label--${size}`)
+    if (error) classes.push('wc-select__label--error')
+    if (isFocused || selectedOption) classes.push('wc-select__label--active')
+    return classes.join(' ')
+  }
+  const getContainerClasses = () => {
+    const classes = ['wc-select__container']
+    classes.push(`wc-select__container--${variant}`)
+    classes.push(`wc-select__container--${size}`)
+    if (disabled) classes.push('wc-select__container--disabled')
+    if (error) classes.push('wc-select__container--error')
+    if (isFocused) classes.push('wc-select__container--focused')
+    if (isOpen) classes.push('wc-select__container--open')
+    return classes.join(' ')
+  }
+  const getOptionClasses = (option, isSelected) => {
+    const classes = ['wc-select__option']
+    if (isSelected) classes.push('wc-select__option--selected')
+    if (option.disabled) classes.push('wc-select__option--disabled')
+    return classes.join(' ')
+  }
+
   const selectId = id || name || `select-${Math.random().toString(36).substr(2, 9)}`
 
   return (
-    <div className={getSelectClasses()} ref={selectRef}>
+    <div className="wc-select" ref={selectRef}>
       {label && (
         <label
           htmlFor={selectId}
-          className={`wc-select__label ${(isFocused || selectedOption) ? 'wc-select__label--active' : ''}`}
+          className={getLabelClasses()}
         >
           {label}
           {required && <span className="wc-select__required">*</span>}
         </label>
       )}
-      
-      <div className="wc-select__container">
+      <div className={getContainerClasses()}>
         <div
           className="wc-select__control"
           style={getSelectStyles()}
@@ -194,7 +218,6 @@ const Select = ({
           <div className="wc-select__value">
             {renderSelectedValue()}
           </div>
-          
           <div className="wc-select__indicators">
             {clearable && (selectedOption || (multiple && value?.length > 0)) && (
               <button
@@ -206,15 +229,14 @@ const Select = ({
                 ×
               </button>
             )}
-            <div className={`wc-select__arrow ${isOpen ? 'wc-select__arrow--open' : ''}`}>
+            <div className={`wc-select__arrow${isOpen ? ' wc-select__arrow--open' : ''}`}>
               ▼
             </div>
           </div>
         </div>
-        
         {isOpen && (
-          <div 
-            className="wc-select__menu"
+          <div
+            className="wc-select__dropdown"
             style={{ maxHeight }}
             ref={optionsRef}
           >
@@ -223,37 +245,37 @@ const Select = ({
                 <input
                   type="text"
                   className="wc-select__search-input"
-                  placeholder="Search..."
+                  placeholder="搜索..."
                   value={searchQuery}
                   onChange={handleSearchChange}
                   autoFocus
                 />
               </div>
             )}
-            
             <div className="wc-select__options" role="listbox">
               {filteredOptions.length === 0 ? (
-                <div className="wc-select__no-options">No options found</div>
+                <div className="wc-select__no-options">没有找到选项</div>
               ) : (
                 filteredOptions.map((option, index) => {
-                  const isSelected = multiple 
+                  const isSelected = multiple
                     ? Array.isArray(value) && value.includes(option.value)
                     : value === option.value
-                  
                   return (
                     <div
                       key={option.value || index}
-                      className={`wc-select__option ${isSelected ? 'wc-select__option--selected' : ''} ${option.disabled ? 'wc-select__option--disabled' : ''}`}
+                      className={getOptionClasses(option, isSelected)}
                       onClick={() => handleOptionClick(option)}
                       role="option"
                       aria-selected={isSelected}
                     >
-                      {multiple && (
-                        <span className={`wc-select__checkbox ${isSelected ? 'wc-select__checkbox--checked' : ''}`}>
-                          {isSelected && '✓'}
-                        </span>
+                      <span className="wc-select__option-text">
+                        {renderOption ? renderOption(option) : (option.label || option.value)}
+                      </span>
+                      {isSelected && (
+                        <svg className="wc-select__option-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <polyline points="20,6 9,17 4,12" />
+                        </svg>
                       )}
-                      {renderOption ? renderOption(option) : (option.label || option.value)}
                     </div>
                   )
                 })
@@ -262,10 +284,13 @@ const Select = ({
           </div>
         )}
       </div>
-      
-      {(helperText || (error && errorMessage)) && (
-        <div className={`wc-select__helper-text ${error ? 'wc-select__helper-text--error' : ''}`}>
-          {error && errorMessage ? errorMessage : helperText}
+      {(error || helperText) && (
+        <div>
+          {error ? (
+            <p className="wc-select__error">{errorMessage || error}</p>
+          ) : (
+            <p className="wc-select__helper">{helperText}</p>
+          )}
         </div>
       )}
     </div>

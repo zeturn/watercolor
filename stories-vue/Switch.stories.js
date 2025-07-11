@@ -2,7 +2,7 @@ import Switch from '../src/components/Switch/Switch.vue'
 import { ref } from 'vue'
 
 export default {
-  title: 'Components/Switch',
+  title: 'Components/Switch (vue)',
   component: Switch,
   parameters: {
     docs: {
