@@ -21,6 +21,17 @@ module.exports = {
     },
   },
   plugins: ['@typescript-eslint', 'vue'],
+  ignorePatterns: [
+    'node_modules/**/*',
+    'dist/**/*',
+    'storybook-static/**/*',
+    'storybook-static-react/**/*',
+    'coverage/**/*',
+    '*.min.js',
+    '*.bundle.js',
+    '*.chunk.js',
+    'public/**/*',
+  ],
   rules: {
     // Vue rules - lower strictness
     'vue/multi-word-component-names': 'off',
@@ -49,6 +60,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-this-alias': 'warn',
     
     // General rules - lower strictness
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
