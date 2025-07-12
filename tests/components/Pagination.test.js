@@ -24,7 +24,7 @@ describe('Pagination Component', () => {
       }
     })
     
-    const pageButtons = wrapper.findAll('.wc-pagination__page')
+    const pageButtons = wrapper.findAll('.wc-page-btn:not(.wc-page-btn--nav)')
     expect(pageButtons.length).toBeGreaterThan(0)
   })
 
@@ -37,7 +37,8 @@ describe('Pagination Component', () => {
       }
     })
     
-    const currentPageButton = wrapper.find('.wc-pagination__page--active')
+    const currentPageButton = wrapper.find('.wc-page-btn--active')
+    expect(currentPageButton.exists()).toBe(true)
     expect(currentPageButton.text()).toBe('3')
   })
 
@@ -50,7 +51,7 @@ describe('Pagination Component', () => {
       }
     })
     
-    const pageButtons = wrapper.findAll('.wc-pagination__page')
+    const pageButtons = wrapper.findAll('.wc-page-btn:not(.wc-page-btn--nav)')
     expect(pageButtons.length).toBeGreaterThan(1) // 确保有足够的页面按钮
     const pageButton = pageButtons[1] // Page 2
     await pageButton.trigger('click')
@@ -67,9 +68,9 @@ describe('Pagination Component', () => {
       }
     })
     
-    const prevButton = wrapper.find('.wc-pagination__prev')
+    const prevButton = wrapper.find('.wc-page-btn--prev')
     expect(prevButton.exists()).toBe(true)
-    expect(prevButton.classes()).not.toContain('disabled')
+    expect(prevButton.attributes('disabled')).toBeFalsy()
   })
 
   it('disables previous button on first page', () => {
@@ -81,8 +82,8 @@ describe('Pagination Component', () => {
       }
     })
     
-    const prevButton = wrapper.find('.wc-pagination__prev')
-    expect(prevButton.classes()).toContain('disabled')
+    const prevButton = wrapper.find('.wc-page-btn--prev')
+    expect(prevButton.attributes('disabled')).toBe('')
   })
 
   it('shows next button when not on last page', () => {
@@ -94,9 +95,9 @@ describe('Pagination Component', () => {
       }
     })
     
-    const nextButton = wrapper.find('.wc-pagination__next')
+    const nextButton = wrapper.find('.wc-page-btn--next')
     expect(nextButton.exists()).toBe(true)
-    expect(nextButton.classes()).not.toContain('disabled')
+    expect(nextButton.attributes('disabled')).toBeFalsy()
   })
 
   it('disables next button on last page', () => {
@@ -108,8 +109,8 @@ describe('Pagination Component', () => {
       }
     })
     
-    const nextButton = wrapper.find('.wc-pagination__next')
-    expect(nextButton.classes()).toContain('disabled')
+    const nextButton = wrapper.find('.wc-page-btn--next')
+    expect(nextButton.attributes('disabled')).toBe('')
   })
 
   it('shows page size selector when showSizeChanger is true', () => {
@@ -122,7 +123,7 @@ describe('Pagination Component', () => {
       }
     })
     
-    expect(wrapper.find('.wc-pagination__size-changer').exists()).toBe(true)
+    expect(wrapper.find('.wc-pagination-size-selector').exists()).toBe(true)
   })
 
   it('emits size-change event when page size changes', async () => {
@@ -135,7 +136,7 @@ describe('Pagination Component', () => {
       }
     })
     
-    const sizeSelector = wrapper.find('.wc-pagination__size-changer select')
+    const sizeSelector = wrapper.find('.wc-pagination-size-selector select')
     await sizeSelector.setValue('20')
     
     expect(wrapper.emitted()).toHaveProperty('size-change')
@@ -151,7 +152,7 @@ describe('Pagination Component', () => {
       }
     })
     
-    expect(wrapper.find('.wc-pagination__quick-jumper').exists()).toBe(true)
+    expect(wrapper.find('.wc-pagination-quick-jumper').exists()).toBe(true)
   })
 
   it('shows ellipsis for large page counts', () => {
@@ -163,7 +164,7 @@ describe('Pagination Component', () => {
       }
     })
     
-    expect(wrapper.findAll('.wc-pagination__ellipsis').length).toBeGreaterThan(0)
+    expect(wrapper.findAll('.wc-page-ellipsis').length).toBeGreaterThan(0)
   })
 
   it('applies size correctly', () => {
@@ -177,5 +178,49 @@ describe('Pagination Component', () => {
     })
     
     expect(wrapper.classes()).toContain('wc-pagination--lg')
+  })
+
+  it('does not render when pageCount is 1', () => {
+    const wrapper = mount(Pagination, {
+      props: {
+        total: 5,
+        pageSize: 10,
+        currentPage: 1
+      }
+    })
+    
+    expect(wrapper.find('.wc-pagination').exists()).toBe(false)
+  })
+
+  it('emits change event when page changes', async () => {
+    const wrapper = mount(Pagination, {
+      props: {
+        total: 100,
+        pageSize: 10,
+        currentPage: 1
+      }
+    })
+    
+    const pageButtons = wrapper.findAll('.wc-page-btn:not(.wc-page-btn--nav)')
+    const pageButton = pageButtons[1] // Page 2
+    await pageButton.trigger('click')
+    
+    expect(wrapper.emitted()).toHaveProperty('change')
+  })
+
+  it('emits update:modelValue when page changes', async () => {
+    const wrapper = mount(Pagination, {
+      props: {
+        total: 100,
+        pageSize: 10,
+        currentPage: 1
+      }
+    })
+    
+    const pageButtons = wrapper.findAll('.wc-page-btn:not(.wc-page-btn--nav)')
+    const pageButton = pageButtons[1] // Page 2
+    await pageButton.trigger('click')
+    
+    expect(wrapper.emitted()).toHaveProperty('update:modelValue')
   })
 }) 

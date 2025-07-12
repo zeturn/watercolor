@@ -33,7 +33,12 @@
     "prepublishOnly": "npm run build",
     "prepack": "npm run build",
     "pack": "npm pack",
-    "publish": "npm publish"
+    "publish": "npm publish",
+    "check-publish": "node scripts/check-publish.js",
+    "release": "node scripts/publish.js",
+    "release:patch": "node scripts/publish.js patch",
+    "release:minor": "node scripts/publish.js minor",
+    "release:major": "node scripts/publish.js major"
   },
   "peerDependencies": {
     "react": "^18.0.0",
