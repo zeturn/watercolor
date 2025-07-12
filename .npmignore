@@ -1,0 +1,68 @@
+# 开发相关文件
+.git/
+.github/
+.idea/
+.vscode/
+*.log
+*.tsbuildinfo
+
+# 测试相关
+tests/
+coverage/
+*.test.js
+*.test.jsx
+*.test.ts
+*.test.tsx
+*.spec.js
+*.spec.jsx
+*.spec.ts
+*.spec.tsx
+vitest.config.js
+vitest.config.ts
+vitest.react.config.ts
+vitest.vue.config.ts
+
+# 构建和开发工具
+vite.config.js
+vite.react.config.js
+vite.vue.config.js
+.eslintrc.cjs
+.eslintignore
+.prettierrc
+tsconfig.json
+
+# Storybook相关
+.storybook-react/
+.storybook-vue/
+stories-react/
+stories-vue/
+storybook-static/
+storybook-static-react/
+storybook-static-vue/
+
+# 文档和笔记
+note/
+*.md
+!README.md
+
+# 脚本和工具
+scripts/
+
+# 公共资源（除了必要的图片）
+public/
+!public/img/watercolorui.png
+
+# 开发依赖和锁文件
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# 临时文件
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# 源码（只保留dist）
+src/ 

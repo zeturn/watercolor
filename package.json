@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "A modern minimalist cross-framework component library",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "main": "dist/watercolor-ui.umd.js",
+  "module": "dist/watercolor-ui.es.js",
   "types": "dist/index.d.ts",
+  "style": "dist/watercolor-ui.css",
   "files": [
     "dist",
-    "src"
+    "README.md",
+    "public/img/watercolorui.png"
   ],
   "scripts": {
     "dev": "vite",
@@ -27,7 +29,11 @@
     "storybook:vue": "storybook dev -p 6006 -c .storybook-vue",
     "build-storybook:vue": "storybook build -c .storybook-vue -o storybook-static-vue",
     "storybook:react": "storybook dev -p 6007 -c .storybook-react",
-    "build-storybook:react": "storybook build -c .storybook-react -o storybook-static-react"
+    "build-storybook:react": "storybook build -c .storybook-react -o storybook-static-react",
+    "prepublishOnly": "npm run build",
+    "prepack": "npm run build",
+    "pack": "npm pack",
+    "publish": "npm publish"
   },
   "peerDependencies": {
     "react": "^18.0.0",
@@ -78,9 +84,31 @@
     "component-library",
     "ui",
     "typescript",
-    "minimalist"
+    "minimalist",
+    "watercolor",
+    "material-ui",
+    "mui",
+    "cross-framework",
+    "dark-mode",
+    "theme"
   ],
-  "author": "watercolor-ui",
+  "author": {
+    "name": "Watercolor UI Team",
+    "email": "support@watercolor-ui.dev",
+    "url": "https://watercolor-ui.dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeturn/watercolor.git"
+  },
+  "homepage": "https://watercolor-ui.dev",
+  "bugs": {
+    "url": "https://github.com/zeturn/watercolor/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
   "license": "MIT",
   "dependencies": {
     "@heroicons/react": "^2.2.0",

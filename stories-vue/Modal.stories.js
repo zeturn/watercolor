@@ -3,7 +3,7 @@ import Button from '../src/components/Button/Button.vue'
 import { ref } from 'vue'
 
 export default {
-  title: 'Components/Modal',
+  title: 'Components/Modal (vue)',
   component: Modal,
   parameters: {
     docs: {

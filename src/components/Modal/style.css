@@ -1,4 +1,4 @@
-/* Modal 组件样式 - 合并了 Dialog 功能 */
+/* Modal 组件样式 */
 
 /* 覆盖层和背景 */
 .wc-modal-overlay {
@@ -46,7 +46,7 @@
 
 /* Modal 主体 */
 .wc-modal {
-  background-color: var(--wc-background, #ffffff);
+  background-color: var(--wc-info-50, #ffffff);
   color: var(--wc-text, #111827);
   border: 1px solid var(--wc-border, #e5e7eb);
   border-radius: 16px;

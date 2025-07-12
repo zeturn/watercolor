@@ -10,7 +10,7 @@
       leave-to-class="opacity-0 translate-y-2"
     >
       <div 
-        v-if="open" 
+        v-if="isOpen" 
         :class="snackbarClasses"
         role="alert"
         aria-live="assertive"
@@ -61,8 +61,7 @@
           <!-- Close Button -->
           <div
             v-if="closable"
-            class="flex-shrink-0"
-          >
+            class="flex-shrink-0">
             <button 
               type="button"
               :class="closeButtonClasses"
@@ -108,6 +107,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  modelValue: {
+    type: Boolean,
+    default: undefined
+  },
   message: {
     type: String,
     default: ''
@@ -152,7 +155,11 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['close', 'action'])
+const emit = defineEmits(['close', 'action', 'update:modelValue'])
+
+const isOpen = computed(() =>
+  props.modelValue !== undefined ? props.modelValue : props.open
+)
 
 const iconMap = {
   success: '✓',
@@ -278,7 +285,12 @@ const progressBarClasses = computed(() => {
 
 const iconText = computed(() => iconMap[props.severity] || iconMap.info)
 
-const handleClose = () => emit('close')
+const handleClose = () => {
+  emit('close')
+  if (props.modelValue !== undefined) {
+    emit('update:modelValue', false)
+  }
+}
 const handleActionClick = () => emit('action')
 
 const startAutoHideTimer = () => {
@@ -316,7 +328,7 @@ const clearTimers = () => {
   }
 }
 
-watch(() => props.open, (newVal) => {
+watch(isOpen, (newVal) => {
   if (newVal) {
     startAutoHideTimer()
   } else {
@@ -325,7 +337,7 @@ watch(() => props.open, (newVal) => {
 })
 
 onMounted(() => {
-  if (props.open) startAutoHideTimer()
+  if (isOpen.value) startAutoHideTimer()
 })
 
 onUnmounted(() => clearTimers())

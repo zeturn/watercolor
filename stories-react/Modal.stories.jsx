@@ -4,7 +4,7 @@ import Button from '@/components/Button/Button';
 import { action } from 'storybook/actions';
 
 export default {
-  title: 'Components/Modal',
+  title: 'Components/Modal (react)',
   component: Modal,
   parameters: {
     docs: {
