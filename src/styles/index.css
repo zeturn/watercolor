@@ -137,6 +137,18 @@
   --wc-primary-800: #165fc5;
   --wc-primary-900: #164e9e;
 
+  /* Primary RGB values for rgba() usage */
+  --wc-primary-50-rgb: 248, 250, 255;
+  --wc-primary-100-rgb: 237, 245, 255;
+  --wc-primary-200-rgb: 215, 233, 255;
+  --wc-primary-300-rgb: 184, 216, 255;
+  --wc-primary-400-rgb: 137, 188, 255;
+  --wc-primary-500-rgb: 91, 158, 255;
+  --wc-primary-600-rgb: 51, 132, 255;
+  --wc-primary-700-rgb: 31, 116, 244;
+  --wc-primary-800-rgb: 22, 95, 197;
+  --wc-primary-900-rgb: 22, 78, 158;
+
   /* Secondary colors - using new green scheme */
   --wc-secondary-50: #F6FFED;
   --wc-secondary-100: #D9F7BE;
@@ -148,6 +160,18 @@
   --wc-secondary-700: #237804;
   --wc-secondary-800: #135200;
   --wc-secondary-900: #092B00;
+
+  /* Secondary RGB values for rgba() usage */
+  --wc-secondary-50-rgb: 246, 255, 237;
+  --wc-secondary-100-rgb: 217, 247, 190;
+  --wc-secondary-200-rgb: 183, 235, 143;
+  --wc-secondary-300-rgb: 149, 222, 100;
+  --wc-secondary-400-rgb: 115, 209, 61;
+  --wc-secondary-500-rgb: 82, 196, 26;
+  --wc-secondary-600-rgb: 56, 158, 13;
+  --wc-secondary-700-rgb: 35, 120, 4;
+  --wc-secondary-800-rgb: 19, 82, 0;
+  --wc-secondary-900-rgb: 9, 43, 0;
 
   /* Neutral colors - using new neutral scheme */
   --wc-neutral-0: #ffffff;
@@ -163,6 +187,20 @@
   --wc-neutral-900: #333333;
   --wc-neutral-950: #222222;
 
+  /* Neutral RGB values for rgba() usage */
+  --wc-neutral-0-rgb: 255, 255, 255;
+  --wc-neutral-50-rgb: 252, 252, 252;
+  --wc-neutral-100-rgb: 248, 248, 248;
+  --wc-neutral-200-rgb: 235, 235, 235;
+  --wc-neutral-300-rgb: 222, 222, 222;
+  --wc-neutral-400-rgb: 181, 181, 181;
+  --wc-neutral-500-rgb: 145, 145, 145;
+  --wc-neutral-600-rgb: 112, 112, 112;
+  --wc-neutral-700-rgb: 94, 94, 94;
+  --wc-neutral-800-rgb: 68, 68, 68;
+  --wc-neutral-900-rgb: 51, 51, 51;
+  --wc-neutral-950-rgb: 34, 34, 34;
+
   /* Success colors */
   --wc-success-50: #F0FFF4;
   --wc-success-100: #EEFFCC;
@@ -174,6 +212,18 @@
   --wc-success-700: #40B701;
   --wc-success-800: #2C9300;
   --wc-success-900: #1D7A00;
+
+  /* Success RGB values for rgba() usage */
+  --wc-success-50-rgb: 240, 255, 244;
+  --wc-success-100-rgb: 238, 255, 204;
+  --wc-success-200-rgb: 216, 255, 154;
+  --wc-success-300-rgb: 189, 255, 103;
+  --wc-success-400-rgb: 162, 255, 65;
+  --wc-success-500-rgb: 118, 255, 3;
+  --wc-success-600-rgb: 89, 219, 2;
+  --wc-success-700-rgb: 64, 183, 1;
+  --wc-success-800-rgb: 44, 147, 0;
+  --wc-success-900-rgb: 29, 122, 0;
 
   /* Info colors */
   --wc-info-50: #F0FDFA;
@@ -187,6 +237,18 @@
   --wc-info-800: #145B92;
   --wc-info-900: #0C4178;
 
+  /* Info RGB values for rgba() usage */
+  --wc-info-50-rgb: 240, 253, 250;
+  --wc-info-100-rgb: 217, 254, 252;
+  --wc-info-200-rgb: 179, 254, 254;
+  --wc-info-300-rgb: 140, 245, 254;
+  --wc-info-400-rgb: 112, 232, 253;
+  --wc-info-500-rgb: 65, 211, 252;
+  --wc-info-600-rgb: 47, 167, 216;
+  --wc-info-700-rgb: 32, 127, 181;
+  --wc-info-800-rgb: 20, 91, 146;
+  --wc-info-900-rgb: 12, 65, 120;
+
   /* Warning colors */
   --wc-warning-50: #FFFEF0;
   --wc-warning-100: #FFF9D0;
@@ -199,6 +261,18 @@
   --wc-warning-800: #936B07;
   --wc-warning-900: #7A5504;
 
+  /* Warning RGB values for rgba() usage */
+  --wc-warning-50-rgb: 255, 254, 240;
+  --wc-warning-100-rgb: 255, 249, 208;
+  --wc-warning-200-rgb: 255, 240, 161;
+  --wc-warning-300-rgb: 255, 230, 115;
+  --wc-warning-400-rgb: 255, 220, 80;
+  --wc-warning-500-rgb: 255, 204, 22;
+  --wc-warning-600-rgb: 219, 170, 16;
+  --wc-warning-700-rgb: 183, 138, 11;
+  --wc-warning-800-rgb: 147, 107, 7;
+  --wc-warning-900-rgb: 122, 85, 4;
+
   /* Error/Danger colors */
   --wc-error-50: #fef2f2;
   --wc-error-100: #FFE6CF;
@@ -210,6 +284,18 @@
   --wc-error-700: #B71108;
   --wc-error-800: #930508;
   --wc-error-900: #7A030E;
+
+  /* Error RGB values for rgba() usage */
+  --wc-error-50-rgb: 254, 242, 242;
+  --wc-error-100-rgb: 255, 230, 207;
+  --wc-error-200-rgb: 255, 199, 159;
+  --wc-error-300-rgb: 255, 161, 111;
+  --wc-error-400-rgb: 255, 125, 75;
+  --wc-error-500-rgb: 255, 64, 16;
+  --wc-error-600-rgb: 219, 37, 11;
+  --wc-error-700-rgb: 183, 17, 8;
+  --wc-error-800-rgb: 147, 5, 8;
+  --wc-error-900-rgb: 122, 3, 14;
 
   --wc-danger-50: var(--wc-error-50);
   --wc-danger-100: var(--wc-error-100);

@@ -57,7 +57,7 @@ export const Basic = {
     columns: 3 
   },
   render: (args) => (
-    <div className="p-8 max-w-4xl">
+    <div style={{ padding: '16px', maxWidth: '600px' }}>
       <PricingTable {...args} />
     </div>
   ),
@@ -105,10 +105,10 @@ export const SoftwarePricing = () => {
   ]
 
   return (
-    <div className="p-8 max-w-5xl">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-4">选择适合您的计划</h2>
-        <p className="text-gray-600">灵活的定价方案，满足不同规模团队的需求</p>
+    <div style={{ padding: '16px', maxWidth: '800px' }}>
+      <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '8px' }}>选择适合您的计划</h2>
+        <p style={{ color: '#6b7280' }}>灵活的定价方案，满足不同规模团队的需求</p>
       </div>
       <PricingTable plans={softwarePlans} columns={3} />
     </div>
@@ -172,10 +172,10 @@ export const HostingPricing = () => {
   ]
 
   return (
-    <div className="p-8 max-w-6xl">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-4">主机托管服务</h2>
-        <p className="text-gray-600">从个人网站到企业应用，我们都有合适的解决方案</p>
+    <div style={{ padding: '16px', maxWidth: '900px' }}>
+      <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '8px' }}>主机托管服务</h2>
+        <p style={{ color: '#6b7280' }}>从个人网站到企业应用，我们都有合适的解决方案</p>
       </div>
       <PricingTable plans={hostingPlans} columns={4} />
     </div>
@@ -224,11 +224,11 @@ export const EducationPricing = () => {
   ]
 
   return (
-    <div className="p-8 max-w-4xl">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-4">教育优惠计划</h2>
-        <p className="text-gray-600">为教育机构和学生提供特别优惠的定价方案</p>
-        <div className="mt-4 inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm">
+    <div style={{ padding: '16px', maxWidth: '600px' }}>
+      <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '8px' }}>教育优惠计划</h2>
+        <p style={{ color: '#6b7280' }}>为教育机构和学生提供特别优惠的定价方案</p>
+        <div style={{ marginTop: '16px', display: 'inline-block', backgroundColor: '#d1fae5', color: '#065f46', padding: '8px 16px', borderRadius: '16px', fontSize: '14px' }}>
           🎓 教育用户专享优惠
         </div>
       </div>
@@ -255,10 +255,10 @@ export const CompactLayout = () => {
   ]
 
   return (
-    <div className="p-8 max-w-2xl">
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold mb-2">简洁版价格表</h2>
-        <p className="text-gray-600">适合空间有限的页面布局</p>
+    <div style={{ padding: '16px', maxWidth: '400px' }}>
+      <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+        <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '8px' }}>简洁版价格表</h2>
+        <p style={{ color: '#6b7280' }}>适合空间有限的页面布局</p>
       </div>
       <PricingTable plans={compactPlans} columns={2} />
     </div>
