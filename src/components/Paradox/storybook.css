@@ -1,0 +1,321 @@
+/* Paradox Storybook 样式 */
+
+/* 集合容器 */
+.paradox-collection {
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.paradox-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--wc-neutral-700, #374151);
+}
+
+.paradox-description {
+  color: var(--wc-neutral-500, #6b7280);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* 网格布局 */
+.paradox-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .paradox-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.paradox-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.paradox-section-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--wc-neutral-700, #374151);
+  margin-bottom: 0.5rem;
+}
+
+/* 分类容器 */
+.paradox-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.paradox-category {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--wc-neutral-200, #e5e7eb);
+  transition: all 0.2s ease;
+}
+
+.paradox-category:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.paradox-category--tech {
+  background-color: var(--wc-primary-50, #eff6ff);
+  border-color: var(--wc-primary-200, #bfdbfe);
+}
+
+.paradox-category--social {
+  background-color: var(--wc-success-50, #f0fdf4);
+  border-color: var(--wc-success-200, #bbf7d0);
+}
+
+.paradox-category--existential {
+  background-color: var(--wc-warning-50, #faf5ff);
+  border-color: var(--wc-warning-200, #c4b5fd);
+}
+
+.paradox-category-title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.paradox-category--tech .paradox-category-title {
+  color: var(--wc-primary-700, #1e40af);
+}
+
+.paradox-category--social .paradox-category-title {
+  color: var(--wc-success-700, #166534);
+}
+
+.paradox-category--existential .paradox-category-title {
+  color: var(--wc-warning-700, #7c3aed);
+}
+
+.paradox-category-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* 互动悖论 */
+.paradox-interactive {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.paradox-item {
+  border: 1px solid var(--wc-neutral-200, #e5e7eb);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  background-color: var(--wc-neutral-0, #ffffff);
+}
+
+.paradox-item:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.paradox-explanation {
+  margin-top: 0.75rem;
+}
+
+.paradox-explanation-summary {
+  font-size: 0.875rem;
+  color: var(--wc-primary-600, #2563eb);
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-weight: 500;
+}
+
+.paradox-explanation-summary:hover {
+  color: var(--wc-primary-700, #1d4ed8);
+}
+
+.paradox-explanation-text {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--wc-neutral-700, #374151);
+  background-color: var(--wc-neutral-50, #f9fafb);
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  line-height: 1.5;
+  border-left: 3px solid var(--wc-primary-500, #3b82f6);
+}
+
+/* 提示框 */
+.paradox-tip {
+  background-color: var(--wc-warning-50, #fef3c7);
+  border: 1px solid var(--wc-warning-200, #fde68a);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.paradox-tip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+}
+
+.paradox-tip-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--wc-warning-700, #92400e);
+  margin-bottom: 0.5rem;
+}
+
+.paradox-tip-text {
+  font-size: 0.875rem;
+  color: var(--wc-warning-700, #92400e);
+  line-height: 1.5;
+}
+
+/* 变体展示 */
+.paradox-variants {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.paradox-variant-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--wc-neutral-200, #e5e7eb);
+  border-radius: 0.5rem;
+  background-color: var(--wc-neutral-0, #ffffff);
+}
+
+.paradox-variant-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--wc-neutral-700, #374151);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--wc-neutral-200, #e5e7eb);
+}
+
+/* 响应式设计 */
+@media (max-width: 640px) {
+  .paradox-collection {
+    padding: 1rem;
+  }
+  
+  .paradox-title {
+    font-size: 1.25rem;
+  }
+  
+  .paradox-category {
+    padding: 0.75rem;
+  }
+  
+  .paradox-item {
+    padding: 0.75rem;
+  }
+  
+  .paradox-variant-group {
+    padding: 0.75rem;
+  }
+}
+
+/* 深色模式支持 */
+.dark .paradox-title {
+  color: var(--wc-neutral-100, #f3f4f6);
+}
+
+.dark .paradox-section-title,
+.dark .paradox-variant-title {
+  color: var(--wc-neutral-200, #d1d5db);
+}
+
+.dark .paradox-description {
+  color: var(--wc-neutral-400, #9ca3af);
+}
+
+.dark .paradox-item {
+  border-color: var(--wc-neutral-600, #4b5563);
+  background-color: var(--wc-neutral-800, #1f2937);
+}
+
+.dark .paradox-explanation-text {
+  background-color: var(--wc-neutral-700, #374151);
+  color: var(--wc-neutral-200, #d1d5db);
+}
+
+.dark .paradox-category--tech {
+  background-color: var(--wc-primary-900, #1e3a8a);
+  border-color: var(--wc-primary-500, #3b82f6);
+}
+
+.dark .paradox-category--social {
+  background-color: var(--wc-success-900, #14532d);
+  border-color: var(--wc-success-500, #22c55e);
+}
+
+.dark .paradox-category--existential {
+  background-color: var(--wc-warning-900, #581c87);
+  border-color: var(--wc-warning-500, #a855f7);
+}
+
+.dark .paradox-tip {
+  background-color: var(--wc-warning-900, #451a03);
+  border-color: var(--wc-warning-500, #f59e0b);
+}
+
+.dark .paradox-variant-group {
+  border-color: var(--wc-neutral-600, #4b5563);
+  background-color: var(--wc-neutral-800, #1f2937);
+}
+
+/* 动画效果 */
+.paradox-category,
+.paradox-item,
+.paradox-tip,
+.paradox-variant-group {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 可访问性 */
+.paradox-explanation-summary:focus {
+  outline: 2px solid var(--wc-primary-500, #3b82f6);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .paradox-category,
+  .paradox-item,
+  .paradox-tip,
+  .paradox-variant-group {
+    animation: none;
+    transition: none;
+  }
+  
+  .paradox-category:hover,
+  .paradox-item:hover,
+  .paradox-tip:hover {
+    transform: none;
+  }
+} 

@@ -1,8 +1,9 @@
 import React from 'react';
 import Paradox from '@/components/Paradox/Paradox.jsx';
+import '../src/components/Paradox/storybook.css';
 
 export default {
-  title: 'Components/Paradox',
+  title: 'Components/Paradox (React)',
   component: Paradox,
   parameters: {
     docs: {
@@ -21,6 +22,55 @@ export default {
       control: 'text', 
       description: '悬停提示' 
     },
+    animated: { 
+      control: 'boolean', 
+      description: '是否启用动画' 
+    },
+    transform: { 
+      control: 'select', 
+      options: ['none', 'rotate', 'scale', 'skew'],
+      description: '变换类型'
+    },
+    speed: { 
+      control: 'select', 
+      options: ['slow', 'normal', 'fast'],
+      description: '动画速度'
+    },
+    hoverEffect: { 
+      control: 'boolean', 
+      description: '是否启用悬停效果' 
+    },
+    infinite: { 
+      control: 'boolean', 
+      description: '是否无限循环' 
+    },
+    size: { 
+      control: 'select', 
+      options: ['sm', 'md', 'lg', 'xl'],
+      description: '尺寸变体'
+    },
+    variant: { 
+      control: 'select', 
+      options: ['primary', 'success', 'warning', 'error', 'info'],
+      description: '样式变体'
+    },
+    borderStyle: { 
+      control: 'select', 
+      options: ['left', 'top', 'bottom', 'right', 'all'],
+      description: '边框样式'
+    },
+    withQuotes: { 
+      control: 'boolean', 
+      description: '是否显示引用符号' 
+    },
+    glow: { 
+      control: 'boolean', 
+      description: '是否启用发光效果' 
+    },
+    gradient: { 
+      control: 'boolean', 
+      description: '是否启用渐变背景' 
+    },
     className: {
       control: 'text',
       description: '自定义CSS类名'
@@ -38,11 +88,11 @@ export const Basic = {
 
 export const ClassicParadoxes = {
   render: () => (
-    <div className="space-y-6 p-6">
-      <h3 className="text-lg font-semibold mb-4">经典悖论集合</h3>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="space-y-4">
-          <h4 className="font-medium text-gray-700">逻辑悖论</h4>
+    <div className="paradox-collection">
+      <h3 className="paradox-title">经典悖论集合</h3>
+      <div className="paradox-grid">
+        <div className="paradox-section">
+          <h4 className="paradox-section-title">逻辑悖论</h4>
           <Paradox 
             content="这句话是假的。"
             tooltip="说谎者悖论：如果这句话是真的，那么它就是假的；如果它是假的，那么它就是真的。"
@@ -57,8 +107,8 @@ export const ClassicParadoxes = {
           />
         </div>
         
-        <div className="space-y-4">
-          <h4 className="font-medium text-gray-700">哲学悖论</h4>
+        <div className="paradox-section">
+          <h4 className="paradox-section-title">哲学悖论</h4>
           <Paradox 
             content="自由意志是一种幻觉。"
             tooltip="如果自由意志是幻觉，那么相信这个观点本身是否也是被决定的？"
@@ -79,12 +129,12 @@ export const ClassicParadoxes = {
 
 export const ModernParadoxes = {
   render: () => (
-    <div className="space-y-6 p-6">
-      <h3 className="text-lg font-semibold mb-4">现代悖论</h3>
-      <div className="space-y-4">
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <h4 className="font-medium mb-3 text-blue-800">技术悖论</h4>
-          <div className="space-y-3">
+    <div className="paradox-collection">
+      <h3 className="paradox-title">现代悖论</h3>
+      <div className="paradox-categories">
+        <div className="paradox-category paradox-category--tech">
+          <h4 className="paradox-category-title">技术悖论</h4>
+          <div className="paradox-category-content">
             <Paradox 
               content="技术让我们更加孤独。"
               tooltip="连接世界的技术反而使人与人之间的真实联系减少。"
@@ -96,9 +146,9 @@ export const ModernParadoxes = {
           </div>
         </div>
         
-        <div className="bg-green-50 p-4 rounded-lg">
-          <h4 className="font-medium mb-3 text-green-800">社会悖论</h4>
-          <div className="space-y-3">
+        <div className="paradox-category paradox-category--social">
+          <h4 className="paradox-category-title">社会悖论</h4>
+          <div className="paradox-category-content">
             <Paradox 
               content="选择越多，幸福越少。"
               tooltip="选择悖论：过多的选择可能导致决策疲劳和后悔心理。"
@@ -110,9 +160,9 @@ export const ModernParadoxes = {
           </div>
         </div>
         
-        <div className="bg-purple-50 p-4 rounded-lg">
-          <h4 className="font-medium mb-3 text-purple-800">存在悖论</h4>
-          <div className="space-y-3">
+        <div className="paradox-category paradox-category--existential">
+          <h4 className="paradox-category-title">存在悖论</h4>
+          <div className="paradox-category-content">
             <Paradox 
               content="死亡给生命以意义。"
               tooltip="正是因为生命有限，才使得每一刻都变得珍贵和有意义。"
@@ -149,25 +199,24 @@ export const InteractiveParadox = {
     ];
 
     return (
-      <div className="space-y-6 p-6">
-        <h3 className="text-lg font-semibold mb-4">互动悖论</h3>
-        <p className="text-gray-600 mb-6">
+      <div className="paradox-collection">
+        <h3 className="paradox-title">互动悖论</h3>
+        <p className="paradox-description">
           将鼠标悬停在下面的悖论上查看提示，点击查看详细解释。
         </p>
         
-        <div className="space-y-4">
+        <div className="paradox-interactive">
           {paradoxes.map((item, index) => (
-            <div key={index} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div key={index} className="paradox-item">
               <Paradox 
                 content={item.content}
                 tooltip={item.tooltip}
-                className="text-lg"
               />
-              <details className="mt-3">
-                <summary className="text-sm text-blue-600 cursor-pointer hover:text-blue-800">
+              <details className="paradox-explanation">
+                <summary className="paradox-explanation-summary">
                   点击查看解释
                 </summary>
-                <p className="mt-2 text-sm text-gray-700 bg-gray-50 p-3 rounded">
+                <p className="paradox-explanation-text">
                   {item.explanation}
                 </p>
               </details>
@@ -175,9 +224,9 @@ export const InteractiveParadox = {
           ))}
         </div>
         
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-          <h4 className="font-medium text-yellow-800 mb-2">🤔 思考提示</h4>
-          <p className="text-sm text-yellow-700">
+        <div className="paradox-tip">
+          <h4 className="paradox-tip-title">🤔 思考提示</h4>
+          <p className="paradox-tip-text">
             悖论不仅仅是文字游戏，它们揭示了语言、逻辑和思维的局限性。
             通过思考这些悖论，我们可以更好地理解知识的边界和认知的复杂性。
           </p>
@@ -185,4 +234,47 @@ export const InteractiveParadox = {
       </div>
     );
   }
+};
+
+export const Variants = {
+  render: () => (
+    <div className="paradox-collection">
+      <h3 className="paradox-title">样式变体</h3>
+      <div className="paradox-variants">
+        <div className="paradox-variant-group">
+          <h4 className="paradox-variant-title">尺寸变体</h4>
+          <Paradox content="小尺寸" size="sm" />
+          <Paradox content="中等尺寸" size="md" />
+          <Paradox content="大尺寸" size="lg" />
+          <Paradox content="超大尺寸" size="xl" />
+        </div>
+        
+        <div className="paradox-variant-group">
+          <h4 className="paradox-variant-title">颜色变体</h4>
+          <Paradox content="主要" variant="primary" />
+          <Paradox content="成功" variant="success" />
+          <Paradox content="警告" variant="warning" />
+          <Paradox content="错误" variant="error" />
+          <Paradox content="信息" variant="info" />
+        </div>
+        
+        <div className="paradox-variant-group">
+          <h4 className="paradox-variant-title">边框样式</h4>
+          <Paradox content="左边框" borderStyle="left" />
+          <Paradox content="上边框" borderStyle="top" />
+          <Paradox content="下边框" borderStyle="bottom" />
+          <Paradox content="右边框" borderStyle="right" />
+          <Paradox content="全边框" borderStyle="all" />
+        </div>
+        
+        <div className="paradox-variant-group">
+          <h4 className="paradox-variant-title">特殊效果</h4>
+          <Paradox content="带引号" withQuotes />
+          <Paradox content="发光效果" glow />
+          <Paradox content="渐变背景" gradient />
+          <Paradox content="动画效果" animated infinite />
+        </div>
+      </div>
+    </div>
+  )
 };

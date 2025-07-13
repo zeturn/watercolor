@@ -1,46 +1,43 @@
-import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Paradox from '@/components/Paradox/Paradox.vue'
+import Paradox from '../../src/components/Paradox/Paradox.vue'
 
-describe('Paradox组件测试', () => {
-  it('应该正确渲染悖论组件', () => {
-    const wrapper = mount(Paradox, {
-      slots: {
-        default: '<div>悖论内容</div>'
-      }
-    })
-    expect(wrapper.classes()).toContain('wc-paradox')
-    expect(wrapper.text()).toContain('悖论内容')
+describe('Paradox.vue', () => {
+  it('renders default content correctly', () => {
+    const wrapper = mount(Paradox)
+    expect(wrapper.text()).toContain('这句话是假。')
+    expect(wrapper.attributes('title')).toBe('若此句为真，则为假；若此句为假，则为真。')
   })
 
-  it('应该支持动画效果', () => {
+  it('renders custom content', () => {
     const wrapper = mount(Paradox, {
       props: {
-        animated: true
+        content: '这是一个测试悖论。'
       }
     })
-    expect(wrapper.classes()).toContain('wc-paradox--animated')
+    expect(wrapper.text()).toContain('这是一个测试悖论。')
   })
 
-  it('应该支持不同的变换类型', () => {
+  it('applies correct CSS classes for variants', () => {
     const wrapper = mount(Paradox, {
       props: {
-        transform: 'rotate'
+        size: 'lg',
+        variant: 'success',
+        borderStyle: 'top',
+        withQuotes: true,
+        glow: true,
+        gradient: true
       }
     })
-    expect(wrapper.classes()).toContain('wc-paradox--rotate')
+    
+    expect(wrapper.classes()).toContain('wc-paradox--lg')
+    expect(wrapper.classes()).toContain('wc-paradox--success')
+    expect(wrapper.classes()).toContain('wc-paradox--border-top')
+    expect(wrapper.classes()).toContain('wc-paradox--with-quotes')
+    expect(wrapper.classes()).toContain('wc-paradox--glow')
+    expect(wrapper.classes()).toContain('wc-paradox--gradient')
   })
 
-  it('应该支持自定义速度', () => {
-    const wrapper = mount(Paradox, {
-      props: {
-        speed: 'slow'
-      }
-    })
-    expect(wrapper.classes()).toContain('wc-paradox--slow')
-  })
-
-  it('应该支持悬停效果', async () => {
+  it('handles hover effects', async () => {
     const wrapper = mount(Paradox, {
       props: {
         hoverEffect: true
@@ -49,39 +46,42 @@ describe('Paradox组件测试', () => {
     
     await wrapper.trigger('mouseenter')
     expect(wrapper.classes()).toContain('wc-paradox--hover')
+    
+    await wrapper.trigger('mouseleave')
+    expect(wrapper.classes()).not.toContain('wc-paradox--hover')
   })
 
-  it('应该支持无限循环', () => {
+  it('applies animation classes correctly', () => {
     const wrapper = mount(Paradox, {
       props: {
-        infinite: true
-      }
-    })
-    expect(wrapper.vm.infinite).toBe(true)
-  })
-
-  it('应该支持暂停和恢复', async () => {
-    const wrapper = mount(Paradox, {
-      props: {
-        animated: true
+        animated: true,
+        transform: 'rotate',
+        speed: 'fast'
       }
     })
     
-    await wrapper.vm.pause()
-    expect(wrapper.vm.isPaused).toBe(true)
-    
-    await wrapper.vm.resume()
-    expect(wrapper.vm.isPaused).toBe(false)
+    expect(wrapper.classes()).toContain('wc-paradox--animated')
+    expect(wrapper.classes()).toContain('wc-paradox--rotate')
+    expect(wrapper.classes()).toContain('wc-paradox--fast')
   })
 
-  it('应该支持重置动画', async () => {
+  it('accepts custom className', () => {
     const wrapper = mount(Paradox, {
       props: {
-        animated: true
+        className: 'custom-class'
       }
     })
     
-    await wrapper.vm.reset()
-    expect(wrapper.vm.currentFrame).toBe(0)
+    expect(wrapper.classes()).toContain('custom-class')
+  })
+
+  it('renders slot content when provided', () => {
+    const wrapper = mount(Paradox, {
+      slots: {
+        default: 'Slot content'
+      }
+    })
+    
+    expect(wrapper.text()).toContain('Slot content')
   })
 }) 

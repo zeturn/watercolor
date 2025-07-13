@@ -120,6 +120,38 @@
   border-radius: 0.375rem;
 }
 
+/* 动画速度变体 */
+.wc-paradox--slow {
+  animation-duration: 5s;
+}
+
+.wc-paradox--normal {
+  animation-duration: 3s;
+}
+
+.wc-paradox--fast {
+  animation-duration: 1.5s;
+}
+
+/* 变换效果 */
+.wc-paradox--rotate {
+  animation: paradoxRotate 3s ease-in-out infinite;
+}
+
+.wc-paradox--scale {
+  animation: paradoxScale 3s ease-in-out infinite;
+}
+
+.wc-paradox--skew {
+  animation: paradoxSkew 3s ease-in-out infinite;
+}
+
+/* 悬停效果 */
+.wc-paradox--hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 /* 特殊效果 */
 .wc-paradox--glow {
   box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
@@ -180,6 +212,33 @@
   }
 }
 
+@keyframes paradoxRotate {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes paradoxScale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes paradoxSkew {
+  0%, 100% {
+    transform: skew(0deg);
+  }
+  50% {
+    transform: skew(1deg);
+  }
+}
+
 /* 响应式设计 */
 @media (max-width: 640px) {
   .wc-paradox {
@@ -222,9 +281,17 @@
 /* 减少动画模式 */
 @media (prefers-reduced-motion: reduce) {
   .wc-paradox,
-  .wc-paradox--animated {
+  .wc-paradox--animated,
+  .wc-paradox--rotate,
+  .wc-paradox--scale,
+  .wc-paradox--skew {
     animation: none;
     transition: none;
+  }
+  
+  .wc-paradox--hover {
+    transform: none;
+    box-shadow: none;
   }
 }
 

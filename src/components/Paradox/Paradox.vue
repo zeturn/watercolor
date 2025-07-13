@@ -49,6 +49,44 @@ const props = defineProps({
   infinite: {
     type: Boolean,
     default: false
+  },
+  /** 尺寸变体 */
+  size: {
+    type: String,
+    default: 'md',
+    validator: (value: string) => ['sm', 'md', 'lg', 'xl'].includes(value)
+  },
+  /** 样式变体 */
+  variant: {
+    type: String,
+    default: 'primary',
+    validator: (value: string) => ['primary', 'success', 'warning', 'error', 'info'].includes(value)
+  },
+  /** 边框样式 */
+  borderStyle: {
+    type: String,
+    default: 'left',
+    validator: (value: string) => ['left', 'top', 'bottom', 'right', 'all'].includes(value)
+  },
+  /** 是否显示引用符号 */
+  withQuotes: {
+    type: Boolean,
+    default: false
+  },
+  /** 是否启用发光效果 */
+  glow: {
+    type: Boolean,
+    default: false
+  },
+  /** 是否启用渐变背景 */
+  gradient: {
+    type: Boolean,
+    default: false
+  },
+  /** 自定义CSS类名 */
+  className: {
+    type: String,
+    default: ''
   }
 })
 
@@ -76,7 +114,35 @@ const paradoxClasses = computed(() => {
     classes.push('wc-paradox--hover')
   }
   
-  return classes
+  if (props.size !== 'md') {
+    classes.push(`wc-paradox--${props.size}`)
+  }
+  
+  if (props.variant !== 'primary') {
+    classes.push(`wc-paradox--${props.variant}`)
+  }
+  
+  if (props.borderStyle !== 'left') {
+    classes.push(`wc-paradox--border-${props.borderStyle}`)
+  }
+  
+  if (props.withQuotes) {
+    classes.push('wc-paradox--with-quotes')
+  }
+  
+  if (props.glow) {
+    classes.push('wc-paradox--glow')
+  }
+  
+  if (props.gradient) {
+    classes.push('wc-paradox--gradient')
+  }
+  
+  if (props.className) {
+    classes.push(props.className)
+  }
+  
+  return classes.join(' ')
 })
 
 const handleMouseEnter = () => {
@@ -148,73 +214,6 @@ onUnmounted(() => {
 </script>
 
 <style>
-.wc-paradox {
-  font-style: italic;
-  position: relative;
-  padding: 12px 16px;
-  border-left: 4px solid var(--wc-primary-500);
-  background: var(--wc-neutral-50);
-  color: var(--wc-neutral-900);
-  cursor: default;
-  user-select: none;
-  transition: color 0.3s ease;
-}
-
-.wc-paradox:hover {
-  color: var(--wc-primary-600);
-}
-
-.wc-paradox--animated {
-  animation: paradox-pulse 2s ease-in-out infinite;
-}
-
-.wc-paradox--rotate {
-  transform: rotate(5deg);
-  transition: transform 0.3s ease;
-}
-
-.wc-paradox--scale {
-  transform: scale(1.05);
-  transition: transform 0.3s ease;
-}
-
-.wc-paradox--skew {
-  transform: skew(-2deg, 1deg);
-  transition: transform 0.3s ease;
-}
-
-.wc-paradox--slow {
-  animation-duration: 4s;
-}
-
-.wc-paradox--fast {
-  animation-duration: 1s;
-}
-
-.wc-paradox--hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-@keyframes paradox-pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  50% {
-    opacity: 0.8;
-    transform: translateY(-2px);
-  }
-}
-
-/* Dark mode */
-.dark .wc-paradox {
-  background: var(--wc-neutral-800);
-  color: var(--wc-neutral-100);
-  border-left-color: var(--wc-primary-400);
-}
-
-.dark .wc-paradox:hover {
-  color: var(--wc-primary-300);
-}
+/* 引入外部样式文件 */
+@import './style.css';
 </style> 
