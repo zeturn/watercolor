@@ -12,8 +12,8 @@ describe('Popover Component', () => {
       }
     })
 
-    expect(wrapper.find('.popover-container').exists()).toBe(true)
-    expect(wrapper.find('.popover-trigger').exists()).toBe(true)
+    expect(wrapper.find('.wc-popover-container').exists()).toBe(true)
+    expect(wrapper.find('.wc-wc-popover-trigger').exists()).toBe(true)
   })
 
   it('displays trigger text', () => {
@@ -28,7 +28,7 @@ describe('Popover Component', () => {
       }
     })
 
-    expect(wrapper.find('.popover-trigger').text()).toBe('自定义触发器')
+    expect(wrapper.find('.wc-wc-popover-trigger').text()).toBe('自定义触发器')
   })
 
   it('opens popover when trigger clicked', async () => {
@@ -42,7 +42,7 @@ describe('Popover Component', () => {
 
     expect(wrapper.vm.isOpen).toBe(false)
     
-    await wrapper.find('.popover-trigger').trigger('click')
+    await wrapper.find('.wc-popover-trigger').trigger('click')
     expect(wrapper.vm.isOpen).toBe(true)
   })
 
@@ -55,10 +55,10 @@ describe('Popover Component', () => {
       }
     })
 
-    await wrapper.find('.popover-trigger').trigger('click')
+    await wrapper.find('.wc-popover-trigger').trigger('click')
     expect(wrapper.vm.isOpen).toBe(true)
     
-    await wrapper.find('.popover-trigger').trigger('click')
+    await wrapper.find('.wc-popover-trigger').trigger('click')
     expect(wrapper.vm.isOpen).toBe(false)
   })
 
@@ -71,7 +71,7 @@ describe('Popover Component', () => {
       }
     })
 
-    await wrapper.find('.popover-trigger').trigger('click')
+    await wrapper.find('.wc-popover-trigger').trigger('click')
     expect(wrapper.emitted()).toHaveProperty('open')
     expect(wrapper.emitted()).toHaveProperty('update:modelValue')
     expect(wrapper.emitted()['update:modelValue'][0]).toEqual([true])
@@ -207,7 +207,7 @@ describe('Popover Component', () => {
       }
     })
 
-    const trigger = wrapper.find('.popover-trigger')
+    const trigger = wrapper.find('.wc-popover-trigger')
     expect(trigger.attributes('aria-expanded')).toBe('false')
   })
 
@@ -220,8 +220,8 @@ describe('Popover Component', () => {
       }
     })
 
-    await wrapper.find('.popover-trigger').trigger('click')
-    const trigger = wrapper.find('.popover-trigger')
+    await wrapper.find('.wc-popover-trigger').trigger('click')
+    const trigger = wrapper.find('.wc-popover-trigger')
     expect(trigger.attributes('aria-expanded')).toBe('true')
   })
 

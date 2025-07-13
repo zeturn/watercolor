@@ -1,7 +1,7 @@
 import PopoverVue from '../src/components/Popover/Popover.vue'
 
 export default {
-  title: 'Components/Popover',
+  title: 'Components/Popover (Vue)',
   component: PopoverVue,
   tags: ['autodocs'],
   argTypes: {

@@ -1,7 +1,7 @@
 import PricingTableVue from '../src/components/PricingTable/PricingTable.vue'
 
 export default {
-  title: 'Components/PricingTable',
+  title: 'Components/PricingTable (Vue)',
   component: PricingTableVue,
   tags: ['autodocs'],
   argTypes: { columns: { control: 'number' } },

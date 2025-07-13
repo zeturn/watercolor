@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Popover from '@/components/Popover/Popover.jsx'
+import '../src/components/Popover/style.css'
 
 export default {
   title: 'Components/Popover (React)',

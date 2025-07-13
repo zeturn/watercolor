@@ -1,7 +1,7 @@
 <template>
   <div
     ref="triggerWrapper"
-    class="popover-container"
+    class="wc-popover-container"
   >
     <slot
       name="trigger"
@@ -9,7 +9,7 @@
       :close="close"
     >
       <button
-        class="popover-trigger"
+        class="wc-popover-trigger"
         :aria-expanded="isOpen.toString()"
         @click="toggle"
       >
@@ -18,12 +18,12 @@
     </slot>
 
     <teleport to="body">
-      <transition name="popover-fade">
+      <transition name="wc-popover-fade">
         <div
           v-if="isOpen"
           ref="popoverRef"
-          class="popover-content"
-          :class="[`popover-${placement}`]"
+          class="wc-popover-content"
+          :class="[`wc-popover-content--${placement}`]"
           role="dialog"
           @click.outside="close"
         >
@@ -38,6 +38,7 @@
 
 <script>
 import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import './style.css'
 
 export default {
   name: 'Popover',
@@ -148,54 +149,4 @@ export default {
     return { isOpen, open, close, toggle, triggerWrapper, popoverRef }
   },
 }
-</script>
-
-<style>
-.popover-trigger {
-  padding: 6px 12px;
-  border: 1px solid var(--wc-neutral-200);
-  background: var(--wc-neutral-0);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.popover-trigger:hover {
-  background: var(--wc-neutral-50);
-}
-
-.popover-content {
-  position: absolute;
-  z-index: 2000;
-  min-width: 180px;
-  background: var(--wc-neutral-0);
-  border: 1px solid var(--wc-neutral-200);
-  border-radius: 6px;
-  box-shadow: none;
-  padding: 12px;
-}
-
-.popover-fade-enter-active,
-.popover-fade-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-.popover-fade-enter-from,
-.popover-fade-leave-to {
-  opacity: 0;
-  transform: scale(0.95);
-}
-
-/* Dark mode */
-.dark .popover-content {
-  background: var(--wc-neutral-800);
-  border-color: var(--wc-neutral-700);
-  color: var(--wc-neutral-100);
-}
-.dark .popover-trigger {
-  background: var(--wc-neutral-800);
-  color: var(--wc-neutral-100);
-  border-color: var(--wc-neutral-700);
-}
-.dark .popover-trigger:hover {
-  background: var(--wc-neutral-700);
-}
-</style> 
+</script> 

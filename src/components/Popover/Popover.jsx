@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import ReactDOM from 'react-dom'
+import './style.css'
 
 /**
  * Popover – React 组件
@@ -20,8 +21,8 @@ export default function Popover({
   children,
   className = '',
 }) {
-  const [internalOpen, setInternalOpen] = useState(open ?? false)
-  const isControlled = open !== undefined
+  const [internalOpen, setInternalOpen] = useState(false)
+  const isControlled = open !== undefined && open !== null
 
   const triggerRef = useRef(null)
   const popoverRef = useRef(null)
@@ -29,13 +30,19 @@ export default function Popover({
   const actualOpen = isControlled ? open : internalOpen
 
   const setOpen = (state) => {
-    if (!isControlled) setInternalOpen(state)
+    console.log('setOpen called with state:', state, 'isControlled:', isControlled)
+    if (!isControlled) {
+      setInternalOpen(state)
+    }
     onOpenChange?.(state)
   }
 
   const openPopover = () => setOpen(true)
   const closePopover = () => setOpen(false)
-  const togglePopover = () => setOpen(!actualOpen)
+  const togglePopover = () => {
+    console.log('Popover toggle clicked, current state:', actualOpen)
+    setOpen(!actualOpen)
+  }
 
   const positionPopover = useCallback(() => {
     const triggerEl = triggerRef.current
@@ -72,6 +79,13 @@ export default function Popover({
     popEl.style.left = `${left + window.scrollX}px`
   }, [placement, offset])
 
+  // Sync controlled state
+  useEffect(() => {
+    if (isControlled && open !== undefined) {
+      console.log('Controlled state synced:', open)
+    }
+  }, [isControlled, open])
+
   // Position on open/resize/scroll
   useEffect(() => {
     if (actualOpen) {
@@ -102,17 +116,17 @@ export default function Popover({
       'aria-expanded': actualOpen,
     })
   ) : (
-    <button ref={triggerRef} className="popover-trigger" onClick={togglePopover} aria-expanded={actualOpen}>
+    <button ref={triggerRef} className="wc-popover-trigger" onClick={togglePopover} aria-expanded={actualOpen}>
       {triggerText}
     </button>
   )
 
   return (
-    <div className={className} style={{ display: 'inline-block' }}>
+    <div className={`wc-popover-container ${className}`.trim()}>
       {triggerNode}
       {actualOpen &&
         ReactDOM.createPortal(
-          <div ref={popoverRef} className={`popover-content popover-${placement}`.trim()} role="dialog">
+          <div ref={popoverRef} className={`wc-popover-content wc-popover-content--${placement}`.trim()} role="dialog">
             {children}
           </div>,
           document.body
