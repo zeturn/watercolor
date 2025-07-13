@@ -16,6 +16,9 @@ export default function CircularProgress({
   variant = 'indeterminate', // 'determinate' | 'indeterminate'
   color = 'primary',
   showValue = false,
+  overlay = false,
+  centered = false,
+  inline = false,
   className = '',
   ...rest
 }) {
@@ -25,6 +28,9 @@ export default function CircularProgress({
   const progressClasses = getCircularProgressClasses({
     color,
     variant,
+    overlay,
+    centered,
+    inline,
     className
   }).join(' ')
   

@@ -79,6 +79,18 @@ const props = defineProps({
   showValue: {
     type: Boolean,
     default: false
+  },
+  overlay: {
+    type: Boolean,
+    default: false
+  },
+  centered: {
+    type: Boolean,
+    default: false
+  },
+  inline: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -100,6 +112,9 @@ const progressClasses = computed(() => {
   const classes = [baseClasses]
   classes.push(`wc-circular-progress--${props.color}`)
   if (props.variant === 'indeterminate') classes.push('wc-circular-progress--indeterminate')
+  if (props.overlay) classes.push('wc-circular-progress--overlay')
+  if (props.centered) classes.push('wc-circular-progress--centered')
+  if (props.inline) classes.push('wc-circular-progress--inline')
   return classes
 })
 

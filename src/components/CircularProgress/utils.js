@@ -80,6 +80,9 @@ export function getCircularProgressClasses(props) {
   const {
     color = 'primary',
     variant = 'indeterminate',
+    overlay = false,
+    centered = false,
+    inline = false,
     className = ''
   } = props
 
@@ -96,6 +99,9 @@ export function getCircularProgressClasses(props) {
   if (variant === 'indeterminate') {
     classes.push('wc-circular-progress--indeterminate')
   }
+  if (overlay) classes.push('wc-circular-progress--overlay')
+  if (centered) classes.push('wc-circular-progress--centered')
+  if (inline) classes.push('wc-circular-progress--inline')
   
   if (className) classes.push(className)
   
