@@ -1,5 +1,64 @@
 import React, { useState } from 'react'
 import Snackbar from '@/components/Snackbar/Snackbar.jsx'
+import ButtonReact from '@/components/Button/Button.jsx'
+import '../src/components/Snackbar/style.css'
+
+// Native CSS styles for stories
+const storyStyles = {
+  container: {
+    padding: '32px',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+  },
+  buttonGroup: {
+    display: 'flex',
+    gap: '12px',
+    flexWrap: 'wrap',
+    marginBottom: '20px'
+  },
+  grid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '12px',
+    maxWidth: '500px'
+  },
+  card: {
+    padding: '16px',
+    border: '1px solid #e5e7eb',
+    borderRadius: '8px',
+    backgroundColor: '#f9fafb'
+  },
+  cardTitle: {
+    fontWeight: '600',
+    marginBottom: '8px',
+    color: '#1f2937'
+  },
+  cardText: {
+    fontSize: '14px',
+    color: '#6b7280',
+    marginBottom: '12px'
+  },
+  infoBox: {
+    marginTop: '32px',
+    padding: '16px',
+    backgroundColor: '#f3f4f6',
+    borderRadius: '8px'
+  },
+  infoTitle: {
+    fontWeight: '600',
+    marginBottom: '8px',
+    color: '#1f2937'
+  },
+  infoList: {
+    margin: '0',
+    paddingLeft: '20px',
+    color: '#4b5563'
+  },
+  emptyState: {
+    textAlign: 'center',
+    padding: '32px',
+    color: '#6b7280'
+  }
+}
 
 export default {
   title: 'Components/Snackbar (React)',
@@ -77,13 +136,13 @@ export const Default = {
     const [open, setOpen] = useState(false)
     
     return (
-      <div className="p-8">
-        <button 
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+      <div style={storyStyles.container}>
+        <ButtonReact 
+          variant="primary"
           onClick={() => setOpen(true)}
         >
           显示 Snackbar
-        </button>
+        </ButtonReact>
         <Snackbar
           {...args}
           open={open}
@@ -115,24 +174,27 @@ export const Severities = () => {
   }
 
   const severityConfig = [
-    { type: 'success', label: '成功', message: '操作成功完成', color: 'bg-green-600' },
-    { type: 'info', label: '信息', message: '这是一条信息提示', color: 'bg-blue-600' },
-    { type: 'warning', label: '警告', message: '请注意这个警告', color: 'bg-yellow-600' },
-    { type: 'error', label: '错误', message: '发生了一个错误', color: 'bg-red-600' },
+    { type: 'success', label: '成功', message: '操作成功完成' },
+    { type: 'info', label: '信息', message: '这是一条信息提示' },
+    { type: 'warning', label: '警告', message: '请注意这个警告' },
+    { type: 'error', label: '错误', message: '发生了一个错误' },
   ]
   
   return (
-    <div className="p-8">
-      <div className="flex gap-3 flex-wrap">
-        {severityConfig.map(({ type, label, color }) => (
-          <button
-            key={type}
-            className={`px-4 py-2 text-white rounded hover:opacity-90 ${color}`}
-            onClick={() => showSnackbar(type)}
-          >
-            {label}
-          </button>
-        ))}
+    <div style={storyStyles.container}>
+      <div style={storyStyles.buttonGroup}>
+        <ButtonReact variant="success" onClick={() => showSnackbar('success')}>
+          成功
+        </ButtonReact>
+        <ButtonReact variant="primary" onClick={() => showSnackbar('info')}>
+          信息
+        </ButtonReact>
+        <ButtonReact variant="warning" onClick={() => showSnackbar('warning')}>
+          警告
+        </ButtonReact>
+        <ButtonReact variant="error" onClick={() => showSnackbar('error')}>
+          错误
+        </ButtonReact>
       </div>
       
       {severityConfig.map(({ type, message }) => (
@@ -153,13 +215,13 @@ export const WithTitle = () => {
   const [open, setOpen] = useState(false)
   
   return (
-    <div className="p-8">
-      <button 
-        className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+    <div style={storyStyles.container}>
+      <ButtonReact 
+        variant="success"
         onClick={() => setOpen(true)}
       >
         显示带标题的通知
-      </button>
+      </ButtonReact>
       <Snackbar
         open={open}
         title="重要通知"
@@ -197,21 +259,17 @@ export const Variants = () => {
   ]
   
   return (
-    <div className="p-8">
-      <div className="flex gap-3 flex-wrap">
-        {variants.map(({ type, label }) => (
-          <button
-            key={type}
-            className={`px-4 py-2 rounded border-2 ${
-              type === 'filled' ? 'bg-blue-600 text-white border-blue-600' :
-              type === 'outlined' ? 'border-blue-600 text-blue-600 hover:bg-blue-50' :
-              'border-gray-300 text-gray-700 hover:bg-gray-50'
-            }`}
-            onClick={() => showSnackbar(type)}
-          >
-            {label}
-          </button>
-        ))}
+    <div style={storyStyles.container}>
+      <div style={storyStyles.buttonGroup}>
+        <ButtonReact variant="primary" onClick={() => showSnackbar('filled')}>
+          Filled
+        </ButtonReact>
+        <ButtonReact variant="outline" onClick={() => showSnackbar('outlined')}>
+          Outlined
+        </ButtonReact>
+        <ButtonReact variant="ghost" onClick={() => showSnackbar('standard')}>
+          Standard
+        </ButtonReact>
       </div>
       
       {variants.map(({ type, title, message, severity }) => (
@@ -234,13 +292,13 @@ export const WithProgress = () => {
   const [open, setOpen] = useState(false)
   
   return (
-    <div className="p-8">
-      <button 
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+    <div style={storyStyles.container}>
+      <ButtonReact 
+        variant="primary"
         onClick={() => setOpen(true)}
       >
         显示进度条通知
-      </button>
+      </ButtonReact>
       <Snackbar
         open={open}
         title="文件上传中"
@@ -270,17 +328,17 @@ export const Positions = () => {
   ]
   
   return (
-    <div className="p-8">
-      <h3 className="text-lg font-semibold mb-4">不同位置</h3>
-      <div className="grid grid-cols-3 gap-3 max-w-md">
+    <div style={storyStyles.container}>
+      <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px' }}>不同位置</h3>
+      <div style={storyStyles.grid}>
         {positions.map(({ key, label, anchorOrigin }) => (
-          <button
+          <ButtonReact
             key={key}
-            className="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded text-sm"
+            variant="ghost"
             onClick={() => setActivePosition(key)}
           >
             {label}
-          </button>
+          </ButtonReact>
         ))}
       </div>
       
@@ -370,30 +428,26 @@ export const Comprehensive = () => {
   ]
   
   return (
-    <div className="p-8 max-w-2xl">
-      <h3 className="text-lg font-semibold mb-6">综合功能演示</h3>
+    <div style={{ ...storyStyles.container, maxWidth: '800px' }}>
+      <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '24px' }}>综合功能演示</h3>
       
-      <div className="grid grid-cols-2 gap-4">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
         {examples.map(({ title, button, config }, index) => (
-          <div key={index} className="p-4 border rounded-lg">
-            <h4 className="font-medium mb-2">{title}</h4>
-            <p className="text-sm text-gray-600 mb-3">
+          <div key={index} style={storyStyles.card}>
+            <h4 style={storyStyles.cardTitle}>{title}</h4>
+            <p style={storyStyles.cardText}>
               {config.severity === 'success' && '✅ 操作成功完成'}
               {config.severity === 'warning' && '⚠️ 需要用户注意'}
               {config.severity === 'error' && '❌ 发生错误需要处理'}
               {config.severity === 'info' && 'ℹ️ 提供有用信息'}
             </p>
-            <button
-              className={`w-full py-2 px-4 rounded text-white ${
-                config.severity === 'success' ? 'bg-green-600 hover:bg-green-700' :
-                config.severity === 'warning' ? 'bg-yellow-600 hover:bg-yellow-700' :
-                config.severity === 'error' ? 'bg-red-600 hover:bg-red-700' :
-                'bg-blue-600 hover:bg-blue-700'
-              }`}
+            <ButtonReact
+              variant={config.severity}
               onClick={() => showNotification(config)}
+              style={{ width: '100%' }}
             >
               {button}
-            </button>
+            </ButtonReact>
           </div>
         ))}
       </div>
@@ -404,25 +458,19 @@ export const Comprehensive = () => {
           {...notification}
           onClose={closeNotification}
           action={
-            notification.severity === 'error' ? (
-              <button
-                className="ml-2 px-3 py-1 bg-white text-red-600 rounded text-sm hover:bg-red-50"
-                onClick={handleAction}
-              >
-                重试
-              </button>
-            ) : null
+            notification.severity === 'error' ? '重试' : null
           }
+          onAction={handleAction}
         />
       )}
 
-      <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-        <h4 className="font-medium mb-2">使用说明</h4>
-        <ul className="text-sm text-gray-600 space-y-1">
-          <li>• <strong>成功操作:</strong> 确认型通知，4秒后自动消失</li>
-          <li>• <strong>警告信息:</strong> 轮廓样式，6秒后自动消失</li>
-          <li>• <strong>网络错误:</strong> 不会自动消失，需要手动关闭</li>
-          <li>• <strong>长时间操作:</strong> 带进度条，10秒后自动消失</li>
+      <div style={storyStyles.infoBox}>
+        <h4 style={storyStyles.infoTitle}>使用说明</h4>
+        <ul style={storyStyles.infoList}>
+          <li><strong>成功操作:</strong> 确认型通知，4秒后自动消失</li>
+          <li><strong>警告信息:</strong> 轮廓样式，6秒后自动消失</li>
+          <li><strong>网络错误:</strong> 不会自动消失，需要手动关闭</li>
+          <li><strong>长时间操作:</strong> 带进度条，10秒后自动消失</li>
         </ul>
       </div>
     </div>
@@ -504,35 +552,35 @@ export const RealWorldExamples = () => {
   ]
   
   return (
-    <div className="p-8 max-w-4xl">
-      <h3 className="text-lg font-semibold mb-6">实际应用场景</h3>
+    <div style={{ ...storyStyles.container, maxWidth: '1200px' }}>
+      <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '24px' }}>实际应用场景</h3>
       
-      <div className="mb-6">
-        <h4 className="font-medium mb-3">触发不同类型的通知：</h4>
-        <div className="flex flex-wrap gap-3">
+      <div style={{ marginBottom: '24px' }}>
+        <h4 style={{ fontWeight: '500', marginBottom: '12px' }}>触发不同类型的通知：</h4>
+        <div style={storyStyles.buttonGroup}>
           {scenarios.map(({ title, action }, index) => (
-            <button
+            <ButtonReact
               key={index}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+              variant="primary"
               onClick={action}
             >
               {title}
-            </button>
+            </ButtonReact>
           ))}
         </div>
       </div>
 
-      <div className="mb-6">
-        <button
-          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm"
+      <div style={{ marginBottom: '24px' }}>
+        <ButtonReact
+          variant="error"
           onClick={() => setNotifications([])}
         >
           清空所有通知
-        </button>
+        </ButtonReact>
       </div>
 
       {/* 显示当前活跃的通知 */}
-      <div className="space-y-4">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         {notifications.map((notification) => (
           <Snackbar
             key={notification.id}
@@ -544,7 +592,7 @@ export const RealWorldExamples = () => {
       </div>
 
       {notifications.length === 0 && (
-        <div className="text-center py-8 text-gray-500">
+        <div style={storyStyles.emptyState}>
           没有活跃的通知
         </div>
       )}

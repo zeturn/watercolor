@@ -754,59 +754,6 @@
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.wc-snackbar--rounded {
-  border-radius: 20px;
-}
-
-.wc-snackbar--square {
-  border-radius: 4px;
-}
-
-.wc-snackbar--minimal {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  backdrop-filter: none;
-}
-
-.wc-snackbar--elevated {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1);
-  transform: translateY(-4px);
-}
-
-.wc-snackbar--loading .wc-snackbar__icon {
-  animation: wc-snackbar-spin 1.5s linear infinite;
-}
-
-@keyframes wc-snackbar-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* ====== Toast-style Enhancements ====== */
-.wc-snackbar--toast-style {
-  border-radius: 16px;
-  padding: 18px;
-  min-width: 320px;
-  max-width: 480px;
-  backdrop-filter: blur(12px);
-}
-
-.wc-snackbar--toast-style .wc-snackbar__content {
-  gap: 6px;
-}
-
-.wc-snackbar--toast-style .wc-snackbar__title {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.wc-snackbar--toast-style .wc-snackbar__message {
-  font-size: 14px;
-  opacity: 0.85;
-  line-height: 1.6;
-}
-
 /* Multiple snackbar stacking with improved visual hierarchy */
 .wc-snackbar-container .wc-snackbar:nth-child(n+2) {
   margin-top: calc(-1 * var(--wc-snackbar-gap) + 4px);

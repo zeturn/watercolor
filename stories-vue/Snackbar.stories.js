@@ -1,14 +1,13 @@
 import { ref } from 'vue'
 import SnackbarVue from '../src/components/Snackbar/Snackbar.vue'
 import ButtonVue from '../src/components/Button/Button.vue'
-import SnackbarJSX from '../src/components/Snackbar/Snackbar.jsx'
 import { SnackbarManager } from '../src/components/Snackbar/utils.js'
 import '../src/components/Snackbar/style.css'
 
 const manager = new SnackbarManager()
 
 export default {
-  title: 'Components/Snackbar',
+  title: 'Components/Snackbar (Vue)',
   component: SnackbarVue,
   tags: ['autodocs'],
   argTypes: {

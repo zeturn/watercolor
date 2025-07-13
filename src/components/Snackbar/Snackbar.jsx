@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
+import './style.css'
 
 const iconMap = {
   success: '✓',
@@ -10,6 +11,7 @@ const iconMap = {
 
 export default function Snackbar({
   open = false,
+  modelValue = undefined, // align with Vue v-model prop
   message = '',
   title = '',
   severity = 'info',
@@ -21,18 +23,23 @@ export default function Snackbar({
   showIcon = true,
   showProgress = false,
   onClose = () => {},
+  onUpdateModelValue, // emit when modelValue changes
   onAction = () => {},
   children,
 }) {
-  const [visible, setVisible] = useState(open)
+  // Determine controlled vs uncontrolled mode
+  const isControlled = modelValue !== undefined
+  const [visible, setVisible] = useState(isControlled ? modelValue : open)
   const [progress, setProgress] = useState(100)
 
+  // Sync prop changes
   useEffect(() => {
-    setVisible(open)
-    if (open) {
+    const incoming = isControlled ? modelValue : open
+    setVisible(incoming)
+    if (incoming) {
       setProgress(100)
     }
-  }, [open])
+  }, [open, modelValue])
 
   useEffect(() => {
     if (!visible || autoHideDuration <= 0) return
@@ -64,7 +71,11 @@ export default function Snackbar({
   }, [visible, autoHideDuration, showProgress])
 
   const handleClose = () => {
-    setVisible(false)
+    if (isControlled) {
+      onUpdateModelValue?.(false)
+    } else {
+      setVisible(false)
+    }
     onClose()
   }
 
@@ -74,121 +85,77 @@ export default function Snackbar({
 
   if (!visible) return null
 
-  const baseClasses = 'fixed z-50 w-full max-w-sm bg-white dark:bg-neutral-800 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700 p-4 transition-all duration-300 ease-in-out'
-  const classes = [baseClasses]
-  
-  // Position classes
+  /* ------------------------------------------------------------------
+   * Adopt Watercolor CSS classes (wc-*) instead of Tailwind utilities.
+   * This guarantees that the component works in Storybook without the
+   * Tailwind runtime and stays visually consistent with the Vue version.
+   * ------------------------------------------------------------------ */
+
+  // Watercolor style classes
+  const classes = [
+    'wc-snackbar',
+    `wc-snackbar--${variant}`,
+    `wc-snackbar--${severity}`,
+  ]
+
+  // Inline positioning (20px margin = var(--wc-snackbar-margin))
+  const positionStyle = { position: 'fixed', zIndex: 1400 }
   const { vertical, horizontal } = anchorOrigin
-  classes.push(vertical === 'top' ? 'top-4' : 'bottom-4')
-  
-  if (horizontal === 'left') classes.push('left-4')
-  else if (horizontal === 'right') classes.push('right-4')
-  else classes.push('left-1/2 transform -translate-x-1/2')
-  
-  // Variant styles
-  if (variant === 'filled') {
-    const colorMap = {
-      success: 'bg-success-500 border-success-500',
-      info: 'bg-primary-500 border-primary-500',
-      warning: 'bg-warning-500 border-warning-500',
-      error: 'bg-error-500 border-error-500',
-    }
-    classes.push(colorMap[severity])
-  } else if (variant === 'outlined') {
-    const colorMap = {
-      success: 'border-success-500 text-success-600 dark:text-success-400 border-l-4',
-      info: 'border-primary-500 text-primary-600 dark:text-primary-400 border-l-4',
-      warning: 'border-warning-500 text-warning-600 dark:text-warning-400 border-l-4',
-      error: 'border-error-500 text-error-600 dark:text-error-400 border-l-4',
-    }
-    classes.push(colorMap[severity])
-  } else {
-    classes.push('text-neutral-900 dark:text-neutral-100')
+
+  if (vertical === 'top') positionStyle.top = '20px'
+  else positionStyle.bottom = '20px'
+
+  if (horizontal === 'left') positionStyle.left = '20px'
+  else if (horizontal === 'right') positionStyle.right = '20px'
+  else {
+    positionStyle.left = '50%'
+    positionStyle.transform = 'translateX(-50%)'
   }
 
-  const actionClasses =
-    variant === 'filled'
-      ? 'hover:bg-white hover:bg-opacity-20 focus:ring-white text-sm font-medium px-3 py-1 rounded-md transition-colors'
-      : {
-          success: 'text-success-600 dark:text-success-400 hover:bg-success-50 dark:hover:bg-success-900/20',
-          info: 'text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20',
-          warning: 'text-warning-600 dark:text-warning-400 hover:bg-warning-50 dark:hover:bg-warning-900/20',
-          error: 'text-error-600 dark:text-error-400 hover:bg-error-50 dark:hover:bg-error-900/20',
-        }[severity] + ' text-sm font-medium px-3 py-1 rounded-md transition-colors'
-
-  const closeButtonClasses =
-    variant === 'filled'
-      ? 'inline-flex rounded-md p-1 hover:bg-white hover:bg-opacity-20 transition-colors'
-      : 'inline-flex rounded-md p-1 text-neutral-400 hover:text-neutral-500 transition-colors'
-
-  const iconClasses = variant === 'filled' 
-    ? 'text-gray' 
-    : {
-        success: 'text-success-500',
-        info: 'text-primary-500',
-        warning: 'text-warning-500',
-        error: 'text-error-500'
-      }[severity]
+  // Inner element classes derived from style.css
+  const iconClasses = 'wc-snackbar__icon'
+  const actionClasses = 'wc-snackbar__action'
+  const closeButtonClasses = 'wc-snackbar__close'
 
   const node = (
-    <div className={classes.join(' ')} role="alert" aria-live="assertive" aria-atomic="true">
-      <div className="flex items-start gap-3 w-full">
-        {/* Icon */}
-        {showIcon && (
-          <div className={`flex-shrink-0 w-5 h-5 flex items-center justify-center font-bold text-lg ${iconClasses}`}>
-            {iconMap[severity]}
-          </div>
-        )}
-        
-        {/* Content */}
-        <div className="flex-1 min-w-0">
-          {title && (
-            <div className="font-semibold text-sm mb-1 leading-tight">
-              {title}
-            </div>
-          )}
-          {children || <div className="text-sm">{message}</div>}
-        </div>
-        
-        {/* Action */}
-        {(actionLabel || children?.action) && (
-          <div className="flex-shrink-0">
-            {children?.action || (
-              <button className={actionClasses} onClick={handleAction} type="button">
-                {actionLabel}
-              </button>
-            )}
-          </div>
-        )}
-        
-        {/* Close Button */}
-        {closable && (
-          <div className="flex-shrink-0">
-            <button className={closeButtonClasses} onClick={handleClose} aria-label="关闭" type="button">
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </button>
-          </div>
-        )}
+    <div
+      className={classes.join(' ')}
+      style={positionStyle}
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      {showIcon && <div className={iconClasses}>{iconMap[severity]}</div>}
+
+      <div className="wc-snackbar__content">
+        {title && <div className="wc-snackbar__title">{title}</div>}
+        {children || <div className="wc-snackbar__message">{message}</div>}
       </div>
-      
-      {/* Progress Bar */}
+
+      {(actionLabel || children?.action) && (
+        <div className="wc-snackbar__actions">
+          {children?.action || (
+            <button type="button" className={actionClasses} onClick={handleAction}>
+              {actionLabel}
+            </button>
+          )}
+        </div>
+      )}
+
+      {closable && (
+        <button
+          type="button"
+          className={closeButtonClasses}
+          aria-label="关闭"
+          onClick={handleClose}
+        >
+          ×
+        </button>
+      )}
+
       {showProgress && autoHideDuration > 0 && (
-        <div className="mt-3 w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1">
-          <div 
-            className={`h-1 rounded-full transition-all duration-100 ${
-              variant === 'filled' 
-                ? 'bg-white bg-opacity-30' 
-                : {
-                    success: 'bg-success-500',
-                    info: 'bg-primary-500',
-                    warning: 'bg-warning-500',
-                    error: 'bg-error-500'
-                  }[severity]
-            }`}
-            style={{ width: `${progress}%` }}
-          />
+        <div className="wc-snackbar__progress">
+          <div className="wc-snackbar__progress-bar" style={{ width: `${progress}%` }} />
         </div>
       )}
     </div>

@@ -1,101 +1,58 @@
 <template>
   <teleport to="body">
-    <transition
-      name="snackbar"
-      enter-active-class="transition ease-out duration-300"
-      enter-from-class="opacity-0 translate-y-2"
-      enter-to-class="opacity-100 translate-y-0"
-      leave-active-class="transition ease-in duration-200"
-      leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 translate-y-2"
+    <div 
+      v-if="isOpen" 
+      :class="snackbarClasses"
+      :style="snackbarStyle"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
     >
-      <div 
-        v-if="isOpen" 
-        :class="snackbarClasses"
-        role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
-      >
-        <div class="flex items-start gap-3 w-full">
-          <!-- Icon -->
-          <div 
-            v-if="showIcon"
-            :class="iconClasses"
-            class="flex-shrink-0 w-5 h-5 flex items-center justify-center font-bold text-lg"
-          >
-            {{ iconText }}
-          </div>
-          
-          <!-- Content -->
-          <div class="flex-1 min-w-0">
-            <div
-              v-if="title"
-              class="font-semibold text-sm mb-1 leading-tight"
-            >
-              {{ title }}
-            </div>
-            <slot>
-              <div class="text-sm">
-                {{ message }}
-              </div>
-            </slot>
-          </div>
-          
-          <!-- Action -->
-          <div
-            v-if="$slots.action || action"
-            class="flex-shrink-0"
-          >
-            <slot name="action">
-              <button
-                v-if="action"
-                type="button"
-                :class="actionClasses"
-                @click="handleActionClick"
-              >
-                {{ action }}
-              </button>
-            </slot>
-          </div>
-          
-          <!-- Close Button -->
-          <div
-            v-if="closable"
-            class="flex-shrink-0">
-            <button 
-              type="button"
-              :class="closeButtonClasses"
-              aria-label="关闭"
-              @click="handleClose"
-            >
-              <svg
-                class="w-4 h-4"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-        
-        <!-- Progress Bar -->
-        <div 
-          v-if="showProgress && autoHideDuration > 0"
-          class="mt-3 w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1"
-        >
-          <div 
-            :class="progressBarClasses"
-            class="h-1 rounded-full transition-all duration-100"
-            :style="{ width: `${progress}%` }"
-          />
-        </div>
+      <!-- Icon -->
+      <div v-if="showIcon" :class="iconClasses">{{ iconText }}</div>
+
+      <!-- Content -->
+      <div class="wc-snackbar__content">
+        <div v-if="title" class="wc-snackbar__title">{{ title }}</div>
+        <slot>
+          <div class="wc-snackbar__message">{{ message }}</div>
+        </slot>
       </div>
-    </transition>
+
+      <!-- Action -->
+      <div v-if="$slots.action || action" class="wc-snackbar__actions">
+        <slot name="action">
+          <button
+            v-if="action"
+            type="button"
+            :class="actionClasses"
+            @click="handleActionClick"
+          >
+            {{ action }}
+          </button>
+        </slot>
+      </div>
+
+      <!-- Close Button -->
+      <button
+        v-if="closable"
+        type="button"
+        :class="closeButtonClasses"
+        aria-label="关闭"
+        @click="handleClose"
+      >
+        ×
+      </button>
+
+      <!-- Progress Bar -->
+      <div v-if="showProgress && autoHideDuration > 0" class="wc-snackbar__progress">
+        <div
+          :class="progressBarClasses"
+          class="wc-snackbar__progress-bar"
+          :style="{ width: `${progress}%` }"
+        />
+      </div>
+    </div>
   </teleport>
 </template>
 
@@ -157,9 +114,19 @@ const props = defineProps({
 
 const emit = defineEmits(['close', 'action', 'update:modelValue'])
 
-const isOpen = computed(() =>
+const internalOpen = ref(
   props.modelValue !== undefined ? props.modelValue : props.open
 )
+
+const isOpen = computed(() => internalOpen.value)
+
+// Sync prop changes to internal state
+watch([
+  () => props.open,
+  () => props.modelValue
+], ([openProp, modelVal]) => {
+  internalOpen.value = props.modelValue !== undefined ? modelVal : openProp
+})
 
 const iconMap = {
   success: '✓',
@@ -172,120 +139,43 @@ let autoHideTimer = null
 let progressTimer = null
 const progress = ref(100)
 
-const snackbarClasses = computed(() => {
-  const baseClasses = 'fixed z-50 w-full max-w-sm bg-white dark:bg-neutral-800 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700 p-4 transition-all duration-300 ease-in-out'
-  const classes = [baseClasses]
-  
-  // Position classes
+// Root classes coming from style.css
+const snackbarClasses = computed(() => [
+  'wc-snackbar',
+  `wc-snackbar--${props.variant}`,
+  `wc-snackbar--${props.severity}`
+])
+
+// Inline positioning so we don't rely on Tailwind utilities
+const snackbarStyle = computed(() => {
+  const style = { position: 'fixed', zIndex: 1400 }
   const { vertical, horizontal } = props.anchorOrigin
-  
-  if (vertical === 'top') {
-    classes.push('top-4')
-  } else {
-    classes.push('bottom-4')
+
+  if (vertical === 'top') style.top = '20px'
+  else style.bottom = '20px'
+
+  if (horizontal === 'left') style.left = '20px'
+  else if (horizontal === 'right') style.right = '20px'
+  else {
+    style.left = '50%'
+    style.transform = 'translateX(-50%)'
   }
-  
-  if (horizontal === 'left') {
-    classes.push('left-4')
-  } else if (horizontal === 'right') {
-    classes.push('right-4')
-  } else {
-    classes.push('left-1/2 transform -translate-x-1/2')
-  }
-  
-  // Variant styles
-  if (props.variant === 'filled') {
-    const colorMap = {
-      success: 'bg-success-500 border-success-500',
-      info: 'bg-primary-500 border-primary-500',
-      warning: 'bg-warning-500 border-warning-500',
-      error: 'bg-error-500 border-error-500'
-    }
-    classes.push(colorMap[props.severity])
-  } else if (props.variant === 'outlined') {
-    const colorMap = {
-      success: 'border-success-500 text-success-600 dark:text-success-400 border-l-4',
-      info: 'border-primary-500 text-primary-600 dark:text-primary-400 border-l-4',
-      warning: 'border-warning-500 text-warning-600 dark:text-warning-400 border-l-4',
-      error: 'border-error-500 text-error-600 dark:text-error-400 border-l-4'
-    }
-    classes.push(colorMap[props.severity])
-  } else {
-    classes.push('text-neutral-900 dark:text-neutral-100')
-  }
-  
-  return classes
+
+  return style
 })
 
-const actionClasses = computed(() => {
-  const baseClasses = 'text-sm font-medium px-3 py-1 rounded-md transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2'
-  const classes = [baseClasses]
-  
-  if (props.variant === 'filled') {
-    classes.push('hover:bg-white hover:bg-opacity-20 focus:ring-white')
-  } else {
-    const colorMap = {
-      success: 'text-success-600 dark:text-success-400 hover:bg-success-50 dark:hover:bg-success-900/20 focus:ring-success-500',
-      info: 'text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 focus:ring-primary-500',
-      warning: 'text-warning-600 dark:text-warning-400 hover:bg-warning-50 dark:hover:bg-warning-900/20 focus:ring-warning-500',
-      error: 'text-error-600 dark:text-error-400 hover:bg-error-50 dark:hover:bg-error-900/20 focus:ring-error-500'
-    }
-    classes.push(colorMap[props.severity])
-  }
-  
-  return classes
-})
+const actionClasses = 'wc-snackbar__action'
 
-const closeButtonClasses = computed(() => {
-  const baseClasses = 'inline-flex rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-150'
-  const classes = [baseClasses]
-  
-  if (props.variant === 'filled') {
-    classes.push('hover:bg-white hover:bg-opacity-20 focus:ring-white')
-  } else {
-    const colorMap = {
-      success: 'text-success-400 hover:text-success-500 focus:ring-success-500',
-      info: 'text-primary-400 hover:text-primary-500 focus:ring-primary-500',
-      warning: 'text-warning-400 hover:text-warning-500 focus:ring-warning-500',
-      error: 'text-error-400 hover:text-error-500 focus:ring-error-500'
-    }
-    classes.push(colorMap[props.severity] || 'text-neutral-400 hover:text-neutral-500 focus:ring-neutral-500')
-  }
-  
-  return classes
-})
+const closeButtonClasses = 'wc-snackbar__close'
 
-const iconClasses = computed(() => {
-  if (props.variant === 'filled') {
-    return 'text-gray'
-  } else {
-    const colorMap = {
-      success: 'text-success-500',
-      info: 'text-primary-500',
-      warning: 'text-warning-500',
-      error: 'text-error-500'
-    }
-    return colorMap[props.severity]
-  }
-})
+const iconClasses = 'wc-snackbar__icon'
 
-const progressBarClasses = computed(() => {
-  if (props.variant === 'filled') {
-    return 'bg-white bg-opacity-30'
-  } else {
-    const colorMap = {
-      success: 'bg-success-500',
-      info: 'bg-primary-500',
-      warning: 'bg-warning-500',
-      error: 'bg-error-500'
-    }
-    return colorMap[props.severity]
-  }
-})
+const progressBarClasses = 'wc-snackbar__progress-bar'
 
 const iconText = computed(() => iconMap[props.severity] || iconMap.info)
 
 const handleClose = () => {
+  internalOpen.value = false
   emit('close')
   if (props.modelValue !== undefined) {
     emit('update:modelValue', false)
