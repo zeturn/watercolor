@@ -272,8 +272,8 @@
 
 /* Filled Style - 暗色模式 */
 .dark .wc-btn--style-filled.wc-btn--primary {
-  background-color: var(--wc-primary-600, #2563eb);
-  color: var(--wc-neutral-0, #ffffff);
+  background-color: var(--wc-primary-500, #2563eb);
+  color: var(--wc-neutral-0, #b3b3b3);
 }
 
 .dark .wc-btn--style-filled.wc-btn--primary:hover:not(.wc-btn--disabled) {
@@ -645,7 +645,7 @@
 }
 
 .wc-btn--style-filled.wc-btn--filled {
-  background-color: var(--wc-neutral-800, #1f2937);
+  background-color: var(--wc-neutral-500, #1f2937);
   color: white;
   border: none;
 }

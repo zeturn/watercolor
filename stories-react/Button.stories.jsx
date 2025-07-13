@@ -54,7 +54,7 @@ Filled.args = {
 }
 
 export const Sizes = () => (
-  <div className="flex items-center gap-4">
+  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
     <Button size="sm">小按钮</Button>
     <Button size="md">中等按钮</Button>
     <Button size="lg">大按钮</Button>
@@ -62,18 +62,18 @@ export const Sizes = () => (
 )
 
 export const Variants = () => (
-  <div className="space-y-4">
-    <div className="flex items-center gap-4">
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
       <Button variant="primary">主要按钮</Button>
       <Button variant="secondary">次要按钮</Button>
       <Button variant="filled">填充按钮</Button>
     </div>
-    <div className="flex items-center gap-4">
+    <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
       <Button variant="success">成功按钮</Button>
       <Button variant="warning">警告按钮</Button>
       <Button variant="error">错误按钮</Button>
     </div>
-    <div className="flex items-center gap-4">
+    <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
       <Button variant="purple">紫色按钮</Button>
       <Button variant="orange">橙色按钮</Button>
       <Button variant="cyan">青色按钮</Button>
@@ -83,7 +83,7 @@ export const Variants = () => (
 )
 
 export const Disabled = () => (
-  <div className="flex items-center gap-4">
+  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
     <Button variant="primary" disabled>
       禁用主要
     </Button>
@@ -97,11 +97,11 @@ export const Disabled = () => (
 )
 
 export const ButtonStyles = () => (
-  <div className="space-y-6">
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
     <div>
-      <h3 className="mb-3 text-lg font-semibold">默认样式 (Default)</h3>
-      <p className="mb-3 text-sm text-gray-600">只有彩色的字，没有背景，hover时才有浅色的背景，没有边框</p>
-      <div className="flex items-center gap-4">
+      <h3 style={{ marginBottom: '12px', fontSize: '18px', fontWeight: '600' }}>默认样式 (Default)</h3>
+      <p style={{ marginBottom: '12px', fontSize: '14px', color: '#6b7280' }}>只有彩色的字，没有背景，hover时才有浅色的背景，没有边框</p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         <Button variant="primary" buttonStyle="default">
           主要按钮
         </Button>
@@ -121,9 +121,9 @@ export const ButtonStyles = () => (
     </div>
 
     <div>
-      <h3 className="mb-3 text-lg font-semibold">边框样式 (Outlined)</h3>
-      <p className="mb-3 text-sm text-gray-600">只有彩色的字，没有背景，hover时才有浅色的背景，有边框</p>
-      <div className="flex items-center gap-4">
+      <h3 style={{ marginBottom: '12px', fontSize: '18px', fontWeight: '600' }}>边框样式 (Outlined)</h3>
+      <p style={{ marginBottom: '12px', fontSize: '14px', color: '#6b7280' }}>只有彩色的字，没有背景，hover时才有浅色的背景，有边框</p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         <Button variant="primary" buttonStyle="outlined">
           主要按钮
         </Button>
@@ -143,9 +143,9 @@ export const ButtonStyles = () => (
     </div>
 
     <div>
-      <h3 className="mb-3 text-lg font-semibold">填充样式 (Filled)</h3>
-      <p className="mb-3 text-sm text-gray-600">只有白色的字，彩色填充背景，hover时有更深色的背景</p>
-      <div className="flex items-center gap-4">
+      <h3 style={{ marginBottom: '12px', fontSize: '18px', fontWeight: '600' }}>填充样式 (Filled)</h3>
+      <p style={{ marginBottom: '12px', fontSize: '14px', color: '#6b7280' }}>只有白色的字，彩色填充背景，hover时有更深色的背景</p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         <Button variant="primary" buttonStyle="filled">
           主要按钮
         </Button>
