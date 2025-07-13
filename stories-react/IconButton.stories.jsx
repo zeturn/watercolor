@@ -1,7 +1,7 @@
 import IconButton from '../src/components/Button/IconButton.jsx'
 
 export default {
-  title: 'Components/IconButton',
+  title: 'Components/IconButton (React)',
   component: IconButton,
   parameters: {
     docs: {

@@ -1,7 +1,7 @@
 import IconButton from '../src/components/Button/IconButton.vue'
 
 export default {
-  title: 'Components/IconButton',
+  title: 'Components/IconButton (Vue)',
   component: IconButton,
   parameters: {
     docs: {
@@ -51,51 +51,31 @@ export const Colors = {
       <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
         <div style="text-align: center;">
           <IconButton color="default" icon="⚙" />
-          <div style="margin-top: 4px; font-size: 12px; color: #6b7280;">
-            Default
-          </div>
+          <div style="margin-top: 4px; font-size: 12px; color: #6b7280;">Default</div>
         </div>
-        
         <div style="text-align: center;">
           <IconButton color="primary" icon="♥" />
-          <div style="margin-top: 4px; font-size: 12px; color: #6b7280;">
-            Primary
-          </div>
+          <div style="margin-top: 4px; font-size: 12px; color: #6b7280;">Primary</div>
         </div>
-        
         <div style="text-align: center;">
           <IconButton color="secondary" icon="★" />
-          <div style="margin-top: 4px; font-size: 12px; color: #6b7280;">
-            Secondary
-          </div>
+          <div style="margin-top: 4px; font-size: 12px; color: #6b7280;">Secondary</div>
         </div>
-        
         <div style="text-align: center;">
           <IconButton color="error" icon="✖" />
-          <div style="margin-top: 4px; font-size: 12px; color: #6b7280;">
-            Error
-          </div>
+          <div style="margin-top: 4px; font-size: 12px; color: #6b7280;">Error</div>
         </div>
-        
         <div style="text-align: center;">
           <IconButton color="warning" icon="⚠" />
-          <div style="margin-top: 4px; font-size: 12px; color: #6b7280;">
-            Warning
-          </div>
+          <div style="margin-top: 4px; font-size: 12px; color: #6b7280;">Warning</div>
         </div>
-        
         <div style="text-align: center;">
           <IconButton color="info" icon="ⓘ" />
-          <div style="margin-top: 4px; font-size: 12px; color: #6b7280;">
-            Info
-          </div>
+          <div style="margin-top: 4px; font-size: 12px; color: #6b7280;">Info</div>
         </div>
-        
         <div style="text-align: center;">
           <IconButton color="success" icon="✓" />
-          <div style="margin-top: 4px; font-size: 12px; color: #6b7280;">
-            Success
-          </div>
+          <div style="margin-top: 4px; font-size: 12px; color: #6b7280;">Success</div>
         </div>
       </div>
     `
@@ -116,23 +96,15 @@ export const Sizes = {
       <div style="display: flex; gap: 20px; align-items: center;">
         <div style="text-align: center;">
           <IconButton size="sm" icon="★" />
-          <div style="margin-top: 8px; font-size: 12px; color: #6b7280;">
-            小尺寸
-          </div>
+          <div style="margin-top: 8px; font-size: 12px; color: #6b7280;">小尺寸</div>
         </div>
-        
         <div style="text-align: center;">
           <IconButton size="md" icon="★" />
-          <div style="margin-top: 8px; font-size: 12px; color: #6b7280;">
-            中等尺寸
-          </div>
+          <div style="margin-top: 8px; font-size: 12px; color: #6b7280;">中等尺寸</div>
         </div>
-        
         <div style="text-align: center;">
           <IconButton size="lg" icon="★" />
-          <div style="margin-top: 8px; font-size: 12px; color: #6b7280;">
-            大尺寸
-          </div>
+          <div style="margin-top: 8px; font-size: 12px; color: #6b7280;">大尺寸</div>
         </div>
       </div>
     `
@@ -156,7 +128,6 @@ export const EdgePositioning = {
           <span style="margin: 0 16px; flex: 1;">开始边缘定位</span>
           <IconButton edge="end" icon="⋮" />
         </div>
-        
         <div style="display: flex; align-items: center; padding: 16px; background: #f9fafb; border-radius: 8px;">
           <IconButton icon="☰" />
           <span style="margin: 0 16px; flex: 1;">普通定位</span>
@@ -181,16 +152,11 @@ export const States = {
       <div style="display: flex; gap: 20px; align-items: center;">
         <div style="text-align: center;">
           <IconButton icon="♥" />
-          <div style="margin-top: 8px; font-size: 12px; color: #6b7280;">
-            正常状态
-          </div>
+          <div style="margin-top: 8px; font-size: 12px; color: #6b7280;">正常状态</div>
         </div>
-        
         <div style="text-align: center;">
           <IconButton icon="♥" disabled />
-          <div style="margin-top: 8px; font-size: 12px; color: #6b7280;">
-            禁用状态
-          </div>
+          <div style="margin-top: 8px; font-size: 12px; color: #6b7280;">禁用状态</div>
         </div>
       </div>
     `
@@ -204,104 +170,48 @@ export const States = {
   }
 }
 
-export const CommonIcons = {
+export const WithIcons = {
   render: () => ({
     components: { IconButton },
     template: `
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 16px; max-width: 600px;">
-        <div style="text-align: center;">
-          <IconButton icon="⚙" title="设置" />
-          <div style="margin-top: 4px; font-size: 10px; color: #6b7280;">设置</div>
-        </div>
-        
-        <div style="text-align: center;">
-          <IconButton icon="🏠" title="首页" />
-          <div style="margin-top: 4px; font-size: 10px; color: #6b7280;">首页</div>
-        </div>
-        
-        <div style="text-align: center;">
-          <IconButton icon="💬" title="消息" />
-          <div style="margin-top: 4px; font-size: 10px; color: #6b7280;">消息</div>
-        </div>
-        
-        <div style="text-align: center;">
-          <IconButton icon="👤" title="用户" />
-          <div style="margin-top: 4px; font-size: 10px; color: #6b7280;">用户</div>
-        </div>
-        
-        <div style="text-align: center;">
-          <IconButton icon="🔍" title="搜索" />
-          <div style="margin-top: 4px; font-size: 10px; color: #6b7280;">搜索</div>
-        </div>
-        
-        <div style="text-align: center;">
-          <IconButton icon="✎" title="编辑" />
-          <div style="margin-top: 4px; font-size: 10px; color: #6b7280;">编辑</div>
-        </div>
-        
-        <div style="text-align: center;">
-          <IconButton icon="🗑" title="删除" color="error" />
-          <div style="margin-top: 4px; font-size: 10px; color: #6b7280;">删除</div>
-        </div>
-        
-        <div style="text-align: center;">
-          <IconButton icon="+" title="添加" color="primary" />
-          <div style="margin-top: 4px; font-size: 10px; color: #6b7280;">添加</div>
-        </div>
-        
-        <div style="text-align: center;">
-          <IconButton icon="♥" title="喜欢" />
-          <div style="margin-top: 4px; font-size: 10px; color: #6b7280;">喜欢</div>
-        </div>
-        
-        <div style="text-align: center;">
-          <IconButton icon="★" title="收藏" color="warning" />
-          <div style="margin-top: 4px; font-size: 10px; color: #6b7280;">收藏</div>
-        </div>
-        
-        <div style="text-align: center;">
-          <IconButton icon="↻" title="刷新" />
-          <div style="margin-top: 4px; font-size: 10px; color: #6b7280;">刷新</div>
-        </div>
-        
-        <div style="text-align: center;">
-          <IconButton icon="⚠" title="警告" color="warning" />
-          <div style="margin-top: 4px; font-size: 10px; color: #6b7280;">警告</div>
-        </div>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <IconButton icon="♥" title="喜欢" />
+        <IconButton icon="★" title="收藏" />
+        <IconButton icon="✎" title="编辑" />
+        <IconButton icon="🗑" title="删除" />
+        <IconButton icon="⚙" title="设置" />
+        <IconButton icon="🔍" title="搜索" />
+        <IconButton icon="📱" title="手机" />
+        <IconButton icon="💬" title="消息" />
       </div>
     `
   }),
   parameters: {
     docs: {
       description: {
-        story: '展示常用图标的IconButton示例。'
+        story: '展示各种图标的图标按钮。'
       }
     }
   }
 }
 
-export const InAppBar = {
+export const InToolbar = {
   render: () => ({
     components: { IconButton },
     template: `
-      <div style="background: #3b82f6; color: white; padding: 8px 16px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
-        <div style="display: flex; align-items: center;">
-          <IconButton edge="start" icon="☰" style="color: white;" />
-          <h3 style="margin: 0 0 0 8px; font-size: 18px;">应用标题</h3>
-        </div>
-        
-        <div style="display: flex; align-items: center;">
-          <IconButton icon="🔍" style="color: white;" />
-          <IconButton icon="♥" style="color: white;" />
-          <IconButton edge="end" icon="⋮" style="color: white;" />
-        </div>
+      <div style="display: flex; align-items: center; padding: 16px; background: #f9fafb; border-radius: 8px; gap: 8px;">
+        <IconButton edge="start" icon="☰" />
+        <span style="flex: 1; font-weight: 500;">工具栏示例</span>
+        <IconButton icon="🔍" />
+        <IconButton icon="⚙" />
+        <IconButton edge="end" icon="⋮" />
       </div>
     `
   }),
   parameters: {
     docs: {
       description: {
-        story: '展示IconButton在应用栏中的典型使用场景。'
+        story: '展示IconButton在工具栏中的典型用法。'
       }
     }
   }

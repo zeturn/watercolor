@@ -1,7 +1,7 @@
 import RatingVue from '../src/components/Rating/Rating.vue'
 
 export default {
-  title: 'Components/Rating',
+  title: 'Components/Rating (Vue)',
   component: RatingVue,
   tags: ['autodocs'],
   argTypes: {

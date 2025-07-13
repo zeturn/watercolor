@@ -1,7 +1,7 @@
 import Fab from '../src/components/Button/Fab.vue'
 
 export default {
-  title: 'Components/Fab',
+  title: 'Components/Fab (Vue)',
   component: Fab,
   parameters: {
     docs: {
