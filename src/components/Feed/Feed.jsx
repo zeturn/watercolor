@@ -18,10 +18,7 @@ const FeedItem = ({
   const feedItemStyles = {
     '--feed-color': color,
     '--feed-dot-size': dotSizeValue,
-    '--feed-line-width': lineWidthValue,
-    display: 'flex', 
-    gap: 12, 
-    position: 'relative'
+    '--feed-line-width': lineWidthValue
   }
 
   return (
@@ -31,18 +28,18 @@ const FeedItem = ({
       onClick={() => onItemClick && onItemClick(item)}
     >
       {showAvatar && item.avatar && (
-        <div className="wc-feed-avatar" style={{ flexShrink: 0 }}>
-          <img src={item.avatar} alt="avatar" style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} />
+        <div className="wc-feed-avatar">
+          <img src={item.avatar} alt="avatar" />
         </div>
       )}
-      <div className="wc-feed-content" style={{ flex: 1 }}>
-        <div className="wc-feed-header" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <strong className="wc-feed-author" style={{ color: 'var(--color-text,#111827)' }}>{item.author}</strong>
-          <span className="wc-feed-time" style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary,#6b7280)' }}>{item.time}</span>
+      <div className="wc-feed-content">
+        <div className="wc-feed-header">
+          <strong className="wc-feed-author">{item.author}</strong>
+          <span className="wc-feed-time">{item.time}</span>
         </div>
-        <p className="wc-feed-text" style={{ margin: '4px 0 0', fontSize: '0.875rem', color: 'var(--color-text,#374151)' }}>{item.text}</p>
+        <p className="wc-feed-text">{item.text}</p>
         {hasChildren && (
-          <ul className="wc-feed-children" style={{ listStyle: 'none', margin: '12px 0 0 52px', padding: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <ul className="wc-feed-children">
             {item.children.map((child) => (
               <FeedItem 
                 key={child.id || child.time} 
@@ -76,13 +73,7 @@ const Feed = ({
   
   const feedListStyles = {
     '--feed-color': color,
-    '--feed-line-width': lineWidthValue,
-    listStyle: 'none', 
-    padding: 0, 
-    margin: 0, 
-    display: 'flex', 
-    flexDirection: 'column', 
-    gap: 16
+    '--feed-line-width': lineWidthValue
   }
 
   return (

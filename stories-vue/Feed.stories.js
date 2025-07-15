@@ -1,6 +1,10 @@
 import FeedVue from '../src/components/Feed/Feed.vue'
 
-export default { title:'Components/Feed', component:FeedVue, tags:['autodocs'] }
+export default { 
+  title:'Components/Feed (Vue)', 
+  component:FeedVue, 
+  tags:['autodocs'] 
+}
 
 const flat = [
   {id:1,author:'Alice',time:'1h',text:'创建了一个新的任务',avatar:'https://i.pravatar.cc/40?img=1'},
