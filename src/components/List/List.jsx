@@ -23,17 +23,14 @@ const List = ({
   className = '',
   ...rest
 }) => {
-  const listClasses = [
-    'w-full',
-    !disablePadding && 'py-2',
-    className
-  ].filter(Boolean).join(' ')
+  // 使用工具函数根据 props 生成原生 CSS 类，避免直接使用 Tailwind 类
+  const listClasses = getListClasses({ dense, disablePadding, className }).join(' ')
 
   return (
     <ListContext.Provider value={{ dense }}>
-      <ul role="list" className={listClasses} {...rest}>
+      <div role="list" className={listClasses} {...rest}>
         {children}
-      </ul>
+      </div>
     </ListContext.Provider>
   )
 }

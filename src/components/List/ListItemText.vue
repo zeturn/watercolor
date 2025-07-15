@@ -1,26 +1,15 @@
 <template>
-  <div class="flex-1 min-w-0">
-    <!-- Primary text -->
-    <div :class="primaryClasses">
-      <slot>
-        {{ primary }}
-      </slot>
-    </div>
-    
-    <!-- Secondary text -->
-    <div
-      v-if="secondary || $slots.secondary"
-      :class="secondaryClasses"
-    >
-      <slot name="secondary">
-        {{ secondary }}
-      </slot>
-    </div>
+  <div :class="textClasses" v-bind="$attrs">
+    <p v-if="primary" class="list-item-text-primary">{{ primary }}</p>
+    <p v-if="secondary" class="list-item-text-secondary">{{ secondary }}</p>
+    <slot v-else />
   </div>
 </template>
 
 <script setup>
-import { computed, inject } from 'vue'
+import { computed } from 'vue'
+import { getListItemTextClasses } from './utils.js'
+import './style.css'
 
 const props = defineProps({
   primary: {
@@ -35,47 +24,14 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  disableTypography: {
-    type: Boolean,
-    default: false
+  className: {
+    type: String,
+    default: ''
   }
 })
 
-const listContext = inject('listContext', { dense: false })
-
-const primaryClasses = computed(() => {
-  const classes = ['text-neutral-900 dark:text-neutral-100']
-  
-  if (!props.disableTypography) {
-    if (listContext.dense) {
-      classes.push('text-sm font-medium')
-    } else {
-      classes.push('text-base font-medium')
-    }
-  }
-  
-  if (props.inset) {
-    classes.push('ml-14')
-  }
-  
-  return classes
-})
-
-const secondaryClasses = computed(() => {
-  const classes = ['text-neutral-600 dark:text-neutral-400 mt-1']
-  
-  if (!props.disableTypography) {
-    if (listContext.dense) {
-      classes.push('text-xs')
-    } else {
-      classes.push('text-sm')
-    }
-  }
-  
-  if (props.inset) {
-    classes.push('ml-14')
-  }
-  
-  return classes
-})
+const textClasses = computed(() => getListItemTextClasses({
+  inset: props.inset,
+  className: props.className
+}).join(' '))
 </script> 

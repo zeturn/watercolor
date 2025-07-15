@@ -1,6 +1,6 @@
 <template>
   <template v-if="subheader">
-    <div class="wc-list-subheader">
+    <div class="list-subheader">
       {{ subheader }}
     </div>
     <component
@@ -24,6 +24,7 @@
 
 <script setup>
 import { computed, provide } from 'vue'
+import './style.css'
 
 defineOptions({
   inheritAttrs: false
@@ -53,20 +54,18 @@ const props = defineProps({
 })
 
 const listClasses = computed(() => {
-  const classes = ['wc-list', 'w-full']
+  const classes = ['list']
   
   if (props.dense) {
-    classes.push('wc-list--dense')
+    classes.push('list--dense')
   }
   
   if (props.disablePadding) {
-    classes.push('wc-list--no-padding')
-  } else {
-    classes.push('py-2')
+    classes.push('list--no-padding')
   }
   
   if (props.nav) {
-    classes.push('wc-list--nav')
+    classes.push('list--nav')
   }
   
   return classes

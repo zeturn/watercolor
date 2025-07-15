@@ -4,7 +4,7 @@ import ListItemIcon from '../src/components/List/ListItemIcon.vue'
 import ListItemText from '../src/components/List/ListItemText.vue'
 
 export default {
-  title: 'Components/List',
+  title: 'Components/List (Vue)',
   component: List,
   parameters: {
     docs: {

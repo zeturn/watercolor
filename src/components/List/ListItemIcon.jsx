@@ -1,23 +1,14 @@
-import React, { useContext } from 'react'
-import './style.css'
-import { ListContext } from './List'
+import React from 'react'
 import { getListItemIconClasses } from './utils.js'
+import './style.css'
 
-const ListItemIcon = ({ children, className = '', ...rest }) => {
-  const { dense } = useContext(ListContext)
-
-  const iconClasses = [
-    'wc-list-item-icon inline-flex items-center justify-center flex-shrink-0',
-    dense ? 'w-4 h-4 mr-4 text-base' : 'w-5 h-5 mr-4 text-lg',
-    'text-neutral-600 dark:text-neutral-400',
-    className
-  ].filter(Boolean).join(' ')
-
+const ListItemIcon = ({ children, position = 'start', className = '', ...rest }) => {
+  const classes = getListItemIconClasses({ position, className }).join(' ')
   return (
-    <div className={iconClasses} {...rest}>
+    <span className={classes} {...rest}>
       {children}
-    </div>
+    </span>
   )
 }
 
-export default ListItemIcon
+export default ListItemIcon 

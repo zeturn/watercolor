@@ -1,58 +1,48 @@
 import React, { useContext } from 'react'
-import './style.css'
-import { ListContext } from './List'
+import { ListContext } from './List.jsx'
 import { getListItemClasses } from './utils.js'
+import './style.css'
 
+/**
+ * React 版本的 ListItem
+ */
 const ListItem = ({
   children,
   button = false,
   disabled = false,
   divider = false,
-  dense: denseProp,
   selected = false,
   disableGutters = false,
+  multiselect = false,
+  component: ComponentProp,
   className = '',
-  onClick,
   ...rest
 }) => {
-  const { dense: contextDense } = useContext(ListContext)
-  const isDense = denseProp !== undefined ? denseProp : contextDense
+  const { dense } = useContext(ListContext) || { dense: false }
 
-  // 组合类名
-  const classes = [
-    'flex items-center w-full transition-colors duration-150',
-    !disableGutters && (isDense ? 'px-4 py-1' : 'px-4 py-2'),
-    button && !disabled && 'cursor-pointer focus:outline-none',
-    disabled && 'opacity-50 cursor-not-allowed',
-    divider && 'border-b border-neutral-200 dark:border-neutral-700',
-    // 选中/悬浮状态
-    selected && button && !disabled && 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400',
-    !selected && button && !disabled && 'hover:bg-neutral-50 dark:hover:bg-neutral-800 focus:bg-neutral-100 dark:focus:bg-neutral-700',
+  const itemClasses = getListItemClasses({
+    button,
+    disabled,
+    divider,
+    dense,
+    selected,
+    disableGutters,
+    multiselect,
     className
-  ].filter(Boolean).join(' ')
+  }).join(' ')
 
-  const handleClick = (e) => {
-    if (button && !disabled) {
-      onClick?.(e)
-    }
-  }
+  const Component = ComponentProp || (button ? 'button' : 'div')
 
   return (
-    <li
+    <Component
       role="listitem"
-      tabIndex={button ? 0 : -1}
-      className={classes}
-      onClick={handleClick}
-      onKeyDown={(e) => {
-        if ((e.key === 'Enter' || e.key === ' ') && button && !disabled) {
-          handleClick(e)
-        }
-      }}
+      className={itemClasses}
+      disabled={button && disabled}
       {...rest}
     >
       {children}
-    </li>
+    </Component>
   )
 }
 
-export default ListItem
+export default ListItem 

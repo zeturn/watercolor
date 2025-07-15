@@ -40,9 +40,6 @@ export { default as Skeleton } from './components/Skeleton/Skeleton.vue'
 // 数据展示组件
 export { default as Typography } from './components/Display/Typography.vue'
 export { default as List } from './components/Display/List.vue'
-export { default as ListItem } from './components/Display/ListItem.vue'
-export { default as ListItemText } from './components/Display/ListItemText.vue'
-export { default as ListItemIcon } from './components/Display/ListItemIcon.vue'
 export { default as Table } from './components/Display/Table.vue'
 export { default as TableHead } from './components/Display/TableHead.vue'
 export { default as TableBody } from './components/Display/TableBody.vue'
@@ -64,10 +61,10 @@ export { default as Tab } from './components/Tabs/Tabs.vue' // 复用 Tabs 组�
 export * from './utils/theme'
 
 // 兼容性别名和组件包装器
-import ListItemComponent from './components/Display/ListItem.vue'
+import ListComponent from './components/Display/List.vue'
 import PaperComponent from './components/Paper/Paper.vue'
 
-export const ListItemButton = ListItemComponent
+export const ListItemButton = ListComponent
 export const TableContainer = PaperComponent
 
 // 工具函数

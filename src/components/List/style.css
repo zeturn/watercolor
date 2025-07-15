@@ -5,9 +5,9 @@
 
 /* CSS变量定义 */
 :root {
-  --list-bg: #ffffff;
-  --list-border: #e5e7eb;
-  --list-text: #111827;
+  --list-bg: transparent;
+  --list-border: var(--wc-border-color);
+  --list-text: var(--wc-text-color);
   --list-text-secondary: #6b7280;
   --list-hover-bg: #f9fafb;
   --list-selected-bg: #eff6ff;
@@ -19,9 +19,6 @@
   --list-radius: 6px;
   --list-transition: all 0.15s ease;
 }
-
-/* 深色模式变量 */
-/* 已移除 prefers-color-scheme 媒体查询，避免与Storybook主题切换冲突 */
 
 /* 列表容器 */
 .list-container {
@@ -50,10 +47,11 @@
   text-decoration: none;
   color: var(--list-text);
   background: transparent;
-  border: none;
+  border: var(--wc-border);
   transition: var(--list-transition);
   cursor: default;
   position: relative;
+  border-radius: var(--list-radius);
 }
 
 /* 按钮模式的列表项 */
@@ -63,7 +61,8 @@
 }
 
 .list-item--button:hover:not(.list-item--disabled) {
-  background: var(--list-hover-bg);
+  background: rgba(0, 0, 0, 0.06); /* 深一点的灰色背景 */
+  border-radius: var(--list-radius); /* 圆角 */
 }
 
 .list-item--button:focus:not(.list-item--disabled) {
@@ -470,4 +469,24 @@
   .list-item-action {
     display: none !important;
   }
+} 
+
+/* ============================= */
+/* 列表容器修饰类（补充组件需求） */
+/* ============================= */
+
+/* 紧凑模式：为容器本身添加垂直内边距减少 */
+.list--dense {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+/* 去除容器内边距 */
+.list--no-padding {
+  padding: 0;
+}
+
+/* 导航列表模式，可根据需要扩展 */
+.list--nav {
+  list-style: none;
 } 
