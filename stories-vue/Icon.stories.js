@@ -2,7 +2,7 @@ import { IconVue } from '../src/index.ts'
 import { LUCIDE_ICONS, HEROICONS, ICON_PRESETS } from '../src/utils/icons.ts'
 
 export default {
-  title: 'Components/Icon',
+  title: 'Components/Icon (Vue)',
   component: IconVue,
   tags: ['autodocs'],
   parameters: {

@@ -28,7 +28,15 @@
 </template>
 
 <script setup>
-import { computed, defineAsyncComponent, ref, watchEffect } from 'vue'
+import { computed, defineAsyncComponent, ref, watchEffect, h } from 'vue'
+
+// 用于在图标库缺失或加载失败时渲染的占位符组件
+const StubIcon = {
+  name: 'StubIcon',
+  render () {
+    return h('span')
+  }
+}
 
 const props = defineProps({
   // Icon库和名称
@@ -81,12 +89,16 @@ const iconComponent = computed(() => {
   try {
     switch (props.library) {
       case 'lucide':
-        return defineAsyncComponent(() => 
-          import('lucide-vue-next').then(module => {
+        return defineAsyncComponent(async () => {
+          try {
+            const module = await import('lucide-vue-next')
             const iconName = props.name.charAt(0).toUpperCase() + props.name.slice(1)
-            return module[iconName] || module.HelpCircle
-          })
-        )
+            return module[iconName] || module.HelpCircle || StubIcon
+          } catch (error) {
+            console.warn('[Icon] lucide-vue-next 加载失败，已使用占位符图标。', error)
+            return StubIcon
+          }
+        })
       
       case 'heroicons':
         // Heroicons 需要特殊处理，暂时禁用
@@ -94,24 +106,28 @@ const iconComponent = computed(() => {
         return null
       
       case 'tabler':
-        return defineAsyncComponent(() =>
-          import('@tabler/icons-vue').then(module => {
-            const iconName = 'Icon' + props.name.split('-').map(word => 
-              word.charAt(0).toUpperCase() + word.slice(1)
-            ).join('')
-            return module[iconName] || module.IconHelp
-          })
-        )
+        return defineAsyncComponent(async () => {
+          try {
+            const module = await import('@tabler/icons-vue')
+            const iconName = 'Icon' + props.name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('')
+            return module[iconName] || module.IconHelp || StubIcon
+          } catch (error) {
+            console.warn('[Icon] @tabler/icons-vue 加载失败，已使用占位符图标。', error)
+            return StubIcon
+          }
+        })
       
       case 'phosphor':
-        return defineAsyncComponent(() =>
-          import('@phosphor-icons/vue').then(module => {
-            const iconName = 'Ph' + props.name.split('-').map(word => 
-              word.charAt(0).toUpperCase() + word.slice(1)
-            ).join('')
-            return module[iconName] || module.PhQuestion
-          })
-        )
+        return defineAsyncComponent(async () => {
+          try {
+            const module = await import('@phosphor-icons/vue')
+            const iconName = 'Ph' + props.name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('')
+            return module[iconName] || module.PhQuestion || StubIcon
+          } catch (error) {
+            console.warn('[Icon] @phosphor-icons/vue 加载失败，已使用占位符图标。', error)
+            return StubIcon
+          }
+        })
       
       default:
         return null

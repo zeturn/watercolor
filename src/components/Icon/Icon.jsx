@@ -1,42 +1,56 @@
 import React, { useMemo, lazy, Suspense } from 'react'
 import PropTypes from 'prop-types'
 
+// AFTER the existing React imports, add a fallback stub icon and helper for safe lazy imports
+const StubIcon = ({ className, style }) => <span className={className} style={style} />
+
+const lazyWithFallback = (importer, resolveComponent) =>
+  lazy(() =>
+    importer()
+      .then((mod) => ({ default: resolveComponent(mod) }))
+      .catch((err) => {
+        console.warn('[Icon] 动态导入失败，已回退到占位符图标。', err)
+        return { default: StubIcon }
+      })
+  )
+
 // 动态导入图标组件的函数
 const createIconComponent = (library, name, variant) => {
+  // 提前生成 PascalCase / kebab-case 名称，避免在多处重复
+  const pascalName = name.charAt(0).toUpperCase() + name.slice(1)
+
   switch (library) {
     case 'lucide':
-      return lazy(() => 
-        import('lucide-react').then(module => {
-          const iconName = name.charAt(0).toUpperCase() + name.slice(1)
-          return { default: module[iconName] || module.HelpCircle }
-        })
+      return lazyWithFallback(
+        () => import('lucide-react'),
+        (module) => module[pascalName] || module.HelpCircle || StubIcon
       )
-    
+
     case 'heroicons':
-      // Heroicons 需要特殊处理，暂时禁用
       console.warn('Heroicons support is currently disabled due to build constraints')
       return null
-    
+
     case 'tabler':
-      return lazy(() =>
-        import('@tabler/icons-react').then(module => {
-          const iconName = 'Icon' + name.split('-').map(word => 
-            word.charAt(0).toUpperCase() + word.slice(1)
-          ).join('')
-          return { default: module[iconName] || module.IconHelp }
-        })
+      return lazyWithFallback(
+        () => import('@tabler/icons-react'),
+        (module) => {
+          const iconName = 'Icon' + name.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join('')
+          return module[iconName] || module.IconHelp || StubIcon
+        }
       )
-    
+
     case 'phosphor':
-      return lazy(() =>
-        import('@phosphor-icons/react').then(module => {
-          const iconName = name.split('-').map(word => 
-            word.charAt(0).toUpperCase() + word.slice(1)
-          ).join('')
-          return { default: module[iconName] || module.Question }
-        })
+      return lazyWithFallback(
+        () => import('@phosphor-icons/react'),
+        (module) => {
+          const iconName = name
+            .split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join('')
+          return module[iconName] || module.Question || StubIcon
+        }
       )
-    
+
     default:
       return null
   }
