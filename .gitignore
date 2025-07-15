@@ -86,3 +86,7 @@ temp/
 *.njsproj
 *.sln
 *.sw? 
+
+# build
+storybook-static-react/
+storybook-static/
