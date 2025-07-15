@@ -3,9 +3,9 @@
 /* CSS变量定义 */
 :root {
   --marquee-bg: transparent;
-  --marquee-text: #111827;
-  --marquee-border: #e5e7eb;
-  --marquee-control-bg: rgba(255, 255, 255, 0.9);
+  --marquee-text: var(--wc-text-color);
+  --marquee-border: var(--wc-border-color);
+  --marquee-control-bg: transparent;
   --marquee-control-hover: #f3f4f6;
   --marquee-gradient-start: rgba(255, 255, 255, 1);
   --marquee-gradient-end: rgba(255, 255, 255, 0);
@@ -47,7 +47,7 @@
   min-height: 40px;
   display: flex;
   align-items: center;
-  background: var(--marquee-bg);
+  background: transparent;
   color: var(--marquee-text);
 }
 .marquee-content {
