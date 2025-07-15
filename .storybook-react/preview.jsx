@@ -11,6 +11,8 @@ const getInitialTheme = () => {
 };
 const savedTheme = getInitialTheme();
 
+const debug = false;
+
 const preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
@@ -62,7 +64,7 @@ const preview = {
 
       // watchEffect will run once and whenever theme changes
       useEffect(() => {
-        console.log('[Preview] Theme changed to:', theme)
+        if (debug) console.log('[Preview] Theme changed to:', theme)
         
         const root = document.documentElement
         root.classList.remove('light', 'dark')
@@ -76,16 +78,16 @@ const preview = {
 
         // save theme to localStorage and trigger manager reload
         const currentTheme = localStorage.getItem('storybook-theme')
-        console.log('[Preview] Current localStorage theme:', currentTheme)
-        console.log('[Preview] New theme to save:', theme)
+        if (debug) console.log('[Preview] Current localStorage theme:', currentTheme)
+        if (debug) console.log('[Preview] New theme to save:', theme)
         
         if (currentTheme !== theme) {
           localStorage.setItem('storybook-theme', theme)
-          console.log('[Preview] Saved theme to localStorage:', theme)
+          if (debug) console.log('[Preview] Saved theme to localStorage:', theme)
           
           // 确保localStorage已保存
           const savedTheme = localStorage.getItem('storybook-theme')
-          console.log('[Preview] Verified saved theme:', savedTheme)
+          if (debug) console.log('[Preview] Verified saved theme:', savedTheme)
           
           // trigger storage event to notify manager
           const storageEvent = new StorageEvent('storage', {
@@ -94,7 +96,7 @@ const preview = {
             oldValue: currentTheme
           })
           
-          console.log('[Preview] Dispatching storage event:', storageEvent)
+          if (debug) console.log('[Preview] Dispatching storage event:', storageEvent)
           window.dispatchEvent(storageEvent)
         }
       }, [theme])

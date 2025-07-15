@@ -39,17 +39,14 @@ const Switch = ({
     <div className="wc-switch-wrapper">
       {/* Label */}
       {label && (
-        <label
-          id={labelId}
-          className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2"
-        >
+        <label id={labelId} className="wc-switch__label">
           {label}
-          {required && <span className="text-error-500 ml-1">*</span>}
+          {required && <span className="wc-switch__required">*</span>}
         </label>
       )}
 
       {/* Switch & Description */}
-      <div className="flex items-center gap-3">
+      <div className="wc-switch__container">
         <label className={switchClasses} aria-disabled={disabled}>
           <input
             type="checkbox"
@@ -67,7 +64,7 @@ const Switch = ({
         </label>
 
         {description && (
-          <span className="text-sm text-neutral-500 dark:text-neutral-400">
+          <span className="wc-switch__description">
             {description}
           </span>
         )}

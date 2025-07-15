@@ -1,4 +1,21 @@
 /* Form 共用样式 */
+:root {
+  --wc-radius-xs: 2px;
+  --wc-radius-sm: 4px;
+  --wc-radius-md: 6px;
+  --wc-radius-lg: 8px;
+
+  /* 动画时长 */
+  --wc-transition-fast: 0.15s ease-in-out;
+  --wc-transition-medium: 0.25s ease-in-out;
+
+  /* 焦点阴影 */
+  --wc-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.35);
+}
+
+.dark {
+  --wc-shadow-focus: 0 0 0 3px rgba(96, 165, 250, 0.45);
+}
 
 /* FormControl 基础样式 */
 .form-control {
@@ -6,6 +23,12 @@
   flex-direction: column;
   position: relative;
   margin-bottom: 16px;
+  border-radius: var(--wc-radius-sm);
+  transition: background-color var(--wc-transition-fast), box-shadow var(--wc-transition-fast);
+}
+
+.form-control:focus-within {
+  box-shadow: var(--wc-shadow-focus);
 }
 
 .form-control--full-width {
@@ -43,12 +66,13 @@
   user-select: none;
   position: relative;
   margin: 0;
-  transition: all 0.2s ease;
+  border-radius: var(--wc-radius-sm);
+  transition: all var(--wc-transition-fast);
 }
 
 .form-control-label:hover {
   background-color: var(--wc-neutral-25, rgba(0, 0, 0, 0.02));
-  border-radius: 4px;
+  transform: translateY(-1px);
 }
 
 /* 标签位置变体 */

@@ -170,6 +170,20 @@
   color: var(--wc-neutral-400);
 }
 
+/* ====== Switch Container (label + toggle + description) ====== */
+.wc-switch__container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Required asterisk */
+.wc-switch__required {
+  color: var(--wc-error-500, #ef4444);
+  margin-left: 2px;
+  font-weight: 500;
+}
+
 /* ====== Switch Content ====== */
 .wc-switch__content {
   display: flex;

@@ -346,3 +346,74 @@ export const FormIntegration = () => {
     </div>
   )
 }
+
+export const Sizes = () => {
+  const [small, setSmall] = useState(false)
+  const [medium, setMedium] = useState(false)
+  const [large, setLarge] = useState(false)
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 32, maxWidth: 400 }}>
+      {/* 尺寸示例 */}
+      <div>
+        <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: 16 }}>不同尺寸的开关</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <Switch size="sm" label="小尺寸开关" description="适用于紧凑布局" checked={small} onChange={setSmall} />
+          <Switch size="md" label="中等尺寸开关（默认）" description="标准尺寸，最常用" checked={medium} onChange={setMedium} />
+          <Switch size="lg" label="大尺寸开关" description="适用于重要设置项" checked={large} onChange={setLarge} />
+        </div>
+      </div>
+
+      {/* 无标签尺寸对比 */}
+      <div>
+        <h4 style={{ fontSize: '0.875rem', fontWeight: 500, marginBottom: 12 }}>无标签的不同尺寸对比</h4>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
+          <div style={{ textAlign: 'center' }}>
+            <Switch size="sm" checked={small} onChange={setSmall} />
+            <p style={{ fontSize: 12, color: '#6b7280', marginTop: 8 }}>小尺寸</p>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <Switch size="md" checked={medium} onChange={setMedium} />
+            <p style={{ fontSize: 12, color: '#6b7280', marginTop: 8 }}>中等尺寸</p>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <Switch size="lg" checked={large} onChange={setLarge} />
+            <p style={{ fontSize: 12, color: '#6b7280', marginTop: 8 }}>大尺寸</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export const WithoutLabels = () => {
+  const [sw1, setSw1] = useState(false)
+  const [sw2, setSw2] = useState(true)
+  const [sw3, setSw3] = useState(false)
+  const [sw4, setSw4] = useState(true)
+
+  const handle = (setFn) => (value) => setFn(value)
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+      <div>
+        <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: 16 }}>无标签开关</h3>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+          <Switch color="primary" checked={sw1} onChange={handle(setSw1)} />
+          <Switch color="success" checked={sw2} onChange={handle(setSw2)} />
+          <Switch color="purple" checked={sw3} onChange={handle(setSw3)} />
+          <Switch color="error" checked={sw4} onChange={handle(setSw4)} />
+        </div>
+      </div>
+
+      <div>
+        <h4 style={{ fontSize: '0.875rem', fontWeight: 500, marginBottom: 12 }}>不同尺寸的无标签开关</h4>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+          <Switch size="sm" color="primary" checked={sw1} onChange={handle(setSw1)} />
+          <Switch size="md" color="success" checked={sw2} onChange={handle(setSw2)} />
+          <Switch size="lg" color="purple" checked={sw3} onChange={handle(setSw3)} />
+        </div>
+      </div>
+    </div>
+  )
+}
