@@ -2,7 +2,7 @@ import Radio from '../src/components/Radio/Radio.vue'
 import { ref } from 'vue'
 
 export default {
-  title: 'Components/Radio',
+  title: 'Components/Radio (Vue)',
   component: Radio,
   parameters: {
     docs: {

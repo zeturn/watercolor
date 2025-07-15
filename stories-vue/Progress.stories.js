@@ -1,7 +1,7 @@
 import ProgressVue from '../src/components/Progress/Progress.vue'
 
 export default {
-  title: 'Components/Progress',
+  title: 'Components/Progress (Vue)',
   component: ProgressVue,
   parameters: {
     layout: 'centered',

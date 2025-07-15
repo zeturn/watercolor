@@ -14,7 +14,7 @@
         v-if="showPercent"
         class="wc-progress-percent"
       >
-        {{ Math.round(value) }}%
+        {{ Math.round(safeValue) }}%
       </span>
     </div>
     
@@ -30,13 +30,17 @@
 </template>
 
 <script setup>
+import './style.css'
 import { computed } from 'vue'
 
 const props = defineProps({
   value: {
-    type: Number,
+    type: [Number, String],
     default: 0,
-    validator: (value) => value >= 0 && value <= 100
+    validator: (value) => {
+      const num = Number(value)
+      return !Number.isNaN(num) && num >= 0 && num <= 100
+    }
   },
   label: {
     type: String,
@@ -64,6 +68,13 @@ const props = defineProps({
 
 const progressClasses = computed(() => ['wc-progress', `wc-progress--${props.size}`])
 
+// 统一校正并限制进度值，防止出现 NaN 或非法数值导致宽度始终为 0%
+const safeValue = computed(() => {
+  const numeric = Number(props.value)
+  if (Number.isNaN(numeric)) return 0
+  return Math.max(0, Math.min(100, numeric))
+})
+
 const barClasses = computed(() => [
   'wc-progress__bar',
   `wc-progress__bar--${props.color}`,
@@ -71,83 +82,7 @@ const barClasses = computed(() => [
 ].filter(Boolean))
 
 const barStyle = computed(() => ({
-  width: `${Math.max(0, Math.min(100, props.value))}%`
+  width: `${safeValue.value}%`
 }))
 </script>
 
-<style scoped>
-.wc-progress-wrapper {
-  width: 100%;
-}
-
-.wc-progress-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.wc-progress-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: #3f3f46;
-}
-
-.wc-progress-percent {
-  font-size: 14px;
-  color: #71717a;
-}
-
-.wc-progress {
-  width: 100%;
-  background-color: #e4e4e7;
-  border-radius: 9999px;
-  overflow: hidden;
-}
-
-.wc-progress--sm {
-  height: 4px;
-}
-
-.wc-progress--md {
-  height: 8px;
-}
-
-.wc-progress--lg {
-  height: 12px;
-}
-
-.wc-progress__bar {
-  height: 100%;
-  border-radius: 9999px;
-  transition: all 0.5s ease;
-}
-
-.wc-progress__bar--animated {
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-/* 深色模式 */
-@media (prefers-color-scheme: dark) {
-  .wc-progress-label {
-    color: #d4d4d8;
-  }
-  
-  .wc-progress-percent {
-    color: #a1a1aa;
-  }
-  
-  .wc-progress {
-    background-color: #3f3f46;
-  }
-}
-</style> 

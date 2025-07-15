@@ -1,8 +1,23 @@
 import React, { useState, useContext, createContext, useCallback } from 'react'
+import './style.css'
 
 const RadioGroupContext = createContext(null)
 
-export function RadioGroup({ value, onChange, name, disabled = false, children, className = '' }) {
+export function RadioGroup({
+  value,
+  onChange,
+  name,
+  disabled = false,
+  label = '',
+  row = false,
+  required = false,
+  error = '',
+  helperText = '',
+  size = 'md',
+  color = 'primary',
+  children,
+  className = '',
+}) {
   const [internalValue, setInternalValue] = useState(value)
   const isControlled = value !== undefined
 
@@ -17,9 +32,39 @@ export function RadioGroup({ value, onChange, name, disabled = false, children, 
     [disabled, isControlled, onChange]
   )
 
+  // ====== 类名计算 ======
+  const groupClasses = ['wc-radio-group', className].filter(Boolean).join(' ')
+  const contentClasses = [
+    'wc-radio-group-content',
+    row ? 'flex flex-wrap gap-4' : 'space-y-2',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   return (
-    <RadioGroupContext.Provider value={{ value: currentValue, updateValue, name, disabled }}>
-      <div className={className}>{children}</div>
+    <RadioGroupContext.Provider
+      value={{ value: currentValue, updateValue, name, disabled, size, color }}
+    >
+      <div className={groupClasses}>
+        {label && (
+          <label className="wc-radio-group-label">
+            {label}
+            {required && <span className="text-error-500">*</span>}
+          </label>
+        )}
+
+        <div className={contentClasses}>{children}</div>
+
+        {(error || helperText) && (
+          <div className="mt-2">
+            {error ? (
+              <p className="text-sm text-error-500">{error}</p>
+            ) : (
+              <p className="text-sm text-neutral-500">{helperText}</p>
+            )}
+          </div>
+        )}
+      </div>
     </RadioGroupContext.Provider>
   )
 }
@@ -39,12 +84,41 @@ export default function Radio({
 }) {
   const group = useContext(RadioGroupContext)
 
+  /* ========== 状态计算 ========= */
   const isChecked = group ? group.value === value : checked !== undefined ? checked : undefined
 
   const inputName = group ? group.name : name
   const isDisabled = group ? group.disabled || disabled : disabled
 
-  const handleChange = (e) => {
+  // 继承 group 的 size / color（若组件自身未显式指定）
+  const finalSize = size || (group && group.size) || 'md'
+  const finalColor = color || (group && group.color) || 'primary'
+
+  /* ========== 焦点管理 ========= */
+  const [focused, setFocused] = useState(false)
+
+  /* ========== 类名计算 ========= */
+  const containerClasses = [
+    'wc-radio',
+    `wc-radio--${finalSize}`,
+    isDisabled && 'wc-radio--disabled',
+    focused && 'wc-radio--focused',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  const radioButtonClasses = [
+    'wc-radio__button',
+    `wc-radio__button--${finalColor}`,
+    `wc-radio__button--${finalSize}`,
+    isChecked && 'wc-radio__button--checked',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  /* ========== 事件处理 ========= */
+  const handleChange = () => {
     if (isDisabled) return
     if (group) {
       group.updateValue(value)
@@ -53,10 +127,11 @@ export default function Radio({
     }
   }
 
+  /* ========== 渲染 ========= */
+  const labelContent = children || label
+
   return (
-    <label
-      className={`wc-radio wc-radio--${size}${isDisabled ? ' wc-radio--disabled' : ''} ${className}`.trim()}
-    >
+    <label className={containerClasses}>
       <input
         type="radio"
         className="wc-radio__input"
@@ -65,10 +140,17 @@ export default function Radio({
         checked={isChecked}
         disabled={isDisabled}
         onChange={handleChange}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
         {...rest}
       />
-      <span className={`wc-radio__button wc-radio__button--${color} wc-radio__button--${size}${isChecked ? ' wc-radio__button--checked' : ''}`}></span>
-      {(children || label) && <span className="radio-label">{children || label}</span>}
+      <span className={radioButtonClasses}>
+        {isChecked && <span className="radio-dot" />}
+      </span>
+      {labelContent && <span className="radio-label">{labelContent}</span>}
     </label>
   )
 }
+
+Radio.displayName = 'Radio'
+RadioGroup.displayName = 'RadioGroup'
