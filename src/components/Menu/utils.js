@@ -1,25 +1,36 @@
 // Menu 组件共用工具函数
 
 export const shadowMap = {
-  0: 'shadow-none',
-  1: 'shadow-sm',
-  2: 'shadow',
-  3: 'shadow-md',
-  4: 'shadow-lg',
-  6: 'shadow-xl',
-  8: 'shadow-2xl',
-  12: 'shadow-2xl',
-  16: 'shadow-2xl',
-  24: 'shadow-2xl'
+  0: 'wc-menu--elevation-0',
+  1: 'wc-menu--elevation-1',
+  2: 'wc-menu--elevation-2',
+  3: 'wc-menu--elevation-3',
+  4: 'wc-menu--elevation-4',
+  6: 'wc-menu--elevation-6',
+  8: 'wc-menu--elevation-8',
+  12: 'wc-menu--elevation-12',
+  16: 'wc-menu--elevation-16',
+  24: 'wc-menu--elevation-24'
 }
 
-export const getMenuClasses = (elevation, className = '') => {
+export const getMenuClasses = (
+  elevation,
+  className = '',
+  variant = 'popover'
+) => {
+  if (variant === 'inline') {
+    return ['wc-menu', 'wc-menu--inline', className]
+      .filter(Boolean)
+      .join(' ')
+  }
+
+  // popover 默认
   const classes = [
-    'absolute bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 py-2 min-w-32 max-w-xs transition-all duration-150 origin-top-left',
+    'wc-menu',
     shadowMap[elevation] || shadowMap[8],
     className
   ].filter(Boolean)
-  
+
   return classes.join(' ')
 }
 

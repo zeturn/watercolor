@@ -1,44 +1,122 @@
-/* Menu 组件样式 */
+/* Menu 组件样式 (纯 CSS，无 Tailwind) */
 
+/* Popover 基础样式 */
 .wc-menu {
-  @apply absolute bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 py-2 min-w-32 max-w-xs transition-all duration-150 origin-top-left;
+  position: absolute;
+  background-color: var( --wc-bg-canvas); /* 白色背景 */
+  border: 1px solid var(--wc-border-color); /* 灰色边框 */
+  border-radius: 8px;        /* 圆角 */
+  padding: 8px 0;            /* 内边距 */
+  min-width: 128px;          /* 8rem */
+  max-width: 320px;          /* 20rem */
+  transition: all 150ms ease;
+  transform-origin: top left;
+  box-sizing: border-box;
 }
 
-.wc-menu__backdrop {
-  @apply fixed inset-0 bg-black bg-opacity-25;
-}
-
+/* 外层容器（用于 popover 模式定位 & 层级） */
 .wc-menu__container {
-  @apply fixed inset-0 z-50;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
 }
 
-.wc-menu--elevation-0 {
-  @apply shadow-none;
+/* 背景遮罩 */
+.wc-menu__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
 }
 
-.wc-menu--elevation-1 {
-  @apply shadow-sm;
-}
-
-.wc-menu--elevation-2 {
-  @apply shadow;
-}
-
-.wc-menu--elevation-3 {
-  @apply shadow-md;
-}
-
-.wc-menu--elevation-4 {
-  @apply shadow-lg;
-}
-
-.wc-menu--elevation-6 {
-  @apply shadow-xl;
-}
-
+/* elevation (阴影) 映射 */
+.wc-menu--elevation-0 { box-shadow: none; }
+.wc-menu--elevation-1 { box-shadow: 0 1px 2px rgba(0, 0, 0, .05); }
+.wc-menu--elevation-2 { box-shadow: 0 1px 3px rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .06); }
+.wc-menu--elevation-3 { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -2px rgba(0, 0, 0, .1); }
+.wc-menu--elevation-4 { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -4px rgba(0, 0, 0, .1); }
+.wc-menu--elevation-6 { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04); }
 .wc-menu--elevation-8,
 .wc-menu--elevation-12,
 .wc-menu--elevation-16,
-.wc-menu--elevation-24 {
-  @apply shadow-2xl;
+.wc-menu--elevation-24 { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, .25); }
+
+/* Link 样式 */
+.wc-menu a {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #374151; /* Neutral 700 */
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  text-align: left;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.wc-menu a:hover,
+.wc-menu a:focus {
+  background: #f3f4f6; /* Neutral 100 */
+  border-radius: 6px;
+  outline: none;
+}
+
+.wc-menu a[aria-current='page'],
+.wc-menu a.active {
+  background: #e5e7eb; /* Neutral 200 */
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* Inline 模式基础样式 */
+.wc-menu--inline {
+  position: relative;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  min-width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px; /* 原 space-y-1 */
+}
+
+/* 子菜单折叠处理 */
+.wc-menu ul {
+  padding-left: 16px; /* 缩进 */
+  margin-top: 4px;
+  list-style: none;
+  display: none;
+}
+
+.wc-menu li.open > ul {
+  display: block;
+}
+
+.wc-menu li {
+  list-style: none;
+}
+
+/* 二级菜单指示箭头 */
+.wc-menu li.has-submenu > a {
+  position: relative;
+  cursor: pointer;
+  padding-right: 24px; /* 预留箭头空间 */
+}
+
+.wc-menu li.has-submenu > a::after {
+  content: '\25B6'; /* ▶ */
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 0.15s ease;
+  font-size: 10px;
+  color: #6b7280; /* neutral-500 */
+}
+
+.wc-menu li.open.has-submenu > a::after {
+  transform: translateY(-50%) rotate(90deg);
 } 

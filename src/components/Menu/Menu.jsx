@@ -3,7 +3,11 @@ import { createPortal } from 'react-dom'
 import './style.css'
 import { getMenuClasses, computeMenuPosition } from './utils.js'
 
+const DEFAULT_ANCHOR_ORIGIN = { vertical: 'bottom', horizontal: 'left' }
+
 const Menu = ({
+  // 默认使用 inline 模式，符合侧边栏菜单使用场景
+  variant = 'inline',
   open = false,
   anchorEl = null,
   anchorOrigin = { vertical: 'bottom', horizontal: 'left' },
@@ -16,6 +20,17 @@ const Menu = ({
 }) => {
   const menuRef = useRef(null)
 
+  // inline 模式始终渲染，不受 open 控制
+  if (variant === 'inline') {
+    const inlineClasses = getMenuClasses(elevation, className, 'inline')
+    return (
+      <nav ref={menuRef} className={inlineClasses}>
+        {children}
+      </nav>
+    )
+  }
+
+  // popover 模式遵循 open 状态
   if (!open) return null
 
   const menuClasses = getMenuClasses(elevation, className)
@@ -38,8 +53,8 @@ const Menu = ({
   }, [anchorEl, anchorOrigin, maxHeight])
 
   return createPortal(
-    <div className="fixed inset-0 z-50">
-      <div className="fixed inset-0 bg-black bg-opacity-25" onClick={onClose} />
+    <div className="wc-menu__container">
+      <div className="wc-menu__backdrop" onClick={onClose} />
       <div ref={menuRef} className={menuClasses} style={styles} onClick={(e) => e.stopPropagation()}>
         {children}
       </div>
