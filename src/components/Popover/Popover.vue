@@ -25,7 +25,7 @@
           class="wc-popover-content"
           :class="[`wc-popover-content--${placement}`]"
           role="dialog"
-          @click.outside="close"
+          v-outside="close"
         >
           <slot>
             这是默认的弹出内容。

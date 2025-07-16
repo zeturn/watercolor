@@ -10,7 +10,7 @@
     </nav>
 
     <!-- Popover Variant -->
-    <Teleport v-else :to="'body'" v-if="open">
+    <Teleport v-else-if="open" :to="'body'">
       <div class="wc-menu__container">
         <!-- 背景遮罩 -->
         <div
