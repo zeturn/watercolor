@@ -38,7 +38,9 @@
     "release": "node scripts/publish.js",
     "release:patch": "node scripts/publish.js patch",
     "release:minor": "node scripts/publish.js minor",
-    "release:major": "node scripts/publish.js major"
+    "release:major": "node scripts/publish.js major",
+    "build:landing": "cd landing-page && npm run build",
+    "deploy:landing": "npm run build:landing && node deploy-landing.js"
   },
   "peerDependencies": {
     "react": "^18.0.0",
@@ -123,6 +125,7 @@
     "@tabler/icons-react": "^3.34.0",
     "@tabler/icons-vue": "^3.34.0",
     "feather-icons": "^4.29.2",
+    "fs-extra": "^11.2.0",
     "lucide": "^0.525.0",
     "lucide-react": "^0.525.0",
     "lucide-vue-next": "^0.525.0",
