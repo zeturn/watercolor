@@ -38,8 +38,8 @@ const props = defineProps({
 // 从父级 List 提供的上下文中获取 dense 信息
 const listContext = inject('listContext', { dense: false })
 
-// 计算实际渲染的标签：显式 component > button? 'button' : 'div'
-const componentTag = computed(() => props.component || (props.button ? 'button' : 'div'))
+// 计算实际渲染的标签：显式 component > button? 'button' : 'li'
+const componentTag = computed(() => props.component || (props.button ? 'button' : 'li'))
 
 // 计算样式类
 const itemClasses = computed(() => getListItemClasses({

@@ -40,6 +40,7 @@ const Avatar = ({
         <img 
           src={src} 
           alt={alt} 
+          role="img"
           onError={onImageError} 
           onLoad={onImageLoad} 
         />

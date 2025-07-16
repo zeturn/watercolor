@@ -1,5 +1,5 @@
 <template>
-  <div :class="['wc-appbar', `wc-appbar--${props.position}`, `wc-appbar--${props.color}`, `wc-appbar--elevation-${props.elevation}`, `wc-appbar--${props.variant}`]" :style="style">
+  <div :class="['wc-appbar', `wc-appbar--${props.position}`, `wc-appbar--${props.color}`, `wc-appbar--elevation-${props.elevation}`, `wc-appbar--${props.variant}`, props.class]" :style="style">
     <slot />
   </div>
 </template>

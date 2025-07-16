@@ -13,7 +13,7 @@ describe('Popover Component', () => {
     })
 
     expect(wrapper.find('.wc-popover-container').exists()).toBe(true)
-    expect(wrapper.find('.wc-wc-popover-trigger').exists()).toBe(true)
+    expect(wrapper.find('.wc-popover-trigger').exists()).toBe(true)
   })
 
   it('displays trigger text', () => {
@@ -28,7 +28,7 @@ describe('Popover Component', () => {
       }
     })
 
-    expect(wrapper.find('.wc-wc-popover-trigger').text()).toBe('自定义触发器')
+    expect(wrapper.find('.wc-popover-trigger').text()).toBe('自定义触发器')
   })
 
   it('opens popover when trigger clicked', async () => {

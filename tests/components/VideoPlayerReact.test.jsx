@@ -2,6 +2,12 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
 import VideoPlayer from '@/components/VideoPlayer/VideoPlayer.jsx'
 
+// 解决 jsdom 不支持 play/pause
+beforeAll(() => {
+  window.HTMLMediaElement.prototype.play = () => Promise.resolve();
+  window.HTMLMediaElement.prototype.pause = () => {};
+});
+
 describe('VideoPlayer (React)', () => {
   it('renders without crashing', () => {
     render(<VideoPlayer />)

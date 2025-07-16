@@ -9,6 +9,7 @@ const Accordion = ({
   onToggle,
   className = '',
   style = {},
+  'aria-label': ariaLabel,
   ...props
 }) => {
   const [activeItems, setActiveItems] = useState([])
@@ -25,7 +26,13 @@ const Accordion = ({
   const isActive = (index) => activeItems.includes(index)
 
   return (
-    <div className={accordionClasses} style={style} {...props}>
+    <div
+      className={accordionClasses}
+      style={style}
+      role="region"
+      aria-label={ariaLabel || 'Accordion'}
+      {...props}
+    >
       {items.map((item, index) => (
         <div key={index} className="wc-accordion-item">
           <button
@@ -42,6 +49,7 @@ const Accordion = ({
           </button>
           <div
             className={`wc-accordion-content ${isActive(index) ? 'wc-accordion-content--open' : ''}`}
+            style={{ display: isActive(index) ? undefined : 'none' }}
           >
             <div className="wc-accordion-content-inner">
               {item.content}
