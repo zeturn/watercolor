@@ -8,10 +8,10 @@ export { default as Grid } from './components/Grid/Grid.vue'
 export { default as Paper } from './components/Paper/Paper.vue'
 
 // 导航组件
-export { default as AppBar } from './components/Navigation/AppBar.vue'
-export { default as Toolbar } from './components/Navigation/Toolbar.vue'
-export { default as Menu } from './components/Navigation/Menu.vue'
-export { default as MenuItem } from './components/Navigation/MenuItem.vue'
+export { default as AppBar } from './components/AppBar/AppBar.vue'
+export { default as Toolbar } from './components/Toolbar/Toolbar.vue'
+export { default as Menu } from './components/Menu/Menu.vue'
+export { default as MenuItem } from './components/Menu/Menu.vue'
 
 // 输入组件
 export { default as TextField } from './components/TextField/TextField.vue'
@@ -38,15 +38,15 @@ export { default as Tooltip } from './components/Tooltip/Tooltip.vue'
 export { default as Skeleton } from './components/Skeleton/Skeleton.vue'
 
 // 数据展示组件
-export { default as Typography } from './components/Display/Typography.vue'
-export { default as List } from './components/Display/List.vue'
-export { default as Table } from './components/Display/Table.vue'
-export { default as TableHead } from './components/Display/TableHead.vue'
-export { default as TableBody } from './components/Display/TableBody.vue'
-export { default as TableRow } from './components/Display/TableRow.vue'
-export { default as TableCell } from './components/Display/TableCell.vue'
-export { default as Avatar } from './components/Display/Avatar.vue'
-export { default as Chip } from './components/Display/Chip.vue'
+export { default as Typography } from './components/Typography/Typography.vue'
+export { default as List } from './components/List/List.vue'
+export { default as Table } from './components/Table/Table.vue'
+export { default as TableHead } from './components/Table/TableHead.vue'
+export { default as TableBody } from './components/Table/TableBody.vue'
+export { default as TableRow } from './components/Table/TableRow.vue'
+export { default as TableCell } from './components/Table/TableCell.vue'
+export { default as Avatar } from './components/Avatar/Avatar.vue'
+export { default as Chip } from './components/Chip/Chip.vue'
 export { default as Card } from './components/Card/Card.vue'
 export { default as CardContent } from './components/Card/CardContent.vue'
 export { default as CardActions } from './components/Card/CardActions.vue'
@@ -61,7 +61,7 @@ export { default as Tab } from './components/Tabs/Tabs.vue' // 复用 Tabs 组�
 export * from './utils/theme'
 
 // 兼容性别名和组件包装器
-import ListComponent from './components/Display/List.vue'
+import ListComponent from './components/List/List.vue'
 import PaperComponent from './components/Paper/Paper.vue'
 
 export const ListItemButton = ListComponent

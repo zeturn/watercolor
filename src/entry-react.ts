@@ -59,9 +59,9 @@ export { default as Toolbar } from './components/Toolbar/Toolbar.jsx'
 export { default as Tooltip } from './components/Tooltip/Tooltip.jsx'
 export { default as Typography } from './components/Typography/Typography.jsx'
 export { default as TypingText } from './components/TypingText/TypingText.jsx'
+export { default as VerificationCodeInput } from './components/Input/VerificationCodeInput.jsx'
 export { default as VideoPlayer } from './components/VideoPlayer/VideoPlayer.jsx'
 export { default as Watermark } from './components/Watermark/Watermark.jsx'
-export { default as VerificationCodeInput } from './components/Input/VerificationCodeInput.jsx'
 
 // 主题工具 & 类型
 export * from './utils/theme' 
