@@ -10,7 +10,6 @@ import {
   CardContentVue,
   BadgeReact,
   AlertReact,
-  BoxReact,
   IconReact,
   ChipReact,
   ProgressReact,

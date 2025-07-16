@@ -1,9 +1,12 @@
-# Build
-dist/
-storybook-static/
-
-# Dependencies
+# 忽略 node_modules、dist、assets、storybook-static 等构建产物和依赖
 node_modules/
+dist/
+assets/
+storybook-static/
+storybook-static-react/
+coverage/
+landing-page/dist/
+landing-page/assets/
 
 # Cache
 .cache/
