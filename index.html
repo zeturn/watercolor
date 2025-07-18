@@ -1,16 +1,571 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WatercolorUI - 现代化跨框架组件库</title>
-    <meta name="description" content="WatercolorUI是一个现代化的跨框架组件库，支持React和Vue，提供优雅的设计和丰富的功能。" />
-    <meta name="keywords" content="React,Vue,组件库,UI,TypeScript,现代化,跨框架" />
-    <script type="module" crossorigin src="/assets/index-Keji38ib.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CMrN4z5z.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaterColor UI - 优雅的水彩风格组件库</title>
+    <meta name="description" content="WaterColor UI - 现代化的水彩风格组件库，支持 Vue 3 和 React，提供优雅的设计和丰富的功能">
+    <meta name="keywords" content="WaterColor UI, Vue, React, 组件库, TypeScript, 水彩风格, 现代化设计">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23667eea' opacity='0.8'/></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #0f0f23;
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #fff;
+        }
+        
+        /* 粒子背景容器 */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2d2d5a 100%);
+        }
+        
+        /* 浮动粒子 */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        .particle:nth-child(1) { 
+            background: #667eea; 
+            width: 6px; 
+            height: 6px; 
+            top: 20%; 
+            left: 20%; 
+            animation-delay: 0s; 
+        }
+        .particle:nth-child(2) { 
+            background: #764ba2; 
+            width: 8px; 
+            height: 8px; 
+            top: 60%; 
+            left: 80%; 
+            animation-delay: 2s; 
+        }
+        .particle:nth-child(3) { 
+            background: #4fc08d; 
+            width: 4px; 
+            height: 4px; 
+            top: 80%; 
+            left: 30%; 
+            animation-delay: 4s; 
+        }
+        .particle:nth-child(4) { 
+            background: #61dafb; 
+            width: 10px; 
+            height: 10px; 
+            top: 40%; 
+            left: 60%; 
+            animation-delay: 1s; 
+        }
+        .particle:nth-child(5) { 
+            background: #ff6b6b; 
+            width: 5px; 
+            height: 5px; 
+            top: 30%; 
+            left: 90%; 
+            animation-delay: 3s; 
+        }
+        .particle:nth-child(6) { 
+            background: #4ecdc4; 
+            width: 7px; 
+            height: 7px; 
+            top: 70%; 
+            left: 10%; 
+            animation-delay: 5s; 
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+                opacity: 0.6; 
+            }
+            50% { 
+                transform: translateY(-20px) rotate(180deg); 
+                opacity: 1; 
+            }
+        }
+        
+        /* 主容器 */
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        /* 主内容卡片 */
+        .content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 80px 60px;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 卡片内部光效 */
+        .content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent, 
+                rgba(103, 126, 234, 0.1), 
+                transparent, 
+                rgba(118, 75, 162, 0.1),
+                transparent
+            );
+            animation: rotate 10s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Logo设计 */
+        .logo {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            font-weight: bold;
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 
+                0 20px 40px rgba(103, 126, 234, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2, #4fc08d, #61dafb);
+            z-index: -1;
+            animation: borderRotate 4s linear infinite;
+        }
+        
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes borderRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 标题样式 */
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 40%, #4fc08d 70%, #61dafb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 30px rgba(103, 126, 234, 0.3);
+        }
+        
+        @keyframes titleGlow {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.2); }
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 50px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+        
+        /* 导航按钮样式 */
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 40px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            min-width: 220px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-button:hover::before {
+            left: 100%;
+        }
+        
+        .vue-button {
+            background: linear-gradient(135deg, #4fc08d 0%, #42b883 100%);
+            box-shadow: 0 10px 30px rgba(79, 192, 141, 0.3);
+        }
+        
+        .react-button {
+            background: linear-gradient(135deg, #61dafb 0%, #21a0c4 100%);
+            box-shadow: 0 10px 30px rgba(97, 218, 251, 0.3);
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-button:active {
+            transform: translateY(-4px) scale(1.02);
+        }
+        
+        /* 特性卡片网格 */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: left 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature:hover::before {
+            left: 0;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .feature h3 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .feature p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        /* 底部装饰 */
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .content {
+                padding: 60px 30px;
+                margin: 20px;
+            }
+            
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .nav-button {
+                min-width: 200px;
+                padding: 18px 35px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .logo {
+                width: 120px;
+                height: 120px;
+                font-size: 50px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .content {
+                padding: 40px 20px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .logo {
+                width: 100px;
+                height: 100px;
+                font-size: 40px;
+            }
+        }
+        
+        /* 加载动画 */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .loading {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- 粒子背景 -->
+    <div class="particles-container">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <div class="container">
+        <div class="content">
+            <div class="logo">W</div>
+            <h1>WaterColor UI</h1>
+            <p class="subtitle">
+                优雅的水彩风格组件库<br>
+                支持 Vue 3 和 React 双框架的现代化解决方案
+            </p>
+            
+            <div class="nav-buttons">
+                <a href="./vue/" class="nav-button vue-button">
+                    <span>📖 Vue 组件文档</span>
+                </a>
+                <a href="./react/" class="nav-button react-button">
+                    <span>📖 React 组件文档</span>
+                </a>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <span class="feature-icon">🎨</span>
+                    <h3>水彩美学</h3>
+                    <p>独特的水彩风格设计语言，为您的应用带来艺术感</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🚀</span>
+                    <h3>双框架支持</h3>
+                    <p>同时支持 Vue 3 和 React，一套组件库解决所有需求</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">📱</span>
+                    <h3>响应式设计</h3>
+                    <p>完美适配桌面端、平板和移动设备</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">⚡</span>
+                    <h3>性能优化</h3>
+                    <p>轻量级设计，快速加载，优异的运行性能</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🛠</span>
+                    <h3>TypeScript</h3>
+                    <p>完整的类型定义，提供更好的开发体验</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎯</span>
+                    <h3>现代化</h3>
+                    <p>采用最新的前端技术栈和设计理念</p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p>✨ 让每一个界面都充满艺术气息 ✨</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 添加一些交互动画
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为特性卡片添加鼠标跟踪效果
+            const features = document.querySelectorAll('.feature');
+            
+            features.forEach(feature => {
+                feature.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    this.style.transform = `translateY(-5px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+                
+                feature.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+            
+            // 为按钮添加涟漪效果
+            const buttons = document.querySelectorAll('.nav-button');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255, 255, 255, 0.3);
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        left: ${x}px;
+                        top: ${y}px;
+                        width: ${size}px;
+                        height: ${size}px;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        });
+        
+        // 添加涟漪动画样式
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
 </html> 

@@ -38,9 +38,7 @@
     "release": "node scripts/publish.js",
     "release:patch": "node scripts/publish.js patch",
     "release:minor": "node scripts/publish.js minor",
-    "release:major": "node scripts/publish.js major",
-    "build:landing": "cd landing-page && npm run build",
-    "deploy:landing": "npm run build:landing && node deploy-landing.js"
+    "release:major": "node scripts/publish.js major"
   },
   "peerDependencies": {
     "react": "^18.0.0",

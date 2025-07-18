@@ -5,8 +5,6 @@ assets/
 storybook-static/
 storybook-static-react/
 coverage/
-landing-page/dist/
-landing-page/assets/
 
 # Cache
 .cache/
