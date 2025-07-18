@@ -5,6 +5,7 @@
 .vscode/
 *.log
 *.tsbuildinfo
+assets/
 
 # 测试相关
 tests/
