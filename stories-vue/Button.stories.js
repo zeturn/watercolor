@@ -109,7 +109,7 @@ export const VueSizes = {
   render: () => ({
     components: { ButtonVue },
     template: `
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div style="display: flex; align-items: center; gap: 16px;">
         <ButtonVue size="sm" variant="primary">小按钮</ButtonVue>
         <ButtonVue size="md" variant="primary">中等按钮</ButtonVue>
         <ButtonVue size="lg" variant="primary">大按钮</ButtonVue>
@@ -122,18 +122,18 @@ export const VueVariants = {
   render: () => ({
     components: { ButtonVue },
     template: `
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 16px;">
           <ButtonVue variant="primary">主要按钮</ButtonVue>
           <ButtonVue variant="secondary">次要按钮</ButtonVue>
           <ButtonVue variant="filled">填充按钮</ButtonVue>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div style="display: flex; align-items: center; gap: 16px;">
           <ButtonVue variant="success">成功按钮</ButtonVue>
           <ButtonVue variant="warning">警告按钮</ButtonVue>
           <ButtonVue variant="error">错误按钮</ButtonVue>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div style="display: flex; align-items: center; gap: 16px;">
           <ButtonVue variant="purple">紫色按钮</ButtonVue>
           <ButtonVue variant="orange">橙色按钮</ButtonVue>
           <ButtonVue variant="cyan">青色按钮</ButtonVue>
@@ -148,7 +148,7 @@ export const VueDisabled = {
   render: () => ({
     components: { ButtonVue },
     template: `
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div style="display: flex; align-items: center; gap: 16px;">
         <ButtonVue variant="primary" disabled>禁用主要</ButtonVue>
         <ButtonVue variant="secondary" disabled>禁用次要</ButtonVue>
         <ButtonVue variant="filled" disabled>禁用填充</ButtonVue>
@@ -161,11 +161,11 @@ export const VueButtonStyles = {
   render: () => ({
     components: { ButtonVue },
     template: `
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div style="display: flex; flex-direction: column; gap: 24px;">
         <div>
-          <h3 style={{ marginBottom: '12px', fontSize: '18px', fontWeight: '600' }}>默认样式 (Default)</h3>
-          <p style={{ marginBottom: '12px', fontSize: '14px', color: '#6b7280' }}>只有彩色的字，没有背景，hover时才有浅色的背景，没有边框</p>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <h3 style="margin-bottom: 12px; font-size: 18px; font-weight: 600;">默认样式 (Default)</h3>
+          <p style="margin-bottom: 12px; font-size: 14px; color: #6b7280;">只有彩色的字，没有背景，hover时才有浅色的背景，没有边框</p>
+          <div style="display: flex; align-items: center; gap: 16px;">
             <ButtonVue variant="primary" buttonStyle="default">主要按钮</ButtonVue>
             <ButtonVue variant="success" buttonStyle="default">成功按钮</ButtonVue>
             <ButtonVue variant="warning" buttonStyle="default">警告按钮</ButtonVue>
@@ -175,8 +175,9 @@ export const VueButtonStyles = {
         </div>
         
         <div>
-              <h3 style={{ marginBottom: '12px', fontSize: '18px', fontWeight: '600' }}>边框样式 (Outlined)</h3>
-          <p style={{ marginBottom: '12px', fontSize: '14px', color: '#6b7280' }}>只有彩色的字，没有背景，hover时才有浅色的背景，有边框</
+          <h3 style="margin-bottom: 12px; font-size: 18px; font-weight: 600;">边框样式 (Outlined)</h3>
+          <p style="margin-bottom: 12px; font-size: 14px; color: #6b7280;">只有彩色的字，没有背景，hover时才有浅色的背景，有边框</p>
+          <div style="display: flex; align-items: center; gap: 16px;">
             <ButtonVue variant="primary" buttonStyle="outlined">主要按钮</ButtonVue>
             <ButtonVue variant="success" buttonStyle="outlined">成功按钮</ButtonVue>
             <ButtonVue variant="warning" buttonStyle="outlined">警告按钮</ButtonVue>
@@ -186,9 +187,9 @@ export const VueButtonStyles = {
         </div>
         
         <div>
-          <h3 style={{ marginBottom: '12px', fontSize: '18px', fontWeight: '600' }}>填充样式 (Filled)</h3>
-          <p style={{ marginBottom: '12px', fontSize: '14px', color: '#6b7280' }}>只有白色的字，彩色填充背景，hover时有更深色的背景</p>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <h3 style="margin-bottom: 12px; font-size: 18px; font-weight: 600;">填充样式 (Filled)</h3>
+          <p style="margin-bottom: 12px; font-size: 14px; color: #6b7280;">只有白色的字，彩色填充背景，hover时有更深色的背景</p>
+          <div style="display: flex; align-items: center; gap: 16px;">
             <ButtonVue variant="primary" buttonStyle="filled">主要按钮</ButtonVue>
             <ButtonVue variant="success" buttonStyle="filled">成功按钮</ButtonVue>
             <ButtonVue variant="warning" buttonStyle="filled">警告按钮</ButtonVue>
@@ -205,42 +206,42 @@ export const VueStyleComparison = {
   render: () => ({
     components: { ButtonVue },
     template: `
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h4 style={{ marginBottom: '8px', fontSize: '16px', fontWeight: '500' }}>Default</h4>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <h4 style="margin-bottom: 8px; font-size: 16px; font-weight: 500;">Default</h4>
             <ButtonVue variant="primary" buttonStyle="default">按钮</ButtonVue>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h4 style={{ marginBottom: '8px', fontSize: '16px', fontWeight: '500' }}>Outlined</h4>
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <h4 style="margin-bottom: 8px; font-size: 16px; font-weight: 500;">Outlined</h4>
             <ButtonVue variant="primary" buttonStyle="outlined">按钮</ButtonVue>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h4 style={{ marginBottom: '8px', fontSize: '16px', fontWeight: '500' }}>Filled</h4>
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <h4 style="margin-bottom: 8px; font-size: 16px; font-weight: 500;">Filled</h4>
             <ButtonVue variant="primary" buttonStyle="filled">按钮</ButtonVue>
           </div>
         </div>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+          <div style="display: flex; flex-direction: column; align-items: center;">
             <ButtonVue variant="success" buttonStyle="default">成功</ButtonVue>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style="display: flex; flex-direction: column; align-items: center;">
             <ButtonVue variant="success" buttonStyle="outlined">成功</ButtonVue>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style="display: flex; flex-direction: column; align-items: center;">
             <ButtonVue variant="success" buttonStyle="filled">成功</ButtonVue>
           </div>
         </div>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+          <div style="display: flex; flex-direction: column; align-items: center;">
             <ButtonVue variant="error" buttonStyle="default">错误</ButtonVue>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style="display: flex; flex-direction: column; align-items: center;">
             <ButtonVue variant="error" buttonStyle="outlined">错误</ButtonVue>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style="display: flex; flex-direction: column; align-items: center;">
             <ButtonVue variant="error" buttonStyle="filled">错误</ButtonVue>
           </div>
         </div>

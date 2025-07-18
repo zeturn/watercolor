@@ -119,420 +119,406 @@
 
 /* CSS Variables */
 :root {
-  /* Font configuration */
-  --wc-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --wc-font-chinese: "";
-  --wc-font-english: "";
-  --wc-font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+	/* Font configuration */
+	--wc-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--wc-font-chinese: "";
+	--wc-font-english: "";
+	--wc-font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
 
-  /* Primary colors - using new blue scheme */
-  --wc-primary-50: #f8faff;
-  --wc-primary-100: #edf5ff;
-  --wc-primary-200: #d7e9ff;
-  --wc-primary-300: #b8d8ff;
-  --wc-primary-400: #89bcff;
-  --wc-primary-500: #5b9eff;
-  --wc-primary-600: #3384ff;
-  --wc-primary-700: #1f74f4;
-  --wc-primary-800: #165fc5;
-  --wc-primary-900: #164e9e;
+	/* Primary colors - using new blue scheme */
+	--wc-primary-50: #f8faff;
+	--wc-primary-100: #edf5ff;
+	--wc-primary-200: #d7e9ff;
+	--wc-primary-300: #b8d8ff;
+	--wc-primary-400: #89bcff;
+	--wc-primary-500: #5b9eff;
+	--wc-primary-600: #3384ff;
+	--wc-primary-700: #1f74f4;
+	--wc-primary-800: #165fc5;
+	--wc-primary-900: #164e9e;
 
-  /* Primary RGB values for rgba() usage */
-  --wc-primary-50-rgb: 248, 250, 255;
-  --wc-primary-100-rgb: 237, 245, 255;
-  --wc-primary-200-rgb: 215, 233, 255;
-  --wc-primary-300-rgb: 184, 216, 255;
-  --wc-primary-400-rgb: 137, 188, 255;
-  --wc-primary-500-rgb: 91, 158, 255;
-  --wc-primary-600-rgb: 51, 132, 255;
-  --wc-primary-700-rgb: 31, 116, 244;
-  --wc-primary-800-rgb: 22, 95, 197;
-  --wc-primary-900-rgb: 22, 78, 158;
+	/* Primary RGB values for rgba() usage */
+	--wc-primary-50-rgb: 248, 250, 255;
+	--wc-primary-100-rgb: 237, 245, 255;
+	--wc-primary-200-rgb: 215, 233, 255;
+	--wc-primary-300-rgb: 184, 216, 255;
+	--wc-primary-400-rgb: 137, 188, 255;
+	--wc-primary-500-rgb: 91, 158, 255;
+	--wc-primary-600-rgb: 51, 132, 255;
+	--wc-primary-700-rgb: 31, 116, 244;
+	--wc-primary-800-rgb: 22, 95, 197;
+	--wc-primary-900-rgb: 22, 78, 158;
 
-  /* Secondary colors - using new green scheme */
-  --wc-secondary-50: #F6FFED;
-  --wc-secondary-100: #D9F7BE;
-  --wc-secondary-200: #B7EB8F;
-  --wc-secondary-300: #95DE64;
-  --wc-secondary-400: #73D13D;
-  --wc-secondary-500: #52C41A;
-  --wc-secondary-600: #389E0D;
-  --wc-secondary-700: #237804;
-  --wc-secondary-800: #135200;
-  --wc-secondary-900: #092B00;
+	/* Secondary colors - using new green scheme */
+	--wc-secondary-50: #F6FFED;
+	--wc-secondary-100: #D9F7BE;
+	--wc-secondary-200: #B7EB8F;
+	--wc-secondary-300: #95DE64;
+	--wc-secondary-400: #73D13D;
+	--wc-secondary-500: #52C41A;
+	--wc-secondary-600: #389E0D;
+	--wc-secondary-700: #237804;
+	--wc-secondary-800: #135200;
+	--wc-secondary-900: #092B00;
 
-  /* Secondary RGB values for rgba() usage */
-  --wc-secondary-50-rgb: 246, 255, 237;
-  --wc-secondary-100-rgb: 217, 247, 190;
-  --wc-secondary-200-rgb: 183, 235, 143;
-  --wc-secondary-300-rgb: 149, 222, 100;
-  --wc-secondary-400-rgb: 115, 209, 61;
-  --wc-secondary-500-rgb: 82, 196, 26;
-  --wc-secondary-600-rgb: 56, 158, 13;
-  --wc-secondary-700-rgb: 35, 120, 4;
-  --wc-secondary-800-rgb: 19, 82, 0;
-  --wc-secondary-900-rgb: 9, 43, 0;
+	/* Secondary RGB values for rgba() usage */
+	--wc-secondary-50-rgb: 246, 255, 237;
+	--wc-secondary-100-rgb: 217, 247, 190;
+	--wc-secondary-200-rgb: 183, 235, 143;
+	--wc-secondary-300-rgb: 149, 222, 100;
+	--wc-secondary-400-rgb: 115, 209, 61;
+	--wc-secondary-500-rgb: 82, 196, 26;
+	--wc-secondary-600-rgb: 56, 158, 13;
+	--wc-secondary-700-rgb: 35, 120, 4;
+	--wc-secondary-800-rgb: 19, 82, 0;
+	--wc-secondary-900-rgb: 9, 43, 0;
 
-  /* Neutral colors - using new neutral scheme */
-  --wc-neutral-0: #ffffff;
-  --wc-neutral-50: #fcfcfc;
-  --wc-neutral-100: #f8f8f8;
-  --wc-neutral-200: #ebebeb;
-  --wc-neutral-300: #dedede;
-  --wc-neutral-400: #b5b5b5;
-  --wc-neutral-500: #919191;
-  --wc-neutral-600: #707070;
-  --wc-neutral-700: #5e5e5e;
-  --wc-neutral-800: #444444;
-  --wc-neutral-900: #333333;
-  --wc-neutral-950: #222222;
+	/* Neutral colors - using new neutral scheme */
+	--wc-neutral-0: #ffffff;
+	--wc-neutral-50: #fcfcfc;
+	--wc-neutral-100: #f8f8f8;
+	--wc-neutral-200: #ebebeb;
+	--wc-neutral-300: #dedede;
+	--wc-neutral-400: #b5b5b5;
+	--wc-neutral-500: #919191;
+	--wc-neutral-600: #707070;
+	--wc-neutral-700: #5e5e5e;
+	--wc-neutral-800: #444444;
+	--wc-neutral-900: #333333;
+	--wc-neutral-950: #222222;
 
-  /* Neutral RGB values for rgba() usage */
-  --wc-neutral-0-rgb: 255, 255, 255;
-  --wc-neutral-50-rgb: 252, 252, 252;
-  --wc-neutral-100-rgb: 248, 248, 248;
-  --wc-neutral-200-rgb: 235, 235, 235;
-  --wc-neutral-300-rgb: 222, 222, 222;
-  --wc-neutral-400-rgb: 181, 181, 181;
-  --wc-neutral-500-rgb: 145, 145, 145;
-  --wc-neutral-600-rgb: 112, 112, 112;
-  --wc-neutral-700-rgb: 94, 94, 94;
-  --wc-neutral-800-rgb: 68, 68, 68;
-  --wc-neutral-900-rgb: 51, 51, 51;
-  --wc-neutral-950-rgb: 34, 34, 34;
+	/* Neutral RGB values for rgba() usage */
+	--wc-neutral-0-rgb: 255, 255, 255;
+	--wc-neutral-50-rgb: 252, 252, 252;
+	--wc-neutral-100-rgb: 248, 248, 248;
+	--wc-neutral-200-rgb: 235, 235, 235;
+	--wc-neutral-300-rgb: 222, 222, 222;
+	--wc-neutral-400-rgb: 181, 181, 181;
+	--wc-neutral-500-rgb: 145, 145, 145;
+	--wc-neutral-600-rgb: 112, 112, 112;
+	--wc-neutral-700-rgb: 94, 94, 94;
+	--wc-neutral-800-rgb: 68, 68, 68;
+	--wc-neutral-900-rgb: 51, 51, 51;
+	--wc-neutral-950-rgb: 34, 34, 34;
 
-  /* Success colors */
-  --wc-success-50: #F0FFF4;
-  --wc-success-100: #EEFFCC;
-  --wc-success-200: #D8FF9A;
-  --wc-success-300: #BDFF67;
-  --wc-success-400: #A2FF41;
-  --wc-success-500: #76FF03;
-  --wc-success-600: #59DB02;
-  --wc-success-700: #40B701;
-  --wc-success-800: #2C9300;
-  --wc-success-900: #1D7A00;
+	/* Success colors */
+	--wc-success-50: #F0FFF4;
+	--wc-success-100: #EEFFCC;
+	--wc-success-200: #D8FF9A;
+	--wc-success-300: #BDFF67;
+	--wc-success-400: #A2FF41;
+	--wc-success-500: #76FF03;
+	--wc-success-600: #59DB02;
+	--wc-success-700: #40B701;
+	--wc-success-800: #2C9300;
+	--wc-success-900: #1D7A00;
 
-  /* Success RGB values for rgba() usage */
-  --wc-success-50-rgb: 240, 255, 244;
-  --wc-success-100-rgb: 238, 255, 204;
-  --wc-success-200-rgb: 216, 255, 154;
-  --wc-success-300-rgb: 189, 255, 103;
-  --wc-success-400-rgb: 162, 255, 65;
-  --wc-success-500-rgb: 118, 255, 3;
-  --wc-success-600-rgb: 89, 219, 2;
-  --wc-success-700-rgb: 64, 183, 1;
-  --wc-success-800-rgb: 44, 147, 0;
-  --wc-success-900-rgb: 29, 122, 0;
+	/* Success RGB values for rgba() usage */
+	--wc-success-50-rgb: 240, 255, 244;
+	--wc-success-100-rgb: 238, 255, 204;
+	--wc-success-200-rgb: 216, 255, 154;
+	--wc-success-300-rgb: 189, 255, 103;
+	--wc-success-400-rgb: 162, 255, 65;
+	--wc-success-500-rgb: 118, 255, 3;
+	--wc-success-600-rgb: 89, 219, 2;
+	--wc-success-700-rgb: 64, 183, 1;
+	--wc-success-800-rgb: 44, 147, 0;
+	--wc-success-900-rgb: 29, 122, 0;
 
-  /* Info colors */
-  --wc-info-50: #F0FDFA;
-  --wc-info-100: #D9FEFC;
-  --wc-info-200: #B3FEFE;
-  --wc-info-300: #8CF5FE;
-  --wc-info-400: #70E8FD;
-  --wc-info-500: #41D3FC;
-  --wc-info-600: #2FA7D8;
-  --wc-info-700: #207FB5;
-  --wc-info-800: #145B92;
-  --wc-info-900: #0C4178;
+	/* Info colors */
+	--wc-info-50: #F0FDFA;
+	--wc-info-100: #D9FEFC;
+	--wc-info-200: #B3FEFE;
+	--wc-info-300: #8CF5FE;
+	--wc-info-400: #70E8FD;
+	--wc-info-500: #41D3FC;
+	--wc-info-600: #2FA7D8;
+	--wc-info-700: #207FB5;
+	--wc-info-800: #145B92;
+	--wc-info-900: #0C4178;
 
-  /* Info RGB values for rgba() usage */
-  --wc-info-50-rgb: 240, 253, 250;
-  --wc-info-100-rgb: 217, 254, 252;
-  --wc-info-200-rgb: 179, 254, 254;
-  --wc-info-300-rgb: 140, 245, 254;
-  --wc-info-400-rgb: 112, 232, 253;
-  --wc-info-500-rgb: 65, 211, 252;
-  --wc-info-600-rgb: 47, 167, 216;
-  --wc-info-700-rgb: 32, 127, 181;
-  --wc-info-800-rgb: 20, 91, 146;
-  --wc-info-900-rgb: 12, 65, 120;
+	/* Info RGB values for rgba() usage */
+	--wc-info-50-rgb: 240, 253, 250;
+	--wc-info-100-rgb: 217, 254, 252;
+	--wc-info-200-rgb: 179, 254, 254;
+	--wc-info-300-rgb: 140, 245, 254;
+	--wc-info-400-rgb: 112, 232, 253;
+	--wc-info-500-rgb: 65, 211, 252;
+	--wc-info-600-rgb: 47, 167, 216;
+	--wc-info-700-rgb: 32, 127, 181;
+	--wc-info-800-rgb: 20, 91, 146;
+	--wc-info-900-rgb: 12, 65, 120;
 
-  /* Warning colors */
-  --wc-warning-50: #FFFEF0;
-  --wc-warning-100: #FFF9D0;
-  --wc-warning-200: #FFF0A1;
-  --wc-warning-300: #FFE673;
-  --wc-warning-400: #FFDC50;
-  --wc-warning-500: #FFCC16;
-  --wc-warning-600: #DBAA10;
-  --wc-warning-700: #B78A0B;
-  --wc-warning-800: #936B07;
-  --wc-warning-900: #7A5504;
+	/* Warning colors */
+	--wc-warning-50: #FFFEF0;
+	--wc-warning-100: #FFF9D0;
+	--wc-warning-200: #FFF0A1;
+	--wc-warning-300: #FFE673;
+	--wc-warning-400: #FFDC50;
+	--wc-warning-500: #FFCC16;
+	--wc-warning-600: #DBAA10;
+	--wc-warning-700: #B78A0B;
+	--wc-warning-800: #936B07;
+	--wc-warning-900: #7A5504;
 
-  /* Warning RGB values for rgba() usage */
-  --wc-warning-50-rgb: 255, 254, 240;
-  --wc-warning-100-rgb: 255, 249, 208;
-  --wc-warning-200-rgb: 255, 240, 161;
-  --wc-warning-300-rgb: 255, 230, 115;
-  --wc-warning-400-rgb: 255, 220, 80;
-  --wc-warning-500-rgb: 255, 204, 22;
-  --wc-warning-600-rgb: 219, 170, 16;
-  --wc-warning-700-rgb: 183, 138, 11;
-  --wc-warning-800-rgb: 147, 107, 7;
-  --wc-warning-900-rgb: 122, 85, 4;
+	/* Warning RGB values for rgba() usage */
+	--wc-warning-50-rgb: 255, 254, 240;
+	--wc-warning-100-rgb: 255, 249, 208;
+	--wc-warning-200-rgb: 255, 240, 161;
+	--wc-warning-300-rgb: 255, 230, 115;
+	--wc-warning-400-rgb: 255, 220, 80;
+	--wc-warning-500-rgb: 255, 204, 22;
+	--wc-warning-600-rgb: 219, 170, 16;
+	--wc-warning-700-rgb: 183, 138, 11;
+	--wc-warning-800-rgb: 147, 107, 7;
+	--wc-warning-900-rgb: 122, 85, 4;
 
-  /* Error/Danger colors */
-  --wc-error-50: #fef2f2;
-  --wc-error-100: #FFE6CF;
-  --wc-error-200: #FFC79F;
-  --wc-error-300: #FFA16F;
-  --wc-error-400: #FF7D4B;
-  --wc-error-500: #ff4010;
-  --wc-error-600: #DB250B;
-  --wc-error-700: #B71108;
-  --wc-error-800: #930508;
-  --wc-error-900: #7A030E;
+	/* Error/Danger colors */
+	--wc-error-50: #fef2f2;
+	--wc-error-100: #FFE6CF;
+	--wc-error-200: #FFC79F;
+	--wc-error-300: #FFA16F;
+	--wc-error-400: #FF7D4B;
+	--wc-error-500: #ff4010;
+	--wc-error-600: #DB250B;
+	--wc-error-700: #B71108;
+	--wc-error-800: #930508;
+	--wc-error-900: #7A030E;
 
-  /* Error RGB values for rgba() usage */
-  --wc-error-50-rgb: 254, 242, 242;
-  --wc-error-100-rgb: 255, 230, 207;
-  --wc-error-200-rgb: 255, 199, 159;
-  --wc-error-300-rgb: 255, 161, 111;
-  --wc-error-400-rgb: 255, 125, 75;
-  --wc-error-500-rgb: 255, 64, 16;
-  --wc-error-600-rgb: 219, 37, 11;
-  --wc-error-700-rgb: 183, 17, 8;
-  --wc-error-800-rgb: 147, 5, 8;
-  --wc-error-900-rgb: 122, 3, 14;
+	/* Error RGB values for rgba() usage */
+	--wc-error-50-rgb: 254, 242, 242;
+	--wc-error-100-rgb: 255, 230, 207;
+	--wc-error-200-rgb: 255, 199, 159;
+	--wc-error-300-rgb: 255, 161, 111;
+	--wc-error-400-rgb: 255, 125, 75;
+	--wc-error-500-rgb: 255, 64, 16;
+	--wc-error-600-rgb: 219, 37, 11;
+	--wc-error-700-rgb: 183, 17, 8;
+	--wc-error-800-rgb: 147, 5, 8;
+	--wc-error-900-rgb: 122, 3, 14;
 
-  --wc-danger-50: var(--wc-error-50);
-  --wc-danger-100: var(--wc-error-100);
-  --wc-danger-200: var(--wc-error-200);
-  --wc-danger-300: var(--wc-error-300);
-  --wc-danger-400: var(--wc-error-400);
-  --wc-danger-500: var(--wc-error-500);
-  --wc-danger-600: var(--wc-error-600);
-  --wc-danger-700: var(--wc-error-700);
-  --wc-danger-800: var(--wc-error-800);
-  --wc-danger-900: var(--wc-error-900);
+	--wc-danger-50: var(--wc-error-50);
+	--wc-danger-100: var(--wc-error-100);
+	--wc-danger-200: var(--wc-error-200);
+	--wc-danger-300: var(--wc-error-300);
+	--wc-danger-400: var(--wc-error-400);
+	--wc-danger-500: var(--wc-error-500);
+	--wc-danger-600: var(--wc-error-600);
+	--wc-danger-700: var(--wc-error-700);
+	--wc-danger-800: var(--wc-error-800);
+	--wc-danger-900: var(--wc-error-900);
 
-  /* Extended color palette*/
-  /* Purple color palette */
-  --wc-purple-50: #f9f7fc;
-  --wc-purple-100: #f1eafc;
-  --wc-purple-200: #e6d8fb;
-  --wc-purple-300: #d4b7f8;
-  --wc-purple-400: #bb8df2;
-  --wc-purple-500: #a667ed;
-  --wc-purple-600: #944ae4;
-  --wc-purple-700: #833bd3;
-  --wc-purple-800: #6f30b0;
-  --wc-purple-900: #5e298f;
-  
-  /* Pink color palette */
-  --wc-pink-50: #fdf7f9;
-  --wc-pink-100: #faeef3;
-  --wc-pink-200: #f9dbe7;
-  --wc-pink-300: #f7bad3;
-  --wc-pink-400: #f38ab6;
-  --wc-pink-500: #ef629d;
-  --wc-pink-600: #e64a89;
-  --wc-pink-700: #d53e77;
-  --wc-pink-800: #b93665;
-  --wc-pink-900: #9f3155;
-  
-  /* Teal color palette */
-  --wc-teal-50: #f6fcfb;
-  --wc-teal-100: #e7f9f7;
-  --wc-teal-200: #cff4f1;
-  --wc-teal-300: #b0eeea;
-  --wc-teal-400: #8be6e0;
-  --wc-teal-500: #6fdcd4;
-  --wc-teal-600: #4ec8c2;
-  --wc-teal-700: #3aaaad;
-  --wc-teal-800: #2e8f95;
-  --wc-teal-900: #267a80;
-  
-  /* Indigo color palette */
-  --wc-indigo-50: #f5f6fe;
-  --wc-indigo-100: #eceeff;
-  --wc-indigo-200: #dbdcff;
-  --wc-indigo-300: #c0c0ff;
-  --wc-indigo-400: #9a97fc;
-  --wc-indigo-500: #7c76f5;
-  --wc-indigo-600: #685de9;
-  --wc-indigo-700: #5a4ed3;
-  --wc-indigo-800: #4b3fb3;
-  --wc-indigo-900: #413592;
-  
+	/* Extended color palette*/
+	/* Purple color palette */
+	--wc-purple-50: #f9f7fc;
+	--wc-purple-100: #f1eafc;
+	--wc-purple-200: #e6d8fb;
+	--wc-purple-300: #d4b7f8;
+	--wc-purple-400: #bb8df2;
+	--wc-purple-500: #a667ed;
+	--wc-purple-600: #944ae4;
+	--wc-purple-700: #833bd3;
+	--wc-purple-800: #6f30b0;
+	--wc-purple-900: #5e298f;
 
-  /* =============================================================================
-   * 语义化颜色变量 - 推荐组件使用
-   * 这些变量已内置明暗模式支持，会根据主题自动切换
-   * ============================================================================= */
-  
-  /* 文本颜色 */
-  --wc-text-primary: var(--wc-neutral-900);      /* 主要文本 */
-  --wc-text-secondary: var(--wc-neutral-600);    /* 次要文本 */
-  --wc-text-tertiary: var(--wc-neutral-500);     /* 第三级文本 */
-  --wc-text-disabled: var(--wc-neutral-400);     /* 禁用文本 */
-  --wc-text-inverse: var(--wc-neutral-0);        /* 反色文本（用于深色背景） */
-  --wc-text-brand: var(--wc-primary-600);        /* 品牌色文本 */
-  --wc-text-success: var(--wc-success-600);      /* 成功状态文本 */
-  --wc-text-warning: var(--wc-warning-600);      /* 警告状态文本 */
-  --wc-text-error: var(--wc-error-600);          /* 错误状态文本 */
-  --wc-text-info: var(--wc-info-600);            /* 信息状态文本 */
-  
-  /* 背景颜色 */
-  --wc-bg-canvas: var(--wc-neutral-0);           /* 主画布背景 */
-  --wc-bg-surface: var(--wc-neutral-50);         /* 表面背景（卡片等） */
-  --wc-bg-surface-secondary: var(--wc-neutral-100); /* 次级表面背景 */
-  --wc-bg-surface-hover: var(--wc-neutral-100);  /* 表面悬停背景 */
-  --wc-bg-surface-active: var(--wc-neutral-200); /* 表面激活背景 */
-  --wc-bg-overlay: rgba(0, 0, 0, 0.5);           /* 遮罩背景 */
-  --wc-bg-brand: var(--wc-primary-500);          /* 品牌色背景 */
-  --wc-bg-brand-hover: var(--wc-primary-200);    /* 品牌色悬停背景 */
-  --wc-bg-brand-active: var(--wc-primary-100);   /* 品牌色激活背景 */
-  --wc-bg-success: var(--wc-success-500);        /* 成功状态背景 */
-  --wc-bg-success-subtle: var(--wc-success-50);  /* 成功状态浅背景 */
-  --wc-bg-warning: var(--wc-warning-500);        /* 警告状态背景 */
-  --wc-bg-warning-subtle: var(--wc-warning-50);  /* 警告状态浅背景 */
-  --wc-bg-error: var(--wc-error-500);            /* 错误状态背景 */
-  --wc-bg-error-subtle: var(--wc-error-50);      /* 错误状态浅背景 */
-  --wc-bg-info: var(--wc-info-500);              /* 信息状态背景 */
-  --wc-bg-info-subtle: var(--wc-info-50);        /* 信息状态浅背景 */
-  
-  /* 边框颜色 */
-  --wc-border-default: var(--wc-neutral-200);    /* 默认边框 */
-  --wc-border-strong: var(--wc-neutral-300);     /* 强调边框 */
-  --wc-border-subtle: var(--wc-neutral-100);     /* 浅色边框 */
-  --wc-border-focus: var(--wc-primary-500);      /* 焦点边框 */
-  --wc-border-brand: var(--wc-primary-500);      /* 品牌色边框 */
-  --wc-border-success: var(--wc-success-500);    /* 成功状态边框 */
-  --wc-border-warning: var(--wc-warning-500);    /* 警告状态边框 */
-  --wc-border-error: var(--wc-error-500);        /* 错误状态边框 */
-  --wc-border-info: var(--wc-info-500);          /* 信息状态边框 */
-  
-  /* 阴影 颜色偏淡 */
-  --wc-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --wc-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --wc-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --wc-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  
-  /* 圆角等级系统 */
-  --wc-radius-none: 0;         /* 无圆角 */
-  --wc-radius-xs: 0.125rem;    /* 2px - 极小圆角 */
-  --wc-radius-sm: 0.25rem;     /* 4px - 小圆角 */
-  --wc-radius-md: 0.375rem;    /* 6px - 中圆角（默认） */
-  --wc-radius-lg: 0.5rem;      /* 8px - 大圆角 */
-  --wc-radius-xl: 0.75rem;     /* 12px - 超大圆角 */
-  --wc-radius-2xl: 1rem;       /* 16px - 特大圆角 */
-  --wc-radius-3xl: 1.5rem;     /* 24px - 巨大圆角 */
-  --wc-radius-full: 9999px;    /* 完全圆角 */
+	/* Pink color palette */
+	--wc-pink-50: #fdf7f9;
+	--wc-pink-100: #faeef3;
+	--wc-pink-200: #f9dbe7;
+	--wc-pink-300: #f7bad3;
+	--wc-pink-400: #f38ab6;
+	--wc-pink-500: #ef629d;
+	--wc-pink-600: #e64a89;
+	--wc-pink-700: #d53e77;
+	--wc-pink-800: #b93665;
+	--wc-pink-900: #9f3155;
 
-  /* =============================================================================
-   * 兼容性变量 - 逐步废弃
-   * ============================================================================= */
-  --color-primary: var(--wc-primary-500);
-  --color-secondary: var(--wc-secondary-500);
-  --color-border: var(--wc-border-default);
-  --color-dark-border: var(--wc-neutral-700);
-  --color-text: var(--wc-text-primary);
-  --color-text-secondary: var(--wc-text-secondary);
-  --color-dark-text: var(--wc-neutral-100);
-  --color-dark-text-secondary: var(--wc-neutral-400);
+	/* Teal color palette */
+	--wc-teal-50: #f6fcfb;
+	--wc-teal-100: #e7f9f7;
+	--wc-teal-200: #cff4f1;
+	--wc-teal-300: #b0eeea;
+	--wc-teal-400: #8be6e0;
+	--wc-teal-500: #6fdcd4;
+	--wc-teal-600: #4ec8c2;
+	--wc-teal-700: #3aaaad;
+	--wc-teal-800: #2e8f95;
+	--wc-teal-900: #267a80;
 
-  --wc-color-primary: var(--wc-primary-500);
-  --wc-color-secondary: var(--wc-secondary-500);
-  --wc-color-border: var(--wc-border-default);
-  --wc-color-dark-border: var(--wc-neutral-700);
-  --wc-color-text: var(--wc-text-primary);
-  --wc-color-text-secondary: var(--wc-text-secondary);
-  /* End of Selection */
+	/* Indigo color palette */
+	--wc-indigo-50: #f5f6fe;
+	--wc-indigo-100: #eceeff;
+	--wc-indigo-200: #dbdcff;
+	--wc-indigo-300: #c0c0ff;
+	--wc-indigo-400: #9a97fc;
+	--wc-indigo-500: #7c76f5;
+	--wc-indigo-600: #685de9;
+	--wc-indigo-700: #5a4ed3;
+	--wc-indigo-800: #4b3fb3;
+	--wc-indigo-900: #413592;
 
+
+	/* =============================================================================
+	* 语义化颜色变量 - 推荐组件使用
+	* 这些变量已内置明暗模式支持，会根据主题自动切换
+	* ============================================================================= */
+	
+	--wc-color-primary: var(--wc-primary-500);
+	--wc-color-secondary: var(--wc-secondary-500);
+	
+	/* 文本颜色 */
+	--wc-text-primary: var(--wc-neutral-900);      /* 主要文本 */
+	--wc-text-secondary: var(--wc-neutral-600);    /* 次要文本 */
+	--wc-text-tertiary: var(--wc-neutral-500);     /* 第三级文本 */
+	--wc-text-disabled: var(--wc-neutral-400);     /* 禁用文本 */
+	--wc-text-inverse: var(--wc-neutral-0);        /* 反色文本（用于按钮、标签等） */
+	--wc-text-brand: var(--wc-primary-600);        /* 品牌色文本 */
+	--wc-text-success: var(--wc-success-600);      /* 成功状态文本 */
+	--wc-text-warning: var(--wc-warning-600);      /* 警告状态文本 */
+	--wc-text-error: var(--wc-error-600);          /* 错误状态文本 */
+	--wc-text-info: var(--wc-info-600);            /* 信息状态文本 */
+
+	/* 背景颜色 */
+	--wc-bg-canvas: var(--wc-neutral-0);           /* 主画布背景（最底层背景） */
+	--wc-bg-surface: var(--wc-neutral-50);         /* 表面背景（卡片等） */
+	--wc-bg-surface-secondary: var(--wc-neutral-100); /* 次级表面背景 */
+	--wc-bg-surface-hover: var(--wc-neutral-100);  /* 表面悬停背景 */
+	--wc-bg-surface-active: var(--wc-neutral-200); /* 表面激活背景 */
+	--wc-bg-overlay: rgba(0, 0, 0, 0.5);           /* 遮罩背景 */
+	--wc-bg-brand: var(--wc-primary-500);          /* 品牌色背景 */
+	--wc-bg-brand-hover: var(--wc-primary-200);    /* 品牌色悬停背景 */
+	--wc-bg-brand-active: var(--wc-primary-100);   /* 品牌色激活背景 */
+	--wc-bg-success: var(--wc-success-500);        /* 成功状态背景 */
+	--wc-bg-success-subtle: var(--wc-success-50);  /* 成功状态浅背景 */
+	--wc-bg-warning: var(--wc-warning-500);        /* 警告状态背景 */
+	--wc-bg-warning-subtle: var(--wc-warning-50);  /* 警告状态浅背景 */
+	--wc-bg-error: var(--wc-error-500);            /* 错误状态背景 */
+	--wc-bg-error-subtle: var(--wc-error-50);      /* 错误状态浅背景 */
+	--wc-bg-info: var(--wc-info-500);              /* 信息状态背景 */
+	--wc-bg-info-subtle: var(--wc-info-50);        /* 信息状态浅背景 */
+
+	/* 边框颜色 WaterColor UI 默认使用浅色边框 */
+	--wc-border-default: var(--wc-neutral-200);    /* 默认边框 */
+	--wc-border-strong: var(--wc-neutral-300);     /* 强调边框 */
+	--wc-border-subtle: var(--wc-neutral-100);     /* 浅色边框 */
+	--wc-border-focus: var(--wc-primary-500);      /* 焦点边框 */
+	--wc-border-brand: var(--wc-primary-500);      /* 品牌色边框 */
+	--wc-border-success: var(--wc-success-500);    /* 成功状态边框 */
+	--wc-border-warning: var(--wc-warning-500);    /* 警告状态边框 */
+	--wc-border-error: var(--wc-error-500);        /* 错误状态边框 */
+	--wc-border-info: var(--wc-info-500);          /* 信息状态边框 */
+
+	/* 阴影 颜色偏淡 */
+	--wc-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+	--wc-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+	--wc-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+	--wc-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+	/* 圆角等级系统 */
+	--wc-radius-none: 0;         /* 无圆角 */
+	--wc-radius-xs: 0.125rem;    /* 2px - 极小圆角 */
+	--wc-radius-sm: 0.25rem;     /* 4px - 小圆角 */
+	--wc-radius-md: 0.375rem;    /* 6px - 中圆角 */
+	--wc-radius-lg: 0.5rem;      /* 8px - 大圆角 */
+	--wc-radius-xl: 0.75rem;     /* 12px - 超大圆角 */
+	--wc-radius-2xl: 1rem;       /* 16px - 特大圆角 （默认一级圆角）*/
+	--wc-radius-3xl: 1.5rem;     /* 24px - 巨大圆角 */
+	--wc-radius-full: 9999px;    /* 完全圆角 */
 }
 
 /* Dark mode */
 .dark {
-  /* Primary colors - 暗色模式调整 */
-  --wc-primary-50: #1e2a47;
-  --wc-primary-100: #243046;
-  --wc-primary-200: #2a3752;
-  --wc-primary-300: #4965a6;
-  --wc-primary-400: #5b82c7;
-  --wc-primary-500: #7ba3e8;
-  --wc-primary-600: #9bc4ff;
-  --wc-primary-700: #bbdaff;
-  --wc-primary-800: #dceeff;
-  --wc-primary-900: #eff7ff;
-  
-  /* Secondary colors - 暗色模式调整 */
-  --wc-secondary-50: #1b2a14;
-  --wc-secondary-100: #2d3f20;
-  --wc-secondary-200: #3e5730;
-  --wc-secondary-300: #5a7a47;
-  --wc-secondary-400: #6d9454;
-  --wc-secondary-500: #85b568;
-  --wc-secondary-600: #a5d084;
-  --wc-secondary-700: #c4e5a5;
-  --wc-secondary-800: #ddf3c7;
-  --wc-secondary-900: #f0fce8;
+    /* Font configuration */
+    --wc-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --wc-font-chinese: "";
+    --wc-font-english: "";
+    --wc-font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
 
-  /* Neutral colors mapping in dark mode */
-  --wc-neutral-0: #1a1a1a;
-  --wc-neutral-50: #252525;
-  --wc-neutral-100: #2f2f2f;
-  --wc-neutral-200: #404040;
-  --wc-neutral-300: #525252;
-  --wc-neutral-400: #737373;
-  --wc-neutral-500: #a3a3a3;
-  --wc-neutral-600: #d4d4d4;
-  --wc-neutral-700: #e5e5e5;
-  --wc-neutral-800: #f5f5f5;
-  --wc-neutral-900: #fafafa;
-  --wc-neutral-950: #ffffff;
+    /* Primary colors - 暗色模式调整 */
+    --wc-primary-900: #1e2a47;
+    --wc-primary-800: #103e79;
+    --wc-primary-700: #155bb3;
+    --wc-primary-600: #1a6ed6;
+    --wc-primary-500: #238aff;
+    --wc-primary-400: #4fa0ff;
+    --wc-primary-300: #7bb8ff;
+    --wc-primary-200: #a7d1ff;
+    --wc-primary-100: #cbe3ff;
+    --wc-primary-50: #e3f0ff;
   
-  /* Start of Selection */
-  /* Success colors - 暗色模式调整 */
-  --wc-success-50: #0a1f12;
-  --wc-success-100: #22482d;
-  --wc-success-200: #3c7349;
-  --wc-success-300: #4ca160;
-  --wc-success-400: #53b56c;
-  --wc-success-500: #4ac168;
-  --wc-success-600: #72d589;
-  --wc-success-700: #a0ffb6;
-  --wc-success-800: #bdffcc;
-  --wc-success-900: #e8f9ec;
-  /* End of Selection */
+    /* Secondary colors - 暗色模式调整，提升鲜明度（整体加深） */
+    --wc-secondary-900: #0e3d0e;
+    --wc-secondary-800: #125012;
+    --wc-secondary-700: #156415;
+    --wc-secondary-600: #1a7a1a;
+    --wc-secondary-500: #229622;
+    --wc-secondary-400: #36a836;
+    --wc-secondary-300: #54c054;
+    --wc-secondary-200: #7ed87e;
+    --wc-secondary-100: #b0eab0;
+    --wc-secondary-50: #d6f5d6;
+
+    /* Neutral colors mapping in dark mode */
+    --wc-neutral-0: #1a1a1a;
+    --wc-neutral-50: #252525;
+    --wc-neutral-100: #2f2f2f;
+    --wc-neutral-200: #404040;
+    --wc-neutral-300: #525252;
+    --wc-neutral-400: #737373;
+    --wc-neutral-500: #a3a3a3;
+    --wc-neutral-600: #d4d4d4;
+    --wc-neutral-700: #e5e5e5;
+    --wc-neutral-800: #f5f5f5;
+    --wc-neutral-900: #fafafa;
+    --wc-neutral-950: #ffffff;
+
+    /* Success colors - 暗色模式调整 */
+    --wc-success-50: #133d1a;
+    --wc-success-100: #176c2c;
+    --wc-success-200: #1e9c3d;
+    --wc-success-300: #22c84a;
+    --wc-success-400: #2eea5c;
+    --wc-success-500: #4cff7a;
+    --wc-success-600: #7cff9c;
+    --wc-success-700: #aaffbe;
+    --wc-success-800: #d2ffe0;
+    --wc-success-900: #f0fff4;
   
   /* Info colors - 暗色模式调整 */
-  --wc-info-50: #1a2f5a;
-  --wc-info-100: #2a4570;
-  --wc-info-200: #3a5a85;
-  --wc-info-300: #4d7bb0;
-  --wc-info-400: #6292c8;
-  --wc-info-500: #7ba8de;
-  --wc-info-600: #96c0f0;
-  --wc-info-700: #b3d4f8;
-  --wc-info-800: #d1e8ff;
-  --wc-info-900: #f0f8ff;
+  --wc-info-50: #142347;
+  --wc-info-100: #1e335a;
+  --wc-info-200: #29446e;
+  --wc-info-300: #355582;
+  --wc-info-400: #406697;
+  --wc-info-500: #4c77ab;
+  --wc-info-600: #5e8fc2;
+  --wc-info-700: #7ba8de;
+  --wc-info-800: #a3c7f3;
+  --wc-info-900: #d1e8ff;
   
   /* Warning colors - 暗色模式调整 */
-  --wc-warning-50: #2d1a0a;
-  --wc-warning-100: #4d2d15;
-  --wc-warning-200: #6b3d1e;
-  --wc-warning-300: #8f5228;
-  --wc-warning-400: #b36732;
-  --wc-warning-500: #d67c3c;
-  --wc-warning-600: #f99146;
-  --wc-warning-700: #ffa55a;
-  --wc-warning-800: #ffb973;
-  --wc-warning-900: #ffd4a6;
+  --wc-warning-50: #332100;    /* 最深，暗色背景下的极深琥珀 */
+  --wc-warning-100: #4a2e00;   /* 深琥珀，仍然很深 */
+  --wc-warning-200: #7a4a00;   /* 明显的深琥珀，带橙色调 */
+  --wc-warning-300: #b36a09;   /* 鲜明的琥珀橙，亮度提升 */
+  --wc-warning-400: #e89c1a;   /* 鲜亮的橙黄色 */
+  --wc-warning-500: #ffc72c;   /* 主色，鲜明明亮 */
+  --wc-warning-600: #ffd85c;   /* 更亮的黄色 */
+  --wc-warning-700: #ffe88c;   /* 柔和明亮 */
+  --wc-warning-800: #fff3c2;   /* 极浅琥珀 */
+  --wc-warning-900: #fffbe6;   /* 最浅，几乎白色 */
   
-  /* Error/Danger colors - 暗色模式调整 */
-  --wc-error-50: #2d1215;
-  --wc-error-100: #3e1d22;
-  --wc-error-200: #522930;
-  --wc-error-300: #7a3a44;
-  --wc-error-400: #9a4d59;
-  --wc-error-500: #c16574;
-  --wc-error-600: #e48194;
-  --wc-error-700: #f2a1b4;
-  --wc-error-800: #fac5d3;
-  --wc-error-900: #fee8ed;
+  /* Error/Danger colors - 暗色模式调整，提升鲜明度，深色在前，亮色在后 */
+  --wc-error-50: #2a0a13;    /* 极深红棕，适合暗色背景 */
+  --wc-error-100: #4a1120;   /* 深酒红 */
+  --wc-error-200: #7a1d34;   /* 鲜明深红 */
+  --wc-error-300: #b3264a;   /* 鲜亮玫红 */
+  --wc-error-400: #e03a5e;   /* 鲜明亮红 */
+  --wc-error-500: #ff4d6d;   /* 主色，明亮鲜红 */
+  --wc-error-600: #ff7a99;   /* 更亮的粉红 */
+  --wc-error-700: #ffb3c6;   /* 柔和明亮 */
+  --wc-error-800: #ffd6e0;   /* 极浅粉红 */
+  --wc-error-900: #fee8ed;   /* 最浅，几乎白色 */
   
   /* Danger (alias) */
   --wc-danger-50: var(--wc-error-50);
@@ -571,17 +557,17 @@
   --wc-pink-800: #faddea;
   --wc-pink-900: #fef0f5;
   
-  /* Teal color palette */
-  --wc-teal-50: #0d2825;
-  --wc-teal-100: #1a3b35;
-  --wc-teal-200: #295047;
-  --wc-teal-300: #3a7066;
-  --wc-teal-400: #4a8c80;
-  --wc-teal-500: #5da69c;
-  --wc-teal-600: #7bc4ba;
-  --wc-teal-700: #9dd8d0;
-  --wc-teal-800: #c3e8e2;
-  --wc-teal-900: #e8f5f3;
+  /* Teal color palette - 更加鲜明亮丽的配色，顺序已颠倒 */
+  --wc-teal-900: #0b4c47;
+  --wc-teal-800: #08665e;
+  --wc-teal-700: #048276;
+  --wc-teal-600: #04a08b;
+  --wc-teal-500: #06bfa5;
+  --wc-teal-400: #22d3bb;
+  --wc-teal-300: #4be3d1;
+  --wc-teal-200: #7ff0e0;
+  --wc-teal-100: #b3f7ec;
+  --wc-teal-50: #e0fcf8;
   
   /* Indigo color palette */
   --wc-indigo-50: #1e2247;
@@ -856,7 +842,7 @@ input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="
 }
 
 /* =============================================================================
- * 媒体查询：减少动画 (用户偏好)
+ * 媒体查询：减少动画
  * ============================================================================= */
 @media (prefers-reduced-motion: reduce) {
   *,

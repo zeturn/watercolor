@@ -152,12 +152,12 @@ const handleClick = (event) => {
 .form-control-label__text {
   font-size: 14px;
   line-height: 1.5;
-  color: var(--color-text-secondary, #374151);
+  color: var(--wc-text-secondary, #374151);
   font-weight: 400;
 }
 
 .dark .form-control-label__text {
-  color: var(--color-dark-text, #f3f4f6);
+  color: var(--wc-text-primary, #f3f4f6);
 }
 
 /* Spacing based on placement */
@@ -201,7 +201,7 @@ const handleClick = (event) => {
 
 /* Focus styles for accessibility */
 .form-control-label:focus-within {
-  outline: 2px solid var(--color-primary, #3b82f6);
+  outline: 2px solid var(--wc-color-primary, #3b82f6);
   outline-offset: 2px;
   border-radius: 4px;
 }

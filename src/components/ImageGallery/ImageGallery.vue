@@ -410,19 +410,19 @@ export default {
   align-items: center;
   margin-bottom: 24px;
   padding-bottom: 16px;
-  border-bottom: 1px solid var(--color-border, #e5e7eb);
+  border-bottom: 1px solid var(--wc-border-default, #e5e7eb);
 }
 
 .gallery-title {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--color-text, #111827);
+  color: var(--wc-text-primary, #111827);
 }
 
 .gallery-count {
   font-size: 0.875rem;
-  color: var(--color-text-secondary, #6b7280);
+  color: var(--wc-text-secondary, #6b7280);
 }
 
 .gallery-grid {
@@ -445,12 +445,12 @@ export default {
 }
 
 .gallery-item:focus {
-  outline: 2px solid var(--color-primary, #3b82f6);
+  outline: 2px solid var(--wc-color-primary, #3b82f6);
   outline-offset: 2px;
 }
 
 .gallery-item-selected {
-  ring: 2px solid var(--color-primary, #3b82f6);
+  ring: 2px solid var(--wc-color-primary, #3b82f6);
 }
 
 .gallery-image-container {
@@ -491,7 +491,7 @@ export default {
   width: 24px;
   height: 24px;
   border: 2px solid var(--wc-neutral-300, #d1d5db);
-  border-top: 2px solid var(--color-primary, #3b82f6);
+  border-top: 2px solid var(--wc-color-primary, #3b82f6);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -531,7 +531,7 @@ export default {
   border: none;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.9);
-  color: var(--color-text, #111827);
+  color: var(--wc-text-primary, #111827);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -581,22 +581,22 @@ export default {
   gap: 16px;
   margin-top: 24px;
   padding-top: 16px;
-  border-top: 1px solid var(--color-border, #e5e7eb);
+  border-top: 1px solid var(--wc-border-default, #e5e7eb);
 }
 
 .gallery-page-btn {
   padding: 8px 16px;
-  border: 1px solid var(--color-border, #d1d5db);
+  border: 1px solid var(--wc-border-default, #d1d5db);
   border-radius: 6px;
   background: white;
-  color: var(--color-text, #111827);
+  color: var(--wc-text-primary, #111827);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .gallery-page-btn:hover:not(:disabled) {
   background: var(--wc-neutral-50, #f9fafb);
-  border-color: var(--color-primary, #3b82f6);
+  border-color: var(--wc-color-primary, #3b82f6);
 }
 
 .gallery-page-btn:disabled {
@@ -606,7 +606,7 @@ export default {
 
 .gallery-page-info {
   font-size: 0.875rem;
-  color: var(--color-text-secondary, #6b7280);
+  color: var(--wc-text-secondary, #6b7280);
 }
 
 /* 灯箱 */
@@ -673,7 +673,7 @@ export default {
 
 .gallery-lightbox-description {
   margin: 0;
-  color: var(--color-text-secondary, #6b7280);
+  color: var(--wc-text-secondary, #6b7280);
   line-height: 1.5;
 }
 
@@ -689,7 +689,7 @@ export default {
 .gallery-lightbox-nav {
   width: 40px;
   height: 40px;
-  border: 1px solid var(--color-border, #d1d5db);
+  border: 1px solid var(--wc-border-default, #d1d5db);
   border-radius: 50%;
   background: white;
   cursor: pointer;
@@ -702,9 +702,9 @@ export default {
 }
 
 .gallery-lightbox-nav:hover:not(:disabled) {
-  background: var(--color-primary, #3b82f6);
+  background: var(--wc-color-primary, #3b82f6);
   color: white;
-  border-color: var(--color-primary, #3b82f6);
+  border-color: var(--wc-color-primary, #3b82f6);
 }
 
 .gallery-lightbox-nav:disabled {
@@ -714,7 +714,7 @@ export default {
 
 .gallery-lightbox-counter {
   font-size: 0.875rem;
-  color: var(--color-text-secondary, #6b7280);
+  color: var(--wc-text-secondary, #6b7280);
 }
 
 /* 尺寸变体 */
@@ -790,11 +790,11 @@ export default {
 /* 深色模式 */
 @media (prefers-color-scheme: dark) {
   .gallery-title {
-    color: var(--color-dark-text, #f9fafb);
+    color: var(--wc-text-primary, #f9fafb);
   }
   
   .gallery-count {
-    color: var(--color-dark-text-secondary, #d1d5db);
+    color: var(--wc-text-secondary, #d1d5db);
   }
   
   .gallery-item {
@@ -803,8 +803,8 @@ export default {
   
   .gallery-page-btn {
     background: var(--wc-neutral-800, #1f2937);
-    border-color: var(--color-dark-border, #374151);
-    color: var(--color-dark-text, #f9fafb);
+    border-color: var(--wc-border-default, #374151);
+    color: var(--wc-text-primary, #f9fafb);
   }
   
   .gallery-page-btn:hover:not(:disabled) {
@@ -812,7 +812,7 @@ export default {
   }
   
   .gallery-page-info {
-    color: var(--color-dark-text-secondary, #d1d5db);
+    color: var(--wc-text-secondary, #d1d5db);
   }
   
   .gallery-lightbox-content {
@@ -820,11 +820,11 @@ export default {
   }
   
   .gallery-lightbox-title {
-    color: var(--color-dark-text, #f9fafb);
+    color: var(--wc-text-primary, #f9fafb);
   }
   
   .gallery-lightbox-description {
-    color: var(--color-dark-text-secondary, #d1d5db);
+    color: var(--wc-text-secondary, #d1d5db);
   }
   
   .gallery-lightbox-navigation {
@@ -833,12 +833,12 @@ export default {
   
   .gallery-lightbox-nav {
     background: var(--wc-neutral-800, #1f2937);
-    border-color: var(--color-dark-border, #374151);
-    color: var(--color-dark-text, #f9fafb);
+    border-color: var(--wc-border-default, #374151);
+    color: var(--wc-text-primary, #f9fafb);
   }
   
   .gallery-lightbox-counter {
-    color: var(--color-dark-text-secondary, #d1d5db);
+    color: var(--wc-text-secondary, #d1d5db);
   }
 }
 </style> 

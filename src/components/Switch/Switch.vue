@@ -264,7 +264,7 @@ const handleToggle = () => {
 }
 
 /* Color variants */
-.switch--color-primary.switch--checked .switch__track {
+.switch--wc-color-primary.switch--checked .switch__track {
   background-color: #3b82f6;
   border-color: #3b82f6;
 }

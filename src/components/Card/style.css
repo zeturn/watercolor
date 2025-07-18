@@ -1,10 +1,9 @@
-/* Card 组件样式 - Watercolor风格 */
+/* Card 组件样式 - Watercolor风格：默认浅灰色，无边框 */
 .wc-card {
   padding: 24px;
-  border-radius: 12px;
+  border-radius: var(--wc-radius-3xl, 0.5rem);
   margin: 0;
-  /* Watercolor风格：默认浅灰色，无边框 */
-  background-color: var(--wc-neutral-100, #f5f5f5);
+  background-color: var(--wc-surface-100, #f5f5f5);
   color: var(--wc-text-primary, #1f2937);
   transition: all 0.2s ease-in-out;
   position: relative;
@@ -17,8 +16,6 @@
 /* Dark mode for cards and panels */
 .dark .wc-card,
 .dark .wc-panel {
-  background-color: #1a1a1a !important;
-  border-color: #2a2a2a !important;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
 }
 
@@ -445,12 +442,12 @@
 
 /* 暗色模式下的颜色变体 */
 .dark .wc-card--primary {
-  background-color: var(--wc-primary-50, #1e2a47);
-  color: var(--wc-primary-800, #dceeff);
+  background-color: var(--wc-primary-900, #1e2a47);
+  color: var(--wc-primary-50, #dceeff);
 }
 
 .dark .wc-card--primary.wc-card--interactive:hover {
-  background-color: var(--wc-primary-100, #243046);
+  background-color: var(--wc-primary-900, #243046);
 }
 
 .dark .wc-card--success {
@@ -491,7 +488,7 @@
 
 /* 暗色模式下的标题颜色 */
 .dark .wc-card--primary .wc-card__title {
-  color: var(--wc-primary-900, #eff7ff);
+  color: var(--wc-primary-50, #dceeff);
 }
 
 .dark .wc-card--success .wc-card__title {

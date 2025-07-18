@@ -96,13 +96,13 @@ const helperTextClasses = computed(() => {
   font-size: 12px;
   line-height: 1.4;
   font-weight: 400;
-  color: var(--color-text-secondary, #6b7280);
+  color: var(--wc-text-secondary, #6b7280);
   transition: all 0.2s ease-in-out;
   display: block;
 }
 
 .dark .form-helper-text {
-  color: var(--color-dark-text-secondary, #9ca3af);
+  color: var(--wc-text-secondary, #9ca3af);
 }
 
 /* Size variants */
@@ -142,7 +142,7 @@ const helperTextClasses = computed(() => {
 }
 
 .form-helper-text--focused {
-  color: var(--color-primary, #3b82f6);
+  color: var(--wc-color-primary, #3b82f6);
 }
 
 .dark .form-helper-text--focused {

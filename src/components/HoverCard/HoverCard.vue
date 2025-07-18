@@ -257,42 +257,42 @@ export default {
 
 /* 触发器变体 */
 .hover-card-default .hover-card-trigger {
-  color: var(--color-primary, #3b82f6);
+  color: var(--wc-color-primary, #3b82f6);
   text-decoration: underline;
   text-decoration-style: dotted;
 }
 
 .hover-card-default .hover-card-trigger:hover {
-  color: var(--color-primary-dark, #2563eb);
+  color: var(--wc-color-primary-dark, #2563eb);
 }
 
 .hover-card-outlined .hover-card-trigger {
   padding: 2px 6px;
-  border: 1px solid var(--color-border, #d1d5db);
+  border: 1px solid var(--wc-border-default, #d1d5db);
   border-radius: 4px;
   background: transparent;
 }
 
 .hover-card-outlined .hover-card-trigger:hover {
-  border-color: var(--color-primary, #3b82f6);
-  background: var(--color-primary-light, #eff6ff);
+  border-color: var(--wc-color-primary, #3b82f6);
+  background: var(--wc-color-primary-light, #eff6ff);
 }
 
 .hover-card-filled .hover-card-trigger {
   padding: 2px 8px;
-  background: var(--color-primary-light, #eff6ff);
-  color: var(--color-primary, #3b82f6);
+  background: var(--wc-color-primary-light, #eff6ff);
+  color: var(--wc-color-primary, #3b82f6);
   border-radius: 4px;
 }
 
 .hover-card-filled .hover-card-trigger:hover {
-  background: var(--color-primary, #3b82f6);
+  background: var(--wc-color-primary, #3b82f6);
   color: white;
 }
 
 .hover-card-minimal .hover-card-trigger {
   color: inherit;
-  border-bottom: 1px dotted var(--color-text-secondary, #6b7280);
+  border-bottom: 1px dotted var(--wc-text-secondary, #6b7280);
 }
 
 .hover-card-minimal .hover-card-trigger:hover {
@@ -322,7 +322,7 @@ export default {
 .hover-card-popup {
   position: absolute;
   background: white;
-  border: 1px solid var(--color-border, #e5e7eb);
+  border: 1px solid var(--wc-border-default, #e5e7eb);
   border-radius: 8px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   z-index: 1000;
@@ -442,14 +442,14 @@ export default {
   margin: 0 0 8px 0;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-text, #111827);
+  color: var(--wc-text-primary, #111827);
   line-height: 1.4;
 }
 
 .hover-card-description {
   margin: 0 0 12px 0;
   font-size: 0.875rem;
-  color: var(--color-text-secondary, #6b7280);
+  color: var(--wc-text-secondary, #6b7280);
   line-height: 1.5;
 }
 
@@ -462,7 +462,7 @@ export default {
 
 .hover-card-meta-item {
   font-size: 0.75rem;
-  color: var(--color-text-tertiary, #9ca3af);
+  color: var(--wc-text-primary-tertiary, #9ca3af);
   background: var(--color-gray-100, #f3f4f6);
   padding: 2px 6px;
   border-radius: 4px;
@@ -477,17 +477,17 @@ export default {
 .hover-card-action-btn {
   padding: 4px 12px;
   font-size: 0.75rem;
-  border: 1px solid var(--color-border, #d1d5db);
+  border: 1px solid var(--wc-border-default, #d1d5db);
   border-radius: 4px;
   background: white;
-  color: var(--color-text, #111827);
+  color: var(--wc-text-primary, #111827);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .hover-card-action-btn:hover {
   background: var(--wc-neutral-50, #f9fafb);
-  border-color: var(--color-primary, #3b82f6);
+  border-color: var(--wc-color-primary, #3b82f6);
 }
 
 .hover-card-action-btn:active {
@@ -510,7 +510,7 @@ export default {
 @media (prefers-color-scheme: dark) {
   .hover-card-popup {
     background: var(--wc-neutral-800, #1f2937);
-    border-color: var(--color-dark-border, #374151);
+    border-color: var(--wc-border-default, #374151);
   }
   
   .hover-card-arrow-top {
@@ -530,22 +530,22 @@ export default {
   }
   
   .hover-card-title {
-    color: var(--color-dark-text, #f9fafb);
+    color: var(--wc-text-primary, #f9fafb);
   }
   
   .hover-card-description {
-    color: var(--color-dark-text-secondary, #d1d5db);
+    color: var(--wc-text-secondary, #d1d5db);
   }
   
   .hover-card-meta-item {
     background: var(--color-dark-gray, #374151);
-    color: var(--color-dark-text-tertiary, #9ca3af);
+    color: var(--wc-text-primary-tertiary, #9ca3af);
   }
   
   .hover-card-action-btn {
     background: var(--wc-neutral-800, #1f2937);
-    border-color: var(--color-dark-border, #374151);
-    color: var(--color-dark-text, #f9fafb);
+    border-color: var(--wc-border-default, #374151);
+    color: var(--wc-text-primary, #f9fafb);
   }
   
   .hover-card-action-btn:hover {
