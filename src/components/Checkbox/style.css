@@ -12,7 +12,9 @@
   justify-content: center;
   position: relative;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: var(--wc-radius-xl);
+  background: var(--wc-bg-surface);
+  color: var(--wc-text-primary);
   transition: all 0.2s ease;
   outline: none;
 }

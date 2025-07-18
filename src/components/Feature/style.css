@@ -5,9 +5,10 @@
   gap: 16px;
   padding: 16px;
   /* Watercolor风格：沿用card风格，默认浅灰色，无边框 */
+  color: var(--wc-text-primary);
   border: none;
-  border-radius: 8px;
-  background: var(--wc-neutral-100, #f5f5f5);
+  border-radius: var(--wc-radius-2xl);
+  background: var(--wc-bg-surface-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: var(--wc-font-family);
@@ -15,7 +16,7 @@
 
 .wc-feature-card:hover {
   /* Watercolor风格：hover时背景变深 */
-  background: var(--wc-neutral-200, #e5e5e5);
+  background: var(--wc-bg-surface-hover);
   transform: translateY(-2px);
 }
 

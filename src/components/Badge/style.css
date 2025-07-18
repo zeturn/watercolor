@@ -3,9 +3,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: 500;
+  font-weight: var(--wc-font-weight-medium);
   font-family: var(--wc-font-family);
-  border-radius: 6px;
+  border-radius: var(--wc-radius-xl);
   white-space: nowrap;
   vertical-align: middle;
   color: var(--wc-text-inverse);
@@ -14,19 +14,19 @@
 /* Size variants */
 .wc-badge--sm {
   padding: 2px 8px;
-  font-size: 12px;
+  font-size: var(--wc-font-size-sm);
   line-height: 1.2;
 }
 
 .wc-badge--md {
   padding: 4px 10px;
-  font-size: 12px;
+  font-size: var(--wc-font-size-sm);
   line-height: 1.2;
 }
 
 .wc-badge--lg {
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: var(--wc-font-size-sm);
   line-height: 1.2;
 }
 

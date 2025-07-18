@@ -23,9 +23,9 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: var(--wc-primary-600, #2563eb);
+  color: var(--wc-border-focus);
   text-decoration: none;
-  font-size: 14px;
+  font-size: var(--wc-font-size-sm);
   padding: 4px 6px;
   border-radius: 4px;
   transition: all 0.2s ease;
@@ -36,72 +36,30 @@
 }
 
 .wc-breadcrumb-link:hover:not(.wc-breadcrumb-link--disabled) {
-  background-color: var(--wc-primary-50, #eff6ff);
-  color: var(--wc-primary-700, #1d4ed8);
+  background-color: var(--wc-bg-surface-hover);
+  color: var(--wc-border-focus);
 }
 
 .wc-breadcrumb-link--disabled {
-  color: var(--wc-neutral-500, #6b7280);
+  color: var(--wc-text-secondary);
   cursor: default;
 }
 
 .wc-breadcrumb-item--current .wc-breadcrumb-link {
-  color: var(--wc-neutral-700, #374151);
-  font-weight: 500;
+  color: var(--wc-text-primary);
+  font-weight: var(--wc-font-weight-medium);
   cursor: default;
 }
 
 .wc-breadcrumb-icon {
   display: inline-flex;
   align-items: center;
-  font-size: 16px;
+  font-size: var(--wc-font-size-md);
 }
 
 .wc-breadcrumb-separator {
-  color: var(--wc-neutral-400, #9ca3af);
-  font-size: 14px;
+  color: var(--wc-text-secondary);
+  font-size: var(--wc-font-size-sm);
   user-select: none;
   margin: 0 4px;
 }
-
-/* Variants */
-.wc-breadcrumb--default {
-  /* Default styles already applied */
-}
-
-/* 深色模式 */
-/* 已移除 prefers-color-scheme 媒体查询，避免与Storybook主题切换冲突 */
-
-/* 暗色模式 - 使用 .dark 类选择器 */
-.dark .wc-breadcrumb {
-  color: var(--wc-neutral-300, #d1d5db);
-}
-
-.dark .wc-breadcrumb-item {
-  color: var(--wc-neutral-400, #9ca3af);
-}
-
-.dark .wc-breadcrumb-item--active {
-  color: var(--wc-neutral-100, #f3f4f6);
-}
-
-.dark .wc-breadcrumb-link {
-  color: var(--wc-primary-400, #60a5fa);
-}
-
-.dark .wc-breadcrumb-link:hover {
-  color: var(--wc-primary-300, #93c5fd);
-}
-
-.dark .wc-breadcrumb-separator {
-  color: var(--wc-neutral-600, #4b5563);
-}
-
-/* 暗色模式下的尺寸变体 */
-.dark .wc-breadcrumb--sm .wc-breadcrumb-item {
-  color: var(--wc-neutral-400, #9ca3af);
-}
-
-.dark .wc-breadcrumb--lg .wc-breadcrumb-item {
-  color: var(--wc-neutral-300, #d1d5db);
-} 

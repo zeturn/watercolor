@@ -31,8 +31,9 @@
   justify-content: center;
   padding: 32px;
   border: none;
-  border-radius: 8px;
-  background: var(--wc-neutral-200, #e5e5e5);
+  border-radius: var(--wc-radius-2xl);
+  background: var(--wc-bg-surface);
+  color: var(--wc-text-primary);
   text-align: center;
   min-height: 120px;
   width: 100%;

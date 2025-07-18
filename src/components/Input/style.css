@@ -6,17 +6,17 @@
 /* CSS变量定义 */
 :root {
   /* Watercolor风格：淡灰色背景，无边框 */
-  --input-bg: var(--wc-neutral-200, #e5e5e5);
+  --input-bg: var(--wc-bg-surface);
   --input-border: transparent;
   --input-border-focus: transparent;
   --input-border-error: transparent;
-  --input-text: #111827;
-  --input-text-secondary: #6b7280;
-  --input-placeholder: #9ca3af;
-  --input-label: #374151;
-  --input-disabled-bg: var(--wc-neutral-200, #e5e5e5);
+  --input-text: var(--wc-text-primary);
+  --input-text-secondary: var(--wc-text-secondary);
+  --input-placeholder: var(--wc-text-secondary);
+  --input-label: var(--wc-text-secondary);
+  --input-disabled-bg: var(--wc-bg-surface);
   --input-disabled-border: transparent;
-  --input-radius: 6px;
+  --input-radius: var(--wc-radius-xl);
   --input-shadow: none;
   /* Watercolor风格：focus时背景变深并添加淡色焦点效果 */
   --input-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.1);
@@ -120,35 +120,39 @@
   position: relative;
   display: flex;
   align-items: center;
+  background-color: var(--wc-bg-surface);
+}
+
+.wc-input-wrapper :hover {
+  background-color: var(--wc-bg-surface-hover);
 }
 
 /* 标签样式 */
 .wc-input-label {
   display: block;
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: var(--wc-font-size-sm);
+  font-weight: var(--wc-font-weight-medium);
   color: var(--input-label);
   margin-bottom: 8px;
   transition: var(--input-transition);
 }
 
 .wc-input-label--active {
-  color: var(--input-border-focus);
+  color: var(--wc-border-focus);
 }
 
 .wc-input-label--error {
-  color: var(--input-border-error);
+  color: var(--wc-border-error);
 }
 
 .wc-input-label__required {
-  color: var(--input-border-error);
+  color: var(--wc-border-error);
   margin-left: 4px;
 }
 
 /* 基础输入框样式 */
 .wc-input {
   width: 100%;
-  /* Watercolor风格：去掉边框，使用淡灰色背景 */
   border: none;
   border-radius: var(--input-radius);
   background-color: var(--input-bg);
@@ -165,8 +169,7 @@
 
 .wc-input:focus {
   outline: none;
-  /* Watercolor风格：focus时背景再加深 */
-  background-color: var(--wc-neutral-300, #d4d4d4);
+  background-color: var(--wc-bg-surface-hover);
   box-shadow: var(--input-shadow-focus);
 }
 

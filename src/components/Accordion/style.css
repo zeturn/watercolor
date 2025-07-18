@@ -7,7 +7,7 @@
 .wc-accordion {
   width: 100%;
   font-family: var(--wc-font-family);
-  border-radius: var(--wc-radius-md);
+  border-radius: var(--wc-radius-2xl);
   overflow: hidden;
 }
 
@@ -36,8 +36,8 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: var(--wc-font-size-md);
+  font-weight: var(--wc-font-weight-medium);
   color: var(--wc-text-primary);
   text-align: left;
   transition: all 0.3s ease-out;
@@ -68,7 +68,7 @@
 }
 
 .wc-accordion-icon {
-  font-size: 12px;
+  font-size: var(--wc-font-size-sm);
   color: var(--wc-text-tertiary);
   transition: transform 0.3s ease-out;
 }
@@ -109,7 +109,7 @@
 /* Bordered variant */
 .wc-accordion--bordered .wc-accordion-item {
   border: 1px solid var(--wc-border-default);
-  border-radius: 8px;
+  border-radius: var(--wc-radius-2xl);
   margin-bottom: 8px;
 }
 

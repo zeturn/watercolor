@@ -125,6 +125,20 @@
 	--wc-font-english: "";
 	--wc-font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
 
+  /* Font weight */
+  --wc-font-size-xs: 0.75rem;
+  --wc-font-size-sm: 0.875rem;
+  --wc-font-size-md: 1rem;
+  --wc-font-size-lg: 1.125rem;
+  --wc-font-size-xl: 1.25rem;
+  --wc-font-size-2xl: 1.5rem;
+  --wc-font-size-3xl: 1.875rem;
+  --wc-font-size-4xl: 2.25rem;
+  --wc-font-size-5xl: 3rem;
+  --wc-font-size-6xl: 4rem;
+  --wc-font-size-7xl: 4.5rem;
+  --wc-font-size-8xl: 6rem;
+
 	/* Primary colors - using new blue scheme */
 	--wc-primary-50: #f8faff;
 	--wc-primary-100: #edf5ff;
@@ -380,10 +394,10 @@
 
 	/* 背景颜色 */
 	--wc-bg-canvas: var(--wc-neutral-0);           /* 主画布背景（最底层背景） */
-	--wc-bg-surface: var(--wc-neutral-50);         /* 表面背景（卡片等） */
-	--wc-bg-surface-secondary: var(--wc-neutral-100); /* 次级表面背景 */
-	--wc-bg-surface-hover: var(--wc-neutral-100);  /* 表面悬停背景 */
-	--wc-bg-surface-active: var(--wc-neutral-200); /* 表面激活背景 */
+	--wc-bg-surface: var(--wc-neutral-200);         /* 表面背景（卡片等） */
+	--wc-bg-surface-secondary: var(--wc-neutral-300); /* 次级表面背景 */
+	--wc-bg-surface-hover: var(--wc-neutral-300);  /* 表面悬停背景 */
+	--wc-bg-surface-active: var(--wc-neutral-300); /* 表面激活背景 */
 	--wc-bg-overlay: rgba(0, 0, 0, 0.5);           /* 遮罩背景 */
 	--wc-bg-brand: var(--wc-primary-500);          /* 品牌色背景 */
 	--wc-bg-brand-hover: var(--wc-primary-200);    /* 品牌色悬停背景 */
@@ -433,6 +447,20 @@
     --wc-font-chinese: "";
     --wc-font-english: "";
     --wc-font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+
+      /* Font size */
+      --wc-font-size-xs: 0.75rem;
+      --wc-font-size-sm: 0.875rem;
+      --wc-font-size-md: 1rem;
+      --wc-font-size-lg: 1.125rem;
+      --wc-font-size-xl: 1.25rem;
+      --wc-font-size-2xl: 1.5rem;
+      --wc-font-size-3xl: 1.875rem;
+      --wc-font-size-4xl: 2.25rem;
+      --wc-font-size-5xl: 3rem;
+      --wc-font-size-6xl: 4rem;
+      --wc-font-size-7xl: 4.5rem;
+      --wc-font-size-8xl: 6rem;
 
     /* Primary colors - 暗色模式调整 */
     --wc-primary-900: #1e2a47;

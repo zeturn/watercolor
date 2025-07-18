@@ -15,13 +15,15 @@
   gap: 12px;
   position: relative;
   padding: 12px;
-  border-radius: 8px;
+  border-radius: var(--wc-radius-2xl);
   transition: background-color 0.2s ease;
+  color: var(--wc-text-primary);
+  background: var(--wc-bg-canvas);
   cursor: pointer;
 }
 
 .wc-feed-item:hover {
-  background-color: var(--wc-neutral-50);
+  background-color: var(--wc-bg-surface-hover);
 }
 
 /* 头像 */
@@ -181,7 +183,7 @@
 .wc-feed-list.card .wc-feed-item {
   background: var(--wc-background, #ffffff);
   border: 1px solid var(--wc-neutral-200);
-  border-radius: 8px;
+  border-radius: var(--wc-radius-2xl);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   padding: 16px;
 }

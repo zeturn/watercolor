@@ -68,7 +68,7 @@ export const Default = {
     cardData: {
       title: '用户信息',
       description: '这是一个用户信息预览卡片，显示了基本的用户详情。',
-      image: 'https://via.placeholder.com/200x150/3b82f6/ffffff?text=User',
+      image: 'https://avatars.githubusercontent.com/u/62530500?v=4',
       imageAlt: '用户头像',
       meta: ['在线', '最近活跃'],
       actions: [
@@ -88,8 +88,8 @@ export const Default = {
     onHide: action('hide'),
   },
   render: (args) => (
-    <div className="w-full max-w-md p-8">
-      <p className="text-center text-gray-600 mb-4">
+    <div style={{ width: '100%', maxWidth: '28rem', padding: '2rem', marginTop: '16rem' }}>
+      <p style={{ textAlign: 'center', color: 'var(--wc-text-secondary)', marginBottom: '1rem' }}>
         将鼠标悬停在下面的文本上查看预览卡片
       </p>
       <HoverCard {...args} />
@@ -103,7 +103,7 @@ export const ProductPreview = {
       cardData: {
         title: 'MacBook Pro 16英寸',
         description: '配备M3 Max芯片的强大笔记本电脑，专为专业用户设计。',
-        image: 'https://via.placeholder.com/280x200/1f2937/ffffff?text=MacBook+Pro',
+        image: 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mbp16-spaceblack-select-202410?wid=904&hei=840&fmt=jpeg&qlt=90&.v=Nys1UFFBTmI1T0VnWWNyeEZhdDFYamhTSEZFNjlmT2xUUDNBTjljV1BxWVk4UDMvOWNCVUEyZk1VN2FtQlpZWXZvdUZlR0V0VUdJSjBWaDVNVG95YlBROXI4TlIyY1pzUUZwNVlXcEFNb2c',
         imageAlt: 'MacBook Pro',
         meta: ['现货', '¥25,999'],
         actions: [
@@ -123,10 +123,10 @@ export const ProductPreview = {
       onHide: action('hide'),
     },
     render: (args) => (
-        <div className="w-full max-w-2xl p-8">
-            <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="text-lg font-semibold mb-4">热门产品</h3>
-                <p className="text-gray-600">
+        <div style={{ width: '100%', maxWidth: '28rem', padding: '2rem', marginTop: '16rem' }}>
+            <div style={{ backgroundColor: 'var(--wc-bg-surface)', padding: '1rem', borderRadius: 'var(--wc-radius-2xl)' }}>
+                <h3 style={{ fontSize: 'var(--wc-font-size-md)', fontWeight: 'var(--wc-font-weight-medium)', marginBottom: '0.5rem' }}>热门产品</h3>
+                <p style={{ color: 'var(--wc-text-secondary)' }}>
                     查看我们最新的
                     <HoverCard {...args} />
                     型号，性能强劲，设计精美。
@@ -138,12 +138,12 @@ export const ProductPreview = {
   
 export const UserMention = {
     args: {
-        triggerText: '@张小明',
+        triggerText: '@zeturn',
         cardData: {
-          title: '张小明',
-          description: '前端开发工程师，专注于Vue.js和React开发，5年工作经验。',
-          image: 'https://via.placeholder.com/120x120/8b5cf6/ffffff?text=张',
-          imageAlt: '张小明头像',
+          title: 'zeturn',
+          description: '前端开发工程师，专注于Vue.js和React开发，3年工作经验。后端开发工程师，专注于PHP和Python开发，5年工作经验。',
+          image: 'https://avatars.githubusercontent.com/u/62530500?v=4',
+          imageAlt: 'zeturn头像',
           meta: ['开发组', '在线'],
           actions: [
             { label: '发私信', onClick: action('发私信') },
@@ -162,8 +162,8 @@ export const UserMention = {
         onHide: action('hide'),
     },
     render: (args) => (
-        <div className="w-full max-w-lg p-8">
-            <p className="text-gray-700 leading-relaxed">
+        <div style={{ width: '100%', maxWidth: '28rem', padding: '2rem', marginTop: '16rem' }}>
+            <p style={{ color: 'var(--wc-text-secondary)', lineHeight: '1.5' }}>
                 项目进度更新：
                 <HoverCard {...args} />
                 已经完成了新功能的开发，代码已提交审核。

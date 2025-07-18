@@ -5,23 +5,36 @@
 
 /* CSS变量定义 */
 :root {
-  --hover-card-bg: #ffffff;
-  --hover-card-border: #e5e7eb;
-  --hover-card-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  --hover-card-text: #111827;
-  --hover-card-text-secondary: #6b7280;
-  --hover-card-text-tertiary: #9ca3af;
-  --hover-card-primary: #3b82f6;
-  --hover-card-primary-hover: #2563eb;
-  --hover-card-primary-light: #eff6ff;
-  --hover-card-gray-50: #f9fafb;
-  --hover-card-gray-100: #f3f4f6;
-  --hover-card-radius: 8px;
-  --hover-card-radius-sm: 4px;
+  --hover-card-bg: var(--wc-bg-surface);
+  --hover-card-border: var(--wc-border-default);
+  --hover-card-shadow: var(--wc-shadow-lg);
+  --hover-card-text: var(--wc-text-primary);
+  --hover-card-text-secondary: var(--wc-text-secondary);
+  --hover-card-text-tertiary: var(--wc-text-tertiary);
+  --hover-card-primary: var(--wc-text-brand);
+  --hover-card-primary-hover: var(--wc-primary-700);
+  --hover-card-primary-light: var(--wc-bg-surface-hover);
+  --hover-card-gray-50: var(--wc-bg-surface);
+  --hover-card-gray-100: var(--wc-bg-surface-secondary);
+  --hover-card-radius: var(--wc-radius-lg);
+  --hover-card-radius-sm: var(--wc-radius-sm);
 }
 
-/* 深色模式变量 */
-/* 已移除 prefers-color-scheme 媒体查询，避免与Storybook主题切换冲突 */
+/* 暗色模式变量 - 使用 .dark 类选择器 */
+.dark {
+  /* HoverCard 在暗色模式下的变量重定义 */
+  --hover-card-bg: var(--wc-bg-surface);
+  --hover-card-border: var(--wc-border-default);
+  --hover-card-shadow: var(--wc-shadow-lg);
+  --hover-card-text: var(--wc-text-primary);
+  --hover-card-text-secondary: var(--wc-text-secondary);
+  --hover-card-text-tertiary: var(--wc-text-tertiary);
+  --hover-card-primary: var(--wc-text-brand);
+  --hover-card-primary-hover: var(--wc-primary-300);
+  --hover-card-primary-light: var(--wc-bg-surface-hover);
+  --hover-card-gray-50: var(--wc-bg-surface);
+  --hover-card-gray-100: var(--wc-bg-surface-secondary);
+}
 
 /* 基础容器样式 */
 .hover-card-container {
@@ -68,7 +81,7 @@
 
 .hover-card-filled .hover-card-trigger:hover {
   background: var(--hover-card-primary);
-  color: white;
+  color: var(--wc-text-primary);
 }
 
 .hover-card-minimal .hover-card-trigger {
@@ -83,15 +96,15 @@
 
 /* 触发器尺寸 */
 .hover-card-size-sm .hover-card-trigger {
-  font-size: 0.875rem;
+  font-size: var(--wc-font-size-sm);
 }
 
 .hover-card-size-md .hover-card-trigger {
-  font-size: 1rem;
+  font-size: var(--wc-font-size-md);
 }
 
 .hover-card-size-lg .hover-card-trigger {
-  font-size: 1.125rem;
+  font-size: var(--wc-font-size-lg);
 }
 
 /* 禁用状态 */
@@ -292,8 +305,8 @@
 /* 标题样式 */
 .hover-card-title {
   margin: 0 0 8px 0;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--wc-font-size-md);
+  font-weight: 500;
   color: var(--hover-card-text);
   line-height: 1.4;
 }
@@ -301,7 +314,7 @@
 /* 描述样式 */
 .hover-card-description {
   margin: 0 0 12px 0;
-  font-size: 0.875rem;
+  font-size: var(--wc-font-size-sm);
   color: var(--hover-card-text-secondary);
   line-height: 1.5;
 }
@@ -404,6 +417,25 @@
   
   .hover-card-image img {
     height: 100px;
+  }
+}
+
+/* 移动端小屏幕优化 */
+@media (max-width: 640px) {
+  .hover-card-popup {
+    max-width: calc(100vw - 32px);
+  }
+  
+  /* 在小屏幕上，左右位置的卡片固定在屏幕内 */
+  .hover-card-position-left,
+  .hover-card-position-right {
+    position: fixed;
+    top: auto;
+    bottom: auto;
+    left: 16px;
+    right: 16px;
+    transform: none;
+    margin: 0;
   }
 }
 

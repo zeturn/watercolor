@@ -70,7 +70,7 @@ export const VueDefault = {
       return { args, value }
     },
     template: `
-      <div class="w-80">
+      <div style="display: flex; flex-direction: column; gap: 1rem; width: 20rem;">
         <InputVue 
           v-model="value"
           :type="args.type"
@@ -83,7 +83,7 @@ export const VueDefault = {
           :help-text="args.helpText"
           :error="args.error"
         />
-        <p class="mt-2 text-sm text-neutral-500">当前值: {{ value }}</p>
+        <p style="margin-top: 8px; font-size: 14px; color: #6b7280;">当前值: {{ value }}</p>
       </div>
     `,
   }),
@@ -97,7 +97,7 @@ export const VueWithLabel = {
       return { value }
     },
     template: `
-      <div class="w-80">
+      <div style="display: flex; flex-direction: column; gap: 1rem; width: 20rem;">
         <InputVue 
           v-model="value"
           label="电子邮箱"
@@ -119,7 +119,7 @@ export const VueWithError = {
       return { value }
     },
     template: `
-      <div class="w-80">
+      <div style="display: flex; flex-direction: column; gap: 1rem; width: 20rem;">
         <InputVue 
           v-model="value"
           label="电子邮箱"
@@ -143,7 +143,7 @@ export const VueSizes = {
       return { smallValue, mediumValue, largeValue }
     },
     template: `
-      <div class="space-y-4 w-80">
+      <div style="display: flex; flex-direction: column; gap: 1rem; width: 20rem;">
         <InputVue 
           v-model="smallValue"
           label="小尺寸"
@@ -177,7 +177,7 @@ export const VueStates = {
       return { normalValue, disabledValue, readonlyValue }
     },
     template: `
-      <div class="space-y-4 w-80">
+      <div style="display: flex; flex-direction: column; gap: 1rem; width: 20rem;">
         <InputVue 
           v-model="normalValue"
           label="正常状态"
@@ -209,7 +209,7 @@ export const VueTypes = {
       return { textValue, emailValue, passwordValue, numberValue }
     },
     template: `
-      <div class="space-y-4 w-80">
+      <div style="display: flex; flex-direction: column; gap: 1rem; width: 20rem;">
         <InputVue 
           v-model="textValue"
           label="文本"

@@ -64,7 +64,7 @@ export const Default = {
     cardData: {
       title: '用户信息',
       description: '这是一个用户信息预览卡片，显示了基本的用户详情。',
-      image: 'https://via.placeholder.com/200x150/3b82f6/ffffff?text=User',
+      image: 'https://avatars.githubusercontent.com/u/62530500?v=4',
       imageAlt: '用户头像',
       meta: ['在线', '最近活跃'],
       actions: [
@@ -87,8 +87,8 @@ export const Default = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-md p-8">
-        <p class="text-center text-gray-600 mb-4">
+      <div style="width: 100%; max-width: 28rem; padding: 2rem; margin-top: 16rem;">
+        <p style="text-align: center; color: var(--wc-text-secondary); margin-bottom: 1rem;">
           将鼠标悬停在下面的文本上查看预览卡片
         </p>
         <HoverCardVue 
@@ -117,7 +117,7 @@ export const ProductPreview = {
     cardData: {
       title: 'MacBook Pro 16英寸',
       description: '配备M3 Max芯片的强大笔记本电脑，专为专业用户设计。',
-      image: 'https://via.placeholder.com/280x200/1f2937/ffffff?text=MacBook+Pro',
+      image: 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mbp16-spaceblack-select-202410?wid=904&hei=840&fmt=jpeg&qlt=90&.v=Nys1UFFBTmI1T0VnWWNyeEZhdDFYamhTSEZFNjlmT2xUUDNBTjljV1BxWVk4UDMvOWNCVUEyZk1VN2FtQlpZWXZvdUZlR0V0VUdJSjBWaDVNVG95YlBROXI4TlIyY1pzUUZwNVlXcEFNb2c',
       imageAlt: 'MacBook Pro',
       meta: ['现货', '¥25,999'],
       actions: [
@@ -140,10 +140,10 @@ export const ProductPreview = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-2xl p-8">
-        <div class="bg-gray-50 p-6 rounded-lg">
-          <h3 class="text-lg font-semibold mb-4">热门产品</h3>
-          <p class="text-gray-600">
+      <div style="width: 100%; max-width: 28rem; padding: 2rem; margin-top: 16rem;">
+        <div style="background-color: var(--wc-bg-surface); padding: 1rem; border-radius: var(--wc-radius-2xl);">
+          <h3 style="font-size: var(--wc-font-size-md); font-weight: var(--wc-font-weight-medium); margin-bottom: 0.5rem;">热门产品</h3>
+          <p style="color: var(--wc-text-secondary);">
             查看我们最新的
             <HoverCardVue 
               :trigger-text="args.triggerText"
@@ -170,12 +170,12 @@ export const ProductPreview = {
 
 export const UserMention = {
   args: {
-    triggerText: '@张小明',
+    triggerText: '@zeturn',
     cardData: {
-      title: '张小明',
-      description: '前端开发工程师，专注于Vue.js和React开发，5年工作经验。',
-      image: 'https://via.placeholder.com/120x120/8b5cf6/ffffff?text=张',
-      imageAlt: '张小明头像',
+      title: 'zeturn',
+      description: '前端开发工程师，专注于Vue.js和React开发，3年工作经验。后端开发工程师，专注于PHP和Python开发，5年工作经验。',
+      image: 'https://avatars.githubusercontent.com/u/62530500?v=4',
+      imageAlt: 'zeturn头像',
       meta: ['开发组', '在线'],
       actions: [
         { label: '发私信', onClick: () => console.log('发私信') },
@@ -197,15 +197,15 @@ export const UserMention = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-lg p-8">
-        <div class="bg-white border rounded-lg p-4">
-          <div class="flex items-center space-x-2 mb-3">
-            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-content text-white text-sm">
+      <div style="width: 100%; max-width: 28rem; padding: 2rem; margin-top: 16rem;">
+        <div style="background-color: var(--wc-bg-surface); border: 1px solid var(--wc-border-default); padding: 1rem; border-radius: var(--wc-radius-2xl);">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+            <div style="width: 2rem; height: 2rem; background-color: var(--wc-bg-surface-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--wc-text-primary); font-size: var(--wc-font-size-sm);">
               我
             </div>
-            <span class="text-sm text-gray-500">刚刚</span>
+            <span style="font-size: var(--wc-font-size-sm); color: var(--wc-text-secondary);">刚刚</span>
           </div>
-          <p class="text-gray-800">
+          <p style="color: var(--wc-text-primary);">
             <HoverCardVue 
               :trigger-text="args.triggerText"
               :card-data="args.cardData"
@@ -258,9 +258,9 @@ export const LinkPreview = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-xl p-8">
-        <div class="prose">
-          <p>
+      <div style="width: 100%; max-width: 28rem; padding: 2rem; margin-top: 16rem;">
+        <div style="background-color: var(--wc-bg-surface); padding: 1rem; border-radius: var(--wc-radius-2xl);">
+          <p style="color: var(--wc-text-secondary);">
             Vue.js是一个渐进式JavaScript框架，非常适合构建用户界面。
             你可以在 
             <HoverCardVue 
@@ -298,10 +298,10 @@ export const Positions = {
       return { cardData }
     },
     template: `
-      <div class="w-full max-w-2xl p-16">
-        <div class="grid grid-cols-3 gap-8 items-center">
+      <div style="width: 100%; max-width: 28rem; padding: 2rem; margin-top: 16rem;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; align-items: center;">
           <div></div>
-          <div class="text-center">
+          <div style="text-align: center;">
             <HoverCardVue 
               trigger-text="顶部位置"
               :card-data="cardData"
@@ -311,7 +311,7 @@ export const Positions = {
           </div>
           <div></div>
           
-          <div class="text-center">
+          <div style="text-align: center;">
             <HoverCardVue 
               trigger-text="左侧位置"
               :card-data="cardData"
@@ -319,10 +319,10 @@ export const Positions = {
               variant="filled"
             />
           </div>
-          <div class="text-center">
-            <span class="text-gray-500">中心区域</span>
+          <div style="text-align: center;">
+            <span style="color: var(--wc-text-secondary);">中心区域</span>
           </div>
-          <div class="text-center">
+          <div style="text-align: center;">
             <HoverCardVue 
               trigger-text="右侧位置"
               :card-data="cardData"
@@ -332,7 +332,7 @@ export const Positions = {
           </div>
           
           <div></div>
-          <div class="text-center">
+          <div style="text-align: center;">
             <HoverCardVue 
               trigger-text="底部位置"
               :card-data="cardData"
@@ -359,9 +359,9 @@ export const Variants = {
       return { cardData }
     },
     template: `
-      <div class="w-full max-w-lg p-8 space-y-6">
+      <div style="width: 100%; max-width: 28rem; padding: 2rem; margin-top: 16rem;">
         <div>
-          <h3 class="text-sm font-medium text-gray-700 mb-3">默认样式</h3>
+          <h3 style="font-size: var(--wc-font-size-sm); font-weight: var(--wc-font-weight-medium); margin-bottom: 0.5rem;">默认样式</h3>
           <HoverCardVue 
             trigger-text="默认样式触发器"
             :card-data="cardData"
@@ -370,7 +370,7 @@ export const Variants = {
         </div>
         
         <div>
-          <h3 class="text-sm font-medium text-gray-700 mb-3">边框样式</h3>
+          <h3 style="font-size: var(--wc-font-size-sm); font-weight: var(--wc-font-weight-medium); margin-bottom: 0.5rem;">边框样式</h3>
           <HoverCardVue 
             trigger-text="边框样式触发器"
             :card-data="cardData"
@@ -379,7 +379,7 @@ export const Variants = {
         </div>
         
         <div>
-          <h3 class="text-sm font-medium text-gray-700 mb-3">填充样式</h3>
+          <h3 style="font-size: var(--wc-font-size-sm); font-weight: var(--wc-font-weight-medium); margin-bottom: 0.5rem;">填充样式</h3>
           <HoverCardVue 
             trigger-text="填充样式触发器"
             :card-data="cardData"
@@ -388,7 +388,7 @@ export const Variants = {
         </div>
         
         <div>
-          <h3 class="text-sm font-medium text-gray-700 mb-3">简洁样式</h3>
+          <h3 style="font-size: var(--wc-font-size-sm); font-weight: var(--wc-font-weight-medium); margin-bottom: 0.5rem;">简洁样式</h3>
           <HoverCardVue 
             trigger-text="简洁样式触发器"
             :card-data="cardData"
@@ -412,9 +412,9 @@ export const Sizes = {
       return { cardData }
     },
     template: `
-      <div class="w-full max-w-lg p-8 space-y-6">
+      <div style="width: 100%; max-width: 28rem; padding: 2rem; margin-top: 16rem;">
         <div>
-          <h3 class="text-sm font-medium text-gray-700 mb-3">小尺寸 (触发器 + 卡片)</h3>
+          <h3 style="font-size: var(--wc-font-size-sm); font-weight: var(--wc-font-weight-medium); margin-bottom: 0.5rem;">小尺寸 (触发器 + 卡片)</h3>
           <HoverCardVue 
             trigger-text="小尺寸"
             :card-data="cardData"
@@ -424,7 +424,7 @@ export const Sizes = {
         </div>
         
         <div>
-          <h3 class="text-sm font-medium text-gray-700 mb-3">中等尺寸 (触发器 + 卡片)</h3>
+          <h3 style="font-size: var(--wc-font-size-sm); font-weight: var(--wc-font-weight-medium); margin-bottom: 0.5rem;">中等尺寸 (触发器 + 卡片)</h3>
           <HoverCardVue 
             trigger-text="中等尺寸"
             :card-data="cardData"
@@ -434,7 +434,7 @@ export const Sizes = {
         </div>
         
         <div>
-          <h3 class="text-sm font-medium text-gray-700 mb-3">大尺寸 (触发器 + 卡片)</h3>
+          <h3 style="font-size: var(--wc-font-size-sm); font-weight: var(--wc-font-weight-medium); margin-bottom: 0.5rem;">大尺寸 (触发器 + 卡片)</h3>
           <HoverCardVue 
             trigger-text="大尺寸"
             :card-data="cardData"
@@ -444,7 +444,7 @@ export const Sizes = {
         </div>
         
         <div>
-          <h3 class="text-sm font-medium text-gray-700 mb-3">特大卡片</h3>
+          <h3 style="font-size: var(--wc-font-size-sm); font-weight: var(--wc-font-weight-medium); margin-bottom: 0.5rem;">特大卡片</h3>
           <HoverCardVue 
             trigger-text="特大卡片"
             :card-data="cardData"
@@ -468,36 +468,35 @@ export const CustomContent = {
       return { cardData }
     },
     template: `
-      <div class="w-full max-w-lg p-8">
-        <p class="text-gray-600 mb-4">
+      <div style="width: 100%; max-width: 28rem; padding: 2rem; margin-top: 16rem;">
+        <p style="color: var(--wc-text-secondary); margin-bottom: 0.5rem;">
           这个示例展示了如何使用插槽自定义触发器和卡片内容。
         </p>
         
         <HoverCardVue :card-data="cardData" position="bottom">
           <template #default>
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+            <span style="display: inline-flex; align-items: center; padding: 0.5rem 1rem; border-radius: var(--wc-radius-2xl); font-size: var(--wc-font-size-sm); font-weight: var(--wc-font-weight-medium); background-color: var(--wc-bg-surface-secondary); color: var(--wc-text-primary);">
               🎨 自定义触发器
             </span>
           </template>
           
           <template #card="{ data }">
-            <div class="p-4">
-              <div class="flex items-center space-x-3 mb-3">
-                <div class="w-10 h-10 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white font-bold">
+            <div style="padding: 1rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <div style="width: 2rem; height: 2rem; background-color: var(--wc-bg-surface-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--wc-text-primary); font-size: var(--wc-font-size-sm);">
                   🎨
                 </div>
                 <div>
-                  <h3 class="font-semibold text-gray-900">{{ data.title }}</h3>
-                  <p class="text-sm text-gray-500">自定义设计</p>
+                  <h3 style="font-size: var(--wc-font-size-sm); font-weight: var(--wc-font-weight-medium); color: var(--wc-text-primary);">{{ data.title }}</h3>
+                  <p style="font-size: var(--wc-font-size-sm); color: var(--wc-text-secondary);">自定义设计</p>
                 </div>
               </div>
               
-              <p class="text-gray-600 text-sm mb-4">{{ data.description }}</p>
+              <p style="font-size: var(--wc-font-size-sm); color: var(--wc-text-secondary); margin-bottom: 0.5rem;">{{ data.description }}</p>
               
-              <div class="flex space-x-2">
-                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">设计</span>
-                <span class="px-2 py-1 bg-pink-100 text-pink-800 text-xs rounded">创意</span>
-                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Vue.js</span>
+              <div style="display: flex; gap: 0.5rem;">
+                <span style="padding: 0.25rem 0.5rem; background-color: var(--wc-bg-surface-secondary); color: var(--wc-text-primary); font-size: var(--wc-font-size-xs); border-radius: var(--wc-radius-sm);">创意</span>
+                <span style="padding: 0.25rem 0.5rem; background-color: var(--wc-bg-surface-secondary); color: var(--wc-text-primary); font-size: var(--wc-font-size-xs); border-radius: var(--wc-radius-sm);">Vue.js</span>
               </div>
             </div>
           </template>
@@ -524,8 +523,8 @@ export const Disabled = {
       return { args }
     },
     template: `
-      <div class="w-full max-w-md p-8">
-        <p class="text-center text-gray-600 mb-4">
+      <div style="width: 100%; max-width: 28rem; padding: 2rem; margin-top: 16rem;">
+        <p style="text-align: center; color: var(--wc-text-secondary); margin-bottom: 0.5rem;">
           下面的触发器已被禁用，悬停不会显示卡片
         </p>
         <HoverCardVue 

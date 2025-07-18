@@ -49,7 +49,7 @@ const Template = (args) => {
   return (
     <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', padding: '16px' }}>
       <Input {...args} value={value} onChange={handleChange} />
-      <p className="mt-2 text-sm text-neutral-500">当前值: {value}</p>
+      <p style={{ marginTop: '8px', fontSize: '14px', color: '#6b7280' }}>当前值: {value}</p>
     </div>
   )
 }
