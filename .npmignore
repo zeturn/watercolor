@@ -67,3 +67,4 @@ Thumbs.db
 
 # 源码（只保留dist）
 src/ 
+index.html
