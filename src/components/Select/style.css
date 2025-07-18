@@ -6,40 +6,28 @@
   --wc-select-height-sm: 32px;
   --wc-select-height-md: 40px;
   --wc-select-height-lg: 48px;
-
-  /* 主要颜色变量（精简，仅保留必要项） */
-  --wc-select-bg: var(--wc-neutral-100, #f5f5f5);
-  --wc-select-text: var(--wc-neutral-900, #111827);
-  --wc-select-placeholder: var(--wc-neutral-500, #6b7280);
+  --wc-select-bg: var(--wc-bg-surface);
+  --wc-select-text: var(--wc-text-primary);
+  --wc-select-placeholder: var(--wc-neutral-500);
   --wc-select-border: transparent;
   --wc-select-border-focus: transparent;
 
   --wc-select-dropdown-bg: var(--wc-select-bg);
   --wc-select-dropdown-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
-  --wc-select-option-hover: var(--wc-neutral-200, #e5e7eb);
-  --wc-select-option-selected: var(--wc-primary-50, #eff6ff);
-  --wc-select-option-active: var(--wc-primary-500, #3b82f6);
+  --wc-select-option-hover: var(--wc-bg-surface-hover);
+  --wc-select-option-selected: var(--wc-bg-surface);
+  --wc-select-option-active: var(--wc-text-primary);
 
   /* 边距 */
   --wc-select-padding: 8px 12px;
   --wc-select-gap: 8px;
 
-  --wc-select-radius: 6px;
-  --wc-select-radius-dropdown: 8px;
+  --wc-select-radius: var(--wc-radius-2xl);
+  --wc-select-radius-dropdown: var(--wc-radius-2xl);
 
   /* 动画 */
   --wc-select-transition: all 0.2s ease;
-}
-
-/* Dark Mode Variables */
-.dark {
-  --wc-select-bg: var(--wc-neutral-800, #1f2937);
-  --wc-select-text: var(--wc-neutral-100, #f9fafb);
-  --wc-select-placeholder: var(--wc-neutral-400, #9ca3af);
-  --wc-select-dropdown-bg: var(--wc-select-bg);
-  --wc-select-option-hover: var(--wc-neutral-700, #374151);
-  --wc-select-option-selected: var(--wc-primary-900, #1e3a8a);
 }
 
 /* ====== Main Select Container ====== */
@@ -80,10 +68,6 @@
 .wc-select__required {
   color: var(--wc-error-500);
   margin-left: 2px;
-}
-
-.dark .wc-select__label {
-  color: var(--wc-neutral-300);
 }
 
 /* ====== Select Container ====== */
@@ -170,6 +154,8 @@
 .wc-select__placeholder {
   color: var(--wc-select-placeholder);
   font-style: italic;
+  margin-left: 0.8rem;
+  margin-bottom: 0.2rem;
 }
 
 /* Multiple Selection Chips */
@@ -390,11 +376,6 @@
   border-bottom: 1px solid var(--wc-select-border);
 }
 
-.dark .wc-select__group-label {
-  background: var(--wc-neutral-700);
-  color: var(--wc-neutral-400);
-}
-
 /* ====== 响应式设计 ====== */
 @media (max-width: 768px) {
   .wc-select__dropdown {
@@ -441,10 +422,6 @@
     background: #000;
     color: #fff;
   }
-  .dark .wc-select__option--selected {
-    background: #fff;
-    color: #000;
-  }
 }
 
 /* ====== 减少动画 ====== */
@@ -471,79 +448,3 @@
     background: #fff;
   }
 }
-
-/* ====== Dark Mode 细节 ====== */
-.dark .wc-select__container:hover {
-  background: var(--wc-select-option-hover);
-}
-.dark .wc-select__container--outlined,
-.dark .wc-select__container--filled,
-.dark .wc-select__container--standard {
-  background: var(--wc-select-bg);
-}
-.dark .wc-select__container--focused {
-  background: var(--wc-select-option-hover);
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
-}
-.dark .wc-select__container--error {
-  background: var(--wc-error-950);
-}
-.dark .wc-select__container--error.wc-select__container--focused {
-  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.2);
-}
-.dark .wc-select__container--open {
-  background: var(--wc-select-option-hover);
-}
-.dark .wc-select__chip {
-  background: var(--wc-primary-900);
-  color: var(--wc-primary-200);
-}
-.dark .wc-select__chip-remove {
-  color: var(--wc-primary-300);
-}
-.dark .wc-select__chip-remove:hover {
-  background: var(--wc-primary-800);
-}
-.dark .wc-select__clear {
-  color: var(--wc-neutral-500);
-}
-.dark .wc-select__clear:hover {
-  color: var(--wc-neutral-300);
-  background: var(--wc-select-bg);
-}
-.dark .wc-select__arrow {
-  color: var(--wc-neutral-400);
-}
-.dark .wc-select__search-input {
-  background: var(--wc-select-bg);
-  color: var(--wc-select-text);
-  border-color: var(--wc-neutral-600);
-}
-.dark .wc-select__search-input:focus {
-  border-color: var(--wc-primary-400);
-}
-.dark .wc-select__option:hover {
-  background: var(--wc-select-option-hover);
-}
-.dark .wc-select__option--selected {
-  background: var(--wc-select-option-selected);
-  color: var(--wc-primary-200);
-}
-.dark .wc-select__option--disabled {
-  color: var(--wc-neutral-600);
-}
-.dark .wc-select__option-check {
-  color: var(--wc-primary-400);
-}
-.dark .wc-select__no-options {
-  color: var(--wc-neutral-400);
-}
-.dark .wc-select__helper {
-  color: var(--wc-neutral-400);
-}
-.dark .wc-select__error {
-  color: var(--wc-error-400);
-}
-.dark .wc-select__loading {
-  color: var(--wc-neutral-400);
-} 

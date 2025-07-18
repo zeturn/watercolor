@@ -1,115 +1,50 @@
 /**
- * Input 组件样式 - Watercolor风格
+ * Input 组件样式 - Watercolor 设计系统
  * 输入框组件的完整样式定义
  */
 
-/* CSS变量定义 */
+/* ========================================
+   CSS 变量定义
+   ======================================== */
 :root {
-  /* Watercolor风格：淡灰色背景，无边框 */
+  /* 输入框基础变量 */
   --input-bg: var(--wc-bg-surface);
+  --input-bg-hover: var(--wc-bg-surface-hover);
+  --input-bg-disabled: var(--wc-bg-surface);
+  --input-bg-error: var(--wc-error-50, #fef2f2);
+  --input-bg-error-hover: var(--wc-error-100, #fee2e2);
+  
+  /* 边框相关 - Watercolor 风格无边框设计 */
   --input-border: transparent;
   --input-border-focus: transparent;
   --input-border-error: transparent;
-  --input-text: var(--wc-text-primary);
+  --input-border-disabled: transparent;
+  
+  /* 文本颜色 */
+  --input-text-primary: var(--wc-text-primary);
   --input-text-secondary: var(--wc-text-secondary);
   --input-placeholder: var(--wc-text-secondary);
   --input-label: var(--wc-text-secondary);
-  --input-disabled-bg: var(--wc-bg-surface);
-  --input-disabled-border: transparent;
-  --input-radius: var(--wc-radius-xl);
+  --input-label-active: var(--wc-border-focus);
+  --input-label-error: var(--wc-border-error);
+  
+  /* 阴影效果 */
   --input-shadow: none;
-  /* Watercolor风格：focus时背景变深并添加淡色焦点效果 */
   --input-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.1);
   --input-shadow-error: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  
+  /* 过渡动画 */
   --input-transition: all 0.2s ease;
+  
+  /* 验证状态颜色 */
+  --input-success-color: #10b981;
+  --input-error-color: var(--wc-border-error);
+  --input-warning-color: #f59e0b;
 }
 
-/* 暗色模式变量 */
-.dark {
-  --input-bg: var(--wc-neutral-200);
-  --input-border: transparent;
-  --input-border-focus: transparent;
-  --input-border-error: transparent;
-  --input-text: var(--wc-neutral-100);
-  --input-text-secondary: var(--wc-neutral-300);
-  --input-placeholder: var(--wc-neutral-500);
-  --input-label: var(--wc-neutral-200);
-  --input-disabled-bg: var(--wc-neutral-700);
-  --input-disabled-border: transparent;
-  --input-shadow: none;
-  --input-shadow-focus: 0 0 0 3px rgba(96, 165, 250, 0.2);
-  --input-shadow-error: 0 0 0 3px rgba(248, 113, 113, 0.2);
-}
-
-.dark .wc-input:focus {
-  background-color: var(--wc-neutral-700);
-}
-
-.dark .wc-input--outlined:focus {
-  background-color: var(--wc-neutral-700);
-}
-
-.dark .wc-input--filled:focus {
-  background-color: var(--wc-neutral-700);
-}
-
-.dark .wc-input--standard:focus {
-  background-color: var(--wc-neutral-700);
-}
-
-.dark .wc-input--error {
-  background-color: var(--wc-error-950);
-}
-
-.dark .wc-input--error:focus {
-  background-color: var(--wc-error-900);
-}
-
-.dark .wc-input-container--floating .wc-input-label {
-  color: var(--wc-neutral-400);
-}
-
-.dark .wc-input-container--floating .wc-input-label--active {
-  color: var(--wc-primary-400);
-}
-
-.dark .wc-input-validation-icon--success {
-  color: var(--wc-success-400);
-}
-
-.dark .wc-input-validation-icon--error {
-  color: var(--wc-error-400);
-}
-
-.dark .wc-input-validation-icon--warning {
-  color: var(--wc-warning-400);
-}
-
-.dark .wc-input-clear-button {
-  color: var(--wc-neutral-400);
-}
-
-.dark .wc-input-clear-button:hover {
-  color: var(--wc-neutral-200);
-  background-color: var(--wc-neutral-700);
-}
-
-.dark .wc-input-password-toggle {
-  color: var(--wc-neutral-400);
-}
-
-.dark .wc-input-password-toggle:hover {
-  color: var(--wc-neutral-200);
-  background-color: var(--wc-neutral-700);
-}
-
-.dark .wc-input-prefix,
-.dark .wc-input-suffix {
-  color: var(--wc-neutral-400);
-  background-color: var(--wc-neutral-700);
-}
-
-/* 容器样式 */
+/* ========================================
+   基础容器结构
+   ======================================== */
 .wc-input-container {
   display: flex;
   flex-direction: column;
@@ -120,14 +55,18 @@
   position: relative;
   display: flex;
   align-items: center;
-  background-color: var(--wc-bg-surface);
+  background-color: var(--input-bg);
+  border-radius: var(--wc-radius-2xl);
+  transition: var(--input-transition);
 }
 
-.wc-input-wrapper :hover {
-  background-color: var(--wc-bg-surface-hover);
+.wc-input-wrapper:hover {
+  background-color: var(--input-bg-hover);
 }
 
-/* 标签样式 */
+/* ========================================
+   标签样式
+   ======================================== */
 .wc-input-label {
   display: block;
   font-size: var(--wc-font-size-sm);
@@ -138,29 +77,33 @@
 }
 
 .wc-input-label--active {
-  color: var(--wc-border-focus);
+  color: var(--input-label-active);
 }
 
 .wc-input-label--error {
-  color: var(--wc-border-error);
+  color: var(--input-label-error);
 }
 
 .wc-input-label__required {
-  color: var(--wc-border-error);
+  color: var(--input-label-error);
   margin-left: 4px;
 }
 
-/* 基础输入框样式 */
+/* ========================================
+   基础输入框样式
+   ======================================== */
 .wc-input {
   width: 100%;
   border: none;
-  border-radius: var(--input-radius);
+  border-radius: var(--wc-radius-2xl);
   background-color: var(--input-bg);
-  color: var(--input-text);
+  color: var(--input-text-primary);
   font-size: 0.875rem;
+  font-family: var(--wc-font-family);
   line-height: 1.5;
   transition: var(--input-transition);
   box-shadow: var(--input-shadow);
+  outline: none;
 }
 
 .wc-input::placeholder {
@@ -168,12 +111,13 @@
 }
 
 .wc-input:focus {
-  outline: none;
-  background-color: var(--wc-bg-surface-hover);
+  background-color: var(--input-bg-hover);
   box-shadow: var(--input-shadow-focus);
 }
 
-/* 尺寸变体 */
+/* ========================================
+   尺寸变体
+   ======================================== */
 .wc-input--sm {
   padding: 6px 8px;
   font-size: 0.75rem;
@@ -189,60 +133,61 @@
   font-size: 1rem;
 }
 
-/* 样式变体 */
+/* ========================================
+   样式变体
+   ======================================== */
 .wc-input--outlined {
-  /* Watercolor风格：outlined版本也去掉边框 */
   background-color: var(--input-bg);
   border: none;
 }
 
 .wc-input--outlined:focus {
-  background-color: var(--wc-neutral-300, #d4d4d4);
+  background-color: var(--input-bg-hover);
 }
 
 .wc-input--filled {
   background-color: var(--input-bg);
   border: none;
-  border-radius: var(--input-radius);
 }
 
 .wc-input--filled:focus {
-  background-color: var(--wc-neutral-300, #d4d4d4);
+  background-color: var(--input-bg-hover);
 }
 
 .wc-input--standard {
   background-color: var(--input-bg);
   border: none;
-  border-radius: var(--input-radius);
   padding-left: 12px;
   padding-right: 12px;
 }
 
 .wc-input--standard:focus {
-  background-color: var(--wc-neutral-300, #d4d4d4);
+  background-color: var(--input-bg-hover);
 }
 
-/* 状态样式 */
+/* ========================================
+   状态样式
+   ======================================== */
 .wc-input--error {
-  background-color: var(--wc-error-50, #fef2f2);
+  background-color: var(--input-bg-error);
   border: none;
 }
 
 .wc-input--error:focus {
-  background-color: var(--wc-error-100, #fee2e2);
+  background-color: var(--input-bg-error-hover);
   box-shadow: var(--input-shadow-error);
 }
 
 .wc-input--disabled {
-  background-color: var(--input-disabled-bg);
-  border-color: var(--input-disabled-border);
+  background-color: var(--input-bg-disabled);
+  border-color: var(--input-border-disabled);
   color: var(--input-text-secondary);
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 .wc-input--readonly {
-  background-color: var(--input-disabled-bg);
+  background-color: var(--input-bg-disabled);
   cursor: default;
 }
 
@@ -255,7 +200,9 @@
   width: 100%;
 }
 
-/* 装饰器样式 */
+/* ========================================
+   装饰器和附加元素
+   ======================================== */
 .wc-input-adornment {
   display: flex;
   align-items: center;
@@ -281,7 +228,9 @@
   padding-right: 0;
 }
 
-/* 帮助文本样式 */
+/* ========================================
+   帮助文本
+   ======================================== */
 .wc-input-helper-text {
   margin-top: 6px;
   font-size: 0.75rem;
@@ -290,10 +239,13 @@
 }
 
 .wc-input-helper-text--error {
-  color: var(--input-border-error);
+  color: var(--input-error-color);
 }
 
-/* 多行文本框样式 */
+/* ========================================
+   特殊输入类型
+   ======================================== */
+/* 多行文本框 */
 .wc-input[type="textarea"],
 textarea.wc-input {
   resize: vertical;
@@ -301,21 +253,34 @@ textarea.wc-input {
   line-height: 1.5;
 }
 
-/* 特殊输入类型样式 */
+/* 文件输入 */
 .wc-input[type="file"] {
   padding: 4px 8px;
 }
 
+/* 范围输入 */
 .wc-input[type="range"] {
   padding: 8px 0;
 }
 
+/* 颜色选择器 */
 .wc-input[type="color"] {
   padding: 4px;
   height: 40px;
 }
 
-/* 浮动标签样式 */
+/* 搜索框 */
+.wc-input--search {
+  padding-left: 40px;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: 12px center;
+  background-size: 16px 16px;
+}
+
+/* ========================================
+   浮动标签
+   ======================================== */
 .wc-input-container--floating {
   position: relative;
 }
@@ -343,7 +308,9 @@ textarea.wc-input {
   padding-bottom: 12px;
 }
 
-/* 验证图标 */
+/* ========================================
+   验证图标
+   ======================================== */
 .wc-input-validation-icon {
   position: absolute;
   right: 12px;
@@ -355,17 +322,20 @@ textarea.wc-input {
 }
 
 .wc-input-validation-icon--success {
-  color: #10b981;
+  color: var(--input-success-color);
 }
 
 .wc-input-validation-icon--error {
-  color: var(--input-border-error);
+  color: var(--input-error-color);
 }
 
 .wc-input-validation-icon--warning {
-  color: #f59e0b;
+  color: var(--input-warning-color);
 }
 
+/* ========================================
+   交互按钮
+   ======================================== */
 /* 清除按钮 */
 .wc-input-clear-button {
   position: absolute;
@@ -392,8 +362,8 @@ textarea.wc-input {
 }
 
 .wc-input-clear-button:hover {
-  background-color: var(--input-disabled-bg);
-  color: var(--input-text);
+  background-color: var(--input-bg-disabled);
+  color: var(--input-text-primary);
 }
 
 /* 密码显示切换 */
@@ -407,7 +377,7 @@ textarea.wc-input {
   border: none;
   background: transparent;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: var(--wc-radius-2xl);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -416,11 +386,13 @@ textarea.wc-input {
 }
 
 .wc-input-password-toggle:hover {
-  background-color: var(--input-disabled-bg);
-  color: var(--input-text);
+  background-color: var(--input-bg-disabled);
+  color: var(--input-text-primary);
 }
 
-/* 输入组样式 */
+/* ========================================
+   输入组
+   ======================================== */
 .wc-input-group {
   display: flex;
   align-items: stretch;
@@ -431,13 +403,13 @@ textarea.wc-input {
 }
 
 .wc-input-group .wc-input:first-child {
-  border-top-left-radius: var(--input-radius);
-  border-bottom-left-radius: var(--input-radius);
+  border-top-left-radius: var(--wc-radius-2xl);
+  border-bottom-left-radius: var(--wc-radius-2xl);
 }
 
 .wc-input-group .wc-input:last-child {
-  border-top-right-radius: var(--input-radius);
-  border-bottom-right-radius: var(--input-radius);
+  border-top-right-radius: var(--wc-radius-2xl);
+  border-bottom-right-radius: var(--wc-radius-2xl);
 }
 
 .wc-input-group .wc-input:not(:last-child) {
@@ -449,13 +421,13 @@ textarea.wc-input {
   position: relative;
 }
 
-/* 前缀/后缀样式 */
+/* 前缀/后缀 */
 .wc-input-prefix,
 .wc-input-suffix {
   display: flex;
   align-items: center;
   padding: 0 12px;
-  background-color: var(--input-disabled-bg);
+  background-color: var(--input-bg-disabled);
   border: 1px solid var(--input-border);
   color: var(--input-text-secondary);
   font-size: 0.875rem;
@@ -464,26 +436,45 @@ textarea.wc-input {
 
 .wc-input-prefix {
   border-right: none;
-  border-top-left-radius: var(--input-radius);
-  border-bottom-left-radius: var(--input-radius);
+  border-top-left-radius: var(--wc-radius-2xl);
+  border-bottom-left-radius: var(--wc-radius-2xl);
 }
 
 .wc-input-suffix {
   border-left: none;
-  border-top-right-radius: var(--input-radius);
-  border-bottom-right-radius: var(--input-radius);
+  border-top-right-radius: var(--wc-radius-2xl);
+  border-bottom-right-radius: var(--wc-radius-2xl);
 }
 
-/* 搜索输入框样式 */
-.wc-input--search {
-  padding-left: 40px;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: 12px center;
-  background-size: 16px 16px;
+/* ========================================
+   验证码输入框
+   ======================================== */
+.wc-input-code {
+  display: flex;
+  gap: 8px;
 }
 
-/* 响应式设计 */
+.wc-input-code__box {
+  width: 44px;
+  height: 48px;
+  text-align: center;
+  font-size: 1rem;
+  background-color: var(--input-bg);
+  color: var(--input-text-primary);
+  border: 1px solid var(--wc-border-color);
+  border-radius: var(--wc-radius-2xl);
+  outline: none;
+  transition: var(--input-transition);
+}
+
+.wc-input-code__box:focus {
+  border-color: var(--wc-bg-brand);
+  box-shadow: 0 0 0 2px rgba(91, 158, 255, 0.25);
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
 @media (max-width: 768px) {
   .wc-input-label {
     font-size: 0.8rem;
@@ -505,10 +496,13 @@ textarea.wc-input {
   }
 }
 
+/* ========================================
+   无障碍支持
+   ======================================== */
 /* 高对比度模式 */
 @media (prefers-contrast: high) {
   .wc-input {
-    border-width: 2px;
+    border: 2px solid var(--input-border);
   }
   
   .wc-input:focus {
@@ -526,7 +520,9 @@ textarea.wc-input {
   }
 }
 
-/* 打印样式 */
+/* ========================================
+   打印样式
+   ======================================== */
 @media print {
   .wc-input {
     border: 1px solid #000 !important;
@@ -538,66 +534,4 @@ textarea.wc-input {
   .wc-input-password-toggle {
     display: none !important;
   }
-} 
-
-
-/* Input styles - flat design */
-.wc-input {
-  width: 100%;
-  padding: 12px 16px;
-  background-color: var(--wc-neutral-500);
-  color: var(--wc-neutral-900);
-  border: none;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  outline: none;
-  font-size: 14px;
-  font-family: var(--wc-font-family);
-}
-
-.wc-input::placeholder {
-  color: var(--wc-neutral-400);
-}
-
-.wc-input:focus {
-  background-color: var(--wc-neutral-100);
-  outline: none;
-}
-
-/* Dark mode input */
-.dark .wc-input {
-  background-color: var(--wc-neutral-200);
-  color: var(--wc-neutral-100);
-}
-
-.dark .wc-input::placeholder {
-  color: var(--wc-neutral-500);
-}
-
-.dark .wc-input:focus {
-  background-color: var(--wc-neutral-700);
-}
-
-/* VerificationCodeInput styles (follow Input naming convention) */
-.wc-input-code {
-  display: flex;
-  gap: 8px;
-}
-
-.wc-input-code__box {
-  width: 44px;
-  height: 48px;
-  text-align: center;
-  font-size: 1rem; /* match md input font size */
-  background-color: var(--input-bg);
-  color: var(--input-text);
-  border: 1px solid var(--wc-neutral-300, #d1d5db);
-  border-radius: var(--input-radius);
-  outline: none;
-  transition: var(--input-transition);
-}
-
-.wc-input-code__box:focus {
-  border-color: var(--wc-primary-500, #5b9eff);
-  box-shadow: 0 0 0 2px rgba(91, 158, 255, 0.25);
 }

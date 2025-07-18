@@ -86,7 +86,7 @@
 .wc-icon--clickable:hover {
   opacity: 0.8;
   transform: scale(1.1);
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: rgba(0, 0, 0, 0.08);
 }
 
 .wc-icon--clickable:active {

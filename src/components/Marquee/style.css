@@ -6,37 +6,37 @@
   --marquee-text: var(--wc-text-color);
   --marquee-border: var(--wc-border-color);
   --marquee-control-bg: transparent;
-  --marquee-control-hover: #f3f4f6;
-  --marquee-gradient-start: rgba(255, 255, 255, 1);
-  --marquee-gradient-end: rgba(255, 255, 255, 0);
-  --marquee-loading-bg: rgba(0, 0, 0, 0.1);
-  --marquee-loading-text: #6b7280;
+  --marquee-control-hover: var(--wc-bg-surface-hover);
+  --marquee-gradient-start: var(--wc-bg-surface);
+  --marquee-gradient-end: var(--wc-bg-surface);
+  --marquee-loading-bg: var(--wc-bg-overlay);
+  --marquee-loading-text: var(--wc-text-secondary);
   --marquee-radius: 6px;
 }
 
 /* 暗色模式变量 */
 .dark {
-  --marquee-bg: var(--wc-neutral-300);
-  --marquee-text: var(--wc-neutral-100);
-  --marquee-border: var(--wc-neutral-600);
-  --marquee-control-bg: var(--wc-neutral-800);
-  --marquee-control-hover: var(--wc-neutral-700);
-  --marquee-gradient-start: var(--wc-neutral-800);
-  --marquee-gradient-end: rgba(31, 41, 55, 0);
-  --marquee-loading-bg: rgba(255, 255, 255, 0.1);
-  --marquee-loading-text: var(--wc-neutral-300);
+  --marquee-bg: var(--wc-bg-surface);
+  --marquee-text: var(--wc-text-primary);
+  --marquee-border: var(--wc-border-color);
+  --marquee-control-bg: var(--wc-bg-surface-secondary);
+  --marquee-control-hover: var(--wc-bg-surface-hover);
+  --marquee-gradient-start: var(--wc-bg-surface);
+  --marquee-gradient-end: var(--wc-bg-surface);
+  --marquee-loading-bg: var(--wc-bg-overlay);
+  --marquee-loading-text: var(--wc-text-secondary);
 }
 
-.dark .marquee-outlined { border-color: var(--wc-neutral-600); }
-.dark .marquee-filled { background: var(--wc-neutral-700); }
-.dark .marquee-gradient { background: linear-gradient(90deg, var(--wc-neutral-800) 0%, var(--wc-neutral-900) 100%); }
-.dark .marquee-control-btn { background: var(--wc-neutral-800); color: var(--wc-neutral-200); }
-.dark .marquee-control-btn:hover { background: var(--wc-neutral-700); }
+.dark .marquee-outlined { border-color: var(--wc-border-color); }
+.dark .marquee-filled { background: var(--wc-bg-surface-secondary); }
+.dark .marquee-gradient { background: linear-gradient(90deg, var(--wc-bg-surface) 0%, var(--wc-bg-surface) 100%); }
+.dark .marquee-control-btn { background: var(--wc-bg-surface-secondary); color: var(--wc-text-primary); }
+.dark .marquee-control-btn:hover { background: var(--wc-bg-surface-hover); }
 .dark .marquee-control-btn:focus { outline-color: var(--wc-primary-400); }
-.dark .marquee-loading-overlay { background: var(--wc-neutral-900); }
-.dark .marquee-loading-text { color: var(--wc-neutral-300); }
-.dark .marquee-gradient-left { background: linear-gradient(90deg, var(--wc-neutral-800) 0%, rgba(31, 41, 55, 0) 100%); }
-.dark .marquee-gradient-right { background: linear-gradient(270deg, var(--wc-neutral-800) 0%, rgba(31, 41, 55, 0) 100%); }
+.dark .marquee-loading-overlay { background: var(--wc-bg-overlay); }
+.dark .marquee-loading-text { color: var(--wc-text-secondary); }
+.dark .marquee-gradient-left { background: linear-gradient(90deg, var(--wc-bg-surface) 0%, rgba(31, 41, 55, 0) 100%); }
+.dark .marquee-gradient-right { background: linear-gradient(270deg, var(--wc-bg-surface) 0%, rgba(31, 41, 55, 0) 100%); }
 
 /* 容器与内容结构 */
 .marquee-container {

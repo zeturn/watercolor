@@ -1,5 +1,6 @@
 import React, { useMemo, lazy, Suspense } from 'react'
 import PropTypes from 'prop-types'
+import './style.css'
 
 // AFTER the existing React imports, add a fallback stub icon and helper for safe lazy imports
 const StubIcon = ({ className, style }) => <span className={className} style={style} />

@@ -46,8 +46,8 @@
 
 /* Modal 主体 */
 .wc-modal {
-  background-color: var(--wc-info-50, #ffffff);
-  color: var(--wc-text, #111827);
+  background-color: var(--wc-bg-surface, #ffffff);
+  color: var(--wc-text-primary);
   border: 1px solid var(--wc-border, #e5e7eb);
   border-radius: 16px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -127,7 +127,7 @@
 .wc-modal__title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--wc-text, #18181b);
+  color: var(--wc-text-primary);
   margin: 0;
   line-height: 1.5;
 }
@@ -177,8 +177,8 @@
   justify-content: flex-end;
   gap: 12px;
   padding: 16px 24px 24px 24px;
-  border-top: 1px solid var(--wc-border, #e5e7eb);
-  background: var(--wc-background-secondary, #f9fafb);
+  border-top: 1px solid var(--wc-border);
+  background: var(--wc-bg-surface-secondary);
   margin-top: auto;
 }
 
@@ -236,76 +236,3 @@
   opacity: 0;
   transform: translateY(20px) scale(0.95);
 }
-
-/* 暗色模式 */
-.dark .wc-modal {
-  background-color: var(--wc-neutral-800);
-  color: var(--wc-neutral-100);
-  border-color: var(--wc-neutral-600);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-}
-
-.dark .wc-modal__title {
-  color: var(--wc-neutral-100);
-}
-
-.dark .wc-modal__body {
-  color: var(--wc-neutral-300);
-}
-
-.dark .wc-modal__footer {
-  border-top-color: var(--wc-neutral-600);
-  background: var(--wc-neutral-700);
-}
-
-.dark .wc-modal__close {
-  background: var(--wc-neutral-700);
-  color: var(--wc-neutral-300);
-}
-
-.dark .wc-modal__close:hover {
-  background: var(--wc-neutral-600);
-  color: var(--wc-neutral-100);
-}
-
-.dark .wc-modal__overlay {
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-/* 响应式调整 */
-@media (max-width: 640px) {
-  .wc-modal-overlay {
-    padding: 8px;
-  }
-  
-  .wc-modal {
-    margin: 0;
-    max-height: calc(100vh - 16px);
-    border-radius: 12px;
-  }
-  
-  .wc-modal__header {
-    padding: 16px 16px 0 16px;
-  }
-  
-  .wc-modal__body {
-    padding: 0 16px 16px 16px;
-    max-height: calc(100vh - 100px);
-  }
-  
-  .wc-modal__footer {
-    padding: 12px 16px 16px 16px;
-  }
-  
-  .wc-modal__title {
-    font-size: 1.125rem;
-  }
-  
-  .wc-modal__close {
-    top: 4px;
-    right: 4px;
-    width: 28px;
-    height: 28px;
-    font-size: 16px;
-  }
-} 

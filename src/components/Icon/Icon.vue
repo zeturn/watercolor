@@ -29,6 +29,7 @@
 
 <script setup>
 import { computed, defineAsyncComponent, ref, watchEffect, h } from 'vue'
+import './style.css'
 
 // 用于在图标库缺失或加载失败时渲染的占位符组件
 const StubIcon = {
@@ -234,20 +235,3 @@ const iconProps = computed(() => {
   return iconProps
 })
 </script>
-
-<style scoped>
-.wc-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  user-select: none;
-  vertical-align: middle;
-}
-
-.wc-icon svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-</style> 

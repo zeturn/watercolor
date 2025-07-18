@@ -12,7 +12,7 @@
   --wc-popover-padding: 12px;
   
   /* 触发器样式 */
-  --wc-popover-trigger-bg: var(--wc-neutral-500, #ffffff);
+  --wc-popover-trigger-bg: var(--wc-bg-surface);
   --wc-popover-trigger-border: var(--wc-neutral-200, #e5e7eb);
   --wc-popover-trigger-hover-bg: var(--wc-neutral-50, #f9fafb);
   --wc-popover-trigger-padding: 6px 12px;
@@ -50,6 +50,7 @@
   font-size: 0.875rem;
   color: var(--wc-text-primary, #b3b3b3);
   outline: none;
+  border-radius: var(--wc-radius-2xl);
 }
 
 .wc-popover-trigger:hover {

@@ -98,7 +98,7 @@ export default {
     },
     speed: {
       type: Number,
-      default: 50,
+      default: 25,
       validator: (value) => value > 0 && value <= 200
     },
     direction: {
@@ -126,7 +126,7 @@ export default {
     },
     showGradient: {
       type: Boolean,
-      default: true
+      default: false
     },
     showControls: {
       type: Boolean,

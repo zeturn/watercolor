@@ -46,7 +46,7 @@
   width: 100%;
   padding: 8px 16px;
   font-size: 14px;
-  color: #374151; /* Neutral 700 */
+  color: var(--wc-text-primary); /* Neutral 700 */
   text-decoration: none;
   background: transparent;
   border: none;
@@ -57,15 +57,15 @@
 
 .wc-menu a:hover,
 .wc-menu a:focus {
-  background: #f3f4f6; /* Neutral 100 */
-  border-radius: 6px;
+  background: var(--wc-bg-surface-hover); /* Neutral 100 */
+  border-radius: var(--wc-radius-xl);
   outline: none;
 }
 
 .wc-menu a[aria-current='page'],
 .wc-menu a.active {
-  background: #e5e7eb; /* Neutral 200 */
-  border-radius: 6px;
+  background: var(--wc-bg-surface-active); 
+  border-radius: var(--wc-radius-xl);
   font-weight: 600;
 }
 
@@ -114,7 +114,7 @@
   transform: translateY(-50%) rotate(0deg);
   transition: transform 0.15s ease;
   font-size: 10px;
-  color: #6b7280; /* neutral-500 */
+  color: var(--wc-text-secondary); /* neutral-500 */
 }
 
 .wc-menu li.open.has-submenu > a::after {

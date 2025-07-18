@@ -831,7 +831,7 @@ button {
  * 改进表单元素选择器（排除特殊类型）
  * ============================================================================= */
 input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="color"]):not([type="file"]) {
-  border-radius: var(--wc-radius-md);
+  border-radius: var(--wc-radius-xl);
   padding: 0.5rem 0.75rem;
 }
 

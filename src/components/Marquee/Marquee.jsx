@@ -14,13 +14,13 @@ import {
  */
 const Marquee = ({
   text = 'This is a scrolling marquee text',
-  speed = 50,
+  speed = 25,
   direction = 'left',
   variant = 'default',
   size = 'md',
   pauseOnHover = false,
   loop = true,
-  showGradient = true,
+  showGradient = false,
   showControls = false,
   allowReverse = true,
   allowSpeedControl = true,

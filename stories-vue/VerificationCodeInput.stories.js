@@ -1,7 +1,7 @@
 import VerificationCodeInput from '../src/components/Input/VerificationCodeInput.vue'
 
 export default {
-  title: 'Components/Input/VerificationCodeInput (Vue)',
+  title: 'Components/VerificationCodeInput (Vue)',
   component: VerificationCodeInput,
   tags: ['autodocs'],
   argTypes: {

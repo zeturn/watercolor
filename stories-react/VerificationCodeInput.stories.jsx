@@ -3,7 +3,7 @@ import VerificationCodeInput from '@/components/Input/VerificationCodeInput.jsx'
 import { action } from 'storybook/actions'
 
 export default {
-  title: 'Components/Input/VerificationCodeInput (React)s',
+  title: 'Components/VerificationCodeInput (React)',
   component: VerificationCodeInput,
   parameters: {
     layout: 'centered'
