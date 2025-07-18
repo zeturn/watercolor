@@ -10,7 +10,7 @@
   align-items: center;
   gap: 8px;
   border: 1px solid var(--wc-neutral-200);
-  border-radius: 6px;
+  border-radius: var(--wc-radius-xl);
   background: var(--wc-neutral-0);
   transition: all 0.2s ease;
   cursor: pointer;
@@ -83,9 +83,9 @@
   left: 0;
   z-index: 1000;
   margin-top: 4px;
-  background: white;
+  background: var(--wc-bg-surface);
   border: 1px solid var(--wc-neutral-200);
-  border-radius: 8px;
+  border-radius: var(--wc-radius-xl);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   min-width: 280px;
   padding: 16px;
@@ -107,7 +107,7 @@
   height: 32px;
   border: none;
   background: none;
-  border-radius: 4px;
+  border-radius: var(--wc-radius-xl);
   cursor: pointer;
   color: var(--wc-neutral-600);
   font-size: 18px;
@@ -115,7 +115,7 @@
 }
 
 .wc-datepicker-nav:hover {
-  background: var(--wc-neutral-100);
+  background: var(--wc-neutral-500);
 }
 
 .wc-datepicker-title {
@@ -154,7 +154,7 @@
   height: 32px;
   border: none;
   background: none;
-  border-radius: 4px;
+  border-radius: var(--wc-radius-xl);
   cursor: pointer;
   font-size: 14px;
   color: var(--wc-neutral-700);
@@ -173,7 +173,7 @@
 
 .wc-datepicker-day--selected {
   background: var(--wc-primary-500);
-  color: white;
+  color: var(--wc-neutral-0);
 }
 
 .wc-datepicker-day--today {
@@ -199,7 +199,7 @@
 .wc-datepicker-clear {
   padding: 6px 12px;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--wc-radius-xl);
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.2s ease;
@@ -223,101 +223,3 @@
   background: var(--wc-neutral-200);
 }
 
-/* 暗色模式 */
-.dark .wc-datepicker-wrapper {
-  background: var(--wc-neutral-800);
-  border-color: var(--wc-neutral-600);
-}
-
-.dark .wc-datepicker-wrapper:hover {
-  border-color: var(--wc-primary-400);
-}
-
-.dark .wc-datepicker-wrapper--focused,
-.dark .wc-datepicker-wrapper--open {
-  border-color: var(--wc-primary-400);
-  box-shadow: 0 0 0 2px var(--wc-primary-900);
-}
-
-.dark .wc-datepicker-wrapper--filled {
-  background: var(--wc-neutral-700);
-}
-
-.dark .wc-datepicker-input {
-  color: var(--wc-neutral-100);
-}
-
-.dark .wc-datepicker-input::placeholder {
-  color: var(--wc-neutral-500);
-}
-
-.dark .wc-datepicker-icon {
-  color: var(--wc-neutral-400);
-}
-
-.dark .wc-datepicker-dropdown {
-  background: var(--wc-neutral-800);
-  border-color: var(--wc-neutral-600);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-}
-
-.dark .wc-datepicker-nav {
-  color: var(--wc-neutral-300);
-}
-
-.dark .wc-datepicker-nav:hover {
-  background: var(--wc-neutral-700);
-}
-
-.dark .wc-datepicker-title {
-  color: var(--wc-neutral-100);
-}
-
-.dark .wc-datepicker-weekday {
-  color: var(--wc-neutral-400);
-}
-
-.dark .wc-datepicker-day {
-  color: var(--wc-neutral-300);
-}
-
-.dark .wc-datepicker-day:hover {
-  background: var(--wc-primary-900);
-  color: var(--wc-primary-200);
-}
-
-.dark .wc-datepicker-day--prev,
-.dark .wc-datepicker-day--next {
-  color: var(--wc-neutral-600);
-}
-
-.dark .wc-datepicker-day--selected {
-  background: var(--wc-primary-600);
-  color: var(--wc-neutral-100);
-}
-
-.dark .wc-datepicker-day--today {
-  color: var(--wc-primary-400);
-}
-
-.dark .wc-datepicker-footer {
-  border-top-color: var(--wc-neutral-600);
-}
-
-.dark .wc-datepicker-today {
-  background: var(--wc-primary-600);
-  color: var(--wc-neutral-100);
-}
-
-.dark .wc-datepicker-today:hover {
-  background: var(--wc-primary-700);
-}
-
-.dark .wc-datepicker-clear {
-  background: var(--wc-neutral-700);
-  color: var(--wc-neutral-300);
-}
-
-.dark .wc-datepicker-clear:hover {
-  background: var(--wc-neutral-600);
-} 

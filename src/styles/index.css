@@ -420,8 +420,8 @@
 	--wc-radius-sm: 0.25rem;     /* 4px - 小圆角 */
 	--wc-radius-md: 0.375rem;    /* 6px - 中圆角 */
 	--wc-radius-lg: 0.5rem;      /* 8px - 大圆角 */
-	--wc-radius-xl: 0.75rem;     /* 12px - 超大圆角 */
-	--wc-radius-2xl: 1rem;       /* 16px - 特大圆角 （默认一级圆角）*/
+	--wc-radius-xl: 0.75rem;     /* 12px - 超大圆角 （按钮、输入框、下拉框）*/
+	--wc-radius-2xl: 1rem;       /* 16px - 特大圆角 （默认一级圆角、卡片、弹窗）*/
 	--wc-radius-3xl: 1.5rem;     /* 24px - 巨大圆角 */
 	--wc-radius-full: 9999px;    /* 完全圆角 */
 }
