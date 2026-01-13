@@ -264,10 +264,12 @@ const filteredOptions = computed(() => {
 })
 
 const getOptionValue = (option) => {
+  if (!option) return null
   return typeof option === 'object' ? option[props.valueKey] : option
 }
 
 const getOptionLabel = (option) => {
+  if (!option) return ''
   return typeof option === 'object' ? option[props.labelKey] : option
 }
 
@@ -278,6 +280,7 @@ const isSelected = (option) => {
       (typeof v === 'object' ? getOptionValue(v) : v) === value
     )
   }
+  if (!props.modelValue) return false
   const currentValue = typeof props.modelValue === 'object' 
     ? getOptionValue(props.modelValue) 
     : props.modelValue

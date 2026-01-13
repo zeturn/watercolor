@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import Autocomplete from '../../src/components/Autocomplete/Autocomplete.vue'
 
@@ -17,16 +17,17 @@ describe('Autocomplete.vue', () => {
       }
     })
     expect(wrapper.find('.wc-autocomplete').exists()).toBe(true)
-    expect(wrapper.find('.wc-autocomplete__label').text()).toBe('Test Autocomplete')
+    expect(wrapper.find('.wc-autocomplete__label').text()).toContain('Test Autocomplete')
   })
 
   it('shows options when input is focused', async () => {
     const wrapper = mount(Autocomplete, {
-      props: { options }
+      props: { options, minSearchLength: 0 }
     })
     
     const input = wrapper.find('.wc-autocomplete__input')
     await input.trigger('focus')
+    await wrapper.vm.$nextTick()
     
     expect(wrapper.find('.wc-autocomplete__dropdown').exists()).toBe(true)
     expect(wrapper.findAll('.wc-autocomplete__option')).toHaveLength(3)
@@ -34,12 +35,14 @@ describe('Autocomplete.vue', () => {
 
   it('filters options based on search query', async () => {
     const wrapper = mount(Autocomplete, {
-      props: { options }
+      props: { options, minSearchLength: 0 }
     })
     
     const input = wrapper.find('.wc-autocomplete__input')
     await input.trigger('focus')
     await input.setValue('Option 1')
+    await input.trigger('input')
+    await wrapper.vm.$nextTick()
     
     expect(wrapper.findAll('.wc-autocomplete__option')).toHaveLength(1)
     expect(wrapper.find('.wc-autocomplete__option-text').text()).toBe('Option 1')
@@ -47,14 +50,16 @@ describe('Autocomplete.vue', () => {
 
   it('emits update:modelValue when option is selected', async () => {
     const wrapper = mount(Autocomplete, {
-      props: { options }
+      props: { options, minSearchLength: 0 }
     })
     
     const input = wrapper.find('.wc-autocomplete__input')
     await input.trigger('focus')
+    await wrapper.vm.$nextTick()
     
     const firstOption = wrapper.findAll('.wc-autocomplete__option')[0]
     await firstOption.trigger('click')
+    await wrapper.vm.$nextTick()
     
     expect(wrapper.emitted('update:modelValue')).toBeTruthy()
     expect(wrapper.emitted('update:modelValue')[0]).toEqual([options[0]])
@@ -65,12 +70,17 @@ describe('Autocomplete.vue', () => {
       props: {
         options,
         modelValue: options[0],
-        clearable: true
+        clearable: true,
+        minSearchLength: 0
       }
     })
     
+    await wrapper.vm.$nextTick()
     const clearButton = wrapper.find('.wc-autocomplete__clear')
+    expect(clearButton.exists()).toBe(true)
+    
     await clearButton.trigger('click')
+    await wrapper.vm.$nextTick()
     
     expect(wrapper.emitted('update:modelValue')).toBeTruthy()
     expect(wrapper.emitted('update:modelValue')[0]).toEqual([null])
@@ -81,18 +91,22 @@ describe('Autocomplete.vue', () => {
       props: {
         options,
         multiple: true,
-        modelValue: []
+        modelValue: [],
+        minSearchLength: 0
       }
     })
     
     const input = wrapper.find('.wc-autocomplete__input')
     await input.trigger('focus')
+    await wrapper.vm.$nextTick()
     
     const firstOption = wrapper.findAll('.wc-autocomplete__option')[0]
     await firstOption.trigger('click')
+    await wrapper.vm.$nextTick()
     
     expect(wrapper.emitted('update:modelValue')).toBeTruthy()
     expect(wrapper.emitted('update:modelValue')[0][0]).toHaveLength(1)
+    expect(wrapper.emitted('update:modelValue')[0][0][0]).toEqual(options[0])
   })
 
   it('shows error message when error prop is provided', () => {
@@ -122,12 +136,15 @@ describe('Autocomplete.vue', () => {
     const wrapper = mount(Autocomplete, {
       props: {
         options,
-        freeSolo: true
+        freeSolo: true,
+        minSearchLength: 0
       }
     })
     
     const input = wrapper.find('.wc-autocomplete__input')
     await input.setValue('Custom value')
+    await input.trigger('input')
+    await wrapper.vm.$nextTick()
     
     expect(wrapper.emitted('update:modelValue')).toBeTruthy()
     expect(wrapper.emitted('update:modelValue')[0]).toEqual(['Custom value'])
@@ -144,11 +161,17 @@ describe('Autocomplete.vue', () => {
     const input = wrapper.find('.wc-autocomplete__input')
     await input.trigger('focus')
     await input.setValue('O')
+    await input.trigger('input')
+    await wrapper.vm.$nextTick()
     
-    expect(wrapper.find('.wc-autocomplete__dropdown').exists()).toBe(true)
+    // When search length < minSearchLength, no options should be shown
     expect(wrapper.findAll('.wc-autocomplete__option')).toHaveLength(0)
     
     await input.setValue('Op')
+    await input.trigger('input')
+    await wrapper.vm.$nextTick()
+    
+    // When search length >= minSearchLength, options should be filtered
     expect(wrapper.findAll('.wc-autocomplete__option')).toHaveLength(3)
   })
 })

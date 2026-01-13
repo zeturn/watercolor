@@ -45,29 +45,28 @@
   position: relative;
   display: flex;
   align-items: center;
-  background: var(--wc-neutral-50);
-  border-radius: var(--wc-border-radius);
+  background: var(--wc-bg-surface);
+  border: none;
+  border-radius: var(--wc-radius-2xl);
   transition: all 0.2s ease;
   cursor: text;
 }
 
 .wc-autocomplete__container--outlined {
-  background: transparent;
-  border: 1px solid var(--wc-neutral-300);
+  background: var(--wc-bg-surface);
+  border: none;
 }
 
 .wc-autocomplete__container--filled {
-  background: var(--wc-neutral-100);
-  border: 1px solid transparent;
-  border-bottom: 2px solid var(--wc-neutral-300);
-  border-radius: var(--wc-border-radius) var(--wc-border-radius) 0 0;
+  background: var(--wc-bg-surface);
+  border: none;
+  border-radius: var(--wc-radius-2xl);
 }
 
 .wc-autocomplete__container--standard {
-  background: transparent;
+  background: var(--wc-bg-surface);
   border: none;
-  border-bottom: 1px solid var(--wc-neutral-300);
-  border-radius: 0;
+  border-radius: var(--wc-radius-2xl);
 }
 
 /* Sizes */
@@ -88,17 +87,17 @@
 
 /* States */
 .wc-autocomplete__container:hover:not(.wc-autocomplete__container--disabled) {
-  border-color: var(--wc-primary-400);
+  background: var(--wc-bg-surface-hover);
 }
 
 .wc-autocomplete__container--open,
 .wc-autocomplete__container:focus-within {
-  border-color: var(--wc-primary-500);
-  box-shadow: 0 0 0 3px var(--wc-primary-100);
+  background: var(--wc-bg-surface-hover);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .wc-autocomplete__container--error {
-  border-color: var(--wc-error-500);
+  background: var(--wc-error-50);
 }
 
 .wc-autocomplete__container--error:focus-within {
@@ -106,7 +105,7 @@
 }
 
 .wc-autocomplete__container--disabled {
-  background: var(--wc-neutral-100);
+  background: var(--wc-bg-surface);
   cursor: not-allowed;
   opacity: 0.6;
 }
@@ -192,8 +191,8 @@
   right: 0;
   z-index: 1000;
   background: white;
-  border: 1px solid var(--wc-neutral-200);
-  border-radius: var(--wc-border-radius);
+  border: none;
+  border-radius: var(--wc-radius-2xl);
   box-shadow: var(--wc-shadow-lg);
   max-height: 300px;
   overflow-y: auto;
@@ -311,7 +310,7 @@
   padding: 0.25rem 0.5rem;
   background: var(--wc-primary-100);
   color: var(--wc-primary-700);
-  border-radius: calc(var(--wc-border-radius) * 0.75);
+  border-radius: var(--wc-radius-2xl);
   font-size: 0.875rem;
   font-weight: 500;
 }

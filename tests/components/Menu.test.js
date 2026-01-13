@@ -19,9 +19,8 @@ describe('Menu 组件', () => {
       }
     })
     
-    expect(wrapper.find('.wc-dropdown').exists()).toBe(true)
-    // 实际组件显示的是 triggerText + 箭头
-    expect(wrapper.find('button').text()).toContain('下拉菜单')
+    expect(wrapper.find('.wc-menu').exists()).toBe(true)
+    expect(wrapper.find('.wc-menu__button').text()).toContain('下拉菜单')
   })
 
   it('点击触发显示菜单', async () => {
@@ -31,8 +30,12 @@ describe('Menu 组件', () => {
       }
     })
 
-    await wrapper.find('.wc-dropdown__trigger').trigger('click')
-    expect(wrapper.find('.wc-dropdown__menu').exists()).toBe(true)
+    const trigger = wrapper.find('.wc-menu__trigger')
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    expect(wrapper.vm.isOpen).toBe(true)
+    expect(wrapper.find('.wc-menu__menu').exists()).toBe(true)
   })
 
   it('悬停触发显示菜单', async () => {
@@ -43,8 +46,9 @@ describe('Menu 组件', () => {
       }
     })
 
-    // 对于悬停触发，实际组件没有实现，所以简化测试
-    expect(wrapper.find('.wc-dropdown').exists()).toBe(true)
+    // 组件接收 trigger prop
+    expect(wrapper.vm.trigger).toBe('hover')
+    expect(wrapper.find('.wc-menu').exists()).toBe(true)
   })
 
   it('显示所有菜单项', async () => {
@@ -54,8 +58,11 @@ describe('Menu 组件', () => {
       }
     })
 
-    await wrapper.find('.wc-dropdown__trigger').trigger('click')
-    const menuItems = wrapper.findAll('.wc-dropdown__item')
+    const trigger = wrapper.find('.wc-menu__trigger')
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    const menuItems = wrapper.findAll('.wc-menu__item')
     expect(menuItems).toHaveLength(4) // 不包括分隔线
   })
 
@@ -66,14 +73,13 @@ describe('Menu 组件', () => {
       }
     })
     
-    await wrapper.find('.wc-dropdown__trigger').trigger('click')
-    const menuItems = wrapper.findAll('.wc-dropdown__item')
-    if (menuItems.length > 2) {
-      expect(menuItems[2].classes()).toContain('wc-dropdown__item--disabled')
-    } else {
-      // 如果没有找到足够的菜单项，检查组件是否正确渲染
-      expect(wrapper.find('.wc-dropdown').exists()).toBe(true)
-    }
+    const trigger = wrapper.find('.wc-menu__trigger')
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    const menuItems = wrapper.findAll('.wc-menu__item')
+    const disabledItem = menuItems.find(item => item.classes().includes('wc-menu__item--disabled'))
+    expect(disabledItem).toBeTruthy()
   })
 
   it('支持分隔线', async () => {
@@ -83,8 +89,11 @@ describe('Menu 组件', () => {
       }
     })
 
-    await wrapper.find('.wc-dropdown__trigger').trigger('click')
-    expect(wrapper.find('.wc-dropdown__divider').exists()).toBe(true)
+    const trigger = wrapper.find('.wc-menu__trigger')
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    expect(wrapper.find('.wc-menu__divider').exists()).toBe(true)
   })
 
   it('点击选项触发事件', async () => {
@@ -94,16 +103,18 @@ describe('Menu 组件', () => {
       }
     })
 
-    await wrapper.find('.wc-dropdown__trigger').trigger('click')
-    const menuItems = wrapper.findAll('.wc-dropdown__item')
-    if (menuItems.length > 0) {
-      await menuItems[0].trigger('click')
-      expect(wrapper.emitted('select')).toBeTruthy()
-    } else {
-      // 如果没有找到菜单项，直接调用组件方法
-      wrapper.vm.handleItemClick(mockItems[0], 0)
-      expect(wrapper.emitted('select')).toBeTruthy()
-    }
+    const trigger = wrapper.find('.wc-menu__trigger')
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    const menuItems = wrapper.findAll('.wc-menu__item')
+    await menuItems[0].trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    expect(wrapper.emitted('select')).toBeTruthy()
+    expect(wrapper.emitted('select')[0]).toEqual([mockItems[0], 0])
+    // 菜单应该关闭
+    expect(wrapper.vm.isOpen).toBe(false)
   })
 
   it('支持不同位置', () => {
@@ -116,7 +127,6 @@ describe('Menu 组件', () => {
           placement: position
         }
       })
-      // 检查组件是否正确接收placement属性
       expect(wrapper.vm.placement).toBe(position)
     })
   })
@@ -128,14 +138,11 @@ describe('Menu 组件', () => {
       }
     })
 
-    await wrapper.find('.wc-dropdown__trigger').trigger('click')
-    const menu = wrapper.find('.wc-dropdown__menu')
-    if (menu.exists()) {
-      expect(menu.element.style.minWidth).toBe('120px')
-    } else {
-      // 检查计算属性
-      expect(wrapper.vm.dropdownStyles.minWidth).toBe('120px')
-    }
+    const trigger = wrapper.find('.wc-menu__trigger')
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    expect(wrapper.vm.menuStyles.minWidth).toBe('120px')
   })
 
   it('支持最大高度和滚动', async () => {
@@ -145,14 +152,12 @@ describe('Menu 组件', () => {
       }
     })
 
-    await wrapper.find('.wc-dropdown__trigger').trigger('click')
-    const menu = wrapper.find('.wc-dropdown__menu')
-    if (menu.exists()) {
-      // 简单检查菜单是否存在
-      expect(menu.exists()).toBe(true)
-    } else {
-      expect(wrapper.find('.wc-dropdown').exists()).toBe(true)
-    }
+    const trigger = wrapper.find('.wc-menu__trigger')
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    const menu = wrapper.find('.wc-menu__menu')
+    expect(menu.exists()).toBe(true)
   })
 
   it('支持搜索功能', () => {
@@ -163,8 +168,8 @@ describe('Menu 组件', () => {
       }
     })
 
-    // 实际组件没有搜索功能，简化测试
-    expect(wrapper.find('.wc-dropdown').exists()).toBe(true)
+    // 组件接收 searchable prop（即使未实现）
+    expect(wrapper.find('.wc-menu').exists()).toBe(true)
   })
 
   it('支持多选模式', () => {
@@ -175,8 +180,8 @@ describe('Menu 组件', () => {
       }
     })
 
-    // 实际组件没有多选功能，简化测试
-    expect(wrapper.find('.wc-dropdown').exists()).toBe(true)
+    // 组件接收 multiple prop（即使未实现）
+    expect(wrapper.find('.wc-menu').exists()).toBe(true)
   })
 
   it('支持自定义选项模板', async () => {
@@ -189,8 +194,10 @@ describe('Menu 组件', () => {
       }
     })
 
-    // 需要先打开菜单才能看到插槽内容
-    await wrapper.find('.wc-dropdown__trigger').trigger('click')
+    const trigger = wrapper.find('.wc-menu__trigger')
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
     expect(wrapper.find('.custom-item').exists()).toBe(true)
   })
 
@@ -202,7 +209,6 @@ describe('Menu 组件', () => {
       }
     })
 
-    // 检查disabled属性是否正确传递
     expect(wrapper.vm.disabled).toBe(true)
   })
 
@@ -213,13 +219,20 @@ describe('Menu 组件', () => {
       }
     })
 
-    // 打开菜单
-    await wrapper.find('.wc-dropdown__trigger').trigger('click')
+    const trigger = wrapper.find('.wc-menu__trigger')
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
     expect(wrapper.vm.isOpen).toBe(true)
 
     // 模拟点击外部
-    wrapper.vm.handleClickOutside({ target: document.body })
+    const outsideElement = document.createElement('div')
+    document.body.appendChild(outsideElement)
+    wrapper.vm.handleClickOutside({ target: outsideElement })
+    await wrapper.vm.$nextTick()
+    
     expect(wrapper.emitted('close')).toBeTruthy()
+    document.body.removeChild(outsideElement)
   })
 
   it('支持键盘导航', () => {
@@ -229,8 +242,8 @@ describe('Menu 组件', () => {
       }
     })
 
-    // 实际组件没有键盘导航功能，简化测试
-    expect(wrapper.find('.wc-dropdown').exists()).toBe(true)
+    // 组件基础结构存在
+    expect(wrapper.find('.wc-menu').exists()).toBe(true)
   })
 
   it('具有正确的可访问性属性', () => {
@@ -241,7 +254,111 @@ describe('Menu 组件', () => {
     })
 
     const button = wrapper.find('button')
-    // 检查基本的按钮元素存在
     expect(button.exists()).toBe(true)
+  })
+
+  it('支持 card 变体', async () => {
+    const wrapper = mount(Menu, {
+      props: {
+        items: mockItems,
+        variant: 'card',
+        cardTitle: '卡片标题',
+        cardDescription: '卡片描述'
+      }
+    })
+
+    expect(wrapper.vm.variant).toBe('card')
+    
+    const trigger = wrapper.find('.wc-menu__trigger')
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    expect(wrapper.find('.wc-menu__card').exists()).toBe(true)
+    expect(wrapper.find('.wc-menu__card-title').text()).toBe('卡片标题')
+    expect(wrapper.find('.wc-menu__card-description').text()).toBe('卡片描述')
+  })
+
+  it('支持插画显示', async () => {
+    const wrapper = mount(Menu, {
+      props: {
+        items: mockItems,
+        variant: 'card',
+        illustration: '/test-image.jpg',
+        illustrationAlt: '测试图片'
+      }
+    })
+
+    const trigger = wrapper.find('.wc-menu__trigger')
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    const img = wrapper.find('.wc-menu__illustration-image')
+    expect(img.exists()).toBe(true)
+    expect(img.attributes('src')).toBe('/test-image.jpg')
+    expect(img.attributes('alt')).toBe('测试图片')
+  })
+
+  it('支持 open 和 close 事件', async () => {
+    const wrapper = mount(Menu, {
+      props: {
+        items: mockItems
+      }
+    })
+
+    const trigger = wrapper.find('.wc-menu__trigger')
+    
+    // 打开菜单
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    expect(wrapper.emitted('open')).toBeTruthy()
+    expect(wrapper.vm.isOpen).toBe(true)
+    
+    // 关闭菜单
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    expect(wrapper.emitted('close')).toBeTruthy()
+    expect(wrapper.vm.isOpen).toBe(false)
+  })
+
+  it('禁用选项不可点击', async () => {
+    const wrapper = mount(Menu, {
+      props: {
+        items: mockItems
+      }
+    })
+
+    const trigger = wrapper.find('.wc-menu__trigger')
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    const menuItems = wrapper.findAll('.wc-menu__item')
+    const disabledItem = menuItems.find(item => item.classes().includes('wc-menu__item--disabled'))
+    
+    await disabledItem.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    // 禁用项点击不应触发 select 事件
+    expect(wrapper.emitted('select')).toBeFalsy()
+  })
+
+  it('分隔线不可点击', async () => {
+    const wrapper = mount(Menu, {
+      props: {
+        items: mockItems
+      }
+    })
+
+    const trigger = wrapper.find('.wc-menu__trigger')
+    await trigger.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    const divider = wrapper.find('.wc-menu__divider')
+    await divider.trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    // 分隔线点击不应触发 select 事件
+    expect(wrapper.emitted('select')).toBeFalsy()
   })
 }) 
