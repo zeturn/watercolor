@@ -20,7 +20,7 @@ const props = defineProps({
   },
   elevation: {
     type: Number,
-    default: 0,
+    default: 4,
   },
   variant: {
     type: String,
