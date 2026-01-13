@@ -13,7 +13,6 @@ const Select = ({
   required = false,
   disabled = false,
   multiple = false,
-  searchable = false,
   clearable = false,
   fullWidth = false,
   size = 'md',
@@ -32,7 +31,6 @@ const Select = ({
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
   const [isFocused, setIsFocused] = useState(false)
   const selectRef = useRef(null)
   const optionsRef = useRef(null)
@@ -50,12 +48,6 @@ const Select = ({
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [])
-
-  const filteredOptions = searchable && searchQuery
-    ? options.filter(option => 
-        (option.label || option.value).toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : options
 
   const selectedOption = multiple 
     ? options.filter(option => value.includes(option.value))
@@ -121,12 +113,6 @@ const Select = ({
     e.stopPropagation()
     const newValue = multiple ? [] : ''
     onChange?.({ target: { name, value: newValue } })
-  }
-
-  const handleSearchChange = (e) => {
-    const query = e.target.value
-    setSearchQuery(query)
-    onSearch?.(query)
   }
 
   const handleFocus = (e) => {
@@ -240,23 +226,11 @@ const Select = ({
             style={{ maxHeight }}
             ref={optionsRef}
           >
-            {searchable && (
-              <div className="wc-select__search">
-                <input
-                  type="text"
-                  className="wc-select__search-input"
-                  placeholder="搜索..."
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                  autoFocus
-                />
-              </div>
-            )}
             <div className="wc-select__options" role="listbox">
-              {filteredOptions.length === 0 ? (
-                <div className="wc-select__no-options">没有找到选项</div>
+              {options.length === 0 ? (
+                <div className="wc-select__no-options">没有可选项</div>
               ) : (
-                filteredOptions.map((option, index) => {
+                options.map((option, index) => {
                   const isSelected = multiple
                     ? Array.isArray(value) && value.includes(option.value)
                     : value === option.value

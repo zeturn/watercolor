@@ -47,21 +47,9 @@
       v-if="open"
       class="wc-select__dropdown"
     >
-      <div
-        v-if="searchable"
-        class="wc-select__search"
-      >
-        <input
-          v-model="searchQuery"
-          class="wc-select__search-input"
-          placeholder="搜索..."
-          @click.stop
-        >
-      </div>
-      
       <div class="wc-select__options">
         <div
-          v-for="option in filteredOptions"
+          v-for="option in options"
           :key="getOptionValue(option)"
           :class="getOptionClasses(option)"
           @click="selectOption(option)"
@@ -80,10 +68,10 @@
         </div>
         
         <div
-          v-if="filteredOptions.length === 0"
+          v-if="options.length === 0"
           class="wc-select__no-options"
         >
-          没有找到选项
+          没有可选项
         </div>
       </div>
     </div>
@@ -157,10 +145,6 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  searchable: {
-    type: Boolean,
-    default: false
-  },
   valueKey: {
     type: String,
     default: 'value'
@@ -176,7 +160,6 @@ const emit = defineEmits(['update:modelValue', 'change'])
 const instance = getCurrentInstance()
 const selectId = ref(`select-${instance?.uid || Math.random().toString(36).substr(2, 9)}`)
 const open = ref(false)
-const searchQuery = ref('')
 
 const labelClasses = computed(() => {
   const classes = ['wc-select__label']
@@ -209,17 +192,6 @@ const selectContainerClasses = computed(() => {
   }
   
   return classes
-})
-
-const filteredOptions = computed(() => {
-  if (!props.searchable || !searchQuery.value) {
-    return props.options
-  }
-  
-  return props.options.filter(option => {
-    const label = getOptionLabel(option).toLowerCase()
-    return label.includes(searchQuery.value.toLowerCase())
-  })
 })
 
 const displayValue = computed(() => {
@@ -265,9 +237,6 @@ const getOptionClasses = (option) => {
 const toggleDropdown = () => {
   if (props.disabled) return
   open.value = !open.value
-  if (open.value) {
-    searchQuery.value = ''
-  }
 }
 
 const selectOption = (option) => {
