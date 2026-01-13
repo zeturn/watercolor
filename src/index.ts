@@ -42,7 +42,6 @@ export { default as DatePickerVue } from './components/DatePicker/DatePicker.vue
 export { default as DatePickerReact } from './components/DatePicker/DatePicker.jsx'
 export { default as DividerVue } from './components/Divider/Divider.vue'
 export { default as DividerReact } from './components/Divider/Divider.jsx'
-export { default as DropdownVue } from './components/Dropdown/Dropdown.vue'
 export { default as FabVue } from './components/Button/Fab.vue'
 export { default as FabReact } from './components/Button/Fab.jsx'
 export { default as Feed } from './components/Feed/Feed.vue'

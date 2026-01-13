@@ -23,7 +23,6 @@ export { default as ColorPicker } from './components/ColorPicker/ColorPicker.jsx
 export { default as Container } from './components/Container/Container.jsx'
 export { default as Copy } from './components/Copy/Copy.jsx'
 export { default as DatePicker } from './components/DatePicker/DatePicker.jsx'
-export { default as Dropdown } from './components/Dropdown/Dropdown.jsx'
 export { default as Fab } from './components/Button/Fab.jsx'
 export { default as Feed } from './components/Feed/Feed.jsx'
 export { default as Feature } from './components/Feature/Feature.jsx'

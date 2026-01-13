@@ -1,5 +1,5 @@
 import AppBarVue from '../src/components/AppBar/AppBar.vue'
-import DropdownVue from '../src/components/Dropdown/Dropdown.vue'
+import MenuVue from '../src/components/Menu/Menu.vue'
 
 export default {
   title: 'Components/AppBar (Vue)',
@@ -15,16 +15,16 @@ const sampleItems = [
 
 export const Navbar = {
   render: () => ({
-    components: { AppBarVue, DropdownVue },
+    components: { AppBarVue, MenuVue },
     setup() {
       return { sampleItems }
     },
     template: `
       <AppBarVue position="static" color="primary" style="padding:0 16px;">
         <div style="display: flex; gap: 16px;">
-          <DropdownVue trigger-text="菜单一" :items="sampleItems" />
-          <DropdownVue trigger-text="菜单二" :items="sampleItems" />
-          <DropdownVue trigger-text="菜单三" :items="sampleItems" />
+          <MenuVue trigger-text="菜单一" :items="sampleItems" />
+          <MenuVue trigger-text="菜单二" :items="sampleItems" />
+          <MenuVue trigger-text="菜单三" :items="sampleItems" />
         </div>
       </AppBarVue>
     `,

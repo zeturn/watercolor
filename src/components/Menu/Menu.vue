@@ -1,111 +1,215 @@
 <template>
-  <div>
-    <!-- Inline Variant (always visible) -->
-    <nav
-      v-if="variant === 'inline'"
-      ref="menuRef"
-      :class="menuClasses"
+  <div
+    ref="menuRef"
+    :class="['wc-menu', { 'dark': isDarkMode }]"
+    :style="{ backgroundColor: 'var(--wc-bg-surface)', color: 'var(--wc-text-primary)' }"
+  >
+    <div
+      ref="triggerRef"
+      class="wc-menu__trigger"
+      @click="handleToggle"
     >
-      <slot />
-    </nav>
+      <slot name="trigger">
+        <button class="wc-menu__button">
+          {{ triggerText }}
+          <span :class="['wc-menu__arrow', { 'wc-menu__arrow--open': isOpen }]">
+            ▼
+          </span>
+        </button>
+      </slot>
+    </div>
 
-    <!-- Popover Variant -->
-    <Teleport v-else-if="open" :to="'body'">
-      <div class="wc-menu__container">
-        <!-- 背景遮罩 -->
-        <div
-          class="wc-menu__backdrop"
-          @click="handleClose"
-        />
-        <!-- 菜单内容 -->
-        <div
-          ref="menuRef"
-          :class="menuClasses"
-          :style="styles"
-          @click.stop
-        >
-          <slot />
-        </div>
+    <Transition name="menu">
+      <div
+        v-if="isOpen"
+        ref="panelRef"
+        :class="menuClasses"
+        :style="menuStyles"
+      >
+        <slot name="content">
+          <div v-if="variant === 'card'" class="wc-menu__card">
+            <!-- 左侧示意图区域 -->
+            <div class="wc-menu__card-illustration">
+              <slot name="illustration">
+                <img 
+                  v-if="illustration" 
+                  :src="illustration" 
+                  :alt="illustrationAlt"
+                  class="wc-menu__illustration-image"
+                />
+                <div v-else class="wc-menu__illustration-placeholder">
+                  <span>🎨</span>
+                </div>
+              </slot>
+              <div v-if="cardTitle || cardDescription" class="wc-menu__card-info">
+                <h4 v-if="cardTitle" class="wc-menu__card-title">{{ cardTitle }}</h4>
+                <p v-if="cardDescription" class="wc-menu__card-description">{{ cardDescription }}</p>
+              </div>
+            </div>
+            
+            <!-- 右侧列表区域 -->
+            <div class="wc-menu__card-list">
+              <div
+                v-for="(item, index) in items"
+                :key="item.key || index"
+                :class="[
+                  item.divider ? 'wc-menu__divider' : 'wc-menu__item',
+                  {
+                    'wc-menu__item--disabled': item.disabled && !item.divider
+                  }
+                ]"
+                @click="handleItemClick(item, index)"
+              >
+                <span
+                  v-if="item.icon"
+                  class="wc-menu__icon"
+                >{{ item.icon }}</span>
+                <span class="wc-menu__label">{{ item.label }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 默认样式 -->
+          <div v-else>
+            <div
+              v-for="(item, index) in items"
+              :key="item.key || index"
+              :class="[
+                item.divider ? 'wc-menu__divider' : 'wc-menu__item',
+                {
+                  'wc-menu__item--disabled': item.disabled && !item.divider
+                }
+              ]"
+              @click="handleItemClick(item, index)"
+            >
+              <span
+                v-if="item.icon"
+                class="wc-menu__icon"
+              >{{ item.icon }}</span>
+              <span class="wc-menu__label">{{ item.label }}</span>
+            </div>
+          </div>
+        </slot>
       </div>
-    </Teleport>
+    </Transition>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
-import { getMenuClasses, computeMenuPosition } from './utils.js'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import './style.css'
 
-// 组件属性
 const props = defineProps({
-  open: {
+  items: {
+    type: Array,
+    default: () => []
+  },
+  triggerText: {
+    type: String,
+    default: '选择选项'
+  },
+  placement: {
+    type: String,
+    default: 'bottom-start',
+    validator: (value) => ['bottom-start', 'bottom-end', 'top-start', 'top-end'].includes(value)
+  },
+  disabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
-  anchorEl: {
-    type: Object,
-    default: null,
-  },
-  anchorOrigin: {
-    type: Object,
-    default: () => ({ vertical: 'bottom', horizontal: 'left' }),
-  },
-  transformOrigin: {
-    // 暂未使用，但保持接口一致
-    type: Object,
-    default: () => ({ vertical: 'top', horizontal: 'left' }),
-  },
-  elevation: {
-    type: Number,
-    default: 8,
-  },
-  maxHeight: {
-    type: [String, Number],
-    default: 'auto',
+  trigger: {
+    type: String,
+    default: 'click',
+    validator: (value) => ['click', 'hover'].includes(value)
   },
   variant: {
     type: String,
-    default: 'inline',
-    validator: (v) => ['popover', 'inline'].includes(v),
+    default: 'default',
+    validator: (value) => ['default', 'card'].includes(value)
   },
-  className: {
-    type: [String, Array, Object],
-    default: '',
+  illustration: {
+    type: String,
+    default: ''
   },
+  illustrationAlt: {
+    type: String,
+    default: '示意图'
+  },
+  cardTitle: {
+    type: String,
+    default: ''
+  },
+  cardDescription: {
+    type: String,
+    default: ''
+  },
+  isDarkMode: {
+    type: Boolean,
+    default: false
+  }
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['select', 'open', 'close'])
 
+const isOpen = ref(false)
 const menuRef = ref(null)
-const styles = ref({})
+const triggerRef = ref(null)
+const panelRef = ref(null)
 
-// 计算类名
-const menuClasses = computed(() => getMenuClasses(props.elevation, props.className, props.variant))
-
-const updatePosition = () => {
-  styles.value = computeMenuPosition(props.anchorEl, props.anchorOrigin, props.maxHeight)
-}
-
-const handleClose = () => emit('close')
-
-watch(
-  () => [props.anchorEl, props.anchorOrigin, props.maxHeight],
-  () => {
-    if (props.open) updatePosition()
+const menuClasses = computed(() => {
+  const classes = ['wc-menu__menu', `wc-menu__menu--${props.placement}`]
+  if (props.variant === 'card') {
+    classes.push('wc-menu__menu--card')
   }
-)
+  return classes
+})
 
-if (props.variant === 'popover') {
-  onMounted(() => {
-    updatePosition()
-    window.addEventListener('scroll', updatePosition, true)
-    window.addEventListener('resize', updatePosition)
-  })
+const menuStyles = computed(() => {
+  if (props.variant === 'card') {
+    return {
+      minWidth: '320px',
+      maxWidth: '450px'
+    }
+  }
+  return {
+    minWidth: '120px'
+  }
+})
 
-  onBeforeUnmount(() => {
-    window.removeEventListener('scroll', updatePosition, true)
-    window.removeEventListener('resize', updatePosition)
-  })
+const handleToggle = () => {
+  if (props.disabled) return
+  
+  isOpen.value = !isOpen.value
+  
+  if (isOpen.value) {
+    emit('open')
+  } else {
+    emit('close')
+  }
 }
+
+const handleItemClick = (item, index) => {
+  if (item.disabled || item.divider) return
+  
+  emit('select', item, index)
+  isOpen.value = false
+  emit('close')
+}
+
+const handleClickOutside = (event) => {
+  if (menuRef.value && !menuRef.value.contains(event.target)) {
+    isOpen.value = false
+    emit('close')
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
 </script>
 
-<style src="./style.css"></style> 
+ 

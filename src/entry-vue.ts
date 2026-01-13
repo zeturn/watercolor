@@ -23,7 +23,6 @@ export { default as ColorPicker } from './components/ColorPicker/ColorPicker.vue
 export { default as Container } from './components/Container/Container.vue'
 export { default as Copy } from './components/Copy/Copy.vue'
 export { default as DatePicker } from './components/DatePicker/DatePicker.vue'
-export { default as Dropdown } from './components/Dropdown/Dropdown.vue'
 export { default as Fab } from './components/Button/Fab.vue'
 export { default as Feed } from './components/Feed/Feed.vue'
 export { default as Feature } from './components/Feature/Feature.vue'

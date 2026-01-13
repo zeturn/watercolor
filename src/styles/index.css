@@ -912,7 +912,7 @@ input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="
 /* Global component font styles */
 .wc-toast,
 .wc-modal,
-.wc-dropdown,
+.wc-menu,
 .wc-button,
 .wc-textfield,
 .wc-card,

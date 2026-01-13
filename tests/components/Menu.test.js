@@ -1,8 +1,8 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Dropdown from '@/components/Dropdown/Dropdown.vue'
+import Menu from '@/components/Menu/Menu.vue'
 
-describe('Dropdown 组件', () => {
+describe('Menu 组件', () => {
   const mockItems = [
     { label: '选项1', key: 'option1' },
     { label: '选项2', key: 'option2' },
@@ -12,7 +12,7 @@ describe('Dropdown 组件', () => {
   ]
 
   it('正确渲染下拉菜单', () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         triggerText: '下拉菜单',
         items: mockItems
@@ -25,7 +25,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('点击触发显示菜单', async () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems
       }
@@ -36,7 +36,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('悬停触发显示菜单', async () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems,
         trigger: 'hover'
@@ -48,7 +48,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('显示所有菜单项', async () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems
       }
@@ -60,7 +60,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('支持禁用选项', async () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems
       }
@@ -77,7 +77,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('支持分隔线', async () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems
       }
@@ -88,7 +88,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('点击选项触发事件', async () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems
       }
@@ -110,7 +110,7 @@ describe('Dropdown 组件', () => {
     const positions = ['bottom-start', 'bottom-end', 'top-start', 'top-end']
     
     positions.forEach(position => {
-      const wrapper = mount(Dropdown, {
+      const wrapper = mount(Menu, {
         props: { 
           items: mockItems,
           placement: position
@@ -122,7 +122,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('支持自定义菜单宽度', async () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems
       }
@@ -139,7 +139,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('支持最大高度和滚动', async () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems
       }
@@ -156,7 +156,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('支持搜索功能', () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems,
         searchable: true
@@ -168,7 +168,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('支持多选模式', () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems,
         multiple: true
@@ -180,7 +180,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('支持自定义选项模板', async () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems
       },
@@ -195,7 +195,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('支持禁用状态', () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems,
         disabled: true
@@ -207,7 +207,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('点击外部关闭菜单', async () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems
       }
@@ -223,7 +223,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('支持键盘导航', () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems
       }
@@ -234,7 +234,7 @@ describe('Dropdown 组件', () => {
   })
 
   it('具有正确的可访问性属性', () => {
-    const wrapper = mount(Dropdown, {
+    const wrapper = mount(Menu, {
       props: {
         items: mockItems
       }

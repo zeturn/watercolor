@@ -57,8 +57,7 @@
 #### 导航组件 (Navigation)
 - ✅ AppBar - 应用栏
 - ✅ Toolbar - 工具栏
-- ✅ Menu - 菜单
-- ✅ Dropdown - 下拉菜单
+- ✅ Menu - 菜单（原 Dropdown 已重命名为 Menu）
 - ✅ Tabs - 标签页
 - ✅ Breadcrumb - 面包屑
 - ✅ Pagination - 分页
@@ -190,9 +189,10 @@
 
 ## 🔄 需要重构/合并的组件
 
-### 1. **Menu + Dropdown** 
+### 1. **Menu + Dropdown** ✅
 **问题**: 功能重叠，应该统一。
-**建议**: 保留Menu作为主组件，Dropdown作为Menu的特定用法或别名。
+**建议**: 保留Menu作为主组件，Dropdown作为Met的特定用法或别名。
+**状态**: ✅ 已完成 - Dropdown 已重命名为 Menu（2026-01-13）
 
 ### 2. **Input + TextField**
 **问题**: 功能重叠，命名不清晰。
@@ -213,7 +213,8 @@
 3. ✅ **已添加**: Autocomplete（2026-01-13）
 4. 📋 **待添加**: Dialog, Drawer, Stepper, Divider, Link
 5. ✅ **添加**: Dialog, Drawer, Stepper, Autocomplete, Divider, Link
-3. 🔄 **重构**: Menu/Dropdown合并，Modal/Dialog规范化
+3. ✅ **已重构**: Menu/Dropdown已合并，Dropdown重命名为 Menu（2026-01-13）
+4. ὐ4 **重构**: Modal/Dialog规范化
 
 ### 短期计划（Phase 2）
 1. ✅ **添加**: TreeView, Transfer, Timeline, Collapse
