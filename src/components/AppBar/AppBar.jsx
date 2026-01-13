@@ -5,7 +5,7 @@ const AppBar = ({
   children,
   position = 'fixed',
   color = 'primary',
-  elevation = 4,
+  elevation = 0,
   variant = 'elevation',
   className = '',
   style = {},

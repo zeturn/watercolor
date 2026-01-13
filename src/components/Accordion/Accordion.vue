@@ -1,5 +1,10 @@
 <template>
-  <div :class="accordionClasses" :style="style">
+  <div
+    :class="accordionClasses"
+    :style="style"
+    role="region"
+    :aria-label="ariaLabel || 'Accordion'"
+  >
     <div
       v-for="(item, index) in items"
       :key="index"
@@ -19,6 +24,7 @@
       </button>
       <div
         :class="['wc-accordion-content', { 'wc-accordion-content--open': activeItems.includes(index) }]"
+        :style="{ display: activeItems.includes(index) ? undefined : 'none' }"
       >
         <div class="wc-accordion-content-inner">
           <slot
@@ -59,6 +65,10 @@ const props = defineProps({
   style: {
     type: [String, Object],
     default: () => ({})
+  },
+  ariaLabel: {
+    type: String,
+    default: ''
   }
 })
 

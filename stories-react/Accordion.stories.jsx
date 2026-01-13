@@ -5,8 +5,15 @@ export default {
   title: 'Components/Accordion (React)',
   component: Accordion,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: '672px', margin: '0 auto', width: '100%' }}>
+        <Story />
+      </div>
+    ),
+  ],
   tags: ['autodocs'],
   argTypes: {
     items: {
@@ -57,11 +64,7 @@ const defaultItems = [
   },
 ]
 
-const Template = (args) => (
-  <div className="w-full max-w-2xl">
-    <Accordion {...args} />
-  </div>
-)
+const Template = (args) => <Accordion {...args} />
 
 export const Default = Template.bind({})
 Default.args = {
@@ -139,9 +142,5 @@ export const WithCustomContent = () => {
       ),
     },
   ]
-  return (
-    <div className="w-full max-w-2xl">
-      <Accordion items={items} />
-    </div>
-  )
+  return <Accordion items={items} />
 }

@@ -29,6 +29,13 @@ const config = {
         ...config.define,
         global: 'globalThis',
       },
+      server: {
+        ...config.server,
+        hmr: {
+          clientPort: process.env.CODESPACE_NAME ? 443 : 6006,
+          protocol: process.env.CODESPACE_NAME ? 'wss' : 'ws',
+        },
+      },
     };
   }
 };

@@ -23,6 +23,13 @@ const config = {
     return {
       ...config,
       plugins: filteredPlugins,
+      server: {
+        ...config.server,
+        hmr: {
+          clientPort: process.env.CODESPACE_NAME ? 443 : 6007,
+          protocol: process.env.CODESPACE_NAME ? 'wss' : 'ws',
+        },
+      },
     };
   },
 

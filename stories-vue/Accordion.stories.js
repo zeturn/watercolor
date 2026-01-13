@@ -4,8 +4,14 @@ export default {
   title: 'Components/Accordion (Vue)',
   component: AccordionVue,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
+  decorators: [
+    (story) => ({
+      components: { story },
+      template: '<div style="max-width: 672px; margin: 0 auto; width: 100%;"><story /></div>',
+    }),
+  ],
   tags: ['autodocs'],
   argTypes: {
     items: {
@@ -36,20 +42,24 @@ export default {
 const defaultItems = [
   {
     title: '什么是Watercolor组件库？',
-    content: 'Watercolor是一个现代化的Vue.js组件库，提供了丰富的UI组件，帮助开发者快速构建美观的用户界面。'
+    content:
+      'Watercolor是一个现代化的Vue.js组件库，提供了丰富的UI组件，帮助开发者快速构建美观的用户界面。',
   },
   {
     title: '如何安装和使用？',
-    content: '您可以通过npm安装：npm install watercolor-ui，然后在您的项目中导入所需的组件。所有组件都支持TypeScript，并提供了完整的类型定义。'
+    content:
+      '您可以通过npm安装：npm install watercolor-ui，然后在您的项目中导入所需的组件。所有组件都支持TypeScript，并提供了完整的类型定义。',
   },
   {
     title: '支持哪些浏览器？',
-    content: 'Watercolor支持所有现代浏览器，包括Chrome、Firefox、Safari和Edge的最新版本。对于旧版浏览器，我们提供了相应的polyfill。'
+    content:
+      'Watercolor支持所有现代浏览器，包括Chrome、Firefox、Safari和Edge的最新版本。对于旧版浏览器，我们提供了相应的polyfill。',
   },
   {
     title: '是否支持主题定制？',
-    content: '是的！Watercolor提供了强大的主题系统，您可以通过CSS变量轻松定制颜色、字体、间距等样式属性，满足不同项目的设计需求。'
-  }
+    content:
+      '是的！Watercolor提供了强大的主题系统，您可以通过CSS变量轻松定制颜色、字体、间距等样式属性，满足不同项目的设计需求。',
+  },
 ]
 
 const Template = (args) => ({
@@ -58,16 +68,14 @@ const Template = (args) => ({
     return { args }
   },
   template: `
-    <div class="w-full max-w-2xl">
-      <AccordionVue 
-        :items="args.items"
-        :multiple="args.multiple"
-        :variant="args.variant"
-        :class="args.class"
-        :style="args.style"
-        @toggle="args.onToggle"
-      />
-    </div>
+    <AccordionVue 
+      :items="args.items"
+      :multiple="args.multiple"
+      :variant="args.variant"
+      :class="args.class"
+      :style="args.style"
+      @toggle="args.onToggle"
+    />
   `,
 })
 
@@ -99,14 +107,8 @@ Filled.args = {
 export const SimpleItems = Template.bind({})
 SimpleItems.args = {
   items: [
-    {
-      title: '基础使用',
-      content: '这是一个简单的手风琴示例。'
-    },
-    {
-      title: '高级功能',
-      content: '支持多种样式和交互模式。'
-    }
+    { title: '基础使用', content: '这是一个简单的手风琴示例。' },
+    { title: '高级功能', content: '支持多种样式和交互模式。' },
   ],
   multiple: false,
   variant: 'default',
@@ -138,27 +140,25 @@ export const WithCustomContent = () => ({
     return { items }
   },
   template: `
-    <div class="w-full max-w-2xl">
-      <AccordionVue :items="items">
-        <template #content-0>
-          <div class="space-y-2">
-            <p>这里可以包含<strong>粗体文本</strong>和<em>斜体文本</em>。</p>
-            <ul class="list-disc pl-4">
-              <li>列表项 1</li>
-              <li>列表项 2</li>
-            </ul>
-          </div>
-        </template>
-        <template #content-1>
-          <div class="space-y-2">
-            <a href="#" class="text-blue-600 hover:underline">了解更多</a>
-            <br />
-            <button class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
-              点击按钮
-            </button>
-          </div>
-        </template>
-      </AccordionVue>
-    </div>
+    <AccordionVue :items="items">
+      <template #content-0>
+        <div class="space-y-2">
+          <p>这里可以包含<strong>粗体文本</strong>和<em>斜体文本</em>。</p>
+          <ul class="list-disc pl-4">
+            <li>列表项 1</li>
+            <li>列表项 2</li>
+          </ul>
+        </div>
+      </template>
+      <template #content-1>
+        <div class="space-y-2">
+          <a href="#" class="text-blue-600 hover:underline">了解更多</a>
+          <br />
+          <button class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+            点击按钮
+          </button>
+        </div>
+      </template>
+    </AccordionVue>
   `,
 }) 
