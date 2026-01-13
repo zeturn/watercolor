@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { computed, provide } from 'vue'
+import { computed, provide, toRefs } from 'vue'
 import './style.css'
 
 const props = defineProps({
@@ -100,12 +100,14 @@ const radioGroupClasses = computed(() => {
 })
 
 // Provide context to child Radio components
-provide('radioGroupContext', {
-  modelValue: props.modelValue,
-  name: props.name,
-  disabled: props.disabled,
-  size: props.size,
-  color: props.color,
+const { modelValue, name, disabled, size, color } = toRefs(props)
+
+provide('radioGroup', {
+  modelValue,
+  name,
+  disabled,
+  size,
+  color,
   updateValue: (value) => {
     emit('update:modelValue', value)
     emit('change', value)

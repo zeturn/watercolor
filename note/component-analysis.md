@@ -232,7 +232,7 @@
 
 ### Material-UI 核心组件覆盖率
 - ✅ 已覆盖: ~75%
-- ❌ 缺失核心组件: Dialog系统、Drawer、Stepper、Autocomplete、TreeView、Divider、Link
+- ❌ 缺失核心组件: Dialog系统、Drawer、Stepper、TreeView、Link
 - 🎁 额外特色: VideoPlayer, ImageGallery, PricingTable, Feature, Feed
 
 ### Ant Design 核心组件覆盖率

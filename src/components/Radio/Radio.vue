@@ -2,10 +2,10 @@
   <label :class="containerClasses">
     <input
       type="radio"
-      :name="name"
+      :name="computedName"
       :value="value"
       :checked="isChecked"
-      :disabled="disabled"
+      :disabled="computedDisabled"
       :class="radioClasses"
       @change="handleChange"
       @focus="handleFocus"
