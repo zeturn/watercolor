@@ -10,6 +10,8 @@
   "files": [
     "dist",
     "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
     "public/img/watercolorui.png"
   ],
   "scripts": {
@@ -72,7 +74,9 @@
     "eslint-plugin-storybook": "^9.0.14",
     "eslint-plugin-vitest": "^0.5.4",
     "eslint-plugin-vue": "^9.19.2",
+    "fs-extra": "^11.2.0",
     "jsdom": "^23.2.0",
+    "node-fetch": "^2.7.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "storybook": "9.0.14",
@@ -123,11 +127,9 @@
     "@tabler/icons-react": "^3.34.0",
     "@tabler/icons-vue": "^3.34.0",
     "feather-icons": "^4.29.2",
-    "fs-extra": "^11.2.0",
     "lucide": "^0.525.0",
     "lucide-react": "^0.525.0",
     "lucide-vue-next": "^0.525.0",
-    "node-fetch": "^2.7.0",
     "prop-types": "^15.8.1"
   }
 }

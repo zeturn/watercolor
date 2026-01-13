@@ -45,6 +45,7 @@ storybook-static-vue/
 note/
 *.md
 !README.md
+!CHANGELOG.md
 
 # 脚本和工具
 scripts/

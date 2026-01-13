@@ -149,7 +149,10 @@ describe('Accordion 组件', () => {
 
     const icon = wrapper.find('.wc-accordion-icon')
     expect(icon.exists()).toBe(true)
-    expect(icon.text()).toContain('▼')
+    // 检查 SVG 箭头是否存在
+    const svg = icon.find('svg')
+    expect(svg.exists()).toBe(true)
+    expect(svg.find('polyline').exists()).toBe(true)
   })
 
   it('具有正确的可访问性属性', () => {

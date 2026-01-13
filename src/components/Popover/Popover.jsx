@@ -30,7 +30,6 @@ export default function Popover({
   const actualOpen = isControlled ? open : internalOpen
 
   const setOpen = (state) => {
-    console.log('setOpen called with state:', state, 'isControlled:', isControlled)
     if (!isControlled) {
       setInternalOpen(state)
     }
@@ -40,7 +39,6 @@ export default function Popover({
   const openPopover = () => setOpen(true)
   const closePopover = () => setOpen(false)
   const togglePopover = () => {
-    console.log('Popover toggle clicked, current state:', actualOpen)
     setOpen(!actualOpen)
   }
 
@@ -82,7 +80,7 @@ export default function Popover({
   // Sync controlled state
   useEffect(() => {
     if (isControlled && open !== undefined) {
-      console.log('Controlled state synced:', open)
+      // Sync controlled state
     }
   }, [isControlled, open])
 
