@@ -26,6 +26,7 @@ module.exports = {
     'dist/**/*',
     'storybook-static/**/*',
     'storybook-static-react/**/*',
+    'storybook-static-vue/**/*',
     'coverage/**/*',
     '*.min.js',
     '*.bundle.js',

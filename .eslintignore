@@ -4,6 +4,7 @@ dist/
 assets/
 storybook-static/
 storybook-static-react/
+storybook-static-vue/
 coverage/
 
 # Cache
