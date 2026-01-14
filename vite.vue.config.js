@@ -6,6 +6,7 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
   plugins: [vue(), dts({ insertTypesEntry: true })],
   build: {
+    emptyOutDir: false,
     lib: {
       entry: resolve(__dirname, 'src/entry-vue.ts'),
       name: 'WatercolorVue',
@@ -17,6 +18,12 @@ export default defineConfig({
       output: {
         globals: {
           vue: 'Vue',
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'style.css') {
+            return 'watercolor-vue.css'
+          }
+          return assetInfo.name
         },
       },
     },

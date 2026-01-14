@@ -7,6 +7,28 @@
   "module": "dist/watercolor-ui.es.js",
   "types": "dist/index.d.ts",
   "style": "dist/watercolor-ui.css",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/watercolor-ui.es.js",
+      "require": "./dist/watercolor-ui.umd.js",
+      "default": "./dist/watercolor-ui.es.js"
+    },
+    "./react": {
+      "types": "./dist/src/entry-react.d.ts",
+      "import": "./dist/watercolor-react.es.js",
+      "require": "./dist/watercolor-react.umd.js",
+      "default": "./dist/watercolor-react.es.js"
+    },
+    "./vue": {
+      "types": "./dist/src/entry-vue.d.ts",
+      "import": "./dist/watercolor-vue.es.js",
+      "require": "./dist/watercolor-vue.umd.js",
+      "default": "./dist/watercolor-vue.es.js"
+    },
+    "./style.css": "./dist/watercolor-ui.css",
+    "./package.json": "./package.json"
+  },
   "files": [
     "dist",
     "README.md",
@@ -16,7 +38,8 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run build:core && npm run build:react && npm run build:vue",
+    "build:core": "vite build",
     "build:vue": "vite build --config vite.vue.config.js",
     "build:react": "vite build --config vite.react.config.js",
     "preview": "vite preview",

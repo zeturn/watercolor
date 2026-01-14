@@ -15,7 +15,13 @@ const requiredFiles = [
   'dist/watercolor-ui.css',
   'dist/watercolor-ui.es.js',
   'dist/watercolor-ui.umd.js',
+  'dist/watercolor-react.es.js',
+  'dist/watercolor-react.umd.js',
+  'dist/watercolor-vue.es.js',
+  'dist/watercolor-vue.umd.js',
   'dist/index.d.ts',
+  'dist/src/entry-react.d.ts',
+  'dist/src/entry-vue.d.ts',
   'README.md',
   'package.json',
   '.npmignore'
@@ -52,7 +58,11 @@ if (missingFields.length > 0) {
 const distFiles = [
   { name: 'watercolor-ui.css', maxSize: 500 }, // 500KB
   { name: 'watercolor-ui.es.js', maxSize: 800 }, // 800KB
-  { name: 'watercolor-ui.umd.js', maxSize: 600 } // 600KB
+  { name: 'watercolor-ui.umd.js', maxSize: 600 }, // 600KB
+  { name: 'watercolor-react.es.js', maxSize: 800 }, // 800KB
+  { name: 'watercolor-react.umd.js', maxSize: 600 }, // 600KB
+  { name: 'watercolor-vue.es.js', maxSize: 800 }, // 800KB
+  { name: 'watercolor-vue.umd.js', maxSize: 600 } // 600KB
 ]
 
 for (const file of distFiles) {

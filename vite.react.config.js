@@ -6,6 +6,7 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
   plugins: [react(), dts({ insertTypesEntry: true })],
   build: {
+    emptyOutDir: false,
     lib: {
       entry: resolve(__dirname, 'src/entry-react.ts'),
       name: 'WatercolorReact',
@@ -18,6 +19,12 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'style.css') {
+            return 'watercolor-react.css'
+          }
+          return assetInfo.name
         },
       },
     },
