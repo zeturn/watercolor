@@ -112,12 +112,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install latest npm
         run: npm i -g npm@latest
 
       - name: Show npm version
         run: npm --version
+
+      - name: Show GitHub OIDC env presence
+        run: |
+          if [ -n "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-}" ] && [ -n "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ]; then
+            echo "GitHub OIDC env is present"
+          else
+            echo "GitHub OIDC env is MISSING"
+          fi
 
       - name: Install dependencies
         run: npm ci
