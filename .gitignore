@@ -78,6 +78,9 @@ jspm_packages/
 tmp/
 temp/
 
+# Notes / internal docs
+note/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

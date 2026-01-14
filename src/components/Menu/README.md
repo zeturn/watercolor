@@ -1,5 +1,3 @@
-````markdown
-# Menu
 
 ## Introduction
 The **Menu** component displays a list of choices that appears when triggered by a button or other element. It supports various placements, variants, and can include icons, dividers, and custom content.
@@ -135,4 +133,3 @@ Released under the MIT License.
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)
 2025-01-13
-````

@@ -8,34 +8,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.5] - 2026-01-14
 
 ### Fixed
-- 🔧 修复 CI 工作流：添加依赖安装步骤以解决发布失败问题
-- 🔧 完善自动发布流程和文档
+- 🔧 Fix CI workflow: install dependencies to prevent publish failures
+- 🔧 Improve the automated release workflow and documentation
 
 ### Added
-- ✅ GitHub Actions CI/CD 自动发布工作流
-- ✅ 自动发布到 GitHub Packages
-- ✅ 自动发布到 npm
-- ✅ 自动创建 GitHub Release
+- ✅ GitHub Actions CI/CD auto-publish workflow
+- ✅ Automated publishing to GitHub Packages
+- ✅ Automated publishing to npm
+- ✅ Automated GitHub Release creation
 
 ### Documentation
-- 📝 新增 CI_SETUP.md CI配置指南
-- 📝 新增 PUBLISHING.md 完整发布指南
-- 📝 新增 QUICK_RELEASE.md 快速发布指南
-- 📝 新增自动化发布脚本 release.sh
-- 📝 更新 README.md 添加 GitHub Packages 安装说明
+- 📝 Add CI setup guide (CI_SETUP.md)
+- 📝 Add publishing guide (PUBLISHING.md)
+- 📝 Add quick release guide (QUICK_RELEASE.md)
+- 📝 Add automated release script (release.sh)
+- 📝 Update README.md with GitHub Packages install instructions
 
 ## [1.0.2] - 2026-01-14
 
 ### Added
-- ✅ GitHub Actions CI/CD 自动发布工作流
-- ✅ 自动发布到 GitHub Packages
-- ✅ 自动发布到 npm
-- ✅ 自动创建 GitHub Release
+- ✅ GitHub Actions CI/CD auto-publish workflow
+- ✅ Automated publishing to GitHub Packages
+- ✅ Automated publishing to npm
+- ✅ Automated GitHub Release creation
 
 ### Documentation
-- 📝 新增 PUBLISHING.md 完整发布指南
-- 📝 新增 QUICK_RELEASE.md 快速发布指南
-- 📝 更新 README.md 添加 GitHub Packages 安装说明
+- 📝 Add publishing guide (PUBLISHING.md)
+- 📝 Add quick release guide (QUICK_RELEASE.md)
+- 📝 Update README.md with GitHub Packages install instructions
 
 ## [1.0.1] - 2026-01-13
 

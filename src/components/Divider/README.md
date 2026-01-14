@@ -1,39 +1,39 @@
-# Divider 分割线组件
+# Divider
 
-分割线是一个基础布局组件，用于视觉分隔和内容区分。
+Divider is a basic layout component used to visually separate content.
 
-## 功能特性
+## Features
 
-- 🎨 多种变体支持（solid、dashed、dotted）
-- 📐 支持水平和垂直方向
-- 📝 支持在分割线中显示文字
-- 🎯 flexItem 支持在 flex 容器中自适应
-- 🔧 完整的主题变量支持
+- 🎨 Multiple variants (`solid`, `dashed`, `dotted`)
+- 📐 Horizontal and vertical orientations
+- 📝 Optional inline text
+- 🎯 `flexItem` support for flex containers
+- 🔧 Theme variable support
 
-## 使用示例
+## Usage
 
 ### React
 
 ```jsx
 import Divider from '@/components/Divider/Divider'
 
-// 基础分割线
+// Basic divider
 <Divider />
 
-// 虚线分割线
+// Dashed divider
 <Divider variant="dashed" />
 
-// 垂直分割线
+// Vertical divider
 <Divider orientation="vertical" />
 
-// 带文字的分割线
-<Divider>或者</Divider>
+// Divider with text
+<Divider>Or</Divider>
 
-// 在 flex 容器中使用
+// Inside a flex container
 <div style={{ display: 'flex' }}>
-  <div>内容1</div>
+  <div>Content 1</div>
   <Divider orientation="vertical" flexItem />
-  <div>内容2</div>
+  <div>Content 2</div>
 </div>
 ```
 
@@ -41,23 +41,23 @@ import Divider from '@/components/Divider/Divider'
 
 ```vue
 <template>
-  <!-- 基础分割线 -->
+  <!-- Basic divider -->
   <Divider />
 
-  <!-- 虚线分割线 -->
+  <!-- Dashed divider -->
   <Divider variant="dashed" />
 
-  <!-- 垂直分割线 -->
+  <!-- Vertical divider -->
   <Divider orientation="vertical" />
 
-  <!-- 带文字的分割线 -->
-  <Divider>或者</Divider>
+  <!-- Divider with text -->
+  <Divider>Or</Divider>
 
-  <!-- 在 flex 容器中使用 -->
+  <!-- Inside a flex container -->
   <div style="display: flex">
-    <div>内容1</div>
+    <div>Content 1</div>
     <Divider orientation="vertical" flex-item />
-    <div>内容2</div>
+    <div>Content 2</div>
   </div>
 </template>
 
@@ -68,29 +68,29 @@ import Divider from '@/components/Divider/Divider.vue'
 
 ## Props
 
-| 属性 | 类型 | 默认值 | 说明 |
-|-----|-----|--------|------|
-| `variant` | String | `'solid'` | 分割线变体，可选值：`solid` / `dashed` / `dotted` |
-| `orientation` | String | `'horizontal'` | 方向，可选值：`horizontal` / `vertical` |
-| `flexItem` | Boolean | `false` | 是否作为 flex 项目，用于在 flex 容器中自适应 |
-| `children` / `slot` | ReactNode / VNode | - | 分割线中的文字内容 |
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | String | `'solid'` | Divider style variant: `solid` / `dashed` / `dotted` |
+| `orientation` | String | `'horizontal'` | Direction: `horizontal` / `vertical` |
+| `flexItem` | Boolean | `false` | Whether it should behave as a flex item (useful in flex layouts) |
+| `children` / `slot` | ReactNode / VNode | - | Text/content rendered inside the divider |
 
-## 主题变量
+## Theme variables
 
-- `--wc-divider-color`: 分割线颜色（默认：`--wc-border-color`）
-- `--wc-spacing-md`: 外间距（默认：16px）
-- `--wc-spacing-sm`: 内间距（默认：8px）
-- `--wc-font-size-sm`: 文字大小（默认：14px）
-- `--wc-text-secondary`: 文字颜色（默认：#666）
+- `--wc-divider-color`: Divider color (default: `--wc-border-color`)
+- `--wc-spacing-md`: Outer spacing (default: 16px)
+- `--wc-spacing-sm`: Inner spacing (default: 8px)
+- `--wc-font-size-sm`: Text size (default: 14px)
+- `--wc-text-secondary`: Text color (default: #666)
 
-## 样式类
+## CSS classes
 
-- `.wc-divider`: 基础类
-- `.wc-divider--solid`: 实线样式
-- `.wc-divider--dashed`: 虚线样式
-- `.wc-divider--dotted`: 点线样式
-- `.wc-divider--horizontal`: 水平方向
-- `.wc-divider--vertical`: 垂直方向
-- `.wc-divider--flex-item`: flex 自适应
-- `.wc-divider--with-text`: 带文字样式
-- `.wc-divider__text`: 文字内容样式
+- `.wc-divider`: Base
+- `.wc-divider--solid`: Solid style
+- `.wc-divider--dashed`: Dashed style
+- `.wc-divider--dotted`: Dotted style
+- `.wc-divider--horizontal`: Horizontal
+- `.wc-divider--vertical`: Vertical
+- `.wc-divider--flex-item`: Flex-item behavior
+- `.wc-divider--with-text`: With text
+- `.wc-divider__text`: Text element

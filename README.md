@@ -36,7 +36,7 @@ A modern minimalist cross-framework component library supporting Vue 3 and React
 
 ### Installation
 
-#### From npm (推荐)
+#### From npm (recommended)
 
 ```bash
 npm install watercolor-ui
@@ -48,13 +48,13 @@ pnpm add watercolor-ui
 
 #### From GitHub Packages
 
-首先配置 `.npmrc`：
+First, configure `.npmrc`:
 
 ```bash
 echo "@zeturn:registry=https://npm.pkg.github.com" >> .npmrc
 ```
 
-然后安装：
+Then install:
 
 ```bash
 npm install @zeturn/watercolor-ui
