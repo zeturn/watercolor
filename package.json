@@ -1,6 +1,6 @@
 {
   "name": "watercolor-ui",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "description": "A modern minimalist cross-framework component library",
   "type": "module",
   "main": "dist/watercolor-ui.umd.js",

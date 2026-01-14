@@ -154,6 +154,69 @@ jobs:
             echo "GitHub OIDC env is MISSING"
           fi
 
+      - name: Show GitHub OIDC token claims (safe)
+        run: |
+          set -euo pipefail
+          node --input-type=module - <<'NODE'
+
+          function base64UrlDecode(input) {
+            const pad = '='.repeat((4 - (input.length % 4)) % 4);
+            const b64 = (input + pad).replace(/-/g, '+').replace(/_/g, '/');
+            return Buffer.from(b64, 'base64').toString('utf8');
+          }
+
+          const url = process.env.ACTIONS_ID_TOKEN_REQUEST_URL;
+          const token = process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN;
+          if (!url || !token) {
+            console.log('OIDC env missing; cannot request an id-token');
+            process.exit(0);
+          }
+
+          // Request an ID token with the audience npm is expected to use.
+          const requestUrl = url.includes('?') ? `${url}&audience=npm` : `${url}?audience=npm`;
+          const res = await fetch(requestUrl, {
+            headers: {
+              Authorization: `bearer ${token}`,
+            },
+          });
+          if (!res.ok) {
+            console.log(`Failed to request id-token: HTTP ${res.status}`);
+            process.exit(0);
+          }
+          const data = await res.json();
+          const value = data?.value;
+          if (!value || typeof value !== 'string') {
+            console.log('Unexpected id-token response shape');
+            process.exit(0);
+          }
+
+          const parts = value.split('.');
+          if (parts.length < 2) {
+            console.log('Unexpected JWT format');
+            process.exit(0);
+          }
+          const payload = JSON.parse(base64UrlDecode(parts[1]));
+
+          // Print only the useful matching fields for npm Trusted Publisher config.
+          const picked = {
+            iss: payload.iss,
+            aud: payload.aud,
+            sub: payload.sub,
+            repository: payload.repository,
+            repository_owner: payload.repository_owner,
+            workflow: payload.workflow,
+            workflow_ref: payload.workflow_ref,
+            job_workflow_ref: payload.job_workflow_ref,
+            ref: payload.ref,
+            sha: payload.sha,
+            actor: payload.actor,
+            environment: payload.environment,
+          };
+
+          console.log('OIDC token claims (subset):');
+          console.log(JSON.stringify(picked, null, 2));
+          NODE
+
       - name: Show npm auth diagnostics (safe)
         run: |
           set -euo pipefail
@@ -201,10 +264,44 @@ jobs:
           path: dist/
 
       - name: Publish to npm (via OIDC)
-        run: npm publish --provenance
+        run: npm publish --provenance --loglevel=verbose
         # OIDC Trusted Publishing 失败时应直接失败，避免“绿灯但没发出去”
         env:
           NODE_AUTH_TOKEN: ''
+
+      - name: Collect npm debug log (sanitized)
+        if: failure()
+        run: |
+          set -euo pipefail
+          mkdir -p npm-logs
+
+          if [ ! -d "$HOME/.npm/_logs" ]; then
+            echo "No npm log dir found"
+            exit 0
+          fi
+
+          latest_log="$(ls -t "$HOME/.npm/_logs"/*-debug-0.log 2>/dev/null | head -n 1 || true)"
+          if [ -z "$latest_log" ]; then
+            echo "No npm debug log found"
+            ls -la "$HOME/.npm/_logs" || true
+            exit 0
+          fi
+
+          echo "Found npm debug log: $latest_log"
+
+          # Redact bearer tokens and JWT-like strings.
+          sed -E \
+            -e 's/(Bearer )[A-Za-z0-9._-]+/\1***REDACTED***/g' \
+            -e 's/eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+/***JWT_REDACTED***/g' \
+            "$latest_log" > "npm-logs/$(basename "$latest_log")"
+
+      - name: Upload npm debug log artifact
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-debug-log
+          path: npm-logs/
+          retention-days: 7
 
   create-release:
     needs: [build-and-test]  # 只依赖构建，不依赖发布
