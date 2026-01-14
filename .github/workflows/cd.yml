@@ -107,8 +107,6 @@ jobs:
     env:
       # Ensure token-based auth cannot interfere with OIDC trusted publishing.
       NODE_AUTH_TOKEN: ''
-      # Use an explicit, job-scoped npmrc so we can guarantee it contains no auth tokens.
-      NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -118,6 +116,9 @@ jobs:
         with:
           node-version: '24'
           cache: 'npm'
+
+      - name: Set npm userconfig path
+        run: echo "NPM_CONFIG_USERCONFIG=$RUNNER_TEMP/npmrc" >> "$GITHUB_ENV"
 
       - name: Install latest npm
         run: npm i -g npm@latest
