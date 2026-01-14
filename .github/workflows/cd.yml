@@ -281,7 +281,27 @@ jobs:
 
       - name: Publish to npm (via OIDC)
         if: steps.npm_version_check.outputs.skip != 'true'
-        run: npm publish --provenance --loglevel=verbose
+        run: |
+          set -euo pipefail
+          set +e
+          out="$(npm publish --provenance --loglevel=verbose 2>&1)"
+          code=$?
+          set -e
+
+          echo "$out"
+
+          if [ $code -eq 0 ]; then
+            exit 0
+          fi
+
+          # If a concurrent process published the same version after our check,
+          # treat this as success (idempotent publish).
+          if echo "$out" | grep -qE "cannot publish over the previously published versions"; then
+            echo "Version already published; treating as success."
+            exit 0
+          fi
+
+          exit $code
         # OIDC Trusted Publishing 失败时应直接失败，避免“绿灯但没发出去”
         env:
           NODE_AUTH_TOKEN: ''
