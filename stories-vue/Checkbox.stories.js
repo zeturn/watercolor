@@ -7,7 +7,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: '水彩设计系统的复选框组件，完全兼容Material-UI的Checkbox API。支持单选、多选、不确定状态和多种颜色主题。'
+        component: '水彩设计系统的复选框组件，支持单选、多选、不确定状态和多种颜色主题。'
       }
     }
   },

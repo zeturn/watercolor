@@ -6,7 +6,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: '水彩设计系统的图标按钮组件，完全兼容Material-UI的IconButton API。支持多种颜色、尺寸和边缘定位。'
+        component: '水彩设计系统的图标按钮组件，支持多种颜色、尺寸和边缘定位。'
       }
     }
   },

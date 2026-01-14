@@ -6,7 +6,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: '水彩设计系统的文本字段组件，完全兼容Material-UI的TextField API。支持多种变体、尺寸和验证状态。'
+        component: '水彩设计系统的文本字段组件，支持多种变体、尺寸和验证状态。'
       }
     }
   },

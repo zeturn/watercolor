@@ -11,7 +11,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: 'Box组件提供了一个通用的容器，支持spacing、布局、颜色等属性的快速设置。类似于Material-UI的Box组件。'
+        component: 'Box组件提供了一个通用的容器，支持spacing、布局、颜色等属性的快速设置。'
       }
     }
   },

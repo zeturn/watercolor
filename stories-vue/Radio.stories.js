@@ -7,7 +7,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: '水彩设计系统的单选按钮组件，完全兼容Material-UI的Radio API。支持多种颜色主题和尺寸，通常与RadioGroup一起使用。'
+        component: '水彩设计系统的单选按钮组件，支持多种颜色主题和尺寸，通常与RadioGroup一起使用。'
       }
     }
   },

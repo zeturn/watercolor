@@ -6,7 +6,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: '水彩设计系统的浮动操作按钮组件，完全兼容Material-UI的Fab API。支持圆形和扩展变体，多种尺寸和颜色。'
+        component: '水彩设计系统的浮动操作按钮组件，支持圆形和扩展变体，多种尺寸和颜色。'
       }
     }
   },

@@ -1,9 +1,0 @@
-import{r as t,j as c}from"./iframe-DqwHGwZR.js";const h=({value:r=0,max:u=5,readOnly:n=!1,onChange:d=()=>{},className:f="",style:m={},...g})=>{const[p,v]=t.useState(0),[l,s]=t.useState(r);t.useEffect(()=>s(r),[r]),t.useEffect(()=>{if(document.getElementById("wc-rating-style"))return;const e=document.createElement("style");e.id="wc-rating-style",e.innerHTML=`
-      .wc-rating{display:inline-flex;gap:4px;}
-      .wc-rating-item{background:none;border:none;cursor:pointer;font-size:1.5rem;line-height:1;padding:0;color:var(--wc-neutral-300);transition:color 0.2s ease;}
-      .wc-rating-item.active{color:var(--wc-warning-500);}
-      .wc-rating-item:hover{transform:scale(1.1);}
-      .wc-rating-item:disabled{cursor:default;}
-      .dark .wc-rating-item{color:var(--wc-neutral-500);}
-      .dark .wc-rating-item.active{color:var(--wc-warning-400);}
-    `,document.head.appendChild(e)},[]);const w=e=>{if(n)return;const a=e===l?0:e;s(a),d(a)},i=e=>{n||v(e)},o=[];for(let e=1;e<=u;e++){const a=e<=p||e<=l;o.push(c.jsx("button",{type:"button",className:`wc-rating-item ${a?"active":""}`,onMouseEnter:()=>i(e),onMouseLeave:()=>i(0),onClick:()=>w(e),disabled:n,"aria-checked":e===l,role:"radio",children:a?"★":"☆"},e))}return c.jsx("div",{className:`wc-rating ${f}`,role:"radiogroup","aria-label":"评分组件",style:m,...g,children:o})};h.__docgenInfo={description:"Rating (React)\r\n支持 0- `max` 星级评分，可只读。",methods:[],displayName:"Rating",props:{value:{defaultValue:{value:"0",computed:!1},required:!1},max:{defaultValue:{value:"5",computed:!1},required:!1},readOnly:{defaultValue:{value:"false",computed:!1},required:!1},onChange:{defaultValue:{value:"() => {}",computed:!1},required:!1},className:{defaultValue:{value:"''",computed:!1},required:!1},style:{defaultValue:{value:"{}",computed:!1},required:!1}}};export{h as R};

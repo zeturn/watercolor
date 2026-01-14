@@ -7,7 +7,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: '水彩设计系统的选择器组件，完全兼容Material-UI的Select API。支持单选、多选、搜索等功能。'
+        component: '水彩设计系统的选择器组件，支持单选、多选、搜索等功能。'
       }
     }
   },

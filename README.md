@@ -4,7 +4,7 @@
 
 ![Watercolor UI Logo](https://github.com/zeturn/watercolor/blob/main/public/img/watercolorui.png)
 
-A modern minimalist cross-framework component library supporting Vue 3 and React 18+, perfect alternative to Material-UI.
+A modern minimalist cross-framework component library supporting Vue 3 and React 18+.
 
 [![npm version](https://badge.fury.io/js/watercolor-ui.svg)](https://badge.fury.io/js/watercolor-ui)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
@@ -22,11 +22,9 @@ A modern minimalist cross-framework component library supporting Vue 3 and React
 - 🎨 **Watercolor Design Language** - Modern watercolor-style design, soft and elegant
 - 🌙 **Dark Mode Support** - Complete dark mode support with automatic switching
 - 🎯 **Cross-Framework Compatible** - Supports both Vue 3 and React 18+
-- 🔄 **Material-UI Compatibility Layer** - Complete Material-UI API compatibility for zero-cost migration
 - 🎭 **Theme System** - Fully customizable color system and theme presets
 - 🛠️ **TypeScript First** - Complete type support and IntelliSense
 - 📚 **Storybook Documentation** - Complete component documentation and interactive demos
-- 🚀 **Zero-Config Migration** - Seamless migration from Material-UI with minimal code changes
 - ⚡ **Performance Optimized** - Tree-shaking optimization with excellent runtime performance
 - 🌐 **Internationalization** - Built-in multi-language support
 - 🎁 **Rich Components** - 60+ high-quality components covering all common use cases
@@ -70,18 +68,6 @@ import 'watercolor-ui/dist/style.css'
 ```
 
 ### Usage
-
-#### 🎯 Migration from Material-UI (Recommended)
-
-The simplest migration approach is using our compatibility layer with minimal code changes:
-
-```javascript
-// Replace all Material-UI imports with Watercolor compatibility layer
-// import { Button, TextField, Card, Container, Typography } from '@mui/material'
-import { Button, TextField, Card, Container, Typography } from 'watercolor-ui/mui-compat'
-
-// No other code changes needed, API is fully compatible!
-```
 
 #### 🔗 Vue 3 Usage
 
@@ -449,56 +435,56 @@ Watercolor UI provides **60+** high-quality components, completely covering all 
 
 ### 🎛️ Form Components
 
-| Component | Vue | React | Material-UI Compatible | Description |
-|------|:---:|:-----:|:----------------:|------|
-| Button | ✅ | ✅ | ✅ | Button component with multiple variants and states |
-| IconButton | ✅ | ✅ | ✅ | Icon button |
-| Fab | ✅ | ✅ | ✅ | Floating action button |
-| TextField | ✅ | ✅ | ✅ | Text input field |
-| Input | ✅ | ✅ | ✅ | Basic input component |
-| Select | ✅ | ✅ | ✅ | Select dropdown |
-| Checkbox | ✅ | ✅ | ✅ | Checkbox |
-| Radio | ✅ | ✅ | ✅ | Radio button |
-| RadioGroup | ✅ | ✅ | ✅ | Radio button group |
-| Switch | ✅ | ✅ | ✅ | Toggle switch |
-| Slider | ✅ | ✅ | ✅ | Slider |
-| FileInput | ✅ | ✅ | ⭕ | File upload |
-| DatePicker | ✅ | ✅ | ⭕ | Date picker |
-| ColorPicker | ✅ | ✅ | ⭕ | Color picker |
-| VerificationCodeInput | ✅ | ✅ | ⭕ | Verification code input |
+| Component | Vue | React | Description |
+|------|:---:|:-----:|------|
+| Button | ✅ | ✅ | Button component with multiple variants and states |
+| IconButton | ✅ | ✅ | Icon button |
+| Fab | ✅ | ✅ | Floating action button |
+| TextField | ✅ | ✅ | Text input field |
+| Input | ✅ | ✅ | Basic input component |
+| Select | ✅ | ✅ | Select dropdown |
+| Checkbox | ✅ | ✅ | Checkbox |
+| Radio | ✅ | ✅ | Radio button |
+| RadioGroup | ✅ | ✅ | Radio button group |
+| Switch | ✅ | ✅ | Toggle switch |
+| Slider | ✅ | ✅ | Slider |
+| FileInput | ✅ | ✅ | File upload |
+| DatePicker | ✅ | ✅ | Date picker |
+| ColorPicker | ✅ | ✅ | Color picker |
+| VerificationCodeInput | ✅ | ✅ | Verification code input |
 
 ### 🏗️ Layout Components
 
-| Component | Vue | React | Material-UI Compatible | Description |
-|------|:---:|:-----:|:----------------:|------|
-| Container | ✅ | ✅ | ✅ | Container component |
-| Box | ✅ | ✅ | ✅ | Box layout |
-| Grid | ✅ | ✅ | ✅ | Grid layout |
-| Paper | ✅ | ✅ | ✅ | Paper container |
+| Component | Vue | React | Description |
+|------|:---:|:-----:|------|
+| Container | ✅ | ✅ | Container component |
+| Box | ✅ | ✅ | Box layout |
+| Grid | ✅ | ✅ | Grid layout |
+| Paper | ✅ | ✅ | Paper container |
 
 ### 💬 Feedback Components
 
-| Component | Vue | React | Material-UI Compatible | Description |
-|------|:---:|:-----:|:----------------:|------|
-| Alert | ✅ | ✅ | ✅ | Alert message |
-| Snackbar | ✅ | ✅ | ✅ | Toast notification |
-| Tooltip | ✅ | ✅ | ✅ | Tooltip |
-| Progress | ✅ | ✅ | ✅ | Progress indicator |
-| Skeleton | ✅ | ✅ | ✅ | Loading skeleton |
-| Spinner | ✅ | ✅ | ⭕ | Loading spinner |
+| Component | Vue | React | Description |
+|------|:---:|:-----:|------|
+| Alert | ✅ | ✅ | Alert message |
+| Snackbar | ✅ | ✅ | Toast notification |
+| Tooltip | ✅ | ✅ | Tooltip |
+| Progress | ✅ | ✅ | Progress indicator |
+| Skeleton | ✅ | ✅ | Loading skeleton |
+| Spinner | ✅ | ✅ | Loading spinner |
 
 ### 📊 Data Display Components
 
-| Component | Vue | React | Material-UI Compatible | Description |
-|------|:---:|:-----:|:----------------:|------|
-| Table | ✅ | ✅ | ✅ | Data table |
-| List | ✅ | ✅ | ✅ | List |
-| Card | ✅ | ✅ | ✅ | Card container |
-| Avatar | ✅ | ✅ | ✅ | Avatar |
-| Badge | ✅ | ✅ | ✅ | Badge |
-| Chip | ✅ | ✅ | ✅ | Chip |
-| Typography | ✅ | ✅ | ✅ | Typography |
-| Rating | ✅ | ✅ | ⭕ | Star rating |
+| Component | Vue | React | Description |
+|------|:---:|:-----:|------|
+| Table | ✅ | ✅ | Data table |
+| List | ✅ | ✅ | List |
+| Card | ✅ | ✅ | Card container |
+| Avatar | ✅ | ✅ | Avatar |
+| Badge | ✅ | ✅ | Badge |
+| Chip | ✅ | ✅ | Chip |
+| Typography | ✅ | ✅ | Typography |
+| Rating | ✅ | ✅ | Star rating |
 
 ## 🎪 Design Philosophy
 

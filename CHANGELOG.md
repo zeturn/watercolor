@@ -52,7 +52,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release of Watercolor UI
 - 60+ cross-framework components for Vue 3 and React 18+
-- Material-UI compatibility layer for zero-cost migration
 - Complete theme system with file-based configuration
 - Dark mode support
 - TypeScript support with full type definitions

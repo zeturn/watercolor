@@ -109,7 +109,7 @@
 ### 高优先级 - 核心缺失组件（10个）
 
 #### 1. **Dialog/DialogActions/DialogContent/DialogTitle** 🔴 高优
-**理由**: Dialog是Material-UI中最常用的组件之一，目前只有Modal，需要提供完整的Dialog组件系统。
+**理由**: Dialog是常用的核心组件之一，目前只有Modal，需要提供完整的Dialog组件系统。
 **用途**: 对话框、确认框、表单弹窗等。
 
 #### 2. **Drawer** 🔴 高优
@@ -202,7 +202,7 @@
 **建议**: Modal作为底层组件，Dialog基于Modal构建，提供更好的语义和API。
 
 ### 4. **SlideOver → Drawer**
-**建议**: 将SlideOver重命名为Drawer，符合Material-UI命名规范。
+**建议**: 将SlideOver重命名为Drawer，符合通用命名规范。
 
 ---
 
@@ -230,7 +230,7 @@
 
 ## 🎯 竞品对比
 
-### Material-UI 核心组件覆盖率
+### 行业常见组件覆盖率
 - ✅ 已覆盖: ~75%
 - ❌ 缺失核心组件: Dialog系统、Drawer、Stepper、TreeView、Link
 - 🎁 额外特色: VideoPlayer, ImageGallery, PricingTable, Feature, Feed

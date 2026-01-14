@@ -7,7 +7,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: '水彩设计系统的滑块组件，完全兼容Material-UI的Slider API。支持连续值选择、步长设置、值标签显示等功能。'
+        component: '水彩设计系统的滑块组件，支持连续值选择、步长设置、值标签显示等功能。'
       }
     }
   },
