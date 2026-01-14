@@ -146,5 +146,5 @@ node -e "console.log(require('watercolor-ui'))"
 ## 📞 支持
 
 如果遇到发布问题，请联系：
-- 邮箱: support@watercolor-ui.dev
+- 邮箱: support@hollowdata.com
 - GitHub Issues: https://github.com/zeturn/watercolor/issues 

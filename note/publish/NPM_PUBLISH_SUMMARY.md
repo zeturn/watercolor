@@ -162,9 +162,9 @@ git push --follow-tags
 ## 📞 支持
 
 如果遇到任何问题：
-- 📧 邮箱: support@watercolor-ui.dev
+- 📧 邮箱: support@hollowdata.com
 - 🐛 GitHub Issues: https://github.com/zeturn/watercolor/issues
-- 📚 文档: https://watercolor-ui.dev
+- 📚 文档: https://hollowdata.com
 
 ---
 

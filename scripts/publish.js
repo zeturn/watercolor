@@ -70,7 +70,7 @@ try {
   console.log('\n🎉 发布成功！')
   console.log(`📦 包名: watercolor-ui@${newVersion}`)
   console.log(`🌐 npm页面: https://www.npmjs.com/package/watercolor-ui`)
-  console.log(`📚 文档: https://watercolor-ui.dev`)
+  console.log(`📚 文档: https://hollowdata.com`)
   
 } catch (error) {
   console.error('\n❌ 发布失败:', error.message)

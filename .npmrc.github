@@ -1,0 +1,5 @@
+# GitHub Packages 配置示例
+# 使用此配置从 GitHub Packages 安装包
+
+@zeturn:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}

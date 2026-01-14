@@ -103,14 +103,17 @@
   ],
   "author": {
     "name": "Watercolor UI Team",
-    "email": "support@watercolor-ui.dev",
-    "url": "https://watercolor-ui.dev"
+    "email": "support@hollowdata.com",
+    "url": "https://hollowdata.com"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/zeturn/watercolor.git"
   },
-  "homepage": "https://watercolor-ui.dev",
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://hollowdata.com",
   "bugs": {
     "url": "https://github.com/zeturn/watercolor/issues"
   },
