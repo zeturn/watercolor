@@ -112,11 +112,14 @@ jobs:
       - name: Setup Node.js for npm
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Upgrade npm to support Trusted Publisher
-        run: npm i -g npm@11.5.1
+      - name: Install latest npm
+        run: npm i -g npm@latest
+
+      - name: Show npm version
+        run: npm --version
 
       - name: Install dependencies
         run: npm ci
@@ -129,10 +132,6 @@ jobs:
 
       - name: Publish to npm (via OIDC)
         run: npm publish --provenance
-        env:
-          # Trusted Publisher 通过 OIDC 自动认证
-          # 如果失败，检查 npm 账户的 Trusted Publisher 配置
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         continue-on-error: true
 
   create-release:
