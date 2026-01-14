@@ -101,6 +101,7 @@ jobs:
     needs: build-and-test
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v'))
+    environment: DEV
     permissions:
       id-token: write
       contents: read
