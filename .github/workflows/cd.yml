@@ -104,6 +104,11 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    env:
+      # Ensure token-based auth cannot interfere with OIDC trusted publishing.
+      NODE_AUTH_TOKEN: ''
+      # Use an explicit, job-scoped npmrc so we can guarantee it contains no auth tokens.
+      NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -112,13 +117,33 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
 
       - name: Install latest npm
         run: npm i -g npm@latest
 
       - name: Show npm version
         run: npm --version
+
+      - name: Configure npm for trusted publishing (no auth)
+        run: |
+          set -euo pipefail
+          echo "registry=https://registry.npmjs.org/" > "$NPM_CONFIG_USERCONFIG"
+          echo "Using NPM_CONFIG_USERCONFIG=$NPM_CONFIG_USERCONFIG"
+          echo "npm registry: $(npm config get registry)"
+
+          # Enforce npm CLI minimum required for Trusted Publishing.
+          node - <<'NODE'
+          const { execSync } = require('node:child_process');
+          const raw = execSync('npm --version', { encoding: 'utf8' }).trim();
+          const [maj, min, pat] = raw.split('.').map((x) => Number(x));
+          const ok = maj > 11 || (maj === 11 && (min > 5 || (min === 5 && pat >= 1)));
+          if (!ok) {
+            console.error(`npm CLI >= 11.5.1 required for trusted publishing; detected ${raw}`);
+            process.exit(1);
+          }
+          console.log(`npm version OK: ${raw}`);
+          NODE
 
       - name: Show GitHub OIDC env presence
         run: |
@@ -183,7 +208,7 @@ jobs:
   create-release:
     needs: [build-and-test]  # 只依赖构建，不依赖发布
     runs-on: ubuntu-latest
-    if: always()  # 即使发布失败也创建 Release
+    if: always() && startsWith(github.ref, 'refs/tags/v')  # 仅对版本标签创建/更新 Release
     permissions:
       contents: write
     steps:
@@ -194,31 +219,29 @@ jobs:
         id: version
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
-      - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create or update GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release v${{ steps.version.outputs.VERSION }}
+          tag_name: ${{ github.ref_name }}
+          name: Release v${{ steps.version.outputs.VERSION }}
           body: |
             ## Watercolor UI v${{ steps.version.outputs.VERSION }}
-            
+
             ### 安装方式
-            
+
             #### 从 npm 安装
             ```bash
             npm install watercolor-ui@${{ steps.version.outputs.VERSION }}
             ```
-            
+
             #### 从 GitHub Packages 安装
             ```bash
             npm install @zeturn/watercolor-ui@${{ steps.version.outputs.VERSION }}
             ```
-            
+
             ### 更新日志
             查看 [CHANGELOG.md](https://github.com/zeturn/watercolor/blob/main/CHANGELOG.md) 了解详细更新内容。
-            
+
             ### 文档
             - 📚 [完整文档](https://hollowdata.com)
             - 🎨 [Vue Demo](https://zeturn.github.io/watercolor/vue/)
