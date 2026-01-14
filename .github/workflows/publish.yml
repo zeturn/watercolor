@@ -86,6 +86,7 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true  # 如果版本已存在，继续执行后续步骤
 
       - name: Restore original package.json
         if: always()
@@ -121,8 +122,9 @@ jobs:
         continue-on-error: true
 
   create-release:
-    needs: [publish-gpr, publish-npm]
+    needs: [build-and-test]  # 只依赖构建，不依赖发布
     runs-on: ubuntu-latest
+    if: always()  # 即使发布失败也创建 Release
     permissions:
       contents: write
     steps:
