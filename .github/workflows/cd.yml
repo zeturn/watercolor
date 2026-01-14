@@ -264,7 +264,23 @@ jobs:
           name: dist
           path: dist/
 
+      - name: Check if version already published to npm
+        id: npm_version_check
+        run: |
+          set -euo pipefail
+          VERSION="$(node -p "require('./package.json').version")"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+
+          if npm view "watercolor-ui@${VERSION}" version >/dev/null 2>&1; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "watercolor-ui@${VERSION} already exists on npm; skipping publish"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "watercolor-ui@${VERSION} not found on npm; will publish"
+          fi
+
       - name: Publish to npm (via OIDC)
+        if: steps.npm_version_check.outputs.skip != 'true'
         run: npm publish --provenance --loglevel=verbose
         # OIDC Trusted Publishing 失败时应直接失败，避免“绿灯但没发出去”
         env:
