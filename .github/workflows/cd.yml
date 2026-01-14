@@ -137,6 +137,12 @@ jobs:
           echo "GITHUB_REF=${GITHUB_REF}"
           echo "GITHUB_EVENT_NAME=${GITHUB_EVENT_NAME}"
 
+          if [ -n "${NPM_CONFIG_USERCONFIG:-}" ]; then
+            echo "NPM_CONFIG_USERCONFIG=${NPM_CONFIG_USERCONFIG}"
+          else
+            echo "NPM_CONFIG_USERCONFIG is not set"
+          fi
+
           if [ -n "${NODE_AUTH_TOKEN:-}" ]; then
             echo "NODE_AUTH_TOKEN is set (length: ${#NODE_AUTH_TOKEN})"
           else
@@ -152,6 +158,13 @@ jobs:
             echo "~/.npmrc does not exist"
           fi
 
+          if [ -n "${NPM_CONFIG_USERCONFIG:-}" ] && [ -f "${NPM_CONFIG_USERCONFIG}" ]; then
+            echo "userconfig .npmrc (redacted):"
+            sed -E 's/(_authToken=).+$/\1***REDACTED***/' "${NPM_CONFIG_USERCONFIG}"
+          else
+            echo "userconfig .npmrc does not exist"
+          fi
+
       - name: Install dependencies
         run: npm ci
 
@@ -164,6 +177,8 @@ jobs:
       - name: Publish to npm (via OIDC)
         run: npm publish --provenance
         # OIDC Trusted Publishing 失败时应直接失败，避免“绿灯但没发出去”
+        env:
+          NODE_AUTH_TOKEN: ''
 
   create-release:
     needs: [build-and-test]  # 只依赖构建，不依赖发布
