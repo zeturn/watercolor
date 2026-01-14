@@ -128,18 +128,29 @@ jobs:
             echo "GitHub OIDC env is MISSING"
           fi
 
-      - name: Mint npm OIDC token
+      - name: Show npm auth diagnostics (safe)
         run: |
           set -euo pipefail
-          if [ -z "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-}" ] || [ -z "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ]; then
-            echo "Missing GitHub OIDC env vars" >&2
-            exit 1
+          echo "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
+          echo "GITHUB_WORKFLOW=${GITHUB_WORKFLOW}"
+          echo "GITHUB_WORKFLOW_REF=${GITHUB_WORKFLOW_REF}"
+          echo "GITHUB_REF=${GITHUB_REF}"
+          echo "GITHUB_EVENT_NAME=${GITHUB_EVENT_NAME}"
+
+          if [ -n "${NODE_AUTH_TOKEN:-}" ]; then
+            echo "NODE_AUTH_TOKEN is set (length: ${#NODE_AUTH_TOKEN})"
+          else
+            echo "NODE_AUTH_TOKEN is NOT set"
           fi
 
-          # Request an OIDC token for npm as the audience.
-          response="$(curl -sS -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=npm")"
-          token="$(node -e 'const r=JSON.parse(process.argv[1]); if(!r.value) process.exit(2); process.stdout.write(r.value);' "$response")"
-          echo "NODE_AUTH_TOKEN=$token" >> "$GITHUB_ENV"
+          echo "npm registry: $(npm config get registry)"
+
+          if [ -f "$HOME/.npmrc" ]; then
+            echo "~/.npmrc (redacted):"
+            sed -E 's/(_authToken=).+$/\1***REDACTED***/' "$HOME/.npmrc"
+          else
+            echo "~/.npmrc does not exist"
+          fi
 
       - name: Install dependencies
         run: npm ci
