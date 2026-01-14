@@ -4,7 +4,7 @@
 
 ![Watercolor UI Logo](https://github.com/zeturn/watercolor/blob/main/public/img/watercolorui.png)
 
-A modern minimalist cross-framework component library supporting Vue 3 and React 18+.
+A modern minimalist cross-framework component library for Vue 3 and React 18+.
 
 [![npm version](https://badge.fury.io/js/watercolor-ui.svg)](https://badge.fury.io/js/watercolor-ui)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
@@ -13,28 +13,29 @@ A modern minimalist cross-framework component library supporting Vue 3 and React
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 [![Storybook](https://img.shields.io/badge/Storybook-Ready-FF4785?logo=storybook)](https://storybook.js.org/)
 
-[🚀 Quick Start](#-quick-start) • [📚 Documentation](https://hollowdata.com) • [🎨 Live Demo](https://zeturn.github.io/watercolor/vue/) • [🔧 Components](#-component-overview)
+[Quick Start](#quick-start) • [Documentation](https://hollowdata.com) • [Live Demo](https://zeturn.github.io/watercolor/vue/) • [Components](#component-overview) • [Changelog](CHANGELOG.md)
 
 </div>
 
-## ✨ Features
+## Features
 
-- 🎨 **Watercolor Design Language** - Modern watercolor-style design, soft and elegant
-- 🌙 **Dark Mode Support** - Complete dark mode support with automatic switching
-- 🎯 **Cross-Framework Compatible** - Supports both Vue 3 and React 18+
-- 🎭 **Theme System** - Fully customizable color system and theme presets
-- 🛠️ **TypeScript First** - Complete type support and IntelliSense
-- 📚 **Storybook Documentation** - Complete component documentation and interactive demos
-- ⚡ **Performance Optimized** - Tree-shaking optimization with excellent runtime performance
-- 🌐 **Internationalization** - Built-in multi-language support
-- 🎁 **Rich Components** - 60+ high-quality components covering all common use cases
-- 🎪 **Flat Design** - Ultra-minimal flat design without shadows or borders, pure HTML+CSS
+- Watercolor design language with soft, modern visuals
+- Cross-framework support for Vue 3 and React 18+
+- File-based theme system with CSS variables
+- Dark mode utilities built in
+- TypeScript-first API with full type definitions
+- Tree-shakable builds with optimized bundle size
+- Storybook docs for interactive component demos
+- 60+ components covering common UI patterns
 
-## 🚀 Quick Start
+## Quick Start
 
-### Installation
+### Requirements
 
-#### From npm (recommended)
+- Node.js >= 16
+- npm >= 8 (or pnpm/yarn)
+
+### Install
 
 ```bash
 npm install watercolor-ui
@@ -44,278 +45,68 @@ yarn add watercolor-ui
 pnpm add watercolor-ui
 ```
 
-#### From GitHub Packages
-
-First, configure `.npmrc`:
-
-```bash
-echo "@zeturn:registry=https://npm.pkg.github.com" >> .npmrc
-```
-
-Then install:
-
-```bash
-npm install @zeturn/watercolor-ui
-```
-
-### Style Configuration
-
-Make sure to import styles in your project entry file:
+### Styles
 
 ```js
 // main.js or main.ts
 import 'watercolor-ui/dist/style.css'
 ```
 
-### Usage
-
-#### 🔗 Vue 3 Usage
+### Vue Usage
 
 ```vue
 <template>
   <div class="app">
-    <!-- Button Component -->
-    <ButtonVue 
-      variant="primary" 
-      size="md"
-      :loading="isLoading"
-      @click="handleClick"
-    >
-      {{ isLoading ? 'Loading...' : 'Click Button' }}
-    </ButtonVue>
-    
-    <!-- Input Component -->
-    <InputVue 
-      v-model="form.username"
-      label="Username"
-      placeholder="Enter username"
-      :required="true"
-      :error="errors.username"
-      helper-text="Username must be at least 3 characters"
-    />
-    
-    <!-- Card Component -->
-    <CardVue 
-      title="User Information" 
-      variant="elevated"
-      padding="lg"
-    >
-      <p>{{ form.username || 'No username yet' }}</p>
-      
-      <template #footer>
-        <div class="flex gap-2">
-          <ButtonVue variant="secondary" size="sm">Cancel</ButtonVue>
-          <ButtonVue variant="primary" size="sm">Save</ButtonVue>
-        </div>
-      </template>
-    </CardVue>
-
-    <!-- Table Component -->
-    <TableVue :data="tableData" :columns="tableColumns" />
+    <ButtonVue variant="primary" size="md">Primary Button</ButtonVue>
+    <InputVue v-model="name" label="Name" placeholder="Enter your name" />
   </div>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
-import { 
-  ButtonVue, 
-  InputVue, 
-  CardVue, 
-  TableVue 
-} from 'watercolor-ui'
+import { ref } from 'vue'
+import { ButtonVue, InputVue } from 'watercolor-ui'
 
-const isLoading = ref(false)
-const form = reactive({
-  username: ''
-})
-const errors = reactive({
-  username: ''
-})
-
-const tableData = ref([
-  { id: 1, name: 'John Doe', email: 'john@example.com' },
-  { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
-])
-
-const tableColumns = [
-  { key: 'id', label: 'ID' },
-  { key: 'name', label: 'Name' },
-  { key: 'email', label: 'Email' }
-]
-
-const handleClick = async () => {
-  isLoading.value = true
-  // Simulate async operation
-  await new Promise(resolve => setTimeout(resolve, 2000))
-  isLoading.value = false
-}
+const name = ref('')
 </script>
 ```
 
-#### ⚛️ React Usage
+### React Usage
 
 ```jsx
 import React, { useState } from 'react'
-import { 
-  ButtonReact, 
-  InputReact, 
-  CardReact, 
-  TableReact,
-  themeVUE,
-  useToast
-} from 'watercolor-ui'
+import { ButtonReact, InputReact } from 'watercolor-ui'
 
-function App() {
-  const [isLoading, setIsLoading] = useState(false)
-  const [form, setForm] = useState({ username: '' })
-  const [errors, setErrors] = useState({})
-  
-  const theme = themeVUE()
-  const toast = useToast()
-
-  const tableData = [
-    { id: 1, name: 'John Doe', email: 'john@example.com' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
-  ]
-
-  const tableColumns = [
-    { key: 'id', label: 'ID' },
-    { key: 'name', label: 'Name' },
-    { key: 'email', label: 'Email' }
-  ]
-
-  const handleClick = async () => {
-    setIsLoading(true)
-    try {
-      // Simulate async operation
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      toast.success('Operation successful!')
-    } catch (error) {
-      toast.error('Operation failed: ' + error.message)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setForm(prev => ({ ...prev, [name]: value }))
-    
-    // Simple validation
-    if (name === 'username' && value.length < 3) {
-      setErrors(prev => ({ ...prev, username: 'Username must be at least 3 characters' }))
-    } else {
-      setErrors(prev => ({ ...prev, [name]: '' }))
-    }
-  }
+export default function App() {
+  const [name, setName] = useState('')
 
   return (
-    <div className="app p-6 space-y-6">
-      {/* Button Component */}
-      <ButtonReact 
-        variant="primary" 
-        size="md"
-        loading={isLoading}
-        onClick={handleClick}
-      >
-        {isLoading ? 'Loading...' : 'Click Button'}
-      </ButtonReact>
-      
-      {/* Input Component */}
-      <InputReact 
-        name="username"
-        value={form.username}
-        onChange={handleInputChange}
-        label="Username"
-        placeholder="Enter username"
-        required
-        error={errors.username}
-        helperText="Username must be at least 3 characters"
+    <div className="app">
+      <ButtonReact variant="primary" size="md">Primary Button</ButtonReact>
+      <InputReact
+        label="Name"
+        placeholder="Enter your name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
-      
-      {/* Card Component */}
-      <CardReact 
-        title="User Information" 
-        variant="elevated"
-        padding="lg"
-        footer={
-          <div className="flex gap-2">
-            <ButtonReact variant="secondary" size="sm">Cancel</ButtonReact>
-            <ButtonReact variant="primary" size="sm">Save</ButtonReact>
-          </div>
-        }
-      >
-        <p>{form.username || 'No username yet'}</p>
-      </CardReact>
-
-      {/* Table Component */}
-      <TableReact data={tableData} columns={tableColumns} />
     </div>
   )
 }
-
-export default App
 ```
 
-```js
-module.exports = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx,vue}",
-    "./node_modules/watercolor-ui/**/*.{js,ts,jsx,tsx,vue}",
-  ],
-  theme: {
-    extend: {
-      colors: {
-        // Watercolor UI theme color variables
-        primary: {
-          50: 'rgb(var(--wc-primary-50) / <alpha-value>)',
-          100: 'rgb(var(--wc-primary-100) / <alpha-value>)',
-          200: 'rgb(var(--wc-primary-200) / <alpha-value>)',
-          300: 'rgb(var(--wc-primary-300) / <alpha-value>)',
-          400: 'rgb(var(--wc-primary-400) / <alpha-value>)',
-          500: 'rgb(var(--wc-primary-500) / <alpha-value>)',
-          600: 'rgb(var(--wc-primary-600) / <alpha-value>)',
-          700: 'rgb(var(--wc-primary-700) / <alpha-value>)',
-          800: 'rgb(var(--wc-primary-800) / <alpha-value>)',
-          900: 'rgb(var(--wc-primary-900) / <alpha-value>)',
-          950: 'rgb(var(--wc-primary-950) / <alpha-value>)',
-        },
-        secondary: {
-          50: 'rgb(var(--wc-secondary-50) / <alpha-value>)',
-          100: 'rgb(var(--wc-secondary-100) / <alpha-value>)',
-          200: 'rgb(var(--wc-secondary-200) / <alpha-value>)',
-          300: 'rgb(var(--wc-secondary-300) / <alpha-value>)',
-          400: 'rgb(var(--wc-secondary-400) / <alpha-value>)',
-          500: 'rgb(var(--wc-secondary-500) / <alpha-value>)',
-          600: 'rgb(var(--wc-secondary-600) / <alpha-value>)',
-          700: 'rgb(var(--wc-secondary-700) / <alpha-value>)',
-          800: 'rgb(var(--wc-secondary-800) / <alpha-value>)',
-          900: 'rgb(var(--wc-secondary-900) / <alpha-value>)',
-          950: 'rgb(var(--wc-secondary-950) / <alpha-value>)',
-        },
-      },
-      fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-      }
-    },
-  },
-  plugins: [],
-  darkMode: 'class',
-}
-```
+## Theme Customization
 
-## 🎨 Theme Customization
+Watercolor UI automatically loads `/theme.config.json` at runtime if present. You can also load or set themes programmatically.
 
-### 📁 File-Based Theme System
+### Theme Config File
 
-Watercolor UI now uses a **file-based theme system** for maximum flexibility. Create a `theme.config.json` file in your project root:
+Create `theme.config.json` in your project root:
 
 ```json
 {
   "primary": {
     "50": "#eff6ff",
     "100": "#dbeafe",
-    "200": "#bfdbfe", 
+    "200": "#bfdbfe",
     "300": "#93c5fd",
     "400": "#60a5fa",
     "500": "#3b82f6",
@@ -328,7 +119,7 @@ Watercolor UI now uses a **file-based theme system** for maximum flexibility. Cr
     "50": "#f3f4ff",
     "100": "#e5e7ff",
     "200": "#c7d2fe",
-    "300": "#a5b4fc", 
+    "300": "#a5b4fc",
     "400": "#818cf8",
     "500": "#6366f1",
     "600": "#4f46e5",
@@ -344,16 +135,13 @@ Watercolor UI now uses a **file-based theme system** for maximum flexibility. Cr
 }
 ```
 
-### 🎭 Programmatic Theme Control
+### Programmatic Theme Control
 
 ```js
-import { setTheme, loadThemeConfig } from 'watercolor-ui'
+import { loadThemeConfig, setTheme, applyFontTheme } from 'watercolor-ui'
 
-// Method 1: Load from file (recommended)
-await loadThemeConfig()  // Loads /theme.config.json
-await loadThemeConfig('/custom-theme.json')  // Custom path
+await loadThemeConfig('/theme.config.json')
 
-// Method 2: Direct theme setting
 setTheme({
   primary: {
     50: '#f0f9ff',
@@ -361,79 +149,31 @@ setTheme({
     200: '#bae6fd',
     300: '#7dd3fc',
     400: '#38bdf8',
-    500: '#0ea5e9',  // Primary color
+    500: '#0ea5e9',
     600: '#0284c7',
     700: '#0369a1',
     800: '#075985',
     900: '#0c4a6e'
-  },
-  secondary: {
-    50: '#fafaf9',
-    100: '#f5f5f4',
-    200: '#e7e5e4',
-    300: '#d6d3d1',
-    400: '#a8a29e',
-    500: '#78716c',  // Secondary color
-    600: '#57534e',
-    700: '#44403c',
-    800: '#292524',
-    900: '#1c1917'
-  },
-  fonts: {
-    chinese: 'PingFang SC',
-    english: 'SF Pro Display',
-    fallback: 'system-ui, sans-serif'
   }
 })
+
+applyFontTheme('modern')
 ```
 
-### 🔄 Dynamic Theme Switching
+### Dark Mode
 
 ```js
-// Switch between different theme files
-await loadThemeConfig('/themes/blue.json')    // Blue theme
-await loadThemeConfig('/themes/green.json')   // Green theme  
-await loadThemeConfig('/themes/orange.json')  // Orange theme
-await loadThemeConfig('/themes/brand.json')   // Brand theme
+import { toggleDarkMode, isDarkMode } from 'watercolor-ui'
+
+toggleDarkMode(true)
+const enabled = isDarkMode()
 ```
 
-### 🌙 Dark Mode
+## Component Overview
 
-```js
-import { 
-  toggleDarkMode, 
-  isDarkMode, 
-  setDarkMode,
-  useDarkMode // React Hook
-} from 'watercolor-ui'
+Watercolor UI provides 60+ components across form, layout, feedback, and data display categories.
 
-// Toggle dark mode
-toggleDarkMode()
-
-// Set dark mode
-setDarkMode(true)   // Enable dark mode
-setDarkMode(false)  // Disable dark mode
-
-// Check current mode
-const darkModeEnabled = isDarkMode()
-
-// React Hook usage
-function ThemeToggle() {
-  const [isDark, setIsDark] = useDarkMode()
-  
-  return (
-    <ButtonReact onClick={() => setIsDark(!isDark)}>
-      {isDark ? '🌞 Light Mode' : '🌙 Dark Mode'}
-    </ButtonReact>
-  )
-}
-```
-
-## 📦 Component Overview
-
-Watercolor UI provides **60+** high-quality components, completely covering all modern web application use cases:
-
-### 🎛️ Form Components
+### Form Components
 
 | Component | Vue | React | Description |
 |------|:---:|:-----:|------|
@@ -453,7 +193,7 @@ Watercolor UI provides **60+** high-quality components, completely covering all 
 | ColorPicker | ✅ | ✅ | Color picker |
 | VerificationCodeInput | ✅ | ✅ | Verification code input |
 
-### 🏗️ Layout Components
+### Layout Components
 
 | Component | Vue | React | Description |
 |------|:---:|:-----:|------|
@@ -462,7 +202,7 @@ Watercolor UI provides **60+** high-quality components, completely covering all 
 | Grid | ✅ | ✅ | Grid layout |
 | Paper | ✅ | ✅ | Paper container |
 
-### 💬 Feedback Components
+### Feedback Components
 
 | Component | Vue | React | Description |
 |------|:---:|:-----:|------|
@@ -473,7 +213,7 @@ Watercolor UI provides **60+** high-quality components, completely covering all 
 | Skeleton | ✅ | ✅ | Loading skeleton |
 | Spinner | ✅ | ✅ | Loading spinner |
 
-### 📊 Data Display Components
+### Data Display Components
 
 | Component | Vue | React | Description |
 |------|:---:|:-----:|------|
@@ -486,54 +226,38 @@ Watercolor UI provides **60+** high-quality components, completely covering all 
 | Typography | ✅ | ✅ | Typography |
 | Rating | ✅ | ✅ | Star rating |
 
-## 🎪 Design Philosophy
-
-Watercolor UI follows an **ultra-minimal flat design** philosophy:
-
-- **No Shadows**: Pure flat design without any drop shadows or elevations
-- **No Borders**: Clean interfaces using background colors for separation
-- **Pure CSS**: All styling done with pure HTML+CSS, no complex animations
-- **Theme-Driven**: Complete reliance on CSS variables for theming
-- **Accessibility First**: Full keyboard navigation and screen reader support
-
-## 🔧 Development
+## Development
 
 ```bash
 # Install dependencies
 npm install
 
-# Start development server
+# Start dev server
 npm run dev
 
 # Build library
 npm run build
 
-# Start Storybook
-npm run storybook
+# Storybook
+npm run storybook:vue
+npm run storybook:react
 
-# Run tests
-npm test
+# Tests
+npm run test
 
-# Lint code
+# Lint
 npm run lint
 ```
 
-## 📄 License
+## Project Links
 
-MIT License - see [LICENSE](LICENSE) file for details.
+- Documentation: https://hollowdata.com
+- Live Demo: https://zeturn.github.io/watercolor/vue/
+- Issues: https://github.com/zeturn/watercolor/issues
 
-## 🤝 Contributing
+## License
 
-We welcome all contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
-
-## 🎯 Roadmap
-
-- [ ] More component variants
-- [ ] Advanced theme system
-- [ ] Better accessibility
-- [ ] More framework support (Angular, Svelte)
-- [ ] Component playground
-- [ ] Design tokens
+MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
