@@ -9,8 +9,7 @@ on:
 # OIDC 权限配置 - npm Trusted Publisher 必需
 permissions:
   id-token: write
-  contents: write
-  packages: write
+  contents: read
 
 jobs:
   build-and-test:
@@ -101,7 +100,7 @@ jobs:
   publish-npm:
     needs: build-and-test
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v'))
     permissions:
       id-token: write
       contents: read
@@ -113,7 +112,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Install latest npm
         run: npm i -g npm@latest
@@ -132,7 +130,7 @@ jobs:
 
       - name: Publish to npm (via OIDC)
         run: npm publish --provenance
-        continue-on-error: true
+        # OIDC Trusted Publishing 失败时应直接失败，避免“绿灯但没发出去”
 
   create-release:
     needs: [build-and-test]  # 只依赖构建，不依赖发布
