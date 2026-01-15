@@ -3,11 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WaterColor UI - 优雅的水彩风格组件库</title>
-    <meta name="description" content="WaterColor UI - 现代化的水彩风格组件库，支持 Vue 3 和 React，提供优雅的设计和丰富的功能">
-    <meta name="keywords" content="WaterColor UI, Vue, React, 组件库, TypeScript, 水彩风格, 现代化设计">
+    <title>WaterColor UI - Vue 3 & React 水彩风格组件库 | WaterColor Design</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="WaterColor UI 是一个基于水彩设计理念的现代化 UI 组件库，完美支持 Vue 3 和 React。提供 50+ 优雅组件，TypeScript 全类型支持，让你的 Web 应用拥有独特的艺术美感。">
+    <meta name="keywords" content="WaterColor UI, 组件库, UI component library, Vue 3 components, React components, Tailwind, TypeScript, Design System, 水彩风格, 前端组件, 界面设计, Ant Design alternative, Element Plus alternative">
+    <meta name="author" content="Zeturn">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://zeturn.github.io/WaterColor-UI/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zeturn.github.io/WaterColor-UI/">
+    <meta property="og:title" content="WaterColor UI - 优雅的水彩风格组件库">
+    <meta property="og:description" content="WaterColor UI 是一个基于水彩设计理念的现代化 UI 组件库，完美支持 Vue 3 和 React。赋予你的应用独特的艺术气息。">
+    <meta property="og:image" content="https://zeturn.github.io/WaterColor-UI/public/img/og-image.png">
+    <meta property="og:locale" content="zh_CN">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://zeturn.github.io/WaterColor-UI/">
+    <meta property="twitter:title" content="WaterColor UI - 优雅的水彩风格组件库">
+    <meta property="twitter:description" content="WaterColor UI 是一个基于水彩设计理念的现代化 UI 组件库，完美支持 Vue 3 和 React。赋予你的应用独特的艺术气息。">
+    <meta property="twitter:image" content="https://zeturn.github.io/WaterColor-UI/public/img/og-image.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "WaterColor UI",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "WaterColor UI 是一个现代化的水彩风格组件库，支持 Vue 3 和 React，提供优雅的设计和丰富的功能。",
+      "author": {
+        "@type": "Person",
+        "name": "Zeturn",
+        "url": "https://github.com/zeturn"
+      },
+      "url": "https://zeturn.github.io/WaterColor-UI/"
+    }
+    </script>
+
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23667eea' opacity='0.8'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+            --accent-color: #fd79a8;
+            --text-color: #2d3436;
+            --bg-color: #f8f9fa;
+            --card-bg: rgba(255, 255, 255, 0.85);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,362 +71,310 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: #0f0f23;
+            font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #fdfbf7;
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(108, 92, 231, 0.15) 0px, transparent 50%),
+                radial-gradient(at 90% 10%, rgba(253, 121, 168, 0.15) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(162, 155, 254, 0.1) 0px, transparent 50%),
+                radial-gradient(at 10% 90%, rgba(85, 239, 196, 0.15) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(253, 203, 110, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
             min-height: 100vh;
             overflow-x: hidden;
-            color: #fff;
+            color: var(--text-color);
+            line-height: 1.6;
         }
-        
-        /* 粒子背景容器 */
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2d2d5a 100%);
-        }
-        
-        /* 浮动粒子 */
-        .particle {
+
+        /* 抽象水彩背景装饰 - 使用CSS模拟水彩晕染效果 */
+        .watercolor-splash {
             position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
+            z-index: -1;
+            filter: blur(40px);
             opacity: 0.6;
-            animation: float 8s infinite ease-in-out;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: morph 20s infinite alternate;
+        }
+
+        .splash-1 {
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: linear-gradient(135deg, #a29bfe, #74b9ff);
+            animation-duration: 25s;
+        }
+
+        .splash-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: linear-gradient(135deg, #ff7675, #fd79a8);
+            animation-duration: 30s;
+        }
+
+        .splash-3 {
+            top: 40%;
+            left: 30%;
+            width: 30vw;
+            height: 30vw;
+            background: linear-gradient(135deg, #55efc4, #81ecec);
+            opacity: 0.4;
+            animation-duration: 22s;
         }
         
-        .particle:nth-child(1) { 
-            background: #667eea; 
-            width: 6px; 
-            height: 6px; 
-            top: 20%; 
-            left: 20%; 
-            animation-delay: 0s; 
+        @keyframes morph {
+            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: rotate(0deg); }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(10deg); }
         }
-        .particle:nth-child(2) { 
-            background: #764ba2; 
-            width: 8px; 
-            height: 8px; 
-            top: 60%; 
-            left: 80%; 
-            animation-delay: 2s; 
+
+        /* 顶部导航 */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
-        .particle:nth-child(3) { 
-            background: #4fc08d; 
-            width: 4px; 
-            height: 4px; 
-            top: 80%; 
-            left: 30%; 
-            animation-delay: 4s; 
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3436;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .particle:nth-child(4) { 
-            background: #61dafb; 
-            width: 10px; 
-            height: 10px; 
-            top: 40%; 
-            left: 60%; 
-            animation-delay: 1s; 
+
+        .logo-mark {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #6c5ce7, #fd79a8);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            display: grid;
+            place-items: center;
+            color: white;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
         }
-        .particle:nth-child(5) { 
-            background: #ff6b6b; 
-            width: 5px; 
-            height: 5px; 
-            top: 30%; 
-            left: 90%; 
-            animation-delay: 3s; 
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
         }
-        .particle:nth-child(6) { 
-            background: #4ecdc4; 
-            width: 7px; 
-            height: 7px; 
-            top: 70%; 
-            left: 10%; 
-            animation-delay: 5s; 
+
+        .nav-link {
+            text-decoration: none;
+            color: #636e72;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
         }
-        
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0px) rotate(0deg); 
-                opacity: 0.6; 
-            }
-            50% { 
-                transform: translateY(-20px) rotate(180deg); 
-                opacity: 1; 
-            }
+
+        .nav-link:hover {
+            color: #2d3436;
         }
         
-        /* 主容器 */
-        .container {
-            min-height: 100vh;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, #6c5ce7, #fd79a8);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .gh-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #2d3436;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .gh-link:hover {
+            transform: translateY(-2px);
+            background-color: #000;
+        }
+
+        /* Hero 区域 */
+        .hero {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 20px;
-            position: relative;
-        }
-        
-        /* 主内容卡片 */
-        .content {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            padding: 80px 60px;
             text-align: center;
-            max-width: 800px;
-            width: 100%;
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            animation: fadeInUp 1s ease-out;
+            padding: 8rem 20px 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
             position: relative;
-            overflow: hidden;
         }
-        
-        /* 卡片内部光效 */
-        .content::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(
-                from 0deg,
-                transparent, 
-                rgba(103, 126, 234, 0.1), 
-                transparent, 
-                rgba(118, 75, 162, 0.1),
-                transparent
-            );
-            animation: rotate 10s linear infinite;
-            z-index: -1;
-        }
-        
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Logo设计 */
-        .logo {
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            font-weight: bold;
-            position: relative;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            box-shadow: 
-                0 20px 40px rgba(103, 126, 234, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            animation: logoFloat 3s ease-in-out infinite;
-        }
-        
-        .logo::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #667eea, #764ba2, #4fc08d, #61dafb);
-            z-index: -1;
-            animation: borderRotate 4s linear infinite;
-        }
-        
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes borderRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* 标题样式 */
+
         h1 {
-            font-size: 4rem;
-            margin-bottom: 30px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 40%, #4fc08d 70%, #61dafb 100%);
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #2d3436;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 span {
+            background: linear-gradient(135deg, #6c5ce7, #fd79a8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: titleGlow 2s ease-in-out infinite alternate;
-            text-shadow: 0 0 30px rgba(103, 126, 234, 0.3);
+            font-style: italic;
         }
-        
-        @keyframes titleGlow {
-            0% { filter: brightness(1); }
-            100% { filter: brightness(1.2); }
-        }
-        
-        /* 副标题 */
+
         .subtitle {
-            font-size: 1.4rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 50px;
-            line-height: 1.6;
+            font-size: 1.5rem;
+            color: #636e72;
+            max-width: 700px;
+            margin-bottom: 3rem;
             font-weight: 300;
         }
-        
-        /* 导航按钮容器 */
-        .nav-buttons {
+
+        .cta-buttons {
             display: flex;
-            gap: 30px;
-            justify-content: center;
+            gap: 20px;
             flex-wrap: wrap;
-            margin-bottom: 60px;
-        }
-        
-        /* 导航按钮样式 */
-        .nav-button {
-            display: inline-flex;
-            align-items: center;
             justify-content: center;
-            padding: 20px 40px;
-            text-decoration: none;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 1.2rem;
-            min-width: 220px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid transparent;
-            background-clip: padding-box;
         }
-        
-        .nav-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .nav-button:hover::before {
-            left: 100%;
-        }
-        
-        .vue-button {
-            background: linear-gradient(135deg, #4fc08d 0%, #42b883 100%);
-            box-shadow: 0 10px 30px rgba(79, 192, 141, 0.3);
-        }
-        
-        .react-button {
-            background: linear-gradient(135deg, #61dafb 0%, #21a0c4 100%);
-            box-shadow: 0 10px 30px rgba(97, 218, 251, 0.3);
-        }
-        
-        .nav-button:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-        
-        .nav-button:active {
-            transform: translateY(-4px) scale(1.02);
-        }
-        
-        /* 特性卡片网格 */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-        
-        .feature {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 30px 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .feature::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transition: left 0.3s ease;
-        }
-        
-        .feature:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .feature:hover::before {
-            left: 0;
-        }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            display: block;
-        }
-        
-        .feature h3 {
-            color: #fff;
-            margin-bottom: 10px;
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
             font-size: 1.1rem;
             font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-vue {
+            background: #42b883;
+            color: white;
+            border: 2px solid #42b883;
+        }
+
+        .btn-react {
+            background: #61dafb;
+            color: #282c34;
+            border: 2px solid #61dafb;
         }
         
-        .feature p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
-            line-height: 1.4;
+        .btn-doc {
+            background: white;
+            color: #2d3436;
+            border: 2px solid rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
         
-        /* 底部装饰 */
-        .footer {
-            margin-top: 50px;
+        .btn-vue:hover {
+             background: #3aa876;
+             border-color: #3aa876;
+        }
+        
+        .btn-react:hover {
+            background: #54cbea;
+            border-color: #54cbea;
+        }
+
+        /* 特性区域 */
+        .features-section {
+            padding: 6rem 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .icon-box {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            background: white;
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
             text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
-        
-        /* 响应式设计 */
+
+        .feature-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2d3436;
+        }
+
+        .feature-desc {
+            color: #636e72;
+            line-height: 1.6;
+        }
+
+        /* 底部 */
+        footer {
+            text-align: center;
+            padding: 4rem 20px;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: rgba(255,255,255,0.5);
+        }
+
+        .footer p {
+            color: #636e72;
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: #6c5ce7;
+            text-decoration: none;
+        }
+
         @media (max-width: 768px) {
-            .content {
-                padding: 60px 30px;
-                margin: 20px;
-            }
-            
             h1 {
                 font-size: 3rem;
             }
@@ -379,196 +383,91 @@
                 font-size: 1.2rem;
             }
             
-            .nav-buttons {
+            nav {
                 flex-direction: column;
-                align-items: center;
-                gap: 20px;
+                gap: 1rem;
             }
             
-            .nav-button {
-                min-width: 200px;
-                padding: 18px 35px;
+            .nav-links {
+                gap: 1rem;
             }
-            
-            .features {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .logo {
-                width: 120px;
-                height: 120px;
-                font-size: 50px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .content {
-                padding: 40px 20px;
-            }
-            
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .logo {
-                width: 100px;
-                height: 100px;
-                font-size: 40px;
-            }
-        }
-        
-        /* 加载动画 */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        .loading {
-            animation: pulse 1.5s ease-in-out infinite;
         }
     </style>
 </head>
 <body>
-    <!-- 粒子背景 -->
-    <div class="particles-container">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+    <div class="watercolor-splash splash-1"></div>
+    <div class="watercolor-splash splash-2"></div>
+    <div class="watercolor-splash splash-3"></div>
+
+    <nav>
+        <a href="#" class="logo">
+            <div class="logo-mark">W</div>
+            WaterColor UI
+        </a>
+        <div class="nav-links">
+            <a href="./vue/" class="nav-link">Vue 组件</a>
+            <a href="./react/" class="nav-link">React 组件</a>
+            <a href="./docs/" class="nav-link">文档中心</a>
+        </div>
+        <a href="https://github.com/zeturn/WaterColor-UI" class="gh-link" target="_blank">
+            <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+            GitHub
+        </a>
+    </nav>
+
+    <div class="hero">
+        <h1>Coding like <br><span>WaterColor</span> Painting</h1>
+        <p class="subtitle">
+            不仅仅是 UI 组件库，更是一种优雅的开发体验。<br>
+            融合艺术美感与现代技术栈，为 Vue 3 和 React 开发者精心打造。
+        </p>
+        <div class="cta-buttons">
+            <a href="./vue/" class="btn btn-vue">Vue 3 文档</a>
+            <a href="./react/" class="btn btn-react">React 文档</a>
+            <a href="./docs/" class="btn btn-doc">设计指南</a>
+        </div>
     </div>
-    
-    <div class="container">
-        <div class="content">
-            <div class="logo">W</div>
-            <h1>WaterColor UI</h1>
-            <p class="subtitle">
-                优雅的水彩风格组件库<br>
-                支持 Vue 3 和 React 双框架的现代化解决方案
-            </p>
-            
-            <div class="nav-buttons">
-                <a href="./vue/" class="nav-button vue-button">
-                    <span>📖 Vue 组件文档</span>
-                </a>
-                <a href="./react/" class="nav-button react-button">
-                    <span>📖 React 组件文档</span>
-                </a>
-                <a href="./docs/" class="nav-button" style="border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.06);">
-                    <span>📚 组件文档集（AI 友好）</span>
-                </a>
+
+    <div class="features-section">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon-box">🎨</div>
+                <h3 class="feature-title">艺术级设计</h3>
+                <p class="feature-desc">独特的水彩设计语言，摆脱千篇一律的 Material 或 Ant Design 风格，让您的应用脱颖而出。</p>
             </div>
-            
-            <div class="features">
-                <div class="feature">
-                    <span class="feature-icon">🎨</span>
-                    <h3>水彩美学</h3>
-                    <p>独特的水彩风格设计语言，为您的应用带来艺术感</p>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">🚀</span>
-                    <h3>双框架支持</h3>
-                    <p>同时支持 Vue 3 和 React，一套组件库解决所有需求</p>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">📱</span>
-                    <h3>响应式设计</h3>
-                    <p>完美适配桌面端、平板和移动设备</p>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">⚡</span>
-                    <h3>性能优化</h3>
-                    <p>轻量级设计，快速加载，优异的运行性能</p>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">🛠</span>
-                    <h3>TypeScript</h3>
-                    <p>完整的类型定义，提供更好的开发体验</p>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">🎯</span>
-                    <h3>现代化</h3>
-                    <p>采用最新的前端技术栈和设计理念</p>
-                </div>
+            <div class="feature-card">
+                <div class="icon-box">⚡</div>
+                <h3 class="feature-title">双栈支持</h3>
+                <p class="feature-desc">使用同一套设计理念，同时支持 Vue 3 和 React。无论您使用哪个框架，体验始终如一。</p>
             </div>
-            
-            <div class="footer">
-                <p>github: <a href="https://github.com/zeturn/WaterColor-UI">https://github.com/WaterColor-UI</a></p>
+            <div class="feature-card">
+                <div class="icon-box">🛡️</div>
+                <h3 class="feature-title">TypeScript 全覆盖</h3>
+                <p class="feature-desc">完全使用 TypeScript 编写，提供完整的类型定义文件，让开发过程更加智能、安全。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box">🧩</div>
+                <h3 class="feature-title">轻量模块化</h3>
+                <p class="feature-desc">支持按需加载，Tree-shaking 友好，确保您的应用体积保持轻盈，加载速度飞快。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box">♿</div>
+                <h3 class="feature-title">无障碍访问</h3>
+                <p class="feature-desc">遵循 WAI-ARIA 标准，确保所有组件对屏幕阅读器友好，让每个人都能使用您的产品。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box">🌙</div>
+                <h3 class="feature-title">主题定制</h3>
+                <p class="feature-desc">内置强大的主题系统，支持深色模式以及精细的 Design Tokens 定制，满足品牌化需求。</p>
             </div>
         </div>
     </div>
 
-    <script>
-        // 添加一些交互动画
-        document.addEventListener('DOMContentLoaded', function() {
-            // 为特性卡片添加鼠标跟踪效果
-            const features = document.querySelectorAll('.feature');
-            
-            features.forEach(feature => {
-                feature.addEventListener('mousemove', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateX = (y - centerY) / 10;
-                    const rotateY = (centerX - x) / 10;
-                    
-                    this.style.transform = `translateY(-5px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                });
-                
-                feature.addEventListener('mouseleave', function() {
-                    this.style.transform = '';
-                });
-            });
-            
-            // 为按钮添加涟漪效果
-            const buttons = document.querySelectorAll('.nav-button');
-            
-            buttons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    const ripple = document.createElement('span');
-                    const rect = this.getBoundingClientRect();
-                    const size = Math.max(rect.width, rect.height);
-                    const x = e.clientX - rect.left - size / 2;
-                    const y = e.clientY - rect.top - size / 2;
-                    
-                    ripple.style.cssText = `
-                        position: absolute;
-                        border-radius: 50%;
-                        background: rgba(255, 255, 255, 0.3);
-                        transform: scale(0);
-                        animation: ripple 0.6s linear;
-                        left: ${x}px;
-                        top: ${y}px;
-                        width: ${size}px;
-                        height: ${size}px;
-                    `;
-                    
-                    this.appendChild(ripple);
-                    
-                    setTimeout(() => {
-                        ripple.remove();
-                    }, 600);
-                });
-            });
-        });
-        
-        // 添加涟漪动画样式
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
+    <footer class="footer">
+        <p>© 2024 WaterColor UI. Released under the MIT License.</p>
+        <p>Made with ❤️ by <a href="https://github.com/zeturn" target="_blank">Zeturn</a></p>
+    </footer>
 </body>
 </html> 

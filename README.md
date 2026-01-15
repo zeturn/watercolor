@@ -2,262 +2,131 @@
 
 <div align="center">
 
-![Watercolor UI Logo](https://github.com/zeturn/watercolor/blob/main/public/img/watercolorui.png)
+<img src="public/img/watercolorui.png" width="140" alt="Watercolor UI" />
 
-A modern minimalist cross-framework component library for Vue 3 and React 18+.
+Modern, minimalist, watercolor-inspired UI components for **Vue 3** and **React 18+** — built with **TypeScript**.
 
 [![npm version](https://badge.fury.io/js/watercolor-ui.svg)](https://badge.fury.io/js/watercolor-ui)
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Vue 3](https://img.shields.io/badge/Vue-3.x-4FC08D?logo=vue.js)](https://vuejs.org/)
-[![React 18](https://img.shields.io/badge/React-18.x-61DAFB?logo=react)](https://reactjs.org/)
+[![React 18](https://img.shields.io/badge/React-18.x-61DAFB?logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 [![Storybook](https://img.shields.io/badge/Storybook-Ready-FF4785?logo=storybook)](https://storybook.js.org/)
 
-[Quick Start](#quick-start) • [Documentation](https://hollowdata.com) • [Live Demo](https://zeturn.github.io/watercolor/vue/) • [Components](#component-overview) • [Changelog](CHANGELOG.md)
+[🚀 Quick Start](#-quick-start) · [📚 Docs](https://zeturn.github.io/watercolor/docs/) · [🧩 Vue Storybook](https://zeturn.github.io/watercolor/vue/) · [⚛️ React Storybook](https://zeturn.github.io/watercolor/react/) · [📝 Changelog](CHANGELOG.md)
 
 </div>
 
-## Features
+## ✨ Features
 
-- Watercolor design language with soft, modern visuals
-- Cross-framework support for Vue 3 and React 18+
-- File-based theme system with CSS variables
-- Dark mode utilities built in
-- TypeScript-first API with full type definitions
-- Tree-shakable builds with optimized bundle size
-- Storybook docs for interactive component demos
-- 60+ components covering common UI patterns
+- One design language, two frameworks (Vue + React)
+- CSS Variables theming + built-in dark mode
+- TypeScript-first APIs with generated type definitions
+- Tree-shaking friendly builds
+- Storybook for interactive previews and usage docs
 
-## Quick Start
+## 📚 Documentation
+
+- Landing page: https://zeturn.github.io/watercolor/
+- VitePress docs (component docs hub): https://zeturn.github.io/watercolor/docs/
+- Vue Storybook: https://zeturn.github.io/watercolor/vue/
+- React Storybook: https://zeturn.github.io/watercolor/react/
+
+## 🚀 Quick Start
 
 ### Requirements
 
 - Node.js >= 16
-- npm >= 8 (or pnpm/yarn)
+- npm >= 8 (or pnpm / yarn)
 
 ### Install
 
 ```bash
-npm install watercolor-ui
-# or
-yarn add watercolor-ui
+npm i watercolor-ui
 # or
 pnpm add watercolor-ui
+# or
+yarn add watercolor-ui
 ```
 
 ### Styles
 
-```js
-// main.js or main.ts
-import 'watercolor-ui/dist/style.css'
+```ts
+import 'watercolor-ui/style.css'
 ```
 
-### Vue Usage
+### Vue (recommended: framework entry)
 
 ```vue
 <template>
-  <div class="app">
-    <ButtonVue variant="primary" size="md">Primary Button</ButtonVue>
-    <InputVue v-model="name" label="Name" placeholder="Enter your name" />
+  <div style="padding: 24px">
+    <Button variant="primary" size="md">Primary</Button>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { ButtonVue, InputVue } from 'watercolor-ui'
-
-const name = ref('')
+<script setup lang="ts">
+import { Button } from 'watercolor-ui/vue'
 </script>
 ```
 
-### React Usage
+### React (recommended: framework entry)
 
-```jsx
-import React, { useState } from 'react'
-import { ButtonReact, InputReact } from 'watercolor-ui'
+```tsx
+import { Button } from 'watercolor-ui/react'
 
 export default function App() {
-  const [name, setName] = useState('')
-
   return (
-    <div className="app">
-      <ButtonReact variant="primary" size="md">Primary Button</ButtonReact>
-      <InputReact
-        label="Name"
-        placeholder="Enter your name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+    <div style={{ padding: 24 }}>
+      <Button variant="primary" size="md">Primary</Button>
     </div>
   )
 }
 ```
 
-## Theme Customization
+## 🎨 Theming & Dark Mode
 
-Watercolor UI automatically loads `/theme.config.json` at runtime if present. You can also load or set themes programmatically.
+Watercolor UI supports a file-based theme config. Place a `theme.config.json` in your app root and load it at runtime.
 
-### Theme Config File
-
-Create `theme.config.json` in your project root:
-
-```json
-{
-  "primary": {
-    "50": "#eff6ff",
-    "100": "#dbeafe",
-    "200": "#bfdbfe",
-    "300": "#93c5fd",
-    "400": "#60a5fa",
-    "500": "#3b82f6",
-    "600": "#2563eb",
-    "700": "#1d4ed8",
-    "800": "#1e40af",
-    "900": "#1e3a8a"
-  },
-  "secondary": {
-    "50": "#f3f4ff",
-    "100": "#e5e7ff",
-    "200": "#c7d2fe",
-    "300": "#a5b4fc",
-    "400": "#818cf8",
-    "500": "#6366f1",
-    "600": "#4f46e5",
-    "700": "#4338ca",
-    "800": "#3730a3",
-    "900": "#312e81"
-  },
-  "fonts": {
-    "chinese": "Noto Sans SC",
-    "english": "Inter",
-    "fallback": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-  }
-}
-```
-
-### Programmatic Theme Control
-
-```js
-import { loadThemeConfig, setTheme, applyFontTheme } from 'watercolor-ui'
+```ts
+import { loadThemeConfig, toggleDarkMode } from 'watercolor-ui'
 
 await loadThemeConfig('/theme.config.json')
-
-setTheme({
-  primary: {
-    50: '#f0f9ff',
-    100: '#e0f2fe',
-    200: '#bae6fd',
-    300: '#7dd3fc',
-    400: '#38bdf8',
-    500: '#0ea5e9',
-    600: '#0284c7',
-    700: '#0369a1',
-    800: '#075985',
-    900: '#0c4a6e'
-  }
-})
-
-applyFontTheme('modern')
-```
-
-### Dark Mode
-
-```js
-import { toggleDarkMode, isDarkMode } from 'watercolor-ui'
-
 toggleDarkMode(true)
-const enabled = isDarkMode()
 ```
 
-## Component Overview
-
-Watercolor UI provides 60+ components across form, layout, feedback, and data display categories.
-
-### Form Components
-
-| Component | Vue | React | Description |
-|------|:---:|:-----:|------|
-| Button | ✅ | ✅ | Button component with multiple variants and states |
-| IconButton | ✅ | ✅ | Icon button |
-| Fab | ✅ | ✅ | Floating action button |
-| TextField | ✅ | ✅ | Text input field |
-| Input | ✅ | ✅ | Basic input component |
-| Select | ✅ | ✅ | Select dropdown |
-| Checkbox | ✅ | ✅ | Checkbox |
-| Radio | ✅ | ✅ | Radio button |
-| RadioGroup | ✅ | ✅ | Radio button group |
-| Switch | ✅ | ✅ | Toggle switch |
-| Slider | ✅ | ✅ | Slider |
-| FileInput | ✅ | ✅ | File upload |
-| DatePicker | ✅ | ✅ | Date picker |
-| ColorPicker | ✅ | ✅ | Color picker |
-| VerificationCodeInput | ✅ | ✅ | Verification code input |
-
-### Layout Components
-
-| Component | Vue | React | Description |
-|------|:---:|:-----:|------|
-| Container | ✅ | ✅ | Container component |
-| Box | ✅ | ✅ | Box layout |
-| Grid | ✅ | ✅ | Grid layout |
-| Paper | ✅ | ✅ | Paper container |
-
-### Feedback Components
-
-| Component | Vue | React | Description |
-|------|:---:|:-----:|------|
-| Alert | ✅ | ✅ | Alert message |
-| Snackbar | ✅ | ✅ | Toast notification |
-| Tooltip | ✅ | ✅ | Tooltip |
-| Progress | ✅ | ✅ | Progress indicator |
-| Skeleton | ✅ | ✅ | Loading skeleton |
-| Spinner | ✅ | ✅ | Loading spinner |
-
-### Data Display Components
-
-| Component | Vue | React | Description |
-|------|:---:|:-----:|------|
-| Table | ✅ | ✅ | Data table |
-| List | ✅ | ✅ | List |
-| Card | ✅ | ✅ | Card container |
-| Avatar | ✅ | ✅ | Avatar |
-| Badge | ✅ | ✅ | Badge |
-| Chip | ✅ | ✅ | Chip |
-| Typography | ✅ | ✅ | Typography |
-| Rating | ✅ | ✅ | Star rating |
-
-## Development
+## 🧑‍💻 Development
 
 ```bash
-# Install dependencies
 npm install
 
-# Start dev server
+# dev
 npm run dev
 
-# Build library
+# build
 npm run build
 
-# Storybook
+# storybook
 npm run storybook:vue
 npm run storybook:react
 
-# Tests
-npm run test
-
-# Lint
+# tests / lint
+npm run test -- --run
 npm run lint
 ```
 
-## Project Links
+## 📦 Release
 
-- Documentation: https://hollowdata.com
-- Live Demo: https://zeturn.github.io/watercolor/vue/
+- Quick release guide: [QUICK_RELEASE.md](QUICK_RELEASE.md)
+- Full publishing guide: [note/PUBLISHING.md](note/PUBLISHING.md)
+
+## 🔗 Links
+
 - Issues: https://github.com/zeturn/watercolor/issues
+- Repository: https://github.com/zeturn/watercolor
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT — see [LICENSE](LICENSE).
 
 ---
 
