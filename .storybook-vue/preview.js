@@ -1,4 +1,5 @@
 import '../src/styles/index.css';
+import './preview.css';
 import { h, watchEffect } from 'vue';
 
 /** @type { import('@storybook/vue3-vite').Preview } */

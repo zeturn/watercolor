@@ -1,6 +1,7 @@
 // .storybook-react/manager.js
 import { addons } from 'storybook/manager-api'
 import { themes } from 'storybook/theming'
+import './manager.css'
 
 // 获取主题的函数，添加重试逻辑
 const getTheme = () => {
@@ -42,7 +43,8 @@ const setThemeConfig = (dark) => {
       // application background - using darker black
       appBg: '#0f0f0f',
       appContentBg: '#1a1a1a',
-      appBorderColor: '#2a2a2a',
+      // reduce visible chrome lines/dividers
+      appBorderColor: '#0f0f0f',
       appBorderRadius: 8,
 
       // text color
@@ -53,6 +55,7 @@ const setThemeConfig = (dark) => {
       barTextColor: '#b3b3b3',
       barSelectedColor: '#60A5FA',
       barBg: '#1a1a1a',
+      barBorderColor: '#1a1a1a',
 
       // form colors
       inputBg: '#2a2a2a',
@@ -80,7 +83,8 @@ const setThemeConfig = (dark) => {
       // light theme background color
       appBg: '#ffffff',
       appContentBg: '#ffffff',
-      appBorderColor: '#e5e5e5',
+      // reduce visible chrome lines/dividers
+      appBorderColor: '#ffffff',
       appBorderRadius: 8,
 
       // text color
@@ -91,6 +95,7 @@ const setThemeConfig = (dark) => {
       barTextColor: '#666666',
       barSelectedColor: '#3B82F6',
       barBg: '#ffffff',
+      barBorderColor: '#ffffff',
 
       // form colors
       inputBg: '#ffffff',

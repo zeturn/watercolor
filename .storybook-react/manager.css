@@ -1,0 +1,36 @@
+/* Reduce Storybook “chrome” lines/dividers (manager UI only)
+   Loaded by .storybook-react/manager.js */
+
+:root {
+  --wc-sb-border: transparent;
+  --wc-sb-soft-border: rgba(127, 127, 127, 0.18);
+}
+
+/* Layout panes & main containers */
+#root :where([role='navigation'], [role='main'], [role='complementary'], [role='tabpanel']) {
+  border-color: var(--wc-sb-border) !important;
+  box-shadow: none !important;
+}
+
+/* Toolbar separators */
+#root :where([role='toolbar']) {
+  border-color: var(--wc-sb-border) !important;
+  box-shadow: none !important;
+}
+
+/* Split-pane drag handles (common in SB layouts) */
+#root :where(.Resizer, .PaneResizer, [class*='Resizer'], [class*='resizer']) {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+/* Remove explicit horizontal rules / dividers */
+#root :where(hr) {
+  display: none !important;
+}
+
+/* Keep form fields usable (don’t make inputs borderless) */
+#root :where(input, textarea, select) {
+  border-color: var(--wc-sb-soft-border) !important;
+}

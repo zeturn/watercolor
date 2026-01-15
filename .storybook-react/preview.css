@@ -1,0 +1,19 @@
+/* Reduce docs/preview divider lines inside the iframe */
+
+.sbdocs :where(hr) {
+  display: none !important;
+}
+
+/* ArgTable and docs tables can look very “lined”; soften them */
+.sbdocs :where(table, th, td) {
+  border-color: transparent !important;
+}
+
+.sbdocs :where(table) {
+  box-shadow: none !important;
+}
+
+.sbdocs :where(.docblock-argstable, .docblock-argstable-body) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}

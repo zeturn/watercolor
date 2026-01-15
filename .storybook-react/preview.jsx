@@ -1,4 +1,5 @@
 import '../src/styles/index.css'
+import './preview.css'
 import React, { useEffect } from 'react'
 
 /** @type { import('@storybook/react-vite').Preview } */
