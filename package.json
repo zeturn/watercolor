@@ -64,6 +64,10 @@
     "release:patch": "node scripts/publish.js patch",
     "release:minor": "node scripts/publish.js minor",
     "release:major": "node scripts/publish.js major"
+    ,
+    "docs:generate": "node scripts/generate-vitepress-docs.mjs",
+    "docs:dev": "npm run docs:generate && vitepress dev docs",
+    "docs:build": "npm run docs:generate && vitepress build docs"
   },
   "peerDependencies": {
     "react": "^18.0.0",
@@ -106,6 +110,7 @@
     "typescript": "^5.3.3",
     "vite": "^5.4.12",
     "vite-plugin-dts": "^4.5.4",
+    "vitepress": "^1.6.4",
     "vitest": "^3.2.4",
     "vitest-canvas-mock": "^0.3.3",
     "vue": "^3.5.17"

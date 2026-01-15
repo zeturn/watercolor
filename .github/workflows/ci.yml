@@ -102,6 +102,14 @@ jobs:
           mkdir -p storybook-static/react
           cp -r storybook-static-vue/* storybook-static/vue/
           cp -r storybook-static-react/* storybook-static/react/
+
+      - name: Build VitePress Docs
+        env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
+        run: |
+          npm run docs:build
+          mkdir -p storybook-static/docs
+          cp -r docs/.vitepress/dist/* storybook-static/docs/
         
       - name: Copy root index.html for navigation
         run: |

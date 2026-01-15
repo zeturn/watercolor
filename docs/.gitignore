@@ -1,0 +1,7 @@
+.vitepress/cache
+.vitepress/dist
+/generated
+
+# Generated from src/components/**/README.md
+/components/*.md
+!/components/index.md
