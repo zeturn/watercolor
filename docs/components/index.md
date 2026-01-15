@@ -11,109 +11,143 @@ title: Components
 
 ## A
 
-- [Accordion](./Accordion)
-- [Alert](./Alert)
-- [AppBar](./AppBar)
-- [Autocomplete](./Autocomplete)
-- [Avatar](./Avatar)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./Accordion">Accordion</a>
+<a class="wc-components-card" href="./Alert">Alert</a>
+<a class="wc-components-card" href="./AppBar">AppBar</a>
+<a class="wc-components-card" href="./Autocomplete">Autocomplete</a>
+<a class="wc-components-card" href="./Avatar">Avatar</a>
+</div>
 
 ## B
 
-- [Badge](./Badge)
-- [Banner](./Banner)
-- [Blockquote](./Blockquote)
-- [Box](./Box)
-- [Breadcrumb](./Breadcrumb)
-- [Button](./Button)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./Badge">Badge</a>
+<a class="wc-components-card" href="./Banner">Banner</a>
+<a class="wc-components-card" href="./Blockquote">Blockquote</a>
+<a class="wc-components-card" href="./Box">Box</a>
+<a class="wc-components-card" href="./Breadcrumb">Breadcrumb</a>
+<a class="wc-components-card" href="./Button">Button</a>
+</div>
 
 ## C
 
-- [Card](./Card)
-- [Checkbox](./Checkbox)
-- [Chip](./Chip)
-- [CircularProgress](./CircularProgress)
-- [ColorPicker](./ColorPicker)
-- [Container](./Container)
-- [Copy](./Copy)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./Card">Card</a>
+<a class="wc-components-card" href="./Checkbox">Checkbox</a>
+<a class="wc-components-card" href="./Chip">Chip</a>
+<a class="wc-components-card" href="./CircularProgress">CircularProgress</a>
+<a class="wc-components-card" href="./ColorPicker">ColorPicker</a>
+<a class="wc-components-card" href="./Container">Container</a>
+<a class="wc-components-card" href="./Copy">Copy</a>
+</div>
 
 ## D
 
-- [DatePicker](./DatePicker)
-- [Divider](./Divider)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./DatePicker">DatePicker</a>
+<a class="wc-components-card" href="./Divider">Divider</a>
+</div>
 
 ## F
 
-- [Feature](./Feature)
-- [Feed](./Feed)
-- [FileInput](./FileInput)
-- [Form](./Form)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./Feature">Feature</a>
+<a class="wc-components-card" href="./Feed">Feed</a>
+<a class="wc-components-card" href="./FileInput">FileInput</a>
+<a class="wc-components-card" href="./Form">Form</a>
+</div>
 
 ## G
 
-- [Grid](./Grid)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./Grid">Grid</a>
+</div>
 
 ## H
 
-- [HoverCard](./HoverCard)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./HoverCard">HoverCard</a>
+</div>
 
 ## I
 
-- [Icon](./Icon)
-- [ImageGallery](./ImageGallery)
-- [Input](./Input)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./Icon">Icon</a>
+<a class="wc-components-card" href="./ImageGallery">ImageGallery</a>
+<a class="wc-components-card" href="./Input">Input</a>
+</div>
 
 ## L
 
-- [List](./List)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./List">List</a>
+</div>
 
 ## M
 
-- [Menu](./Menu)
-- [Modal](./Modal)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./Menu">Menu</a>
+<a class="wc-components-card" href="./Modal">Modal</a>
+</div>
 
 ## N
 
-- [NumberAnimation](./NumberAnimation)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./NumberAnimation">NumberAnimation</a>
+</div>
 
 ## P
 
-- [Pagination](./Pagination)
-- [Paper](./Paper)
-- [Popover](./Popover)
-- [PricingTable](./PricingTable)
-- [Progress](./Progress)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./Pagination">Pagination</a>
+<a class="wc-components-card" href="./Paper">Paper</a>
+<a class="wc-components-card" href="./Popover">Popover</a>
+<a class="wc-components-card" href="./PricingTable">PricingTable</a>
+<a class="wc-components-card" href="./Progress">Progress</a>
+</div>
 
 ## R
 
-- [Radio](./Radio)
-- [Rating](./Rating)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./Radio">Radio</a>
+<a class="wc-components-card" href="./Rating">Rating</a>
+</div>
 
 ## S
 
-- [Select](./Select)
-- [Skeleton](./Skeleton)
-- [SlideOver](./SlideOver)
-- [Slider](./Slider)
-- [Snackbar](./Snackbar)
-- [Status](./Status)
-- [Switch](./Switch)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./Select">Select</a>
+<a class="wc-components-card" href="./Skeleton">Skeleton</a>
+<a class="wc-components-card" href="./SlideOver">SlideOver</a>
+<a class="wc-components-card" href="./Slider">Slider</a>
+<a class="wc-components-card" href="./Snackbar">Snackbar</a>
+<a class="wc-components-card" href="./Status">Status</a>
+<a class="wc-components-card" href="./Switch">Switch</a>
+</div>
 
 ## T
 
-- [Table](./Table)
-- [Tabs](./Tabs)
-- [TextField](./TextField)
-- [Toolbar](./Toolbar)
-- [Tooltip](./Tooltip)
-- [TypingText](./TypingText)
-- [Typography](./Typography)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./Table">Table</a>
+<a class="wc-components-card" href="./Tabs">Tabs</a>
+<a class="wc-components-card" href="./TextField">TextField</a>
+<a class="wc-components-card" href="./Toolbar">Toolbar</a>
+<a class="wc-components-card" href="./Tooltip">Tooltip</a>
+<a class="wc-components-card" href="./TypingText">TypingText</a>
+<a class="wc-components-card" href="./Typography">Typography</a>
+</div>
 
 ## V
 
-- [VideoPlayer](./VideoPlayer)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./VideoPlayer">VideoPlayer</a>
+</div>
 
 ## W
 
-- [Watermark](./Watermark)
+<div class="wc-components-grid">
+<a class="wc-components-card" href="./Watermark">Watermark</a>
+</div>
 
 <!-- AUTO-GENERATED:COMPONENTS_LIST:END -->

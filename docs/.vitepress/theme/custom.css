@@ -1,3 +1,78 @@
+.dark {
+  color-scheme: dark;
+}
+
+/* Brand colors */
+:root {
+  --vp-c-brand-1: #7c5cff;
+  --vp-c-brand-2: #61dafb;
+  --vp-c-brand-3: #4fc08d;
+  --vp-c-brand-soft: rgba(124, 92, 255, 0.14);
+
+  --wc-gradient: linear-gradient(135deg, rgba(124, 92, 255, 1) 0%, rgba(97, 218, 251, 1) 50%, rgba(79, 192, 141, 1) 100%);
+}
+
+/* Improve layout density */
+.VPNavBarTitle .title {
+  font-weight: 700;
+}
+
+.VPHomeHero .name {
+  background: var(--wc-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.VPHomeHero .tagline {
+  max-width: 56rem;
+}
+
+.VPHomeHero .image {
+  filter: drop-shadow(0 18px 48px rgba(0, 0, 0, 0.35));
+}
+
+.VPFeature {
+  border-radius: 16px;
+}
+
+/* Components list grid */
+.wc-components-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin: 12px 0 20px;
+}
+
+.wc-components-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  transition: transform 0.08s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.wc-components-card::after {
+  content: '→';
+  opacity: 0.55;
+  font-size: 13px;
+}
+
+.wc-components-card:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 55%, var(--vp-c-divider));
+  background: color-mix(in srgb, var(--vp-c-brand-soft) 55%, var(--vp-c-bg-soft));
+}
+
+.wc-components-card:active {
+  transform: translateY(0);
+}
+
 .wc-preview {
   margin: 16px 0 24px;
   border: 1px solid var(--vp-c-divider);
@@ -13,7 +88,11 @@
   gap: 12px;
   padding: 10px 12px;
   border-bottom: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg);
+  background: linear-gradient(
+    180deg,
+    var(--vp-c-bg) 0%,
+    color-mix(in srgb, var(--vp-c-bg) 70%, var(--vp-c-bg-soft)) 100%
+  );
 }
 
 .wc-preview__title {
@@ -30,7 +109,7 @@
   width: 100%;
   height: 520px;
   border: 0;
-  background: #fff;
+  background: var(--vp-c-bg);
 }
 
 @media (max-width: 640px) {

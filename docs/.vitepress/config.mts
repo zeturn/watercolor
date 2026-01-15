@@ -26,11 +26,20 @@ export default defineConfig({
   base: resolveRepoBase(),
 
   themeConfig: {
+    logo: '/img/watercolorui.png',
     nav: [
+      { text: '文档首页', link: '/' },
       { text: '组件', link: '/components/' },
-      { text: 'GitHub', link: 'https://github.com/zeturn/watercolor' },
+      { text: 'Vue Storybook', link: '../vue/' },
+      { text: 'React Storybook', link: '../react/' },
     ],
     sidebar: readSidebar(),
     search: { provider: 'local' },
+
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/zeturn/watercolor' },
+    ],
+
+    outline: { level: [2, 3] },
   },
 })

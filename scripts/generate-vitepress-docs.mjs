@@ -11,9 +11,160 @@ const storiesReactRoot = path.join(workspaceRoot, 'stories-react')
 
 const PREVIEW_START = '<!-- AUTO-GENERATED:PREVIEW:START -->'
 const PREVIEW_END = '<!-- AUTO-GENERATED:PREVIEW:END -->'
+const SUMMARY_START = '<!-- AUTO-GENERATED:SUMMARY:START -->'
+const SUMMARY_END = '<!-- AUTO-GENERATED:SUMMARY:END -->'
 
 function stripTrailingSlash(input) {
   return input.endsWith('/') ? input.slice(0, -1) : input
+}
+
+function splitMarkdownTableRow(line) {
+  const trimmed = line.trim()
+  const core = trimmed.replace(/^\|/, '').replace(/\|$/, '')
+  const cells = []
+  let current = ''
+  for (let i = 0; i < core.length; i++) {
+    const ch = core[i]
+    const prev = core[i - 1]
+    if (ch === '|' && prev !== '\\') {
+      cells.push(current.trim().replace(/\\\|/g, '|'))
+      current = ''
+      continue
+    }
+    current += ch
+  }
+  cells.push(current.trim().replace(/\\\|/g, '|'))
+  return cells
+}
+
+function extractMarkdownTableAfterHeading(markdown, headingMatchers) {
+  const lines = markdown.split(/\r?\n/)
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+    const heading = line.match(/^#{2,4}\s+(.+)\s*$/)
+    if (!heading) continue
+
+    const headingText = heading[1].trim()
+    const matched = headingMatchers.some((re) => re.test(headingText))
+    if (!matched) continue
+
+    // Seek table header
+    let j = i + 1
+    while (j < lines.length && lines[j].trim() === '') j++
+
+    if (j + 1 >= lines.length) return null
+
+    const headerLine = lines[j]
+    const sepLine = lines[j + 1]
+    const looksLikeTableHeader = headerLine.includes('|')
+    const looksLikeSeparator = /^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)+\|?\s*$/.test(sepLine)
+
+    if (!looksLikeTableHeader || !looksLikeSeparator) return null
+
+    const header = splitMarkdownTableRow(headerLine)
+    const rows = []
+    let k = j + 2
+    while (k < lines.length) {
+      const rowLine = lines[k]
+      if (!rowLine.trim().startsWith('|')) break
+      if (!rowLine.includes('|')) break
+      rows.push(splitMarkdownTableRow(rowLine))
+      k++
+    }
+
+    return { header, rows }
+  }
+
+  return null
+}
+
+function normalizePropsTable(table) {
+  if (!table) return null
+  const headerLower = table.header.map((h) => h.toLowerCase().replace(/\s+/g, ''))
+
+  const idxName = headerLower.findIndex((h) => h.includes('prop') || h === 'name' || h.includes('属性') || h.includes('参数'))
+  const idxType = headerLower.findIndex((h) => h.includes('type') || h.includes('类型'))
+  const idxDefault = headerLower.findIndex((h) => h.includes('default') || h.includes('默认'))
+  const idxDesc = headerLower.findIndex((h) => h.includes('description') || h.includes('desc') || h.includes('说明') || h.includes('描述'))
+
+  const pick = (row, idx, fallbackIdx) => {
+    const realIdx = idx >= 0 ? idx : fallbackIdx
+    return row[realIdx] ?? ''
+  }
+
+  const normalized = table.rows.map((r) => {
+    return {
+      name: pick(r, idxName, 0),
+      type: pick(r, idxType, 1),
+      default: pick(r, idxDefault, 2),
+      description: pick(r, idxDesc, Math.min(3, r.length - 1)),
+    }
+  })
+
+  return normalized
+}
+
+function normalizeEventsTable(table) {
+  if (!table) return null
+  const headerLower = table.header.map((h) => h.toLowerCase().replace(/\s+/g, ''))
+  const idxName = headerLower.findIndex((h) => h.includes('event') || h === 'name' || h.includes('事件'))
+  const idxDesc = headerLower.findIndex((h) => h.includes('description') || h.includes('desc') || h.includes('说明') || h.includes('描述'))
+
+  const pick = (row, idx, fallbackIdx) => {
+    const realIdx = idx >= 0 ? idx : fallbackIdx
+    return row[realIdx] ?? ''
+  }
+
+  const normalized = table.rows.map((r) => {
+    return {
+      name: pick(r, idxName, 0),
+      description: pick(r, idxDesc, Math.min(1, r.length - 1)),
+    }
+  })
+
+  return normalized
+}
+
+function buildQuickSummaryBlock({ props, events, limit = 10 }) {
+  const hasProps = Array.isArray(props) && props.length > 0
+  const hasEvents = Array.isArray(events) && events.length > 0
+  if (!hasProps && !hasEvents) return ''
+
+  const lines = []
+  lines.push('## 快速摘要')
+  lines.push('')
+  lines.push(SUMMARY_START)
+  lines.push('')
+  lines.push('> 以下内容从组件 README 的表格自动抽取（可能只展示前几项）。')
+  lines.push('')
+
+  if (hasProps) {
+    const slice = props.slice(0, limit)
+    lines.push('### Props')
+    lines.push('')
+    lines.push('| Name | Type | Default | Description |')
+    lines.push('| --- | --- | --- | --- |')
+    for (const p of slice) {
+      lines.push(`| ${p.name || ''} | ${p.type || ''} | ${p.default || ''} | ${p.description || ''} |`)
+    }
+    lines.push('')
+  }
+
+  if (hasEvents) {
+    const slice = events.slice(0, limit)
+    lines.push('### Events')
+    lines.push('')
+    lines.push('| Event | Description |')
+    lines.push('| --- | --- |')
+    for (const e of slice) {
+      lines.push(`| ${e.name || ''} | ${e.description || ''} |`)
+    }
+    lines.push('')
+  }
+
+  lines.push(SUMMARY_END)
+  lines.push('')
+  return lines.join('\n')
 }
 
 function ensureDir(dirPath) {
@@ -124,6 +275,16 @@ function stripExistingPreview(markdown) {
   return `${before}${after}`
 }
 
+function stripExistingSummary(markdown) {
+  const startIdx = markdown.indexOf(SUMMARY_START)
+  const endIdx = markdown.indexOf(SUMMARY_END)
+  if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) return markdown
+
+  const before = markdown.slice(0, startIdx)
+  const after = markdown.slice(endIdx + SUMMARY_END.length)
+  return `${before}${after}`
+}
+
 function insertAfterFrontmatter(markdown, insertion) {
   if (!insertion) return markdown
   const trimmed = markdown.trimStart()
@@ -163,10 +324,18 @@ function buildComponentsListMarkdown(components) {
   for (const c of components) {
     const letter = c.name[0]?.toUpperCase() || '#'
     if (letter !== currentLetter) {
+      if (currentLetter) {
+        lines.push('</div>')
+      }
       currentLetter = letter
       lines.push(`\n## ${currentLetter}\n`)
+      lines.push('<div class="wc-components-grid">')
     }
-    lines.push(`- [${c.name}](./${c.name})`)
+    lines.push(`<a class="wc-components-card" href="./${c.name}">${c.name}</a>`)
+  }
+
+  if (currentLetter) {
+    lines.push('</div>')
   }
 
   return `${lines.join('\n')}\n`
@@ -197,14 +366,32 @@ function main() {
     const raw = readText(readmePath)
     let doc = normalizeDocMarkdown(dir.name, raw)
 
+    // Extract Props/Events quick summary from README tables
+    const propsTable = extractMarkdownTableAfterHeading(raw, [
+      /^props$/i,
+      /^properties$/i,
+      /^(props|prop)\b/i,
+      /^(\s*)属性(\s*)$/,
+      /^(\s*)参数(\s*)$/,
+    ])
+    const eventsTable = extractMarkdownTableAfterHeading(raw, [
+      /^events$/i,
+      /^(\s*)事件(\s*)$/,
+    ])
+    const props = normalizePropsTable(propsTable)
+    const events = normalizeEventsTable(eventsTable)
+
     const vueTitle = findStoryTitle('vue', dir.name)
     const reactTitle = findStoryTitle('react', dir.name)
     const vueDocsId = vueTitle ? `${slugifyForStorybook(vueTitle)}--docs` : null
     const reactDocsId = reactTitle ? `${slugifyForStorybook(reactTitle)}--docs` : null
 
     doc = stripExistingPreview(doc)
+    doc = stripExistingSummary(doc)
     const preview = buildStorybookPreviewBlock({ vueDocsId, reactDocsId })
-    doc = insertAfterFrontmatter(doc, preview)
+    const summary = buildQuickSummaryBlock({ props, events })
+    const topBlocks = [preview, summary].filter(Boolean).join('\n\n')
+    doc = insertAfterFrontmatter(doc, topBlocks)
 
     const outPath = path.join(docsComponentsRoot, `${dir.name}.md`)
     writeText(outPath, doc)
@@ -226,13 +413,19 @@ function main() {
     writeText(componentsIndexPath, updated)
   }
 
+  const groups = new Map()
+  for (const c of components) {
+    const letter = c.name[0]?.toUpperCase() || '#'
+    if (!groups.has(letter)) groups.set(letter, [])
+    groups.get(letter).push(c)
+  }
+  const sortedLetters = Array.from(groups.keys()).sort((a, b) => a.localeCompare(b))
   const sidebar = {
-    '/components/': [
-      {
-        text: 'Components',
-        items: components.map((c) => ({ text: c.name, link: c.docPath })),
-      },
-    ],
+    '/components/': sortedLetters.map((letter) => ({
+      text: letter,
+      collapsed: true,
+      items: groups.get(letter).map((c) => ({ text: c.name, link: c.docPath })),
+    })),
   }
   writeText(path.join(generatedRoot, 'sidebar.json'), JSON.stringify(sidebar, null, 2) + '\n')
 
