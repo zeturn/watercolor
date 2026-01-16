@@ -27,8 +27,7 @@ Modern, minimalist, watercolor-inspired UI components for **Vue 3** and **React 
 
 ## 📚 Documentation
 
-- Landing page: https://zeturn.github.io/watercolor/
-- VitePress docs (component docs hub): https://zeturn.github.io/watercolor/docs/
+- Documentation & Home: https://zeturn.github.io/watercolor/docs/
 - Vue Storybook: https://zeturn.github.io/watercolor/vue/
 - React Storybook: https://zeturn.github.io/watercolor/react/
 
