@@ -1,0 +1,238 @@
+/* Modal 组件样式 */
+
+/* 覆盖层和背景 */
+.wc-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* 位置变体 */
+.wc-modal-overlay--centered {
+  align-items: center;
+}
+
+.wc-modal-overlay--top {
+  align-items: flex-start;
+  padding-top: 60px;
+}
+
+.wc-modal-overlay--bottom {
+  align-items: flex-end;
+  padding-bottom: 60px;
+}
+
+/* 遮罩层 */
+.wc-modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(4px);
+  z-index: -1;
+  animation: overlayEnter 0.3s ease-out;
+}
+
+/* Modal 主体 */
+.wc-modal {
+  background-color: var(--wc-bg-surface, #ffffff);
+  color: var(--wc-text-primary);
+  border: 1px solid var(--wc-border, #e5e7eb);
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  position: relative;
+  max-height: 90vh;
+  overflow: hidden;
+  animation: modalEnter 0.3s ease-out;
+}
+
+/* 尺寸变体 */
+.wc-modal--xs {
+  max-width: 320px;
+}
+
+.wc-modal--sm {
+  max-width: 448px;
+}
+
+.wc-modal--md {
+  max-width: 512px;
+}
+
+.wc-modal--lg {
+  max-width: 672px;
+}
+
+.wc-modal--xl {
+  max-width: 896px;
+}
+
+/* 全屏变体 */
+.wc-modal--fullscreen {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+  margin: 0;
+}
+
+.wc-modal--fullscreen .wc-modal-overlay {
+  padding: 0;
+}
+
+/* 全宽变体 */
+.wc-modal--full-width {
+  width: 100%;
+}
+
+/* 滚动行为 */
+.wc-modal--scroll-paper {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.wc-modal--scroll-body .wc-modal-overlay {
+  align-items: flex-start;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.wc-modal--scroll-body .wc-modal {
+  max-height: none;
+  overflow-y: visible;
+}
+
+/* Modal header */
+.wc-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 24px 0 24px;
+  margin-bottom: 16px;
+}
+
+.wc-modal__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--wc-text-primary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 关闭按钮 */
+.wc-modal__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--wc-text-secondary, #6b7280);
+  transition: all 0.2s ease;
+}
+
+.wc-modal__close:hover {
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--wc-text, #111827);
+}
+
+/* Modal body */
+.wc-modal__body {
+  padding: 0 24px 24px 24px;
+  color: var(--wc-text-secondary, #3f3f46);
+  line-height: 1.6;
+  overflow-y: auto;
+  max-height: calc(90vh - 120px); /* 减去头部和底部的空间 */
+}
+
+.wc-modal--fullscreen .wc-modal__body {
+  max-height: calc(100vh - 120px);
+}
+
+/* Modal footer */
+.wc-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px 24px 24px;
+  border-top: 1px solid var(--wc-border);
+  background: var(--wc-bg-surface-secondary);
+  margin-top: auto;
+}
+
+.wc-modal__footer--start {
+  justify-content: flex-start;
+}
+
+.wc-modal__footer--center {
+  justify-content: center;
+}
+
+.wc-modal__footer--space-between {
+  justify-content: space-between;
+}
+
+/* 动画 */
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes overlayEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 过渡动画类 */
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-active .wc-modal,
+.modal-leave-active .wc-modal {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.modal-enter-from .wc-modal,
+.modal-leave-to .wc-modal {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+}

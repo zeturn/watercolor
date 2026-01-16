@@ -1,0 +1,311 @@
+/* Feature 组件样式 - Watercolor风格 */
+.wc-feature-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+  /* Watercolor风格：沿用card风格，默认浅灰色，无边框 */
+  color: var(--wc-text-primary);
+  border: none;
+  border-radius: var(--wc-radius-2xl);
+  background: var(--wc-bg-surface-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--wc-font-family);
+}
+
+.wc-feature-card:hover {
+  /* Watercolor风格：hover时背景变深 */
+  background: var(--wc-bg-surface-hover);
+  transform: translateY(-2px);
+}
+
+/* Alignment variants */
+.wc-feature-card--center {
+  align-items: center;
+  text-align: center;
+}
+
+.wc-feature-card--left {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Direction variants */
+.wc-feature-card--reverse {
+  flex-direction: row-reverse;
+}
+
+.wc-feature-card--vertical {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Size variants */
+.wc-feature-card--sm {
+  padding: 12px;
+  gap: 12px;
+}
+
+.wc-feature-card--md {
+  padding: 16px;
+  gap: 16px;
+}
+
+.wc-feature-card--lg {
+  padding: 24px;
+  gap: 20px;
+}
+
+/* Elements */
+.wc-feature-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wc-primary-600, #2563eb);
+  transition: all 0.2s ease;
+}
+
+.wc-feature-icon--sm {
+  width: 32px;
+  height: 32px;
+  font-size: 1.25rem;
+}
+
+.wc-feature-icon--md {
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+}
+
+.wc-feature-icon--lg {
+  width: 64px;
+  height: 64px;
+  font-size: 2.5rem;
+}
+
+/* 图标背景样式 - 默认为圆形带背景 */
+.wc-feature-icon {
+  background: var(--wc-primary-50, linear-gradient(135deg, #e0e7ff 0%, #f0f9ff 100%));
+  border-radius: 50%;
+  box-shadow: 0 2px 8px 0 rgba(59,130,246,0.08);
+}
+
+.wc-feature-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.wc-feature-content--center {
+  text-align: center;
+}
+
+.wc-feature-content--left {
+  text-align: left;
+}
+
+.wc-feature-title {
+  margin: 0 0 4px 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--wc-neutral-900, #111827);
+  line-height: 1.4;
+}
+
+.wc-feature-title--sm {
+  font-size: 1rem;
+}
+
+.wc-feature-title--md {
+  font-size: 1.125rem;
+}
+
+.wc-feature-title--lg {
+  font-size: 1.25rem;
+}
+
+.wc-feature-description {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--wc-neutral-600, #4b5563);
+  line-height: 1.5;
+}
+
+.wc-feature-description--sm {
+  font-size: 0.75rem;
+}
+
+.wc-feature-description--md {
+  font-size: 0.875rem;
+}
+
+.wc-feature-description--lg {
+  font-size: 1rem;
+}
+
+.wc-feature-cta {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--wc-primary-600, #2563eb);
+  font-weight: 500;
+  text-decoration: underline;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.wc-feature-cta:hover {
+  color: var(--wc-primary-700, #1d4ed8);
+  text-decoration-color: var(--wc-primary-700, #1d4ed8);
+}
+
+/* Background variants */
+.wc-feature-card--transparent {
+  background: transparent;
+  border: none;
+}
+
+.wc-feature-card--white {
+  background: var(--wc-neutral-0, #ffffff);
+}
+
+.wc-feature-card--gray {
+  background: var(--wc-neutral-100, #f3f4f6);
+}
+
+.wc-feature-card--primary {
+  background: var(--wc-primary-50, #eff6ff);
+  border: none;
+}
+
+.wc-feature-card--primary .wc-feature-title {
+  color: var(--wc-primary-900, #1e3a8a);
+}
+
+.wc-feature-card--primary .wc-feature-description {
+  color: var(--wc-primary-700, #1d4ed8);
+}
+
+/* Style variants - 兼容Vue模板中的变体 */
+.wc-feature-card--elevated {
+  background: var(--wc-neutral-0, #ffffff);
+  box-shadow: 0 4px 24px 0 rgba(56, 112, 255, 0.08), 0 1.5px 6px 0 rgba(0,0,0,0.04);
+  border: none;
+}
+
+.wc-feature-card--elevated:hover {
+  box-shadow: 0 8px 32px 0 rgba(56, 112, 255, 0.13), 0 2px 8px 0 rgba(0,0,0,0.08);
+  background: var(--wc-primary-25, #f5faff);
+}
+
+.wc-feature-card--minimal {
+  background: transparent;
+  border: 1.5px dashed var(--wc-neutral-300, #d1d5db);
+  box-shadow: none;
+}
+
+.wc-feature-card--minimal:hover {
+  border-color: var(--wc-primary-500, #3b82f6);
+  background: var(--wc-primary-25, rgba(59,130,246,0.03));
+}
+
+.wc-feature-card--minimal .wc-feature-icon {
+  background: none;
+  box-shadow: none;
+}
+
+/* Interactive states */
+.wc-feature-card--clickable {
+  cursor: pointer;
+}
+
+.wc-feature-card--clickable:hover .wc-feature-icon {
+  transform: scale(1.1);
+}
+
+.wc-feature-card--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Dark mode styles */
+.dark .wc-feature-card {
+  background: var(--wc-neutral-200, #1f2937);
+  color: var(--wc-neutral-900, #f5f5f5);
+}
+
+.dark .wc-feature-card:hover {
+  background: var(--wc-neutral-300, #374151);
+  color: var(--wc-neutral-900, #f5f5f5);
+}
+
+.dark .wc-feature-icon {
+  color: var(--wc-primary-400, #60a5fa);
+}
+
+.dark .wc-feature-title {
+  color: var(--wc-neutral-100, #f5f5f5);
+}
+
+.dark .wc-feature-description {
+  color: var(--wc-neutral-400, #9ca3af);
+}
+
+.dark .wc-feature-cta {
+  color: var(--wc-primary-400, #60a5fa);
+}
+
+.dark .wc-feature-cta:hover {
+  color: var(--wc-primary-300, #3b82f6);
+}
+
+.dark .wc-feature-card--transparent {
+  background: transparent;
+}
+
+.dark .wc-feature-card--white {
+  background: var(--wc-neutral-900, #111827);
+}
+
+.dark .wc-feature-card--gray {
+  background: var(--wc-neutral-800, #1f2937);
+}
+
+.dark .wc-feature-card--primary {
+  background: var(--wc-primary-800, #1e40af);
+}
+
+.dark .wc-feature-card--primary .wc-feature-title {
+  color: var(--wc-primary-100, #dbeafe);
+}
+
+.dark .wc-feature-card--primary .wc-feature-description {
+  color: var(--wc-primary-300, #93c5fd);
+}
+
+.dark .wc-feature-card--elevated {
+  background: var(--wc-neutral-900, #111827);
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dark .wc-feature-card--elevated:hover {
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  background: var(--wc-primary-900, #1e3a8a);
+}
+
+.dark .wc-feature-card--minimal {
+  background: transparent;
+  border: 1.5px dashed var(--wc-neutral-600, #4b5563);
+}
+
+.dark .wc-feature-card--minimal:hover {
+  border-color: var(--wc-primary-400, #60a5fa);
+  background: var(--wc-primary-900, rgba(59,130,246,0.03));
+}
+
+.dark .wc-feature-card--minimal .wc-feature-icon {
+  background: none;
+  box-shadow: none;
+} 

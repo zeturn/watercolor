@@ -1,0 +1,340 @@
+/* Popover 组件样式 */
+
+/* CSS 变量定义 */
+:root {
+  --wc-popover-bg: var(--wc-neutral-0, #ffffff);
+  --wc-popover-border-color: var(--wc-neutral-200, #e5e7eb);
+  --wc-popover-border-radius: var(--wc-radius-md, 0.375rem);
+  --wc-popover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --wc-popover-z-index: 2000;
+  --wc-popover-min-width: 180px;
+  --wc-popover-max-width: 320px;
+  --wc-popover-padding: 12px;
+  
+  /* 触发器样式 */
+  --wc-popover-trigger-bg: var(--wc-bg-surface);
+  --wc-popover-trigger-border: var(--wc-neutral-200, #e5e7eb);
+  --wc-popover-trigger-hover-bg: var(--wc-neutral-50, #f9fafb);
+  --wc-popover-trigger-padding: 6px 12px;
+  
+  /* 动画变量 */
+  --wc-popover-transition-duration: 0.2s;
+  --wc-popover-transition-easing: ease;
+}
+
+/* 深色模式变量 */
+/* 已移除 prefers-color-scheme 媒体查询，避免与Storybook主题切换冲突 */
+
+.dark {
+  --wc-popover-bg: var(--wc-neutral-800, #1f2937);
+  --wc-popover-border-color: var(--wc-neutral-700, #374151);
+  --wc-popover-trigger-bg: var(--wc-neutral-800, #1f2937);
+  --wc-popover-trigger-border: var(--wc-neutral-700, #374151);
+  --wc-popover-trigger-hover-bg: var(--wc-neutral-700, #374151);
+}
+
+/* 容器样式 */
+.wc-popover-container {
+  display: inline-block;
+  position: relative;
+}
+
+/* 触发器样式 */
+.wc-popover-trigger {
+  padding: var(--wc-popover-trigger-padding);
+  border: 1px solid var(--wc-popover-trigger-border);
+  background: var(--wc-popover-trigger-bg);
+  border-radius: var(--wc-popover-border-radius);
+  cursor: pointer;
+  transition: all var(--wc-popover-transition-duration) var(--wc-popover-transition-easing);
+  font-size: 0.875rem;
+  color: var(--wc-text-primary, #b3b3b3);
+  outline: none;
+  border-radius: var(--wc-radius-2xl);
+}
+
+.wc-popover-trigger:hover {
+  background: var(--wc-popover-trigger-hover-bg);
+  border-color: var(--wc-primary-500, #3b82f6);
+}
+
+.wc-popover-trigger:focus {
+  outline: 2px solid var(--wc-primary-500, #3b82f6);
+  outline-offset: 2px;
+}
+
+.wc-popover-trigger[aria-expanded="true"] {
+  background: var(--wc-popover-trigger-hover-bg);
+  border-color: var(--wc-primary-500, #3b82f6);
+}
+
+/* 弹出内容样式 */
+.wc-popover-content {
+  position: absolute;
+  z-index: var(--wc-popover-z-index);
+  min-width: var(--wc-popover-min-width);
+  max-width: var(--wc-popover-max-width);
+  background: var(--wc-popover-bg);
+  border: 1px solid var(--wc-popover-border-color);
+  border-radius: var(--wc-popover-border-radius);
+  box-shadow: var(--wc-popover-shadow);
+  padding: var(--wc-popover-padding);
+  color: var(--wc-text-primary, #111827);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* 位置变体 */
+.wc-popover-content--top {
+  transform-origin: bottom center;
+}
+
+.wc-popover-content--bottom {
+  transform-origin: top center;
+}
+
+.wc-popover-content--left {
+  transform-origin: right center;
+}
+
+.wc-popover-content--right {
+  transform-origin: left center;
+}
+
+/* 箭头指示器 */
+.wc-popover-content::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+}
+
+.wc-popover-content--top::before {
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: var(--wc-popover-border-color);
+}
+
+.wc-popover-content--top::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-top-color: var(--wc-popover-bg);
+}
+
+.wc-popover-content--bottom::before {
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-color: var(--wc-popover-border-color);
+}
+
+.wc-popover-content--bottom::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-bottom-color: var(--wc-popover-bg);
+}
+
+.wc-popover-content--left::before {
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left-color: var(--wc-popover-border-color);
+}
+
+.wc-popover-content--left::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-left-color: var(--wc-popover-bg);
+}
+
+.wc-popover-content--right::before {
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-right-color: var(--wc-popover-border-color);
+}
+
+.wc-popover-content--right::after {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-right-color: var(--wc-popover-bg);
+}
+
+/* 无箭头变体 */
+.wc-popover-content--no-arrow::before,
+.wc-popover-content--no-arrow::after {
+  display: none;
+}
+
+/* 尺寸变体 */
+.wc-popover-content--sm {
+  min-width: 120px;
+  max-width: 200px;
+  padding: 8px;
+  font-size: 0.75rem;
+}
+
+.wc-popover-content--md {
+  min-width: var(--wc-popover-min-width);
+  max-width: var(--wc-popover-max-width);
+  padding: var(--wc-popover-padding);
+}
+
+.wc-popover-content--lg {
+  min-width: 240px;
+  max-width: 400px;
+  padding: 16px;
+  font-size: 1rem;
+}
+
+/* 动画效果 */
+.wc-popover-fade-enter-active,
+.wc-popover-fade-leave-active {
+  transition: opacity var(--wc-popover-transition-duration) var(--wc-popover-transition-easing),
+              transform var(--wc-popover-transition-duration) var(--wc-popover-transition-easing);
+}
+
+.wc-popover-fade-enter-from,
+.wc-popover-fade-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.wc-popover-fade-enter-to,
+.wc-popover-fade-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 滑动动画 */
+.wc-popover-slide-enter-active,
+.wc-popover-slide-leave-active {
+  transition: opacity var(--wc-popover-transition-duration) var(--wc-popover-transition-easing),
+              transform var(--wc-popover-transition-duration) var(--wc-popover-transition-easing);
+}
+
+.wc-popover-slide-enter-from {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.wc-popover-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* 内容样式 */
+.wc-popover__header {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--wc-popover-border-color);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.wc-popover__body {
+  margin: 0;
+}
+
+.wc-popover__footer {
+  padding-top: 8px;
+  margin-top: 8px;
+  border-top: 1px solid var(--wc-popover-border-color);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* 响应式设计 */
+@media (max-width: 640px) {
+  .wc-popover-content {
+    max-width: calc(100vw - 32px);
+    margin: 0 16px;
+  }
+  
+  .wc-popover-content--lg {
+    max-width: calc(100vw - 32px);
+    padding: 12px;
+  }
+}
+
+/* 可访问性 */
+.wc-popover-content[role="dialog"] {
+  outline: none;
+}
+
+.wc-popover-content:focus {
+  outline: 2px solid var(--wc-primary-500, #3b82f6);
+  outline-offset: -2px;
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .wc-popover-content {
+    border: 2px solid var(--wc-neutral-900, #111827);
+  }
+  
+  .wc-popover-trigger {
+    border: 2px solid var(--wc-neutral-900, #111827);
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .wc-popover-fade-enter-active,
+  .wc-popover-fade-leave-active,
+  .wc-popover-slide-enter-active,
+  .wc-popover-slide-leave-active,
+  .wc-popover-trigger {
+    transition: none;
+  }
+  
+  .wc-popover-fade-enter-from,
+  .wc-popover-fade-leave-to,
+  .wc-popover-slide-enter-from,
+  .wc-popover-slide-leave-to {
+    transform: none;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .wc-popover-content {
+    position: static !important;
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+    background: white !important;
+    color: black !important;
+  }
+  
+  .wc-popover-content::before,
+  .wc-popover-content::after {
+    display: none !important;
+  }
+} 

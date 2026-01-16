@@ -12,19 +12,24 @@ console.log('🔍 检查发布文件...')
 
 // 检查必要的文件
 const requiredFiles = [
-  'dist/watercolor-ui.css',
-  'dist/watercolor-ui.es.js',
-  'dist/watercolor-ui.umd.js',
-  'dist/watercolor-react.es.js',
-  'dist/watercolor-react.umd.js',
-  'dist/watercolor-vue.es.js',
-  'dist/watercolor-vue.umd.js',
-  'dist/index.d.ts',
-  'dist/src/entry-react.d.ts',
-  'dist/src/entry-vue.d.ts',
+  'packages/react/dist/watercolor-react.css',
+  'packages/react/dist/watercolor-react.es.js',
+  'packages/react/dist/watercolor-react.umd.js',
+  'packages/react/dist/index.d.ts',
+  'packages/react/package.json',
+  
+  'packages/vue/dist/watercolor-vue.css',
+  'packages/vue/dist/watercolor-vue.es.js',
+  'packages/vue/dist/watercolor-vue.umd.js',
+  'packages/vue/dist/index.d.ts',
+  'packages/vue/package.json',
+  
+  'packages/core/dist/core.es.js',
+  'packages/core/dist/core.umd.js',
+  'packages/core/package.json',
+
   'README.md',
-  'package.json',
-  '.npmignore'
+  'package.json'
 ]
 
 const missingFiles = []

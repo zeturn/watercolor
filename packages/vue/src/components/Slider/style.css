@@ -1,0 +1,554 @@
+/* ====== Slider Component Styles ====== */
+
+/* CSS Variables */
+:root {
+  /* Track */
+  --wc-slider-track-height: 4px;
+  --wc-slider-track-bg: var(--wc-neutral-200);
+  --wc-slider-track-active: var(--wc-primary-500);
+  --wc-slider-track-radius: 2px;
+  
+  /* Thumb */
+  --wc-slider-thumb-size: 20px;
+  --wc-slider-thumb-bg: var(--wc-primary-500);
+  --wc-slider-thumb-border: 2px solid var(--wc-neutral-0);
+  --wc-slider-thumb-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --wc-slider-thumb-focus-shadow: 0 0 0 8px rgba(var(--wc-primary-500-rgb), 0.16);
+  
+  /* Marks */
+  --wc-slider-mark-size: 8px;
+  --wc-slider-mark-bg: var(--wc-neutral-300);
+  --wc-slider-mark-active: var(--wc-primary-500);
+  
+  /* Labels */
+  --wc-slider-label-bg: var(--wc-neutral-800);
+  --wc-slider-label-text: var(--wc-neutral-0);
+  --wc-slider-label-padding: 4px 8px;
+  --wc-slider-label-radius: 4px;
+  
+  /* Spacing */
+  --wc-slider-padding: 16px 0;
+  --wc-slider-margin: 12px;
+  
+  /* Transitions */
+  --wc-slider-transition: all 0.2s ease;
+}
+
+/* Dark Mode Variables */
+.dark {
+  --wc-slider-track-bg: var(--wc-neutral-700);
+  --wc-slider-track-active: var(--wc-primary-400);
+  --wc-slider-thumb-bg: var(--wc-primary-400);
+  --wc-slider-thumb-border: 2px solid var(--wc-neutral-800);
+  --wc-slider-mark-bg: var(--wc-neutral-600);
+  --wc-slider-mark-active: var(--wc-primary-400);
+  --wc-slider-label-bg: var(--wc-neutral-200);
+  --wc-slider-label-text: var(--wc-neutral-800);
+}
+
+/* ====== Main Slider Container ====== */
+.wc-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--wc-slider-padding);
+  font-family: var(--wc-font-family);
+  touch-action: none;
+  user-select: none;
+}
+
+.wc-slider--vertical {
+  flex-direction: column;
+  height: 200px;
+  width: auto;
+  padding: 0 var(--wc-slider-margin);
+}
+
+.wc-slider--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Size Variants */
+.wc-slider--sm {
+  --wc-slider-track-height: 2px;
+  --wc-slider-thumb-size: 16px;
+  --wc-slider-mark-size: 6px;
+}
+
+.wc-slider--lg {
+  --wc-slider-track-height: 6px;
+  --wc-slider-thumb-size: 24px;
+  --wc-slider-mark-size: 10px;
+}
+
+/* Color Variants */
+.wc-slider--primary {
+  --wc-slider-track-active: var(--wc-primary-500);
+  --wc-slider-thumb-bg: var(--wc-primary-500);
+  --wc-slider-mark-active: var(--wc-primary-500);
+}
+
+.wc-slider--secondary {
+  --wc-slider-track-active: var(--wc-secondary-500);
+  --wc-slider-thumb-bg: var(--wc-secondary-500);
+  --wc-slider-mark-active: var(--wc-secondary-500);
+}
+
+.wc-slider--success {
+  --wc-slider-track-active: var(--wc-success-500);
+  --wc-slider-thumb-bg: var(--wc-success-500);
+  --wc-slider-mark-active: var(--wc-success-500);
+}
+
+.wc-slider--warning {
+  --wc-slider-track-active: var(--wc-warning-500);
+  --wc-slider-thumb-bg: var(--wc-warning-500);
+  --wc-slider-mark-active: var(--wc-warning-500);
+}
+
+.wc-slider--error {
+  --wc-slider-track-active: var(--wc-error-500);
+  --wc-slider-thumb-bg: var(--wc-error-500);
+  --wc-slider-mark-active: var(--wc-error-500);
+}
+
+/* ====== Slider Track ====== */
+.wc-slider__track {
+  position: relative;
+  flex: 1;
+  height: var(--wc-slider-track-height);
+  background: var(--wc-slider-track-bg);
+  border-radius: var(--wc-slider-track-radius);
+  cursor: pointer;
+}
+
+.wc-slider--vertical .wc-slider__track {
+  width: var(--wc-slider-track-height);
+  height: 100%;
+  flex: none;
+}
+
+/* Active Track */
+.wc-slider__track-active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: var(--wc-slider-track-active);
+  border-radius: var(--wc-slider-track-radius);
+  transition: var(--wc-slider-transition);
+}
+
+.wc-slider--vertical .wc-slider__track-active {
+  width: 100%;
+  bottom: 0;
+  top: auto;
+}
+
+/* Range Track (for range sliders) */
+.wc-slider__track-range {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: var(--wc-slider-track-active);
+  border-radius: var(--wc-slider-track-radius);
+  transition: var(--wc-slider-transition);
+}
+
+.wc-slider--vertical .wc-slider__track-range {
+  width: 100%;
+  left: 0;
+}
+
+/* ====== Slider Thumb ====== */
+.wc-slider__thumb {
+  position: absolute;
+  top: 50%;
+  width: var(--wc-slider-thumb-size);
+  height: var(--wc-slider-thumb-size);
+  background: var(--wc-slider-thumb-bg);
+  border: var(--wc-slider-thumb-border);
+  border-radius: 50%;
+  box-shadow: var(--wc-slider-thumb-shadow);
+  cursor: grab;
+  transform: translate(-50%, -50%);
+  transition: var(--wc-slider-transition);
+  z-index: 2;
+}
+
+.wc-slider--vertical .wc-slider__thumb {
+  left: 50%;
+  top: auto;
+  transform: translate(-50%, 50%);
+}
+
+.wc-slider__thumb:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.wc-slider--vertical .wc-slider__thumb:hover {
+  transform: translate(-50%, 50%) scale(1.1);
+}
+
+.wc-slider__thumb:active,
+.wc-slider__thumb--dragging {
+  cursor: grabbing;
+  transform: translate(-50%, -50%) scale(1.2);
+  box-shadow: var(--wc-slider-thumb-shadow), var(--wc-slider-thumb-focus-shadow);
+}
+
+.wc-slider--vertical .wc-slider__thumb:active,
+.wc-slider--vertical .wc-slider__thumb--dragging {
+  transform: translate(-50%, 50%) scale(1.2);
+}
+
+.wc-slider__thumb:focus {
+  outline: none;
+  box-shadow: var(--wc-slider-thumb-shadow), var(--wc-slider-thumb-focus-shadow);
+}
+
+/* Thumb States */
+.wc-slider__thumb--start {
+  z-index: 3;
+}
+
+.wc-slider__thumb--end {
+  z-index: 3;
+}
+
+/* ====== Slider Marks ====== */
+.wc-slider__marks {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 0;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.wc-slider--vertical .wc-slider__marks {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  right: auto;
+  width: 0;
+  height: auto;
+  transform: translateX(-50%);
+}
+
+.wc-slider__mark {
+  position: absolute;
+  width: var(--wc-slider-mark-size);
+  height: var(--wc-slider-mark-size);
+  background: var(--wc-slider-mark-bg);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: var(--wc-slider-transition);
+}
+
+.wc-slider--vertical .wc-slider__mark {
+  transform: translate(-50%, 50%);
+}
+
+.wc-slider__mark--active {
+  background: var(--wc-slider-mark-active);
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.wc-slider--vertical .wc-slider__mark--active {
+  transform: translate(-50%, 50%) scale(1.2);
+}
+
+/* ====== Slider Labels ====== */
+.wc-slider__labels {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 8px;
+  pointer-events: none;
+}
+
+.wc-slider--vertical .wc-slider__labels {
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  right: auto;
+  margin-top: 0;
+  margin-left: 8px;
+  width: auto;
+}
+
+.wc-slider__label {
+  position: absolute;
+  font-size: 0.75rem;
+  color: var(--wc-neutral-600);
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.wc-slider--vertical .wc-slider__label {
+  transform: translateY(50%);
+}
+
+.wc-slider__label--active {
+  color: var(--wc-slider-track-active);
+  font-weight: 500;
+}
+
+/* Value Labels */
+.wc-slider__value-label {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--wc-slider-label-bg);
+  color: var(--wc-slider-label-text);
+  padding: var(--wc-slider-label-padding);
+  border-radius: var(--wc-slider-label-radius);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  margin-bottom: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--wc-slider-transition);
+}
+
+.wc-slider--vertical .wc-slider__value-label {
+  bottom: auto;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-bottom: 0;
+  margin-left: 8px;
+}
+
+.wc-slider__value-label::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--wc-slider-label-bg);
+}
+
+.wc-slider--vertical .wc-slider__value-label::after {
+  top: 50%;
+  left: 0;
+  right: 100%;
+  transform: translateY(-50%);
+  border: 4px solid transparent;
+  border-right-color: var(--wc-slider-label-bg);
+}
+
+.wc-slider__thumb:hover .wc-slider__value-label,
+.wc-slider__thumb:focus .wc-slider__value-label,
+.wc-slider__thumb--dragging .wc-slider__value-label {
+  opacity: 1;
+}
+
+/* ====== Input Range (Hidden) ====== */
+.wc-slider__input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.wc-slider--vertical .wc-slider__input {
+  writing-mode: bt-lr; /* IE */
+  -webkit-appearance: slider-vertical; /* WebKit */
+}
+
+/* ====== Step Indicators ====== */
+.wc-slider__steps {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 0;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.wc-slider--vertical .wc-slider__steps {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  right: auto;
+  width: 0;
+  height: auto;
+  transform: translateX(-50%);
+}
+
+.wc-slider__step {
+  position: absolute;
+  width: 2px;
+  height: calc(var(--wc-slider-track-height) * 2);
+  background: var(--wc-slider-mark-bg);
+  transform: translate(-50%, -50%);
+}
+
+.wc-slider--vertical .wc-slider__step {
+  width: calc(var(--wc-slider-track-height) * 2);
+  height: 2px;
+  transform: translate(-50%, 50%);
+}
+
+.wc-slider__step--active {
+  background: var(--wc-slider-mark-active);
+}
+
+/* ====== Tooltip ====== */
+.wc-slider__tooltip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--wc-neutral-800);
+  color: var(--wc-neutral-0);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--wc-slider-transition);
+  z-index: 10;
+}
+
+.wc-slider--vertical .wc-slider__tooltip {
+  bottom: auto;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.wc-slider__tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--wc-neutral-800);
+}
+
+.wc-slider--vertical .wc-slider__tooltip::after {
+  top: 50%;
+  left: 0;
+  right: 100%;
+  transform: translateY(-50%);
+  border: 4px solid transparent;
+  border-right-color: var(--wc-neutral-800);
+}
+
+.wc-slider__thumb:hover .wc-slider__tooltip,
+.wc-slider__thumb--dragging .wc-slider__tooltip {
+  opacity: 1;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+  .wc-slider {
+    padding: 20px 0;
+  }
+  
+  .wc-slider--vertical {
+    height: 150px;
+  }
+  
+  .wc-slider__thumb {
+    --wc-slider-thumb-size: 24px;
+  }
+  
+  .wc-slider__tooltip,
+  .wc-slider__value-label {
+    font-size: 0.875rem;
+    padding: 6px 10px;
+  }
+}
+
+/* ====== High Contrast Mode ====== */
+@media (prefers-contrast: high) {
+  .wc-slider__track {
+    border: 1px solid currentColor;
+  }
+  
+  .wc-slider__thumb {
+    border-width: 3px;
+    border-color: currentColor;
+  }
+  
+  .wc-slider__mark {
+    border: 1px solid currentColor;
+  }
+}
+
+/* ====== Reduced Motion ====== */
+@media (prefers-reduced-motion: reduce) {
+  .wc-slider__thumb,
+  .wc-slider__track-active,
+  .wc-slider__track-range,
+  .wc-slider__mark,
+  .wc-slider__tooltip,
+  .wc-slider__value-label {
+    transition: none;
+  }
+}
+
+/* ====== Print Styles ====== */
+@media print {
+  .wc-slider {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  .wc-slider__tooltip,
+  .wc-slider__value-label {
+    display: none;
+  }
+  
+  .wc-slider__track,
+  .wc-slider__track-active {
+    border: 1px solid #000;
+  }
+}
+
+/* ====== Animation Keyframes ====== */
+@keyframes wc-slider-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+.wc-slider__thumb--animated {
+  animation: wc-slider-pulse 1s ease-in-out infinite;
+}
+
+/* ====== Custom Thumb Styles ====== */
+.wc-slider--square .wc-slider__thumb {
+  border-radius: 2px;
+}
+
+.wc-slider--diamond .wc-slider__thumb {
+  border-radius: 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.wc-slider--diamond .wc-slider__thumb:hover {
+  transform: translate(-50%, -50%) rotate(45deg) scale(1.1);
+} 

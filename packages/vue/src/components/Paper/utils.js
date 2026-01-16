@@ -1,0 +1,1 @@
+export * from '@watercolor/core/src/components/Paper/utils.jsx';

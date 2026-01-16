@@ -1,0 +1,189 @@
+/* Alert 组件样式 */
+.wc-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--wc-radius-2xl);
+  font-family: var(--wc-font-family);
+  position: relative;
+}
+
+.wc-alert-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--wc-font-size-sm);
+  font-weight: var(--wc-font-weight-bold);
+  border-radius: 50%;
+}
+
+.wc-alert-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.wc-alert-title {
+  font-weight: var(--wc-font-weight-medium);
+  font-size: var(--wc-font-size-md);
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.wc-alert-message {
+  font-size: var(--wc-font-size-sm);
+  line-height: 1.5;
+}
+
+.wc-alert-close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  font-size: var(--wc-font-size-lg);
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--wc-radius-2xl);
+  transition: all 0.2s ease;
+}
+
+.wc-alert-close:hover {
+  background-color: var(--wc-bg-surface-hover);
+}
+
+/* Success Alert */
+.wc-alert--success.wc-alert--filled {
+  background-color: var(--wc-bg-success-subtle);
+  color: var(--wc-text-success);
+  border: 1px solid var(--wc-border-success);
+}
+
+.wc-alert--success.wc-alert--filled .wc-alert-icon {
+  background-color: var(--wc-bg-success);
+  color: var(--wc-neutral-0);
+}
+
+.wc-alert--success.wc-alert--outlined {
+  background-color: transparent;
+  color: var(--wc-text-success);
+  border: 1px solid var(--wc-border-success);
+}
+
+.wc-alert--success.wc-alert--outlined .wc-alert-icon {
+  color: var(--wc-text-success);
+}
+
+.wc-alert--success.wc-alert--standard {
+  background-color: var(--wc-bg-success-subtle);
+  color: var(--wc-text-success);
+  border: none;
+}
+
+.wc-alert--success.wc-alert--standard .wc-alert-icon {
+  color: var(--wc-text-success);
+}
+
+/* Info Alert */
+.wc-alert--info.wc-alert--filled {
+  background-color: var(--wc-bg-info-subtle);
+  color: var(--wc-text-info);
+  border: 1px solid var(--wc-border-info);
+}
+
+.wc-alert--info.wc-alert--filled .wc-alert-icon {
+  background-color: var(--wc-bg-info);
+  color: var(--wc-neutral-0);
+}
+
+.wc-alert--info.wc-alert--outlined {
+  background-color: transparent;
+  color: var(--wc-text-info);
+  border: 1px solid var(--wc-border-info);
+}
+
+.wc-alert--info.wc-alert--outlined .wc-alert-icon {
+  color: var(--wc-text-info);
+}
+
+.wc-alert--info.wc-alert--standard {
+  background-color: var(--wc-bg-info-subtle);
+  color: var(--wc-text-info);
+  border: none;
+}
+
+.wc-alert--info.wc-alert--standard .wc-alert-icon {
+  color: var(--wc-text-info);
+}
+
+/* Warning Alert */
+.wc-alert--warning.wc-alert--filled {
+  background-color: var(--wc-bg-warning-subtle);
+  color: var(--wc-text-warning);
+  border: 1px solid var(--wc-border-warning);
+}
+
+.wc-alert--warning.wc-alert--filled .wc-alert-icon {
+  background-color: var(--wc-bg-warning);
+  color: var(--wc-neutral-0);
+}
+
+.wc-alert--warning.wc-alert--outlined {
+  background-color: transparent;
+  color: var(--wc-text-warning);
+  border: 1px solid var(--wc-border-warning);
+}
+
+.wc-alert--warning.wc-alert--outlined .wc-alert-icon {
+  color: var(--wc-text-warning);
+}
+
+.wc-alert--warning.wc-alert--standard {
+  background-color: var(--wc-bg-warning-subtle);
+  color: var(--wc-text-warning);
+  border: none;
+}
+
+.wc-alert--warning.wc-alert--standard .wc-alert-icon {
+  color: var(--wc-text-warning);
+}
+
+/* Error Alert */
+.wc-alert--error.wc-alert--filled {
+  background-color: var(--wc-bg-error-subtle);
+  color: var(--wc-text-error);
+  border: 1px solid var(--wc-border-error);
+}
+
+.wc-alert--error.wc-alert--filled .wc-alert-icon {
+  background-color: var(--wc-bg-error);
+  color: var(--wc-neutral-0);
+}
+
+.wc-alert--error.wc-alert--outlined {
+  background-color: transparent;
+  color: var(--wc-text-error);
+  border: 1px solid var(--wc-border-error);
+}
+
+.wc-alert--error.wc-alert--outlined .wc-alert-icon {
+  color: var(--wc-text-error);
+}
+
+.wc-alert--error.wc-alert--standard {
+  background-color: var(--wc-bg-error-subtle);
+  color: var(--wc-text-error);
+  border: none;
+}
+
+.wc-alert--error.wc-alert--standard .wc-alert-icon {
+  color: var(--wc-text-error);
+}
+
+/* The component now relies on global semantic variables to switch between light and dark themes automatically. No additional .dark overrides are required. */ 

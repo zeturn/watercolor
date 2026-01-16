@@ -1,0 +1,1 @@
+export * from '@watercolor/core/src/components/PricingTable/utils.jsx';

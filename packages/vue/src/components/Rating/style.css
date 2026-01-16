@@ -1,0 +1,387 @@
+/* ====== Rating Component Styles - Watercolor风格 ====== */
+
+/* CSS Variables */
+:root {
+  /* Spacing */
+  --wc-rating-gap: 4px;
+  --wc-rating-gap-sm: 2px;
+  --wc-rating-gap-lg: 6px;
+  
+  /* Sizes */
+  --wc-rating-size-sm: 1rem;
+  --wc-rating-size-md: 1.5rem;
+  --wc-rating-size-lg: 2rem;
+  --wc-rating-size-xl: 2.5rem;
+  
+  /* Colors - Watercolor风格 */
+  --wc-rating-empty: var(--wc-neutral-200, #e5e7eb);
+  --wc-rating-hover: var(--wc-neutral-400, #9ca3af);
+  --wc-rating-filled: var(--wc-warning-500, #f59e0b);
+  
+  /* Transitions */
+  --wc-rating-transition: all 0.2s ease;
+}
+
+/* Dark Mode Variables */
+.dark {
+  --wc-rating-empty: var(--wc-neutral-600, #4b5563);
+  --wc-rating-hover: var(--wc-neutral-500, #6b7280);
+  --wc-rating-filled: var(--wc-warning-400, #fbbf24);
+}
+
+/* ====== Main Rating Container ====== */
+.wc-rating,
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wc-rating-gap);
+  font-family: var(--wc-font-family);
+}
+
+/* Size Variants */
+.wc-rating--sm,
+.rating--sm {
+  gap: var(--wc-rating-gap-sm);
+}
+
+.wc-rating--lg,
+.rating--lg {
+  gap: var(--wc-rating-gap-lg);
+}
+
+/* ====== Rating Item (Star) ====== */
+.wc-rating-item,
+.rating-item {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font-size: var(--wc-rating-size-md);
+  line-height: 1;
+  /* Watercolor风格：默认浅灰色 */
+  color: var(--wc-rating-empty);
+  transition: var(--wc-rating-transition);
+  user-select: none;
+  outline: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 星星样式（现在直接在模板中显示） */
+.wc-rating-item,
+.rating-item {
+  /* 稍微调整字体粗细让星星不那么尖 */
+  font-weight: 400;
+}
+
+/* Size Variants */
+.wc-rating-item--sm,
+.rating-item--sm {
+  font-size: var(--wc-rating-size-sm);
+}
+
+.wc-rating-item--lg,
+.rating-item--lg {
+  font-size: var(--wc-rating-size-lg);
+}
+
+.wc-rating-item--xl,
+.rating-item--xl {
+  font-size: var(--wc-rating-size-xl);
+}
+
+/* Active (Filled) State - Watercolor风格：点击后才是黄色 */
+.wc-rating-item.active,
+.rating-item.active {
+  color: var(--wc-rating-filled);
+}
+
+/* Hover Effects - Watercolor风格：hover时灰色变深 */
+.wc-rating-item:hover:not(.active) {
+  color: var(--wc-rating-hover);
+  transform: scale(1.05);
+}
+
+.wc-rating-item:hover.active {
+  transform: scale(1.05);
+  color: var(--wc-warning-600);
+}
+
+.wc-rating-item:active {
+  transform: scale(0.95);
+}
+
+/* Focus State */
+.wc-rating-item:focus-visible {
+  outline: 2px solid var(--wc-primary-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Disabled State */
+.wc-rating-item:disabled,
+.rating-item:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.wc-rating-item:disabled:hover,
+.rating-item:disabled:hover {
+  transform: none;
+  color: var(--wc-rating-empty);
+}
+
+.wc-rating-item:disabled.active,
+.rating-item:disabled.active {
+  color: var(--wc-rating-filled);
+  opacity: 0.6;
+}
+
+/* ====== Color Variants ====== */
+.wc-rating--primary .wc-rating-item.active,
+.rating--primary .rating-item.active {
+  color: var(--wc-primary-500);
+}
+
+.wc-rating--secondary .wc-rating-item.active,
+.rating--secondary .rating-item.active {
+  color: var(--wc-secondary-500);
+}
+
+.wc-rating--success .wc-rating-item.active,
+.rating--success .rating-item.active {
+  color: var(--wc-success-500);
+}
+
+.wc-rating--error .wc-rating-item.active,
+.rating--error .rating-item.active {
+  color: var(--wc-error-500);
+}
+
+.wc-rating--info .wc-rating-item.active,
+.rating--info .rating-item.active {
+  color: var(--wc-info-500);
+}
+
+/* ====== Custom Icons ====== */
+.wc-rating--heart .wc-rating-item::before,
+.rating--heart .rating-item::before {
+  content: "♡";
+}
+
+.wc-rating--heart .wc-rating-item.active::before,
+.rating--heart .rating-item.active::before {
+  content: "♥";
+}
+
+.wc-rating--thumbs .wc-rating-item::before,
+.rating--thumbs .rating-item::before {
+  content: "👍";
+  opacity: 0.3;
+}
+
+.wc-rating--thumbs .wc-rating-item.active::before,
+.rating--thumbs .rating-item.active::before {
+  opacity: 1;
+}
+
+/* ====== Precision (Half Stars) ====== */
+.wc-rating--precision .wc-rating-item,
+.rating--precision .rating-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.wc-rating--precision .wc-rating-item::after,
+.rating--precision .rating-item::after {
+  content: "★";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--fill-percentage, 0%);
+  overflow: hidden;
+  color: var(--wc-rating-filled);
+}
+
+/* ====== Read-only Styles ====== */
+.wc-rating--readonly,
+.rating--readonly {
+  pointer-events: none;
+}
+
+.wc-rating--readonly .wc-rating-item,
+.rating--readonly .rating-item {
+  cursor: default;
+}
+
+.wc-rating--readonly .wc-rating-item:hover,
+.rating--readonly .rating-item:hover {
+  transform: none;
+}
+
+/* ====== Label Styles ====== */
+.wc-rating__label,
+.rating__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--wc-neutral-700);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.dark .wc-rating__label,
+.dark .rating__label {
+  color: var(--wc-neutral-300);
+}
+
+/* ====== Value Display ====== */
+.wc-rating__value,
+.rating__value {
+  font-size: 0.875rem;
+  color: var(--wc-neutral-600);
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+.dark .wc-rating__value,
+.dark .rating__value {
+  color: var(--wc-neutral-400);
+}
+
+
+
+/* ====== Animation Variants ====== */
+.wc-rating--animated .wc-rating-item,
+.rating--animated .rating-item {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wc-rating--animated .wc-rating-item:hover,
+.rating--animated .rating-item:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.wc-rating--bounce .wc-rating-item.active,
+.rating--bounce .rating-item.active {
+  animation: rating-bounce 0.6s ease;
+}
+
+@keyframes rating-bounce {
+  0%, 20%, 60%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  80% {
+    transform: translateY(-4px);
+  }
+}
+
+/* ====== Glow Effect ====== */
+.wc-rating--glow .wc-rating-item.active,
+.rating--glow .rating-item.active {
+  text-shadow: 0 0 8px currentColor;
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+/* ====== Compact Variant ====== */
+.wc-rating--compact,
+.rating--compact {
+  gap: 1px;
+}
+
+.wc-rating--compact .wc-rating-item,
+.rating--compact .rating-item {
+  font-size: 1.25rem;
+}
+
+/* ====== Vertical Layout ====== */
+.wc-rating--vertical,
+.rating--vertical {
+  flex-direction: column;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+  .wc-rating,
+  .rating {
+    gap: 2px;
+  }
+  
+  .wc-rating-item,
+  .rating-item {
+    font-size: 1.25rem;
+  }
+  
+  .wc-rating-item:hover,
+  .rating-item:hover {
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 480px) {
+  .wc-rating-item,
+  .rating-item {
+    font-size: 1rem;
+  }
+}
+
+/* ====== High Contrast Mode ====== */
+@media (prefers-contrast: high) {
+  .wc-rating-item,
+  .rating-item {
+    border: 1px solid transparent;
+  }
+  
+  .wc-rating-item:focus,
+  .rating-item:focus {
+    border-color: currentColor;
+  }
+  
+  .wc-rating-item.active,
+  .rating-item.active {
+    background-color: currentColor;
+    color: var(--wc-neutral-0);
+  }
+}
+
+/* ====== Reduced Motion ====== */
+@media (prefers-reduced-motion: reduce) {
+  .wc-rating-item,
+  .rating-item {
+    transition: none;
+  }
+  
+  .wc-rating-item:hover,
+  .rating-item:hover {
+    transform: none;
+  }
+  
+  .wc-rating--bounce .wc-rating-item.active,
+  .rating--bounce .rating-item.active {
+    animation: none;
+  }
+}
+
+/* ====== Print Styles ====== */
+@media print {
+  .wc-rating,
+  .rating {
+    break-inside: avoid;
+  }
+  
+  .wc-rating-item,
+  .rating-item {
+    color: #000 !important;
+  }
+  
+  .wc-rating-item.active,
+  .rating-item.active {
+    background-color: #000;
+    color: #fff !important;
+  }
+} 

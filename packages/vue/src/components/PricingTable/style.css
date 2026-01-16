@@ -1,0 +1,575 @@
+/* ====== PricingTable Component Styles ====== */
+
+/* CSS Variables */
+:root {
+  /* Spacing */
+  --wc-pricing-gap: 24px;
+  --wc-pricing-gap-sm: 16px;
+  --wc-pricing-gap-lg: 32px;
+  
+  /* Card Padding */
+  --wc-pricing-card-padding: 24px;
+  --wc-pricing-card-padding-sm: 16px;
+  --wc-pricing-card-padding-lg: 32px;
+  
+  /* Border Radius */
+  --wc-pricing-card-radius: 8px;
+  --wc-pricing-button-radius: 4px;
+  
+  /* Typography */
+  --wc-pricing-name-size: 1.25rem;
+  --wc-pricing-price-size: 2rem;
+  --wc-pricing-features-size: 0.875rem;
+  --wc-pricing-button-size: 0.875rem;
+  
+  /* Colors */
+  --wc-pricing-card-bg: var(--wc-neutral-0);
+  --wc-pricing-card-border: var(--wc-neutral-200);
+  --wc-pricing-popular-border: var(--wc-primary-500);
+  --wc-pricing-name-color: var(--wc-neutral-900);
+  --wc-pricing-price-color: var(--wc-primary-500);
+  --wc-pricing-features-color: var(--wc-neutral-700);
+  
+  /* Shadows */
+  --wc-pricing-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --wc-pricing-card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --wc-pricing-popular-shadow: 0 8px 25px rgba(var(--wc-primary-500-rgb), 0.25);
+  
+  /* Transitions */
+  --wc-pricing-transition: all 0.25s ease;
+  --wc-pricing-button-transition: all 0.2s ease;
+}
+
+/* Dark Mode Variables */
+.dark {
+  --wc-pricing-card-bg: var(--wc-neutral-800);
+  --wc-pricing-card-border: var(--wc-neutral-700);
+  --wc-pricing-name-color: var(--wc-neutral-100);
+  --wc-pricing-price-color: var(--wc-primary-400);
+  --wc-pricing-features-color: var(--wc-neutral-300);
+  --wc-pricing-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --wc-pricing-card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* ====== Main Grid Container ====== */
+.pricing-grid {
+  display: grid;
+  gap: var(--wc-pricing-gap);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Grid Columns Variants */
+.pricing-grid--1-col {
+  grid-template-columns: 1fr;
+  max-width: 400px;
+}
+
+.pricing-grid--2-col {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 800px;
+}
+
+.pricing-grid--3-col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.pricing-grid--4-col {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Size Variants */
+.pricing-grid--sm {
+  gap: var(--wc-pricing-gap-sm);
+}
+
+.pricing-grid--lg {
+  gap: var(--wc-pricing-gap-lg);
+}
+
+/* ====== Plan Card ====== */
+.plan-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: var(--wc-pricing-card-padding);
+  background: var(--wc-pricing-card-bg);
+  border: 1px solid var(--wc-pricing-card-border);
+  border-radius: var(--wc-pricing-card-radius);
+  text-align: center;
+  box-shadow: var(--wc-pricing-card-shadow);
+  transition: var(--wc-pricing-transition);
+  overflow: hidden;
+}
+
+.plan-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--wc-pricing-card-shadow-hover);
+}
+
+/* Popular Plan */
+.plan-card.popular,
+.plan-card--popular {
+  border-width: 2px;
+  border-color: var(--wc-pricing-popular-border);
+  box-shadow: var(--wc-pricing-popular-shadow);
+  transform: scale(1.05);
+}
+
+.plan-card.popular::before,
+.plan-card--popular::before {
+  content: "推荐";
+  position: absolute;
+  top: 12px;
+  right: -24px;
+  padding: 4px 32px;
+  background: var(--wc-primary-500);
+  color: var(--wc-neutral-0);
+  font-size: 0.75rem;
+  font-weight: 600;
+  transform: rotate(45deg);
+  transform-origin: center;
+}
+
+/* Card Size Variants */
+.plan-card--sm {
+  padding: var(--wc-pricing-card-padding-sm);
+  gap: 8px;
+}
+
+.plan-card--lg {
+  padding: var(--wc-pricing-card-padding-lg);
+  gap: 16px;
+}
+
+/* Card Style Variants */
+.plan-card--outlined {
+  background: transparent;
+  border-width: 2px;
+}
+
+.plan-card--filled {
+  background: var(--wc-primary-50);
+  border-color: var(--wc-primary-200);
+}
+
+.plan-card--minimal {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.plan-card--elevated {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ====== Plan Elements ====== */
+
+/* Plan Name */
+.plan-name {
+  margin: 0;
+  font-size: var(--wc-pricing-name-size);
+  font-weight: 600;
+  color: var(--wc-pricing-name-color);
+  line-height: 1.2;
+}
+
+/* Plan Price */
+.plan-price {
+  margin: 0;
+  font-size: var(--wc-pricing-price-size);
+  font-weight: 700;
+  color: var(--wc-pricing-price-color);
+  line-height: 1;
+}
+
+.plan-price--sm {
+  font-size: 1.5rem;
+}
+
+.plan-price--lg {
+  font-size: 2.5rem;
+}
+
+.plan-price--xl {
+  font-size: 3rem;
+}
+
+/* Price Period */
+.plan-price__period {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--wc-neutral-500);
+  margin-left: 4px;
+}
+
+/* Original Price (strikethrough) */
+.plan-price__original {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--wc-neutral-500);
+  text-decoration: line-through;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* Plan Features */
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1 1 auto;
+  text-align: left;
+  font-size: var(--wc-pricing-features-size);
+  color: var(--wc-pricing-features-color);
+}
+
+.plan-features li {
+  padding: 6px 0;
+  position: relative;
+  padding-left: 20px;
+}
+
+.plan-features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--wc-success-500);
+  font-weight: 600;
+}
+
+.plan-features li.unavailable {
+  color: var(--wc-neutral-400);
+  text-decoration: line-through;
+}
+
+.plan-features li.unavailable::before {
+  content: "✗";
+  color: var(--wc-error-500);
+}
+
+/* Features with Icons */
+.plan-features--icons li::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: var(--wc-success-500);
+  border-radius: 50%;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* Plan Button */
+.plan-btn {
+  margin-top: auto;
+  padding: 12px 24px;
+  border: 1px solid var(--wc-primary-500);
+  border-radius: var(--wc-pricing-button-radius);
+  background: var(--wc-primary-500);
+  color: var(--wc-neutral-0);
+  font-size: var(--wc-pricing-button-size);
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--wc-pricing-button-transition);
+  min-height: 44px;
+}
+
+.plan-btn:hover {
+  background: var(--wc-primary-400);
+  border-color: var(--wc-primary-400);
+  transform: translateY(-1px);
+}
+
+.plan-btn:active {
+  transform: translateY(0);
+}
+
+.plan-btn:focus {
+  outline: 2px solid var(--wc-primary-500);
+  outline-offset: 2px;
+}
+
+/* Button Variants */
+.plan-btn--outlined {
+  background: transparent;
+  color: var(--wc-primary-500);
+}
+
+.plan-btn--outlined:hover {
+  background: var(--wc-primary-500);
+  color: var(--wc-neutral-0);
+}
+
+.plan-btn--ghost {
+  background: transparent;
+  border: none;
+  color: var(--wc-primary-500);
+}
+
+.plan-btn--ghost:hover {
+  background: var(--wc-primary-50);
+}
+
+.plan-btn--secondary {
+  background: var(--wc-neutral-200);
+  border-color: var(--wc-neutral-200);
+  color: var(--wc-neutral-700);
+}
+
+.plan-btn--secondary:hover {
+  background: var(--wc-neutral-300);
+  border-color: var(--wc-neutral-300);
+}
+
+/* Button Sizes */
+.plan-btn--sm {
+  padding: 8px 16px;
+  font-size: 0.75rem;
+  min-height: 36px;
+}
+
+.plan-btn--lg {
+  padding: 16px 32px;
+  font-size: 1rem;
+  min-height: 52px;
+}
+
+/* ====== Special Effects ====== */
+
+/* Gradient Background */
+.plan-card--gradient {
+  background: linear-gradient(135deg, var(--wc-primary-500), var(--wc-secondary-500));
+  color: var(--wc-neutral-0);
+  border: none;
+}
+
+.plan-card--gradient .plan-name,
+.plan-card--gradient .plan-price,
+.plan-card--gradient .plan-features {
+  color: var(--wc-neutral-0);
+}
+
+.plan-card--gradient .plan-btn {
+  background: var(--wc-neutral-0);
+  color: var(--wc-primary-500);
+}
+
+.plan-card--gradient .plan-btn:hover {
+  background: var(--wc-neutral-100);
+}
+
+/* Animated Border */
+.plan-card--animated {
+  position: relative;
+  background: linear-gradient(var(--wc-pricing-card-bg), var(--wc-pricing-card-bg)) padding-box,
+              linear-gradient(45deg, var(--wc-primary-500), var(--wc-secondary-500)) border-box;
+  border: 2px solid transparent;
+}
+
+/* Badge */
+.plan-badge {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 12px;
+  background: var(--wc-primary-500);
+  color: var(--wc-neutral-0);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--wc-pricing-gap-sm);
+    padding: 0 12px;
+  }
+  
+  .plan-card {
+    padding: var(--wc-pricing-card-padding-sm);
+  }
+  
+  .plan-card.popular,
+  .plan-card--popular {
+    transform: none;
+    margin: 0;
+  }
+  
+  .plan-price {
+    font-size: 1.75rem;
+  }
+  
+  .plan-btn {
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pricing-grid {
+    padding: 0 8px;
+  }
+  
+  .plan-card {
+    padding: 16px;
+  }
+  
+  .plan-price {
+    font-size: 1.5rem;
+  }
+  
+  .plan-features {
+    font-size: 0.8rem;
+  }
+}
+
+/* ====== High Contrast Mode ====== */
+@media (prefers-contrast: high) {
+  .plan-card {
+    border-width: 2px;
+    border-color: var(--wc-neutral-900);
+  }
+  
+  .plan-btn {
+    border-width: 2px;
+  }
+}
+
+/* ====== Reduced Motion ====== */
+@media (prefers-reduced-motion: reduce) {
+  .plan-card,
+  .plan-btn {
+    transition: none;
+  }
+  
+  .plan-card:hover {
+    transform: none;
+  }
+  
+  .plan-btn:hover {
+    transform: none;
+  }
+  
+  .plan-card--animated {
+    background: var(--wc-pricing-card-bg);
+    border: 1px solid var(--wc-pricing-card-border);
+  }
+}
+
+/* ====== Print Styles ====== */
+@media print {
+  .pricing-grid {
+    display: block;
+  }
+  
+  .plan-card {
+    break-inside: avoid;
+    margin-bottom: 24px;
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  .plan-btn {
+    display: none;
+  }
+}
+
+.dark .plan-card--filled {
+  background: var(--wc-primary-900);
+  border-color: var(--wc-primary-700);
+}
+
+.dark .plan-card--minimal {
+  background: transparent;
+}
+
+.dark .plan-card--minimal:hover {
+  background: var(--wc-neutral-900);
+}
+
+.dark .plan-card--elevated {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.dark .plan-price__period {
+  color: var(--wc-neutral-400);
+}
+
+.dark .plan-price__original {
+  color: var(--wc-neutral-500);
+}
+
+.dark .plan-features li.unavailable {
+  color: var(--wc-neutral-600);
+}
+
+.dark .plan-btn {
+  background: var(--wc-primary-600);
+  color: var(--wc-neutral-100);
+}
+
+.dark .plan-btn:hover {
+  background: var(--wc-primary-700);
+}
+
+.dark .plan-btn--outlined {
+  background: transparent;
+  border-color: var(--wc-primary-400);
+  color: var(--wc-primary-400);
+}
+
+.dark .plan-btn--outlined:hover {
+  background: var(--wc-primary-900);
+  color: var(--wc-primary-200);
+}
+
+.dark .plan-btn--ghost {
+  background: transparent;
+  color: var(--wc-neutral-300);
+}
+
+.dark .plan-btn--ghost:hover {
+  background: var(--wc-neutral-700);
+  color: var(--wc-neutral-100);
+}
+
+.dark .plan-btn--secondary {
+  background: var(--wc-neutral-700);
+  color: var(--wc-neutral-200);
+}
+
+.dark .plan-btn--secondary:hover {
+  background: var(--wc-neutral-600);
+}
+
+.dark .plan-card--gradient {
+  background: linear-gradient(135deg, var(--wc-primary-900) 0%, var(--wc-primary-800) 100%);
+}
+
+.dark .plan-card--gradient .plan-name,
+.dark .plan-card--gradient .plan-price {
+  color: var(--wc-neutral-100);
+}
+
+.dark .plan-card--gradient .plan-btn {
+  background: var(--wc-neutral-100);
+  color: var(--wc-primary-900);
+}
+
+.dark .plan-card--gradient .plan-btn:hover {
+  background: var(--wc-neutral-200);
+}
+
+.dark .plan-badge {
+  background: var(--wc-primary-700);
+  color: var(--wc-neutral-100);
+} 

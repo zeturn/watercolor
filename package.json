@@ -1,78 +1,29 @@
 {
-  "name": "watercolor-ui",
-  "version": "1.1.16",
-  "description": "A modern minimalist cross-framework component library",
-  "type": "module",
-  "main": "dist/watercolor-ui.umd.js",
-  "module": "dist/watercolor-ui.es.js",
-  "types": "dist/index.d.ts",
-  "style": "dist/watercolor-ui.css",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/watercolor-ui.es.js",
-      "require": "./dist/watercolor-ui.umd.js",
-      "default": "./dist/watercolor-ui.es.js"
-    },
-    "./react": {
-      "types": "./dist/src/entry-react.d.ts",
-      "import": "./dist/watercolor-react.es.js",
-      "require": "./dist/watercolor-react.umd.js",
-      "default": "./dist/watercolor-react.es.js"
-    },
-    "./vue": {
-      "types": "./dist/src/entry-vue.d.ts",
-      "import": "./dist/watercolor-vue.es.js",
-      "require": "./dist/watercolor-vue.umd.js",
-      "default": "./dist/watercolor-vue.es.js"
-    },
-    "./style.css": "./dist/watercolor-ui.css",
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "dist",
-    "README.md",
-    "CHANGELOG.md",
-    "LICENSE",
-    "public/img/watercolorui.png"
+  "name": "watercolor-ui-root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:core && npm run build:react && npm run build:vue",
-    "build:core": "vite build",
-    "build:vue": "vite build --config vite.vue.config.js",
-    "build:react": "vite build --config vite.react.config.js",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006 -c .storybook-vue",
-    "build-storybook": "storybook build -c .storybook-vue -o storybook-static-vue",
+    "build": "npm run build --workspaces --if-present",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:vue": "vitest run --config vitest.vue.config.ts --coverage",
-    "test:react": "vitest run --config vitest.react.config.ts --coverage",
-    "lint": "eslint . --ext ts,tsx,js,jsx,vue",
-    "lint:fix": "eslint . --ext ts,tsx,js,jsx,vue --fix",
-    "storybook:vue": "storybook dev -p 6006 -c .storybook-vue",
-    "build-storybook:vue": "storybook build -c .storybook-vue -o storybook-static-vue",
-    "storybook:react": "storybook dev -p 6007 -c .storybook-react",
-    "build-storybook:react": "storybook build -c .storybook-react -o storybook-static-react",
-    "prepublishOnly": "npm run build",
-    "prepack": "npm run build",
-    "pack": "npm pack",
-    "publish": "npm publish",
+    "lint": "npm run lint --workspaces --if-present",
+    "storybook": "npm run storybook:vue",
+    "build-storybook": "npm run build-storybook:vue",
+    "storybook:vue": "npm run storybook -w packages/vue",
+    "build-storybook:vue": "npm run build-storybook -w packages/vue",
+    "storybook:react": "npm run storybook -w packages/react",
+    "build-storybook:react": "npm run build-storybook -w packages/react",
+    "docs:generate": "node scripts/generate-vitepress-docs.mjs",
+    "docs:dev": "npm run docs:generate && vitepress dev docs",
+    "docs:build": "npm run docs:generate && vitepress build docs",
     "check-publish": "node scripts/check-publish.js",
     "release": "node scripts/publish.js",
     "release:patch": "node scripts/publish.js patch",
     "release:minor": "node scripts/publish.js minor",
     "release:major": "node scripts/publish.js major"
-    ,
-    "docs:generate": "node scripts/generate-vitepress-docs.mjs",
-    "docs:dev": "npm run docs:generate && vitepress dev docs",
-    "docs:build": "npm run docs:generate && vitepress build docs"
-  },
-  "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "vue": "^3.0.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.1",
@@ -147,18 +98,5 @@
     "node": ">=16.0.0",
     "npm": ">=8.0.0"
   },
-  "license": "MIT",
-  "dependencies": {
-    "@heroicons/react": "^2.2.0",
-    "@heroicons/vue": "^2.2.0",
-    "@phosphor-icons/react": "^2.1.10",
-    "@phosphor-icons/vue": "^2.2.1",
-    "@tabler/icons-react": "^3.34.0",
-    "@tabler/icons-vue": "^3.34.0",
-    "feather-icons": "^4.29.2",
-    "lucide": "^0.525.0",
-    "lucide-react": "^0.525.0",
-    "lucide-vue-next": "^0.525.0",
-    "prop-types": "^15.8.1"
-  }
+  "license": "MIT"
 }

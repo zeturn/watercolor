@@ -1,0 +1,649 @@
+/* ====== Skeleton Component Styles ====== */
+
+/* CSS Variables */
+:root {
+  /* Base Colors */
+  --wc-skeleton-bg: var(--wc-neutral-200);
+  --wc-skeleton-highlight: var(--wc-neutral-300);
+  --wc-skeleton-text: var(--wc-neutral-100);
+  
+  /* Dimensions */
+  --wc-skeleton-border-radius: 4px;
+  --wc-skeleton-height: 1em;
+  --wc-skeleton-width: 100%;
+  
+  /* Animation */
+  --wc-skeleton-animation-duration: 1.5s;
+  --wc-skeleton-wave-color: rgba(255, 255, 255, 0.5);
+  
+  /* Spacing */
+  --wc-skeleton-margin: 0;
+  --wc-skeleton-gap: 8px;
+}
+
+/* Dark Mode Variables */
+.dark {
+  --wc-skeleton-bg: var(--wc-neutral-700);
+  --wc-skeleton-highlight: var(--wc-neutral-600);
+  --wc-skeleton-text: var(--wc-neutral-800);
+  --wc-skeleton-wave-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ====== Base Skeleton ====== */
+.wc-skeleton {
+  display: inline-block;
+  height: var(--wc-skeleton-height);
+  width: var(--wc-skeleton-width);
+  background: var(--wc-skeleton-bg);
+  border-radius: var(--wc-skeleton-border-radius);
+  margin: var(--wc-skeleton-margin);
+  position: relative;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.wc-skeleton--block {
+  display: block;
+}
+
+.wc-skeleton--inline {
+  display: inline-block;
+}
+
+/* ====== Animation Variants ====== */
+
+/* Pulse Animation */
+.wc-skeleton--pulse {
+  animation: wc-skeleton-pulse var(--wc-skeleton-animation-duration) ease-in-out infinite;
+}
+
+@keyframes wc-skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Wave Animation */
+.wc-skeleton--wave {
+  background: linear-gradient(
+    90deg,
+    var(--wc-skeleton-bg) 0%,
+    var(--wc-skeleton-highlight) 50%,
+    var(--wc-skeleton-bg) 100%
+  );
+  background-size: 200% 100%;
+  animation: wc-skeleton-wave var(--wc-skeleton-animation-duration) ease-in-out infinite;
+}
+
+@keyframes wc-skeleton-wave {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Shimmer Animation */
+.wc-skeleton--shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--wc-skeleton-wave-color),
+    transparent
+  );
+  animation: wc-skeleton-shimmer var(--wc-skeleton-animation-duration) ease-in-out infinite;
+}
+
+@keyframes wc-skeleton-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* No Animation */
+.wc-skeleton--none {
+  animation: none;
+}
+
+.wc-skeleton--none::after {
+  display: none;
+}
+
+/* ====== Shape Variants ====== */
+
+/* Text */
+.wc-skeleton--text {
+  height: 1em;
+  border-radius: 2px;
+}
+
+/* Circular */
+.wc-skeleton--circular {
+  border-radius: 50%;
+  width: var(--wc-skeleton-height);
+}
+
+/* Rectangular */
+.wc-skeleton--rectangular {
+  border-radius: 0;
+}
+
+/* Rounded */
+.wc-skeleton--rounded {
+  border-radius: 8px;
+}
+
+/* ====== Size Variants ====== */
+
+/* Text Sizes */
+.wc-skeleton--text-xs {
+  height: 0.75em;
+  font-size: 0.75rem;
+}
+
+.wc-skeleton--text-sm {
+  height: 0.875em;
+  font-size: 0.875rem;
+}
+
+.wc-skeleton--text-md {
+  height: 1em;
+  font-size: 1rem;
+}
+
+.wc-skeleton--text-lg {
+  height: 1.125em;
+  font-size: 1.125rem;
+}
+
+.wc-skeleton--text-xl {
+  height: 1.25em;
+  font-size: 1.25rem;
+}
+
+/* Avatar Sizes */
+.wc-skeleton--avatar-xs {
+  width: 24px;
+  height: 24px;
+}
+
+.wc-skeleton--avatar-sm {
+  width: 32px;
+  height: 32px;
+}
+
+.wc-skeleton--avatar-md {
+  width: 40px;
+  height: 40px;
+}
+
+.wc-skeleton--avatar-lg {
+  width: 48px;
+  height: 48px;
+}
+
+.wc-skeleton--avatar-xl {
+  width: 64px;
+  height: 64px;
+}
+
+/* Button Sizes */
+.wc-skeleton--button-sm {
+  height: 32px;
+  width: 80px;
+  border-radius: 6px;
+}
+
+.wc-skeleton--button-md {
+  height: 40px;
+  width: 100px;
+  border-radius: 6px;
+}
+
+.wc-skeleton--button-lg {
+  height: 48px;
+  width: 120px;
+  border-radius: 8px;
+}
+
+/* Card Sizes */
+.wc-skeleton--card-sm {
+  height: 200px;
+  width: 300px;
+}
+
+.wc-skeleton--card-md {
+  height: 250px;
+  width: 400px;
+}
+
+.wc-skeleton--card-lg {
+  height: 300px;
+  width: 500px;
+}
+
+/* ====== Width Variants ====== */
+.wc-skeleton--w-25 {
+  width: 25%;
+}
+
+.wc-skeleton--w-50 {
+  width: 50%;
+}
+
+.wc-skeleton--w-75 {
+  width: 75%;
+}
+
+.wc-skeleton--w-full {
+  width: 100%;
+}
+
+/* ====== Height Variants ====== */
+.wc-skeleton--h-4 {
+  height: 1rem;
+}
+
+.wc-skeleton--h-6 {
+  height: 1.5rem;
+}
+
+.wc-skeleton--h-8 {
+  height: 2rem;
+}
+
+.wc-skeleton--h-12 {
+  height: 3rem;
+}
+
+.wc-skeleton--h-16 {
+  height: 4rem;
+}
+
+.wc-skeleton--h-20 {
+  height: 5rem;
+}
+
+/* ====== Skeleton Groups ====== */
+.wc-skeleton-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wc-skeleton-gap);
+}
+
+.wc-skeleton-group--horizontal {
+  flex-direction: row;
+  align-items: center;
+}
+
+.wc-skeleton-group--grid {
+  display: grid;
+  gap: var(--wc-skeleton-gap);
+}
+
+/* ====== Common Patterns ====== */
+
+/* Avatar with Text */
+.wc-skeleton-avatar-text {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.wc-skeleton-avatar-text__avatar {
+  flex-shrink: 0;
+}
+
+.wc-skeleton-avatar-text__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Card Pattern */
+.wc-skeleton-card {
+  padding: 16px;
+  border: 1px solid var(--wc-neutral-200);
+  border-radius: 8px;
+  background: var(--wc-neutral-0);
+}
+
+.wc-skeleton-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.wc-skeleton-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wc-skeleton-card__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  justify-content: flex-end;
+}
+
+.dark .wc-skeleton-card {
+  background: var(--wc-neutral-800);
+  border-color: var(--wc-neutral-600);
+}
+
+/* List Pattern */
+.wc-skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wc-skeleton-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.wc-skeleton-list-item__icon {
+  flex-shrink: 0;
+}
+
+.wc-skeleton-list-item__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Table Pattern */
+.wc-skeleton-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.wc-skeleton-table__header {
+  border-bottom: 1px solid var(--wc-neutral-200);
+}
+
+.wc-skeleton-table__row {
+  border-bottom: 1px solid var(--wc-neutral-100);
+}
+
+.wc-skeleton-table__cell {
+  padding: 12px 8px;
+  vertical-align: middle;
+}
+
+.dark .wc-skeleton-table__header {
+  background: var(--wc-neutral-700);
+}
+
+.dark .wc-skeleton-table__row {
+  background: var(--wc-neutral-800);
+  border-color: var(--wc-neutral-600);
+}
+
+/* ====== Loading States ====== */
+.wc-skeleton--loading {
+  pointer-events: none;
+  user-select: none;
+}
+
+.wc-skeleton--loaded {
+  animation: wc-skeleton-fade-out 0.3s ease-out forwards;
+}
+
+@keyframes wc-skeleton-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+  .wc-skeleton-card {
+    padding: 12px;
+  }
+  
+  .wc-skeleton-group {
+    --wc-skeleton-gap: 6px;
+  }
+  
+  .wc-skeleton-avatar-text {
+    gap: 8px;
+  }
+  
+  .wc-skeleton-list-item {
+    gap: 8px;
+    padding: 6px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .wc-skeleton--card-sm,
+  .wc-skeleton--card-md,
+  .wc-skeleton--card-lg {
+    width: 100%;
+  }
+  
+  .wc-skeleton-card__actions {
+    flex-direction: column;
+  }
+  
+  .wc-skeleton-group--horizontal {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* ====== High Contrast Mode ====== */
+@media (prefers-contrast: high) {
+  .wc-skeleton {
+    border: 1px solid currentColor;
+  }
+  
+  .wc-skeleton--wave,
+  .wc-skeleton--pulse,
+  .wc-skeleton--shimmer {
+    animation: none;
+    background: var(--wc-skeleton-bg);
+  }
+  
+  .wc-skeleton--shimmer::after {
+    display: none;
+  }
+}
+
+/* ====== Reduced Motion ====== */
+@media (prefers-reduced-motion: reduce) {
+  .wc-skeleton--wave,
+  .wc-skeleton--pulse,
+  .wc-skeleton--shimmer {
+    animation: none;
+  }
+  
+  .wc-skeleton--shimmer::after {
+    display: none;
+  }
+  
+  .wc-skeleton--loaded {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* ====== Print Styles ====== */
+@media print {
+  .wc-skeleton {
+    background: #f0f0f0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  .wc-skeleton--wave,
+  .wc-skeleton--pulse,
+  .wc-skeleton--shimmer {
+    animation: none;
+  }
+  
+  .wc-skeleton--shimmer::after {
+    display: none;
+  }
+}
+
+/* ====== Custom Variants ====== */
+
+/* Gradient Skeleton */
+.wc-skeleton--gradient {
+  background: linear-gradient(
+    135deg,
+    var(--wc-skeleton-bg) 0%,
+    var(--wc-skeleton-highlight) 50%,
+    var(--wc-skeleton-bg) 100%
+  );
+}
+
+/* Soft Skeleton */
+.wc-skeleton--soft {
+  background: var(--wc-skeleton-bg);
+  opacity: 0.6;
+}
+
+/* Sharp Skeleton */
+.wc-skeleton--sharp {
+  border-radius: 0;
+  background: var(--wc-skeleton-bg);
+}
+
+/* ====== Utility Classes ====== */
+.wc-skeleton--hidden {
+  display: none;
+}
+
+.wc-skeleton--visible {
+  display: block;
+}
+
+.wc-skeleton--center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wc-skeleton--no-margin {
+  margin: 0;
+}
+
+/* ====== Component-Specific Skeletons ====== */
+
+/* Image Skeleton */
+.wc-skeleton--image {
+  background: var(--wc-skeleton-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wc-skeleton-text);
+  font-size: 2rem;
+}
+
+.wc-skeleton--image::before {
+  content: '🖼️';
+  opacity: 0.5;
+}
+
+/* Video Skeleton */
+.wc-skeleton--video {
+  background: var(--wc-skeleton-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wc-skeleton-text);
+  font-size: 2rem;
+  aspect-ratio: 16/9;
+}
+
+.wc-skeleton--video::before {
+  content: '▶️';
+  opacity: 0.5;
+}
+
+/* Chart Skeleton */
+.wc-skeleton--chart {
+  background: var(--wc-skeleton-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wc-skeleton-text);
+  font-size: 2rem;
+  min-height: 200px;
+}
+
+.wc-skeleton--chart::before {
+  content: '📊';
+  opacity: 0.5;
+}
+
+.dark .wc-skeleton-card {
+  background: var(--wc-neutral-800);
+  border-color: var(--wc-neutral-600);
+}
+
+.dark .wc-skeleton-list-item {
+  background: var(--wc-neutral-800);
+}
+
+.dark .wc-skeleton-table__header {
+  background: var(--wc-neutral-700);
+}
+
+.dark .wc-skeleton-table__row {
+  background: var(--wc-neutral-800);
+  border-color: var(--wc-neutral-600);
+}
+
+.dark .wc-skeleton--gradient {
+  background: linear-gradient(
+    90deg,
+    var(--wc-neutral-700) 0%,
+    var(--wc-neutral-600) 50%,
+    var(--wc-neutral-700) 100%
+  );
+}
+
+.dark .wc-skeleton--soft {
+  background: var(--wc-neutral-600);
+}
+
+.dark .wc-skeleton--image {
+  background: var(--wc-neutral-700);
+  border-color: var(--wc-neutral-600);
+}
+
+.dark .wc-skeleton--video {
+  background: var(--wc-neutral-700);
+  border-color: var(--wc-neutral-600);
+}
+
+.dark .wc-skeleton--chart {
+  background: var(--wc-neutral-700);
+  border-color: var(--wc-neutral-600);
+} 

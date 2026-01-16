@@ -1,0 +1,406 @@
+/* Pagination 组件样式 - Watercolor风格 */
+
+/* CSS 变量定义 */
+:root {
+  --wc-pagination-button-size: 32px;
+  --wc-pagination-button-padding: 0 6px;
+  /* Watercolor风格：默认透明背景，无边框 */
+  --wc-pagination-button-bg: transparent;
+  --wc-pagination-button-border: transparent;
+  --wc-pagination-button-color: var(--wc-neutral-700, #374151);
+  /* Hover时显示浅色背景 */
+  --wc-pagination-button-hover-bg: var(--wc-neutral-100, #f3f4f6);
+  --wc-pagination-button-hover-border: transparent;
+  --wc-pagination-button-hover-color: var(--wc-primary-500, #3b82f6);
+  /* 激活状态保持原有样式 */
+  --wc-pagination-button-active-bg: var(--wc-primary-500, #3b82f6);
+  --wc-pagination-button-active-border: var(--wc-primary-500, #3b82f6);
+  --wc-pagination-button-active-color: var(--wc-neutral-0, #ffffff);
+  --wc-pagination-button-disabled-opacity: 0.5;
+  --wc-pagination-gap: 4px;
+  --wc-pagination-border-radius: var(--wc-radius-md, 0.25rem);
+  --wc-pagination-font-size: 0.875rem;
+  --wc-pagination-transition: all 0.2s ease;
+}
+
+/* 深色模式变量 - 已集成到.dark类中 */
+.dark .wc-page-ellipsis {
+  color: var(--wc-neutral-400);
+}
+
+.dark .wc-pagination--success {
+  --wc-pagination-button-hover-border: var(--wc-success-400);
+  --wc-pagination-button-hover-color: var(--wc-success-400);
+  --wc-pagination-button-active-bg: var(--wc-success-500);
+  --wc-pagination-button-active-border: var(--wc-success-500);
+}
+
+.dark .wc-pagination--warning {
+  --wc-pagination-button-hover-border: var(--wc-warning-400);
+  --wc-pagination-button-hover-color: var(--wc-warning-400);
+  --wc-pagination-button-active-bg: var(--wc-warning-500);
+  --wc-pagination-button-active-border: var(--wc-warning-500);
+}
+
+.dark .wc-pagination--error {
+  --wc-pagination-button-hover-border: var(--wc-error-400);
+  --wc-pagination-button-hover-color: var(--wc-error-400);
+  --wc-pagination-button-active-bg: var(--wc-error-500);
+  --wc-pagination-button-active-border: var(--wc-error-500);
+}
+
+.dark .wc-pagination-info {
+  color: var(--wc-neutral-300);
+}
+
+.dark .wc-pagination-size-selector select {
+  background: var(--wc-neutral-800);
+  color: var(--wc-neutral-200);
+  border-color: var(--wc-neutral-600);
+}
+
+/* 分页容器 */
+.wc-pagination,
+.pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wc-pagination-gap);
+  font-size: var(--wc-pagination-font-size);
+}
+
+/* 分页按钮基础样式 */
+.wc-page-btn,
+.page-btn {
+  min-width: var(--wc-pagination-button-size);
+  height: var(--wc-pagination-button-size);
+  padding: var(--wc-pagination-button-padding);
+  /* Watercolor风格：默认无边框，透明背景 */
+  border: none;
+  background: var(--wc-pagination-button-bg);
+  color: var(--wc-pagination-button-color);
+  border-radius: var(--wc-pagination-border-radius);
+  font-size: var(--wc-pagination-font-size);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--wc-pagination-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  user-select: none;
+  outline: none;
+}
+
+/* 悬浮状态 - Watercolor风格：hover时显示浅色背景 */
+.wc-page-btn:hover:not(:disabled):not(.wc-page-btn--active),
+.page-btn:hover:not(:disabled):not(.active) {
+  background: var(--wc-pagination-button-hover-bg);
+  border: none;
+  color: var(--wc-pagination-button-hover-color);
+  transform: translateY(-1px);
+}
+
+/* 激活状态 */
+.wc-page-btn--active,
+.wc-page-btn.active,
+.page-btn.active {
+  background: var(--wc-pagination-button-active-bg);
+  border-color: var(--wc-pagination-button-active-border);
+  color: var(--wc-pagination-button-active-color);
+  cursor: default;
+}
+
+/* 禁用状态 */
+.wc-page-btn:disabled,
+.wc-page-btn--disabled,
+.page-btn:disabled {
+  opacity: var(--wc-pagination-button-disabled-opacity);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* 焦点状态 */
+.wc-page-btn:focus-visible,
+.page-btn:focus-visible {
+  outline: 2px solid var(--wc-primary-500, #3b82f6);
+  outline-offset: 2px;
+}
+
+/* 省略号 */
+.wc-page-ellipsis,
+.page-ellipsis {
+  padding: var(--wc-pagination-button-padding);
+  color: var(--wc-text-secondary, #6b7280);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--wc-pagination-button-size);
+  height: var(--wc-pagination-button-size);
+}
+
+/* 尺寸变体 */
+.wc-pagination--sm {
+  --wc-pagination-button-size: 28px;
+  --wc-pagination-button-padding: 0 4px;
+  --wc-pagination-font-size: 0.75rem;
+  --wc-pagination-gap: 2px;
+}
+
+.wc-pagination--md {
+  --wc-pagination-button-size: 32px;
+  --wc-pagination-button-padding: 0 6px;
+  --wc-pagination-font-size: 0.875rem;
+  --wc-pagination-gap: 4px;
+}
+
+.wc-pagination--lg {
+  --wc-pagination-button-size: 40px;
+  --wc-pagination-button-padding: 0 8px;
+  --wc-pagination-font-size: 1rem;
+  --wc-pagination-gap: 6px;
+}
+
+.wc-pagination--xl {
+  --wc-pagination-button-size: 48px;
+  --wc-pagination-button-padding: 0 12px;
+  --wc-pagination-font-size: 1.125rem;
+  --wc-pagination-gap: 8px;
+}
+
+/* 形状变体 */
+.wc-pagination--rounded .wc-page-btn {
+  border-radius: var(--wc-radius-full, 9999px);
+}
+
+.wc-pagination--square .wc-page-btn {
+  border-radius: 0;
+}
+
+/* 颜色变体 */
+.wc-pagination--primary {
+  --wc-pagination-button-hover-border: var(--wc-primary-500, #3b82f6);
+  --wc-pagination-button-hover-color: var(--wc-primary-500, #3b82f6);
+  --wc-pagination-button-active-bg: var(--wc-primary-500, #3b82f6);
+  --wc-pagination-button-active-border: var(--wc-primary-500, #3b82f6);
+}
+
+.wc-pagination--success {
+  --wc-pagination-button-hover-border: var(--wc-success-500, #10b981);
+  --wc-pagination-button-hover-color: var(--wc-success-500, #10b981);
+  --wc-pagination-button-active-bg: var(--wc-success-500, #10b981);
+  --wc-pagination-button-active-border: var(--wc-success-500, #10b981);
+}
+
+.wc-pagination--warning {
+  --wc-pagination-button-hover-border: var(--wc-warning-500, #f59e0b);
+  --wc-pagination-button-hover-color: var(--wc-warning-500, #f59e0b);
+  --wc-pagination-button-active-bg: var(--wc-warning-500, #f59e0b);
+  --wc-pagination-button-active-border: var(--wc-warning-500, #f59e0b);
+}
+
+.wc-pagination--error {
+  --wc-pagination-button-hover-border: var(--wc-error-500, #ef4444);
+  --wc-pagination-button-hover-color: var(--wc-error-500, #ef4444);
+  --wc-pagination-button-active-bg: var(--wc-error-500, #ef4444);
+  --wc-pagination-button-active-border: var(--wc-error-500, #ef4444);
+}
+
+/* 变体样式 */
+.wc-pagination--minimal .wc-page-btn {
+  border: none;
+  background: transparent;
+}
+
+.wc-pagination--minimal .wc-page-btn:hover:not(:disabled):not(.wc-page-btn--active) {
+  background: var(--wc-pagination-button-hover-bg);
+}
+
+.wc-pagination--minimal .wc-page-btn--active {
+  background: var(--wc-pagination-button-active-bg);
+  color: var(--wc-pagination-button-active-color);
+}
+
+.wc-pagination--outlined .wc-page-btn {
+  /* Watercolor风格：outlined版本默认也无边框 */
+  border: none;
+  background: transparent;
+}
+
+.wc-pagination--outlined .wc-page-btn:hover:not(:disabled):not(.wc-page-btn--active) {
+  background: var(--wc-pagination-button-hover-bg);
+  border: none;
+}
+
+.wc-pagination--outlined .wc-page-btn--active {
+  background: var(--wc-pagination-button-active-bg);
+  color: var(--wc-pagination-button-active-color);
+  border: none;
+}
+
+/* 紧凑模式 */
+.wc-pagination--compact {
+  --wc-pagination-gap: 0;
+}
+
+.wc-pagination--compact .wc-page-btn {
+  border-radius: 0;
+}
+
+.wc-pagination--compact .wc-page-btn:first-child {
+  border-top-left-radius: var(--wc-pagination-border-radius);
+  border-bottom-left-radius: var(--wc-pagination-border-radius);
+}
+
+.wc-pagination--compact .wc-page-btn:last-child {
+  border-top-right-radius: var(--wc-pagination-border-radius);
+  border-bottom-right-radius: var(--wc-pagination-border-radius);
+}
+
+.wc-pagination--compact .wc-page-btn:not(:first-child) {
+  border-left: none;
+}
+
+/* 导航按钮 */
+.wc-page-btn--nav {
+  font-weight: 600;
+}
+
+.wc-page-btn--prev::before {
+  content: '‹';
+  margin-right: 2px;
+}
+
+.wc-page-btn--next::after {
+  content: '›';
+  margin-left: 2px;
+}
+
+.wc-page-btn--first::before {
+  content: '«';
+  margin-right: 2px;
+}
+
+.wc-page-btn--last::after {
+  content: '»';
+  margin-left: 2px;
+}
+
+/* 分页信息 */
+.wc-pagination-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--wc-pagination-font-size);
+  color: var(--wc-text-secondary, #6b7280);
+  margin: 0 8px;
+}
+
+.wc-pagination-total {
+  font-weight: 500;
+  color: var(--wc-text-primary, #111827);
+}
+
+/* 页面大小选择器 */
+.wc-pagination-size-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 16px;
+}
+
+.wc-pagination-size-selector select {
+  padding: 4px 8px;
+  border: 1px solid var(--wc-pagination-button-border);
+  border-radius: var(--wc-pagination-border-radius);
+  background: var(--wc-pagination-button-bg);
+  color: var(--wc-pagination-button-color);
+  font-size: var(--wc-pagination-font-size);
+  cursor: pointer;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .wc-pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .wc-pagination--lg {
+    --wc-pagination-button-size: 36px;
+    --wc-pagination-font-size: 0.875rem;
+  }
+  
+  .wc-pagination--xl {
+    --wc-pagination-button-size: 40px;
+    --wc-pagination-font-size: 1rem;
+  }
+  
+  .wc-pagination-info {
+    order: -1;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  
+  .wc-pagination-size-selector {
+    order: 1;
+    width: 100%;
+    justify-content: center;
+    margin: 8px 0 0 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .wc-pagination {
+    --wc-pagination-button-size: 28px;
+    --wc-pagination-font-size: 0.75rem;
+    --wc-pagination-gap: 2px;
+  }
+  
+  /* 隐藏部分页码，只显示关键页码 */
+  .wc-pagination--mobile .wc-page-btn:not(.wc-page-btn--active):not(.wc-page-btn--nav):not(:first-of-type):not(:last-of-type):not(:nth-last-of-type(2)):not(:nth-of-type(2)) {
+    display: none;
+  }
+}
+
+/* 可访问性 */
+.wc-pagination[role="navigation"] {
+  outline: none;
+}
+
+.wc-page-btn[aria-current="page"] {
+  background: var(--wc-pagination-button-active-bg);
+  border-color: var(--wc-pagination-button-active-border);
+  color: var(--wc-pagination-button-active-color);
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .wc-page-btn {
+    border: 2px solid var(--wc-neutral-900, #111827);
+  }
+  
+  .wc-page-btn--active {
+    background: var(--wc-neutral-900, #111827);
+    color: var(--wc-neutral-0, #ffffff);
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .wc-page-btn {
+    transition: none;
+  }
+  
+  .wc-page-btn:hover:not(:disabled):not(.wc-page-btn--active) {
+    transform: none;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .wc-pagination {
+    display: none !important;
+  }
+} 

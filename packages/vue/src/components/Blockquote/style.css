@@ -1,0 +1,213 @@
+/* Blockquote 组件样式 */
+.wc-blockquote {
+  padding: 24px 32px;
+  border-radius: var(--wc-radius-2xl);
+  margin: 0;
+  background-color: var(--wc-bg-surface);
+  color: var(--wc-text-primary);
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+/* 默认有边框样式（保留原有样式） */
+.wc-blockquote:not(.wc-blockquote--no-border) {
+  border-left: 4px solid var(--wc-border-focus);
+}
+
+/* 无边框样式（新的默认样式） */
+.wc-blockquote--no-border {
+  border: none;
+}
+
+/* 交互效果 */
+.wc-blockquote--interactive:hover {
+  background-color: var(--wc-bg-surface-hover);
+}
+
+/* 文本 */
+.quote-text {
+  margin: 0;
+  font-size: var(--wc-font-size-md);
+  line-height: 1.6;
+}
+
+.quote-cite {
+  margin-top: 8px;
+  font-size: var(--wc-font-size-sm);
+  color: var(--wc-text-secondary);
+  text-align: right;
+}
+
+/* 颜色变体 */
+.wc-blockquote--primary {
+  background-color: var(--wc-bg-surface);
+  color: var(--wc-text-primary);
+  border-left-color: var(--wc-border-focus);
+}
+
+.wc-blockquote--primary.wc-blockquote--interactive:hover {
+  background-color: var(--wc-bg-surface-hover);
+}
+
+.wc-blockquote--success {
+  background-color: var(--wc-bg-surface);
+  color: var(--wc-text-primary);
+  border-left-color: var(--wc-border-success);
+}
+
+.wc-blockquote--success.wc-blockquote--interactive:hover {
+  background-color: var(--wc-bg-surface-hover);
+}
+
+.wc-blockquote--warning {
+  background-color: var(--wc-bg-surface);
+  color: var(--wc-text-primary);
+  border-left-color: var(--wc-border-warning);
+}
+
+.wc-blockquote--warning.wc-blockquote--interactive:hover {
+  background-color: var(--wc-bg-surface-hover);
+}
+
+.wc-blockquote--error {
+  background-color: var(--wc-bg-surface);
+  color: var(--wc-text-primary);
+  border-left-color: var(--wc-border-error);
+}
+
+.wc-blockquote--error.wc-blockquote--interactive:hover {
+  background-color: var(--wc-bg-surface-hover);
+}
+
+.wc-blockquote--info {
+  background-color: var(--wc-bg-surface);
+  color: var(--wc-text-primary);
+  border-left-color: var(--wc-border-info);
+}
+
+.wc-blockquote--info.wc-blockquote--interactive:hover {
+  background-color: var(--wc-bg-surface-hover);
+}
+
+/* 颜色变体的引用来源文字颜色 */
+.wc-blockquote--primary .quote-cite {
+  color: var(--wc-border-focus);
+}
+
+.wc-blockquote--success .quote-cite {
+  color: var(--wc-border-success);
+}
+
+.wc-blockquote--warning .quote-cite {
+  color: var(--wc-border-warning);
+}
+
+.wc-blockquote--error .quote-cite {
+  color: var(--wc-border-error);
+}
+
+.wc-blockquote--info .quote-cite {
+  color: var(--wc-border-info);
+}
+
+/* 变体样式 */
+.wc-blockquote--minimal {
+  padding: 16px 20px;
+  background-color: transparent;
+  border-left: 3px solid var(--wc-border-default);
+}
+
+.wc-blockquote--minimal:hover {
+  background-color: var(--wc-bg-surface-hover);
+}
+
+/* card 变体已复用 Card 组件，不再需要专属样式 */
+
+/* 尺寸变体 */
+.wc-blockquote--small {
+  padding: 16px 20px;
+}
+
+.wc-blockquote--small .quote-text {
+  font-size: var(--wc-font-size-sm);
+}
+
+.wc-blockquote--small .quote-cite {
+  font-size: var(--wc-font-size-xs);
+  margin-top: 6px;
+}
+
+.wc-blockquote--large {
+  padding: 32px 40px;
+}
+
+.wc-blockquote--large .quote-text {
+  font-size: var(--wc-font-size-lg);
+  line-height: 1.7;
+}
+
+.wc-blockquote--large .quote-cite {
+  font-size: var(--wc-font-size-md);
+  margin-top: 12px;
+}
+
+/* 暗色模式 */
+/* 已移除 prefers-color-scheme 媒体查询，避免与Storybook主题切换冲突 */
+
+/* 暗色模式 - 使用 .dark 类选择器 */
+.dark .wc-blockquote {
+  background-color: var(--wc-bg-surface);
+  border-left-color: var(--wc-border-focus);
+  color: var(--wc-text-primary);
+}
+
+.dark .wc-blockquote--style-bordered {
+  border-color: var(--wc-border-default);
+}
+
+.dark .wc-blockquote--style-filled {
+  background-color: var(--wc-bg-surface);
+  color: var(--wc-text-primary);
+}
+
+.dark .wc-blockquote--style-minimal {
+  border-left-color: var(--wc-border-focus);
+  color: var(--wc-text-secondary);
+}
+
+.dark .wc-blockquote-content {
+  color: var(--wc-text-primary);
+}
+
+.dark .wc-blockquote-author {
+  color: var(--wc-text-secondary);
+}
+
+.dark .wc-blockquote-cite {
+  color: var(--wc-text-secondary);
+}
+
+/* 暗色模式下的颜色变体 */
+.dark .wc-blockquote--primary {
+  border-left-color: var(--wc-border-focus);
+}
+
+.dark .wc-blockquote--secondary {
+  border-left-color: var(--wc-border-secondary);
+}
+
+.dark .wc-blockquote--success {
+  border-left-color: var(--wc-border-success);
+}
+
+.dark .wc-blockquote--warning {
+  border-left-color: var(--wc-border-warning);
+}
+
+.dark .wc-blockquote--error {
+  border-left-color: var(--wc-border-error);
+}
+
+.dark .wc-blockquote--info {
+  border-left-color: var(--wc-border-info);
+} 

@@ -45,7 +45,12 @@ try {
   // 6. 更新版本号
   console.log(`\n📦 更新版本号 (${versionType})...`)
   execSync(`npm version ${versionType} --no-git-tag-version`, { stdio: 'inherit' })
-  
+  try {
+    execSync(`npm version ${versionType} --workspaces --no-git-tag-version`, { stdio: 'inherit' })
+  } catch (e) {
+    console.warn('Workspace version update warning:', e.message)
+  }
+
   // 7. 读取新的版本号
   const packageJson = JSON.parse(fs.readFileSync(path.join(rootDir, 'package.json'), 'utf8'))
   const newVersion = packageJson.version
@@ -58,9 +63,9 @@ try {
   execSync(`git commit -m "chore: release v${newVersion}"`, { stdio: 'inherit' })
   execSync(`git tag v${newVersion}`, { stdio: 'inherit' })
   
-  // 9. 发布到npm
-  console.log('\n📤 发布到npm...')
-  execSync('npm publish', { stdio: 'inherit' })
+  // 9. 发布到npm (由 GitHub Actions 接管)
+  console.log('\n📤 触发 GitHub Actions 发布流程...')
+  // execSync('npm publish --workspaces --access public', { stdio: 'inherit' })
   
   // 10. 推送到GitHub
   console.log('\n📤 推送到GitHub...')

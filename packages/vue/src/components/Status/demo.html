@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status 组件动画演示</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+        
+        .title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .demo-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+        
+        .demo-card h3 {
+            margin: 0 0 16px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a202c;
+        }
+        
+        .demo-card p {
+            margin: 8px 0;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .status-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 16px 0;
+            padding: 16px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        /* Status 组件样式 */
+        .wc-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            font-family: inherit;
+        }
+        
+        .wc-status::before {
+            content: '';
+            display: block;
+            border-radius: 50%;
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .wc-status__text {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+        
+        /* 状态颜色 */
+        .wc-status--success::before { background-color: #10b981; }
+        .wc-status--error::before { background-color: #ef4444; }
+        .wc-status--warning::before { background-color: #f59e0b; }
+        .wc-status--info::before { background-color: #3b82f6; }
+        .wc-status--pending::before { background-color: #8b5cf6; }
+        .wc-status--processing::before { background-color: #06b6d4; }
+        .wc-status--cancelled::before { background-color: #64748b; }
+        .wc-status--default::before { background-color: #9ca3af; }
+        
+        /* 动画 */
+        .wc-status--pulse::before { animation: pulse 2s infinite; }
+        .wc-status--spin::before { animation: spin 1s linear infinite; }
+        .wc-status--bounce::before { animation: bounce 1.5s infinite; }
+        .wc-status--blink::before { animation: blink 1s infinite; }
+        .wc-status--shake::before { animation: shake 0.8s infinite; }
+        .wc-status--breathe::before { animation: breathe 3s infinite; }
+        .wc-status--ripple::before { animation: ripple 2s infinite; }
+        .wc-status--glow::before { animation: glow 2.5s infinite; }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-6px); }
+            60% { transform: translateY(-3px); }
+        }
+        
+        @keyframes blink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0.3; }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+            20%, 40%, 60%, 80% { transform: translateX(2px); }
+        }
+        
+        @keyframes breathe {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        
+        @keyframes ripple {
+            0% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+            70% { box-shadow: 0 0 0 6px transparent; opacity: 0; }
+            100% { box-shadow: 0 0 0 0 transparent; opacity: 0; }
+        }
+        
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🎯 Status 组件动画展示</h1>
+        
+        <div class="demo-grid">
+            <div class="demo-card">
+                <h3>成功状态</h3>
+                <div class="status-display">
+                    <span class="wc-status wc-status--success wc-status--bounce">
+                        <span class="wc-status__text">操作成功</span>
+                    </span>
+                </div>
+                <p>跳动动画 - 表达成功的喜悦</p>
+            </div>
+            
+            <div class="demo-card">
+                <h3>错误状态</h3>
+                <div class="status-display">
+                    <span class="wc-status wc-status--error wc-status--shake">
+                        <span class="wc-status__text">操作失败</span>
+                    </span>
+                </div>
+                <p>震动动画 - 表达紧急错误</p>
+            </div>
+            
+            <div class="demo-card">
+                <h3>警告状态</h3>
+                <div class="status-display">
+                    <span class="wc-status wc-status--warning wc-status--blink">
+                        <span class="wc-status__text">注意警告</span>
+                    </span>
+                </div>
+                <p>闪烁动画 - 吸引用户注意</p>
+            </div>
+            
+            <div class="demo-card">
+                <h3>信息状态</h3>
+                <div class="status-display">
+                    <span class="wc-status wc-status--info wc-status--ripple">
+                        <span class="wc-status__text">系统信息</span>
+                    </span>
+                </div>
+                <p>扩散动画 - 信息传播效果</p>
+            </div>
+            
+            <div class="demo-card">
+                <h3>等待状态</h3>
+                <div class="status-display">
+                    <span class="wc-status wc-status--pending wc-status--pulse">
+                        <span class="wc-status__text">等待处理</span>
+                    </span>
+                </div>
+                <p>脉冲动画 - 等待响应</p>
+            </div>
+            
+            <div class="demo-card">
+                <h3>处理状态</h3>
+                <div class="status-display">
+                    <span class="wc-status wc-status--processing wc-status--spin">
+                        <span class="wc-status__text">正在处理</span>
+                    </span>
+                </div>
+                <p>旋转动画 - 表示进行中</p>
+            </div>
+            
+            <div class="demo-card">
+                <h3>取消状态</h3>
+                <div class="status-display">
+                    <span class="wc-status wc-status--cancelled wc-status--breathe">
+                        <span class="wc-status__text">已取消</span>
+                    </span>
+                </div>
+                <p>呼吸动画 - 缓慢淡化</p>
+            </div>
+            
+            <div class="demo-card">
+                <h3>默认状态</h3>
+                <div class="status-display">
+                    <span class="wc-status wc-status--default wc-status--glow">
+                        <span class="wc-status__text">默认状态</span>
+                    </span>
+                </div>
+                <p>发光动画 - 柔和提示</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px; color: #64748b;">
+            <p>🎨 Watercolor UI - Status 组件</p>
+            <p>支持 8 种状态和多样化动画效果</p>
+        </div>
+    </div>
+</body>
+</html> 

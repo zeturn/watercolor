@@ -1,0 +1,316 @@
+/* Autocomplete 样式 - 基于 Select 但针对搜索优化 */
+
+.wc-autocomplete {
+  position: relative;
+  width: 100%;
+  font-family: var(--wc-font-family);
+}
+
+.wc-autocomplete--full-width {
+  width: 100%;
+}
+
+/* Label */
+.wc-autocomplete__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--wc-neutral-700);
+  transition: color 0.2s ease;
+}
+
+.wc-autocomplete__label--sm {
+  font-size: 0.875rem;
+}
+
+.wc-autocomplete__label--md {
+  font-size: 1rem;
+}
+
+.wc-autocomplete__label--lg {
+  font-size: 1.125rem;
+}
+
+.wc-autocomplete__label--error {
+  color: var(--wc-error-600);
+}
+
+.wc-autocomplete__required {
+  color: var(--wc-error-500);
+  margin-left: 0.25rem;
+}
+
+/* Container */
+.wc-autocomplete__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--wc-bg-surface);
+  border: none;
+  border-radius: var(--wc-radius-2xl);
+  transition: all 0.2s ease;
+  cursor: text;
+}
+
+.wc-autocomplete__container--outlined {
+  background: var(--wc-bg-surface);
+  border: none;
+}
+
+.wc-autocomplete__container--filled {
+  background: var(--wc-bg-surface);
+  border: none;
+  border-radius: var(--wc-radius-2xl);
+}
+
+.wc-autocomplete__container--standard {
+  background: var(--wc-bg-surface);
+  border: none;
+  border-radius: var(--wc-radius-2xl);
+}
+
+/* Sizes */
+.wc-autocomplete__container--sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.wc-autocomplete__container--md {
+  padding: 0.625rem 1rem;
+  font-size: 1rem;
+}
+
+.wc-autocomplete__container--lg {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.125rem;
+}
+
+/* States */
+.wc-autocomplete__container:hover:not(.wc-autocomplete__container--disabled) {
+  background: var(--wc-bg-surface-hover);
+}
+
+.wc-autocomplete__container--open,
+.wc-autocomplete__container:focus-within {
+  background: var(--wc-bg-surface-hover);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.wc-autocomplete__container--error {
+  background: var(--wc-error-50);
+}
+
+.wc-autocomplete__container--error:focus-within {
+  box-shadow: 0 0 0 3px var(--wc-error-100);
+}
+
+.wc-autocomplete__container--disabled {
+  background: var(--wc-bg-surface);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Input */
+.wc-autocomplete__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--wc-neutral-900);
+  min-width: 0;
+}
+
+.wc-autocomplete__input::placeholder {
+  color: var(--wc-neutral-400);
+}
+
+.wc-autocomplete__input:disabled {
+  cursor: not-allowed;
+}
+
+/* Indicators */
+.wc-autocomplete__indicators {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 0.5rem;
+  flex-shrink: 0;
+}
+
+.wc-autocomplete__clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--wc-neutral-500);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.wc-autocomplete__clear svg {
+  width: 100%;
+  height: 100%;
+}
+
+.wc-autocomplete__clear:hover {
+  background: var(--wc-neutral-200);
+  color: var(--wc-neutral-700);
+}
+
+.wc-autocomplete__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  color: var(--wc-neutral-500);
+  transition: transform 0.2s ease;
+}
+
+.wc-autocomplete__arrow svg {
+  width: 100%;
+  height: 100%;
+}
+
+.wc-autocomplete__arrow--open {
+  transform: rotate(180deg);
+}
+
+/* Dropdown */
+.wc-autocomplete__dropdown {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: white;
+  border: none;
+  border-radius: var(--wc-radius-2xl);
+  box-shadow: var(--wc-shadow-lg);
+  max-height: 300px;
+  overflow-y: auto;
+  animation: wc-autocomplete-dropdown-enter 0.15s ease-out;
+}
+
+@keyframes wc-autocomplete-dropdown-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Options */
+.wc-autocomplete__options {
+  padding: 0.25rem 0;
+}
+
+.wc-autocomplete__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  color: var(--wc-neutral-900);
+}
+
+.wc-autocomplete__option:hover,
+.wc-autocomplete__option--highlighted {
+  background: var(--wc-primary-50);
+}
+
+.wc-autocomplete__option--selected {
+  background: var(--wc-primary-100);
+  color: var(--wc-primary-700);
+  font-weight: 500;
+}
+
+.wc-autocomplete__option--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wc-autocomplete__option-text {
+  flex: 1;
+}
+
+.wc-autocomplete__option-check {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: 0.5rem;
+  color: var(--wc-primary-600);
+  flex-shrink: 0;
+}
+
+.wc-autocomplete__no-options {
+  padding: 1rem;
+  text-align: center;
+  color: var(--wc-neutral-500);
+  font-size: 0.875rem;
+}
+
+/* Helper Text */
+.wc-autocomplete__helper {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--wc-neutral-600);
+}
+
+.wc-autocomplete__error {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--wc-error-600);
+}
+
+/* Scrollbar Styling */
+.wc-autocomplete__dropdown::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.wc-autocomplete__dropdown::-webkit-scrollbar-track {
+  background: var(--wc-neutral-100);
+}
+
+.wc-autocomplete__dropdown::-webkit-scrollbar-thumb {
+  background: var(--wc-neutral-300);
+  border-radius: var(--wc-border-radius);
+}
+
+.wc-autocomplete__dropdown::-webkit-scrollbar-thumb:hover {
+  background: var(--wc-neutral-400);
+}
+
+/* Focus visible */
+.wc-autocomplete__input:focus-visible {
+  outline: none;
+}
+
+/* Multiple Selection Chips (if needed in future) */
+.wc-autocomplete__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0.25rem 0;
+}
+
+.wc-autocomplete__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  background: var(--wc-primary-100);
+  color: var(--wc-primary-700);
+  border-radius: var(--wc-radius-2xl);
+  font-size: 0.875rem;
+  font-weight: 500;
+}

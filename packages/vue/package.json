@@ -1,0 +1,42 @@
+{
+  "name": "watercolor-ui-vue",
+  "version": "1.1.16",
+  "type": "module",
+  "main": "dist/watercolor-vue.umd.js",
+  "module": "dist/watercolor-vue.es.js",
+  "types": "dist/index.d.ts",
+  "style": "dist/watercolor-vue.css",
+  "exports": {
+    ".": {
+      "import": "./dist/watercolor-vue.es.js",
+      "require": "./dist/watercolor-vue.umd.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./style.css": "./dist/watercolor-vue.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "@watercolor/core": "*",
+    "@heroicons/vue": "^2.2.0",
+    "@phosphor-icons/vue": "^2.2.1",
+    "@tabler/icons-vue": "^3.34.0",
+    "lucide-vue-next": "^0.525.0"
+  },
+  "devDependencies": {
+     "@vitejs/plugin-vue": "^5.0.4",
+     "vite": "^5.4.12",
+     "vite-plugin-dts": "^4.5.4",
+     "typescript": "^5.3.3",
+     "@vue/compiler-sfc": "^3.5.17"
+  }
+}

@@ -1,0 +1,450 @@
+/* ====== Select Component Styles - Watercolor风格 ====== */
+
+/* CSS Variables */
+:root {
+  /* 尺寸 */
+  --wc-select-height-sm: 32px;
+  --wc-select-height-md: 40px;
+  --wc-select-height-lg: 48px;
+  --wc-select-bg: var(--wc-bg-surface);
+  --wc-select-text: var(--wc-text-primary);
+  --wc-select-placeholder: var(--wc-neutral-500);
+  --wc-select-border: transparent;
+  --wc-select-border-focus: transparent;
+
+  --wc-select-dropdown-bg: var(--wc-select-bg);
+  --wc-select-dropdown-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  --wc-select-option-hover: var(--wc-bg-surface-hover);
+  --wc-select-option-selected: var(--wc-bg-surface);
+  --wc-select-option-active: var(--wc-text-primary);
+
+  /* 边距 */
+  --wc-select-padding: 8px 12px;
+  --wc-select-gap: 8px;
+
+  --wc-select-radius: var(--wc-radius-2xl);
+  --wc-select-radius-dropdown: var(--wc-radius-2xl);
+
+  /* 动画 */
+  --wc-select-transition: all 0.2s ease;
+}
+
+/* ====== Main Select Container ====== */
+.wc-select {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: var(--wc-font-family);
+}
+
+.wc-select--full-width {
+  width: 100%;
+}
+
+.wc-select--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ====== Select Label ====== */
+.wc-select__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--wc-neutral-700);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.wc-select__label--active {
+  color: var(--wc-primary-500);
+}
+
+.wc-select__label--error {
+  color: var(--wc-error-500);
+}
+
+.wc-select__required {
+  color: var(--wc-error-500);
+  margin-left: 2px;
+}
+
+/* ====== Select Container ====== */
+.wc-select__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--wc-select-bg);
+  border: none;
+  border-radius: var(--wc-select-radius);
+  cursor: pointer;
+  transition: var(--wc-select-transition);
+  min-height: var(--wc-select-height-md);
+}
+
+.wc-select__container:hover {
+  background: var(--wc-select-option-hover);
+}
+
+/* Size Variants */
+.wc-select__container--sm {
+  min-height: var(--wc-select-height-sm);
+  font-size: 0.875rem;
+}
+
+.wc-select__container--lg {
+  min-height: var(--wc-select-height-lg);
+  font-size: 1.125rem;
+}
+
+/* Variant Styles（合并背景） */
+.wc-select__container--outlined,
+.wc-select__container--filled,
+.wc-select__container--standard {
+  background: var(--wc-select-bg);
+  border: none;
+  border-radius: var(--wc-select-radius);
+}
+
+/* States */
+.wc-select__container--focused {
+  background: var(--wc-select-option-hover);
+  border: none;
+  box-shadow: 0 0 0 3px rgba(var(--wc-primary-500-rgb, 59,130,246), 0.1);
+}
+
+.wc-select__container--error {
+  background: var(--wc-error-50);
+  border: none;
+}
+
+.wc-select__container--error.wc-select__container--focused {
+  box-shadow: 0 0 0 3px rgba(var(--wc-error-500-rgb, 248,113,113), 0.1);
+}
+
+.wc-select__container--open {
+  background: var(--wc-select-option-hover);
+  border: none;
+}
+
+/* ====== Select Control ====== */
+.wc-select__control {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--wc-select-padding);
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: inherit;
+  color: var(--wc-select-text);
+}
+
+/* ====== Select Value ====== */
+.wc-select__value {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: 1.5em;
+  overflow: hidden;
+}
+
+.wc-select__placeholder {
+  color: var(--wc-select-placeholder);
+  font-style: italic;
+  margin-left: 0.8rem;
+  margin-bottom: 0.2rem;
+}
+
+/* Multiple Selection Chips */
+.wc-select__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  width: 100%;
+}
+
+.wc-select__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: var(--wc-primary-100);
+  color: var(--wc-primary-700);
+  border-radius: 12px;
+  font-size: 0.875rem;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wc-select__chip-remove {
+  background: none;
+  border: none;
+  color: var(--wc-primary-600);
+  cursor: pointer;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+.wc-select__chip-remove:hover {
+  background: var(--wc-primary-200);
+}
+
+/* ====== Select Indicators ====== */
+.wc-select__indicators {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 8px;
+}
+
+.wc-select__clear {
+  background: none;
+  border: none;
+  color: var(--wc-neutral-400);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wc-select__clear:hover {
+  color: var(--wc-neutral-600);
+  background: var(--wc-select-bg);
+}
+
+.wc-select__arrow {
+  color: var(--wc-neutral-400);
+  transition: var(--wc-select-transition);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wc-select__arrow--open {
+  transform: rotate(180deg);
+}
+
+/* ====== Dropdown ====== */
+.wc-select__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--wc-select-dropdown-bg);
+  border: none;
+  border-radius: var(--wc-select-radius-dropdown);
+  box-shadow: var(--wc-select-dropdown-shadow);
+  padding: 4px 0;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 4px;
+}
+
+/* Search Input */
+.wc-select__search {
+  padding: 8px;
+  border-bottom: 1px solid var(--wc-select-border);
+}
+
+.wc-select__search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--wc-select-border);
+  border-radius: 4px;
+  background: var(--wc-select-bg);
+  color: var(--wc-select-text);
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.wc-select__search-input:focus {
+  border-color: var(--wc-select-border-focus);
+}
+
+/* Options Container */
+.wc-select__options {
+  overflow-y: auto;
+  max-height: 250px;
+}
+
+/* Option Item */
+.wc-select__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: var(--wc-select-transition);
+  color: var(--wc-select-text);
+  font-size: 0.875rem;
+}
+
+.wc-select__option:hover {
+  background: var(--wc-select-option-hover);
+}
+
+.wc-select__option--selected {
+  background: var(--wc-select-option-selected);
+  color: var(--wc-select-option-active);
+  font-weight: 500;
+}
+
+.wc-select__option--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wc-select__option--disabled:hover {
+  background: transparent;
+}
+
+/* Option Content */
+.wc-select__option-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wc-select__option-check {
+  width: 16px;
+  height: 16px;
+  color: var(--wc-select-option-active);
+  margin-left: 8px;
+}
+
+/* No Options */
+.wc-select__no-options {
+  padding: 16px 12px;
+  text-align: center;
+  color: var(--wc-neutral-500);
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+/* ====== Helper Text ====== */
+.wc-select__helper {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--wc-neutral-600);
+}
+
+.wc-select__error {
+  color: var(--wc-error-500);
+}
+
+/* ====== Loading State ====== */
+.wc-select__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  color: var(--wc-neutral-500);
+  font-size: 0.875rem;
+}
+
+/* ====== Group Styles ====== */
+.wc-select__group {
+  padding: 0;
+}
+
+.wc-select__group-label {
+  padding: 8px 12px 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--wc-neutral-600);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--wc-neutral-50);
+  border-bottom: 1px solid var(--wc-select-border);
+}
+
+/* ====== 响应式设计 ====== */
+@media (max-width: 768px) {
+  .wc-select__dropdown {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 50vh;
+    border-radius: 12px 12px 0 0;
+    margin: 0;
+  }
+  .wc-select__chips {
+    max-width: 200px;
+    overflow: hidden;
+  }
+  .wc-select__chip {
+    max-width: 100px;
+  }
+}
+
+/* ====== 动画 ====== */
+@keyframes wc-select-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wc-select__dropdown {
+  animation: wc-select-fade-in 0.2s ease;
+}
+
+/* ====== 高对比模式 ====== */
+@media (prefers-contrast: high) {
+  .wc-select__container {
+    border-width: 2px;
+  }
+  .wc-select__option--selected {
+    background: #000;
+    color: #fff;
+  }
+}
+
+/* ====== 减少动画 ====== */
+@media (prefers-reduced-motion: reduce) {
+  .wc-select__container,
+  .wc-select__option,
+  .wc-select__arrow {
+    transition: none;
+  }
+  .wc-select__dropdown {
+    animation: none;
+  }
+}
+
+/* ====== 打印样式 ====== */
+@media print {
+  .wc-select__dropdown {
+    display: none !important;
+  }
+  .wc-select__container {
+    border: 1px solid #000;
+  }
+  .wc-select__value {
+    background: #fff;
+  }
+}

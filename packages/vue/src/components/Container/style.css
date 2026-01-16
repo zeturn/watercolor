@@ -1,0 +1,57 @@
+/* Container 组件样式 */
+.wc-container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* Responsive padding */
+@media (min-width: 640px) {
+  .wc-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wc-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* Max width variants */
+.wc-container--xs {
+  max-width: 20rem; /* 320px */
+}
+
+.wc-container--sm {
+  max-width: 24rem; /* 384px */
+}
+
+.wc-container--md {
+  max-width: 28rem; /* 448px */
+}
+
+.wc-container--lg {
+  max-width: 64rem; /* 1024px */
+}
+
+.wc-container--xl {
+  max-width: 72rem; /* 1152px */
+}
+
+.wc-container--2xl {
+  max-width: 80rem; /* 1280px */
+}
+
+/* Fluid and fixed widths */
+.wc-container--fluid,
+.wc-container--fixed {
+  width: 100%;
+}
+
+.wc-container--fixed {
+  max-width: none;
+} 
