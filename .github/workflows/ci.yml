@@ -108,12 +108,7 @@ jobs:
           NODE_OPTIONS: "--max_old_space_size=4096"
         run: |
           npm run docs:build
-          mkdir -p storybook-static/docs
-          cp -r docs/.vitepress/dist/* storybook-static/docs/
-        
-      - name: Copy root index.html for navigation
-        run: |
-          cp index.html storybook-static/index.html
+          cp -r docs/.vitepress/dist/* storybook-static/
         
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4

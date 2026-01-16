@@ -9,7 +9,7 @@ function resolveRepoBase(): string {
   if (!isCI && !process.env.DOCS_BASE) return '/'
 
   const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'watercolor'
-  const base = process.env.DOCS_BASE || `/${repo}/docs/`
+  const base = process.env.DOCS_BASE || `/${repo}/`
   return base.endsWith('/') ? base : `${base}/`
 }
 
