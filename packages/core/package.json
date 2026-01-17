@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-core",
-  "version": "1.1.27",
+  "version": "1.1.28",
   "type": "module",
   "main": "dist/core.umd.js",
   "module": "dist/core.es.js",
@@ -21,6 +21,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeturn/watercolor",
+    "directory": "packages/core"
   },
   "devDependencies": {
      "@vitejs/plugin-react": "^4.6.0",
