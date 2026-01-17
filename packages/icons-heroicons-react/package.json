@@ -1,0 +1,36 @@
+{
+  "name": "@zeturn/watercolor-icons-heroicons-react",
+  "version": "1.1.29",
+  "type": "module",
+  "main": "dist/watercolor-icons-heroicons-react.umd.js",
+  "module": "dist/watercolor-icons-heroicons-react.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/watercolor-icons-heroicons-react.es.js",
+      "require": "./dist/watercolor-icons-heroicons-react.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeturn/watercolor.git",
+    "directory": "packages/icons-heroicons-react"
+  },
+  "license": "MIT"
+}

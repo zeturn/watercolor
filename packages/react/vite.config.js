@@ -14,7 +14,16 @@ export default defineConfig({
       fileName: (format) => `watercolor-react.${format}.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom', '@zeturn/watercolor-core'],
+      external: [
+        'react',
+        'react-dom',
+        '@zeturn/watercolor-core',
+        '@zeturn/watercolor-icons-feather',
+        '@zeturn/watercolor-icons-lucide-react',
+        '@zeturn/watercolor-icons-tabler-react',
+        '@zeturn/watercolor-icons-phosphor-react',
+        '@zeturn/watercolor-icons-heroicons-react',
+      ],
       output: {
         globals: {
           react: 'React',
@@ -32,6 +41,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
+      '@zeturn/watercolor-core/src': resolve(__dirname, '../core/src'),
     },
   },
 }) 

@@ -14,7 +14,15 @@ export default defineConfig({
       fileName: (format) => `watercolor-vue.${format}.js`,
     },
     rollupOptions: {
-      external: ['vue', '@zeturn/watercolor-core'],
+      external: [
+        'vue',
+        '@zeturn/watercolor-core',
+        '@zeturn/watercolor-icons-feather',
+        '@zeturn/watercolor-icons-lucide-vue',
+        '@zeturn/watercolor-icons-tabler-vue',
+        '@zeturn/watercolor-icons-phosphor-vue',
+        '@zeturn/watercolor-icons-heroicons-vue',
+      ],
       output: {
         globals: {
           vue: 'Vue',
@@ -31,6 +39,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
+      '@zeturn/watercolor-core/src': resolve(__dirname, '../core/src'),
     },
   },
 }) 

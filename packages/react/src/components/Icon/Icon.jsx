@@ -17,39 +17,29 @@ const lazyWithFallback = (importer, resolveComponent) =>
 
 // 动态导入图标组件的函数
 const createIconComponent = (library, name, variant) => {
-  // 提前生成 PascalCase / kebab-case 名称，避免在多处重复
-  const pascalName = name.charAt(0).toUpperCase() + name.slice(1)
-
   switch (library) {
     case 'lucide':
       return lazyWithFallback(
-        () => import('lucide-react'),
-        (module) => module[pascalName] || module.HelpCircle || StubIcon
+        () => import('@zeturn/watercolor-icons-lucide-react'),
+        (module) => (module.getIcon?.(name)) || StubIcon
       )
 
     case 'heroicons':
-      console.warn('Heroicons support is currently disabled due to build constraints')
-      return null
+      return lazyWithFallback(
+        () => import('@zeturn/watercolor-icons-heroicons-react'),
+        (module) => (module.getIcon?.(name, variant)) || StubIcon
+      )
 
     case 'tabler':
       return lazyWithFallback(
-        () => import('@tabler/icons-react'),
-        (module) => {
-          const iconName = 'Icon' + name.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join('')
-          return module[iconName] || module.IconHelp || StubIcon
-        }
+        () => import('@zeturn/watercolor-icons-tabler-react'),
+        (module) => (module.getIcon?.(name)) || StubIcon
       )
 
     case 'phosphor':
       return lazyWithFallback(
-        () => import('@phosphor-icons/react'),
-        (module) => {
-          const iconName = name
-            .split('-')
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join('')
-          return module[iconName] || module.Question || StubIcon
-        }
+        () => import('@zeturn/watercolor-icons-phosphor-react'),
+        (module) => (module.getIcon?.(name)) || StubIcon
       )
 
     default:
@@ -101,14 +91,13 @@ const Icon = ({
     if (library === 'feather' && name) {
       return lazy(async () => {
         try {
-          const feather = await import('feather-icons')
-          const featherLib = feather.default || feather
           const sizeValue = getSizeValue(size)
-          const iconSvg = featherLib.icons[name]?.toSvg({
+          const { getFeatherSvg } = await import('@zeturn/watercolor-icons-feather')
+          const iconSvg = await getFeatherSvg(name, {
             width: sizeValue,
             height: sizeValue,
-            'stroke-width': strokeWidth
-          }) || ''
+            strokeWidth: Number(strokeWidth),
+          })
           
           return { 
             default: ({ className, style }) => (

@@ -1,0 +1,36 @@
+{
+  "name": "@zeturn/watercolor-icons-tabler-react",
+  "version": "1.1.29",
+  "type": "module",
+  "main": "dist/watercolor-icons-tabler-react.umd.js",
+  "module": "dist/watercolor-icons-tabler-react.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/watercolor-icons-tabler-react.es.js",
+      "require": "./dist/watercolor-icons-tabler-react.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  },
+  "dependencies": {
+    "@tabler/icons-react": "^3.34.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeturn/watercolor.git",
+    "directory": "packages/icons-tabler-react"
+  },
+  "license": "MIT"
+}

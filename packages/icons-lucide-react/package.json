@@ -1,0 +1,36 @@
+{
+  "name": "@zeturn/watercolor-icons-lucide-react",
+  "version": "1.1.29",
+  "type": "module",
+  "main": "dist/watercolor-icons-lucide-react.umd.js",
+  "module": "dist/watercolor-icons-lucide-react.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/watercolor-icons-lucide-react.es.js",
+      "require": "./dist/watercolor-icons-lucide-react.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  },
+  "dependencies": {
+    "lucide-react": "^0.525.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeturn/watercolor.git",
+    "directory": "packages/icons-lucide-react"
+  },
+  "license": "MIT"
+}
