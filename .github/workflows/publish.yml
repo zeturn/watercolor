@@ -18,6 +18,8 @@ permissions:
 jobs:
   publish-core:
     runs-on: ubuntu-latest
+    environment:
+      name: DEV
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -42,12 +44,13 @@ jobs:
             npm publish -w packages/core --access public --provenance
           fi
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_OTP: ${{ inputs.otp }}
 
   publish-react:
     runs-on: ubuntu-latest
     needs: publish-core
+    environment:
+      name: DEV
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -75,12 +78,13 @@ jobs:
             npm publish -w packages/react --access public --provenance
           fi
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_OTP: ${{ inputs.otp }}
 
   publish-vue:
     runs-on: ubuntu-latest
     needs: publish-core
+    environment:
+      name: DEV
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -108,5 +112,4 @@ jobs:
             npm publish -w packages/vue --access public --provenance
           fi
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_OTP: ${{ inputs.otp }}
