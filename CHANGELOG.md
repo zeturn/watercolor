@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.17] - 2026-01-17
+
+### Fixed
+- 🔧 Fixed missing test scripts (test:react, test:vue)
+- 🔧 Fixed Storybook build errors by removing non-existent staticDirs configuration
+- 🔧 Fixed incorrect React component import in Vue Button story
+
+### Changed
+- Bump package version to 1.1.17
+
 ## [1.1.16] - 2026-01-16
 
 ### Changed

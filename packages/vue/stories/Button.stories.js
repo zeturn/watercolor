@@ -1,5 +1,4 @@
 import ButtonVue from '../src/components/Button/Button.vue'
-import ButtonReact from '../src/components/Button/Button.jsx'
 
 export default {
   title: 'Components/Button (Vue)',
