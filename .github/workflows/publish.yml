@@ -5,22 +5,20 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
-    inputs:
-      otp:
-        description: 'NPM 2FA one-time password (optional; only needed if your token requires OTP)'
-        required: false
-        type: string
+
 
 permissions:
   id-token: write
-  contents: write
-  packages: write
+  contents: read
 
 jobs:
   publish-core:
     runs-on: ubuntu-latest
     environment:
       name: DEV
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -41,21 +39,16 @@ jobs:
         run: npm run build -w packages/core
 
       - name: Publish Core
-        run: |
-          if [ -n "${NPM_OTP}" ]; then
-            npm publish -w packages/core --access public --provenance --otp="${NPM_OTP}"
-          else
-            npm publish -w packages/core --access public --provenance
-          fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_OTP: ${{ inputs.otp }}
+        run: npm publish -w packages/core --access public --provenance
 
   publish-react:
     runs-on: ubuntu-latest
     needs: publish-core
     environment:
       name: DEV
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -79,21 +72,16 @@ jobs:
         run: npm run build -w packages/react
 
       - name: Publish React
-        run: |
-          if [ -n "${NPM_OTP}" ]; then
-            npm publish -w packages/react --access public --provenance --otp="${NPM_OTP}"
-          else
-            npm publish -w packages/react --access public --provenance
-          fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_OTP: ${{ inputs.otp }}
+        run: npm publish -w packages/react --access public --provenance
 
   publish-vue:
     runs-on: ubuntu-latest
     needs: publish-core
     environment:
       name: DEV
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -117,12 +105,4 @@ jobs:
         run: npm run build -w packages/vue
 
       - name: Publish Vue
-        run: |
-          if [ -n "${NPM_OTP}" ]; then
-            npm publish -w packages/vue --access public --provenance --otp="${NPM_OTP}"
-          else
-            npm publish -w packages/vue --access public --provenance
-          fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_OTP: ${{ inputs.otp }}
+        run: npm publish -w packages/vue --access public --provenance
