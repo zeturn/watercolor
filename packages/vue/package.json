@@ -31,17 +31,18 @@
     "vue": "^3.0.0"
   },
   "dependencies": {
-    "@zeturn/watercolor-core": "*",
     "@heroicons/vue": "^2.2.0",
     "@phosphor-icons/vue": "^2.2.1",
     "@tabler/icons-vue": "^3.34.0",
+    "@zeturn/watercolor-core": "*",
+    "feather-icons": "^4.29.2",
     "lucide-vue-next": "^0.525.0"
   },
   "devDependencies": {
-     "@vitejs/plugin-vue": "^5.0.4",
-     "vite": "^5.4.12",
-     "vite-plugin-dts": "^4.5.4",
-     "typescript": "^5.3.3",
-     "@vue/compiler-sfc": "^3.5.17"
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vue/compiler-sfc": "^3.5.17",
+    "typescript": "^5.3.3",
+    "vite": "^5.4.12",
+    "vite-plugin-dts": "^4.5.4"
   }
 }
