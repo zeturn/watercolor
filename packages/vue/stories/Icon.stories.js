@@ -1,4 +1,4 @@
-import { IconVue } from '../src/index.ts'
+import { Icon as IconVue } from '../src/index.ts'
 import { LUCIDE_ICONS, HEROICONS, ICON_PRESETS } from '../src/utils/icons.ts'
 
 export default {
