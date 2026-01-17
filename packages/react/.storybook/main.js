@@ -31,9 +31,7 @@ const config = {
         },
       },
     };
-  },
-
-  staticDirs: ['../public']
+  }
 }
 
 export default config; 
