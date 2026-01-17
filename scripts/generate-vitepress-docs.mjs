@@ -2,7 +2,10 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 const workspaceRoot = path.resolve(process.cwd())
-const componentsRoot = path.join(workspaceRoot, 'src', 'components')
+const componentsRoots = [
+  path.join(workspaceRoot, 'packages', 'vue', 'src', 'components'),
+  path.join(workspaceRoot, 'packages', 'react', 'src', 'components'),
+]
 const docsRoot = path.join(workspaceRoot, 'docs')
 const docsComponentsRoot = path.join(docsRoot, 'components')
 const generatedRoot = path.join(docsRoot, 'generated')
@@ -189,12 +192,25 @@ function writeText(filePath, content) {
 }
 
 function listComponentDirs() {
-  if (!fs.existsSync(componentsRoot)) return []
-  return fs
-    .readdirSync(componentsRoot)
-    .map((name) => ({ name, fullPath: path.join(componentsRoot, name) }))
-    .filter((e) => isDirectory(e.fullPath))
-    .sort((a, b) => a.name.localeCompare(b.name))
+  const entries = []
+  const seen = new Set()
+
+  for (const root of componentsRoots) {
+    if (!fs.existsSync(root)) continue
+    const subdirs = fs
+      .readdirSync(root)
+      .map((name) => ({ name, fullPath: path.join(root, name) }))
+      .filter((e) => isDirectory(e.fullPath))
+      .sort((a, b) => a.name.localeCompare(b.name))
+
+    for (const entry of subdirs) {
+      if (seen.has(entry.name)) continue
+      seen.add(entry.name)
+      entries.push(entry)
+    }
+  }
+
+  return entries.sort((a, b) => a.name.localeCompare(b.name))
 }
 
 function normalizeDocMarkdown(componentName, markdown) {
@@ -317,7 +333,7 @@ function insertAfterFrontmatter(markdown, insertion) {
 
 function buildComponentsListMarkdown(components) {
   if (components.length === 0) {
-    return '> 未发现任何组件 README（src/components/**/README.md）。\n'
+    return '> 未发现任何组件 README（packages/*/src/components/**/README.md）。\n'
   }
 
   const lines = []
