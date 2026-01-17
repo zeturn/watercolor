@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconReact } from '../src/index.ts'
+import { Icon as IconReact } from '../src/index.ts'
 
 export default {
   title: 'Components/Icon (React)',
