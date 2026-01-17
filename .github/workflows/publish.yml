@@ -130,3 +130,53 @@ jobs:
         env:
           NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc-oidc
           NODE_AUTH_TOKEN: ""
+
+  publish-icons:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - icons-feather
+          - icons-heroicons-react
+          - icons-heroicons-vue
+          - icons-lucide-react
+          - icons-lucide-vue
+          - icons-phosphor-react
+          - icons-phosphor-vue
+          - icons-tabler-react
+          - icons-tabler-vue
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Upgrade npm to support Trusted Publisher
+        run: npm i -g npm@11.5.1
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build ${{ matrix.package }}
+        run: npm run build -w packages/${{ matrix.package }}
+
+      - name: Prepare npm config for OIDC
+        run: |
+          cat > "$RUNNER_TEMP/npmrc-oidc" <<'EOF'
+          registry=https://registry.npmjs.org/
+          @zeturn:registry=https://registry.npmjs.org/
+          EOF
+
+      - name: Publish ${{ matrix.package }}
+        run: npm publish -w packages/${{ matrix.package }} --access public --provenance
+        env:
+          NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc-oidc
+          NODE_AUTH_TOKEN: ""
