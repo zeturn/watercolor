@@ -36,8 +36,18 @@ jobs:
       - name: Build Core
         run: npm run build -w packages/core
 
+      - name: Prepare npm config for OIDC
+        run: |
+          cat > "$RUNNER_TEMP/npmrc-oidc" <<'EOF'
+          registry=https://registry.npmjs.org/
+          @zeturn:registry=https://registry.npmjs.org/
+          EOF
+
       - name: Publish Core
         run: npm publish -w packages/core --access public --provenance
+        env:
+          NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc-oidc
+          NODE_AUTH_TOKEN: ""
 
   publish-react:
     runs-on: ubuntu-latest
@@ -67,8 +77,18 @@ jobs:
       - name: Build React
         run: npm run build -w packages/react
 
+      - name: Prepare npm config for OIDC
+        run: |
+          cat > "$RUNNER_TEMP/npmrc-oidc" <<'EOF'
+          registry=https://registry.npmjs.org/
+          @zeturn:registry=https://registry.npmjs.org/
+          EOF
+
       - name: Publish React
         run: npm publish -w packages/react --access public --provenance
+        env:
+          NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc-oidc
+          NODE_AUTH_TOKEN: ""
 
   publish-vue:
     runs-on: ubuntu-latest
@@ -98,5 +118,15 @@ jobs:
       - name: Build Vue
         run: npm run build -w packages/vue
 
+      - name: Prepare npm config for OIDC
+        run: |
+          cat > "$RUNNER_TEMP/npmrc-oidc" <<'EOF'
+          registry=https://registry.npmjs.org/
+          @zeturn:registry=https://registry.npmjs.org/
+          EOF
+
       - name: Publish Vue
         run: npm publish -w packages/vue --access public --provenance
+        env:
+          NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc-oidc
+          NODE_AUTH_TOKEN: ""
