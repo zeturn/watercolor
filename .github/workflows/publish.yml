@@ -5,6 +5,11 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
+    inputs:
+      otp:
+        description: 'NPM 2FA one-time password (optional; only needed if your token requires OTP)'
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -30,9 +35,15 @@ jobs:
         run: npm run build -w packages/core
 
       - name: Publish Core
-        run: npm publish -w packages/core --access public --provenance
+        run: |
+          if [ -n "${NPM_OTP}" ]; then
+            npm publish -w packages/core --access public --provenance --otp="${NPM_OTP}"
+          else
+            npm publish -w packages/core --access public --provenance
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_OTP: ${{ inputs.otp }}
 
   publish-react:
     runs-on: ubuntu-latest
@@ -57,9 +68,15 @@ jobs:
         run: npm run build -w packages/react
 
       - name: Publish React
-        run: npm publish -w packages/react --access public --provenance
+        run: |
+          if [ -n "${NPM_OTP}" ]; then
+            npm publish -w packages/react --access public --provenance --otp="${NPM_OTP}"
+          else
+            npm publish -w packages/react --access public --provenance
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_OTP: ${{ inputs.otp }}
 
   publish-vue:
     runs-on: ubuntu-latest
@@ -84,6 +101,12 @@ jobs:
         run: npm run build -w packages/vue
 
       - name: Publish Vue
-        run: npm publish -w packages/vue --access public --provenance
+        run: |
+          if [ -n "${NPM_OTP}" ]; then
+            npm publish -w packages/vue --access public --provenance --otp="${NPM_OTP}"
+          else
+            npm publish -w packages/vue --access public --provenance
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_OTP: ${{ inputs.otp }}
