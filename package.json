@@ -9,6 +9,8 @@
     "build": "npm run build --workspaces --if-present",
     "test": "vitest",
     "test:ui": "vitest --ui",
+    "test:react": "npm run test -w packages/react",
+    "test:vue": "npm run test -w packages/vue",
     "lint": "npm run lint --workspaces --if-present",
     "storybook": "npm run storybook:vue",
     "build-storybook": "npm run build-storybook:vue",
