@@ -239,16 +239,18 @@ function findStoryTitle(framework, componentName) {
 }
 
 function buildStorybookPreviewBlock({ vueDocsId, reactDocsId }) {
-  const vueBase = stripTrailingSlash(process.env.DOCS_PREVIEW_VUE_BASE || '../../vue')
-  const reactBase = stripTrailingSlash(process.env.DOCS_PREVIEW_REACT_BASE || '../../react')
+  const vueBaseEnv = process.env.DOCS_PREVIEW_VUE_BASE
+  const reactBaseEnv = process.env.DOCS_PREVIEW_REACT_BASE
+  const vueBase = vueBaseEnv ? stripTrailingSlash(vueBaseEnv) : null
+  const reactBase = reactBaseEnv ? stripTrailingSlash(reactBaseEnv) : null
 
   const blocks = []
 
-  if (vueDocsId) {
+  if (vueDocsId && vueBase) {
     blocks.push(`\n<div class="wc-preview">\n  <div class="wc-preview__header">\n    <span class="wc-preview__title">Vue 预览</span>\n    <a class="wc-preview__link" href="${vueBase}/?path=/docs/${vueDocsId}" target="_blank" rel="noreferrer">在 Storybook 中打开</a>\n  </div>\n  <iframe class="wc-preview__frame" src="${vueBase}/iframe.html?id=${vueDocsId}&viewMode=docs" loading="lazy"></iframe>\n</div>\n`)
   }
 
-  if (reactDocsId) {
+  if (reactDocsId && reactBase) {
     blocks.push(`\n<div class="wc-preview">\n  <div class="wc-preview__header">\n    <span class="wc-preview__title">React 预览</span>\n    <a class="wc-preview__link" href="${reactBase}/?path=/docs/${reactDocsId}" target="_blank" rel="noreferrer">在 Storybook 中打开</a>\n  </div>\n  <iframe class="wc-preview__frame" src="${reactBase}/iframe.html?id=${reactDocsId}&viewMode=docs" loading="lazy"></iframe>\n</div>\n`)
   }
 

@@ -1,21 +1,29 @@
 ---
 layout: false
-title: WaterColor UI - Vue 3 & React 水彩风格组件库
-description: WaterColor UI 是一个基于水彩设计理念的现代化 UI 组件库，完美支持 Vue 3 和 React。
+title: Watercolor UI - Vue 3 & React 组件库
+description: Watercolor UI 是一个面向 Vue 3 与 React 的轻量组件库，强调清晰、低干扰、可维护的视觉语言。
 head:
   - [link, { rel: "preconnect", href: "https://fonts.googleapis.com" }]
   - [link, { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" }]
-  - [link, { href: "https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap", rel: "stylesheet" }]
+  - [link, { href: "https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap", rel: "stylesheet" }]
 ---
+
+<script setup>
+import { withBase } from 'vitepress'
+</script>
 
 <style>
 :root {
-    --primary-color: #5D56A9; /* 更深沉的紫色 */
-    --secondary-color: #9D95E3;
-    --text-primary: #2C3E50;
-    --text-secondary: #5F6C7B;
-    --bg-color: #FAFBFC;
-    --card-bg: #FFFFFF;
+    --wc-bg: #f6f7f8;
+    --wc-card: #ffffff;
+    --wc-text: #1f2937;
+    --wc-muted: #6b7280;
+    --wc-blue: #eaf2ff;
+    --wc-green: #eaf7f0;
+    --wc-yellow: #fff6d9;
+    --wc-red: #fdeeee;
+    --wc-gray: #f1f3f5;
+    --wc-border: rgba(15, 23, 42, 0.06);
 }
 
 * {
@@ -25,405 +33,375 @@ head:
 }
 
 body {
-    font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-    background-color: var(--bg-color);
-    /* 移除复杂的径向渐变背景，改用更干净的纹理或纯色 */
-    background-image: linear-gradient(to bottom, #FAFBFC, #F3F5F9);
+    font-family: 'Source Sans 3', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(180deg, #ffffff 0%, var(--wc-bg) 100%);
+    color: var(--wc-text);
     min-height: 100vh;
     overflow-x: hidden;
-    color: var(--text-primary);
-    line-height: 1.6;
 }
 
-/* 抽象水彩背景装饰 - 降低透明度，使其更优雅 */
-.watercolor-splash {
+.page {
+    position: relative;
+    min-height: 100vh;
+}
+
+.soft-bg {
     position: absolute;
     z-index: -1;
-    filter: blur(80px); /* 增加模糊度使得光晕更柔和 */
-    opacity: 0.08; /* 大幅降低透明度，只保留淡淡的氛围 */
-    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-    animation: morph 20s infinite alternate;
+    border-radius: 32px;
+    filter: blur(0);
+    opacity: 0.7;
 }
 
-.splash-1 {
-    top: -10%;
-    left: -10%;
-    width: 60vw;
-    height: 60vw;
-    background: #5D56A9;
-    animation-duration: 35s;
+.soft-bg.blue {
+    width: 38vw;
+    height: 38vw;
+    top: -6vw;
+    left: -8vw;
+    background: var(--wc-blue);
 }
 
-.splash-2 {
-    bottom: -10%;
-    right: -10%;
-    width: 60vw;
-    height: 60vw;
-    background: #FD79A8;
-    animation-duration: 40s;
+.soft-bg.green {
+    width: 26vw;
+    height: 26vw;
+    top: 18vw;
+    right: -6vw;
+    background: var(--wc-green);
 }
 
-.splash-3 {
-    top: 40%;
-    left: 20%;
-    width: 50vw;
-    height: 50vw;
-    background: #4A90E2;
-    animation-duration: 30s;
+.soft-bg.yellow {
+    width: 24vw;
+    height: 24vw;
+    bottom: -6vw;
+    left: 12vw;
+    background: var(--wc-yellow);
 }
 
-@keyframes morph {
-    0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: rotate(0deg); }
-    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(10deg); }
-}
-
-/* 顶部导航 */
-nav {
+header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 5%;
+    justify-content: space-between;
+    padding: 1.6rem 6%;
     max-width: 1200px;
     margin: 0 auto;
-    border-bottom: 1px solid rgba(0,0,0,0.03); /* 微弱的分割线增加结构感 */
 }
 
 .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    text-decoration: none;
     display: flex;
     align-items: center;
     gap: 12px;
+    text-decoration: none;
+    color: var(--wc-text);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.2px;
 }
 
 .logo-mark {
     width: 36px;
     height: 36px;
-    background: linear-gradient(135deg, #5D56A9, #FD79A8);
-    border-radius: 8px; /* 方形圆角显得更稳重 */
+    border-radius: 10px;
+    background: var(--wc-gray);
     display: grid;
     place-items: center;
-    color: white;
-    font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 10px rgba(93, 86, 169, 0.2);
+    font-weight: 700;
+    color: var(--wc-text);
 }
 
 .nav-links {
     display: flex;
-    gap: 2.5rem;
+    gap: 2rem;
 }
 
 .nav-link {
     text-decoration: none;
-    color: var(--text-secondary);
-    font-weight: 500;
-    transition: color 0.3s;
+    color: var(--wc-muted);
     font-size: 0.95rem;
-    letter-spacing: 0.02em;
+    font-weight: 500;
 }
 
 .nav-link:hover {
-    color: var(--primary-color);
-}
-
-.nav-link::after {
-    display: none; /* 移除下划线动画，保持简洁 */
+    color: var(--wc-text);
 }
 
 .gh-link {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
-    background-color: #F1F3F5;
-    color: var(--text-primary);
-    padding: 8px 16px;
-    border-radius: 6px;
+    padding: 8px 14px;
+    background: var(--wc-gray);
+    border-radius: 10px;
     text-decoration: none;
-    transition: all 0.2s;
+    color: var(--wc-text);
     font-size: 0.9rem;
-    font-weight: 500;
-    border: 1px solid transparent;
+    font-weight: 600;
 }
 
-.gh-link:hover {
-    background-color: #E9ECEF;
-    border-color: #DEE2E6;
-    transform: none; /* 移除位移 */
-}
-
-/* Hero 区域 */
 .hero {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 3rem;
     align-items: center;
-    text-align: center;
-    padding: 6rem 20px 4rem;
-    max-width: 900px;
-    margin: 0 auto;
-    position: relative;
-}
-
-h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-    position: relative;
-    z-index: 1;
-    letter-spacing: -0.02em;
-}
-
-h1 span {
-    background: linear-gradient(135deg, #5D56A9, #FD79A8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-style: italic;
-    padding-right: 0.1em; /* 防止斜体被切 */
-}
-
-.subtitle {
-    font-size: 1.25rem;
-    color: var(--text-secondary);
-    max-width: 680px;
-    margin-bottom: 3rem;
-    font-weight: 400;
-    line-height: 1.7;
-}
-
-.cta-buttons {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.btn {
-    padding: 12px 28px;
-    border-radius: 6px; /* 更小的圆角，显得更专业 */
-    font-size: 1rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.btn-vue {
-    background: #42b883;
-    color: white;
-    border: 1px solid #3aa876;
-}
-
-.btn-react {
-    background: #3498db; /* 调整为更深沉的蓝色 */
-    color: white;
-    border: 1px solid #2980b9;
-}
-
-.btn-doc {
-    background: white;
-    color: var(--text-primary);
-    border: 1px solid #E2E8F0;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-
-.btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-}
-
-.btn-vue:hover {
-     background: #3aa876;
-}
-
-.btn-react:hover {
-    background: #2980b9;
-}
-
-.btn-doc:hover {
-    border-color: #CBD5E0;
-    background-color: #FAFAFA;
-}
-
-/* 特性区域 */
-.features-section {
-    padding: 5rem 20px;
+    padding: 4.2rem 6% 3rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
+.hero-title {
+    font-size: clamp(2.6rem, 4vw, 3.6rem);
+    line-height: 1.2;
+    font-weight: 600;
+    margin-bottom: 1.4rem;
+}
+
+.hero-title span {
+    display: inline-block;
+    background: var(--wc-blue);
+    padding: 0 12px 4px;
+    border-radius: 14px;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--wc-muted);
+    line-height: 1.8;
+    margin-bottom: 2.4rem;
+}
+
+.cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.btn {
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--wc-text);
+    background: var(--wc-gray);
+}
+
+.btn.primary {
+    background: var(--wc-blue);
+}
+
+.hero-panel {
+    background: var(--wc-card);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    display: grid;
+    gap: 14px;
+}
+
+.panel-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--wc-gray);
+    font-size: 0.95rem;
+    color: var(--wc-text);
+}
+
+.panel-row span {
+    color: var(--wc-muted);
+    font-size: 0.85rem;
+}
+
+.panel-row.blue {
+    background: var(--wc-blue);
+}
+
+.panel-row.green {
+    background: var(--wc-green);
+}
+
+.panel-row.yellow {
+    background: var(--wc-yellow);
+}
+
+.panel-row.red {
+    background: var(--wc-red);
+}
+
+.section {
+    padding: 3.5rem 6% 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1.4rem;
+}
+
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
 }
 
 .feature-card {
-    background: #FFFFFF;
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid #EAECEF; /* 实体边框代替玻璃拟态 */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-    transition: all 0.3s ease;
+    border-radius: 16px;
+    padding: 20px;
+    background: var(--wc-card);
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
 }
 
-.feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
-    border-color: #E2E8F0;
+.feature-card.blue {
+    background: var(--wc-blue);
 }
 
-.icon-box {
-    font-size: 2rem;
-    margin-bottom: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #F8F9FA;
-    width: 56px;
-    height: 56px;
-    border-radius: 10px;
-    color: var(--primary-color);
+.feature-card.green {
+    background: var(--wc-green);
+}
+
+.feature-card.yellow {
+    background: var(--wc-yellow);
+}
+
+.feature-card.red {
+    background: var(--wc-red);
 }
 
 .feature-title {
-    font-family: 'Lato', sans-serif; /* 标题改回无衬线字体，除了大标题外更易读 */
-    font-size: 1.25rem;
-    margin-bottom: 0.8rem;
-    color: var(--text-primary);
-    font-weight: 700;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    font-size: 1.1rem;
 }
 
 .feature-desc {
-    color: var(--text-secondary);
-    line-height: 1.6;
+    color: var(--wc-muted);
+    line-height: 1.7;
     font-size: 0.95rem;
 }
 
-/* 底部 */
 footer {
     text-align: center;
-    padding: 3rem 20px;
-    margin-top: 4rem;
-    border-top: 1px solid #EAECEF;
-    background: #FFFFFF;
-}
-
-.footer p {
-    color: #9CA3AF;
-    margin-bottom: 0.5rem;
+    padding: 3.5rem 20px;
+    color: var(--wc-muted);
     font-size: 0.9rem;
 }
 
-.footer a {
-    color: var(--primary-color);
+footer a {
+    color: var(--wc-text);
     text-decoration: none;
-    transition: color 0.2s;
+    font-weight: 600;
 }
 
-.footer a:hover {
-    text-decoration: underline;
-}
-
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2.8rem;
-    }
-    
-    .subtitle {
-        font-size: 1.1rem;
-    }
-    
-    nav {
+@media (max-width: 900px) {
+    header {
         flex-direction: column;
         gap: 1rem;
     }
-    
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
     .nav-links {
-        gap: 1.5rem;
+        gap: 1.2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero {
+        padding: 3rem 6% 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
     }
 }
 </style>
 
-<div class="watercolor-splash splash-1"></div>
-<div class="watercolor-splash splash-2"></div>
-<div class="watercolor-splash splash-3"></div>
+<div class="page">
+    <div class="soft-bg blue"></div>
+    <div class="soft-bg green"></div>
+    <div class="soft-bg yellow"></div>
 
-<nav>
-    <a href="#" class="logo">
-        <div class="logo-mark">W</div>
-        WaterColor UI
-    </a>
-    <div class="nav-links">
-        <a href="../vue/" class="nav-link">Vue 组件</a>
-        <a href="../react/" class="nav-link">React 组件</a>
-        <a href="./components/" class="nav-link">文档中心</a>
-    </div>
-    <a href="https://github.com/zeturn/WaterColor-UI" class="gh-link" target="_blank">
-        <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-        </svg>
-        GitHub
-    </a>
-</nav>
+    <header>
+        <a :href="withBase('/')" class="logo">
+            <div class="logo-mark">W</div>
+            Watercolor UI
+        </a>
+        <div class="nav-links">
+            <a :href="withBase('/guide/installation')" class="nav-link">使用指南</a>
+            <a :href="withBase('/components/')" class="nav-link">组件文档</a>
+            <a :href="withBase('/guide/usage')" class="nav-link">设计理念</a>
+        </div>
+        <a href="https://github.com/zeturn/WaterColor-UI" class="gh-link" target="_blank" rel="noreferrer">
+            <svg height="18" width="18" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+            GitHub
+        </a>
+    </header>
 
-<div class="hero">
-    <h1>Coding like <br><span>WaterColor</span> Painting</h1>
-    <p class="subtitle">
-        不仅仅是 UI 组件库，更是一种优雅的开发体验。<br>
-        融合艺术美感与现代技术栈，为 Vue 3 和 React 开发者精心打造。
-    </p>
-    <div class="cta-buttons">
-        <a href="../vue/" class="btn btn-vue">Vue 3 文档</a>
-        <a href="../react/" class="btn btn-react">React 文档</a>
-        <a href="./components/" class="btn btn-doc">设计指南</a>
-    </div>
+    <main class="hero">
+        <div>
+            <h1 class="hero-title">清爽、规整、低干扰的 <span>组件文档</span></h1>
+            <p class="hero-subtitle">
+                Watercolor UI 面向 Vue 3 与 React。我们更关注布局秩序、留白与可维护的设计语言，
+                用浅色标准色作为辅助，让信息层级更清晰。
+            </p>
+            <div class="cta-buttons">
+                <a :href="withBase('/guide/installation')" class="btn primary">开始使用</a>
+                <a :href="withBase('/components/')" class="btn">组件列表</a>
+                <a :href="withBase('/guide/usage')" class="btn">设计规范</a>
+            </div>
+        </div>
+        <div class="hero-panel">
+            <div class="panel-row blue">
+                <div>Vue 3 组件</div>
+                <span>轻量、清晰、易组合</span>
+            </div>
+            <div class="panel-row green">
+                <div>React 组件</div>
+                <span>一致的 API 与风格</span>
+            </div>
+            <div class="panel-row yellow">
+                <div>TypeScript</div>
+                <span>类型友好、自动补全</span>
+            </div>
+            <div class="panel-row red">
+                <div>Design Tokens</div>
+                <span>可扩展、可替换</span>
+            </div>
+        </div>
+    </main>
+
+    <section class="section">
+        <h2 class="section-title">为什么适合你的项目</h2>
+        <div class="features-grid">
+            <div class="feature-card blue">
+                <div class="feature-title">结构清晰</div>
+                <div class="feature-desc">页面结构和导航保持一致，减少学习成本，快速找到需要的组件。</div>
+            </div>
+            <div class="feature-card green">
+                <div class="feature-title">低干扰配色</div>
+                <div class="feature-desc">以白灰为底，浅色标准色点缀，确保内容被优先阅读。</div>
+            </div>
+            <div class="feature-card yellow">
+                <div class="feature-title">轻量可维护</div>
+                <div class="feature-desc">组件文档从源码同步生成，保持更新节奏一致。</div>
+            </div>
+            <div class="feature-card red">
+                <div class="feature-title">多端一致</div>
+                <div class="feature-desc">Vue 与 React 的体验统一，方便跨团队协作。</div>
+            </div>
+        </div>
+    </section>
 </div>
 
-<div class="features-section">
-    <div class="features-grid">
-        <div class="feature-card">
-            <div class="icon-box">🎨</div>
-            <h3 class="feature-title">艺术级设计</h3>
-            <p class="feature-desc">独特的水彩设计语言，摆脱千篇一律的 Material 或 Ant Design 风格，让您的应用脱颖而出。</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon-box">⚡</div>
-            <h3 class="feature-title">双栈支持</h3>
-            <p class="feature-desc">使用同一套设计理念，同时支持 Vue 3 和 React。无论您使用哪个框架，体验始终如一。</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon-box">🛡️</div>
-            <h3 class="feature-title">TypeScript 全覆盖</h3>
-            <p class="feature-desc">完全使用 TypeScript 编写，提供完整的类型定义文件，让开发过程更加智能、安全。</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon-box">🧩</div>
-            <h3 class="feature-title">轻量模块化</h3>
-            <p class="feature-desc">支持按需加载，Tree-shaking 友好，确保您的应用体积保持轻盈，加载速度飞快。</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon-box">♿</div>
-            <h3 class="feature-title">无障碍访问</h3>
-            <p class="feature-desc">遵循 WAI-ARIA 标准，确保所有组件对屏幕阅读器友好，让每个人都能使用您的产品。</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon-box">🌙</div>
-            <h3 class="feature-title">主题定制</h3>
-            <p class="feature-desc">内置强大的主题系统，支持深色模式以及精细的 Design Tokens 定制，满足品牌化需求。</p>
-        </div>
-    </div>
-</div>
-
-<footer class="footer">
-    <p>© 2024 WaterColor UI. Released under the MIT License.</p>
-    <p>Made with ❤️ by <a href="https://github.com/zeturn" target="_blank">Zeturn</a></p>
+<footer>
+    <p>© 2024 Watercolor UI. Released under the MIT License.</p>
+    <p>Made by <a href="https://github.com/zeturn" target="_blank" rel="noreferrer">Zeturn</a></p>
 </footer>

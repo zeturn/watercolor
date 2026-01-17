@@ -24,6 +24,7 @@ export default defineConfig({
   title: 'Watercolor UI',
   description: 'Watercolor UI 组件文档集（自动生成）',
   base: resolveRepoBase(),
+  appearance: false,
 
   themeConfig: {
     logo: '/img/watercolorui.png',
@@ -31,8 +32,6 @@ export default defineConfig({
       { text: '文档首页', link: '/' },
       { text: '指南', link: '/guide/installation' },
       { text: '组件', link: '/components/' },
-      { text: 'Vue Storybook', link: '../vue/' },
-      { text: 'React Storybook', link: '../react/' },
     ],
     sidebar: {
       '/guide/': [

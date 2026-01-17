@@ -1,4 +1,4 @@
-import { applyTheme, toggleDarkMode, themes } from './theme'
+import { setTheme, toggleDarkMode, themes } from './theme'
 
 export type ColorTheme = keyof typeof themes
 
@@ -26,27 +26,60 @@ export function createThemeManager (
   defaultColor: ColorTheme = 'default',
   defaultDark: boolean = false
 ): ThemeManager {
-  const savedColor = localStorage.getItem('wc-color') as ColorTheme | null
-  const savedScheme = localStorage.getItem('wc-scheme') as 'light' | 'dark' | null
+  const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined'
+
+  let savedColor: ColorTheme | null = null
+  let savedScheme: 'light' | 'dark' | null = null
+
+  if (isBrowser) {
+    try {
+      savedColor = localStorage.getItem('wc-color') as ColorTheme | null
+      savedScheme = localStorage.getItem('wc-scheme') as 'light' | 'dark' | null
+    } catch {
+      // ignore storage failures (privacy mode / disabled storage)
+    }
+  }
 
   let _color: ColorTheme = savedColor || defaultColor
   let _dark = savedScheme ? savedScheme === 'dark' : defaultDark
 
-  // 首次应用
-  applyTheme(_color)
-  toggleDarkMode(_dark)
+  // 首次应用（仅浏览器环境）
+  if (isBrowser) {
+    const theme = themes[_color] ?? themes.default
+    setTheme({
+      primary: theme.primary,
+      secondary: theme.secondary,
+    })
+    toggleDarkMode(_dark)
+  }
 
   const setColor = (c: ColorTheme) => {
     if (c === _color) return
     _color = c
-    applyTheme(c)
-    localStorage.setItem('wc-color', c)
+    if (isBrowser) {
+      const theme = themes[c] ?? themes.default
+      setTheme({
+        primary: theme.primary,
+        secondary: theme.secondary,
+      })
+      try {
+        localStorage.setItem('wc-color', c)
+      } catch {
+        // ignore
+      }
+    }
   }
 
   const toggleDark = () => {
     _dark = !_dark
-    toggleDarkMode(_dark)
-    localStorage.setItem('wc-scheme', _dark ? 'dark' : 'light')
+    if (isBrowser) {
+      toggleDarkMode(_dark)
+      try {
+        localStorage.setItem('wc-scheme', _dark ? 'dark' : 'light')
+      } catch {
+        // ignore
+      }
+    }
   }
 
   return {

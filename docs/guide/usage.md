@@ -26,9 +26,10 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { Button, Card, Icon } from '@zeturn/watercolor-vue'
-import '@zeturn/watercolor-vue/style.css' // 确保已引入样式
+// 建议把样式放到 main.ts / main.js 只引入一次：
+// import '@zeturn/watercolor-vue/style.css'
 
 const handleClick = () => {
   console.log('按钮被点击了')
@@ -44,6 +45,8 @@ const handleClick = () => {
 </style>
 ```
 
+> 建议：样式只在应用入口引入一次（如 `main.ts`），不要在每个组件里重复引入。
+
 ## React 使用示例
 
 这里以 `Button` 和 `TextField` 组件为例。
@@ -51,7 +54,8 @@ const handleClick = () => {
 ```tsx
 import React, { useState } from 'react'
 import { Button, Card, TextField, Icon } from '@zeturn/watercolor-react'
-import '@zeturn/watercolor-react/style.css' // 确保已引入样式
+// 建议把样式放到 main.tsx / App.tsx 顶部只引入一次：
+// import '@zeturn/watercolor-react/style.css'
 
 export default function App() {
   const [value, setValue] = useState('')
@@ -91,6 +95,26 @@ Watercolor UI 的 `Icon` 组件支持多个图标库（如 Lucide, Heroicons, Ph
 ### 2. 深色模式 (Dark Mode)
 
 组件库内置了对深色模式的支持。如果在您的应用中启用了深色类名（通常是 `dark` 类加在 `html` 或 `body` 标签上），Watercolor 组件会自动适配深色主题。
+
+你也可以使用内置工具函数手动切换：
+
+```ts
+import { toggleDarkMode } from '@zeturn/watercolor-react' // Vue 项目对应 @zeturn/watercolor-vue
+
+toggleDarkMode(true)
+```
+
+### 4. 主题配置 (theme.config.json)
+
+Watercolor UI 默认会在浏览器环境下尝试加载 `/theme.config.json`（不会阻塞渲染）。你也可以在合适的时机手动触发：
+
+```ts
+import { loadThemeConfig } from '@zeturn/watercolor-vue' // React 项目对应 @zeturn/watercolor-react
+
+await loadThemeConfig('/theme.config.json')
+```
+
+> SSR（Next.js / Nuxt）项目：请确保这些函数只在客户端调用。
 
 ### 3. Tree Shaking
 

@@ -69,6 +69,18 @@ yarn add @zeturn/watercolor-react
 import '@zeturn/watercolor-react/style.css'
 ```
 
+## Peer Dependencies（重要）
+
+- `@zeturn/watercolor-vue` 需要 `vue@^3`
+- `@zeturn/watercolor-react` 需要 `react@^18`、`react-dom@^18`
+
+如果你的项目版本不匹配，可能出现类型错误或运行时异常。
+
+## SSR 使用说明
+
+主题相关的工具函数（例如 `loadThemeConfig` / `toggleDarkMode`）会访问浏览器 DOM。
+在 Next.js / Nuxt 等 SSR 场景中，请只在客户端执行（例如 `onMounted` / `useEffect` 里）。
+
 ## TypeScript 支持
 
 Watercolor UI 使用 TypeScript 编写，自带类型定义文件，无需额外安装 `@types/...` 包。
