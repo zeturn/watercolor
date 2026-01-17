@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-react",
-  "version": "1.1.17",
+  "version": "1.1.18",
   "type": "module",
   "main": "dist/watercolor-react.umd.js",
   "module": "dist/watercolor-react.es.js",
@@ -8,9 +8,9 @@
   "style": "dist/watercolor-react.css",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/watercolor-react.es.js",
-      "require": "./dist/watercolor-react.umd.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/watercolor-react.umd.js"
     },
     "./style.css": "./dist/watercolor-react.css"
   },

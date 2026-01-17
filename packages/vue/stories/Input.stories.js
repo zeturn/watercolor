@@ -1,5 +1,4 @@
 import InputVue from '../src/components/Input/Input.vue'
-import InputReact from '../src/components/Input/Input.jsx'
 import { ref } from 'vue'
 
 export default {

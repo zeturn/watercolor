@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-vue",
-  "version": "1.1.17",
+  "version": "1.1.18",
   "type": "module",
   "main": "dist/watercolor-vue.umd.js",
   "module": "dist/watercolor-vue.es.js",
@@ -8,9 +8,9 @@
   "style": "dist/watercolor-vue.css",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/watercolor-vue.es.js",
-      "require": "./dist/watercolor-vue.umd.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/watercolor-vue.umd.js"
     },
     "./style.css": "./dist/watercolor-vue.css"
   },

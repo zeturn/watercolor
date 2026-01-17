@@ -1,15 +1,15 @@
 {
   "name": "@zeturn/watercolor-core",
-  "version": "1.1.16",
+  "version": "1.1.18",
   "type": "module",
   "main": "dist/core.umd.js",
   "module": "dist/core.es.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/core.es.js",
-      "require": "./dist/core.umd.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/core.umd.js"
     },
     "./src/*": "./src/*"
   },
