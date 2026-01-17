@@ -29,11 +29,23 @@ export default defineConfig({
     logo: '/img/watercolorui.png',
     nav: [
       { text: '文档首页', link: '/' },
+      { text: '指南', link: '/guide/installation' },
       { text: '组件', link: '/components/' },
       { text: 'Vue Storybook', link: '../vue/' },
       { text: 'React Storybook', link: '../react/' },
     ],
-    sidebar: readSidebar(),
+    sidebar: {
+      '/guide/': [
+        {
+          text: '指南',
+          items: [
+            { text: '安装', link: '/guide/installation' },
+            { text: '快速上手', link: '/guide/usage' },
+          ]
+        }
+      ],
+      ...readSidebar()
+    },
     search: { provider: 'local' },
 
     socialLinks: [

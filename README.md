@@ -6,12 +6,11 @@
 
 Modern, minimalist, watercolor-inspired UI components for **Vue 3** and **React 18+** — built with **TypeScript**.
 
-[![npm version](https://badge.fury.io/js/watercolor-ui.svg)](https://badge.fury.io/js/watercolor-ui)
+[![npm version](https://img.shields.io/npm/v/@zeturn/watercolor-vue?label=vue)](https://www.npmjs.com/package/@zeturn/watercolor-vue)
+[![npm version](https://img.shields.io/npm/v/@zeturn/watercolor-react?label=react)](https://www.npmjs.com/package/@zeturn/watercolor-react)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Vue 3](https://img.shields.io/badge/Vue-3.x-4FC08D?logo=vue.js)](https://vuejs.org/)
 [![React 18](https://img.shields.io/badge/React-18.x-61DAFB?logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6?logo=typescript)](https://www.typescriptlang.org/)
-[![Storybook](https://img.shields.io/badge/Storybook-Ready-FF4785?logo=storybook)](https://storybook.js.org/)
 
 [🚀 Quick Start](#-quick-start) · [📚 Docs](https://zeturn.github.io/watercolor/docs/) · [🧩 Vue Storybook](https://zeturn.github.io/watercolor/vue/) · [⚛️ React Storybook](https://zeturn.github.io/watercolor/react/) · [📝 Changelog](CHANGELOG.md)
 
@@ -21,9 +20,8 @@ Modern, minimalist, watercolor-inspired UI components for **Vue 3** and **React 
 
 - One design language, two frameworks (Vue + React)
 - CSS Variables theming + built-in dark mode
-- TypeScript-first APIs with generated type definitions
+- TypeScript-first APIs
 - Tree-shaking friendly builds
-- Storybook for interactive previews and usage docs
 
 ## 📚 Documentation
 
@@ -33,20 +31,40 @@ Modern, minimalist, watercolor-inspired UI components for **Vue 3** and **React 
 
 ## 🚀 Quick Start
 
-### Requirements
+### Installation
 
-- Node.js >= 16
-- npm >= 8 (or pnpm / yarn)
-
-### Install
+**For Vue:**
 
 ```bash
-npm i watercolor-ui
-# or
-pnpm add watercolor-ui
-# or
-yarn add watercolor-ui
+npm install @zeturn/watercolor-vue
 ```
+
+**For React:**
+
+```bash
+npm install @zeturn/watercolor-react
+```
+
+### Usage
+
+See [Installation Guide](https://zeturn.github.io/watercolor/docs/guide/installation.html) for more details.
+
+```typescript
+// Import style
+import '@zeturn/watercolor-vue/style.css' // or @zeturn/watercolor-react/style.css
+
+// Import components
+import { Button } from '@zeturn/watercolor-vue' // or @zeturn/watercolor-react
+```
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+## 📄 License
+
+MIT © [Zeturn](https://github.com/zeturn)
+
 
 ### Styles
 
