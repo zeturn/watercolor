@@ -27,10 +27,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Upgrade npm to support Trusted Publisher
         run: npm i -g npm@11.5.1
+
+      - name: Prepare npm config (OIDC)
+        run: |
+          echo "registry=https://registry.npmjs.org/" > "$RUNNER_TEMP/npmrc"
+          echo "always-auth=false" >> "$RUNNER_TEMP/npmrc"
 
       - name: Install dependencies
         run: npm ci
@@ -40,6 +44,9 @@ jobs:
 
       - name: Publish Core
         run: npm publish -w packages/core --access public --provenance
+        env:
+          NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc
+          NODE_AUTH_TOKEN: ''
 
   publish-react:
     runs-on: ubuntu-latest
@@ -57,10 +64,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Upgrade npm to support Trusted Publisher
         run: npm i -g npm@11.5.1
+
+      - name: Prepare npm config (OIDC)
+        run: |
+          echo "registry=https://registry.npmjs.org/" > "$RUNNER_TEMP/npmrc"
+          echo "always-auth=false" >> "$RUNNER_TEMP/npmrc"
 
       - name: Install dependencies
         run: npm ci
@@ -73,6 +84,9 @@ jobs:
 
       - name: Publish React
         run: npm publish -w packages/react --access public --provenance
+        env:
+          NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc
+          NODE_AUTH_TOKEN: ''
 
   publish-vue:
     runs-on: ubuntu-latest
@@ -90,10 +104,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Upgrade npm to support Trusted Publisher
         run: npm i -g npm@11.5.1
+
+      - name: Prepare npm config (OIDC)
+        run: |
+          echo "registry=https://registry.npmjs.org/" > "$RUNNER_TEMP/npmrc"
+          echo "always-auth=false" >> "$RUNNER_TEMP/npmrc"
 
       - name: Install dependencies
         run: npm ci
@@ -106,3 +124,6 @@ jobs:
 
       - name: Publish Vue
         run: npm publish -w packages/vue --access public --provenance
+        env:
+          NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc
+          NODE_AUTH_TOKEN: ''
