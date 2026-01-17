@@ -1,1 +1,1 @@
-export * from '@watercolor/core/src/components/VideoPlayer/utils.js';
+export * from '@zeturn/watercolor-core/src/components/VideoPlayer/utils.js';

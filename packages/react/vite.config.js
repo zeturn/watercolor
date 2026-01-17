@@ -14,7 +14,7 @@ export default defineConfig({
       fileName: (format) => `watercolor-react.${format}.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom', '@watercolor/core'],
+      external: ['react', 'react-dom', '@zeturn/watercolor-core'],
       output: {
         globals: {
           react: 'React',

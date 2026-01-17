@@ -1,1 +1,1 @@
-export * from '@watercolor/core/src/components/Checkbox/utils.jsx';
+export * from '@zeturn/watercolor-core/src/components/Checkbox/utils.jsx';

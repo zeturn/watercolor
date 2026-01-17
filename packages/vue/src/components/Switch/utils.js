@@ -1,1 +1,1 @@
-export * from '@watercolor/core/src/components/Switch/utils.js';
+export * from '@zeturn/watercolor-core/src/components/Switch/utils.js';

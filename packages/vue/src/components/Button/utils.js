@@ -1,1 +1,1 @@
-export * from '@watercolor/core/src/components/Button/utils.jsx';
+export * from '@zeturn/watercolor-core/src/components/Button/utils.jsx';

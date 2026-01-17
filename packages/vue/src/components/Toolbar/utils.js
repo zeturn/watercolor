@@ -1,1 +1,1 @@
-export * from '@watercolor/core/src/components/Toolbar/utils.js';
+export * from '@zeturn/watercolor-core/src/components/Toolbar/utils.js';

@@ -14,7 +14,7 @@ export default defineConfig({
       fileName: (format) => `watercolor-vue.${format}.js`,
     },
     rollupOptions: {
-      external: ['vue', '@watercolor/core'],
+      external: ['vue', '@zeturn/watercolor-core'],
       output: {
         globals: {
           vue: 'Vue',

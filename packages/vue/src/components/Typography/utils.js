@@ -1,1 +1,1 @@
-export * from '@watercolor/core/src/components/Typography/utils.js';
+export * from '@zeturn/watercolor-core/src/components/Typography/utils.js';

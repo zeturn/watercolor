@@ -1,5 +1,5 @@
 {
-  "name": "watercolor-ui-react",
+  "name": "@zeturn/watercolor-react",
   "version": "1.1.16",
   "type": "module",
   "main": "dist/watercolor-react.umd.js",
@@ -22,12 +22,15 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
   "dependencies": {
-    "@watercolor/core": "*",
+    "@zeturn/watercolor-core": "*",
     "@heroicons/react": "^2.2.0",
     "@phosphor-icons/react": "^2.1.10",
     "@tabler/icons-react": "^3.34.0",

@@ -1,5 +1,5 @@
 {
-  "name": "@watercolor/core",
+  "name": "@zeturn/watercolor-core",
   "version": "1.1.16",
   "type": "module",
   "main": "dist/core.umd.js",

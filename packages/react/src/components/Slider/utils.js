@@ -1,1 +1,1 @@
-export * from '@watercolor/core/src/components/Slider/utils.jsx';
+export * from '@zeturn/watercolor-core/src/components/Slider/utils.jsx';
