@@ -100,8 +100,8 @@ jobs:
           npm run build-storybook:react
           mkdir -p storybook-static/vue
           mkdir -p storybook-static/react
-          cp -r storybook-static-vue/* storybook-static/vue/
-          cp -r storybook-static-react/* storybook-static/react/
+          cp -r packages/vue/storybook-static/* storybook-static/vue/
+          cp -r packages/react/storybook-static/* storybook-static/react/
 
       - name: Build VitePress Docs
         env:
