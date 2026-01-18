@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-react",
-  "version": "1.1.36",
+  "version": "1.1.37",
   "type": "module",
   "main": "dist/watercolor-react.umd.js",
   "module": "dist/watercolor-react.es.js",
