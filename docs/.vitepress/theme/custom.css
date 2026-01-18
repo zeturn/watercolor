@@ -2,7 +2,8 @@
 
 :root {
   --vp-font-family-base: 'Source Sans 3', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', 'SF Mono', Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
 
   --vp-c-brand-1: #5b82d8;
   --vp-c-brand-2: #7aa5e6;
