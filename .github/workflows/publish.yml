@@ -196,6 +196,8 @@ jobs:
       contents: read
     env:
       NODE_AUTH_TOKEN: ""
+      NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc-oidc
+      NPM_CONFIG_REGISTRY: https://registry.npmjs.org/
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -209,18 +211,24 @@ jobs:
       - name: Upgrade npm to support Trusted Publisher
         run: npm i -g npm@11.5.1
 
+      - name: Prepare npm config for OIDC
+        run: |
+          cat > "$NPM_CONFIG_USERCONFIG" <<'EOF'
+          registry=https://registry.npmjs.org/
+          @zeturn:registry=https://registry.npmjs.org/
+          always-auth=false
+          EOF
+
       - name: Install dependencies
         run: npm ci
 
       - name: Prepare npm config for OIDC
         run: |
-          cat > "$RUNNER_TEMP/npmrc-oidc" <<'EOF'
+          cat > "$NPM_CONFIG_USERCONFIG" <<'EOF'
           registry=https://registry.npmjs.org/
           @zeturn:registry=https://registry.npmjs.org/
+          always-auth=false
           EOF
 
       - name: Publish installer
         run: npm publish -w packages/watercolor-ui --access public --provenance
-        env:
-          NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc-oidc
-          NODE_AUTH_TOKEN: ""
