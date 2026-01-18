@@ -92,6 +92,14 @@ export default function App() {
 Watercolor UI 的 `Icon` 组件支持多个图标库（如 Lucide, Heroicons, Phosphor 等）。
 在使用时，请确保您了解如何通过 `library` 属性选择图标集。默认推荐使用 `lucide`。
 
+从 v1.1.28 起，图标库已拆分为可选独立包：
+
+- React：`@zeturn/watercolor-icons-lucide-react` / `@zeturn/watercolor-icons-heroicons-react` / `@zeturn/watercolor-icons-tabler-react` / `@zeturn/watercolor-icons-phosphor-react`
+- Vue：`@zeturn/watercolor-icons-lucide-vue` / `@zeturn/watercolor-icons-heroicons-vue` / `@zeturn/watercolor-icons-tabler-vue` / `@zeturn/watercolor-icons-phosphor-vue`
+- Feather（通用）：`@zeturn/watercolor-icons-feather`
+
+如果你选择了某个 `library` 但没有安装对应包，`Icon` 会回退渲染占位符。
+
 ### 2. 深色模式 (Dark Mode)
 
 组件库内置了对深色模式的支持。如果在您的应用中启用了深色类名（通常是 `dark` 类加在 `html` 或 `body` 标签上），Watercolor 组件会自动适配深色主题。

@@ -1,0 +1,36 @@
+{
+  "name": "@zeturn/watercolor-icons-heroicons-vue",
+  "version": "1.1.30",
+  "type": "module",
+  "main": "dist/watercolor-icons-heroicons-vue.umd.js",
+  "module": "dist/watercolor-icons-heroicons-vue.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/watercolor-icons-heroicons-vue.es.js",
+      "require": "./dist/watercolor-icons-heroicons-vue.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "@heroicons/vue": "^2.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeturn/watercolor.git",
+    "directory": "packages/icons-heroicons-vue"
+  },
+  "license": "MIT"
+}

@@ -20,6 +20,7 @@ Modern, minimalist, watercolor-inspired UI components for **Vue 3** and **React 
 - CSS Variables theming + built-in dark mode
 - TypeScript-first APIs
 - Tree-shaking friendly builds
+- Optional icon packs (install only what you use)
 
 ## 📚 Documentation
 
@@ -73,6 +74,15 @@ toggleDarkMode(true)
 ```
 
 > Note: theme helpers run in browser only. For SSR (Next.js / Nuxt), call them on the client.
+
+### Icons (optional)
+
+The `Icon` component supports multiple icon libraries via optional packages:
+
+- React: `@zeturn/watercolor-icons-lucide-react`, `@zeturn/watercolor-icons-tabler-react`, `@zeturn/watercolor-icons-phosphor-react`
+- React: `@zeturn/watercolor-icons-lucide-react`, `@zeturn/watercolor-icons-heroicons-react`, `@zeturn/watercolor-icons-tabler-react`, `@zeturn/watercolor-icons-phosphor-react`
+- Vue: `@zeturn/watercolor-icons-lucide-vue`, `@zeturn/watercolor-icons-heroicons-vue`, `@zeturn/watercolor-icons-tabler-vue`, `@zeturn/watercolor-icons-phosphor-vue`
+- Feather (shared): `@zeturn/watercolor-icons-feather`
 
 ## 🤝 Contributing
 

@@ -1,0 +1,36 @@
+{
+  "name": "@zeturn/watercolor-icons-phosphor-vue",
+  "version": "1.1.30",
+  "type": "module",
+  "main": "dist/watercolor-icons-phosphor-vue.umd.js",
+  "module": "dist/watercolor-icons-phosphor-vue.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/watercolor-icons-phosphor-vue.es.js",
+      "require": "./dist/watercolor-icons-phosphor-vue.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "@phosphor-icons/vue": "^2.2.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeturn/watercolor.git",
+    "directory": "packages/icons-phosphor-vue"
+  },
+  "license": "MIT"
+}

@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-react",
-  "version": "1.1.28",
+  "version": "1.1.30",
   "type": "module",
   "main": "dist/watercolor-react.umd.js",
   "module": "dist/watercolor-react.es.js",
@@ -37,12 +37,7 @@
     "react-dom": "^18.0.0"
   },
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
-    "@phosphor-icons/react": "^2.1.10",
-    "@tabler/icons-react": "^3.34.0",
     "@zeturn/watercolor-core": "1.1.28",
-    "feather-icons": "^4.29.2",
-    "lucide-react": "^0.525.0",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {

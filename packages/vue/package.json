@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-vue",
-  "version": "1.1.28",
+  "version": "1.1.30",
   "type": "module",
   "main": "dist/watercolor-vue.umd.js",
   "module": "dist/watercolor-vue.es.js",
@@ -36,12 +36,7 @@
     "vue": "^3.0.0"
   },
   "dependencies": {
-    "@heroicons/vue": "^2.2.0",
-    "@phosphor-icons/vue": "^2.2.1",
-    "@tabler/icons-vue": "^3.34.0",
-    "@zeturn/watercolor-core": "1.1.28",
-    "feather-icons": "^4.29.2",
-    "lucide-vue-next": "^0.525.0"
+    "@zeturn/watercolor-core": "1.1.28"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",

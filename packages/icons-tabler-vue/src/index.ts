@@ -1,0 +1,19 @@
+import * as Tabler from '@tabler/icons-vue'
+import type { Component } from 'vue'
+
+function toPascalCase(input: string): string {
+  return input
+    .split('-')
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join('')
+}
+
+/**
+ * Resolve a Tabler Vue icon component by kebab-case name (e.g. "alert-circle").
+ */
+export function getIcon(name: string): Component | undefined {
+  const mod: any = Tabler
+  const iconName = 'Icon' + toPascalCase(name)
+  return mod[iconName] || mod.IconHelp
+}

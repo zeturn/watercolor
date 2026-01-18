@@ -85,6 +85,50 @@ import '@zeturn/watercolor-react/style.css'
 
 Watercolor UI 使用 TypeScript 编写，自带类型定义文件，无需额外安装 `@types/...` 包。
 
+## 图标库（可选，推荐）
+
+`Icon` 组件支持多种图标库。为了避免“安装 UI 库就自动拉一堆图标依赖”，图标库已拆分为可选独立包：你只需要安装你用到的那一个（或几个）。
+
+### React 项目可选安装
+
+```bash
+# Lucide
+npm install @zeturn/watercolor-icons-lucide-react
+
+# Heroicons
+npm install @zeturn/watercolor-icons-heroicons-react
+
+# Tabler
+npm install @zeturn/watercolor-icons-tabler-react
+
+# Phosphor
+npm install @zeturn/watercolor-icons-phosphor-react
+
+# Feather（输出 SVG 字符串，React/Vue 通用）
+npm install @zeturn/watercolor-icons-feather
+```
+
+### Vue 项目可选安装
+
+```bash
+# Lucide
+npm install @zeturn/watercolor-icons-lucide-vue
+
+# Heroicons
+npm install @zeturn/watercolor-icons-heroicons-vue
+
+# Tabler
+npm install @zeturn/watercolor-icons-tabler-vue
+
+# Phosphor
+npm install @zeturn/watercolor-icons-phosphor-vue
+
+# Feather（输出 SVG 字符串，React/Vue 通用）
+npm install @zeturn/watercolor-icons-feather
+```
+
+> 说明：如果你在 `Icon` 里选择了某个 `library`，但没有安装对应图标包，组件会回退到占位符渲染，并在控制台提示。
+
 ## 字体配置（推荐）
 
 为了获得最佳的"水彩"视觉体验，我们推荐在您的 `index.html` 中引入以下字体：
