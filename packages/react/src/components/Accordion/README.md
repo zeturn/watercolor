@@ -58,7 +58,7 @@ The Accordion component can be styled using CSS variables for colors, borders, a
 To contribute to the Accordion component, please follow the standard contribution guidelines of the project.
 
 ## License
-This component is licensed under the MIT License. 
+This component is licensed under the ISC License. 
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)

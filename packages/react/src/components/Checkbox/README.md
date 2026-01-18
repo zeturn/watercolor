@@ -97,7 +97,7 @@ You can override these classes or leverage CSS variables (e.g. `--wc-primary-500
 Contributions are welcome! Feel free to open an issue or submit a pull request.
 
 ## License
-MIT © Watercolor UI
+ISC © Watercolor UI
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)

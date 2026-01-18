@@ -85,7 +85,7 @@ Feel free to compose or extend these classes to match your design system.
 Contributions are welcome! Please open an issue or submit a pull request.
 
 ## License
-MIT © Watercolor UI
+ISC © Watercolor UI
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)

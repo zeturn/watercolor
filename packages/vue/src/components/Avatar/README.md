@@ -80,7 +80,7 @@ The dark theme is applied automatically by toggling the `dark` class on the `<ht
 Feel free to open an issue or pull request if you find a bug or have a feature request.
 
 ## License
-This component is released under the MIT License. 
+This component is released under the ISC License. 
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)

@@ -82,7 +82,7 @@ Dark-mode values are handled automatically through the same variables. No extra 
 Feel free to submit issues or pull requests on GitHub. Please follow the coding conventions and include unit tests for new features.
 
 ## License
-MIT © Watercolor UI Team
+ISC © Watercolor UI Team
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)

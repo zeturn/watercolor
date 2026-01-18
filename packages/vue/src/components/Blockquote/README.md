@@ -75,7 +75,7 @@ Contributions are welcome!
 3. Ensure `pnpm test` passes and ESLint rules are satisfied before opening a PR.
 
 ## License
-MIT © watercolor-ui
+ISC © watercolor-ui
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)

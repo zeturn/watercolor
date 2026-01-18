@@ -85,7 +85,7 @@ Key variables:
 Feel free to submit pull requests or open issues on GitHub.
 
 ## License
-MIT
+ISC
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)
