@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-icons-lucide-vue",
-  "version": "1.1.32",
+  "version": "1.1.33",
   "type": "module",
   "main": "dist/watercolor-icons-lucide-vue.umd.js",
   "module": "dist/watercolor-icons-lucide-vue.es.js",
