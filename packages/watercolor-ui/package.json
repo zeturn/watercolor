@@ -1,0 +1,31 @@
+{
+  "name": "watercolor-ui",
+  "version": "1.1.31",
+  "description": "Watercolor UI installer for core and platform packages",
+  "main": "scripts/installer.js",
+  "bin": {
+    "watercolor-ui": "bin/watercolor-ui.js"
+  },
+  "files": [
+    "bin",
+    "scripts",
+    "README.md",
+    "package.json"
+  ],
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeturn/watercolor",
+    "directory": "packages/watercolor-ui"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "license": "ISC"
+}

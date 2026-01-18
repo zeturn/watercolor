@@ -180,3 +180,37 @@ jobs:
         env:
           NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc-oidc
           NODE_AUTH_TOKEN: ""
+
+  publish-installer:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Upgrade npm to support Trusted Publisher
+        run: npm i -g npm@11.5.1
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prepare npm config for OIDC
+        run: |
+          cat > "$RUNNER_TEMP/npmrc-oidc" <<'EOF'
+          registry=https://registry.npmjs.org/
+          @zeturn:registry=https://registry.npmjs.org/
+          EOF
+
+      - name: Publish installer
+        run: npm publish -w packages/watercolor-ui --access public --provenance
+        env:
+          NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc-oidc
+          NODE_AUTH_TOKEN: ""

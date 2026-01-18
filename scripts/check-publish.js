@@ -28,6 +28,12 @@ const requiredFiles = [
   'packages/core/dist/core.umd.js',
   'packages/core/package.json',
 
+  'packages/watercolor-ui/package.json',
+  'packages/watercolor-ui/scripts/installer.js',
+  'packages/watercolor-ui/scripts/postinstall.js',
+  'packages/watercolor-ui/bin/watercolor-ui.js',
+  'packages/watercolor-ui/README.md',
+
   'README.md',
   'package.json'
 ]

@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-icons-heroicons-react",
-  "version": "1.1.30",
+  "version": "1.1.31",
   "type": "module",
   "main": "dist/watercolor-icons-heroicons-react.umd.js",
   "module": "dist/watercolor-icons-heroicons-react.es.js",
