@@ -115,7 +115,7 @@ Example:
 Pull requests and issues are welcome! Please ensure parity between Vue & React implementations and update the Storybook stories accordingly.
 
 ## License
-MIT © Beans-Design
+ISC © Beans-Design
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)

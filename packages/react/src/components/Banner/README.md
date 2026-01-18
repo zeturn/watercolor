@@ -81,7 +81,7 @@ You may override palettes by redefining CSS variables in your own theme.
 Open issues or PRs to suggest improvements.
 
 ## License
-MIT
+ISC
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)

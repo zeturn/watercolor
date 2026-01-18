@@ -112,7 +112,7 @@ You can also add your own classes via the `className` (React) or `class` (Vue) p
 Feel free to open issues or pull requests to suggest improvements or new features.
 
 ## License
-MIT
+ISC
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)

@@ -80,7 +80,7 @@ All visual styles are defined in `src/components/DatePicker/style.css` and reuse
 Issues and pull requests are welcome!
 
 ## License
-MIT
+ISC
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)

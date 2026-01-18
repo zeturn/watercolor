@@ -74,7 +74,7 @@ You can override palette variables or extend themes in `src/styles/index.css`.
 Feel free to open issues or PRs to enhance the component.
 
 ## License
-Released under the MIT License.
+Released under the ISC License.
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)

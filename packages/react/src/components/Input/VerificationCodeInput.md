@@ -88,7 +88,7 @@ Override them globally or add custom CSS targeting `.wc-input-code` / `.wc-input
 PRs and issues are welcome! Please follow the project's ESLint / Prettier rules and add unit tests where applicable.
 
 ## License
-MIT License © Watercolor UI team
+ISC License © Watercolor UI team
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)

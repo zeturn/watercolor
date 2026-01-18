@@ -67,7 +67,7 @@ Override variables in `src/styles/index.css` or apply extra classes via `classNa
 Pull requests & issues are welcome.
 
 ## License
-MIT
+ISC
 
 ## Reviewed by
 Reviewed by @zeturn – 2025-06-29 

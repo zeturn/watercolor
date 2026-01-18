@@ -80,7 +80,7 @@ Override these classes or adjust CSS variables (e.g. `--wc-primary-500`) to matc
 Contributions are welcome! Feel free to open an issue or submit a pull request.
 
 ## License
-MIT © Watercolor UI
+ISC © Watercolor UI
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)

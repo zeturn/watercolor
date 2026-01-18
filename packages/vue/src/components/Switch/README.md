@@ -93,7 +93,7 @@ const enabled = ref(false);
 Feel free to open issues or PRs to enhance the component.
 
 ## License
-Released under the MIT License.
+Released under the ISC License.
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)

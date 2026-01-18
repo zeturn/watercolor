@@ -74,7 +74,7 @@ Dark mode is handled automatically: when the `dark` class is present on the root
 Found a bug or have an improvement idea? Feel free to open an issue or create a pull request.
 
 ## License
-Released under the MIT License.
+Released under the ISC License.
 
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)
