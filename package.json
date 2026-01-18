@@ -100,5 +100,6 @@
     "node": ">=16.0.0",
     "npm": ">=8.0.0"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "version": "1.1.36"
 }

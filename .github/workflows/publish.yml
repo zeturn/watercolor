@@ -217,8 +217,10 @@ jobs:
           cat > "$RUNNER_TEMP/npmrc-oidc" <<'EOF'
           registry=https://registry.npmjs.org/
           @zeturn:registry=https://registry.npmjs.org/
-          always-auth=false
           EOF
 
       - name: Publish installer
-        run: NPM_CONFIG_USERCONFIG="$RUNNER_TEMP/npmrc-oidc" npm publish -w packages/watercolor-ui --access public --provenance
+        run: npm publish -w packages/watercolor-ui --access public --provenance
+        env:
+          NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc-oidc
+          NODE_AUTH_TOKEN: ""
