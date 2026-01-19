@@ -247,6 +247,58 @@ function normalizeDocMarkdown(componentName, markdown) {
   return `---\ntitle: ${componentName}\n---\n\n${markdown}`
 }
 
+function ensureH1AfterFrontmatter(componentName, markdown) {
+  const lines = markdown.split(/\r?\n/)
+  let i = 0
+
+  if (lines[0] === '---') {
+    for (let j = 1; j < lines.length; j++) {
+      if (lines[j] === '---') {
+        i = j + 1
+        break
+      }
+    }
+  }
+
+  while (i < lines.length && lines[i].trim() === '') i++
+
+  if (i < lines.length && /^#\s+/.test(lines[i])) {
+    return markdown
+  }
+
+  const before = lines.slice(0, i)
+  const after = lines.slice(i)
+  return [...before, '', `# ${componentName}`, '', ...after].join('\n')
+}
+
+function insertAfterFirstH1(markdown, insertion) {
+  if (!insertion) return markdown
+
+  const lines = markdown.split(/\r?\n/)
+  let i = 0
+
+  if (lines[0] === '---') {
+    for (let j = 1; j < lines.length; j++) {
+      if (lines[j] === '---') {
+        i = j + 1
+        break
+      }
+    }
+  }
+
+  for (let j = i; j < lines.length; j++) {
+    if (/^#\s+/.test(lines[j])) {
+      const insertAt = j + 1
+      const before = lines.slice(0, insertAt)
+      const after = lines.slice(insertAt)
+      return [...before, '', insertion, '', ...after].join('\n')
+    }
+  }
+
+  // Fallback: if no H1 exists (should not happen after ensureH1AfterFrontmatter), append at end.
+  return `${markdown.trimEnd()}\n\n${insertion}\n`
+}
+
 function slugifyForStorybook(input) {
   return input
     .toLowerCase()
@@ -501,6 +553,9 @@ function main() {
 
     doc = normalizeGeneratedDocsMarkdown(dir.name, doc)
 
+    // Ensure the visible title is always rendered first.
+    doc = ensureH1AfterFrontmatter(dir.name, doc)
+
     // Extract Props/Events quick summary from README tables
     const propsTable = extractMarkdownTableAfterHeading(raw, [
       /^props$/i,
@@ -526,7 +581,7 @@ function main() {
     const preview = buildStorybookPreviewBlock({ vueDocsId, reactDocsId })
     const summary = buildQuickSummaryBlock({ props, events })
     const topBlocks = [preview, summary].filter(Boolean).join('\n\n')
-    doc = insertAfterFrontmatter(doc, topBlocks)
+    doc = insertAfterFirstH1(doc, topBlocks)
 
     const outPath = path.join(docsComponentsRoot, `${dir.name}.md`)
     writeText(outPath, doc)
