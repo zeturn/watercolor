@@ -6,6 +6,25 @@ const readline = require('readline')
 const PACKAGE_CORE = '@zeturn/watercolor-core'
 const PACKAGE_REACT = '@zeturn/watercolor-react'
 const PACKAGE_VUE = '@zeturn/watercolor-vue'
+const ICON_PACKAGES = {
+  feather: '@zeturn/watercolor-icons-feather',
+  heroicons: {
+    react: '@zeturn/watercolor-icons-heroicons-react',
+    vue: '@zeturn/watercolor-icons-heroicons-vue'
+  },
+  lucide: {
+    react: '@zeturn/watercolor-icons-lucide-react',
+    vue: '@zeturn/watercolor-icons-lucide-vue'
+  },
+  phosphor: {
+    react: '@zeturn/watercolor-icons-phosphor-react',
+    vue: '@zeturn/watercolor-icons-phosphor-vue'
+  },
+  tabler: {
+    react: '@zeturn/watercolor-icons-tabler-react',
+    vue: '@zeturn/watercolor-icons-tabler-vue'
+  }
+}
 const ROOT_PACKAGE_NAME = 'watercolor-ui-root'
 
 function getPackageManager() {
@@ -43,11 +62,38 @@ function detectFramework(pkg) {
   return null
 }
 
+function detectIconPack(pkg) {
+  if (!pkg) return null
+  const deps = {
+    ...(pkg.dependencies || {}),
+    ...(pkg.devDependencies || {}),
+    ...(pkg.peerDependencies || {})
+  }
+
+  const detected = []
+  if (deps[ICON_PACKAGES.feather]) detected.push('feather')
+  if (deps[ICON_PACKAGES.heroicons.react] || deps[ICON_PACKAGES.heroicons.vue]) detected.push('heroicons')
+  if (deps[ICON_PACKAGES.lucide.react] || deps[ICON_PACKAGES.lucide.vue]) detected.push('lucide')
+  if (deps[ICON_PACKAGES.phosphor.react] || deps[ICON_PACKAGES.phosphor.vue]) detected.push('phosphor')
+  if (deps[ICON_PACKAGES.tabler.react] || deps[ICON_PACKAGES.tabler.vue]) detected.push('tabler')
+
+  if (detected.length === 1) return detected[0]
+  return null
+}
+
 function normalizeFramework(value) {
   if (!value) return null
   const normalized = String(value).trim().toLowerCase()
   if (['react', 'vue', 'both'].includes(normalized)) return normalized
   if (['skip', 'none', 'false', '0'].includes(normalized)) return 'skip'
+  return null
+}
+
+function normalizeIconPack(value) {
+  if (!value) return null
+  const normalized = String(value).trim().toLowerCase()
+  if (['feather', 'heroicons', 'lucide', 'phosphor', 'tabler'].includes(normalized)) return normalized
+  if (['skip', 'none', 'false', '0'].includes(normalized)) return 'none'
   return null
 }
 
@@ -64,6 +110,23 @@ function promptFramework() {
       rl.close()
       const choice = normalizeFramework(answer)
       resolve(choice || 'skip')
+    })
+  })
+}
+
+function promptIconPack() {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
+
+  const question = 'Select icon pack (none/feather/heroicons/lucide/phosphor/tabler): '
+
+  return new Promise(resolve => {
+    rl.question(question, answer => {
+      rl.close()
+      const choice = normalizeIconPack(answer)
+      resolve(choice || 'none')
     })
   })
 }
@@ -112,7 +175,32 @@ async function resolveFramework({ frameworkOverride, projectRoot, interactive })
   return await promptFramework()
 }
 
-async function runInstaller({ frameworkOverride, interactive } = {}) {
+async function resolveIconPack({ iconOverride, projectRoot, interactive }) {
+  const envChoice = normalizeIconPack(iconOverride || process.env.WATERCOLOR_UI_ICONS)
+  if (envChoice) return envChoice
+
+  const pkg = readPackageJson(projectRoot)
+  const detected = detectIconPack(pkg)
+
+  if (detected) return detected
+  if (!interactive) return 'none'
+  return await promptIconPack()
+}
+
+function resolveIconPackages(iconPack, framework) {
+  if (!iconPack || iconPack === 'none') return []
+  if (iconPack === 'feather') return [ICON_PACKAGES.feather]
+
+  const pack = ICON_PACKAGES[iconPack]
+  if (!pack) return []
+
+  if (framework === 'react') return [pack.react]
+  if (framework === 'vue') return [pack.vue]
+  if (framework === 'both') return [pack.react, pack.vue]
+  return []
+}
+
+async function runInstaller({ frameworkOverride, iconOverride, interactive } = {}) {
   if (process.env.WATERCOLOR_UI_SKIP_INSTALL === '1') return
 
   const projectRoot = process.env.INIT_CWD || process.cwd()
@@ -146,6 +234,14 @@ async function runInstaller({ frameworkOverride, interactive } = {}) {
   const packages = [PACKAGE_CORE]
   if (framework === 'react' || framework === 'both') packages.push(PACKAGE_REACT)
   if (framework === 'vue' || framework === 'both') packages.push(PACKAGE_VUE)
+
+  const iconPack = await resolveIconPack({
+    iconOverride: iconOverride || process.env.WATERCOLOR_UI_ICONS,
+    projectRoot,
+    interactive: isInteractive
+  })
+
+  packages.push(...resolveIconPackages(iconPack, framework))
 
   const ok = installPackages(projectRoot, packages)
   if (!ok) {
