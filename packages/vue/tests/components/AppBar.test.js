@@ -6,6 +6,8 @@ describe('AppBar (Vue)', () => {
   it('默认渲染', () => {
     const wrapper = mount(AppBar, { slots: { default: '内容' } })
     expect(wrapper.classes()).toContain('wc-appbar')
+    expect(wrapper.classes()).toContain('wc-appbar--fixed')
+    expect(wrapper.classes()).toContain('wc-appbar--default')
     expect(wrapper.text()).toBe('内容')
   })
 

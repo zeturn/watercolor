@@ -4,7 +4,7 @@ import './style.css'
 const AppBar = ({
   children,
   position = 'fixed',
-  color = 'primary',
+  color = 'default',
   elevation = 4,
   variant = 'elevation',
   className = '',

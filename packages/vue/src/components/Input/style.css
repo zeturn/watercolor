@@ -42,6 +42,23 @@
   --input-warning-color: #f59e0b;
 }
 
+/*
+  Hover 时希望“更深”而不是“更浅”。
+  在暗色主题里 --wc-bg-surface-hover 可能会更亮，因此对 Input 单独做 hover 颜色的暗化。
+  兼容性：不支持 color-mix 的浏览器继续使用上面的 token 作为 fallback。
+*/
+@supports (background-color: color-mix(in srgb, white, black)) {
+  :root {
+    --input-bg-hover: color-mix(in srgb, var(--input-bg) 92%, #000 8%);
+    --input-bg-error-hover: color-mix(in srgb, var(--input-bg-error) 92%, #000 8%);
+  }
+
+  .dark {
+    --input-bg-hover: color-mix(in srgb, var(--input-bg) 88%, #000 12%);
+    --input-bg-error-hover: color-mix(in srgb, var(--input-bg-error) 88%, #000 12%);
+  }
+}
+
 /* ========================================
    基础容器结构
    ======================================== */

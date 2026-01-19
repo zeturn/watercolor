@@ -15,8 +15,8 @@ const props = defineProps({
   },
   color: {
     type: String,
-    default: 'primary',
-    validator: (v) => ['primary', 'secondary', 'transparent', 'inherit'].includes(v)
+    default: 'default',
+    validator: (v) => ['default', 'primary', 'secondary', 'transparent', 'inherit'].includes(v)
   },
   elevation: {
     type: Number,

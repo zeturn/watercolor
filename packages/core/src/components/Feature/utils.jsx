@@ -223,12 +223,10 @@ export function handleCtaClick(e, onCtaClick) {
  */
 export function renderIcon(icon) {
   if (typeof icon === 'string') {
-    // 返回一个创建 span 元素的函数，而不是 JSX
-    return () => {
-      const span = document.createElement('span')
-      span.innerHTML = icon
-      return span
-    }
+    // In React, returning a function here would be treated as an invalid child.
+    // Keep this utility framework-agnostic: return the raw string and let the
+    // framework layer decide how to render HTML (e.g. React dangerouslySetInnerHTML).
+    return icon
   }
   return icon
 } 

@@ -14,7 +14,7 @@ describe('AppBar (React)', () => {
     expect(appBar).toBeInTheDocument()
     expect(appBar).toHaveClass('wc-appbar')
     expect(appBar).toHaveClass('wc-appbar--fixed')
-    expect(appBar).toHaveClass('wc-appbar--primary')
+    expect(appBar).toHaveClass('wc-appbar--default')
     expect(appBar).toHaveClass('wc-appbar--elevation-4')
     expect(appBar).toHaveClass('wc-appbar--elevation')
   })
@@ -120,7 +120,7 @@ describe('AppBar (React)', () => {
     // 检查必需的类名
     expect(classList).toContain('wc-appbar')
     expect(classList).toContain('wc-appbar--fixed')
-    expect(classList).toContain('wc-appbar--primary')
+    expect(classList).toContain('wc-appbar--default')
     expect(classList).toContain('wc-appbar--elevation-4')
     expect(classList).toContain('wc-appbar--elevation')
   })

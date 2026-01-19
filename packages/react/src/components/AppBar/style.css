@@ -6,6 +6,12 @@
   z-index: 50;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
+
+  /* Default spacing: keeps inner content away from edges */
+  --wc-appbar-padding-y: 10px;
+  --wc-appbar-padding-x: 16px;
+  padding: var(--wc-appbar-padding-y) var(--wc-appbar-padding-x);
 }
 
 .wc-appbar--fixed {
@@ -35,14 +41,20 @@
   position: relative;
 }
 
+.wc-appbar--default {
+  /* Normal state: opaque white (theme-aware via semantic tokens) */
+  background-color: var(--wc-bg-canvas);
+  color: var(--wc-text-primary);
+}
+
 .wc-appbar--primary {
-  background-color: transparent;
-  color: #ffffff;
+  background-color: var(--wc-bg-brand);
+  color: var(--wc-text-inverse);
 }
 
 .wc-appbar--secondary {
-  background-color: #f3f4f6; /* Tailwind's bg-neutral-100 */
-  color: #111827; /* Tailwind's text-neutral-900 */
+  background-color: var(--wc-bg-surface);
+  color: var(--wc-text-primary);
 }
 
 .wc-appbar--transparent {
@@ -55,7 +67,7 @@
 }
 
 .wc-appbar--outlined {
-  border-bottom: 1px solid #e5e7eb; /* Tailwind's border-neutral-200 */
+  border-bottom: 1px solid var(--wc-border-default);
 }
 
 .wc-appbar--elevation-0 {
@@ -87,4 +99,9 @@
 .wc-appbar--elevation-16,
 .wc-appbar--elevation-24 {
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* Ensure outlined variant stays "flat" even if elevation classes exist */
+.wc-appbar.wc-appbar--outlined {
+  box-shadow: none;
 }

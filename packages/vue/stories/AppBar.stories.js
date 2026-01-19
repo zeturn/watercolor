@@ -20,7 +20,7 @@ export const Navbar = {
       return { sampleItems }
     },
     template: `
-      <AppBarVue position="static" color="primary" style="padding:0 16px;">
+      <AppBarVue position="static" color="default">
         <div style="display: flex; gap: 16px;">
           <MenuVue trigger-text="菜单一" :items="sampleItems" />
           <MenuVue trigger-text="菜单二" :items="sampleItems" />

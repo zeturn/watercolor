@@ -60,7 +60,16 @@ const Feature = ({
     >
       {icon && (
         <div className={iconClasses}>
-          {renderIcon(icon)}
+          {typeof icon === 'string' ? (
+            <span
+              className="wc-feature-icon__inner"
+              // icon is developer-provided (emoji/svg/html string). Rendering as HTML
+              // keeps parity with Vue's v-html behavior.
+              dangerouslySetInnerHTML={{ __html: icon }}
+            />
+          ) : (
+            renderIcon(icon)
+          )}
         </div>
       )}
       <div className={contentClasses}>
