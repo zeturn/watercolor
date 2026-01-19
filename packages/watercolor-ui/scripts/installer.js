@@ -98,34 +98,64 @@ function normalizeIconPack(value) {
 }
 
 function promptFramework() {
+  console.log('[watercolor-ui] Available UI packages:')
+  console.log('  1) React (@zeturn/watercolor-react)')
+  console.log('  2) Vue (@zeturn/watercolor-vue)')
+  console.log('  3) Both (React + Vue)')
+  console.log('  4) Skip')
+
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   })
 
-  const question = 'Select framework to install (react/vue/both/skip): '
+  const question = 'Select UI package (1-4 or react/vue/both/skip): '
 
   return new Promise(resolve => {
     rl.question(question, answer => {
       rl.close()
-      const choice = normalizeFramework(answer)
+      const trimmed = String(answer || '').trim()
+      const mapped = {
+        '1': 'react',
+        '2': 'vue',
+        '3': 'both',
+        '4': 'skip'
+      }[trimmed]
+      const choice = normalizeFramework(mapped || trimmed)
       resolve(choice || 'skip')
     })
   })
 }
 
 function promptIconPack() {
+  console.log('[watercolor-ui] Available icon packages:')
+  console.log('  1) None')
+  console.log('  2) Feather')
+  console.log('  3) Heroicons')
+  console.log('  4) Lucide')
+  console.log('  5) Phosphor')
+  console.log('  6) Tabler')
+
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   })
 
-  const question = 'Select icon pack (none/feather/heroicons/lucide/phosphor/tabler): '
+  const question = 'Select icon pack (1-6 or none/feather/heroicons/lucide/phosphor/tabler): '
 
   return new Promise(resolve => {
     rl.question(question, answer => {
       rl.close()
-      const choice = normalizeIconPack(answer)
+      const trimmed = String(answer || '').trim()
+      const mapped = {
+        '1': 'none',
+        '2': 'feather',
+        '3': 'heroicons',
+        '4': 'lucide',
+        '5': 'phosphor',
+        '6': 'tabler'
+      }[trimmed]
+      const choice = normalizeIconPack(mapped || trimmed)
       resolve(choice || 'none')
     })
   })

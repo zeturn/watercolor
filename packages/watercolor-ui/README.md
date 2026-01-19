@@ -39,4 +39,5 @@ You can also run the installer manually:
 ```bash
 npx watercolor-ui --framework react
 npx watercolor-ui --icons lucide
+npx watercolor-ui
 ```
