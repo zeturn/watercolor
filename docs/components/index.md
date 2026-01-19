@@ -2,9 +2,9 @@
 title: Components
 ---
 
-# 组件列表
+# Components
 
-请从这里进入具体组件的使用文档。
+Browse the component documentation from this page.
 
 <!-- AUTO-GENERATED:COMPONENTS_LIST:START -->
 

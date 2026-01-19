@@ -17,6 +17,33 @@ const PREVIEW_END = '<!-- AUTO-GENERATED:PREVIEW:END -->'
 const SUMMARY_START = '<!-- AUTO-GENERATED:SUMMARY:START -->'
 const SUMMARY_END = '<!-- AUTO-GENERATED:SUMMARY:END -->'
 
+function stripSectionByMarkers(markdown, markerStart, markerEnd) {
+  const lines = markdown.split(/\r?\n/)
+  const startLineIndex = lines.findIndex((l) => l.includes(markerStart))
+  const endLineIndex = lines.findIndex((l) => l.includes(markerEnd))
+
+  if (startLineIndex === -1 || endLineIndex === -1 || endLineIndex < startLineIndex) {
+    return markdown
+  }
+
+  // If there is a heading immediately above the marker block, remove it too.
+  let removeStart = startLineIndex
+  let k = startLineIndex - 1
+  while (k >= 0 && lines[k].trim() === '') k--
+  if (k >= 0 && /^#{2,4}\s+/.test(lines[k].trim())) {
+    removeStart = k
+  }
+
+  let removeEnd = endLineIndex + 1
+  // Consume at most one blank line after the marker block.
+  if (removeEnd < lines.length && lines[removeEnd].trim() === '') {
+    removeEnd += 1
+  }
+
+  const kept = [...lines.slice(0, removeStart), ...lines.slice(removeEnd)]
+  return kept.join('\n')
+}
+
 function stripTrailingSlash(input) {
   return input.endsWith('/') ? input.slice(0, -1) : input
 }
@@ -134,11 +161,11 @@ function buildQuickSummaryBlock({ props, events, limit = 10 }) {
   if (!hasProps && !hasEvents) return ''
 
   const lines = []
-  lines.push('## 快速摘要')
+  lines.push('## Quick Summary')
   lines.push('')
   lines.push(SUMMARY_START)
   lines.push('')
-  lines.push('> 以下内容从组件 README 的表格自动抽取（可能只展示前几项）。')
+  lines.push('> Auto-extracted from the component README tables (may show only the first few rows).')
   lines.push('')
 
   if (hasProps) {
@@ -263,17 +290,17 @@ function buildStorybookPreviewBlock({ vueDocsId, reactDocsId }) {
   const blocks = []
 
   if (vueDocsId && vueBase) {
-    blocks.push(`\n<div class="wc-preview">\n  <div class="wc-preview__header">\n    <span class="wc-preview__title">Vue 预览</span>\n    <a class="wc-preview__link" href="${vueBase}/?path=/docs/${vueDocsId}" target="_blank" rel="noreferrer">在 Storybook 中打开</a>\n  </div>\n  <iframe class="wc-preview__frame" src="${vueBase}/iframe.html?id=${vueDocsId}&viewMode=docs" loading="lazy"></iframe>\n</div>\n`)
+    blocks.push(`\n<div class="wc-preview">\n  <div class="wc-preview__header">\n    <span class="wc-preview__title">Vue Preview</span>\n    <a class="wc-preview__link" href="${vueBase}/?path=/docs/${vueDocsId}" target="_blank" rel="noreferrer">Open in Storybook</a>\n  </div>\n  <iframe class="wc-preview__frame" src="${vueBase}/iframe.html?id=${vueDocsId}&viewMode=docs" loading="lazy"></iframe>\n</div>\n`)
   }
 
   if (reactDocsId && reactBase) {
-    blocks.push(`\n<div class="wc-preview">\n  <div class="wc-preview__header">\n    <span class="wc-preview__title">React 预览</span>\n    <a class="wc-preview__link" href="${reactBase}/?path=/docs/${reactDocsId}" target="_blank" rel="noreferrer">在 Storybook 中打开</a>\n  </div>\n  <iframe class="wc-preview__frame" src="${reactBase}/iframe.html?id=${reactDocsId}&viewMode=docs" loading="lazy"></iframe>\n</div>\n`)
+    blocks.push(`\n<div class="wc-preview">\n  <div class="wc-preview__header">\n    <span class="wc-preview__title">React Preview</span>\n    <a class="wc-preview__link" href="${reactBase}/?path=/docs/${reactDocsId}" target="_blank" rel="noreferrer">Open in Storybook</a>\n  </div>\n  <iframe class="wc-preview__frame" src="${reactBase}/iframe.html?id=${reactDocsId}&viewMode=docs" loading="lazy"></iframe>\n</div>\n`)
   }
 
   if (blocks.length === 0) return ''
 
   return [
-    '## 组件预览',
+    '## Component Preview',
     '',
     PREVIEW_START,
     ...blocks,
@@ -283,24 +310,112 @@ function buildStorybookPreviewBlock({ vueDocsId, reactDocsId }) {
 }
 
 function stripExistingPreview(markdown) {
-  const startIdx = markdown.indexOf(PREVIEW_START)
-  const endIdx = markdown.indexOf(PREVIEW_END)
-  if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) return markdown
-
-  // Remove the whole preview section, including the heading line if it is right above the marker.
-  const before = markdown.slice(0, startIdx)
-  const after = markdown.slice(endIdx + PREVIEW_END.length)
-  return `${before}${after}`
+  return stripSectionByMarkers(markdown, PREVIEW_START, PREVIEW_END)
 }
 
 function stripExistingSummary(markdown) {
-  const startIdx = markdown.indexOf(SUMMARY_START)
-  const endIdx = markdown.indexOf(SUMMARY_END)
-  if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) return markdown
+  return stripSectionByMarkers(markdown, SUMMARY_START, SUMMARY_END)
+}
 
-  const before = markdown.slice(0, startIdx)
-  const after = markdown.slice(endIdx + SUMMARY_END.length)
-  return `${before}${after}`
+function normalizeGeneratedDocsMarkdown(componentName, markdown) {
+  let out = markdown
+
+  // Fix common package references (old docs used watercolor-ui/* or @zeturn/watercolor).
+  out = out.replaceAll('`watercolor-ui/react`', '`@zeturn/watercolor-react`')
+  out = out.replaceAll('`watercolor-ui/vue`', '`@zeturn/watercolor-vue`')
+  out = out.replaceAll("'watercolor-ui/react'", "'@zeturn/watercolor-react'")
+  out = out.replaceAll('"watercolor-ui/react"', '"@zeturn/watercolor-react"')
+  out = out.replaceAll("'watercolor-ui/vue'", "'@zeturn/watercolor-vue'")
+  out = out.replaceAll('"watercolor-ui/vue"', '"@zeturn/watercolor-vue"')
+
+  // Replace legacy installer command with the actual framework packages.
+  out = out.replace(
+    /npm\s+(?:i|install)\s+watercolor-ui\b/g,
+    'npm i @zeturn/watercolor-react\n# or\nnpm i @zeturn/watercolor-vue',
+  )
+
+  // Small typo fixes that have leaked into docs.
+  out = out.replaceAll('Subiscting...', 'Submitting...')
+  out = out.replaceAll('"subisc"', '"submit"')
+  out = out.replaceAll("'subisc'", "'submit'")
+
+  // Code-fence aware normalization: map @zeturn/watercolor -> framework package
+  // and replace internal watercolor-ui/* imports with named imports.
+  const lines = out.split(/\r?\n/)
+  const result = []
+  let inFence = false
+  let fenceLang = ''
+  let frameworkHint = null
+
+  const inferFramework = (lang, hint) => {
+    const l = (lang || '').toLowerCase()
+    if (l.includes('vue')) return 'vue'
+    if (l.includes('tsx') || l.includes('jsx')) return 'react'
+    if (hint) return hint
+    return null
+  }
+
+  for (const line of lines) {
+    const headingMatch = line.match(/^###\s+(React|Vue\s*3|Vue)\b/i)
+    if (headingMatch) {
+      const t = headingMatch[1].toLowerCase()
+      frameworkHint = t.startsWith('react') ? 'react' : 'vue'
+    }
+
+    const fenceMatch = line.match(/^```\s*([A-Za-z0-9_-]+)?\s*$/)
+    if (fenceMatch) {
+      if (!inFence) {
+        inFence = true
+        fenceLang = fenceMatch[1] || ''
+      } else {
+        inFence = false
+        fenceLang = ''
+      }
+      result.push(line)
+      continue
+    }
+
+    if (!inFence) {
+      result.push(line)
+      continue
+    }
+
+    const framework = inferFramework(fenceLang, frameworkHint)
+    let updated = line
+
+    // Upgrade @zeturn/watercolor to the correct framework package.
+    if (framework === 'react') {
+      updated = updated.replaceAll("'@zeturn/watercolor'", "'@zeturn/watercolor-react'")
+      updated = updated.replaceAll('"@zeturn/watercolor"', '"@zeturn/watercolor-react"')
+    }
+    if (framework === 'vue') {
+      updated = updated.replaceAll("'@zeturn/watercolor'", "'@zeturn/watercolor-vue'")
+      updated = updated.replaceAll('"@zeturn/watercolor"', '"@zeturn/watercolor-vue"')
+    }
+
+    // Replace internal watercolor-ui path imports with named imports.
+    if (framework === 'react') {
+      updated = updated.replace(
+        /^\s*import\s+([A-Za-z0-9_$]+)\s+from\s+['"]watercolor-ui\/[^'"]+['"]\s*;?\s*$/,
+        "import { $1 } from '@zeturn/watercolor-react'",
+      )
+    }
+    if (framework === 'vue') {
+      updated = updated.replace(
+        /^\s*import\s+([A-Za-z0-9_$]+)\s+from\s+['"]watercolor-ui\/[^'"]+['"]\s*;?\s*$/,
+        "import { $1 } from '@zeturn/watercolor-vue'",
+      )
+    }
+
+    // Remove component-scoped internal style imports; docs should recommend importing the package style once.
+    if (/^\s*import\s+['"]watercolor-ui\/src\/components\/.+\/style\.css['"]\s*;?\s*$/.test(updated)) {
+      updated = ''
+    }
+
+    result.push(updated)
+  }
+
+  return result.join('\n')
 }
 
 function insertAfterFrontmatter(markdown, insertion) {
@@ -333,7 +448,7 @@ function insertAfterFrontmatter(markdown, insertion) {
 
 function buildComponentsListMarkdown(components) {
   if (components.length === 0) {
-    return '> 未发现任何组件 README（packages/*/src/components/**/README.md）。\n'
+    return '> No component READMEs found under `packages/*/src/components/**/README.md`.\n'
   }
 
   const lines = []
@@ -383,6 +498,8 @@ function main() {
 
     const raw = readText(readmePath)
     let doc = normalizeDocMarkdown(dir.name, raw)
+
+    doc = normalizeGeneratedDocsMarkdown(dir.name, doc)
 
     // Extract Props/Events quick summary from README tables
     const propsTable = extractMarkdownTableAfterHeading(raw, [
