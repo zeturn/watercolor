@@ -85,49 +85,119 @@ import '@zeturn/watercolor-react/style.css'
 
 Watercolor UI 使用 TypeScript 编写，自带类型定义文件，无需额外安装 `@types/...` 包。
 
-## 图标库（可选，推荐）
+## 图标库（可选，按需安装）
 
-`Icon` 组件支持多种图标库。为了避免“安装 UI 库就自动拉一堆图标依赖”，图标库已拆分为可选独立包：你只需要安装你用到的那一个（或几个）。
+⚠️ **重要说明**：从 v1.1.18 开始，图标库已从主包中移除，改为**完全可选**的依赖。这意味着：
+
+- ✅ 安装 `@zeturn/watercolor-react` 或 `@zeturn/watercolor-vue` **不会**自动下载任何图标包
+- ✅ 你只需要安装你实际使用的图标库
+- ✅ 如果不使用 `Icon` 组件，则无需安装任何图标库
+
+`Icon` 组件支持多种图标库。只需安装你需要的那一个（或几个）：
 
 ### React 项目可选安装
 
 ```bash
-# Lucide
-npm install @zeturn/watercolor-icons-lucide-react
+# Lucide（推荐）
+npm install lucide-react
 
 # Heroicons
-npm install @zeturn/watercolor-icons-heroicons-react
+npm install @heroicons/react
 
 # Tabler
-npm install @zeturn/watercolor-icons-tabler-react
+npm install @tabler/icons-react
 
 # Phosphor
-npm install @zeturn/watercolor-icons-phosphor-react
+npm install @phosphor-icons/react
 
-# Feather（输出 SVG 字符串，React/Vue 通用）
-npm install @zeturn/watercolor-icons-feather
+# 或使用 Watercolor 的预包装版本（版本锁定）
+npm install @zeturn/watercolor-icons-lucide-react
+npm install @zeturn/watercolor-icons-heroicons-react
+npm install @zeturn/watercolor-icons-tabler-react
+npm install @zeturn/watercolor-icons-phosphor-react
 ```
 
 ### Vue 项目可选安装
 
 ```bash
-# Lucide
-npm install @zeturn/watercolor-icons-lucide-vue
+# Lucide（推荐）
+npm install lucide-vue-next
 
 # Heroicons
-npm install @zeturn/watercolor-icons-heroicons-vue
+npm install @heroicons/vue
 
 # Tabler
-npm install @zeturn/watercolor-icons-tabler-vue
+npm install @tabler/icons-vue
 
 # Phosphor
-npm install @zeturn/watercolor-icons-phosphor-vue
+npm install @phosphor-icons/vue
 
-# Feather（输出 SVG 字符串，React/Vue 通用）
+# 或使用 Watercolor 的预包装版本（版本锁定）
+npm install @zeturn/watercolor-icons-lucide-vue
+npm install @zeturn/watercolor-icons-heroicons-vue
+npm install @zeturn/watercolor-icons-tabler-vue
+npm install @zeturn/watercolor-icons-phosphor-vue
+```
+
+### Feather Icons（React/Vue 通用）
+
+```bash
 npm install @zeturn/watercolor-icons-feather
 ```
 
-> 说明：如果你在 `Icon` 里选择了某个 `library`，但没有安装对应图标包，组件会回退到占位符渲染，并在控制台提示。
+> **提示**：如果你在 `Icon` 组件中使用了某个 `library`，但没有安装对应的图标包，组件会显示占位符并在控制台发出警告。
+
+### React 项目可选安装
+
+```bash
+# Lucide（推荐）
+npm install lucide-react
+
+# Heroicons
+npm install @heroicons/react
+
+# Tabler
+npm install @tabler/icons-react
+
+# Phosphor
+npm install @phosphor-icons/react
+
+# 或使用 Watercolor 的预包装版本（版本锁定）
+npm install @zeturn/watercolor-icons-lucide-react
+npm install @zeturn/watercolor-icons-heroicons-react
+npm install @zeturn/watercolor-icons-tabler-react
+npm install @zeturn/watercolor-icons-phosphor-react
+```
+
+### Vue 项目可选安装
+
+```bash
+# Lucide（推荐）
+npm install lucide-vue-next
+
+# Heroicons
+npm install @heroicons/vue
+
+# Tabler
+npm install @tabler/icons-vue
+
+# Phosphor
+npm install @phosphor-icons/vue
+
+# 或使用 Watercolor 的预包装版本（版本锁定）
+npm install @zeturn/watercolor-icons-lucide-vue
+npm install @zeturn/watercolor-icons-heroicons-vue
+npm install @zeturn/watercolor-icons-tabler-vue
+npm install @zeturn/watercolor-icons-phosphor-vue
+```
+
+### Feather Icons（React/Vue 通用）
+
+```bash
+npm install @zeturn/watercolor-icons-feather
+```
+
+> **提示**：如果你在 `Icon` 组件中使用了某个 `library`，但没有安装对应的图标包，组件会显示占位符并在控制台发出警告。
 
 ## 字体配置（推荐）
 

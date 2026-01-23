@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-vue",
-  "version": "1.1.40",
+  "version": "1.1.18",
   "type": "module",
   "main": "dist/watercolor-vue.umd.js",
   "module": "dist/watercolor-vue.es.js",
@@ -8,9 +8,9 @@
   "style": "dist/watercolor-vue.css",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
       "import": "./dist/watercolor-vue.es.js",
-      "require": "./dist/watercolor-vue.umd.js"
+      "require": "./dist/watercolor-vue.umd.js",
+      "types": "./dist/index.d.ts"
     },
     "./style.css": "./dist/watercolor-vue.css"
   },
@@ -27,22 +27,31 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/zeturn/watercolor",
-    "directory": "packages/vue"
-  },
   "peerDependencies": {
     "vue": "^3.0.0"
   },
+  "peerDependenciesMeta": {
+    "@heroicons/vue": {
+      "optional": true
+    },
+    "@phosphor-icons/vue": {
+      "optional": true
+    },
+    "@tabler/icons-vue": {
+      "optional": true
+    },
+    "lucide-vue-next": {
+      "optional": true
+    }
+  },
   "dependencies": {
-    "@zeturn/watercolor-core": "1.1.28"
+    "@zeturn/watercolor-core": "*"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.4",
-    "@vue/compiler-sfc": "^3.5.17",
-    "typescript": "^5.3.3",
-    "vite": "^5.4.12",
-    "vite-plugin-dts": "^4.5.4"
+     "@vitejs/plugin-vue": "^5.0.4",
+     "vite": "^5.4.12",
+     "vite-plugin-dts": "^4.5.4",
+     "typescript": "^5.3.3",
+     "@vue/compiler-sfc": "^3.5.17"
   }
 }

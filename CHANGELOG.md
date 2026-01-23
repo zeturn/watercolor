@@ -5,30 +5,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.35] - 2026-01-18
+## [1.1.18] - 2026-01-23
 
 ### Changed
-- Bump package version to 1.1.35
+- 🎯 **Breaking Change**: Icon libraries are now fully optional peer dependencies
+- ⚡ Installing `@zeturn/watercolor-react` or `@zeturn/watercolor-vue` no longer downloads all icon packages automatically
+- 📦 Reduced default installation size significantly
+- 🎨 Removed Tailwind CSS dependency - all styles now use native CSS
 
-## [1.1.34] - 2026-01-18
+### Fixed
+- 🔧 Fixed issue where users were forced to download all icon packages even when only needing one
+- 🔧 Icon libraries (`lucide-react`, `@heroicons/react`, `@tabler/icons-react`, `@phosphor-icons/react`) moved to `peerDependenciesMeta` with `optional: true` in React package
+- 🔧 Icon libraries (`lucide-vue-next`, `@heroicons/vue`, `@tabler/icons-vue`, `@phosphor-icons/vue`) moved to `peerDependenciesMeta` with `optional: true` in Vue package
+- 🔧 Removed `@apply` directives from Toolbar component to eliminate Tailwind CSS dependency
+- 🔧 Fixed compatibility issues with Tailwind CSS v4's stricter `@apply` parsing rules
+- 🔧 Watercolor UI is now completely framework-independent and doesn't require Tailwind CSS
 
-### Changed
-- Bump package version to 1.1.34
+### Documentation
+- 📝 Updated installation guide to clarify icon libraries are optional
+- 📝 Added clear instructions for installing only needed icon packages
+- 📝 Updated README with simplified icon installation examples
 
-## [1.1.33] - 2026-01-18
+### Migration Guide
+If you're upgrading from v1.1.17 or earlier and using icon components, you need to manually install the icon library you're using:
 
-### Changed
-- Bump package version to 1.1.33
+**React projects:**
+```bash
+npm install lucide-react  # if using Lucide
+npm install @heroicons/react  # if using Heroicons
+npm install @tabler/icons-react  # if using Tabler
+npm install @phosphor-icons/react  # if using Phosphor
+```
 
-## [1.1.32] - 2026-01-18
-
-### Changed
-- Bump package version to 1.1.32
-
-## [1.1.31] - 2026-01-18
-
-### Changed
-- Bump package version to 1.1.31
+**Vue projects:**
+```bash
+npm install lucide-vue-next  # if using Lucide
+npm install @heroicons/vue  # if using Heroicons
+npm install @tabler/icons-vue  # if using Tabler
+npm install @phosphor-icons/vue  # if using Phosphor
+```
 
 ## [1.1.17] - 2026-01-17
 

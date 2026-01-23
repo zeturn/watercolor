@@ -79,10 +79,17 @@ toggleDarkMode(true)
 
 The `Icon` component supports multiple icon libraries via optional packages:
 
-- React: `@zeturn/watercolor-icons-lucide-react`, `@zeturn/watercolor-icons-tabler-react`, `@zeturn/watercolor-icons-phosphor-react`
-- React: `@zeturn/watercolor-icons-lucide-react`, `@zeturn/watercolor-icons-heroicons-react`, `@zeturn/watercolor-icons-tabler-react`, `@zeturn/watercolor-icons-phosphor-react`
-- Vue: `@zeturn/watercolor-icons-lucide-vue`, `@zeturn/watercolor-icons-heroicons-vue`, `@zeturn/watercolor-icons-tabler-vue`, `@zeturn/watercolor-icons-phosphor-vue`
-- Feather (shared): `@zeturn/watercolor-icons-feather`
+**Install only what you need** — icon libraries are now fully optional peer dependencies (v1.1.18+):
+
+- React: `lucide-react`, `@heroicons/react`, `@tabler/icons-react`, `@phosphor-icons/react`
+- Vue: `lucide-vue-next`, `@heroicons/vue`, `@tabler/icons-vue`, `@phosphor-icons/vue`
+- Or use Watercolor's versioned packages: `@zeturn/watercolor-icons-*`
+
+**Example**:
+```bash
+npm install lucide-react  # React only
+npm install lucide-vue-next  # Vue only
+```
 
 ## 🤝 Contributing
 
