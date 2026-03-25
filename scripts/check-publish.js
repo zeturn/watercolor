@@ -53,16 +53,34 @@ if (missingFiles.length > 0) {
   process.exit(1)
 }
 
-// 检查package.json中的必要字段
-const packageJson = JSON.parse(fs.readFileSync(path.join(rootDir, 'package.json'), 'utf8'))
-const requiredFields = ['name', 'version', 'description', 'main', 'module', 'types', 'files']
+const packageChecks = [
+  {
+    name: 'packages/core/package.json',
+    fields: ['name', 'version', 'main', 'module', 'types', 'files', 'exports']
+  },
+  {
+    name: 'packages/react/package.json',
+    fields: ['name', 'version', 'main', 'module', 'types', 'style', 'files', 'exports']
+  },
+  {
+    name: 'packages/vue/package.json',
+    fields: ['name', 'version', 'main', 'module', 'types', 'style', 'files', 'exports']
+  },
+  {
+    name: 'packages/watercolor-ui/package.json',
+    fields: ['name', 'version', 'main', 'bin', 'files']
+  }
+]
 
-const missingFields = requiredFields.filter(field => !packageJson[field])
+for (const check of packageChecks) {
+  const packageJson = JSON.parse(fs.readFileSync(path.join(rootDir, check.name), 'utf8'))
+  const missingFields = check.fields.filter(field => !packageJson[field])
 
-if (missingFields.length > 0) {
-  console.error('❌ package.json缺少以下字段:')
-  missingFields.forEach(field => console.error(`  - ${field}`))
-  process.exit(1)
+  if (missingFields.length > 0) {
+    console.error(`❌ ${check.name} 缺少以下字段:`)
+    missingFields.forEach(field => console.error(`  - ${field}`))
+    process.exit(1)
+  }
 }
 
 // 检查文件大小
@@ -88,7 +106,7 @@ for (const file of distFiles) {
 }
 
 console.log('✅ 所有检查通过！')
-console.log('📦 准备发布到npm...')
+console.log('📦 准备发布到 npm workspaces...')
 console.log('')
 console.log('📋 发布清单:')
 console.log('  - 主文件: dist/watercolor-ui.umd.js')

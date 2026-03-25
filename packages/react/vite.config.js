@@ -7,11 +7,13 @@ export default defineConfig({
   plugins: [react(), dts({ insertTypesEntry: true })],
   build: {
     emptyOutDir: false,
+    assetsDir: '',
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'WatercolorReact',
       formats: ['es', 'umd'],
       fileName: (format) => `watercolor-react.${format}.js`,
+      cssFileName: 'watercolor-react',
     },
     rollupOptions: {
       external: [
@@ -30,10 +32,7 @@ export default defineConfig({
           'react-dom': 'ReactDOM',
         },
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') {
-            return 'watercolor-react.css'
-          }
-          return assetInfo.name
+          return '[name][extname]'
         },
       },
     },
@@ -43,5 +42,9 @@ export default defineConfig({
       '@': resolve(__dirname, 'src'),
       '@zeturn/watercolor-core/src': resolve(__dirname, '../core/src'),
     },
+  },
+  esbuild: {
+    jsx: 'automatic',
+    jsxImportSource: 'react',
   },
 }) 

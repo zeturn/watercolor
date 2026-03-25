@@ -7,11 +7,13 @@ export default defineConfig({
   plugins: [vue(), dts({ insertTypesEntry: true })],
   build: {
     emptyOutDir: false,
+    assetsDir: '',
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'WatercolorVue',
       formats: ['es', 'umd'],
       fileName: (format) => `watercolor-vue.${format}.js`,
+      cssFileName: 'watercolor-vue',
     },
     rollupOptions: {
       external: [
@@ -28,10 +30,7 @@ export default defineConfig({
           vue: 'Vue',
         },
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') {
-            return 'watercolor-vue.css'
-          }
-          return assetInfo.name
+          return '[name][extname]'
         },
       },
     },

@@ -4,7 +4,7 @@ Watercolor UI 提供了 Vue和 React 两个独立版本的包。请根据您的�
 
 ## 先决条件
 
-- **Node.js**: >= 16.0.0
+- **Node.js**: `20.19+` or `22.12+`
 - **包管理器**: npm, pnpm, 或 yarn
 
 ## Vue 3 项目

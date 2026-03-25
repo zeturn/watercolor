@@ -13,6 +13,10 @@ export interface ThemeManager {
   toggleDark: () => void
 }
 
+function getResolvedTheme () {
+  return themes.default
+}
+
 /**
  * 创建一个跨框架可复用的主题管理器
  * ─ 负责：
@@ -45,7 +49,7 @@ export function createThemeManager (
 
   // 首次应用（仅浏览器环境）
   if (isBrowser) {
-    const theme = themes[_color] ?? themes.default
+    const theme = getResolvedTheme()
     setTheme({
       primary: theme.primary,
       secondary: theme.secondary,
@@ -57,7 +61,7 @@ export function createThemeManager (
     if (c === _color) return
     _color = c
     if (isBrowser) {
-      const theme = themes[c] ?? themes.default
+      const theme = getResolvedTheme()
       setTheme({
         primary: theme.primary,
         secondary: theme.secondary,

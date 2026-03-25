@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-core",
-  "version": "1.1.42",
+  "version": "1.1.43",
   "type": "module",
   "main": "dist/core.umd.js",
   "module": "dist/core.es.js",
@@ -28,8 +28,8 @@
     "directory": "packages/core"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.6.0",
-    "vite": "^5.4.12",
+    "@vitejs/plugin-react": "^6.0.1",
+    "vite": "^8.0.2",
     "vite-plugin-dts": "^4.5.4",
     "typescript": "^5.3.3"
   }

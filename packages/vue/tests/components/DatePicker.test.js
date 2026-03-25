@@ -2,11 +2,14 @@ import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import DatePicker from '@/components/DatePicker/DatePicker.vue'
 
+const createLocalDate = (year, month, day, hours = 0, minutes = 0, seconds = 0) =>
+  new Date(year, month - 1, day, hours, minutes, seconds)
+
 describe('DatePicker 组件', () => {
   it('正确渲染日期选择器', () => {
     const wrapper = mount(DatePicker, {
       props: {
-        modelValue: new Date('2023-12-25')
+        modelValue: createLocalDate(2023, 12, 25)
       }
     })
     
@@ -15,7 +18,7 @@ describe('DatePicker 组件', () => {
   })
 
   it('显示选中的日期', () => {
-    const testDate = new Date('2023-12-25')
+    const testDate = createLocalDate(2023, 12, 25)
     
     const wrapper = mount(DatePicker, {
       props: {
@@ -28,7 +31,7 @@ describe('DatePicker 组件', () => {
   })
 
   it('支持不同的日期格式', () => {
-    const testDate = new Date('2023-12-25')
+    const testDate = createLocalDate(2023, 12, 25)
     
     const wrapper = mount(DatePicker, {
       props: {
@@ -44,7 +47,7 @@ describe('DatePicker 组件', () => {
     const wrapper = mount(DatePicker, {
       props: {
         mode: 'range',
-        modelValue: new Date('2023-12-20') // 实际组件只支持单个日期
+        modelValue: createLocalDate(2023, 12, 20) // 实际组件只支持单个日期
       }
     })
     
@@ -53,7 +56,7 @@ describe('DatePicker 组件', () => {
   })
 
   it('支持禁用特定日期', () => {
-    const disabledDates = [new Date('2023-12-25')]
+    const disabledDates = [createLocalDate(2023, 12, 25)]
     
     const wrapper = mount(DatePicker, {
       props: {
@@ -71,8 +74,8 @@ describe('DatePicker 组件', () => {
   })
 
   it('支持最小和最大日期限制', () => {
-    const minDate = new Date('2023-12-01')
-    const maxDate = new Date('2023-12-31')
+    const minDate = createLocalDate(2023, 12, 1)
+    const maxDate = createLocalDate(2023, 12, 31)
     
     const wrapper = mount(DatePicker, {
       props: {
@@ -105,7 +108,7 @@ describe('DatePicker 组件', () => {
     const wrapper = mount(DatePicker, {
       props: {
         showTime: true,
-        modelValue: new Date('2023-12-25 14:30:00')
+        modelValue: createLocalDate(2023, 12, 25, 14, 30, 0)
       }
     })
     
@@ -117,7 +120,7 @@ describe('DatePicker 组件', () => {
     const wrapper = mount(DatePicker, {
       props: {
         mode: 'month',
-        modelValue: new Date('2023-12-01')
+        modelValue: createLocalDate(2023, 12, 1)
       }
     })
     
@@ -129,7 +132,7 @@ describe('DatePicker 组件', () => {
     const wrapper = mount(DatePicker, {
       props: {
         mode: 'year',
-        modelValue: new Date('2023-01-01')
+        modelValue: createLocalDate(2023, 1, 1)
       }
     })
     
@@ -161,7 +164,7 @@ describe('DatePicker 组件', () => {
   it('支持清除功能', async () => {
     const wrapper = mount(DatePicker, {
       props: {
-        modelValue: new Date('2023-12-25'),
+        modelValue: createLocalDate(2023, 12, 25),
         clearable: true,
         'onUpdate:modelValue': (value) => wrapper.setProps({ modelValue: value })
       }
@@ -198,7 +201,7 @@ describe('DatePicker 组件', () => {
       }
     })
     
-    const testDate = new Date('2023-12-25')
+    const testDate = createLocalDate(2023, 12, 25)
     
     // 模拟选择日期
     wrapper.vm.selectDate({ date: testDate, month: 'current', day: 25 })

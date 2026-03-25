@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-icons-phosphor-react",
-  "version": "1.1.42",
+  "version": "1.1.43",
   "type": "module",
   "main": "dist/watercolor-icons-phosphor-react.umd.js",
   "module": "dist/watercolor-icons-phosphor-react.es.js",
@@ -19,7 +19,8 @@
     "build": "vite build"
   },
   "peerDependencies": {
-    "react": "^18.0.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10"
