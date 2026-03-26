@@ -4,7 +4,26 @@ title: Components
 
 # Components
 
-Browse the component documentation from this page.
+从这里进入每个组件的独立文档页。
+
+## 建议阅读方式
+
+如果你是第一次接入 Watercolor UI，建议按下面的顺序看：
+
+1. 先看 `Button`、`Card`、`Typography` 这些基础组件，快速建立视觉基线。
+2. 再看 `Input`、`Select`、`Modal`、`Table` 这些业务常用组件。
+3. 最后根据需要进入 `Icon`、`Watermark`、`TypingText`、`VideoPlayer` 这类增强组件。
+
+## 文档包含什么
+
+每个组件页都包含：
+
+- 组件适用场景
+- React / Vue 的导入方式
+- React / Vue 最小示例
+- 常见使用提示
+- Props / Events 摘要
+- 原始 README 的完整 API 与说明
 
 <!-- AUTO-GENERATED:COMPONENTS_LIST:START -->
 
