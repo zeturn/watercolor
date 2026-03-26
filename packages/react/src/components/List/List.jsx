@@ -19,6 +19,7 @@ const List = ({
   children,
   dense = false,
   disablePadding = false,
+  nav = false,
   subheader = '',
   className = '',
   ...rest
@@ -28,7 +29,7 @@ const List = ({
 
   return (
     <ListContext.Provider value={{ dense }}>
-      <div role="list" className={listClasses} {...rest}>
+      <div role={nav ? 'navigation' : 'list'} className={listClasses} {...rest}>
         {children}
       </div>
     </ListContext.Provider>

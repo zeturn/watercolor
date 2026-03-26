@@ -39,6 +39,23 @@ const StubIcon = {
   }
 }
 
+const ICON_PACKAGES = {
+  lucide: '@zeturn/watercolor-icons-lucide-vue',
+  heroicons: '@zeturn/watercolor-icons-heroicons-vue',
+  tabler: '@zeturn/watercolor-icons-tabler-vue',
+  phosphor: '@zeturn/watercolor-icons-phosphor-vue',
+  feather: '@zeturn/watercolor-icons-feather'
+}
+
+const loadIconPackage = async (library) => {
+  const packageName = ICON_PACKAGES[library]
+  if (!packageName) {
+    return null
+  }
+
+  return import(/* @vite-ignore */ packageName)
+}
+
 const props = defineProps({
   // Icon库和名称
   library: {
@@ -92,7 +109,7 @@ const iconComponent = computed(() => {
       case 'lucide':
         return defineAsyncComponent(async () => {
           try {
-            const module = await import('@zeturn/watercolor-icons-lucide-vue')
+            const module = await loadIconPackage('lucide')
             return module.getIcon?.(props.name) || StubIcon
           } catch (error) {
             console.warn('[Icon] Lucide 图标库加载失败，已使用占位符图标。', error)
@@ -103,7 +120,7 @@ const iconComponent = computed(() => {
       case 'heroicons':
         return defineAsyncComponent(async () => {
           try {
-            const module = await import('@zeturn/watercolor-icons-heroicons-vue')
+            const module = await loadIconPackage('heroicons')
             return module.getIcon?.(props.name, props.variant) || StubIcon
           } catch (error) {
             console.warn('[Icon] Heroicons 图标库加载失败，已使用占位符图标。', error)
@@ -114,7 +131,7 @@ const iconComponent = computed(() => {
       case 'tabler':
         return defineAsyncComponent(async () => {
           try {
-            const module = await import('@zeturn/watercolor-icons-tabler-vue')
+            const module = await loadIconPackage('tabler')
             return module.getIcon?.(props.name) || StubIcon
           } catch (error) {
             console.warn('[Icon] Tabler 图标库加载失败，已使用占位符图标。', error)
@@ -125,7 +142,7 @@ const iconComponent = computed(() => {
       case 'phosphor':
         return defineAsyncComponent(async () => {
           try {
-            const module = await import('@zeturn/watercolor-icons-phosphor-vue')
+            const module = await loadIconPackage('phosphor')
             return module.getIcon?.(props.name) || StubIcon
           } catch (error) {
             console.warn('[Icon] Phosphor 图标库加载失败，已使用占位符图标。', error)
@@ -157,7 +174,7 @@ watchEffect(async () => {
   if (props.library === 'feather' && props.name) {
     try {
       const sizeValue = getSizeValue(props.size)
-      const { getFeatherSvg } = await import('@zeturn/watercolor-icons-feather')
+      const { getFeatherSvg } = (await loadIconPackage('feather')) || {}
       featherIconHtml.value = await getFeatherSvg(props.name, {
         width: sizeValue,
         height: sizeValue,

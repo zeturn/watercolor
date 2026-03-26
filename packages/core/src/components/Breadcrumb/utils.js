@@ -3,7 +3,7 @@
 /**
  * 有效的Breadcrumb变体
  */
-export const validVariants = ['default']
+export const validVariants = ['default', 'minimal']
 
 /**
  * 验证Breadcrumb变体

@@ -16,15 +16,13 @@ export default defineConfig({
       cssFileName: 'watercolor-react',
     },
     rollupOptions: {
+      checks: {
+        pluginTimings: false,
+      },
       external: [
         'react',
         'react-dom',
         '@zeturn/watercolor-core',
-        '@zeturn/watercolor-icons-feather',
-        '@zeturn/watercolor-icons-lucide-react',
-        '@zeturn/watercolor-icons-tabler-react',
-        '@zeturn/watercolor-icons-phosphor-react',
-        '@zeturn/watercolor-icons-heroicons-react',
       ],
       output: {
         globals: {
@@ -42,9 +40,5 @@ export default defineConfig({
       '@': resolve(__dirname, 'src'),
       '@zeturn/watercolor-core/src': resolve(__dirname, '../core/src'),
     },
-  },
-  esbuild: {
-    jsx: 'automatic',
-    jsxImportSource: 'react',
   },
 }) 

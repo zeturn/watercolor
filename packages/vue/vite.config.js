@@ -16,14 +16,12 @@ export default defineConfig({
       cssFileName: 'watercolor-vue',
     },
     rollupOptions: {
+      checks: {
+        pluginTimings: false,
+      },
       external: [
         'vue',
         '@zeturn/watercolor-core',
-        '@zeturn/watercolor-icons-feather',
-        '@zeturn/watercolor-icons-lucide-vue',
-        '@zeturn/watercolor-icons-tabler-vue',
-        '@zeturn/watercolor-icons-phosphor-vue',
-        '@zeturn/watercolor-icons-heroicons-vue',
       ],
       output: {
         globals: {

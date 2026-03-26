@@ -13,10 +13,14 @@ export default defineConfig({
       fileName: (format) => `watercolor-icons-tabler-react.${format}.js`,
     },
     rollupOptions: {
+      checks: {
+        pluginTimings: false,
+      },
       external: ['react', '@tabler/icons-react'],
       output: {
         globals: {
           react: 'React',
+          '@tabler/icons-react': 'TablerIconsReact',
         },
       },
     },

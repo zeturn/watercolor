@@ -15,6 +15,11 @@ export default defineConfig({
       name: 'WatercolorCore',
       formats: ['es', 'umd'],
       fileName: (format) => `core.${format}.js`,
-    }
+    },
+    rollupOptions: {
+      checks: {
+        pluginTimings: false,
+      },
+    },
   }
 }) 

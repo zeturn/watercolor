@@ -10,6 +10,7 @@ export default function ColorPicker({
   disabled = false,
   className = ''
 }) {
+  const normalizedValue = value ?? ''
   const colorPickerClasses = getColorPickerClasses({
     size,
     shape,
@@ -17,7 +18,7 @@ export default function ColorPicker({
     className
   }).join(' ')
 
-  const previewStyles = getPreviewStyles(value)
+  const previewStyles = getPreviewStyles(normalizedValue)
 
   const handleInput = (e) => {
     handleColorChange(e, disabled, onChange)
@@ -27,7 +28,7 @@ export default function ColorPicker({
     <label className={colorPickerClasses}>
       <input
         type="color"
-        value={value}
+        value={normalizedValue}
         onChange={handleInput}
         disabled={disabled}
         className="wc-color-picker__input"

@@ -13,10 +13,14 @@ export default defineConfig({
       fileName: (format) => `watercolor-icons-lucide-vue.${format}.js`,
     },
     rollupOptions: {
+      checks: {
+        pluginTimings: false,
+      },
       external: ['vue', 'lucide-vue-next'],
       output: {
         globals: {
           vue: 'Vue',
+          'lucide-vue-next': 'LucideVueNext',
         },
       },
     },

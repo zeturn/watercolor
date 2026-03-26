@@ -13,10 +13,14 @@ export default defineConfig({
       fileName: (format) => `watercolor-icons-lucide-react.${format}.js`,
     },
     rollupOptions: {
+      checks: {
+        pluginTimings: false,
+      },
       external: ['react', 'lucide-react'],
       output: {
         globals: {
           react: 'React',
+          'lucide-react': 'LucideReact',
         },
       },
     },

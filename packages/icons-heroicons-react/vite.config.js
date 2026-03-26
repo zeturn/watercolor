@@ -13,10 +13,14 @@ export default defineConfig({
       fileName: (format) => `watercolor-icons-heroicons-react.${format}.js`,
     },
     rollupOptions: {
+      checks: {
+        pluginTimings: false,
+      },
       external: ['react', '@heroicons/react'],
       output: {
         globals: {
           react: 'React',
+          '@heroicons/react': 'HeroiconsReact',
         },
       },
     },

@@ -39,7 +39,7 @@ const props = defineProps({
     default: 0,
     validator: (value) => {
       const num = Number(value)
-      return !Number.isNaN(num) && num >= 0 && num <= 100
+      return !Number.isNaN(num)
     }
   },
   label: {

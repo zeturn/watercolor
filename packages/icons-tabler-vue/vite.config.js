@@ -13,10 +13,14 @@ export default defineConfig({
       fileName: (format) => `watercolor-icons-tabler-vue.${format}.js`,
     },
     rollupOptions: {
+      checks: {
+        pluginTimings: false,
+      },
       external: ['vue', '@tabler/icons-vue'],
       output: {
         globals: {
           vue: 'Vue',
+          '@tabler/icons-vue': 'TablerIconsVue',
         },
       },
     },

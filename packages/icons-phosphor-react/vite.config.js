@@ -13,10 +13,14 @@ export default defineConfig({
       fileName: (format) => `watercolor-icons-phosphor-react.${format}.js`,
     },
     rollupOptions: {
+      checks: {
+        pluginTimings: false,
+      },
       external: ['react', '@phosphor-icons/react'],
       output: {
         globals: {
           react: 'React',
+          '@phosphor-icons/react': 'PhosphorIconsReact',
         },
       },
     },

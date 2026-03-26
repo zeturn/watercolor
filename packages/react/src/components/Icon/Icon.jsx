@@ -2,13 +2,29 @@ import React, { useMemo, lazy, Suspense } from 'react'
 import PropTypes from 'prop-types'
 import './style.css'
 
-// AFTER the existing React imports, add a fallback stub icon and helper for safe lazy imports
 const StubIcon = ({ className, style }) => <span className={className} style={style} />
+
+const ICON_PACKAGES = {
+  lucide: '@zeturn/watercolor-icons-lucide-react',
+  heroicons: '@zeturn/watercolor-icons-heroicons-react',
+  tabler: '@zeturn/watercolor-icons-tabler-react',
+  phosphor: '@zeturn/watercolor-icons-phosphor-react',
+  feather: '@zeturn/watercolor-icons-feather',
+}
+
+const loadIconPackage = (library) => {
+  const packageName = ICON_PACKAGES[library]
+  if (!packageName) {
+    return Promise.resolve(null)
+  }
+
+  return import(/* @vite-ignore */ packageName)
+}
 
 const lazyWithFallback = (importer, resolveComponent) =>
   lazy(() =>
     importer()
-      .then((mod) => ({ default: resolveComponent(mod) }))
+      .then((mod) => ({ default: resolveComponent(mod || {}) }))
       .catch((err) => {
         console.warn('[Icon] 动态导入失败，已回退到占位符图标。', err)
         return { default: StubIcon }
@@ -20,25 +36,25 @@ const createIconComponent = (library, name, variant) => {
   switch (library) {
     case 'lucide':
       return lazyWithFallback(
-        () => import('@zeturn/watercolor-icons-lucide-react'),
+        () => loadIconPackage('lucide'),
         (module) => (module.getIcon?.(name)) || StubIcon
       )
 
     case 'heroicons':
       return lazyWithFallback(
-        () => import('@zeturn/watercolor-icons-heroicons-react'),
+        () => loadIconPackage('heroicons'),
         (module) => (module.getIcon?.(name, variant)) || StubIcon
       )
 
     case 'tabler':
       return lazyWithFallback(
-        () => import('@zeturn/watercolor-icons-tabler-react'),
+        () => loadIconPackage('tabler'),
         (module) => (module.getIcon?.(name)) || StubIcon
       )
 
     case 'phosphor':
       return lazyWithFallback(
-        () => import('@zeturn/watercolor-icons-phosphor-react'),
+        () => loadIconPackage('phosphor'),
         (module) => (module.getIcon?.(name)) || StubIcon
       )
 
@@ -92,7 +108,7 @@ const Icon = ({
       return lazy(async () => {
         try {
           const sizeValue = getSizeValue(size)
-          const { getFeatherSvg } = await import('@zeturn/watercolor-icons-feather')
+          const { getFeatherSvg } = (await loadIconPackage('feather')) || {}
           const iconSvg = await getFeatherSvg(name, {
             width: sizeValue,
             height: sizeValue,

@@ -13,7 +13,15 @@ export default defineConfig({
       fileName: (format) => `watercolor-icons-feather.${format}.js`,
     },
     rollupOptions: {
+      checks: {
+        pluginTimings: false,
+      },
       external: ['feather-icons'],
+      output: {
+        globals: {
+          'feather-icons': 'feather',
+        },
+      },
     },
   },
 })

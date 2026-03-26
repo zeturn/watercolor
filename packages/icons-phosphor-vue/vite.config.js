@@ -13,10 +13,14 @@ export default defineConfig({
       fileName: (format) => `watercolor-icons-phosphor-vue.${format}.js`,
     },
     rollupOptions: {
+      checks: {
+        pluginTimings: false,
+      },
       external: ['vue', '@phosphor-icons/vue'],
       output: {
         globals: {
           vue: 'Vue',
+          '@phosphor-icons/vue': 'PhosphorIconsVue',
         },
       },
     },

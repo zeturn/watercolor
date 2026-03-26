@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import Watermark from '@/components/Watermark/Watermark.jsx'
 
@@ -21,16 +21,19 @@ describe('Watermark (React)', () => {
 
   it('renders watermark when content is provided', async () => {
     render(<Watermark content="测试水印" />)
-    // 直接用 querySelector
-    const wm = document.querySelector('.wc-watermark')
-    expect(wm).toBeInTheDocument()
-    expect(wm.style.backgroundImage).toContain('mock-url')
+    await waitFor(() => {
+      const wm = document.querySelector('.wc-watermark')
+      expect(wm).toBeInTheDocument()
+      expect(wm.style.backgroundImage).toContain('mock-url')
+    })
   })
 
   it('renders watermark when image is provided', async () => {
     render(<Watermark image="test.png" />)
-    const wm = document.querySelector('.wc-watermark')
-    expect(wm).toBeInTheDocument()
+    await waitFor(() => {
+      const wm = document.querySelector('.wc-watermark')
+      expect(wm).toBeInTheDocument()
+    })
   })
 
   it('renders children only when no content/image', () => {
@@ -42,7 +45,9 @@ describe('Watermark (React)', () => {
   it('renders children with watermark', async () => {
     render(<Watermark content="abc"><span>child2</span></Watermark>)
     expect(screen.getByText('child2')).toBeInTheDocument()
-    const wm = document.querySelector('.wc-watermark')
-    expect(wm).toBeInTheDocument()
+    await waitFor(() => {
+      const wm = document.querySelector('.wc-watermark')
+      expect(wm).toBeInTheDocument()
+    })
   })
 })

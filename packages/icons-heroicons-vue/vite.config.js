@@ -13,10 +13,14 @@ export default defineConfig({
       fileName: (format) => `watercolor-icons-heroicons-vue.${format}.js`,
     },
     rollupOptions: {
+      checks: {
+        pluginTimings: false,
+      },
       external: ['vue', '@heroicons/vue'],
       output: {
         globals: {
           vue: 'Vue',
+          '@heroicons/vue': 'HeroiconsVue',
         },
       },
     },

@@ -9,7 +9,7 @@ export const validSizes = ['sm', 'md', 'lg']
 /**
  * 有效的Chip变体
  */
-export const validVariants = ['filled', 'outlined']
+export const validVariants = ['filled', 'outlined', 'text']
 
 /**
  * 有效的Chip颜色

@@ -74,5 +74,5 @@ export function isValidAlertType(type) {
  * @returns {boolean} 是否为有效变体
  */
 export function isValidAlertVariant(variant) {
-  return ['filled', 'outlined', 'standard'].includes(variant)
-} 
+  return ['filled', 'outlined', 'standard', 'minimal'].includes(variant)
+}
