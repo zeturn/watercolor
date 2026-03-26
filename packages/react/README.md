@@ -1,6 +1,6 @@
 # @zeturn/watercolor-react
 
-Watercolor UI components for React 18+. Built with TypeScript.
+Watercolor UI components for React 18 and 19. Built with TypeScript.
 
 ## Install
 

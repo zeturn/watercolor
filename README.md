@@ -4,7 +4,7 @@
 
 <img src="public/img/watercolorui.png" width="140" alt="Watercolor UI" />
 
-Modern, minimalist, watercolor-inspired UI components for **Vue 3** and **React 18+** — built with **TypeScript**.
+Modern, minimalist, watercolor-inspired UI components for **Vue 3.5+** and **React 18/19** — built with **TypeScript**.
 
 [![npm version](https://img.shields.io/npm/v/@zeturn/watercolor-vue?label=vue)](https://www.npmjs.com/package/@zeturn/watercolor-vue)
 [![npm version](https://img.shields.io/npm/v/@zeturn/watercolor-react?label=react)](https://www.npmjs.com/package/@zeturn/watercolor-react)
@@ -32,13 +32,13 @@ Modern, minimalist, watercolor-inspired UI components for **Vue 3** and **React 
 
 ### Install
 
-**Vue 3**
+**Vue 3.5+**
 
 ```bash
 npm install @zeturn/watercolor-vue
 ```
 
-**React 18+**
+**React 18 / 19**
 
 ```bash
 npm install @zeturn/watercolor-react

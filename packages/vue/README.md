@@ -1,6 +1,6 @@
 # @zeturn/watercolor-vue
 
-Watercolor UI components for Vue 3. Built with TypeScript.
+Watercolor UI components for Vue 3.5+. Built with TypeScript.
 
 ## Install
 

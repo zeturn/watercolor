@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-icons-lucide-vue",
-  "version": "1.1.43",
+  "version": "1.1.44",
   "type": "module",
   "main": "dist/watercolor-icons-lucide-vue.umd.js",
   "module": "dist/watercolor-icons-lucide-vue.es.js",
@@ -19,7 +19,7 @@
     "build": "vite build"
   },
   "peerDependencies": {
-    "vue": "^3.0.0"
+    "vue": "^3.5.0"
   },
   "dependencies": {
     "lucide-vue-next": "^0.525.0"

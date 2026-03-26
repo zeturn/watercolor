@@ -31,14 +31,10 @@
     "@chromatic-com/storybook": "^5.1.0",
     "@storybook/addon-docs": "10.3.3",
     "@storybook/addon-links": "10.3.3",
-    "@storybook/react-vite": "10.3.3",
     "@storybook/vue3-vite": "10.3.3",
     "@testing-library/jest-dom": "^6.1.5",
-    "@testing-library/react": "^16.3.0",
     "@testing-library/vue": "^8.0.1",
     "@types/node": "^20.10.6",
-    "@types/react": "^18.2.46",
-    "@types/react-dom": "^18.2.18",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
     "@vitejs/plugin-react": "^6.0.1",
@@ -57,8 +53,6 @@
     "fs-extra": "^11.2.0",
     "jsdom": "^23.2.0",
     "node-fetch": "^2.7.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "storybook": "10.3.3",
     "typescript": "^5.3.3",
     "vite": "^8.0.2",
@@ -67,6 +61,17 @@
     "vitest": "^3.2.4",
     "vitest-canvas-mock": "^0.3.3",
     "vue": "^3.5.17"
+  },
+  "overrides": {
+    "@docsearch/js": {
+      ".": "4.6.1",
+      "@docsearch/css": "4.6.1",
+      "@docsearch/react": "4.6.1"
+    },
+    "vitepress": {
+      "@docsearch/css": "4.6.1",
+      "@docsearch/js": "4.6.1"
+    }
   },
   "keywords": [
     "vue",
@@ -101,5 +106,5 @@
     "npm": ">=8.0.0"
   },
   "license": "ISC",
-  "version": "1.1.43"
+  "version": "1.1.44"
 }

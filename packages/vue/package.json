@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-vue",
-  "version": "1.1.43",
+  "version": "1.1.44",
   "type": "module",
   "main": "dist/watercolor-vue.umd.js",
   "module": "dist/watercolor-vue.es.js",
@@ -33,7 +33,7 @@
     "directory": "packages/vue"
   },
   "peerDependencies": {
-    "vue": "^3.0.0"
+    "vue": "^3.5.0"
   },
   "peerDependenciesMeta": {
     "@heroicons/vue": {

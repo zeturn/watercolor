@@ -71,8 +71,8 @@ import '@zeturn/watercolor-react/style.css'
 
 ## Peer Dependencies（重要）
 
-- `@zeturn/watercolor-vue` 需要 `vue@^3`
-- `@zeturn/watercolor-react` 需要 `react@^18`、`react-dom@^18`
+- `@zeturn/watercolor-vue` 需要 `vue@^3.5`
+- `@zeturn/watercolor-react` 需要 `react@^18 || ^19`、`react-dom@^18 || ^19`
 
 如果你的项目版本不匹配，可能出现类型错误或运行时异常。
 
