@@ -1,0 +1,20 @@
+{
+  "name": "project-docs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "docusaurus start --host 0.0.0.0",
+    "build": "docusaurus build",
+    "serve": "docusaurus serve"
+  },
+  "dependencies": {
+    "@docusaurus/core": "latest",
+    "@docusaurus/preset-classic": "latest",
+    "@mdx-js/react": "latest",
+    "clsx": "latest",
+    "prism-react-renderer": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {}
+}
