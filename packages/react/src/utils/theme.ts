@@ -349,6 +349,12 @@ export async function loadThemeConfig(configPath: string = '/theme.config.json')
       return
     }
 
+    const contentType = res.headers.get('content-type') || ''
+    if (!contentType.includes('application/json')) {
+      console.info('[Watercolor UI] theme.config.json not found, using default theme')
+      return
+    }
+
     const cfg: WatercolorTheme = await res.json()
     setTheme(cfg)
     
