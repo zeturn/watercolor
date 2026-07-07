@@ -101,3 +101,4 @@ update_hover.py
 .gitignore
 update_transition.py
 update_shadow.py
+update_input.py
