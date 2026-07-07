@@ -6,7 +6,7 @@
   gap: 8px;
   font-weight: 500;
   font-family: var(--wc-font-family);
-  transition: all 0.2s ease;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1); /* Faster for high-performance feel */
   cursor: pointer;
   outline: none;
   border: none;
@@ -18,6 +18,7 @@
   vertical-align: middle;
   background-color: transparent;
   border: none;
+  border-radius: var(--wc-radius-md, 8px);
 }
 
 /* Size variants */
@@ -152,54 +153,24 @@
   color: var(--wc-primary-300, #93c5fd);
 }
 
-.dark .wc-btn--style-default.wc-btn--primary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-primary-900, #1e3a8a);
-  color: var(--wc-primary-200, #bfdbfe);
-}
-
 .dark .wc-btn--style-default.wc-btn--secondary {
   color: var(--wc-secondary-300, #95de64);
-}
-
-.dark .wc-btn--style-default.wc-btn--secondary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-secondary-800, #374151);
-  color: var(--wc-secondary-200, #b7eb8f);
 }
 
 .dark .wc-btn--style-default.wc-btn--success {
   color: var(--wc-success-300, #86efac);
 }
 
-.dark .wc-btn--style-default.wc-btn--success:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-success-100, #14532d);
-  color: var(--wc-success-900, #bbf7d0);
-}
-
 .dark .wc-btn--style-default.wc-btn--warning {
   color: var(--wc-warning-300, #fcd34d);
-}
-
-.dark .wc-btn--style-default.wc-btn--warning:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-warning-100, #78350f);
-  color: var(--wc-warning-900, #fde68a);
 }
 
 .dark .wc-btn--style-default.wc-btn--error {
   color: var(--wc-error-300, #fca5a5);
 }
 
-.dark .wc-btn--style-default.wc-btn--error:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-error-200, #7f1d1d);
-  color: var(--wc-error-900, #fecaca);
-}
-
 .dark .wc-btn--style-default.wc-btn--info {
   color: var(--wc-info-300, #7dd3fc);
-}
-
-.dark .wc-btn--style-default.wc-btn--info:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-info-900, #0c4a6e);
-  color: var(--wc-info-200, #bae6fd);
 }
 
 /* Outlined Style - 暗色模式 */
@@ -208,21 +179,9 @@
   color: var(--wc-primary-300, #93c5fd);
 }
 
-.dark .wc-btn--style-outlined.wc-btn--primary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-primary-900, #1e3a8a);
-  border-color: var(--wc-primary-300, #93c5fd);
-  color: var(--wc-primary-200, #bfdbfe);
-}
-
 .dark .wc-btn--style-outlined.wc-btn--secondary {
   border-color: var(--wc-secondary-400, #73d13d);
   color: var(--wc-secondary-300, #95de64);
-}
-
-.dark .wc-btn--style-outlined.wc-btn--secondary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-secondary-800, #374151);
-  border-color: var(--wc-secondary-300, #95de64);
-  color: var(--wc-secondary-200, #b7eb8f);
 }
 
 .dark .wc-btn--style-outlined.wc-btn--success {
@@ -230,21 +189,9 @@
   color: var(--wc-success-300, #86efac);
 }
 
-.dark .wc-btn--style-outlined.wc-btn--success:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-success-900, #14532d);
-  border-color: var(--wc-success-300, #86efac);
-  color: var(--wc-success-200, #bbf7d0);
-}
-
 .dark .wc-btn--style-outlined.wc-btn--warning {
   border-color: var(--wc-warning-400, #fbbf24);
   color: var(--wc-warning-300, #fcd34d);
-}
-
-.dark .wc-btn--style-outlined.wc-btn--warning:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-warning-900, #78350f);
-  border-color: var(--wc-warning-300, #fcd34d);
-  color: var(--wc-warning-200, #fde68a);
 }
 
 .dark .wc-btn--style-outlined.wc-btn--error {
@@ -252,21 +199,9 @@
   color: var(--wc-error-300, #fca5a5);
 }
 
-.dark .wc-btn--style-outlined.wc-btn--error:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-error-900, #7f1d1d);
-  border-color: var(--wc-error-300, #fca5a5);
-  color: var(--wc-error-200, #fecaca);
-}
-
 .dark .wc-btn--style-outlined.wc-btn--info {
   border-color: var(--wc-info-400, #38bdf8);
   color: var(--wc-info-300, #7dd3fc);
-}
-
-.dark .wc-btn--style-outlined.wc-btn--info:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-info-900, #0c4a6e);
-  border-color: var(--wc-info-300, #7dd3fc);
-  color: var(--wc-info-200, #bae6fd);
 }
 
 /* Filled Style - 暗色模式 */
@@ -275,17 +210,9 @@
   color: var(--wc-neutral-0, #b3b3b3);
 }
 
-.dark .wc-btn--style-filled.wc-btn--primary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-primary-500, #3b82f6);
-}
-
 .dark .wc-btn--style-filled.wc-btn--secondary {
   background-color: var(--wc-secondary-600, #389e0d);
   color: var(--wc-neutral-0, #ffffff);
-}
-
-.dark .wc-btn--style-filled.wc-btn--secondary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-secondary-500, #52c41a);
 }
 
 .dark .wc-btn--style-filled.wc-btn--success {
@@ -293,17 +220,9 @@
   color: var(--wc-neutral-0, #ffffff);
 }
 
-.dark .wc-btn--style-filled.wc-btn--success:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-success-500, #22c55e);
-}
-
 .dark .wc-btn--style-filled.wc-btn--warning {
   background-color: var(--wc-warning-600, #d97706);
   color: var(--wc-neutral-0, #ffffff);
-}
-
-.dark .wc-btn--style-filled.wc-btn--warning:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-warning-500, #f59e0b);
 }
 
 .dark .wc-btn--style-filled.wc-btn--error {
@@ -311,17 +230,9 @@
   color: var(--wc-neutral-0, #ffffff);
 }
 
-.dark .wc-btn--style-filled.wc-btn--error:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-error-500, #ef4444);
-}
-
 .dark .wc-btn--style-filled.wc-btn--info {
   background-color: var(--wc-info-600, #0284c7);
   color: var(--wc-neutral-0, #ffffff);
-}
-
-.dark .wc-btn--style-filled.wc-btn--info:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-info-500, #0ea5e9);
 }
 
 .dark .wc-btn--style-filled.wc-btn--purple {
@@ -329,17 +240,9 @@
   color: var(--wc-neutral-0, #ffffff);
 }
 
-.dark .wc-btn--style-filled.wc-btn--purple:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-purple-500, #8b5cf6);
-}
-
 .dark .wc-btn--style-filled.wc-btn--orange {
   background-color: var(--wc-orange-600, #ea580c);
   color: var(--wc-neutral-0, #ffffff);
-}
-
-.dark .wc-btn--style-filled.wc-btn--orange:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-orange-500, #f97316);
 }
 
 .dark .wc-btn--style-filled.wc-btn--cyan {
@@ -347,103 +250,56 @@
   color: var(--wc-neutral-0, #ffffff);
 }
 
-.dark .wc-btn--style-filled.wc-btn--cyan:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-cyan-500, #06b6d4);
-}
-
 .dark .wc-btn--style-filled.wc-btn--pink {
   background-color: var(--wc-pink-600, #db2777);
   color: var(--wc-neutral-0, #ffffff);
-}
-
-.dark .wc-btn--style-filled.wc-btn--pink:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-pink-500, #ec4899);
 }
 
 /* 样式模式 - Default: watercolor风格，只有彩色的字，没有背景，hover时才有浅色的背景，没有边框 */
 .wc-btn--style-default {
   background-color: transparent;
   border: none;
+  border-radius: var(--wc-radius-md, 8px);
 }
 
 .wc-btn--style-default.wc-btn--primary {
   color: var(--wc-primary-500, #3b82f6);
 }
 
-.wc-btn--style-default.wc-btn--primary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-primary-50, #eff6ff);
-}
-
 .wc-btn--style-default.wc-btn--secondary {
   color: var(--wc-neutral-500, #6b7280);
-}
-
-.wc-btn--style-default.wc-btn--secondary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-neutral-50, #f9fafb);
 }
 
 .wc-btn--style-default.wc-btn--success {
   color: var(--wc-success-500, #10b981);
 }
 
-.wc-btn--style-default.wc-btn--success:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-success-50, #ecfdf5);
-}
-
 .wc-btn--style-default.wc-btn--warning {
   color: var(--wc-warning-500, #f59e0b);
-}
-
-.wc-btn--style-default.wc-btn--warning:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-warning-50, #fffbeb);
 }
 
 .wc-btn--style-default.wc-btn--error {
   color: var(--wc-error-500, #ef4444);
 }
 
-.wc-btn--style-default.wc-btn--error:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-error-50, #fef2f2);
-}
-
 .wc-btn--style-default.wc-btn--info {
   color: var(--wc-info-500, #06b6d4);
-}
-
-.wc-btn--style-default.wc-btn--info:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-info-50, #ecfeff);
 }
 
 .wc-btn--style-default.wc-btn--purple {
   color: var(--wc-purple-500, #8b5cf6);
 }
 
-.wc-btn--style-default.wc-btn--purple:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-purple-50, #faf5ff);
-}
-
 .wc-btn--style-default.wc-btn--orange {
   color: var(--wc-orange-500, #f97316);
-}
-
-.wc-btn--style-default.wc-btn--orange:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-orange-50, #fff7ed);
 }
 
 .wc-btn--style-default.wc-btn--cyan {
   color: var(--wc-cyan-500, #06b6d4);
 }
 
-.wc-btn--style-default.wc-btn--cyan:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-cyan-50, #ecfeff);
-}
-
 .wc-btn--style-default.wc-btn--pink {
   color: var(--wc-pink-500, #ec4899);
-}
-
-.wc-btn--style-default.wc-btn--pink:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-pink-50, #fdf2f8);
 }
 
 /* 样式模式 - Outlined: watercolor风格，只有彩色的字，没有背景，hover时才有浅色的背景，有边框 */
@@ -457,17 +313,9 @@
   border-color: var(--wc-primary-500, #3b82f6);
 }
 
-.wc-btn--style-outlined.wc-btn--primary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-primary-50, #eff6ff);
-}
-
 .wc-btn--style-outlined.wc-btn--secondary {
   color: var(--wc-neutral-500, #6b7280);
   border-color: var(--wc-neutral-500, #6b7280);
-}
-
-.wc-btn--style-outlined.wc-btn--secondary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-neutral-50, #f9fafb);
 }
 
 .wc-btn--style-outlined.wc-btn--success {
@@ -475,17 +323,9 @@
   border-color: var(--wc-success-500, #10b981);
 }
 
-.wc-btn--style-outlined.wc-btn--success:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-success-50, #ecfdf5);
-}
-
 .wc-btn--style-outlined.wc-btn--warning {
   color: var(--wc-warning-500, #f59e0b);
   border-color: var(--wc-warning-500, #f59e0b);
-}
-
-.wc-btn--style-outlined.wc-btn--warning:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-warning-50, #fffbeb);
 }
 
 .wc-btn--style-outlined.wc-btn--error {
@@ -493,17 +333,9 @@
   border-color: var(--wc-error-500, #ef4444);
 }
 
-.wc-btn--style-outlined.wc-btn--error:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-error-50, #fef2f2);
-}
-
 .wc-btn--style-outlined.wc-btn--info {
   color: var(--wc-info-500, #06b6d4);
   border-color: var(--wc-info-500, #06b6d4);
-}
-
-.wc-btn--style-outlined.wc-btn--info:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-info-50, #ecfeff);
 }
 
 .wc-btn--style-outlined.wc-btn--purple {
@@ -511,17 +343,9 @@
   border-color: var(--wc-purple-500, #8b5cf6);
 }
 
-.wc-btn--style-outlined.wc-btn--purple:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-purple-50, #faf5ff);
-}
-
 .wc-btn--style-outlined.wc-btn--orange {
   color: var(--wc-orange-500, #f97316);
   border-color: var(--wc-orange-500, #f97316);
-}
-
-.wc-btn--style-outlined.wc-btn--orange:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-orange-50, #fff7ed);
 }
 
 .wc-btn--style-outlined.wc-btn--cyan {
@@ -529,17 +353,9 @@
   border-color: var(--wc-cyan-500, #06b6d4);
 }
 
-.wc-btn--style-outlined.wc-btn--cyan:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-cyan-50, #ecfeff);
-}
-
 .wc-btn--style-outlined.wc-btn--pink {
   color: var(--wc-pink-500, #ec4899);
   border-color: var(--wc-pink-500, #ec4899);
-}
-
-.wc-btn--style-outlined.wc-btn--pink:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-pink-50, #fdf2f8);
 }
 
 /* 样式模式 - Filled: 只有白色的字，彩色填充背景，hover时有更深色的背景 */
@@ -549,18 +365,10 @@
   border: none;
 }
 
-.wc-btn--style-filled.wc-btn--primary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-primary-600, #2563eb);
-}
-
 .wc-btn--style-filled.wc-btn--secondary {
   background-color: var(--wc-neutral-500, #6b7280);
   color: white;
   border: none;
-}
-
-.wc-btn--style-filled.wc-btn--secondary:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-neutral-600, #4b5563);
 }
 
 .wc-btn--style-filled.wc-btn--success {
@@ -569,18 +377,10 @@
   border: none;
 }
 
-.wc-btn--style-filled.wc-btn--success:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-success-600, #059669);
-}
-
 .wc-btn--style-filled.wc-btn--warning {
   background-color: var(--wc-warning-500, #f59e0b);
   color: white;
   border: none;
-}
-
-.wc-btn--style-filled.wc-btn--warning:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-warning-600, #d97706);
 }
 
 .wc-btn--style-filled.wc-btn--error {
@@ -589,18 +389,10 @@
   border: none;
 }
 
-.wc-btn--style-filled.wc-btn--error:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-error-600, #dc2626);
-}
-
 .wc-btn--style-filled.wc-btn--info {
   background-color: var(--wc-info-500, #06b6d4);
   color: white;
   border: none;
-}
-
-.wc-btn--style-filled.wc-btn--info:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-info-600, #0891b2);
 }
 
 .wc-btn--style-filled.wc-btn--purple {
@@ -609,18 +401,10 @@
   border: none;
 }
 
-.wc-btn--style-filled.wc-btn--purple:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-purple-600, #7c3aed);
-}
-
 .wc-btn--style-filled.wc-btn--orange {
   background-color: var(--wc-orange-500, #f97316);
   color: white;
   border: none;
-}
-
-.wc-btn--style-filled.wc-btn--orange:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-orange-600, #ea580c);
 }
 
 .wc-btn--style-filled.wc-btn--cyan {
@@ -629,28 +413,16 @@
   border: none;
 }
 
-.wc-btn--style-filled.wc-btn--cyan:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-cyan-600, #0891b2);
-}
-
 .wc-btn--style-filled.wc-btn--pink {
   background-color: var(--wc-pink-500, #ec4899);
   color: white;
   border: none;
 }
 
-.wc-btn--style-filled.wc-btn--pink:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-pink-600, #db2777);
-}
-
 .wc-btn--style-filled.wc-btn--filled {
   background-color: var(--wc-neutral-500, #1f2937);
   color: white;
   border: none;
-}
-
-.wc-btn--style-filled.wc-btn--filled:hover:not(.wc-btn--disabled) {
-  background-color: var(--wc-neutral-900, #111827);
 }
 
 /* ===== FAB (Floating Action Button) Styles ===== */
@@ -666,7 +438,7 @@
   font-weight: 500;
   text-decoration: none;
   outline: none;
-  transition: all 0.2s ease;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1); /* Faster for high-performance feel */
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
   overflow: hidden;
 }
@@ -857,7 +629,7 @@
   font-family: var(--wc-font-family);
   border-radius: 50%;
   outline: none;
-  transition: all 0.2s ease;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1); /* Faster for high-performance feel */
   overflow: hidden;
 }
 
@@ -1035,3 +807,43 @@
     color: #4b5563 !important;
   }
 } 
+
+/* Global Button Hover State */
+/* 1. Filled buttons get lighter */
+.wc-btn--style-filled:hover:not(.wc-btn--disabled) {
+  filter: brightness(1.15);
+}
+.wc-btn--style-filled:active:not(.wc-btn--disabled) {
+  filter: brightness(0.95);
+}
+
+/* 2. Transparent background buttons (Default, Outlined) get a light gray background */
+.wc-btn--style-default:hover:not(.wc-btn--disabled),
+.wc-btn--style-outlined:hover:not(.wc-btn--disabled) {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+.wc-btn--style-default:active:not(.wc-btn--disabled),
+.wc-btn--style-outlined:active:not(.wc-btn--disabled) {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+/* Dark mode variations for transparent buttons */
+.dark .wc-btn--style-default:hover:not(.wc-btn--disabled),
+.dark .wc-btn--style-outlined:hover:not(.wc-btn--disabled) {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.dark .wc-btn--style-default:active:not(.wc-btn--disabled),
+.dark .wc-btn--style-outlined:active:not(.wc-btn--disabled) {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* 微弱的实体感 */
+.wc-btn--style-filled {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+.wc-btn--style-outlined {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+.dark .wc-btn--style-filled {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}

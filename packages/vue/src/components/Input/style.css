@@ -8,8 +8,8 @@
    ======================================== */
 :root {
   /* 输入框基础变量 */
-  --input-bg: var(--wc-bg-surface);
-  --input-bg-hover: var(--wc-bg-surface-hover);
+  --input-bg: #ffffff;
+  --input-bg-hover: #ffffff;
   --input-bg-disabled: var(--wc-bg-surface);
   --input-bg-error: var(--wc-error-50, #fef2f2);
   --input-bg-error-hover: var(--wc-error-100, #fee2e2);
@@ -73,7 +73,7 @@
   display: flex;
   align-items: center;
   background-color: var(--input-bg);
-  border-radius: var(--wc-radius-2xl);
+  border-radius: var(--wc-radius-md, 8px);
   transition: var(--input-transition);
 }
 
@@ -111,16 +111,19 @@
    ======================================== */
 .wc-input {
   width: 100%;
-  border: none;
-  border-radius: var(--wc-radius-2xl);
+  border: 1px solid var(--wc-border-base, #d1d5db);
+  border-radius: var(--wc-radius-md, 8px);
   background-color: var(--input-bg);
   color: var(--input-text-primary);
   font-size: 0.875rem;
   font-family: var(--wc-font-family);
   line-height: 1.5;
-  transition: var(--input-transition);
-  box-shadow: var(--input-shadow);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
   outline: none;
+}
+.dark .wc-input {
+  background-color: var(--wc-bg-surface-dark, #1f2937);
+  border-color: var(--wc-border-base-dark, #4b5563);
 }
 
 .wc-input::placeholder {
@@ -128,8 +131,9 @@
 }
 
 .wc-input:focus {
-  background-color: var(--input-bg-hover);
-  box-shadow: var(--input-shadow-focus);
+  background-color: var(--input-bg);
+  border-color: var(--wc-primary-500, #3b82f6);
+  box-shadow: 0 0 0 1px var(--wc-primary-500, #3b82f6);
 }
 
 /* ========================================
@@ -394,7 +398,7 @@ textarea.wc-input {
   border: none;
   background: transparent;
   cursor: pointer;
-  border-radius: var(--wc-radius-2xl);
+  border-radius: var(--wc-radius-md, 8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -479,7 +483,7 @@ textarea.wc-input {
   background-color: var(--input-bg);
   color: var(--input-text-primary);
   border: 1px solid var(--wc-border-color);
-  border-radius: var(--wc-radius-2xl);
+  border-radius: var(--wc-radius-md, 8px);
   outline: none;
   transition: var(--input-transition);
 }
