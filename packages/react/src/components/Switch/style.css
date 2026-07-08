@@ -5,21 +5,21 @@
   /* Track */
   --wc-switch-track-width: 44px;
   --wc-switch-track-height: 24px;
-  --wc-switch-track-bg: var(--wc-neutral-300);
-  --wc-switch-track-checked: var(--wc-primary-500);
+  --wc-switch-track-bg: var(--wc-neutral-200, #e5e7eb);
+  --wc-switch-track-checked: var(--wc-neutral-900, #111827);
   --wc-switch-track-radius: 12px;
   
   /* Thumb */
   --wc-switch-thumb-size: 20px;
   --wc-switch-thumb-bg: var(--wc-neutral-0);
-  --wc-switch-thumb-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --wc-switch-thumb-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   --wc-switch-thumb-offset: 2px;
   
   /* Focus */
   --wc-switch-focus-shadow: 0 0 0 3px rgba(var(--wc-primary-500-rgb), 0.2);
   
   /* Transitions */
-  --wc-switch-transition: all 0.2s ease;
+  --wc-switch-transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
   
   /* Colors */
   --wc-switch-disabled-opacity: 0.5;
@@ -28,7 +28,7 @@
 /* Dark Mode Variables */
 .dark {
   --wc-switch-track-bg: var(--wc-neutral-600);
-  --wc-switch-track-checked: var(--wc-primary-400);
+  --wc-switch-track-checked: var(--wc-neutral-100, #f3f4f6);
   --wc-switch-thumb-bg: var(--wc-neutral-100);
 }
 
@@ -69,7 +69,7 @@
 
 /* Color Variants */
 .wc-switch--primary {
-  --wc-switch-track-checked: var(--wc-primary-500);
+  --wc-switch-track-checked: var(--wc-neutral-900, #111827);
 }
 
 .wc-switch--secondary {
@@ -564,3 +564,30 @@
 .wc-switch--material .wc-switch__input:checked + .wc-switch__track .wc-switch__thumb {
   background: var(--wc-primary-500);
 } 
+/* Extended Color Variants */
+.wc-switch__input:checked + .wc-switch__track .wc-switch__thumb {
+  background: var(--wc-switch-thumb-checked, var(--wc-switch-thumb-bg));
+}
+
+.wc-switch--color-dark { --wc-switch-track-checked: #18181b; --wc-switch-thumb-checked: #ffffff; }
+.wc-switch--color-zinc { --wc-switch-track-checked: #71717a; --wc-switch-thumb-checked: #ffffff; }
+.wc-switch--color-white { --wc-switch-track-checked: #ffffff; --wc-switch-thumb-checked: #18181b; }
+.wc-switch--color-white .wc-switch__input:checked + .wc-switch__track { box-shadow: inset 0 0 0 1px #e5e7eb; }
+
+.wc-switch--color-red { --wc-switch-track-checked: #ef4444; --wc-switch-thumb-checked: #ffffff; }
+.wc-switch--color-orange { --wc-switch-track-checked: #f97316; --wc-switch-thumb-checked: #ffffff; }
+.wc-switch--color-amber { --wc-switch-track-checked: #f59e0b; --wc-switch-thumb-checked: #451a03; }
+.wc-switch--color-yellow { --wc-switch-track-checked: #eab308; --wc-switch-thumb-checked: #422006; }
+.wc-switch--color-lime { --wc-switch-track-checked: #84cc16; --wc-switch-thumb-checked: #1a2e05; }
+.wc-switch--color-green { --wc-switch-track-checked: #22c55e; --wc-switch-thumb-checked: #ffffff; }
+.wc-switch--color-emerald { --wc-switch-track-checked: #10b981; --wc-switch-thumb-checked: #ffffff; }
+.wc-switch--color-teal { --wc-switch-track-checked: #14b8a6; --wc-switch-thumb-checked: #ffffff; }
+.wc-switch--color-cyan { --wc-switch-track-checked: #06b6d4; --wc-switch-thumb-checked: #083344; }
+.wc-switch--color-sky { --wc-switch-track-checked: #0ea5e9; --wc-switch-thumb-checked: #ffffff; }
+.wc-switch--color-blue { --wc-switch-track-checked: #3b82f6; --wc-switch-thumb-checked: #ffffff; }
+.wc-switch--color-indigo { --wc-switch-track-checked: #6366f1; --wc-switch-thumb-checked: #ffffff; }
+.wc-switch--color-violet { --wc-switch-track-checked: #8b5cf6; --wc-switch-thumb-checked: #ffffff; }
+.wc-switch--color-purple { --wc-switch-track-checked: #a855f7; --wc-switch-thumb-checked: #ffffff; }
+.wc-switch--color-fuchsia { --wc-switch-track-checked: #d946ef; --wc-switch-thumb-checked: #ffffff; }
+.wc-switch--color-pink { --wc-switch-track-checked: #ec4899; --wc-switch-thumb-checked: #ffffff; }
+.wc-switch--color-rose { --wc-switch-track-checked: #f43f5e; --wc-switch-thumb-checked: #ffffff; }
