@@ -93,12 +93,3 @@ note/
 # build
 storybook-static-react/
 storybook-static/
-update_select.py
-demo.html
-update_pagination.py
-update_switch.py
-.gitignore
-update_switch_colors.py
-update_demo_colors.py
-update_switch_hover.py
-remove_old_hover.py
