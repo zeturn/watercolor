@@ -27,7 +27,7 @@
   --wc-select-radius-dropdown: var(--wc-radius-md, 8px);
 
   /* 动画 */
-  --wc-select-transition: all 0.2s ease;
+  --wc-select-transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ====== Main Select Container ====== */
