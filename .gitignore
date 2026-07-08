@@ -93,3 +93,5 @@ note/
 # build
 storybook-static-react/
 storybook-static/
+update_select.py
+demo.html
