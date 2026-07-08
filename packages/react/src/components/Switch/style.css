@@ -311,18 +311,7 @@
   border-width: 2px;
 }
 
-/* ====== Hover Effects ====== */
-.wc-switch:not(.wc-switch--disabled):hover .wc-switch__track {
-  background: var(--wc-neutral-400);
-}
-
-.wc-switch:not(.wc-switch--disabled):hover .wc-switch__input:checked + .wc-switch__track {
-  background: var(--wc-primary-600);
-}
-
-.wc-switch:not(.wc-switch--disabled):hover .wc-switch__thumb {
-  box-shadow: var(--wc-switch-thumb-shadow), 0 0 0 4px rgba(var(--wc-primary-500-rgb), 0.1);
-}
+/* ====== Hover Effects Removed ====== */
 
 /* ====== Active Effects ====== */
 .wc-switch:not(.wc-switch--disabled):active .wc-switch__thumb {
@@ -591,3 +580,11 @@
 .wc-switch--color-fuchsia { --wc-switch-track-checked: #d946ef; --wc-switch-thumb-checked: #ffffff; }
 .wc-switch--color-pink { --wc-switch-track-checked: #ec4899; --wc-switch-thumb-checked: #ffffff; }
 .wc-switch--color-rose { --wc-switch-track-checked: #f43f5e; --wc-switch-thumb-checked: #ffffff; }
+
+/* Hover state for Switch Track */
+.wc-switch:hover .wc-switch__input:not(:checked) + .wc-switch__track {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+.wc-switch:hover .wc-switch__input:checked + .wc-switch__track {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
