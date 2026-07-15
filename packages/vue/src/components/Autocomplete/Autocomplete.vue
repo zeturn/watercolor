@@ -27,6 +27,11 @@
         :readonly="readonly"
         class="wc-autocomplete__input"
         autocomplete="off"
+        role="combobox"
+        aria-autocomplete="list"
+        :aria-expanded="open"
+        :aria-controls="`${autocompleteId}-options`"
+        :aria-activedescendant="highlightedIndex >= 0 ? `${autocompleteId}-option-${highlightedIndex}` : undefined"
         @focus="handleFocus"
         @blur="handleBlur"
         @input="handleInput"
@@ -62,12 +67,17 @@
     <div
       v-if="open && filteredOptions.length > 0"
       class="wc-autocomplete__dropdown"
+      :id="`${autocompleteId}-options`"
+      role="listbox"
     >
       <div class="wc-autocomplete__options">
         <div
           v-for="(option, index) in filteredOptions"
           :key="getOptionValue(option)"
+          :id="`${autocompleteId}-option-${index}`"
           :class="getOptionClasses(option, index)"
+          role="option"
+          :aria-selected="isSelected(option)"
           @click="selectOption(option)"
           @mouseenter="highlightedIndex = index"
         >
@@ -92,6 +102,7 @@
     <div
       v-if="open && searchQuery && filteredOptions.length === 0"
       class="wc-autocomplete__dropdown"
+      role="status"
     >
       <div class="wc-autocomplete__no-options">
         <slot name="no-options">
@@ -166,7 +177,7 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: 'outlined',
+    default: 'filled',
     validator: (value) => ['outlined', 'filled', 'standard'].includes(value)
   },
   multiple: {

@@ -1,0 +1,132 @@
+.wc-interaction-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: clamp(32px, 6vw, 80px) clamp(20px, 6vw, 88px);
+  color: var(--wc-text-primary);
+  background: var(--wc-surface-canvas);
+}
+
+.wc-interaction-shell {
+  width: min(980px, 100%);
+  margin: 0 auto;
+}
+
+.wc-interaction-intro {
+  max-width: 640px;
+  margin-bottom: clamp(52px, 8vw, 88px);
+}
+
+.wc-interaction-eyebrow,
+.wc-interaction-label {
+  color: var(--wc-text-tertiary);
+  font-size: var(--wc-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.wc-interaction-eyebrow {
+  margin: 0 0 14px;
+  color: var(--wc-accent);
+}
+
+.wc-interaction-title {
+  margin: 0 0 16px;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 560;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+}
+
+.wc-interaction-description {
+  margin: 0;
+  color: var(--wc-text-secondary);
+  font-size: var(--wc-font-size-lg);
+  line-height: 1.65;
+}
+
+.wc-interaction-section {
+  margin-top: 56px;
+}
+
+.wc-interaction-section-title {
+  margin: 0 0 22px;
+  font-size: var(--wc-font-size-sm);
+  font-weight: 600;
+}
+
+.wc-interaction-states {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 28px 20px;
+}
+
+.wc-interaction-state {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.wc-interaction-control {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+}
+
+.wc-interaction-force-hover.wc-btn,
+.wc-interaction-force-hover.wc-icon-button,
+.wc-interaction-force-hover.list-item,
+.wc-interaction-force-hover.wc-menu__button {
+  background: var(--wc-action-hover);
+}
+
+.wc-interaction-force-focus.wc-btn,
+.wc-interaction-force-focus.wc-icon-button,
+.wc-interaction-force-focus.list-item,
+.wc-interaction-force-focus.wc-menu__button {
+  outline: 2px solid var(--wc-focus-ring);
+  outline-offset: 2px;
+}
+
+.wc-interaction-example {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
+  gap: clamp(40px, 8vw, 96px);
+  align-items: start;
+}
+
+.wc-interaction-list {
+  max-width: 520px;
+}
+
+.wc-interaction-list .list-item {
+  min-height: 56px;
+  padding: 8px 12px;
+}
+
+.wc-interaction-list .list-item-icon {
+  margin-right: 12px;
+}
+
+.wc-interaction-menu-area {
+  min-height: 260px;
+}
+
+.wc-interaction-note {
+  margin: 0 0 14px;
+  color: var(--wc-text-tertiary);
+  font-size: var(--wc-font-size-xs);
+  line-height: 1.5;
+}
+
+@media (max-width: 760px) {
+  .wc-interaction-states {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+  }
+
+  .wc-interaction-example {
+    grid-template-columns: 1fr;
+  }
+}

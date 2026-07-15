@@ -1,5 +1,10 @@
 <template>
-  <div :class="cardClasses">
+  <div
+    :class="cardClasses"
+    :role="attrs.onClick ? 'button' : undefined"
+    :tabindex="attrs.onClick ? 0 : undefined"
+    @keydown="handleKeydown"
+  >
     <div
       v-if="title || $slots.header"
       class="wc-card-header"
@@ -28,7 +33,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, useAttrs } from 'vue'
 import { getCardClasses } from './utils.js'
 import { validVariants, validColors, validSizes } from './utils.js'
 import './style.css'
@@ -40,7 +45,7 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: 'filled',
+    default: 'minimal',
     validator: (value) => validVariants.includes(value)
   },
   color: {
@@ -55,7 +60,7 @@ const props = defineProps({
   },
   interactive: {
     type: Boolean,
-    default: true
+    default: false
   },
   noBorder: {
     type: Boolean,
@@ -67,7 +72,16 @@ const props = defineProps({
   }
 })
 
+const attrs = useAttrs()
+const isInteractive = computed(() => props.interactive || Boolean(attrs.onClick))
+
 const cardClasses = computed(() => 
-  getCardClasses(props.className, props.variant, props.color, props.size, props.interactive, props.noBorder)
+  getCardClasses(props.className, props.variant, props.color, props.size, isInteractive.value, props.noBorder)
 )
-</script> 
+
+const handleKeydown = (event) => {
+  if (!attrs.onClick || !['Enter', ' '].includes(event.key)) return
+  event.preventDefault()
+  attrs.onClick(event)
+}
+</script>

@@ -98,6 +98,8 @@ export const getMenuItemClasses = (item) => {
   const classes = ['wc-menu__item']
   if (item.divider) classes.push('wc-menu__divider')
   if (item.disabled) classes.push('wc-menu__item--disabled')
+  if (item.selected) classes.push('wc-menu__item--selected')
+  if (item.danger) classes.push('wc-menu__item--danger')
   return classes
 }
 
@@ -180,7 +182,7 @@ export function getMenuPositionStyles(placement) {
     position: 'absolute',
     zIndex: 1000
   }
-  
+
   switch (placement) {
     case 'bottom-start':
       styles.top = '100%'
@@ -218,7 +220,7 @@ export function getMenuPositionStyles(placement) {
       styles.left = 0
       styles.marginTop = '4px'
   }
-  
+
   return styles
 }
 
@@ -246,7 +248,7 @@ export function processMenuItems(items) {
  */
 export function handleKeyNavigation(event, items, activeIndex, setActiveIndex, onSelect, onClose) {
   const { key } = event
-  
+
   switch (key) {
     case 'ArrowDown':
       event.preventDefault()
@@ -271,4 +273,4 @@ export function handleKeyNavigation(event, items, activeIndex, setActiveIndex, o
       onClose && onClose()
       break
   }
-} 
+}

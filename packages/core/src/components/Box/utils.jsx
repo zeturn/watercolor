@@ -3,20 +3,20 @@
 /**
  * 间距映射表
  */
-export const spacingMap = { 
-  0: '0', 
-  1: '0.25rem', 
-  2: '0.5rem', 
-  3: '0.75rem', 
-  4: '1rem', 
-  5: '1.25rem', 
-  6: '1.5rem', 
-  8: '2rem', 
-  10: '2.5rem', 
-  12: '3rem', 
-  16: '4rem', 
-  20: '5rem', 
-  24: '6rem' 
+export const spacingMap = {
+  0: '0',
+  1: '0.25rem',
+  2: '0.5rem',
+  3: '0.75rem',
+  4: '1rem',
+  5: '1.25rem',
+  6: '1.5rem',
+  8: '2rem',
+  10: '2.5rem',
+  12: '3rem',
+  16: '4rem',
+  20: '5rem',
+  24: '6rem'
 }
 
 /**
@@ -88,30 +88,30 @@ export function sizeVal(value) {
  * @returns {Array<string>} CSS类名数组
  */
 export function getBoxClasses(props) {
-  const classes = []
-  
+  const classes = ['wc-box']
+
   // Display classes
   if (props.display && displayMap[props.display]) {
     classes.push(displayMap[props.display])
   }
-  
+
   // Flexbox classes
   if (props.flexDirection && directionMap[props.flexDirection]) {
     classes.push(directionMap[props.flexDirection])
   }
-  
+
   if (props.justifyContent && justifyMap[props.justifyContent]) {
     classes.push(justifyMap[props.justifyContent])
   }
-  
+
   if (props.alignItems && alignMap[props.alignItems]) {
     classes.push(alignMap[props.alignItems])
   }
-  
+
   if (props.flexWrap && wrapMap[props.flexWrap]) {
     classes.push(wrapMap[props.flexWrap])
   }
-  
+
   // Gap classes
   if (props.gap !== undefined) {
     const gapValue = props.gap.toString()
@@ -119,7 +119,7 @@ export function getBoxClasses(props) {
       classes.push(`gap-${gapValue}`)
     }
   }
-  
+
   return classes
 }
 
@@ -130,7 +130,7 @@ export function getBoxClasses(props) {
  */
 export function getBoxStyles(props) {
   const styles = {}
-  
+
   // Spacing
   if (props.p !== undefined) styles.padding = spacingMap[props.p] || sizeVal(props.p)
   if (props.pt !== undefined) styles.paddingTop = spacingMap[props.pt] || sizeVal(props.pt)
@@ -147,7 +147,7 @@ export function getBoxStyles(props) {
     styles.paddingTop = value
     styles.paddingBottom = value
   }
-  
+
   if (props.m !== undefined) styles.margin = spacingMap[props.m] || sizeVal(props.m)
   if (props.mt !== undefined) styles.marginTop = spacingMap[props.mt] || sizeVal(props.mt)
   if (props.mr !== undefined) styles.marginRight = spacingMap[props.mr] || sizeVal(props.mr)
@@ -163,7 +163,7 @@ export function getBoxStyles(props) {
     styles.marginTop = value
     styles.marginBottom = value
   }
-  
+
   // Layout
   if (props.display) styles.display = props.display
   if (props.flexDirection) styles.flexDirection = props.flexDirection
@@ -171,17 +171,17 @@ export function getBoxStyles(props) {
   if (props.alignItems) styles.alignItems = props.alignItems
   if (props.flexWrap) styles.flexWrap = props.flexWrap
   if (props.gap !== undefined) styles.gap = sizeVal(props.gap)
-  
+
   // Color & border
   if (props.bgcolor) styles.backgroundColor = props.bgcolor
   if (props.color) styles.color = props.color
   if (props.border) styles.border = props.border
   if (props.borderRadius !== undefined) {
-    styles.borderRadius = typeof props.borderRadius === 'number' 
-      ? `${props.borderRadius}px` 
+    styles.borderRadius = typeof props.borderRadius === 'number'
+      ? `${props.borderRadius}px`
       : props.borderRadius
   }
-  
+
   // Size
   if (props.width !== undefined) styles.width = sizeVal(props.width)
   if (props.height !== undefined) styles.height = sizeVal(props.height)
@@ -189,6 +189,6 @@ export function getBoxStyles(props) {
   if (props.minHeight !== undefined) styles.minHeight = sizeVal(props.minHeight)
   if (props.maxWidth !== undefined) styles.maxWidth = sizeVal(props.maxWidth)
   if (props.maxHeight !== undefined) styles.maxHeight = sizeVal(props.maxHeight)
-  
+
   return styles
-} 
+}

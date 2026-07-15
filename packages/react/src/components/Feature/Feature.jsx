@@ -19,6 +19,7 @@ const Feature = ({
   size = 'md',
   align = 'left',
   background = 'default',
+  variant = 'default',
   bgColor = '',
   reverse = false,
   vertical = false,
@@ -52,14 +53,27 @@ const Feature = ({
     ...style
   }
 
+  const iconDimension = typeof iconSize === 'number' ? `${iconSize}px` : iconSize
+  const interactiveProps = onClick ? {
+    role: 'button',
+    tabIndex: 0,
+    onKeyDown: (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault()
+        onClick(event)
+      }
+    }
+  } : {}
+
   return (
-    <div 
-      className={`${cardClasses} ${isDarkMode ? 'dark' : ''}`} 
+    <div
+      className={`${cardClasses} ${variant !== 'default' ? `wc-feature-card--${variant}` : ''}`}
       style={cardStyles}
       onClick={(e) => handleFeatureClick(e, false, onClick)}
+      {...interactiveProps}
     >
       {icon && (
-        <div className={iconClasses}>
+        <div className={iconClasses} style={{ width: iconDimension, height: iconDimension }}>
           {typeof icon === 'string' ? (
             <span
               className="wc-feature-icon__inner"
@@ -93,4 +107,4 @@ const Feature = ({
 
 Feature.displayName = 'Feature'
 
-export default Feature 
+export default Feature

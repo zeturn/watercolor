@@ -25,6 +25,11 @@ export default defineConfig({
         'react/jsx-runtime',
         'react/jsx-dev-runtime',
         '@zeturn/watercolor-core',
+        '@zeturn/watercolor-icons-feather',
+        '@zeturn/watercolor-icons-heroicons-react',
+        '@zeturn/watercolor-icons-lucide-react',
+        '@zeturn/watercolor-icons-phosphor-react',
+        '@zeturn/watercolor-icons-tabler-react',
       ],
       output: {
         globals: {

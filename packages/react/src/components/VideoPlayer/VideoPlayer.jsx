@@ -82,14 +82,14 @@ const VideoPlayer = ({
         onEnded={() => setPlaying(false)}
       />
       <div className="controls">
-        <button className="ctrl-btn" onClick={togglePlay}>{playing ? '❚❚' : '▶️'}</button>
-        <div className="progress" onClick={seek}>
+        <button className="ctrl-btn" aria-label={playing ? '暂停' : '播放'} onClick={togglePlay}>{playing ? '❚❚' : '▶️'}</button>
+        <div className="progress" role="slider" tabIndex={0} aria-label="播放进度" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100} onClick={seek}>
           <div className="progress-bar" style={{ width: `${progress}%` }} />
         </div>
         <span className="time">{formattedCurrent} / {formattedDuration}</span>
-        <button className="ctrl-btn" onClick={toggleMute}>{muted ? '🔇' : '🔊'}</button>
+        <button className="ctrl-btn" aria-label={muted ? '取消静音' : '静音'} onClick={toggleMute}>{muted ? '🔇' : '🔊'}</button>
         <input className="volume" type="range" min="0" max="1" step="0.05" value={volume} onChange={(e)=>setVolume(Number(e.target.value))} />
-        <button className="ctrl-btn" onClick={handleFullscreen}>⛶</button>
+        <button className="ctrl-btn" aria-label="全屏" onClick={handleFullscreen}>⛶</button>
       </div>
     </div>
   )

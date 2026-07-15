@@ -1,197 +1,116 @@
-/* Alert 组件样式 */
 .wc-alert {
+  --wc-alert-tone: var(--wc-text-info);
+  --wc-alert-tint: var(--wc-bg-info-subtle);
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  padding: 16px;
-  border-radius: var(--wc-radius-2xl);
+  padding: 14px 16px;
+  border-radius: var(--wc-radius-xl);
+  background: var(--wc-surface-subtle);
+  color: var(--wc-text-primary);
   font-family: var(--wc-font-family);
-  position: relative;
+}
+
+.wc-alert--success {
+  --wc-alert-tone: var(--wc-text-success);
+  --wc-alert-tint: var(--wc-bg-success-subtle);
+}
+
+.wc-alert--warning {
+  --wc-alert-tone: var(--wc-text-warning);
+  --wc-alert-tint: var(--wc-bg-warning-subtle);
+}
+
+.wc-alert--error {
+  --wc-alert-tone: var(--wc-text-error);
+  --wc-alert-tint: var(--wc-bg-error-subtle);
+}
+
+.wc-alert--filled {
+  background: var(--wc-alert-tint);
+}
+
+.wc-alert--outlined {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--wc-border-subtle);
+}
+
+.wc-alert--minimal {
+  padding-inline: 0;
+  background: transparent;
 }
 
 .wc-alert-icon {
-  flex-shrink: 0;
+  display: inline-flex;
   width: 20px;
   height: 20px;
-  display: flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  font-size: var(--wc-font-size-sm);
-  font-weight: var(--wc-font-weight-bold);
-  border-radius: 50%;
+  color: var(--wc-alert-tone);
+}
+
+.wc-alert-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
 }
 
 .wc-alert-content {
-  flex: 1;
   min-width: 0;
+  flex: 1;
 }
 
 .wc-alert-title {
-  font-weight: var(--wc-font-weight-medium);
-  font-size: var(--wc-font-size-md);
-  margin-bottom: 4px;
-  line-height: 1.4;
+  margin-bottom: 3px;
+  color: var(--wc-text-primary);
+  font-size: var(--wc-font-size-sm);
+  font-weight: var(--wc-font-weight-semibold);
+  line-height: 1.45;
 }
 
 .wc-alert-message {
+  color: var(--wc-text-secondary);
   font-size: var(--wc-font-size-sm);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .wc-alert-close {
-  flex-shrink: 0;
-  background: none;
-  border: none;
-  font-size: var(--wc-font-size-lg);
-  cursor: pointer;
-  padding: 0;
-  width: 20px;
-  height: 20px;
-  display: flex;
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  border-radius: var(--wc-radius-2xl);
-  transition: all 0.2s ease;
+  margin: -4px -6px -4px 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--wc-radius-lg);
+  background: transparent;
+  color: var(--wc-text-secondary);
+  cursor: pointer;
 }
 
 .wc-alert-close:hover {
-  background-color: var(--wc-bg-surface-hover);
+  background: var(--wc-action-hover);
+  color: var(--wc-text-primary);
 }
 
-/* Success Alert */
-.wc-alert--success.wc-alert--filled {
-  background-color: var(--wc-bg-success-subtle);
-  color: var(--wc-text-success);
-  border: 1px solid var(--wc-border-success);
+.wc-alert-close:focus-visible {
+  outline: 0;
+  box-shadow: var(--wc-focus-ring);
 }
 
-.wc-alert--success.wc-alert--filled .wc-alert-icon {
-  background-color: var(--wc-bg-success);
-  color: var(--wc-neutral-0);
+.wc-alert-close svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 2;
 }
-
-.wc-alert--success.wc-alert--outlined {
-  background-color: transparent;
-  color: var(--wc-text-success);
-  border: 1px solid var(--wc-border-success);
-}
-
-.wc-alert--success.wc-alert--outlined .wc-alert-icon {
-  color: var(--wc-text-success);
-}
-
-.wc-alert--success.wc-alert--standard,
-.wc-alert--success.wc-alert--minimal {
-  background-color: var(--wc-bg-success-subtle);
-  color: var(--wc-text-success);
-  border: none;
-}
-
-.wc-alert--success.wc-alert--standard .wc-alert-icon,
-.wc-alert--success.wc-alert--minimal .wc-alert-icon {
-  color: var(--wc-text-success);
-}
-
-/* Info Alert */
-.wc-alert--info.wc-alert--filled {
-  background-color: var(--wc-bg-info-subtle);
-  color: var(--wc-text-info);
-  border: 1px solid var(--wc-border-info);
-}
-
-.wc-alert--info.wc-alert--filled .wc-alert-icon {
-  background-color: var(--wc-bg-info);
-  color: var(--wc-neutral-0);
-}
-
-.wc-alert--info.wc-alert--outlined {
-  background-color: transparent;
-  color: var(--wc-text-info);
-  border: 1px solid var(--wc-border-info);
-}
-
-.wc-alert--info.wc-alert--outlined .wc-alert-icon {
-  color: var(--wc-text-info);
-}
-
-.wc-alert--info.wc-alert--standard,
-.wc-alert--info.wc-alert--minimal {
-  background-color: var(--wc-bg-info-subtle);
-  color: var(--wc-text-info);
-  border: none;
-}
-
-.wc-alert--info.wc-alert--standard .wc-alert-icon,
-.wc-alert--info.wc-alert--minimal .wc-alert-icon {
-  color: var(--wc-text-info);
-}
-
-/* Warning Alert */
-.wc-alert--warning.wc-alert--filled {
-  background-color: var(--wc-bg-warning-subtle);
-  color: var(--wc-text-warning);
-  border: 1px solid var(--wc-border-warning);
-}
-
-.wc-alert--warning.wc-alert--filled .wc-alert-icon {
-  background-color: var(--wc-bg-warning);
-  color: var(--wc-neutral-0);
-}
-
-.wc-alert--warning.wc-alert--outlined {
-  background-color: transparent;
-  color: var(--wc-text-warning);
-  border: 1px solid var(--wc-border-warning);
-}
-
-.wc-alert--warning.wc-alert--outlined .wc-alert-icon {
-  color: var(--wc-text-warning);
-}
-
-.wc-alert--warning.wc-alert--standard,
-.wc-alert--warning.wc-alert--minimal {
-  background-color: var(--wc-bg-warning-subtle);
-  color: var(--wc-text-warning);
-  border: none;
-}
-
-.wc-alert--warning.wc-alert--standard .wc-alert-icon,
-.wc-alert--warning.wc-alert--minimal .wc-alert-icon {
-  color: var(--wc-text-warning);
-}
-
-/* Error Alert */
-.wc-alert--error.wc-alert--filled {
-  background-color: var(--wc-bg-error-subtle);
-  color: var(--wc-text-error);
-  border: 1px solid var(--wc-border-error);
-}
-
-.wc-alert--error.wc-alert--filled .wc-alert-icon {
-  background-color: var(--wc-bg-error);
-  color: var(--wc-neutral-0);
-}
-
-.wc-alert--error.wc-alert--outlined {
-  background-color: transparent;
-  color: var(--wc-text-error);
-  border: 1px solid var(--wc-border-error);
-}
-
-.wc-alert--error.wc-alert--outlined .wc-alert-icon {
-  color: var(--wc-text-error);
-}
-
-.wc-alert--error.wc-alert--standard,
-.wc-alert--error.wc-alert--minimal {
-  background-color: var(--wc-bg-error-subtle);
-  color: var(--wc-text-error);
-  border: none;
-}
-
-.wc-alert--error.wc-alert--standard .wc-alert-icon,
-.wc-alert--error.wc-alert--minimal .wc-alert-icon {
-  color: var(--wc-text-error);
-}
-
-/* The component now relies on global semantic variables to switch between light and dark themes automatically. No additional .dark overrides are required. */ 

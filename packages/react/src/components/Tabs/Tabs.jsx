@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useId } from 'react'
 import './style.css'
 
 const Tabs = ({
@@ -10,6 +10,7 @@ const Tabs = ({
   className = '',
   ...props
 }) => {
+  const tabsId = useId()
   const [internalActiveIndex, setInternalActiveIndex] = useState(controlledActiveIndex || 0)
   
   const isControlled = controlledActiveIndex !== undefined
@@ -21,7 +22,6 @@ const Tabs = ({
     }
   }, [controlledActiveIndex, isControlled])
   
-  // 统一使用原生 CSS 类而非 Tailwind 工具类
   const tabsClasses = [
     'wc-tabs',
     variant === 'pills' && 'wc-tabs--pills',
@@ -35,7 +35,6 @@ const Tabs = ({
   const getTabClasses = (index, disabled) => {
     const classes = ['wc-tab']
     if (activeIndex === index) classes.push('wc-tab--active')
-    if (disabled) classes.push('opacity-50 cursor-not-allowed') // 额外语义化 class，可考虑移除
     return classes.join(' ')
   }
   
@@ -52,16 +51,42 @@ const Tabs = ({
   }
   
   const activeTab = tabs[activeIndex]
+
+  const handleTabKeyDown = (event, index) => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return
+
+    event.preventDefault()
+    const enabledIndexes = tabs
+      .map((tab, tabIndex) => (!tab.disabled ? tabIndex : -1))
+      .filter((tabIndex) => tabIndex >= 0)
+    if (!enabledIndexes.length) return
+
+    const position = enabledIndexes.indexOf(index)
+    let nextIndex
+    if (event.key === 'Home') nextIndex = enabledIndexes[0]
+    else if (event.key === 'End') nextIndex = enabledIndexes[enabledIndexes.length - 1]
+    else if (event.key === 'ArrowRight') nextIndex = enabledIndexes[(position + 1) % enabledIndexes.length]
+    else nextIndex = enabledIndexes[(position - 1 + enabledIndexes.length) % enabledIndexes.length]
+
+    handleTabClick(nextIndex, tabs[nextIndex])
+    event.currentTarget.parentElement?.querySelectorAll('[role="tab"]')[nextIndex]?.focus()
+  }
   
   return (
     <div className="wc-tabs-wrapper" {...props}>
-      <div className={tabsClasses}>
+      <div className={tabsClasses} role="tablist" aria-label="内容分组">
         {tabs.map((tab, index) => (
           <button
             key={tab.key || index}
             className={getTabClasses(index, tab.disabled)}
             onClick={() => handleTabClick(index, tab)}
+            onKeyDown={(event) => handleTabKeyDown(event, index)}
             disabled={tab.disabled}
+            id={`${tabsId}-tab-${index}`}
+            role="tab"
+            aria-selected={activeIndex === index}
+            aria-controls={`${tabsId}-panel`}
+            tabIndex={activeIndex === index ? 0 : -1}
             type="button"
           >
             {tab.title}
@@ -69,7 +94,12 @@ const Tabs = ({
         ))}
       </div>
       
-      <div className="wc-tab-content mt-6">
+      <div
+        id={`${tabsId}-panel`}
+        className="wc-tab-content"
+        role="tabpanel"
+        aria-labelledby={`${tabsId}-tab-${activeIndex}`}
+      >
         {typeof children === 'function' 
           ? children({ activeTab, activeIndex })
           : children
@@ -81,4 +111,4 @@ const Tabs = ({
 
 Tabs.displayName = 'Tabs'
 
-export default Tabs 
+export default Tabs

@@ -22,7 +22,7 @@
         fill="none"
         class="wc-circular-progress-bg"
       />
-      
+
       <!-- Progress circle -->
       <circle
         :cx="center"
@@ -37,7 +37,7 @@
         class="wc-circular-progress-circle"
       />
     </svg>
-    
+
     <!-- Value text -->
     <div
       v-if="showValue"
@@ -108,8 +108,7 @@ const strokeDashoffset = computed(() => {
 })
 
 const progressClasses = computed(() => {
-  const baseClasses = 'wc-circular-progress inline-flex relative items-center justify-center'
-  const classes = [baseClasses]
+  const classes = ['wc-circular-progress']
   classes.push(`wc-circular-progress--${props.color}`)
   if (props.variant === 'indeterminate') classes.push('wc-circular-progress--indeterminate')
   if (props.overlay) classes.push('wc-circular-progress--overlay')
@@ -121,4 +120,4 @@ const progressClasses = computed(() => {
 const circleClasses = computed(() => (props.variant === 'indeterminate' ? ['wc-circular-progress-circle--indeterminate'] : []))
 
 const variantAriaValueNow = computed(() => (props.variant === 'determinate' ? props.value : undefined))
-</script> 
+</script>

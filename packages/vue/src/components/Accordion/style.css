@@ -1,81 +1,65 @@
-/* ==========================================================================
- *  Accordion Component Styles
- * ========================================================================== */
-
-/* basic container style
-   ========================================================================== */
 .wc-accordion {
   width: 100%;
   font-family: var(--wc-font-family);
-  border-radius: var(--wc-radius-2xl);
-  overflow: hidden;
 }
 
-/* 
- * ==========================================================================
- * accordion item style
- * ========================================================================== */
 .wc-accordion-item {
-  border-bottom: 1px solid var(--wc-border-default);
+  margin: 2px 0;
+  border-radius: var(--wc-radius-xl);
 }
 
-.wc-accordion-item:last-child {
-  border-bottom: none;
-}
-
-/* 
- * ==========================================================================
- * header button style
- * ========================================================================== */
 .wc-accordion-header {
-  width: 100%;
   display: flex;
-  justify-content: space-between;
+  width: 100%;
+  min-height: 48px;
   align-items: center;
-  padding: 16px 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: var(--wc-radius-xl);
+  background: transparent;
+  color: var(--wc-text-primary);
+  font: inherit;
   font-size: var(--wc-font-size-md);
   font-weight: var(--wc-font-weight-medium);
-  color: var(--wc-text-primary);
+  line-height: 1.4;
   text-align: left;
-  transition: all 0.3s ease-out;
+  cursor: pointer;
+  transition: background-color var(--wc-motion-fast) var(--wc-ease-standard);
 }
 
-.wc-accordion-header:hover {
-  background-color: var(--wc-bg-surface-hover);
-  transform: translateY(-1px);
+.wc-accordion-header:hover:not(:disabled) {
+  background: var(--wc-action-hover);
 }
 
 .wc-accordion-header--active {
-  color: var(--wc-text-brand);
-  background-color: var(--wc-bg-brand-hover);
-  transform: translateY(0);
+  background: var(--wc-action-selected);
 }
 
-/* 
- * ==========================================================================
- * title and icon style
- * ========================================================================== */
+.wc-accordion-header:focus-visible {
+  outline: 2px solid var(--wc-focus-ring);
+  outline-offset: 2px;
+}
+
+.wc-accordion-header:disabled {
+  color: var(--wc-text-disabled);
+  cursor: not-allowed;
+}
+
 .wc-accordion-title {
   flex: 1;
-  transition: transform 0.3s ease-out;
-}
-
-.wc-accordion-header--active .wc-accordion-title {
-  transform: translateX(2px);
 }
 
 .wc-accordion-icon {
-  display: flex;
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  width: 1rem;
-  height: 1rem;
-  font-size: var(--wc-font-size-sm);
   color: var(--wc-text-tertiary);
-  transition: transform 0.3s ease-out;
+  transition: transform var(--wc-motion-normal) var(--wc-ease-standard);
 }
 
 .wc-accordion-icon svg {
@@ -87,64 +71,27 @@
   transform: rotate(180deg);
 }
 
-/* 
- * ==========================================================================
- * content expand animation
- * ========================================================================== */
 .wc-accordion-content {
-  max-height: 0;
   overflow: hidden;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.3s ease-out;
-}
-
-.wc-accordion-content--open {
-  max-height: 500px;
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .wc-accordion-content-inner {
-  padding: 16px 20px 20px;
+  padding: 10px 12px 18px;
   color: var(--wc-text-secondary);
   line-height: 1.6;
 }
 
-/* 
- * ==========================================================================
- * variant style
- * ========================================================================== */
+.wc-accordion--filled .wc-accordion-item {
+  background: var(--wc-surface-subtle);
+}
 
-/* Bordered variant */
 .wc-accordion--bordered .wc-accordion-item {
-  border: 1px solid var(--wc-border-default);
-  border-radius: var(--wc-radius-2xl);
-  margin-bottom: 8px;
+  box-shadow: inset 0 0 0 1px var(--wc-border-subtle);
 }
 
-.wc-accordion--bordered .wc-accordion-item:last-child {
-  margin-bottom: 0;
-}
-
-/* Filled variant */
-.wc-accordion--filled .wc-accordion-header {
-  background-color: var(--wc-bg-surface-secondary);
-}
-
-.wc-accordion--filled .wc-accordion-header:hover {
-  background-color: var(--wc-bg-surface-hover);
-}
-
-/*  
- * ==========================================================================
- * responsive design
- * ========================================================================== */
-@media (max-width: 640px) {
+@media (prefers-reduced-motion: reduce) {
   .wc-accordion-header,
-  .wc-accordion-content-inner {
-    padding-left: 16px;
-    padding-right: 16px;
+  .wc-accordion-icon {
+    transition: none;
   }
 }
-

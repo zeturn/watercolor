@@ -13,29 +13,30 @@ const Progress = ({
 }) => {
   const validColors = ['primary', 'success', 'warning', 'error', 'purple', 'orange', 'cyan', 'pink']
   const safeColor = validColors.includes(color) ? color : 'primary'
-  
-  const safeValue = Math.max(0, Math.min(100, value))
-  
+
+  const numericValue = Number(value)
+  const safeValue = Number.isNaN(numericValue) ? 0 : Math.max(0, Math.min(100, numericValue))
+
   const progressClasses = ['wc-progress', `wc-progress--${size}`]
-  
+
   const barClasses = [
     'wc-progress__bar',
     `wc-progress__bar--${safeColor}`,
     animated && 'wc-progress__bar--animated'
   ].filter(Boolean).join(' ')
-  
+
   const barStyle = {
     width: `${safeValue}%`
   }
-  
+
   return (
     <div className={`wc-progress-wrapper ${className}`} {...props}>
       {(label || showPercent) && (
         <div className="wc-progress-header">
           {label && (
-            <label className="wc-progress-label">
+            <span className="wc-progress-label">
               {label}
-            </label>
+            </span>
           )}
           {showPercent && (
             <span className="wc-progress-percent">
@@ -44,9 +45,16 @@ const Progress = ({
           )}
         </div>
       )}
-      
-      <div className={progressClasses.join(' ')}>
-        <div 
+
+      <div
+        className={progressClasses.join(' ')}
+        role="progressbar"
+        aria-label={label || '进度'}
+        aria-valuenow={safeValue}
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <div
           className={barClasses}
           style={barStyle}
         />
@@ -57,4 +65,4 @@ const Progress = ({
 
 Progress.displayName = 'Progress'
 
-export default Progress 
+export default Progress

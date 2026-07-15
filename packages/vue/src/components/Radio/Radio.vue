@@ -103,6 +103,10 @@ const containerClasses = computed(() => {
   if (focused.value) {
     classes.push('wc-radio--focused')
   }
+
+  if (isChecked.value) {
+    classes.push('wc-radio--checked')
+  }
   
   return classes
 })
@@ -144,5 +148,3 @@ const handleBlur = () => {
   focused.value = false
 }
 </script>
-
- 

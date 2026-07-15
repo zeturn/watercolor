@@ -2,11 +2,27 @@ import React, { useState } from 'react'
 import './style.css'
 import { 
   getBannerClasses, 
-  getBannerIcon, 
   getBannerStyles,
   handleBannerClose,
   handleBannerAction
 } from './utils.js'
+
+const BannerIcon = ({ type }) => {
+  const detail = type === 'success'
+    ? <path d="m6.8 10.1 2.1 2.1 4.4-4.6" />
+    : type === 'info'
+      ? <><path d="M10 9v4" /><path d="M10 6.5h.01" /></>
+      : type === 'warning'
+        ? <><path d="M10 6.5v4.2" /><path d="M10 13.5h.01" /></>
+        : <><path d="m7.5 7.5 5 5" /><path d="m12.5 7.5-5 5" /></>
+
+  return (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="10" cy="10" r="7.25" />
+      {detail}
+    </svg>
+  )
+}
 
 /**
  * Banner 组件 (React 版)
@@ -32,8 +48,6 @@ export default function Banner({
 
   const bannerClasses = getBannerClasses(type, position, sticky)
   const bannerStyles = getBannerStyles(zIndex)
-  const iconContent = getBannerIcon(type)
-
   const handleClose = () => {
     handleBannerClose(setVisible, onClose)
   }
@@ -49,11 +63,13 @@ export default function Banner({
     <div
       className={bannerClasses}
       style={bannerStyles}
+      role={type === 'error' ? 'alert' : 'status'}
+      aria-live={type === 'error' ? 'assertive' : 'polite'}
     >
       <div className="wc-banner-content">
         {showIcon && (
           <div className="wc-banner-icon">
-            {iconContent}
+            <BannerIcon type={type} />
           </div>
         )}
         <div className="wc-banner-text">
@@ -80,7 +96,9 @@ export default function Banner({
             className="wc-banner-close"
             aria-label="关闭"
           >
-            ×
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true">
+              <path d="m6 6 8 8M14 6l-8 8" />
+            </svg>
           </button>
         )}
       </div>

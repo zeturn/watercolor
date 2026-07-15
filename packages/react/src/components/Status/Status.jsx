@@ -13,11 +13,12 @@ const Status = ({
 }) => {
   const statusClasses = getStatusClasses({ status, size, showText, animated, animationType, className })
   const statusTextContent = getStatusText(status)
-  
+
   return (
-    <span 
-      className={statusClasses} 
+    <span
+      className={statusClasses}
       title={statusTextContent}
+      aria-label={statusTextContent}
       {...props}
     >
       {showText && <span className="wc-status__text">{statusTextContent}</span>}
@@ -27,4 +28,4 @@ const Status = ({
 
 Status.displayName = 'Status'
 
-export default Status 
+export default Status

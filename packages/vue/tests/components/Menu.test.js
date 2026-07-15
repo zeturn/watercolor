@@ -18,7 +18,7 @@ describe('Menu 组件', () => {
         items: mockItems
       }
     })
-    
+
     expect(wrapper.find('.wc-menu').exists()).toBe(true)
     expect(wrapper.find('.wc-menu__button').text()).toContain('下拉菜单')
   })
@@ -33,7 +33,7 @@ describe('Menu 组件', () => {
     const trigger = wrapper.find('.wc-menu__trigger')
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.vm.isOpen).toBe(true)
     expect(wrapper.find('.wc-menu__menu').exists()).toBe(true)
   })
@@ -61,7 +61,7 @@ describe('Menu 组件', () => {
     const trigger = wrapper.find('.wc-menu__trigger')
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     const menuItems = wrapper.findAll('.wc-menu__item')
     expect(menuItems).toHaveLength(4) // 不包括分隔线
   })
@@ -72,11 +72,11 @@ describe('Menu 组件', () => {
         items: mockItems
       }
     })
-    
+
     const trigger = wrapper.find('.wc-menu__trigger')
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     const menuItems = wrapper.findAll('.wc-menu__item')
     const disabledItem = menuItems.find(item => item.classes().includes('wc-menu__item--disabled'))
     expect(disabledItem).toBeTruthy()
@@ -92,7 +92,7 @@ describe('Menu 组件', () => {
     const trigger = wrapper.find('.wc-menu__trigger')
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.find('.wc-menu__divider').exists()).toBe(true)
   })
 
@@ -106,11 +106,11 @@ describe('Menu 组件', () => {
     const trigger = wrapper.find('.wc-menu__trigger')
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     const menuItems = wrapper.findAll('.wc-menu__item')
     await menuItems[0].trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.emitted('select')).toBeTruthy()
     expect(wrapper.emitted('select')[0]).toEqual([mockItems[0], 0])
     // 菜单应该关闭
@@ -119,10 +119,10 @@ describe('Menu 组件', () => {
 
   it('支持不同位置', () => {
     const positions = ['bottom-start', 'bottom-end', 'top-start', 'top-end']
-    
+
     positions.forEach(position => {
       const wrapper = mount(Menu, {
-        props: { 
+        props: {
           items: mockItems,
           placement: position
         }
@@ -141,7 +141,7 @@ describe('Menu 组件', () => {
     const trigger = wrapper.find('.wc-menu__trigger')
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.vm.menuStyles.minWidth).toBe('120px')
   })
 
@@ -155,7 +155,7 @@ describe('Menu 组件', () => {
     const trigger = wrapper.find('.wc-menu__trigger')
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     const menu = wrapper.find('.wc-menu__menu')
     expect(menu.exists()).toBe(true)
   })
@@ -197,7 +197,7 @@ describe('Menu 组件', () => {
     const trigger = wrapper.find('.wc-menu__trigger')
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.find('.custom-item').exists()).toBe(true)
   })
 
@@ -222,7 +222,7 @@ describe('Menu 组件', () => {
     const trigger = wrapper.find('.wc-menu__trigger')
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.vm.isOpen).toBe(true)
 
     // 模拟点击外部
@@ -230,7 +230,7 @@ describe('Menu 组件', () => {
     document.body.appendChild(outsideElement)
     wrapper.vm.handleClickOutside({ target: outsideElement })
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.emitted('close')).toBeTruthy()
     document.body.removeChild(outsideElement)
   })
@@ -246,15 +246,39 @@ describe('Menu 组件', () => {
     expect(wrapper.find('.wc-menu').exists()).toBe(true)
   })
 
-  it('具有正确的可访问性属性', () => {
+  it('具有正确的可访问性属性', async () => {
     const wrapper = mount(Menu, {
       props: {
         items: mockItems
       }
     })
 
-    const button = wrapper.find('button')
-    expect(button.exists()).toBe(true)
+    const button = wrapper.find('.wc-menu__button')
+    expect(button.attributes('type')).toBe('button')
+    expect(button.attributes('aria-haspopup')).toBe('menu')
+    expect(button.attributes('aria-expanded')).toBe('false')
+
+    await button.trigger('click')
+
+    expect(button.attributes('aria-expanded')).toBe('true')
+    expect(wrapper.find('[role="menu"]').exists()).toBe(true)
+    expect(wrapper.findAll('[role="menuitem"]')).toHaveLength(4)
+  })
+
+  it('支持 selected 和 danger 语义状态', async () => {
+    const wrapper = mount(Menu, {
+      props: {
+        items: [
+          { label: '已选择', selected: true },
+          { label: '删除', danger: true }
+        ]
+      }
+    })
+
+    await wrapper.find('.wc-menu__button').trigger('click')
+
+    expect(wrapper.find('.wc-menu__item--selected').text()).toBe('已选择')
+    expect(wrapper.find('.wc-menu__item--danger').text()).toBe('删除')
   })
 
   it('支持 card 变体', async () => {
@@ -268,11 +292,11 @@ describe('Menu 组件', () => {
     })
 
     expect(wrapper.vm.variant).toBe('card')
-    
+
     const trigger = wrapper.find('.wc-menu__trigger')
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.find('.wc-menu__card').exists()).toBe(true)
     expect(wrapper.find('.wc-menu__card-title').text()).toBe('卡片标题')
     expect(wrapper.find('.wc-menu__card-description').text()).toBe('卡片描述')
@@ -291,7 +315,7 @@ describe('Menu 组件', () => {
     const trigger = wrapper.find('.wc-menu__trigger')
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     const img = wrapper.find('.wc-menu__illustration-image')
     expect(img.exists()).toBe(true)
     expect(img.attributes('src')).toBe('/test-image.jpg')
@@ -306,18 +330,18 @@ describe('Menu 组件', () => {
     })
 
     const trigger = wrapper.find('.wc-menu__trigger')
-    
+
     // 打开菜单
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.emitted('open')).toBeTruthy()
     expect(wrapper.vm.isOpen).toBe(true)
-    
+
     // 关闭菜单
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.emitted('close')).toBeTruthy()
     expect(wrapper.vm.isOpen).toBe(false)
   })
@@ -332,13 +356,13 @@ describe('Menu 组件', () => {
     const trigger = wrapper.find('.wc-menu__trigger')
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     const menuItems = wrapper.findAll('.wc-menu__item')
     const disabledItem = menuItems.find(item => item.classes().includes('wc-menu__item--disabled'))
-    
+
     await disabledItem.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     // 禁用项点击不应触发 select 事件
     expect(wrapper.emitted('select')).toBeFalsy()
   })
@@ -353,12 +377,12 @@ describe('Menu 组件', () => {
     const trigger = wrapper.find('.wc-menu__trigger')
     await trigger.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     const divider = wrapper.find('.wc-menu__divider')
     await divider.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     // 分隔线点击不应触发 select 事件
     expect(wrapper.emitted('select')).toBeFalsy()
   })
-}) 
+})

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useId, useState } from 'react'
 import './style.css'
 import { getPlacementClass, validatePlacement } from './utils'
 
@@ -14,36 +14,37 @@ export default function Tooltip({
   }
 
   const [show, setShow] = useState(false)
-  const [isAnimating, setIsAnimating] = useState(false)
+  const tooltipId = useId()
 
   const placementClass = getPlacementClass(placement)
 
   const handleMouseEnter = () => {
     setShow(true)
-    setIsAnimating(true)
   }
 
   const handleMouseLeave = () => {
     setShow(false)
-    setTimeout(() => setIsAnimating(false), 150) // 匹配动画时长
   }
 
   return (
     <span
-      className={`wc-tooltip-wrapper relative inline-block ${className}`}
+      className={`wc-tooltip-wrapper ${className}`.trim()}
+      aria-describedby={show ? tooltipId : undefined}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onFocus={handleMouseEnter}
+      onBlur={handleMouseLeave}
     >
       {children}
-      {(show || isAnimating) && (
+      {show && (
         <div
-          className={`wc-tooltip absolute z-50 px-2 py-1 rounded text-xs whitespace-nowrap ${placementClass} ${
-            show ? 'tooltip-fade-enter-to' : 'tooltip-fade-leave-to'
-          }`}
+          id={tooltipId}
+          className={`wc-tooltip ${placementClass}`}
+          role="tooltip"
         >
           {text}
         </div>
       )}
     </span>
   )
-} 
+}

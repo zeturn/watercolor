@@ -6,6 +6,8 @@ describe('Card (React)', () => {
   it('正常渲染', () => {
     render(<Card>内容</Card>)
     expect(screen.getByText('内容')).toBeInTheDocument()
+    expect(screen.getByText('内容').closest('.wc-card')).toHaveClass('wc-card--minimal')
+    expect(screen.getByText('内容').closest('.wc-card')).not.toHaveClass('wc-card--interactive')
   })
 
   it('支持 title/header/footer', () => {
@@ -27,6 +29,11 @@ describe('Card (React)', () => {
     render(<Card onClick={handleClick}>点击</Card>)
     fireEvent.click(screen.getByText('点击'))
     expect(handleClick).toHaveBeenCalled()
+    expect(screen.getByText('点击').closest('.wc-card')).toHaveClass('wc-card--interactive')
+    expect(screen.getByText('点击').closest('.wc-card')).toHaveAttribute('role', 'button')
+
+    fireEvent.keyDown(screen.getByText('点击').closest('.wc-card'), { key: 'Enter' })
+    expect(handleClick).toHaveBeenCalledTimes(2)
   })
 
   it('支持 interactive=false', () => {

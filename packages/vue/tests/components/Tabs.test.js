@@ -112,8 +112,7 @@ describe('Tabs Component', () => {
     })
 
     const tabButtons = wrapper.findAll('.wc-tab')
-    expect(tabButtons[1].classes()).toContain('opacity-50')
-    expect(tabButtons[1].classes()).toContain('cursor-not-allowed')
+    expect(tabButtons[1].attributes('disabled')).toBeDefined()
 
     // 点击禁用的标签页不应该发出事件
     await tabButtons[1].trigger('click')
@@ -150,4 +149,4 @@ describe('Tabs Component', () => {
     expect(wrapper.text()).toContain('激活索引: 1')
     expect(wrapper.text()).toContain('激活标签: 选项卡2')
   })
-}) 
+})

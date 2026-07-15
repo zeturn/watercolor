@@ -9,7 +9,7 @@ describe('Button Component', () => {
         default: 'Test Button'
       }
     })
-    
+
     expect(wrapper.text()).toBe('Test Button')
     expect(wrapper.find('button').exists()).toBe(true)
   })
@@ -75,7 +75,7 @@ describe('Button Component', () => {
   })
 
   it('applies correct variant class', () => {
-    const wrapper = mount(Button, { 
+    const wrapper = mount(Button, {
       props: { variant: 'primary' },
       slots: { default: '主要按钮' }
     })
@@ -83,7 +83,7 @@ describe('Button Component', () => {
   })
 
   it('applies correct size class', () => {
-    const wrapper = mount(Button, { 
+    const wrapper = mount(Button, {
       props: { size: 'lg' },
       slots: { default: '大按钮' }
     })
@@ -91,22 +91,22 @@ describe('Button Component', () => {
   })
 
   it('applies correct buttonStyle class', () => {
-    const wrapper = mount(Button, { 
+    const wrapper = mount(Button, {
       props: { buttonStyle: 'outlined' },
       slots: { default: '边框按钮' }
     })
     expect(wrapper.classes()).toContain('wc-btn--style-outlined')
   })
 
-  it('defaults to filled buttonStyle', () => {
-    const wrapper = mount(Button, { 
+  it('defaults to borderless buttonStyle', () => {
+    const wrapper = mount(Button, {
       slots: { default: '默认按钮' }
     })
-    expect(wrapper.classes()).toContain('wc-btn--style-filled')
+    expect(wrapper.classes()).toContain('wc-btn--style-default')
   })
 
   it('applies default buttonStyle class', () => {
-    const wrapper = mount(Button, { 
+    const wrapper = mount(Button, {
       props: { buttonStyle: 'default' },
       slots: { default: '默认样式按钮' }
     })
@@ -114,10 +114,10 @@ describe('Button Component', () => {
   })
 
   it('combines variant and buttonStyle classes correctly', () => {
-    const wrapper = mount(Button, { 
-      props: { 
-        variant: 'success', 
-        buttonStyle: 'outlined' 
+    const wrapper = mount(Button, {
+      props: {
+        variant: 'success',
+        buttonStyle: 'outlined'
       },
       slots: { default: '成功边框按钮' }
     })
@@ -126,7 +126,7 @@ describe('Button Component', () => {
   })
 
   it('handles disabled state', () => {
-    const wrapper = mount(Button, { 
+    const wrapper = mount(Button, {
       props: { disabled: true },
       slots: { default: '禁用按钮' }
     })
@@ -135,10 +135,10 @@ describe('Button Component', () => {
   })
 
   it('emits click event when clicked', async () => {
-    const wrapper = mount(Button, { 
+    const wrapper = mount(Button, {
       slots: { default: '点击按钮' }
     })
     await wrapper.trigger('click')
     expect(wrapper.emitted()).toHaveProperty('click')
   })
-}) 
+})

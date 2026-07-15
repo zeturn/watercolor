@@ -47,7 +47,7 @@ export function isValidBackground(background) {
  * @param {Object} props - Feature的props
  * @returns {Array<string>} CSS类名数组
  */
-export const getFeatureCardClasses = ({ align, size, background, reverse, vertical, clickable, disabled, className, isDarkMode }) => {
+export const getFeatureCardClasses = ({ align, size, background, reverse, vertical, clickable, disabled, className }) => {
   const classes = [
     'wc-feature-card',
     clickable && 'wc-feature-card--clickable',
@@ -57,8 +57,7 @@ export const getFeatureCardClasses = ({ align, size, background, reverse, vertic
     `wc-feature-card--${size}`,
     `wc-feature-card--${background}`,
     `wc-feature-card--${align}`,
-    className,
-    isDarkMode && 'dark'
+    className
   ]
   return classes.filter(Boolean)
 }
@@ -69,11 +68,10 @@ export const getFeatureCardClasses = ({ align, size, background, reverse, vertic
  * @param {boolean} isDarkMode - 是否为暗模式
  * @returns {Array<string>} CSS类名数组
  */
-export function getFeatureIconClasses(iconSize, isDarkMode) {
+export function getFeatureIconClasses(iconSize) {
   const classes = [
     'wc-feature-icon',
-    `wc-feature-icon--${iconSize}`,
-    isDarkMode && 'dark'
+    `wc-feature-icon--${iconSize}`
   ]
   return classes.filter(Boolean)
 }
@@ -84,11 +82,10 @@ export function getFeatureIconClasses(iconSize, isDarkMode) {
  * @param {boolean} isDarkMode - 是否为暗模式
  * @returns {Array<string>} CSS类名数组
  */
-export function getFeatureContentClasses(align, isDarkMode) {
+export function getFeatureContentClasses(align) {
   const classes = [
     'wc-feature-content',
-    `wc-feature-content--${align}`,
-    isDarkMode && 'dark'
+    `wc-feature-content--${align}`
   ]
   return classes.filter(Boolean)
 }
@@ -99,11 +96,10 @@ export function getFeatureContentClasses(align, isDarkMode) {
  * @param {boolean} isDarkMode - 是否为暗模式
  * @returns {Array<string>} CSS类名数组
  */
-export function getFeatureTitleClasses(size, isDarkMode) {
+export function getFeatureTitleClasses(size) {
   const classes = [
     'wc-feature-title',
-    `wc-feature-title--${size}`,
-    isDarkMode && 'dark'
+    `wc-feature-title--${size}`
   ]
   return classes.filter(Boolean)
 }
@@ -114,82 +110,12 @@ export function getFeatureTitleClasses(size, isDarkMode) {
  * @param {boolean} isDarkMode - 是否为暗模式
  * @returns {Array<string>} CSS类名数组
  */
-export const getFeatureDescriptionClasses = (size, isDarkMode) => {
+export const getFeatureDescriptionClasses = (size) => {
   const classes = [
     'wc-feature-description',
-    `wc-feature-description--${size}`,
-    isDarkMode && 'dark'
+    `wc-feature-description--${size}`
   ]
   return classes.filter(Boolean)
-}
-
-/**
- * 获取图标包装器的内联样式
- * @param {string|number} iconSize - 图标尺寸
- * @returns {Object} 内联样式对象
- */
-export function getIconWrapperStyles(iconSize) {
-  const styles = {
-    flexShrink: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'var(--wc-primary-600, #2563eb)'
-  }
-  
-  if (typeof iconSize === 'number') {
-    styles.width = `${iconSize}px`
-    styles.height = `${iconSize}px`
-  } else if (typeof iconSize === 'string') {
-    styles.width = iconSize
-    styles.height = iconSize
-  }
-  
-  return styles
-}
-
-/**
- * 获取卡片的内联样式
- * @param {Object} props - Feature的props
- * @returns {Object} 内联样式对象
- */
-export function getCardStyles(props) {
-  const {
-    align = 'left',
-    bgColor = '',
-    reverse = false,
-    vertical = false,
-    style = {}
-  } = props
-
-  const styles = {
-    display: 'flex',
-    alignItems: align === 'center' ? 'center' : 'flex-start',
-    gap: '16px',
-    padding: '16px',
-    border: '1px solid var(--wc-neutral-200, #e5e7eb)',
-    borderRadius: '8px',
-    background: 'var(--wc-neutral-50, #f9fafb)',
-    cursor: 'pointer',
-    transition: 'all 0.2s ease',
-    ...style
-  }
-  
-  if (reverse) {
-    styles.flexDirection = 'row-reverse'
-  }
-  
-  if (vertical) {
-    styles.flexDirection = 'column'
-    styles.alignItems = 'center'
-    styles.textAlign = 'center'
-  }
-  
-  if (bgColor) {
-    styles.background = bgColor
-  }
-  
-  return styles
 }
 
 /**
@@ -229,4 +155,4 @@ export function renderIcon(icon) {
     return icon
   }
   return icon
-} 
+}

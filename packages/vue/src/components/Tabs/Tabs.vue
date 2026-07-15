@@ -1,19 +1,34 @@
 <template>
   <div class="wc-tabs-wrapper">
-    <div :class="tabsClasses">
+    <div
+      :class="tabsClasses"
+      role="tablist"
+      aria-label="内容分组"
+    >
       <button
         v-for="(tab, index) in tabs"
         :key="tab.key || index"
         :class="getTabClasses(index)"
         :disabled="tab.disabled"
+        :id="`${tabsId}-tab-${index}`"
+        role="tab"
+        :aria-selected="activeIndex === index"
+        :aria-controls="`${tabsId}-panel`"
+        :tabindex="activeIndex === index ? 0 : -1"
         type="button"
         @click="handleTabClick(index)"
+        @keydown="handleTabKeydown($event, index)"
       >
         {{ tab.title }}
       </button>
     </div>
     
-    <div class="wc-tab-content mt-6">
+    <div
+      :id="`${tabsId}-panel`"
+      class="wc-tab-content"
+      role="tabpanel"
+      :aria-labelledby="`${tabsId}-tab-${activeIndex}`"
+    >
       <slot
         :active-tab="activeTab"
         :active-index="activeIndex"
@@ -24,7 +39,7 @@
 
 <script setup>
 import './style.css'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, useId, watch } from 'vue'
 
 const props = defineProps({
   tabs: {
@@ -45,6 +60,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'change'])
 
+const tabsId = useId()
 const activeIndex = ref(props.modelValue)
 
 const activeTab = computed(() => props.tabs[activeIndex.value])
@@ -67,19 +83,7 @@ const tabsClasses = computed(() => {
 })
 
 const getTabClasses = (index) => {
-  const baseClasses = 'wc-tab'
-  const activeClass = activeIndex.value === index ? 'wc-tab--active' : ''
-  const disabledClass = props.tabs[index]?.disabled ? 'opacity-50 cursor-not-allowed' : ''
-
-  let variantClasses = ''
-  if (props.variant === 'underline') {
-    variantClasses = 'border-b-2 border-transparent rounded-none px-4 py-2 -mb-px'
-    if (activeIndex.value === index) {
-      variantClasses += ' border-primary-500 bg-transparent text-primary-600 dark:text-primary-400'
-    }
-  }
-
-  return [baseClasses, activeClass, disabledClass, variantClasses]
+  return ['wc-tab', { 'wc-tab--active': activeIndex.value === index }]
 }
 
 const handleTabClick = (index) => {
@@ -88,6 +92,26 @@ const handleTabClick = (index) => {
   activeIndex.value = index
   emit('update:modelValue', index)
   emit('change', index, props.tabs[index])
+}
+
+const handleTabKeydown = (event, index) => {
+  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return
+
+  event.preventDefault()
+  const enabledIndexes = props.tabs
+    .map((tab, tabIndex) => (!tab.disabled ? tabIndex : -1))
+    .filter(tabIndex => tabIndex >= 0)
+  if (!enabledIndexes.length) return
+
+  const position = enabledIndexes.indexOf(index)
+  let nextIndex
+  if (event.key === 'Home') nextIndex = enabledIndexes[0]
+  else if (event.key === 'End') nextIndex = enabledIndexes[enabledIndexes.length - 1]
+  else if (event.key === 'ArrowRight') nextIndex = enabledIndexes[(position + 1) % enabledIndexes.length]
+  else nextIndex = enabledIndexes[(position - 1 + enabledIndexes.length) % enabledIndexes.length]
+
+  handleTabClick(nextIndex)
+  event.currentTarget.parentElement?.querySelectorAll('[role="tab"]')[nextIndex]?.focus()
 }
 
 watch(

@@ -378,10 +378,7 @@ describe('CircularProgress (React)', () => {
       render(<CircularProgress />)
       const progressbar = screen.getByRole('progressbar')
       expect(progressbar).toHaveClass('wc-circular-progress')
-      expect(progressbar).toHaveClass('inline-flex')
-      expect(progressbar).toHaveClass('relative')
-      expect(progressbar).toHaveClass('items-center')
-      expect(progressbar).toHaveClass('justify-center')
+      expect(progressbar.className).not.toMatch(/inline-flex|items-center|justify-center/)
     })
 
     it('maintains class order and structure', () => {

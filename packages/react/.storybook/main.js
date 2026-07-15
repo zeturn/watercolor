@@ -1,4 +1,8 @@
 // .storybook-react/main.js
+import { fileURLToPath } from 'node:url'
+
+const workspaceRoot = fileURLToPath(new URL('../../../', import.meta.url))
+
 /** @type { import('@storybook/react-vite').StorybookConfig } */
 const config = {
   stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
@@ -24,6 +28,10 @@ const config = {
       plugins: filteredPlugins,
       server: {
         ...config.server,
+        fs: {
+          ...config.server?.fs,
+          allow: [...(config.server?.fs?.allow || []), workspaceRoot],
+        },
         hmr: {
           clientPort: process.env.CODESPACE_NAME ? 443 : 6007,
           protocol: process.env.CODESPACE_NAME ? 'wss' : 'ws',

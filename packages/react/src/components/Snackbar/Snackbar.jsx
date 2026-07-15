@@ -2,11 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import './style.css'
 
-const iconMap = {
-  success: '✓',
-  info: 'ℹ',
-  warning: '⚠',
-  error: '✕'
+const StatusIcon = ({ severity }) => {
+  const detail = severity === 'success'
+    ? <path d="m6.8 10.1 2.1 2.1 4.4-4.6" />
+    : severity === 'info'
+      ? <><path d="M10 9v4" /><path d="M10 6.5h.01" /></>
+      : severity === 'warning'
+        ? <><path d="M10 6.5v4.2" /><path d="M10 13.5h.01" /></>
+        : <><path d="m7.5 7.5 5 5" /><path d="m12.5 7.5-5 5" /></>
+
+  return (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="10" cy="10" r="7.25" />
+      {detail}
+    </svg>
+  )
 }
 
 export default function Snackbar({
@@ -15,7 +25,7 @@ export default function Snackbar({
   message = '',
   title = '',
   severity = 'info',
-  variant = 'filled',
+  variant = 'standard',
   autoHideDuration = 6000,
   anchorOrigin = { vertical: 'bottom', horizontal: 'left' },
   action: actionLabel = '',
@@ -43,30 +53,30 @@ export default function Snackbar({
 
   useEffect(() => {
     if (!visible || autoHideDuration <= 0) return
-    
+
     const startTime = Date.now()
     const timer = setTimeout(() => {
       handleClose()
     }, autoHideDuration)
-    
+
     // Progress bar animation
     if (showProgress) {
       const progressTimer = setInterval(() => {
         const elapsed = Date.now() - startTime
         const remaining = Math.max(0, 100 - (elapsed / autoHideDuration) * 100)
         setProgress(remaining)
-        
+
         if (remaining <= 0) {
           clearInterval(progressTimer)
         }
       }, 50)
-      
+
       return () => {
         clearTimeout(timer)
         clearInterval(progressTimer)
       }
     }
-    
+
     return () => clearTimeout(timer)
   }, [visible, autoHideDuration, showProgress])
 
@@ -125,7 +135,7 @@ export default function Snackbar({
       aria-live="assertive"
       aria-atomic="true"
     >
-      {showIcon && <div className={iconClasses}>{iconMap[severity]}</div>}
+      {showIcon && <div className={iconClasses}><StatusIcon severity={severity} /></div>}
 
       <div className="wc-snackbar__content">
         {title && <div className="wc-snackbar__title">{title}</div>}
@@ -149,7 +159,9 @@ export default function Snackbar({
           aria-label="关闭"
           onClick={handleClose}
         >
-          ×
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true">
+            <path d="m6 6 8 8M14 6l-8 8" />
+          </svg>
         </button>
       )}
 
@@ -162,4 +174,4 @@ export default function Snackbar({
   )
 
   return createPortal(node, document.body)
-} 
+}

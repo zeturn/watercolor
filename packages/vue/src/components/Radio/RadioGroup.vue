@@ -7,7 +7,7 @@
       {{ label }}
       <span
         v-if="required"
-        class="text-error-500"
+        class="wc-radio-group__required"
       >*</span>
     </label>
     
@@ -17,17 +17,17 @@
     
     <div
       v-if="error || helperText"
-      class="mt-2"
+      class="wc-radio-group__message"
     >
       <p
         v-if="error"
-        class="text-sm text-error-500"
+        class="wc-radio-group__error"
       >
         {{ error }}
       </p>
       <p
         v-else-if="helperText"
-        class="text-sm text-neutral-500"
+        class="wc-radio-group__helper"
       >
         {{ helperText }}
       </p>
@@ -91,9 +91,7 @@ const radioGroupClasses = computed(() => {
   const classes = [baseClasses]
   
   if (props.row) {
-    classes.push('flex flex-wrap gap-4')
-  } else {
-    classes.push('space-y-2')
+    classes.push('wc-radio-group-content--row')
   }
   
   return classes
@@ -114,5 +112,3 @@ provide('radioGroup', {
   }
 })
 </script>
-
- 

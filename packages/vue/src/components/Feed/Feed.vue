@@ -28,9 +28,9 @@ const FeedItem = defineComponent({
     item: { type: Object, required: true },
     showAvatar: { type: Boolean, default: true },
     variant: { type: String, default: 'timeline' },
-    color: { type: String, default: 'var(--wc-primary-500)' },
-    dotSize: { type: [String, Number], default: 12 },
-    lineWidth: { type: [String, Number], default: 2 },
+    color: { type: String, default: 'var(--wc-accent)' },
+    dotSize: { type: [String, Number], default: 8 },
+    lineWidth: { type: [String, Number], default: 1 },
   },
   emits: ['item-click'],
   computed: {
@@ -55,9 +55,13 @@ const FeedItem = defineComponent({
       class="wc-feed-item" 
       :class="[variant, (item.children && item.children.length) ? 'has-children' : '']" 
       :style="feedItemStyles"
-      @click="handleClick"
+      role="button"
+      tabindex="0"
+      @click.stop="handleClick"
+      @keydown.enter.stop="handleClick"
+      @keydown.space.stop.prevent="handleClick"
     >
-      <div v-if="showAvatar && item.avatar" class="wc-feed-avatar"><img :src="item.avatar" alt="avatar" /></div>
+      <div v-if="showAvatar && item.avatar" class="wc-feed-avatar"><img :src="item.avatar" :alt="item.author || ''" /></div>
       <div class="wc-feed-content">
         <div class="wc-feed-header">
           <strong class="wc-feed-author">{{ item.author }}</strong>
@@ -92,9 +96,9 @@ export default {
     items: { type: Array, default: () => [] },
     variant: { type: String, default: 'timeline' }, // timeline 默认
     showAvatar: { type: Boolean, default: true },
-    color: { type: String, default: 'var(--wc-primary-500)' }, // 主题颜色
-    dotSize: { type: [String, Number], default: 12 }, // 圆点大小
-    lineWidth: { type: [String, Number], default: 3 }, // 线条粗细
+    color: { type: String, default: 'var(--wc-accent)' }, // 主题颜色
+    dotSize: { type: [String, Number], default: 8 }, // 圆点大小
+    lineWidth: { type: [String, Number], default: 1 }, // 线条粗细
   },
   emits: ['item-click'],
   setup(props) {
@@ -114,4 +118,4 @@ export default {
 }
 </script>
 
-<style src="./style.css"></style> 
+<style src="./style.css"></style>

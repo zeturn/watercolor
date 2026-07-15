@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useId, useState } from 'react'
 import './style.css'
 import { buildAccordionClasses, toggleActiveItems } from './utils'
 
@@ -12,12 +12,14 @@ const Accordion = ({
   'aria-label': ariaLabel,
   ...props
 }) => {
+  const accordionId = useId()
   const [activeItems, setActiveItems] = useState([])
 
   // Build classes via shared util
   const accordionClasses = buildAccordionClasses(variant, className)
 
   const toggleItem = (index) => {
+    if (items[index]?.disabled) return
     const newActiveItems = toggleActiveItems(activeItems, index, multiple)
     setActiveItems(newActiveItems)
     onToggle?.(index, newActiveItems.includes(index))
@@ -38,6 +40,10 @@ const Accordion = ({
           <button
             className={`wc-accordion-header ${isActive(index) ? 'wc-accordion-header--active' : ''}`}
             onClick={() => toggleItem(index)}
+            id={`${accordionId}-trigger-${index}`}
+            disabled={item.disabled}
+            aria-expanded={isActive(index)}
+            aria-controls={`${accordionId}-panel-${index}`}
             type="button"
           >
             <span className="wc-accordion-title">{item.title}</span>
@@ -50,7 +56,9 @@ const Accordion = ({
             </span>
           </button>
           <div
+            id={`${accordionId}-panel-${index}`}
             className={`wc-accordion-content ${isActive(index) ? 'wc-accordion-content--open' : ''}`}
+            aria-labelledby={`${accordionId}-trigger-${index}`}
             style={{ display: isActive(index) ? undefined : 'none' }}
           >
             <div className="wc-accordion-content-inner">

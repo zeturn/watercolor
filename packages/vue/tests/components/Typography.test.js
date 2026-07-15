@@ -26,6 +26,7 @@ describe('Typography Component', () => {
 
     expect(wrapper.element.tagName.toLowerCase()).toBe('h1')
     expect(wrapper.text()).toContain('标题文本')
+    expect(wrapper.classes()).toContain('wc-typography--h1')
   })
 
   it('应该支持自定义组件', () => {
@@ -50,6 +51,7 @@ describe('Typography Component', () => {
     })
 
     expect(wrapper.vm.color).toBe('primary')
+    expect(wrapper.classes()).toContain('wc-typography--color-primary')
   })
 
   it('应该正确应用文本对齐', () => {
@@ -60,6 +62,7 @@ describe('Typography Component', () => {
     })
 
     expect(wrapper.vm.align).toBe('center')
+    expect(wrapper.classes()).toContain('wc-typography--align-center')
   })
 
   it('应该支持无换行', () => {
@@ -70,6 +73,7 @@ describe('Typography Component', () => {
     })
 
     expect(wrapper.vm.noWrap).toBe(true)
+    expect(wrapper.classes()).toContain('wc-typography--no-wrap')
   })
 
   it('应该支持底部间距', () => {
@@ -80,6 +84,7 @@ describe('Typography Component', () => {
     })
 
     expect(wrapper.vm.gutterBottom).toBe(true)
+    expect(wrapper.classes()).toContain('wc-typography--gutter-bottom')
   })
 
   it('应该设置正确的默认值', () => {
@@ -153,4 +158,4 @@ describe('Typography Component', () => {
       expect(wrapper.vm.align).toBe(align)
     })
   })
-}) 
+})

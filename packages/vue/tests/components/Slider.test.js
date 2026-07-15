@@ -1,194 +1,56 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import Slider from '@/components/Slider/Slider.vue'
 
 describe('Slider Component', () => {
-  it('renders correctly', () => {
-    const wrapper = mount(Slider, {
-      props: {
-        modelValue: 50
-      }
-    })
-
+  it('使用原生 range 正确渲染', () => {
+    const wrapper = mount(Slider, { props: { modelValue: 50 } })
+    const input = wrapper.find('input[type="range"]')
     expect(wrapper.find('.wc-slider').exists()).toBe(true)
-    expect(wrapper.find('.wc-slider__track').exists()).toBe(true)
-    expect(wrapper.find('.wc-slider__thumb').exists()).toBe(true)
+    expect(input.exists()).toBe(true)
+    expect(input.element.value).toBe('50')
   })
 
-  it('displays current value when enabled', () => {
-    const wrapper = mount(Slider, {
-      props: {
-        modelValue: 75,
-        valueLabelDisplay: 'on'
-      }
-    })
-
-    expect(wrapper.find('.wc-slider__value').text()).toBe('75')
-  })
-
-  it('emits update:modelValue when value changes', async () => {
-    const wrapper = mount(Slider, {
-      props: {
-        modelValue: 50,
-        min: 0,
-        max: 100
-      }
-    })
-
-    // 模拟点击滑块轨道
-    const track = wrapper.find('.wc-slider__track')
-    const trackElement = track.element
-    trackElement.getBoundingClientRect = vi.fn(() => ({
-      left: 0,
-      width: 100
-    }))
-
-    await track.trigger('click', { clientX: 75 })
-    expect(wrapper.emitted()).toHaveProperty('update:modelValue')
-  })
-
-  it('applies min and max values correctly', () => {
-    const wrapper = mount(Slider, {
-      props: {
-        modelValue: 50,
-        min: 10,
-        max: 90
-      }
-    })
-
-    const thumb = wrapper.find('.wc-slider__thumb')
-    expect(thumb.attributes('aria-valuemin')).toBe('10')
-    expect(thumb.attributes('aria-valuemax')).toBe('90')
-    expect(thumb.attributes('aria-valuenow')).toBe('50')
-  })
-
-  it('applies step value correctly', async () => {
-    const wrapper = mount(Slider, {
-      props: {
-        modelValue: 50,
-        step: 10
-      }
-    })
-
-    // 测试键盘交互
-    const thumb = wrapper.find('.wc-slider__thumb')
-    await thumb.trigger('keydown', { key: 'ArrowRight' })
-    
-    expect(wrapper.emitted()).toHaveProperty('update:modelValue')
-  })
-
-  it('applies disabled state correctly', () => {
-    const wrapper = mount(Slider, {
-      props: {
-        modelValue: 50,
-        disabled: true
-      }
-    })
-
-    const thumb = wrapper.find('.wc-slider__thumb')
-    expect(thumb.attributes('tabindex')).toBe('-1')
-  })
-
-  it('displays label when provided', () => {
-    const wrapper = mount(Slider, {
-      props: {
-        modelValue: 50,
-        label: '音量'
-      }
-    })
-
-    expect(wrapper.find('.wc-slider__label').exists()).toBe(true)
+  it('显示标签并关联输入', () => {
+    const wrapper = mount(Slider, { props: { modelValue: 50, label: '音量' } })
     expect(wrapper.find('.wc-slider__label').text()).toBe('音量')
+    expect(wrapper.find('.wc-slider__label').attributes('for')).toBe(wrapper.find('input').attributes('id'))
   })
 
-  it('supports keyboard navigation', async () => {
-    const wrapper = mount(Slider, {
-      props: {
-        modelValue: 50,
-        step: 1
-      }
-    })
-
-    const thumb = wrapper.find('.wc-slider__thumb')
-    
-    // 测试向右箭头键
-    await thumb.trigger('keydown', { key: 'ArrowRight' })
-    expect(wrapper.emitted()).toHaveProperty('update:modelValue')
-    
-    // 测试向左箭头键
-    await thumb.trigger('keydown', { key: 'ArrowLeft' })
-    expect(wrapper.emitted()['update:modelValue']).toHaveLength(2)
+  it('传递 min max step 与无障碍名称', () => {
+    const wrapper = mount(Slider, { props: { modelValue: 50, min: 10, max: 90, step: 5, label: '音量' } })
+    const input = wrapper.find('input')
+    expect(input.attributes('min')).toBe('10')
+    expect(input.attributes('max')).toBe('90')
+    expect(input.attributes('step')).toBe('5')
+    expect(input.attributes('aria-label')).toBe('音量')
   })
 
-  it('supports Home and End keys', async () => {
-    const wrapper = mount(Slider, {
-      props: {
-        modelValue: 50,
-        min: 0,
-        max: 100
-      }
-    })
-
-    const thumb = wrapper.find('.wc-slider__thumb')
-    
-    // 测试Home键
-    await thumb.trigger('keydown', { key: 'Home' })
-    expect(wrapper.emitted()).toHaveProperty('update:modelValue')
-    
-    // 测试End键
-    await thumb.trigger('keydown', { key: 'End' })
-    expect(wrapper.emitted()['update:modelValue']).toHaveLength(2)
+  it('输入时发出 model 事件，提交时发出 change', async () => {
+    const wrapper = mount(Slider, { props: { modelValue: 20 } })
+    const input = wrapper.find('input')
+    input.element.value = '65'
+    await input.trigger('input')
+    await input.trigger('change')
+    expect(wrapper.emitted()['update:modelValue'][0]).toEqual([65])
+    expect(wrapper.emitted().change[0]).toEqual([65])
   })
 
-  it('has correct ARIA attributes', () => {
-    const wrapper = mount(Slider, {
-      props: {
-        modelValue: 50,
-        min: 0,
-        max: 100
-      }
-    })
-
-    const thumb = wrapper.find('.wc-slider__thumb')
-    expect(thumb.attributes('role')).toBe('slider')
-    expect(thumb.attributes('aria-valuemin')).toBe('0')
-    expect(thumb.attributes('aria-valuemax')).toBe('100')
-    expect(thumb.attributes('aria-valuenow')).toBe('50')
+  it('通过 CSS 变量表达进度而不写入颜色', () => {
+    const wrapper = mount(Slider, { props: { modelValue: 25, min: 0, max: 100 } })
+    expect(wrapper.find('input').attributes('style')).toContain('--wc-slider-percentage: 25%')
   })
 
-  it('calculates percentage correctly', () => {
-    const wrapper = mount(Slider, {
-      props: {
-        modelValue: 25,
-        min: 0,
-        max: 100
-      }
-    })
-
-    const activeTrack = wrapper.find('.wc-slider__track-active')
-    expect(activeTrack.attributes('style')).toContain('width: 25%')
+  it('按需显示当前值', () => {
+    const shown = mount(Slider, { props: { modelValue: 75, valueLabelDisplay: 'on' } })
+    const hidden = mount(Slider, { props: { modelValue: 75, valueLabelDisplay: 'off' } })
+    expect(shown.find('.wc-slider__value').text()).toBe('75')
+    expect(hidden.find('.wc-slider__value').exists()).toBe(false)
   })
 
-  it('shows value label when display is on', () => {
-    const wrapper = mount(Slider, {
-      props: {
-        modelValue: 60,
-        valueLabelDisplay: 'on'
-      }
-    })
-
-    expect(wrapper.find('.wc-slider__value').exists()).toBe(true)
-    expect(wrapper.find('.wc-slider__value').text()).toBe('60')
+  it('正确应用禁用状态', () => {
+    const wrapper = mount(Slider, { props: { modelValue: 50, disabled: true } })
+    expect(wrapper.classes()).toContain('wc-slider--disabled')
+    expect(wrapper.find('input').attributes('disabled')).toBeDefined()
   })
-
-  it('hides value label when display is off', () => {
-    const wrapper = mount(Slider, {
-      props: {
-        modelValue: 60,
-        valueLabelDisplay: 'off'
-      }
-    })
-
-    expect(wrapper.find('.wc-slider__value').exists()).toBe(false)
-  })
-}) 
+})

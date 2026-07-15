@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useId } from 'react'
 import './style.css'
 
 const Autocomplete = ({
@@ -18,7 +18,7 @@ const Autocomplete = ({
   clearable = true,
   fullWidth = false,
   size = 'md',
-  variant = 'outlined',
+  variant = 'filled',
   minSearchLength = 0,
   noOptionsText = 'No options found',
   name = '',
@@ -225,7 +225,8 @@ const Autocomplete = ({
     }
   }
 
-  const autocompleteId = id || name || `autocomplete-${Math.random().toString(36).substr(2, 9)}`
+  const generatedId = useId()
+  const autocompleteId = id || name || generatedId
 
   return (
     <div className={getAutocompleteClasses()} ref={autocompleteRef} style={style}>
@@ -251,7 +252,12 @@ const Autocomplete = ({
             placeholder,
             disabled,
             readonly,
-            ref: inputRef
+            ref: inputRef,
+            role: 'combobox',
+            'aria-autocomplete': 'list',
+            'aria-expanded': isOpen,
+            'aria-controls': `${autocompleteId}-options`,
+            'aria-activedescendant': highlightedIndex >= 0 ? `${autocompleteId}-option-${highlightedIndex}` : undefined
           })
         ) : (
           <input
@@ -268,6 +274,11 @@ const Autocomplete = ({
             disabled={disabled}
             readOnly={readonly}
             autoComplete="off"
+            role="combobox"
+            aria-autocomplete="list"
+            aria-expanded={isOpen}
+            aria-controls={`${autocompleteId}-options`}
+            aria-activedescendant={highlightedIndex >= 0 ? `${autocompleteId}-option-${highlightedIndex}` : undefined}
           />
         )}
         
@@ -295,7 +306,7 @@ const Autocomplete = ({
       </div>
 
       {isOpen && searchQuery.length >= minSearchLength && (
-        <div className="wc-autocomplete__dropdown">
+        <div className="wc-autocomplete__dropdown" id={`${autocompleteId}-options`} role="listbox">
           {filteredOptions.length === 0 ? (
             <div className="wc-autocomplete__no-options">
               {noOptionsText}
@@ -305,7 +316,10 @@ const Autocomplete = ({
               {filteredOptions.map((option, index) => (
                 <div
                   key={getValue(option) || index}
+                  id={`${autocompleteId}-option-${index}`}
                   className={getOptionClasses(option, index)}
+                  role="option"
+                  aria-selected={isSelected(option)}
                   onClick={() => handleOptionClick(option)}
                   onMouseEnter={() => setHighlightedIndex(index)}
                 >

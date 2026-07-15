@@ -1,8 +1,12 @@
 <template>
   <div
-    :class="[cardClasses, { 'dark': isDarkMode }]"
+    :class="cardClasses"
     :style="cardStyle"
+    role="button"
+    tabindex="0"
     @click="$emit('click')"
+    @keydown.enter="$emit('click')"
+    @keydown.space.prevent="$emit('click')"
   >
     <div
       v-if="icon"
@@ -43,7 +47,7 @@ export default {
     ctaLabel: { type: String, default: '' },
     ctaHref: { type: String, default: '#' },
     variant: { type: String, default: 'default', validator: v => ['default','elevated','minimal'].includes(v) },
-    isDarkMode: { type: Boolean, default: false },
+    isDarkMode: { type: Boolean, default: false }, // retained for API compatibility; theme is inherited
   },
   emits: ['click', 'cta-click'],
   computed: {
@@ -82,5 +86,3 @@ export default {
   },
 }
 </script>
-
- 

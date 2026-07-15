@@ -1,7 +1,23 @@
 import React, { useState } from 'react'
 import './style.css'
-import { getAlertClasses, getIconContent } from './utils.js'
+import { getAlertClasses } from './utils.js'
 
+const AlertIcon = ({ type }) => {
+  const detail = type === 'success'
+    ? <path d="m6.8 10.1 2.1 2.1 4.4-4.6" />
+    : type === 'info'
+      ? <><path d="M10 9v4" /><path d="M10 6.5h.01" /></>
+      : type === 'warning'
+        ? <><path d="M10 6.5v4.2" /><path d="M10 13.5h.01" /></>
+        : <><path d="m7.5 7.5 5 5" /><path d="m12.5 7.5-5 5" /></>
+
+  return (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="10" cy="10" r="7.25" />
+      {detail}
+    </svg>
+  )
+}
 
 export function Alert({
   type = 'info',
@@ -23,8 +39,6 @@ export function Alert({
   }
 
   const alertClasses = getAlertClasses(type, variant)
-  const iconContent = getIconContent(type)
-
   const classes = [
     ...alertClasses,
     className,
@@ -34,7 +48,7 @@ export function Alert({
     <div className={classes} role="alert">
       {showIcon && (
         <div className="wc-alert-icon">
-          <span>{iconContent}</span>
+          <AlertIcon type={type} />
         </div>
       )}
       <div className="wc-alert-content">
@@ -50,11 +64,13 @@ export function Alert({
           aria-label="关闭"
           onClick={handleClose}
         >
-          ×
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true">
+            <path d="m6 6 8 8M14 6l-8 8" />
+          </svg>
         </button>
       )}
     </div>
   )
 }
 
-export default Alert 
+export default Alert

@@ -10,7 +10,7 @@ const FormHelperText = ({
   focused = false,
   margin = 'normal', // normal | dense | none
   required = false,
-  variant = 'outlined', // standard | outlined | filled
+  variant = 'filled', // standard | outlined | filled
   id,
   size = 'md',
   className = '',
@@ -36,7 +36,7 @@ const FormHelperText = ({
   ].filter(Boolean).join(' ')
 
   return (
-    <p id={id} className={classes} style={style} {...props}>
+    <p id={id} className={classes} style={style} aria-live={isError ? 'polite' : undefined} {...props}>
       {children}
     </p>
   )

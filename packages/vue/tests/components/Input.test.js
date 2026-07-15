@@ -58,8 +58,8 @@ describe('Input 组件', () => {
     })
     
     expect(wrapper.find('input').attributes('disabled')).toBeDefined()
-    expect(wrapper.classes()).toContain('opacity-50')
-    expect(wrapper.classes()).toContain('cursor-not-allowed')
+    expect(wrapper.classes()).toContain('wc-input-container--disabled')
+    expect(wrapper.find('input').classes()).toContain('wc-input--disabled')
   })
 
   it('支持只读状态', () => {
@@ -77,8 +77,8 @@ describe('Input 组件', () => {
       }
     })
     
-    expect(wrapper.find('p.text-error-500').text()).toBe('用户名不能为空')
-    expect(wrapper.find('svg.text-error-500').exists()).toBe(true)
+    expect(wrapper.find('.wc-input-helper-text--error').text()).toBe('用户名不能为空')
+    expect(wrapper.find('.wc-input-error-icon').exists()).toBe(true)
   })
 
   it('显示帮助文本', () => {
@@ -88,7 +88,7 @@ describe('Input 组件', () => {
       }
     })
     
-    expect(wrapper.find('p.text-neutral-500').text()).toBe('请输入6-20位字符')
+    expect(wrapper.find('.wc-input-helper-text').text()).toBe('请输入6-20位字符')
   })
 
   it('错误信息优先于帮助文本', () => {
@@ -99,8 +99,8 @@ describe('Input 组件', () => {
       }
     })
     
-    expect(wrapper.find('p.text-error-500').text()).toBe('输入错误')
-    expect(wrapper.find('p.text-neutral-500').exists()).toBe(false)
+    expect(wrapper.find('.wc-input-helper-text--error').text()).toBe('输入错误')
+    expect(wrapper.findAll('.wc-input-helper-text')).toHaveLength(1)
   })
 
   it('支持不同尺寸', () => {
@@ -111,15 +111,7 @@ describe('Input 组件', () => {
         props: { size }
       })
       
-      const sizeClasses = {
-        sm: 'px-2 py-1 text-sm',
-        md: 'px-3 py-2 text-sm',
-        lg: 'px-4 py-3 text-base'
-      }
-      
-      sizeClasses[size].split(' ').forEach(cls => {
-        expect(wrapper.find('input').classes()).toContain(cls)
-      })
+      expect(wrapper.find('input').classes()).toContain(`wc-input--${size}`)
     })
   })
 
@@ -152,4 +144,4 @@ describe('Input 组件', () => {
     expect(wrapper1.find('label').attributes('for')).toBe(id1)
     expect(wrapper2.find('label').attributes('for')).toBe(id2)
   })
-}) 
+})

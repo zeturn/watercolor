@@ -144,7 +144,7 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: 'outlined',
+    default: 'filled',
     validator: (value) => ['outlined', 'filled', 'standard'].includes(value)
   },
   fullWidth: {
@@ -238,4 +238,4 @@ const handleKeydown = (event) => {
 }
 </script>
 
-<style src="./style.css" scoped></style> 
+<style src="./style.css" scoped></style>

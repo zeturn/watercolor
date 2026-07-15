@@ -14,6 +14,7 @@ import './style.css'
  *  size      string – 尺寸
  */
 export default function Paper({
+  component: Component = 'div',
   variant = 'elevation',
   elevation = 1,
   square = false,
@@ -21,11 +22,17 @@ export default function Paper({
   clickable = false,
   color = 'default',
   size = null,
+  shape = null,
+  gradient = false,
+  frosted = false,
+  textured = false,
   className = '',
   children,
   onClick,
   onMouseEnter,
   onMouseLeave,
+  onKeyDown,
+  style = {},
   ...rest
 }) {
   // 验证并标准化阴影等级（0-24）
@@ -39,6 +46,10 @@ export default function Paper({
     clickable,
     color,
     size,
+    shape,
+    gradient,
+    frosted,
+    textured,
     className
   })
 
@@ -48,19 +59,26 @@ export default function Paper({
     }
   }
 
+  const handleKeyDown = (event) => {
+    onKeyDown?.(event)
+    if (!clickable || event.defaultPrevented || !['Enter', ' '].includes(event.key)) return
+    event.preventDefault()
+    onClick?.(event)
+  }
+
   return (
-    <div 
+    <Component
       className={paperClasses}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      style={{
-        cursor: clickable ? 'pointer' : 'default',
-        ...rest.style
-      }}
+      role={clickable ? 'button' : undefined}
+      tabIndex={clickable ? 0 : undefined}
+      style={style}
       {...rest}
     >
       {children}
-    </div>
+    </Component>
   )
 }

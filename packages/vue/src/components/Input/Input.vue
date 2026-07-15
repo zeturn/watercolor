@@ -3,12 +3,12 @@
     <label
       v-if="label"
       :for="inputId"
-      class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2"
+      class="wc-input-label"
     >
       {{ label }}
       <span
         v-if="required"
-        class="text-error-500 ml-1"
+        class="wc-input-label__required"
       >*</span>
     </label>
     
@@ -30,10 +30,10 @@
       
       <div
         v-if="error"
-        class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+        class="wc-input-validation-icon wc-input-validation-icon--error"
       >
         <svg
-          class="h-5 w-5 text-error-500"
+          class="wc-input-error-icon"
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -48,13 +48,13 @@
     
     <p
       v-if="error"
-      class="mt-2 text-sm text-error-500"
+      class="wc-input-helper-text wc-input-helper-text--error"
     >
       {{ error }}
     </p>
     <p
       v-else-if="helpText"
-      class="mt-2 text-sm text-neutral-500 dark:text-neutral-400"
+      class="wc-input-helper-text"
     >
       {{ helpText }}
     </p>
@@ -116,7 +116,7 @@ const inputId = ref(`input-${instance?.uid || Math.random().toString(36).substr(
 const wrapperClasses = computed(() => {
   const classes = ['wc-input-container']
   if (props.disabled) {
-    classes.push('opacity-50', 'cursor-not-allowed')
+    classes.push('wc-input-container--disabled')
   }
   return classes
 })
@@ -124,21 +124,16 @@ const wrapperClasses = computed(() => {
 const inputClasses = computed(() => {
   const classes = ['wc-input', `wc-input--${props.size}`, 'wc-input--filled']
 
-  // 为了向后兼容以及满足测试用例，附加拟 Tailwind 大小工具类
-  const sizeUtilityMap = {
-    sm: ['px-2', 'py-1', 'text-sm'],
-    md: ['px-3', 'py-2', 'text-sm'],
-    lg: ['px-4', 'py-3', 'text-base']
-  }
-
-  classes.push(...sizeUtilityMap[props.size])
-
   if (props.error) {
     classes.push('wc-input--error')
   }
 
   if (props.disabled) {
     classes.push('wc-input--disabled')
+  }
+
+  if (props.readonly) {
+    classes.push('wc-input--readonly')
   }
 
   return classes
@@ -157,4 +152,4 @@ const handleBlur = (event) => {
 }
 </script> 
 
-<style src="./style.css"></style> 
+<style src="./style.css"></style>

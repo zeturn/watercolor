@@ -81,45 +81,45 @@ export function isValidBorderRadius(borderRadius) {
  * @returns {string} 完整的CSS类名字符串
  */
 export function getCardClasses(
-  className = '', 
-  variant = 'filled', 
-  color = 'default', 
-  size = 'medium', 
-  interactive = true, 
+  className = '',
+  variant = 'minimal',
+  color = 'default',
+  size = 'medium',
+  interactive = false,
   noBorder = true
 ) {
   const classes = ['wc-card']
-  
+
   // 添加变体类名
-  if (variant && variant !== 'filled') {
+  if (variant) {
     classes.push(`wc-card--${variant}`)
   }
-  
+
   // 添加颜色类名
   if (color && color !== 'default') {
     classes.push(`wc-card--${color}`)
   }
-  
+
   // 添加尺寸类名
   if (size && size !== 'medium') {
     classes.push(`wc-card--${size}`)
   }
-  
+
   // 添加交互效果类名
   if (interactive) {
     classes.push('wc-card--interactive')
   }
-  
+
   // 添加无边框类名
   if (noBorder) {
     classes.push('wc-card--no-border')
   }
-  
+
   // 添加自定义类名
   if (className) {
     classes.push(className)
   }
-  
+
   return classes.filter(Boolean).join(' ')
 }
 
@@ -175,16 +175,16 @@ export const vuePaddingClasses = {
  */
 export function getVueCardClasses(props) {
   const { variant = 'default', padding = 'md' } = props
-  
+
   const classes = ['wc-card']
-  
+
   if (vueVariantClasses[variant]) {
     classes.push(vueVariantClasses[variant])
   }
-  
+
   if (vuePaddingClasses[padding]) {
     classes.push(vuePaddingClasses[padding])
   }
-  
+
   return classes.filter(Boolean)
-} 
+}

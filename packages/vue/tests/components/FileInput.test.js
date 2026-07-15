@@ -60,8 +60,8 @@ describe('FileInput Component', () => {
       }
     })
     
-    // FileInput组件没有实现disabled功能，跳过这个测试期望
-    expect(wrapper.find('input').exists()).toBe(true)
+    expect(wrapper.classes()).toContain('wc-file-input-wrapper--disabled')
+    expect(wrapper.find('input').attributes('disabled')).toBeDefined()
   })
 
   it('shows file preview when showPreview is true', () => {
@@ -85,4 +85,4 @@ describe('FileInput Component', () => {
     // FileInput组件通过label元素支持drag and drop，检查基本结构
     expect(wrapper.find('.wc-file-input-wrapper').exists()).toBe(true)
   })
-}) 
+})

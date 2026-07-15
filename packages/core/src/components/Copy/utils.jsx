@@ -43,28 +43,16 @@ export function getCopyClasses(props) {
   } = props
 
   const classes = ['wc-copy']
-  
+
   classes.push(`wc-copy--${variant}`)
   classes.push(`wc-copy--${size}`)
-  
+
   if (copied) classes.push('wc-copy--copied')
   if (copyError) classes.push('wc-copy--error')
-  
-  if (className) classes.push(className)
-  
-  return classes.filter(Boolean)
-}
 
-/**
- * 获取当前显示的图标
- * @param {boolean} copied - 是否已复制
- * @param {boolean} copyError - 是否复制出错
- * @returns {string} 图标内容
- */
-export function getCurrentIcon(copied, copyError) {
-  if (copyError) return '❌'
-  if (copied) return '✓'
-  return '📋'
+  if (className) classes.push(className)
+
+  return classes.filter(Boolean)
 }
 
 /**
@@ -147,7 +135,7 @@ export async function handleCopyOperation(
   resetDelay
 ) {
   const success = await copyToClipboard(text)
-  
+
   if (success) {
     setCopied(true)
     setCopyError(false)
@@ -177,9 +165,9 @@ export async function handleCopyOperation(
  */
 export function getTooltipClasses(copied, copyError) {
   let classes = 'wc-copy-tooltip'
-  
+
   if (copied) classes += ' wc-copy-tooltip--success'
   if (copyError) classes += ' wc-copy-tooltip--error'
-  
+
   return classes
-} 
+}

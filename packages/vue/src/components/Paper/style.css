@@ -1,299 +1,159 @@
-/* Paper 组件样式 */
-
-/* CSS 变量定义 */
-:root {
-  --wc-paper-bg: var(--wc-neutral-0, #ffffff);
-  --wc-paper-border-color: var(--wc-neutral-200, #e5e7eb);
-  --wc-paper-border-radius: var(--wc-radius-lg, 0.5rem);
-  --wc-paper-border-radius-sm: var(--wc-radius-md, 0.375rem);
-  --wc-paper-transition: var(--wc-transition-all, all 0.25s ease);
-  
-  /* 阴影变量 */
-  --wc-paper-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --wc-paper-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  --wc-paper-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --wc-paper-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --wc-paper-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --wc-paper-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-/* 深色模式变量 */
-/* 已移除 prefers-color-scheme 媒体查询，避免与Storybook主题切换冲突 */
-
-.dark {
-  --wc-paper-bg: var(--wc-neutral-800, #1f2937);
-  --wc-paper-border-color: var(--wc-neutral-700, #374151);
-}
-
-/* 基础 Paper 样式 */
+/* Paper creates hierarchy only when the caller explicitly asks for it. */
 .wc-paper {
-  background-color: var(--wc-paper-bg);
-  border-radius: var(--wc-paper-border-radius);
-  transition: var(--wc-paper-transition);
-  position: relative;
-  overflow: hidden;
-}
+  --wc-paper-bg: var(--wc-surface-raised);
+  --wc-paper-fg: var(--wc-text-primary);
+  --wc-paper-shadow: none;
 
-/* 变体样式 */
-.wc-paper--elevation {
-  border: 1px solid var(--wc-paper-border-color);
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: var(--wc-paper-fg);
+  background: var(--wc-paper-bg);
+  border: 0;
+  border-radius: var(--wc-radius-xl);
+  box-shadow: var(--wc-paper-shadow);
+  transition:
+    background-color var(--wc-motion-fast) var(--wc-ease-standard),
+    box-shadow var(--wc-motion-normal) var(--wc-ease-standard),
+    color var(--wc-motion-fast) var(--wc-ease-standard);
 }
 
 .wc-paper--outlined {
-  border: 1px solid var(--wc-paper-border-color);
-  box-shadow: none;
+  background: transparent;
+  outline: 1px solid var(--wc-border-default);
+  outline-offset: -1px;
 }
 
-/* 阴影等级 */
-.wc-paper--elevation-0 {
-  box-shadow: none;
-  border: none;
+.wc-paper--elevation-0 { --wc-paper-shadow: none; }
+
+.wc-paper:is(.wc-paper--elevation-1, .wc-paper--elevation-2) {
+  --wc-paper-shadow: var(--wc-shadow-sm);
 }
 
-.wc-paper--elevation-1 {
-  box-shadow: var(--wc-paper-shadow-xs);
+.wc-paper:is(.wc-paper--elevation-3, .wc-paper--elevation-4, .wc-paper--elevation-5) {
+  --wc-paper-shadow: var(--wc-shadow-md);
 }
 
-.wc-paper--elevation-2 {
-  box-shadow: var(--wc-paper-shadow-sm);
+.wc-paper:is(
+  .wc-paper--elevation-6,
+  .wc-paper--elevation-7,
+  .wc-paper--elevation-8,
+  .wc-paper--elevation-9,
+  .wc-paper--elevation-10,
+  .wc-paper--elevation-11
+) {
+  --wc-paper-shadow: var(--wc-shadow-lg);
 }
 
-.wc-paper--elevation-3 {
-  box-shadow: var(--wc-paper-shadow-md);
+.wc-paper:is(
+  .wc-paper--elevation-12,
+  .wc-paper--elevation-13,
+  .wc-paper--elevation-14,
+  .wc-paper--elevation-15,
+  .wc-paper--elevation-16,
+  .wc-paper--elevation-17
+) {
+  --wc-paper-shadow: var(--wc-shadow-xl);
 }
 
-.wc-paper--elevation-4 {
-  box-shadow: var(--wc-paper-shadow-lg);
+.wc-paper:is(
+  .wc-paper--elevation-18,
+  .wc-paper--elevation-19,
+  .wc-paper--elevation-20,
+  .wc-paper--elevation-21,
+  .wc-paper--elevation-22,
+  .wc-paper--elevation-23,
+  .wc-paper--elevation-24
+) {
+  --wc-paper-shadow: var(--wc-shadow-xl);
 }
 
-.wc-paper--elevation-5 {
-  box-shadow: var(--wc-paper-shadow-xl);
-}
+.wc-paper--square { border-radius: 0; }
+.wc-paper--rounded-sm { border-radius: var(--wc-radius-md); }
+.wc-paper--rounded,
+.wc-paper--rounded-lg { border-radius: var(--wc-radius-lg); }
+.wc-paper--rounded-xl { border-radius: var(--wc-radius-xl); }
+.wc-paper--rounded-2xl { border-radius: var(--wc-radius-2xl); }
+.wc-paper--rounded-full { border-radius: var(--wc-radius-full); }
 
-.wc-paper--elevation-6 {
-  box-shadow: var(--wc-paper-shadow-2xl);
-}
+.wc-paper--sm { padding: 12px; }
+.wc-paper--md { padding: 16px; }
+.wc-paper--lg { padding: 24px; }
+.wc-paper--xl { padding: 32px; }
 
-/* 形状变体 */
-.wc-paper--square {
-  border-radius: 0;
-}
-
-.wc-paper--rounded-sm {
-  border-radius: var(--wc-paper-border-radius-sm);
-}
-
-.wc-paper--rounded-lg {
-  border-radius: var(--wc-paper-border-radius);
-}
-
-.wc-paper--rounded-xl {
-  border-radius: var(--wc-radius-xl, 0.75rem);
-}
-
-.wc-paper--rounded-2xl {
-  border-radius: var(--wc-radius-2xl, 1rem);
-}
-
-.wc-paper--rounded-full {
-  border-radius: 9999px;
-}
-
-/* 尺寸变体 */
-.wc-paper--sm {
-  padding: 0.75rem;
-}
-
-.wc-paper--md {
-  padding: 1rem;
-}
-
-.wc-paper--lg {
-  padding: 1.5rem;
-}
-
-.wc-paper--xl {
-  padding: 2rem;
-}
-
-/* 颜色变体 */
 .wc-paper--primary {
-  background-color: var(--wc-primary-50, #eff6ff);
-  border-color: var(--wc-primary-200, #bfdbfe);
+  --wc-paper-bg: var(--wc-accent-subtle);
+  --wc-paper-fg: var(--wc-text-primary);
 }
 
 .wc-paper--success {
-  background-color: var(--wc-success-50, #ecfdf5);
-  border-color: var(--wc-success-200, #bbf7d0);
+  --wc-paper-bg: var(--wc-bg-success-subtle);
+  --wc-paper-fg: var(--wc-text-success);
 }
 
 .wc-paper--warning {
-  background-color: var(--wc-warning-50, #fffbeb);
-  border-color: var(--wc-warning-200, #fed7aa);
+  --wc-paper-bg: var(--wc-bg-warning-subtle);
+  --wc-paper-fg: var(--wc-text-warning);
 }
 
 .wc-paper--error {
-  background-color: var(--wc-error-50, #fef2f2);
-  border-color: var(--wc-error-200, #fecaca);
+  --wc-paper-bg: var(--wc-bg-error-subtle);
+  --wc-paper-fg: var(--wc-text-error);
 }
 
 .wc-paper--info {
-  background-color: var(--wc-info-50, #f0f9ff);
-  border-color: var(--wc-info-200, #bae6fd);
+  --wc-paper-bg: var(--wc-bg-info-subtle);
+  --wc-paper-fg: var(--wc-text-info);
 }
 
-/* 交互状态 */
-.wc-paper--hoverable {
-  cursor: pointer;
-  transition: var(--wc-paper-transition), transform 0.2s ease;
-}
+.wc-paper--hoverable,
+.wc-paper--clickable { cursor: pointer; }
 
-.wc-paper--hoverable:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--wc-paper-shadow-lg);
-}
+.wc-paper--hoverable:hover,
+.wc-paper--clickable:hover { background: var(--wc-action-hover); }
 
-.wc-paper--clickable {
-  cursor: pointer;
-  user-select: none;
-}
+.wc-paper--clickable:active { background: var(--wc-action-active); }
 
-.wc-paper--clickable:active {
-  transform: scale(0.98);
-}
+.wc-paper:focus { outline: none; }
 
-/* 特殊效果 */
-.wc-paper--gradient {
-  background: linear-gradient(135deg, var(--wc-paper-bg) 0%, var(--wc-neutral-50, #f9fafb) 100%);
-}
-
-.wc-paper--frosted {
-  backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.wc-paper--textured {
-  background-image: 
-    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0);
-  background-size: 20px 20px;
-}
-
-/* 内容区域 */
-.wc-paper__header {
-  padding: 1rem 1rem 0 1rem;
-  border-bottom: 1px solid var(--wc-paper-border-color);
-  margin-bottom: 1rem;
-}
-
-.wc-paper__content {
-  padding: 1rem;
-}
-
-.wc-paper__footer {
-  padding: 0 1rem 1rem 1rem;
-  border-top: 1px solid var(--wc-paper-border-color);
-  margin-top: 1rem;
-}
-
-/* 响应式设计 */
-@media (max-width: 640px) {
-  .wc-paper--sm {
-    padding: 0.5rem;
-  }
-  
-  .wc-paper--md {
-    padding: 0.75rem;
-  }
-  
-  .wc-paper--lg {
-    padding: 1rem;
-  }
-  
-  .wc-paper--xl {
-    padding: 1.5rem;
-  }
-}
-
-/* 可访问性 */
-.wc-paper:focus {
-  outline: 2px solid var(--wc-primary-500, #3b82f6);
+.wc-paper:focus-visible {
+  outline: 2px solid var(--wc-focus-ring);
   outline-offset: 2px;
 }
 
-.wc-paper[tabindex] {
-  cursor: pointer;
+.wc-paper--gradient {
+  background: linear-gradient(135deg, var(--wc-paper-bg), var(--wc-surface-subtle));
 }
 
-/* 深色模式特定样式 */
-.dark .wc-paper--primary {
-  background-color: var(--wc-primary-900, #1e3a8a);
-  border-color: var(--wc-primary-700, #1d4ed8);
+.wc-paper--frosted {
+  background: color-mix(in srgb, var(--wc-surface-overlay) 82%, transparent);
+  backdrop-filter: blur(12px);
 }
 
-.dark .wc-paper--success {
-  background-color: var(--wc-success-900, #064e3b);
-  border-color: var(--wc-success-700, #047857);
+.wc-paper--textured {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    color-mix(in srgb, currentColor 12%, transparent) 1px,
+    transparent 0
+  );
+  background-size: 20px 20px;
 }
 
-.dark .wc-paper--warning {
-  background-color: var(--wc-warning-900, #78350f);
-  border-color: var(--wc-warning-700, #a16207);
-}
+.wc-paper__header,
+.wc-paper__content,
+.wc-paper__footer { padding: 16px; }
 
-.dark .wc-paper--error {
-  background-color: var(--wc-error-900, #7f1d1d);
-  border-color: var(--wc-error-700, #b91c1c);
-}
+.wc-paper__header { padding-bottom: 0; }
+.wc-paper__footer { padding-top: 0; }
 
-.dark .wc-paper--info {
-  background-color: var(--wc-info-900, #0c4a6e);
-  border-color: var(--wc-info-700, #0369a1);
-}
-
-.dark .wc-paper--frosted {
-  background-color: rgba(31, 41, 55, 0.8);
-  border: 1px solid rgba(55, 65, 81, 0.3);
-}
-
-.dark .wc-paper--gradient {
-  background: linear-gradient(135deg, var(--wc-paper-bg) 0%, var(--wc-neutral-700, #374151) 100%);
-}
-
-/* 高对比度模式 */
-@media (prefers-contrast: high) {
-  .wc-paper {
-    border: 2px solid var(--wc-neutral-900, #111827);
-  }
-  
-  .wc-paper--outlined {
-    border-width: 2px;
-  }
-}
-
-/* 减少动画模式 */
 @media (prefers-reduced-motion: reduce) {
-  .wc-paper,
-  .wc-paper--hoverable,
-  .wc-paper--clickable {
-    transition: none;
-  }
-  
-  .wc-paper--hoverable:hover {
-    transform: none;
-  }
-  
-  .wc-paper--clickable:active {
-    transform: none;
-  }
+  .wc-paper { transition: none; }
 }
 
-/* 打印样式 */
 @media print {
   .wc-paper {
-    background: white !important;
     color: black !important;
-    border: 1px solid #000 !important;
+    background: white !important;
     box-shadow: none !important;
   }
-} 
+}

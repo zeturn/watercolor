@@ -6,6 +6,8 @@
     :style="skeletonStyles"
     role="status"
     aria-live="polite"
+    aria-label="正在加载"
+    aria-busy="true"
   />
   <template v-else>
     <slot />
@@ -97,73 +99,3 @@ const skeletonStyles = computed(() => {
   return styles
 })
 </script>
-
-<style scoped>
-/* Variant shapes */
-.wc-skeleton {
-  background-color: var(--wc-neutral-200);
-  display: block;
-  position: relative;
-  overflow: hidden;
-}
-
-.wc-skeleton--text {
-  border-radius: 4px;
-}
-
-.wc-skeleton--rectangular {
-  border-radius: 4px;
-}
-
-.wc-skeleton--rounded {
-  border-radius: 8px;
-}
-
-.wc-skeleton--circular {
-  border-radius: 50%;
-}
-
-/* Pulse animation */
-.wc-skeleton--pulse {
-  animation: wc-skeleton-pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes wc-skeleton-pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
-}
-
-/* Wave animation */
-.wc-skeleton--wave::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  animation: wc-skeleton-wave 1.6s linear infinite;
-}
-
-@keyframes wc-skeleton-wave {
-  0% {
-    transform: translateX(-100%);
-  }
-  50% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-/* Dark mode */
-.dark .wc-skeleton {
-  background-color: var(--wc-neutral-700);
-}
-</style> 

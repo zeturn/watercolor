@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react'
+import React, { useState, useRef, useEffect, useCallback, useId } from 'react'
 import ReactDOM from 'react-dom'
 import './style.css'
 
@@ -21,6 +21,7 @@ export default function Popover({
   children,
   className = '',
 }) {
+  const popoverId = useId()
   const [internalOpen, setInternalOpen] = useState(false)
   const isControlled = open !== undefined && open !== null
 
@@ -112,9 +113,19 @@ export default function Popover({
       ref: triggerRef,
       onClick: togglePopover,
       'aria-expanded': actualOpen,
+      'aria-haspopup': 'dialog',
+      'aria-controls': popoverId,
     })
   ) : (
-    <button ref={triggerRef} className="wc-popover-trigger" onClick={togglePopover} aria-expanded={actualOpen}>
+    <button
+      ref={triggerRef}
+      type="button"
+      className="wc-popover-trigger"
+      onClick={togglePopover}
+      aria-expanded={actualOpen}
+      aria-haspopup="dialog"
+      aria-controls={popoverId}
+    >
       {triggerText}
     </button>
   )
@@ -124,7 +135,15 @@ export default function Popover({
       {triggerNode}
       {actualOpen &&
         ReactDOM.createPortal(
-          <div ref={popoverRef} className={`wc-popover-content wc-popover-content--${placement}`.trim()} role="dialog">
+          <div
+            ref={popoverRef}
+            id={popoverId}
+            className={`wc-popover-content wc-popover-content--${placement}`.trim()}
+            role="dialog"
+            aria-label="弹出内容"
+            tabIndex={-1}
+            onKeyDown={(event) => event.key === 'Escape' && closePopover()}
+          >
             {children}
           </div>,
           document.body

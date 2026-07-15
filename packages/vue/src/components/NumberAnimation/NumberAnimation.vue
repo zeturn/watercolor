@@ -4,6 +4,7 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import './style.css'
 
 const props = defineProps({
   value: {
@@ -225,27 +226,3 @@ defineExpose({
   stop: stopAnimation
 })
 </script>
-
-<style scoped>
-.wc-number-animation {
-  font-variant-numeric: tabular-nums;
-  display: inline-block;
-  transition: all 0.3s ease;
-}
-
-.wc-number-animation--playing {
-  transform: scale(1.05);
-}
-
-.wc-number-animation--ease-in {
-  transition-timing-function: ease-in;
-}
-
-.wc-number-animation--ease-out {
-  transition-timing-function: ease-out;
-}
-
-.wc-number-animation--ease-in-out {
-  transition-timing-function: ease-in-out;
-}
-</style> 

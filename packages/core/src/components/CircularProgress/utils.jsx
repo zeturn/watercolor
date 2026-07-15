@@ -48,7 +48,7 @@ export function calculateCircleParams(size, thickness) {
   const center = sizeNumber / 2
   const radius = (sizeNumber - thickness) / 2
   const circumference = 2 * Math.PI * radius
-  
+
   return {
     sizeNumber,
     center,
@@ -86,25 +86,19 @@ export function getCircularProgressClasses(props) {
     className = ''
   } = props
 
-  const classes = [
-    'wc-circular-progress',
-    'inline-flex',
-    'relative',
-    'items-center',
-    'justify-center'
-  ]
-  
+  const classes = ['wc-circular-progress']
+
   classes.push(`wc-circular-progress--${color}`)
-  
+
   if (variant === 'indeterminate') {
     classes.push('wc-circular-progress--indeterminate')
   }
   if (overlay) classes.push('wc-circular-progress--overlay')
   if (centered) classes.push('wc-circular-progress--centered')
   if (inline) classes.push('wc-circular-progress--inline')
-  
+
   if (className) classes.push(className)
-  
+
   return classes.filter(Boolean)
 }
 
@@ -115,11 +109,11 @@ export function getCircularProgressClasses(props) {
  */
 export function getCircleClasses(variant) {
   const classes = ['wc-circular-progress-circle']
-  
+
   if (variant === 'indeterminate') {
     classes.push('wc-circular-progress-circle--indeterminate')
   }
-  
+
   return classes.filter(Boolean)
 }
 
@@ -139,16 +133,16 @@ export function formatDisplayValue(value) {
  */
 export function getAriaProps(props) {
   const { value = 0, variant } = props
-  
+
   const ariaProps = {
     role: 'progressbar',
     'aria-valuemin': 0,
     'aria-valuemax': 100
   }
-  
+
   if (variant === 'determinate') {
     ariaProps['aria-valuenow'] = value
   }
-  
+
   return ariaProps
-} 
+}

@@ -56,15 +56,14 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
-import { 
-  isValidVariant, 
-  isValidSize, 
-  isValidType, 
+import { computed } from 'vue'
+import {
+  isValidVariant,
+  isValidSize,
+  isValidType,
   isValidRounded,
   isValidButtonStyle,
   getButtonClasses,
-  getVariantStyles,
   handleButtonClick as utilHandleButtonClick
 } from './utils.js'
 import './style.css'
@@ -77,7 +76,7 @@ const props = defineProps({
   },
   buttonStyle: {
     type: String,
-    default: 'filled',
+    default: 'default',
     validator: isValidButtonStyle
   },
   size: {
@@ -135,9 +134,6 @@ const props = defineProps({
 
 const emit = defineEmits(['click', 'mouseover', 'mouseout', 'focus', 'blur'])
 
-const isHovered = ref(false)
-const isFocused = ref(false)
-
 const buttonClasses = computed(() => getButtonClasses(props))
 
 const buttonStyles = computed(() => ({}))
@@ -154,22 +150,18 @@ const handleClick = (event) => {
 }
 
 const handleMouseOver = (event) => {
-  isHovered.value = true
   emit('mouseover', event)
 }
 
 const handleMouseOut = (event) => {
-  isHovered.value = false
   emit('mouseout', event)
 }
 
 const handleFocus = (event) => {
-  isFocused.value = true
   emit('focus', event)
 }
 
 const handleBlur = (event) => {
-  isFocused.value = false
   emit('blur', event)
 }
-</script> 
+</script>

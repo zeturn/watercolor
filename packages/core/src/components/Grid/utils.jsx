@@ -5,42 +5,42 @@
 
 // 断点映射
 export const BREAKPOINTS = {
-  xs: '',
-  sm: 'sm:',
-  md: 'md:',
-  lg: 'lg:',
-  xl: 'xl:'
+  xs: 'xs',
+  sm: 'sm',
+  md: 'md',
+  lg: 'lg',
+  xl: 'xl'
 }
 
 // 方向映射
 export const DIRECTION_MAP = {
-  'row': 'flex-row',
-  'column': 'flex-col',
-  'row-reverse': 'flex-row-reverse',
-  'column-reverse': 'flex-col-reverse'
+  'row': 'wc-grid-container--row',
+  'column': 'wc-grid-container--column',
+  'row-reverse': 'wc-grid-container--row-reverse',
+  'column-reverse': 'wc-grid-container--column-reverse'
 }
 
 // 水平对齐映射
 export const JUSTIFY_CONTENT_MAP = {
-  'flex-start': 'justify-start',
-  'center': 'justify-center',
-  'flex-end': 'justify-end',
-  'space-between': 'justify-between',
-  'space-around': 'justify-around',
-  'space-evenly': 'justify-evenly'
+  'flex-start': 'wc-grid-container--justify-start',
+  'center': 'wc-grid-container--justify-center',
+  'flex-end': 'wc-grid-container--justify-end',
+  'space-between': 'wc-grid-container--justify-between',
+  'space-around': 'wc-grid-container--justify-around',
+  'space-evenly': 'wc-grid-container--justify-evenly'
 }
 
 // 垂直对齐映射
 export const ALIGN_ITEMS_MAP = {
-  'flex-start': 'items-start',
-  'center': 'items-center',
-  'flex-end': 'items-end',
-  'stretch': 'items-stretch',
-  'baseline': 'items-baseline'
+  'flex-start': 'wc-grid-container--align-start',
+  'center': 'wc-grid-container--align-center',
+  'flex-end': 'wc-grid-container--align-end',
+  'stretch': 'wc-grid-container--align-stretch',
+  'baseline': 'wc-grid-container--align-baseline'
 }
 
 // 有效的间距值
-export const VALID_SPACING_VALUES = ['1', '2', '3', '4', '5', '6', '8', '10', '12']
+export const VALID_SPACING_VALUES = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
 
 /**
  * 获取容器类名
@@ -49,7 +49,7 @@ export const VALID_SPACING_VALUES = ['1', '2', '3', '4', '5', '6', '8', '10', '1
  */
 export const getContainerClasses = (props) => {
   const { direction = 'row', justifyContent = 'flex-start', alignItems = 'stretch', spacing = 0 } = props
-  const classes = ['flex', 'flex-wrap']
+  const classes = ['wc-grid', 'wc-grid-container']
   
   // 添加方向类
   if (DIRECTION_MAP[direction]) {
@@ -67,9 +67,7 @@ export const getContainerClasses = (props) => {
   }
   
   // 添加间距类
-  if (spacing > 0) {
-    classes.push(...getSpacingClasses(spacing))
-  }
+  classes.push(...getSpacingClasses(spacing))
   
   return classes
 }
@@ -81,7 +79,7 @@ export const getContainerClasses = (props) => {
  */
 export const getItemClasses = (props) => {
   const { xs, sm, md, lg, xl } = props
-  const classes = ['flex-shrink-0']
+  const classes = ['wc-grid', 'wc-grid-item']
   
   // 添加响应式宽度类
   Object.entries(BREAKPOINTS).forEach(([breakpoint, prefix]) => {
@@ -100,15 +98,12 @@ export const getItemClasses = (props) => {
  * @returns {Array} 类名数组
  */
 export const getSpacingClasses = (spacing) => {
-  const spacingValue = spacing.toString()
-  
-  if (VALID_SPACING_VALUES.includes(spacingValue)) {
-    return [`gap-${spacingValue}`]
-  }
-  
-  // 如果不是预设值，计算基于4的倍数
-  const calculatedSpacing = Math.floor(spacing / 4)
-  return [`gap-${calculatedSpacing}`]
+  const numericSpacing = Number(spacing)
+  const normalizedSpacing = Number.isFinite(numericSpacing)
+    ? Math.max(0, Math.min(12, Math.round(numericSpacing)))
+    : 0
+
+  return [`wc-grid-container--spacing-${normalizedSpacing}`]
 }
 
 /**
@@ -117,18 +112,25 @@ export const getSpacingClasses = (spacing) => {
  * @param {string} prefix - 断点前缀
  * @returns {Array} 类名数组
  */
-export const getBreakpointClasses = (value, prefix) => {
+export const getBreakpointClasses = (value, breakpoint) => {
+  // Vue casts an absent prop to false when Boolean is one of its accepted
+  // types. Treat false/null as "not configured" instead of coercing them to
+  // a numeric column span.
+  if (value === false || value === null || value === undefined) {
+    return []
+  }
+
   if (value === 'auto') {
-    return [`${prefix}flex-auto`]
+    return [`wc-grid-item--${breakpoint}-auto`]
   }
   
   if (value === true) {
-    return [`${prefix}flex-1`]
+    return [`wc-grid-item--${breakpoint}-true`]
   }
   
-  if (typeof value === 'number') {
-    const width = Math.round((value / 12) * 100)
-    return [`${prefix}w-${getWidthClass(width)}`]
+  const numericValue = Number(value)
+  if (Number.isFinite(numericValue) && numericValue >= 1 && numericValue <= 12) {
+    return [`wc-grid-item--${breakpoint}-${Math.round(numericValue)}`]
   }
   
   return []
@@ -264,8 +266,16 @@ export const formatGridProps = (props) => {
   
   // 格式化断点值
   ['xs', 'sm', 'md', 'lg', 'xl'].forEach(breakpoint => {
-    if (formatted[breakpoint] !== undefined && formatted[breakpoint] !== 'auto' && formatted[breakpoint] !== true) {
-      const value = Number(formatted[breakpoint])
+    const breakpointValue = formatted[breakpoint]
+
+    if (
+      breakpointValue !== undefined &&
+      breakpointValue !== null &&
+      breakpointValue !== false &&
+      breakpointValue !== 'auto' &&
+      breakpointValue !== true
+    ) {
+      const value = Number(breakpointValue)
       if (!isNaN(value)) {
         formatted[breakpoint] = Math.max(1, Math.min(12, value))
       }
@@ -405,4 +415,4 @@ export const debugGridConfig = (props) => {
       }
     }
   }
-} 
+}

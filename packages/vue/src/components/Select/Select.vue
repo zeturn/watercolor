@@ -3,7 +3,7 @@
     <!-- Label -->
     <label 
       v-if="label" 
-      :for="selectId" 
+      :id="`${selectId}-label`"
       :class="labelClasses"
     >
       {{ label }}
@@ -16,7 +16,17 @@
     <!-- Select Container -->
     <div
       :class="selectContainerClasses"
+      :id="selectId"
+      :tabindex="disabled ? -1 : 0"
+      role="combobox"
+      aria-haspopup="listbox"
+      :aria-expanded="open"
+      :aria-disabled="disabled"
+      :aria-required="required"
+      :aria-labelledby="label ? `${selectId}-label` : undefined"
+      :aria-controls="`${selectId}-options`"
       @click="toggleDropdown"
+      @keydown="handleKeydown"
     >
       <!-- Display Value -->
       <div class="wc-select__value">
@@ -46,12 +56,17 @@
     <div
       v-if="open"
       class="wc-select__dropdown"
+      :id="`${selectId}-options`"
+      role="listbox"
+      :aria-multiselectable="multiple || undefined"
     >
       <div class="wc-select__options">
         <div
           v-for="option in options"
           :key="getOptionValue(option)"
           :class="getOptionClasses(option)"
+          role="option"
+          :aria-selected="isSelected(option)"
           @click="selectOption(option)"
         >
           <span class="wc-select__option-text">{{ getOptionLabel(option) }}</span>
@@ -138,7 +153,7 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: 'outlined',
+    default: 'filled',
     validator: (value) => ['outlined', 'filled', 'standard'].includes(value)
   },
   multiple: {
@@ -239,6 +254,16 @@ const toggleDropdown = () => {
   open.value = !open.value
 }
 
+const handleKeydown = (event) => {
+  if (props.disabled) return
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    toggleDropdown()
+  } else if (event.key === 'Escape') {
+    open.value = false
+  }
+}
+
 const selectOption = (option) => {
   const value = getOptionValue(option)
   
@@ -275,5 +300,3 @@ onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
 })
 </script>
-
- 

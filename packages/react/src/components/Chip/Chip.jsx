@@ -1,6 +1,6 @@
 import React from 'react'
 import './style.css'
-import { getChipClasses, handleChipClick, handleChipDelete, getDefaultDeleteIcon } from './utils.jsx'
+import { getChipClasses, handleChipClick, handleChipDelete, getDefaultDeleteIconPath } from './utils.jsx'
 
 export default function Chip({
   label = '',
@@ -15,13 +15,16 @@ export default function Chip({
   onClick,
   onDelete,
   children,
+  className = '',
+  ...rest
 }) {
   const chipClasses = getChipClasses({
     size,
     variant,
     color,
     clickable,
-    disabled
+    disabled,
+    className
   })
 
   const handleClick = (e) => {
@@ -32,17 +35,29 @@ export default function Chip({
     handleChipDelete(e, disabled, onDelete)
   }
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      handleClick(event)
+    }
+  }
+
   return (
     <div
       className={chipClasses}
+      role={clickable ? 'button' : undefined}
+      tabIndex={clickable && !disabled ? 0 : undefined}
+      aria-disabled={clickable ? disabled : undefined}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      {...rest}
     >
       {(children && children.avatar) || avatar ? (
         <div className="wc-chip-avatar">
           {children && children.avatar ? (
             children.avatar
           ) : (
-            <img src={avatar} alt="" className="w-full h-full object-cover rounded-full" />
+            <img src={avatar} alt="" className="wc-chip-avatar-image" />
           )}
         </div>
       ) : null}
@@ -54,7 +69,11 @@ export default function Chip({
           className="wc-chip-delete"
           aria-label="删除"
         >
-          {deleteIcon || getDefaultDeleteIcon()}
+          {deleteIcon || (
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" className="wc-chip-delete-icon" aria-hidden="true">
+              <path fillRule="evenodd" d={getDefaultDeleteIconPath()} clipRule="evenodd" />
+            </svg>
+          )}
         </button>
       )}
     </div>

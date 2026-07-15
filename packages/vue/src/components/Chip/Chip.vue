@@ -1,7 +1,12 @@
 <template>
   <div
     :class="chipClasses"
+    :role="clickable ? 'button' : undefined"
+    :tabindex="clickable && !disabled ? 0 : undefined"
+    :aria-disabled="clickable ? disabled : undefined"
     @click="handleClick"
+    @keydown.enter="handleClick"
+    @keydown.space.prevent="handleClick"
   >
     <!-- Avatar/Icon -->
     <div
@@ -13,18 +18,18 @@
           v-if="avatar"
           :src="avatar"
           alt=""
-          class="w-full h-full object-cover rounded-full"
+          class="wc-chip-avatar-image"
         >
       </slot>
     </div>
-    
+
     <!-- Label -->
     <span class="wc-chip-label">
       <slot>{{ label }}</slot>
     </span>
-    
+
     <!-- Delete Icon -->
-    <button 
+    <button
       v-if="deletable"
       type="button"
       class="wc-chip-delete"
@@ -33,7 +38,7 @@
     >
       <slot name="deleteIcon">
         <svg
-          class="w-4 h-4"
+          class="wc-chip-delete-icon"
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -97,7 +102,7 @@ const props = defineProps({
 
 const emit = defineEmits(['click', 'delete'])
 
-const chipClasses = computed(() => 
+const chipClasses = computed(() =>
   getChipClasses(props)
 )
 
@@ -108,4 +113,4 @@ const handleClick = (event) => {
 const handleDelete = (event) => {
   handleChipDelete(event, props.disabled, (e) => emit('delete', e))
 }
-</script> 
+</script>

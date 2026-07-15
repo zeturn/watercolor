@@ -10,7 +10,10 @@
     >
       <button
         class="wc-popover-trigger"
+        type="button"
         :aria-expanded="isOpen.toString()"
+        aria-haspopup="dialog"
+        :aria-controls="popoverId"
         @click="toggle"
       >
         {{ triggerText }}
@@ -24,8 +27,11 @@
           ref="popoverRef"
           class="wc-popover-content"
           :class="[`wc-popover-content--${placement}`]"
+          :id="popoverId"
           role="dialog"
-          v-outside="close"
+          aria-label="弹出内容"
+          tabindex="-1"
+          @keydown.esc="close"
         >
           <slot>
             这是默认的弹出内容。
@@ -37,26 +43,11 @@
 </template>
 
 <script>
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick, useId, watch } from 'vue'
 import './style.css'
 
 export default {
   name: 'Popover',
-  directives: {
-    outside: {
-      beforeMount(el, binding) {
-        el.__clickOutside__ = (e) => {
-          if (!el.contains(e.target)) {
-            binding.value(e)
-          }
-        }
-        document.addEventListener('mousedown', el.__clickOutside__)
-      },
-      unmounted(el) {
-        document.removeEventListener('mousedown', el.__clickOutside__)
-      },
-    },
-  },
   props: {
     modelValue: {
       type: Boolean,
@@ -81,6 +72,7 @@ export default {
     const isOpen = ref(props.modelValue)
     const triggerWrapper = ref(null)
     const popoverRef = ref(null)
+    const popoverId = useId()
 
     const open = () => {
       if (isOpen.value) return
@@ -99,6 +91,13 @@ export default {
 
     const toggle = () => {
       isOpen.value ? close() : open()
+    }
+
+    const handleDocumentPointerDown = (event) => {
+      if (!isOpen.value) return
+      if (triggerWrapper.value?.contains(event.target)) return
+      if (popoverRef.value?.contains(event.target)) return
+      close()
     }
 
     const positionPopover = () => {
@@ -139,14 +138,21 @@ export default {
       if (isOpen.value) nextTick(positionPopover)
       window.addEventListener('resize', positionPopover)
       window.addEventListener('scroll', positionPopover)
+      document.addEventListener('mousedown', handleDocumentPointerDown)
     })
 
     onBeforeUnmount(() => {
       window.removeEventListener('resize', positionPopover)
       window.removeEventListener('scroll', positionPopover)
+      document.removeEventListener('mousedown', handleDocumentPointerDown)
     })
 
-    return { isOpen, open, close, toggle, triggerWrapper, popoverRef }
+    watch(() => props.modelValue, value => {
+      isOpen.value = value
+      if (value) nextTick(positionPopover)
+    })
+
+    return { isOpen, open, close, toggle, triggerWrapper, popoverRef, popoverId }
   },
 }
-</script> 
+</script>

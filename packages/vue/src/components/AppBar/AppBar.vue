@@ -20,7 +20,7 @@ const props = defineProps({
   },
   elevation: {
     type: Number,
-    default: 4,
+    default: 0,
   },
   variant: {
     type: String,
@@ -37,5 +37,3 @@ const props = defineProps({
   }
 })
 </script>
-
-<style src="./style.css"></style> 

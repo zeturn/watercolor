@@ -1,75 +1,63 @@
-/* Badge 组件样式 */
 .wc-badge {
+  --wc-badge-tone: var(--wc-text-brand);
+  --wc-badge-tint: var(--wc-accent-subtle);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: var(--wc-font-weight-medium);
+  border-radius: var(--wc-radius-md);
+  background: var(--wc-badge-tint);
+  color: var(--wc-badge-tone);
   font-family: var(--wc-font-family);
-  border-radius: var(--wc-radius-md, 8px);
+  font-weight: var(--wc-font-weight-medium);
+  line-height: 1.2;
   white-space: nowrap;
   vertical-align: middle;
 }
 
-/* Size variants */
-.wc-badge--sm {
-  padding: 2px 8px;
-  font-size: var(--wc-font-size-sm);
-  line-height: 1.2;
+.wc-badge--secondary {
+  --wc-badge-tone: var(--wc-text-secondary);
+  --wc-badge-tint: var(--wc-surface-subtle);
 }
 
-.wc-badge--md {
-  padding: 4px 10px;
-  font-size: var(--wc-font-size-sm);
-  line-height: 1.2;
+.wc-badge--success {
+  --wc-badge-tone: var(--wc-text-success);
+  --wc-badge-tint: var(--wc-bg-success-subtle);
 }
 
-.wc-badge--lg {
-  padding: 6px 12px;
-  font-size: var(--wc-font-size-sm);
-  line-height: 1.2;
+.wc-badge--warning,
+.wc-badge--orange {
+  --wc-badge-tone: var(--wc-text-warning);
+  --wc-badge-tint: var(--wc-bg-warning-subtle);
 }
 
-/* Dot variants */
-.wc-badge--dot-sm {
-  width: 8px;
-  height: 8px;
-  padding: 0;
-  border-radius: 50%;
+.wc-badge--error,
+.wc-badge--pink {
+  --wc-badge-tone: var(--wc-text-error);
+  --wc-badge-tint: var(--wc-bg-error-subtle);
 }
 
-.wc-badge--dot-md {
-  width: 10px;
-  height: 10px;
-  padding: 0;
-  border-radius: 50%;
+.wc-badge--cyan {
+  --wc-badge-tone: var(--wc-text-info);
+  --wc-badge-tint: var(--wc-bg-info-subtle);
 }
 
+.wc-badge--purple {
+  --wc-badge-tone: var(--wc-text-brand);
+  --wc-badge-tint: var(--wc-accent-subtle);
+}
+
+.wc-badge--sm { padding: 2px 6px; font-size: var(--wc-font-size-xs); }
+.wc-badge--md { padding: 3px 8px; font-size: var(--wc-font-size-xs); }
+.wc-badge--lg { padding: 4px 10px; font-size: var(--wc-font-size-sm); }
+
+.wc-badge--dot-sm,
+.wc-badge--dot-md,
 .wc-badge--dot-lg {
-  width: 12px;
-  height: 12px;
   padding: 0;
-  border-radius: 50%;
+  border-radius: var(--wc-radius-full);
+  background: var(--wc-badge-tone);
 }
 
-/* Color variants (Soft style by default) */
-.wc-badge--primary   { background-color: var(--wc-primary-100, #dbeafe); color: var(--wc-primary-700, #1d4ed8); }
-.wc-badge--secondary { background-color: var(--wc-secondary-100, #f3f4f6); color: var(--wc-secondary-700, #374151); }
-.wc-badge--success   { background-color: var(--wc-success-100, #d1fae5); color: var(--wc-success-700, #047857); }
-.wc-badge--warning   { background-color: var(--wc-warning-100, #fef3c7); color: var(--wc-warning-700, #b45309); }
-.wc-badge--error     { background-color: var(--wc-error-100, #fee2e2); color: var(--wc-error-700, #b91c1c); }
-.wc-badge--purple    { background-color: var(--wc-purple-100, #f3e8ff); color: var(--wc-purple-700, #7e22ce); }
-.wc-badge--orange    { background-color: var(--wc-orange-100, #ffedd5); color: var(--wc-orange-700, #c2410c); }
-.wc-badge--cyan      { background-color: var(--wc-cyan-100, #cffafe); color: var(--wc-cyan-700, #0e7490); }
-.wc-badge--pink      { background-color: var(--wc-pink-100, #fce7f3); color: var(--wc-pink-700, #be185d); }
-
-/* Dark mode variations for Badge */
-.dark .wc-badge--primary   { background-color: var(--wc-primary-900, #1e3a8a); color: var(--wc-primary-300, #93c5fd); }
-.dark .wc-badge--secondary { background-color: var(--wc-secondary-800, #374151); color: var(--wc-secondary-300, #d1d5db); }
-.dark .wc-badge--success   { background-color: var(--wc-success-900, #064e3b); color: var(--wc-success-300, #6ee7b7); }
-.dark .wc-badge--warning   { background-color: var(--wc-warning-900, #78350f); color: var(--wc-warning-300, #fcd34d); }
-.dark .wc-badge--error     { background-color: var(--wc-error-900, #7f1d1d); color: var(--wc-error-300, #fca5a5); }
-.dark .wc-badge--purple    { background-color: var(--wc-purple-900, #581c87); color: var(--wc-purple-300, #d8b4fe); }
-.dark .wc-badge--orange    { background-color: var(--wc-orange-900, #7c2d12); color: var(--wc-orange-300, #fdba74); }
-.dark .wc-badge--cyan      { background-color: var(--wc-cyan-900, #164e63); color: var(--wc-cyan-300, #67e8f9); }
-.dark .wc-badge--pink      { background-color: var(--wc-pink-900, #831843); color: var(--wc-pink-300, #f9a8d4); }
- 
+.wc-badge--dot-sm { width: 6px; height: 6px; }
+.wc-badge--dot-md { width: 8px; height: 8px; }
+.wc-badge--dot-lg { width: 10px; height: 10px; }

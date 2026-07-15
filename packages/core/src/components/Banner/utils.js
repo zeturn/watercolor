@@ -1,26 +1,6 @@
 // Banner 组件工具函数
 
 /**
- * Banner类型的颜色映射
- */
-export const typeColorClasses = {
-  success: 'bg-success-600 dark:bg-success-500 text-neutral-0',
-  info: 'bg-info-600 dark:bg-info-500 text-neutral-0',
-  warning: 'bg-warning-600 dark:bg-warning-500 text-neutral-0',
-  error: 'bg-error-600 dark:bg-error-500 text-neutral-0',
-}
-
-/**
- * Banner图标映射
- */
-export const iconMap = {
-  success: '✓',
-  info: '📢',
-  warning: '⚠',
-  error: '✕',
-}
-
-/**
  * 有效的Banner类型
  */
 export const validTypes = ['success', 'info', 'warning', 'error']
@@ -61,21 +41,12 @@ export function getBannerClasses(type, position, sticky) {
     `wc-banner--${type}`,
     `wc-banner--${position}`
   ]
-  
+
   if (sticky) {
     classes.push('wc-banner--sticky')
   }
-  
-  return classes.join(' ')
-}
 
-/**
- * 获取Banner图标
- * @param {string} type - Banner类型
- * @returns {string} 图标字符
- */
-export function getBannerIcon(type) {
-  return iconMap[type] || iconMap.info
+  return classes.join(' ')
 }
 
 /**
@@ -107,4 +78,4 @@ export function handleBannerAction(onAction) {
   if (onAction) {
     onAction()
   }
-} 
+}

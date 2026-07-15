@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useId, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import Button from '../Button/Button.jsx'
 import './style.css'
@@ -53,6 +53,7 @@ const Modal = ({
   
   ...props
 }) => {
+  const modalId = useId()
   const [isVisible, setIsVisible] = useState(visible || open)
   const modalRef = useRef(null)
   const previousActiveElement = useRef(null)
@@ -88,7 +89,7 @@ const Modal = ({
   }
 
   const handleOverlayClick = () => {
-    const shouldClose = maskClosable || closeOnOverlay
+    const shouldClose = maskClosable && closeOnOverlay
     const isDisabled = disableBackdropClick
     
     if (shouldClose && !isDisabled) {
@@ -170,7 +171,7 @@ const Modal = ({
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={title ? 'modal-title' : undefined}
+        aria-labelledby={title ? `${modalId}-title` : undefined}
         tabIndex={-1}
         {...props}
       >
@@ -183,7 +184,9 @@ const Modal = ({
             onClick={handleClose}
             aria-label="关闭"
           >
-            ×
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 6l12 12M18 6 6 18" />
+            </svg>
           </Button>
         )}
 
@@ -192,7 +195,7 @@ const Modal = ({
           <div className="wc-modal__header">
             {header || (
               title && (
-                <h3 id="modal-title" className="wc-modal__title">
+                <h3 id={`${modalId}-title`} className="wc-modal__title">
                   {title}
                 </h3>
               )
@@ -220,4 +223,4 @@ const Modal = ({
 
 Modal.displayName = 'Modal'
 
-export default Modal 
+export default Modal

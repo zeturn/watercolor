@@ -5,7 +5,7 @@ const AppBar = ({
   children,
   position = 'fixed',
   color = 'default',
-  elevation = 4,
+  elevation = 0,
   variant = 'elevation',
   className = '',
   style = {},
@@ -20,4 +20,4 @@ const AppBar = ({
   )
 }
 
-export default AppBar 
+export default AppBar

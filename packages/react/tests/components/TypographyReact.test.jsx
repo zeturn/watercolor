@@ -24,14 +24,22 @@ describe('Typography (React)', () => {
   it('applies color and align props', () => {
     render(<Typography color="primary" align="center">颜色对齐</Typography>)
     const el = screen.getByText('颜色对齐')
-    expect(el.className).toMatch(/text-primary|text-center/)
+    expect(el).toHaveClass(
+      'wc-typography',
+      'wc-typography--color-primary',
+      'wc-typography--align-center'
+    )
   })
 
   it('applies gutterBottom and noWrap', () => {
     render(<Typography gutterBottom noWrap>特殊</Typography>)
     const el = screen.getByText('特殊')
-    expect(el.className).toContain('mb-4')
-    expect(el.className).toContain('truncate')
+    expect(el).toHaveClass('wc-typography--gutter-bottom', 'wc-typography--no-wrap')
+  })
+
+  it('uses a self-contained variant class', () => {
+    render(<Typography variant="h3">可视化标题</Typography>)
+    expect(screen.getByText('可视化标题')).toHaveClass('wc-typography--h3')
   })
 
   it('supports custom component', () => {

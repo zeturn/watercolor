@@ -13,8 +13,8 @@ describe('Grid 组件', () => {
       }
     })
     
-    expect(wrapper.classes()).toContain('flex')
-    expect(wrapper.classes()).toContain('flex-wrap')
+    expect(wrapper.classes()).toContain('wc-grid')
+    expect(wrapper.classes()).toContain('wc-grid-container')
   })
 
   it('支持不同列数', () => {
@@ -28,7 +28,7 @@ describe('Grid 组件', () => {
         },
         slots: { default: '<div>项目</div>' }
       })
-      expect(wrapper.classes()).toContain('flex-shrink-0')
+      expect(wrapper.classes()).toContain(`wc-grid-item--${breakpoint}-6`)
     })
   })
 
@@ -43,10 +43,8 @@ describe('Grid 组件', () => {
         },
         slots: { default: '<div>项目</div>' }
       })
-      expect(wrapper.classes()).toContain('flex')
-      // 检查是否有gap类
-      const hasGapClass = wrapper.classes().some(cls => cls.startsWith('gap-'))
-      expect(hasGapClass).toBe(true)
+      expect(wrapper.classes()).toContain('wc-grid-container')
+      expect(wrapper.classes()).toContain(`wc-grid-container--spacing-${spacing}`)
     })
   })
 
@@ -61,8 +59,7 @@ describe('Grid 组件', () => {
       }
     })
     
-    // 检查是否有gap类或flex类
-    expect(wrapper.classes()).toContain('flex')
+    expect(wrapper.classes()).toContain('wc-grid-container--spacing-5')
   })
 
   it('支持响应式列数', () => {
@@ -79,7 +76,29 @@ describe('Grid 组件', () => {
       }
     })
     
-    expect(wrapper.classes()).toContain('flex-shrink-0')
+    expect(wrapper.classes()).toContain('wc-grid-item--xs-12')
+    expect(wrapper.classes()).toContain('wc-grid-item--sm-6')
+    expect(wrapper.classes()).toContain('wc-grid-item--md-4')
+    expect(wrapper.classes()).toContain('wc-grid-item--lg-3')
+  })
+
+  it('不会把未设置的断点转换成一列宽', () => {
+    const wrapper = mount(Grid, {
+      props: {
+        item: true,
+        xs: 12,
+        md: 4
+      },
+      slots: {
+        default: '<div>响应式项目</div>'
+      }
+    })
+
+    expect(wrapper.classes()).toContain('wc-grid-item--xs-12')
+    expect(wrapper.classes()).toContain('wc-grid-item--md-4')
+    expect(wrapper.classes()).not.toContain('wc-grid-item--sm-1')
+    expect(wrapper.classes()).not.toContain('wc-grid-item--lg-1')
+    expect(wrapper.classes()).not.toContain('wc-grid-item--xl-1')
   })
 
   it('支持响应式间距', () => {
@@ -93,8 +112,8 @@ describe('Grid 组件', () => {
       }
     })
     
-    expect(wrapper.classes()).toContain('flex')
-    expect(wrapper.classes()).toContain('flex-wrap')
+    expect(wrapper.classes()).toContain('wc-grid-container')
+    expect(wrapper.classes()).toContain('wc-grid-container--spacing-2')
   })
 
   it('支持自动填充模式', () => {
@@ -108,7 +127,7 @@ describe('Grid 组件', () => {
       }
     })
     
-    expect(wrapper.classes()).toContain('flex-shrink-0')
+    expect(wrapper.classes()).toContain('wc-grid-item--xs-auto')
   })
 
   it('支持行间距设置', () => {
@@ -122,7 +141,7 @@ describe('Grid 组件', () => {
       }
     })
     
-    expect(wrapper.classes()).toContain('flex')
+    expect(wrapper.classes()).toContain('wc-grid-container--spacing-3')
   })
 
   it('支持列间距设置', () => {
@@ -136,7 +155,7 @@ describe('Grid 组件', () => {
       }
     })
     
-    expect(wrapper.classes()).toContain('flex-wrap')
+    expect(wrapper.classes()).toContain('wc-grid-container--spacing-2')
   })
 
   it('支持垂直对齐', () => {
@@ -151,10 +170,10 @@ describe('Grid 组件', () => {
         slots: { default: '<div>项目</div>' }
       })
       const alignMap = {
-        'flex-start': 'items-start',
-        'center': 'items-center', 
-        'flex-end': 'items-end',
-        'stretch': 'items-stretch'
+        'flex-start': 'wc-grid-container--align-start',
+        'center': 'wc-grid-container--align-center',
+        'flex-end': 'wc-grid-container--align-end',
+        'stretch': 'wc-grid-container--align-stretch'
       }
       expect(wrapper.classes()).toContain(alignMap[align])
     })
@@ -172,12 +191,12 @@ describe('Grid 组件', () => {
         slots: { default: '<div>项目</div>' }
       })
       const justifyMap = {
-        'flex-start': 'justify-start',
-        'center': 'justify-center',
-        'flex-end': 'justify-end', 
-        'space-between': 'justify-between',
-        'space-around': 'justify-around',
-        'space-evenly': 'justify-evenly'
+        'flex-start': 'wc-grid-container--justify-start',
+        'center': 'wc-grid-container--justify-center',
+        'flex-end': 'wc-grid-container--justify-end',
+        'space-between': 'wc-grid-container--justify-between',
+        'space-around': 'wc-grid-container--justify-around',
+        'space-evenly': 'wc-grid-container--justify-evenly'
       }
       expect(wrapper.classes()).toContain(justifyMap[justify])
     })
@@ -194,7 +213,7 @@ describe('Grid 组件', () => {
       }
     })
     
-    expect(wrapper.classes()).toContain('flex-row')
+    expect(wrapper.classes()).toContain('wc-grid-container--row')
   })
 
   it('支持自定义标签', () => {
@@ -238,6 +257,6 @@ describe('Grid 组件', () => {
       }
     })
     
-    expect(wrapper.classes()).toContain('flex-shrink-0')
+    expect(wrapper.classes()).toContain('wc-grid-item--xs-6')
   })
-}) 
+})

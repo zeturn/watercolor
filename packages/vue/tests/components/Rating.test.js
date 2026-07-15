@@ -10,9 +10,9 @@ describe('Rating Component', () => {
       }
     })
 
-    expect(wrapper.find('.rating').exists()).toBe(true)
-    expect(wrapper.findAll('.rating-item')).toHaveLength(5)
-    expect(wrapper.findAll('.rating-item.active')).toHaveLength(3)
+    expect(wrapper.find('.wc-rating').exists()).toBe(true)
+    expect(wrapper.findAll('.wc-rating-item')).toHaveLength(5)
+    expect(wrapper.findAll('.wc-rating-item--active')).toHaveLength(3)
   })
 
   it('displays correct number of stars', () => {
@@ -23,7 +23,7 @@ describe('Rating Component', () => {
       }
     })
 
-    expect(wrapper.findAll('.rating-item')).toHaveLength(5)
+    expect(wrapper.findAll('.wc-rating-item')).toHaveLength(5)
   })
 
   it('emits update:modelValue when star is clicked', async () => {
@@ -33,7 +33,7 @@ describe('Rating Component', () => {
       }
     })
 
-    await wrapper.findAll('.rating-item')[2].trigger('click')
+    await wrapper.findAll('.wc-rating-item')[2].trigger('click')
     expect(wrapper.emitted()).toHaveProperty('update:modelValue')
     expect(wrapper.emitted()['update:modelValue'][0]).toEqual([3])
   })
@@ -45,7 +45,7 @@ describe('Rating Component', () => {
       }
     })
 
-    await wrapper.findAll('.rating-item')[3].trigger('click')
+    await wrapper.findAll('.wc-rating-item')[3].trigger('click')
     expect(wrapper.emitted()).toHaveProperty('change')
     expect(wrapper.emitted()['change'][0]).toEqual([4])
   })
@@ -58,7 +58,7 @@ describe('Rating Component', () => {
       }
     })
 
-    await wrapper.findAll('.rating-item')[4].trigger('click')
+    await wrapper.findAll('.wc-rating-item')[4].trigger('click')
     expect(wrapper.emitted()).not.toHaveProperty('update:modelValue')
   })
 
@@ -70,7 +70,7 @@ describe('Rating Component', () => {
       }
     })
 
-    expect(wrapper.findAll('.rating-item')).toHaveLength(10)
+    expect(wrapper.findAll('.wc-rating-item')).toHaveLength(10)
   })
 
   it('highlights stars on hover', async () => {
@@ -80,13 +80,13 @@ describe('Rating Component', () => {
       }
     })
 
-    await wrapper.findAll('.rating-item')[3].trigger('mouseenter')
+    await wrapper.findAll('.wc-rating-item')[3].trigger('mouseenter')
     
     // 检查内部状态
     expect(wrapper.vm.hovered).toBe(4)
     
     // 检查活跃的星星数量（包括悬停效果）
-    const activeStars = wrapper.findAll('.rating-item.active')
+    const activeStars = wrapper.findAll('.wc-rating-item--active')
     expect(activeStars).toHaveLength(4)
   })
 
@@ -97,10 +97,10 @@ describe('Rating Component', () => {
       }
     })
 
-    await wrapper.findAll('.rating-item')[4].trigger('mouseenter')
+    await wrapper.findAll('.wc-rating-item')[4].trigger('mouseenter')
     expect(wrapper.vm.hovered).toBe(5)
 
-    await wrapper.findAll('.rating-item')[4].trigger('mouseleave')
+    await wrapper.findAll('.wc-rating-item')[4].trigger('mouseleave')
     expect(wrapper.vm.hovered).toBe(0)
   })
 
@@ -112,7 +112,7 @@ describe('Rating Component', () => {
     })
 
     // 点击同一个星星应该清零
-    await wrapper.findAll('.rating-item')[2].trigger('click')
+    await wrapper.findAll('.wc-rating-item')[2].trigger('click')
     expect(wrapper.emitted()['update:modelValue'][0]).toEqual([0])
   })
 
@@ -123,10 +123,10 @@ describe('Rating Component', () => {
       }
     })
 
-    expect(wrapper.find('.rating').attributes('role')).toBe('radiogroup')
-    expect(wrapper.find('.rating').attributes('aria-label')).toBe('评分组件')
+    expect(wrapper.find('.wc-rating').attributes('role')).toBe('radiogroup')
+    expect(wrapper.find('.wc-rating').attributes('aria-label')).toBe('评分组件')
     
-    const stars = wrapper.findAll('.rating-item')
+    const stars = wrapper.findAll('.wc-rating-item')
     expect(stars[1].attributes('role')).toBe('radio')
     expect(stars[1].attributes('aria-checked')).toBe('true')
     expect(stars[2].attributes('aria-checked')).toBe('false')
@@ -140,7 +140,7 @@ describe('Rating Component', () => {
       }
     })
 
-    const stars = wrapper.findAll('.rating-item')
+    const stars = wrapper.findAll('.wc-rating-item')
     stars.forEach(star => {
       expect(star.attributes('disabled')).toBeDefined()
     })
@@ -166,7 +166,7 @@ describe('Rating Component', () => {
       }
     })
 
-    const stars = wrapper.findAll('.rating-item')
+    const stars = wrapper.findAll('.wc-rating-item')
     stars.forEach(star => {
       expect(star.text()).toBe('★')
     })
@@ -179,7 +179,7 @@ describe('Rating Component', () => {
       }
     })
 
-    expect(wrapper.findAll('.rating-item.active')).toHaveLength(0)
+    expect(wrapper.findAll('.wc-rating-item--active')).toHaveLength(0)
   })
 
   it('handles maximum value correctly', () => {
@@ -190,6 +190,6 @@ describe('Rating Component', () => {
       }
     })
 
-    expect(wrapper.findAll('.rating-item.active')).toHaveLength(5)
+    expect(wrapper.findAll('.wc-rating-item--active')).toHaveLength(5)
   })
-}) 
+})

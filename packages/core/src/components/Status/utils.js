@@ -4,7 +4,7 @@
  * 有效的Status状态类型
  */
 export const validStatuses = [
-  'default', 'success', 'error', 'warning', 'info', 
+  'default', 'success', 'error', 'warning', 'info',
   'pending', 'processing', 'cancelled'
 ]
 
@@ -24,46 +24,14 @@ export const validAnimationTypes = [
  * 状态配置
  */
 export const statusConfig = {
-  default: { 
-    text: '默认',
-    color: '#9ca3af',
-    darkColor: '#6b7280'
-  },
-  success: { 
-    text: '成功',
-    color: '#10b981',
-    darkColor: '#059669'
-  },
-  error: { 
-    text: '失败',
-    color: '#ef4444',
-    darkColor: '#dc2626'
-  },
-  warning: { 
-    text: '警告',
-    color: '#f59e0b',
-    darkColor: '#d97706'
-  },
-  info: { 
-    text: '信息',
-    color: '#3b82f6',
-    darkColor: '#2563eb'
-  },
-  pending: { 
-    text: '等待中',
-    color: '#8b5cf6',
-    darkColor: '#7c3aed'
-  },
-  processing: { 
-    text: '进行中',
-    color: '#06b6d4',
-    darkColor: '#0891b2'
-  },
-  cancelled: { 
-    text: '已取消',
-    color: '#64748b',
-    darkColor: '#475569'
-  }
+  default: { text: '默认', color: 'var(--wc-text-tertiary)' },
+  success: { text: '成功', color: 'var(--wc-text-success)' },
+  error: { text: '失败', color: 'var(--wc-text-error)' },
+  warning: { text: '警告', color: 'var(--wc-text-warning)' },
+  info: { text: '信息', color: 'var(--wc-text-info)' },
+  pending: { text: '等待中', color: 'var(--wc-text-brand)' },
+  processing: { text: '进行中', color: 'var(--wc-text-info)' },
+  cancelled: { text: '已取消', color: 'var(--wc-text-disabled)' }
 }
 
 /**
@@ -100,27 +68,27 @@ export function getSafeStatus(status) {
  */
 export function getStatusClasses({ status, size, showText, animated, animationType = 'auto', className }) {
   const safeStatus = getSafeStatus(status)
-  
+
   const classes = [
     'wc-status',
     `wc-status--${safeStatus}`,
     `wc-status--${size}`
   ]
-  
+
   if (showText) {
     classes.push('wc-status--with-text')
   }
-  
+
   if (animated) {
     const finalAnimationType = getAnimationType(safeStatus, animationType)
     classes.push('wc-status--animated', `wc-status--${finalAnimationType}`)
   }
-  
+
   // 添加自定义类名
   if (className) {
     classes.push(className)
   }
-  
+
   return classes.filter(Boolean).join(' ')
 }
 
@@ -139,9 +107,9 @@ export function getStatusText(status) {
  * @param {boolean} isDark - 是否为深色模式
  * @returns {string} 状态颜色
  */
-export function getStatusColor(status, isDark = false) {
+export function getStatusColor(status) {
   const config = statusConfig[status] || statusConfig.default
-  return isDark ? config.darkColor : config.color
+  return config.color
 }
 
 /**
@@ -154,7 +122,7 @@ export function getAnimationType(status, animationType = 'auto') {
   if (animationType !== 'auto' && validAnimationTypes.includes(animationType)) {
     return animationType
   }
-  
+
   // 根据状态自动选择动画类型
   const defaultAnimations = {
     processing: 'spin',
@@ -166,6 +134,6 @@ export function getAnimationType(status, animationType = 'auto') {
     cancelled: 'breathe',
     default: 'glow'
   }
-  
+
   return defaultAnimations[status] || 'pulse'
-} 
+}

@@ -3,40 +3,48 @@
     <transition name="slideover">
       <div
         v-if="model"
-        class="slideover-wrapper"
+        class="wc-slideover-wrapper"
         tabindex="-1"
         @keydown.esc="close"
       >
         <div
-          class="slideover-overlay"
+          class="wc-slideover-overlay"
           @click="close"
         />
         <div
-          class="slideover-panel"
-          :class="[`slideover-${placement}`]"
+          ref="panelRef"
+          class="wc-slideover-panel"
+          :class="[`wc-slideover-${placement}`]"
           :style="panelStyle"
+          role="dialog"
+          aria-modal="true"
+          tabindex="-1"
         >
           <header
             v-if="$slots.header"
-            class="slideover-header"
+            class="wc-slideover-header"
           >
             <slot name="header" />
           </header>
-          <div class="slideover-body">
+          <div class="wc-slideover-body">
             <slot />
           </div>
           <footer
             v-if="$slots.footer"
-            class="slideover-footer"
+            class="wc-slideover-footer"
           >
             <slot name="footer" />
           </footer>
           <button
-            class="slideover-close"
+            ref="closeRef"
+            class="wc-slideover-close"
+            type="button"
             aria-label="关闭"
             @click="close"
           >
-            ✕
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 6l12 12M18 6 6 18" />
+            </svg>
           </button>
         </div>
       </div>
@@ -45,7 +53,8 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import './style.css'
 export default {
   name: 'SlideOver',
   props: {
@@ -65,6 +74,11 @@ export default {
   },
   emits: ['update:modelValue', 'open', 'close'],
   setup(props, { emit }) {
+    const panelRef = ref(null)
+    const closeRef = ref(null)
+    const previousActiveElement = ref(null)
+    let previousOverflow = ''
+
     const model = computed({
       get: () => props.modelValue,
       set: (v) => emit('update:modelValue', v)
@@ -74,53 +88,27 @@ export default {
       emit('close')
     }
     const panelStyle = computed(() => ({ width: typeof props.width === 'number' ? props.width + 'px' : props.width }))
-    return { model, close, panelStyle }
+
+    watch(() => props.modelValue, async (open) => {
+      if (open) {
+        previousActiveElement.value = document.activeElement
+        previousOverflow = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
+        emit('open')
+        await nextTick()
+        if (closeRef.value) closeRef.value.focus()
+        else panelRef.value?.focus()
+      } else {
+        document.body.style.overflow = previousOverflow
+        previousActiveElement.value?.focus?.()
+      }
+    }, { immediate: true })
+
+    onBeforeUnmount(() => {
+      document.body.style.overflow = previousOverflow
+    })
+
+    return { model, close, panelStyle, panelRef, closeRef }
   }
 }
 </script>
-
-<style scoped>
-.slideover-wrapper {
-  position: fixed;
-  inset: 0;
-  z-index: 3000;
-  display: flex;
-}
-.slideover-overlay {
-  flex: 1 1 auto;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(2px);
-}
-.slideover-panel {
-  position: relative;
-  background: var(--wc-neutral-0);
-  max-height: 100vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  /* Flat design: remove shadow */
-}
-.slideover-left { order: 0; }
-.slideover-right { order: 1; }
-.slideover-close {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: none;
-  border: none;
-  font-size: 1.25rem;
-  cursor: pointer;
-}
-.slideover-header, .slideover-footer { padding: 16px; border-bottom: 1px solid var(--wc-neutral-200); }
-.slideover-footer { border-top: 1px solid var(--wc-neutral-200); border-bottom: none; }
-.slideover-body { padding: 16px; flex: 1 1 auto; }
-
-.slideover-enter-active, .slideover-leave-active { transition: transform 0.3s ease, opacity 0.3s ease; }
-.slideover-enter-from, .slideover-leave-to { opacity: 0; }
-.slideover-right.slideover-panel.slideover-enter-from { transform: translateX(100%); }
-.slideover-right.slideover-panel.slideover-leave-to { transform: translateX(100%); }
-.slideover-left.slideover-panel.slideover-enter-from { transform: translateX(-100%); }
-.slideover-left.slideover-panel.slideover-leave-to { transform: translateX(-100%); }
-
-/* Dark mode handled via CSS variables */
-</style> 

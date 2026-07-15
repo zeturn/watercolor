@@ -9,6 +9,7 @@
 
 <script setup>
 import { computed, provide } from 'vue'
+import './style.css'
 
 const props = defineProps({
   disabled: {
@@ -25,7 +26,7 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: 'outlined',
+    default: 'filled',
     validator: (value) => ['outlined', 'filled', 'standard'].includes(value)
   },
   size: {
@@ -72,40 +73,5 @@ const formControlClasses = computed(() => {
 })
 
 // Provide context to child components
-provide('formControlContext', {
-  disabled: props.disabled,
-  error: props.error,
-  required: props.required,
-  variant: props.variant,
-  size: props.size
-})
+provide('formControlContext', props)
 </script>
-
-<style scoped>
-.form-control {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.form-control--full-width {
-  width: 100%;
-}
-
-.form-control--margin-dense {
-  margin-bottom: 8px;
-}
-
-.form-control--margin-normal {
-  margin-bottom: 16px;
-}
-
-.form-control--disabled {
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-.form-control--error {
-  /* Error state will be handled by child components */
-}
-</style> 

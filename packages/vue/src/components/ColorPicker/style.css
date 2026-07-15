@@ -1,91 +1,35 @@
-/* ColorPicker 组件样式 */
 .wc-color-picker {
-  display: inline-flex;
   position: relative;
+  display: inline-grid;
+  width: 36px;
+  height: 36px;
+  padding: 4px;
+  border-radius: var(--wc-radius-md);
+  background: transparent;
   cursor: pointer;
+  transition: background var(--wc-motion-fast) var(--wc-ease-standard);
+  place-items: center;
 }
-
+.wc-color-picker:hover:not(.wc-color-picker--disabled) { background: var(--wc-action-hover); }
+.wc-color-picker--sm { width: 30px; height: 30px; }
+.wc-color-picker--lg { width: 44px; height: 44px; }
+.wc-color-picker__input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .wc-color-picker__preview {
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  border: 2px solid var(--wc-neutral-200, #e5e7eb);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  transition: all 0.2s ease;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--wc-border-default), var(--wc-shadow-sm);
+  transition: transform var(--wc-motion-fast) var(--wc-ease-standard), box-shadow var(--wc-motion-fast) var(--wc-ease-standard);
 }
+.wc-color-picker--sm .wc-color-picker__preview { width: 22px; height: 22px; }
+.wc-color-picker--lg .wc-color-picker__preview { width: 36px; height: 36px; }
+.wc-color-picker--square .wc-color-picker__preview { border-radius: 2px; }
+.wc-color-picker--rounded .wc-color-picker__preview { border-radius: var(--wc-radius-md); }
+.wc-color-picker:hover:not(.wc-color-picker--disabled) .wc-color-picker__preview { transform: scale(1.05); }
+.wc-color-picker__input:focus-visible + .wc-color-picker__preview { box-shadow: inset 0 0 0 1px var(--wc-border-default), 0 0 0 2px var(--wc-focus-ring); }
+.wc-color-picker--disabled { cursor: not-allowed; opacity: 0.45; }
 
-.wc-color-picker__preview:hover {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transform: scale(1.05);
+@media (prefers-reduced-motion: reduce) {
+  .wc-color-picker,
+  .wc-color-picker__preview { transition: none; }
 }
-
-.wc-color-picker__input {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-}
-
-/* Size variants */
-.wc-color-picker--sm .wc-color-picker__preview {
-  width: 32px;
-  height: 32px;
-}
-
-.wc-color-picker--md .wc-color-picker__preview {
-  width: 40px;
-  height: 40px;
-}
-
-.wc-color-picker--lg .wc-color-picker__preview {
-  width: 48px;
-  height: 48px;
-}
-
-/* Shape variants */
-.wc-color-picker--square .wc-color-picker__preview {
-  border-radius: 8px;
-}
-
-.wc-color-picker--rounded .wc-color-picker__preview {
-  border-radius: 12px;
-}
-
-.wc-color-picker--circle .wc-color-picker__preview {
-  border-radius: 50%;
-}
-
-/* Disabled state */
-.wc-color-picker--disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.wc-color-picker--disabled .wc-color-picker__preview {
-  cursor: not-allowed;
-  transform: none;
-}
-
-.wc-color-picker--disabled .wc-color-picker__preview:hover {
-  transform: none;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-}
-
-/* 暗色模式 - 使用 .dark 类选择器 */
-.dark .wc-color-picker__preview {
-  border-color: var(--wc-neutral-400, #737373);
-  box-shadow: 0 1px 3px 0 rgba(255, 255, 255, 0.1), 0 1px 2px 0 rgba(255, 255, 255, 0.06);
-}
-
-.dark .wc-color-picker__preview:hover {
-  box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.15), 0 2px 4px -1px rgba(255, 255, 255, 0.1);
-}
-
-.dark .wc-color-picker--disabled .wc-color-picker__preview:hover {
-  box-shadow: 0 1px 3px 0 rgba(255, 255, 255, 0.1), 0 1px 2px 0 rgba(255, 255, 255, 0.06);
-} 

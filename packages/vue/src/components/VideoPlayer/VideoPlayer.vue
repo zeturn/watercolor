@@ -10,12 +10,19 @@
     <div class="controls">
       <button
         class="ctrl-btn"
+        :aria-label="playing ? '暂停' : '播放'"
         @click="togglePlay"
       >
         {{ playing ? '❚❚' : '▶️' }}
       </button>
       <div
         class="progress"
+        role="slider"
+        tabindex="0"
+        aria-label="播放进度"
+        :aria-valuenow="Math.round(progress)"
+        aria-valuemin="0"
+        aria-valuemax="100"
         @click="seek($event)"
       >
         <div
@@ -26,6 +33,7 @@
       <span class="time">{{ formattedCurrent }} / {{ formattedDuration }}</span>
       <button
         class="ctrl-btn"
+        :aria-label="muted ? '取消静音' : '静音'"
         @click="toggleMute"
       >
         {{ muted ? '🔇' : '🔊' }}
@@ -40,6 +48,7 @@
       >
       <button
         class="ctrl-btn"
+        aria-label="全屏"
         @click="handleFullscreen"
       >
         ⛶
@@ -125,18 +134,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.video-wrapper { width: 100%; max-width: 640px; margin: 0 auto; }
-.video-el { width: 100%; border-radius: 8px; background: black; }
-.controls { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 0.875rem; color: var(--wc-neutral-700); }
-.ctrl-btn { background: none; border: none; cursor: pointer; font-size: 1rem; }
-.progress { flex: 1 1 auto; height: 6px; background: var(--wc-neutral-300); border-radius: 3px; cursor: pointer; position: relative; }
-.progress-bar { height: 100%; background: var(--wc-primary-500); border-radius: 3px; }
-.volume { width: 80px; }
-.time { min-width: 60px; text-align: center; }
-
-/* Dark mode */
-.dark .controls { color: var(--wc-neutral-200); }
-.dark .progress { background: var(--wc-neutral-600); }
-.dark .progress-bar { background: var(--wc-primary-400); }
-</style> 
+<style src="./style.css"></style>

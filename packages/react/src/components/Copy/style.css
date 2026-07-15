@@ -1,256 +1,99 @@
-/* Copy 组件样式 */
 .wc-copy {
+  --wc-copy-tone: var(--wc-text-secondary);
+
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  max-width: 100%;
+  gap: 10px;
+  border: 0;
+  border-radius: var(--wc-radius-lg);
+  background: transparent;
+  color: var(--wc-copy-tone);
   cursor: pointer;
-  position: relative;
   font-family: var(--wc-font-family);
-  transition: all 0.2s ease;
+  line-height: 1.4;
+  text-align: left;
   user-select: none;
-  /* 添加浅色背景 */
-  background-color: var(--wc-neutral-100, #f5f5f5);
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--wc-neutral-100, #f5f5f5);
+  transition:
+    background-color var(--wc-motion-fast) var(--wc-ease-standard),
+    color var(--wc-motion-fast) var(--wc-ease-standard);
 }
 
-.wc-copy:hover {
-  background-color: var(--wc-neutral-200, #e5e7eb);
-  border-color: var(--wc-neutral-200, #e5e7eb);
-}
+.wc-copy--sm { min-height: 28px; padding: 4px 7px; font-size: 12px; }
+.wc-copy--md { min-height: 34px; padding: 7px 9px; font-size: 14px; }
+.wc-copy--lg { min-height: 40px; padding: 9px 11px; font-size: 15px; }
 
-/* Variant styles */
-.wc-copy--default {
-  color: var(--wc-neutral-700, #374151);
-}
+.wc-copy--primary { --wc-copy-tone: var(--wc-text-brand); }
+.wc-copy--secondary { --wc-copy-tone: var(--wc-text-secondary); }
+.wc-copy--success,
+.wc-copy--copied { --wc-copy-tone: var(--wc-text-success); }
+.wc-copy--warning { --wc-copy-tone: var(--wc-text-warning); }
+.wc-copy--error { --wc-copy-tone: var(--wc-text-error); }
 
-.wc-copy--primary {
-  color: var(--wc-primary-600, #2563eb);
-}
+.wc-copy--filled { background: var(--wc-action-selected); }
+.wc-copy--outlined { box-shadow: inset 0 0 0 1px var(--wc-border-subtle); }
+.wc-copy--minimal { padding-inline: 4px; }
 
-.wc-copy--secondary {
-  color: var(--wc-neutral-600, #4b5563);
-}
+.wc-copy:hover,
+.wc-copy:focus-visible { background: var(--wc-action-hover); outline: 0; }
+.wc-copy:focus-visible { box-shadow: var(--wc-focus-ring); }
+.wc-copy:active { background: var(--wc-action-active); }
 
-.wc-copy--success {
-  color: var(--wc-success-600, #059669);
-}
-
-.wc-copy--warning {
-  color: var(--wc-warning-600, #d97706);
-}
-
-.wc-copy--error {
-  color: var(--wc-error-600, #dc2626);
-}
-
-/* Size styles */
-.wc-copy--sm {
-  font-size: 12px;
-  gap: 4px;
-  padding: 6px 8px;
-}
-
-.wc-copy--md {
-  font-size: 14px;
-  gap: 6px;
-  padding: 8px 12px;
-}
-
-.wc-copy--lg {
-  font-size: 16px;
-  gap: 8px;
-  padding: 10px 16px;
-}
-
-/* State styles */
-.wc-copy--copied {
-  color: var(--wc-success-600, #059669);
-  background-color: var(--wc-success-50, #ecfdf5);
-  border-color: var(--wc-success-200, #bbf7d0);
-}
-
-.wc-copy--error {
-  color: var(--wc-error-600, #dc2626);
-  background-color: var(--wc-error-50, #fef2f2);
-  border-color: var(--wc-error-200, #fecaca);
-}
-
-/* Elements */
 .wc-copy-text {
+  min-width: 0;
   flex: 1;
-  word-break: break-all;
+  overflow: hidden;
+  color: var(--wc-text-primary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .wc-copy-action {
-  display: flex;
+  display: inline-flex;
+  flex: 0 0 auto;
   align-items: center;
-  gap: 4px;
-  flex-shrink: 0;
+  gap: 5px;
+  color: var(--wc-copy-tone);
 }
 
 .wc-copy-icon {
+  display: inline-flex;
   width: 16px;
   height: 16px;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
 }
 
-.wc-copy--sm .wc-copy-icon {
-  width: 14px;
-  height: 14px;
-}
+.wc-copy-icon svg { width: 100%; height: 100%; }
+.wc-copy-label { font-weight: 500; }
 
-.wc-copy--md .wc-copy-icon {
-  width: 16px;
-  height: 16px;
-}
-
-.wc-copy--lg .wc-copy-icon {
-  width: 18px;
-  height: 18px;
-}
-
-.wc-copy-label {
-  font-size: inherit;
-  font-weight: 500;
-}
-
-/* Tooltip */
 .wc-copy-tooltip {
   position: absolute;
-  bottom: 100%;
+  bottom: calc(100% + 8px);
   left: 50%;
+  z-index: 1100;
+  padding: 6px 9px;
   transform: translateX(-50%);
-  margin-bottom: 8px;
-  padding: 6px 12px;
-  background-color: var(--wc-neutral-800, #1f2937);
-  color: var(--wc-neutral-100, #f3f4f6);
+  border-radius: var(--wc-radius-md);
+  background: var(--wc-surface-overlay);
+  color: var(--wc-text-primary);
+  box-shadow: var(--wc-shadow-md);
   font-size: 12px;
-  border-radius: 6px;
   white-space: nowrap;
-  z-index: 1000;
   pointer-events: none;
-  opacity: 0;
-  animation: wc-copy-tooltip-show 0.2s ease-out forwards;
+  animation: wc-copy-tooltip-enter var(--wc-motion-fast) var(--wc-ease-standard) both;
 }
 
-.wc-copy-tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 4px solid transparent;
-  border-top-color: var(--wc-neutral-800, #1f2937);
+.wc-copy-tooltip--success { color: var(--wc-text-success); }
+.wc-copy-tooltip--error { color: var(--wc-text-error); }
+
+@keyframes wc-copy-tooltip-enter {
+  from { opacity: 0; transform: translate(-50%, 3px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
 }
 
-.wc-copy-tooltip--success {
-  background-color: var(--wc-success-600, #059669);
+@media (prefers-reduced-motion: reduce) {
+  .wc-copy { transition: none; }
+  .wc-copy-tooltip { animation: none; }
 }
-
-.wc-copy-tooltip--success::after {
-  border-top-color: var(--wc-success-600, #059669);
-}
-
-.wc-copy-tooltip--error {
-  background-color: var(--wc-error-600, #dc2626);
-}
-
-.wc-copy-tooltip--error::after {
-  border-top-color: var(--wc-error-600, #dc2626);
-}
-
-/* Animations */
-@keyframes wc-copy-tooltip-show {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
-@keyframes wc-copy-pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-.wc-copy--copied .wc-copy-icon {
-  animation: wc-copy-pulse 0.6s ease-in-out;
-}
-
-/* 暗色模式 - 使用 .dark 类选择器 */
-.dark .wc-copy {
-  background-color: var(--wc-neutral-100, #2f2f2f);
-  border-color: var(--wc-neutral-200, #404040);
-}
-
-.dark .wc-copy:hover {
-  background-color: var(--wc-neutral-200, #404040);
-  border-color: var(--wc-neutral-300, #525252);
-}
-
-.dark .wc-copy--default {
-  color: var(--wc-neutral-600, #d4d4d4);
-}
-
-.dark .wc-copy--primary {
-  color: var(--wc-primary-400, #5b82c7);
-}
-
-.dark .wc-copy--secondary {
-  color: var(--wc-neutral-500, #a3a3a3);
-}
-
-.dark .wc-copy--success {
-  color: var(--wc-success-400, #4a8c5e);
-}
-
-.dark .wc-copy--warning {
-  color: var(--wc-warning-400, #9a6d36);
-}
-
-.dark .wc-copy--error {
-  color: var(--wc-error-400, #9a4d59);
-}
-
-.dark .wc-copy--copied {
-  color: var(--wc-success-400, #4a8c5e);
-  background-color: var(--wc-success-50, #0d2818);
-  border-color: var(--wc-success-200, #295438);
-}
-
-.dark .wc-copy-tooltip {
-  background-color: var(--wc-neutral-100, #2f2f2f);
-  color: var(--wc-neutral-800, #f5f5f5);
-}
-
-.dark .wc-copy-tooltip::after {
-  border-top-color: var(--wc-neutral-100, #2f2f2f);
-}
-
-.dark .wc-copy-tooltip--success {
-  background-color: var(--wc-success-400, #4a8c5e);
-}
-
-.dark .wc-copy-tooltip--success::after {
-  border-top-color: var(--wc-success-400, #4a8c5e);
-}
-
-.dark .wc-copy-tooltip--error {
-  background-color: var(--wc-error-400, #9a4d59);
-}
-
-.dark .wc-copy-tooltip--error::after {
-  border-top-color: var(--wc-error-400, #9a4d59);
-} 

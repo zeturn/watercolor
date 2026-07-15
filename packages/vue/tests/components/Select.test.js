@@ -81,6 +81,21 @@ describe('Select Component', () => {
     expect(wrapper.find('.wc-select__container').classes()).toContain('wc-select__container--filled')
   })
 
+  it('uses the quiet filled surface by default', () => {
+    const wrapper = mount(Select, { props: { options: defaultOptions } })
+    expect(wrapper.find('.wc-select__container').classes()).toContain('wc-select__container--filled')
+  })
+
+  it('opens from the keyboard and exposes combobox semantics', async () => {
+    const wrapper = mount(Select, { props: { options: defaultOptions } })
+    const control = wrapper.find('.wc-select__container')
+    expect(control.attributes('role')).toBe('combobox')
+    expect(control.attributes('aria-expanded')).toBe('false')
+    await control.trigger('keydown', { key: 'Enter' })
+    expect(control.attributes('aria-expanded')).toBe('true')
+    expect(wrapper.find('[role="listbox"]').exists()).toBe(true)
+  })
+
   it('supports multiple selection', async () => {
     const wrapper = mount(Select, {
       props: {
@@ -195,4 +210,4 @@ describe('Select Component', () => {
 
     expect(wrapper.find('.wc-select__helper').text()).toBe('这是帮助文本')
   })
-}) 
+})

@@ -39,21 +39,22 @@ const StubIcon = {
   }
 }
 
-const ICON_PACKAGES = {
-  lucide: '@zeturn/watercolor-icons-lucide-vue',
-  heroicons: '@zeturn/watercolor-icons-heroicons-vue',
-  tabler: '@zeturn/watercolor-icons-tabler-vue',
-  phosphor: '@zeturn/watercolor-icons-phosphor-vue',
-  feather: '@zeturn/watercolor-icons-feather'
+// Literal import specifiers let Vite/Rollup discover and split each pack.
+const ICON_LOADERS = {
+  lucide: () => import('@zeturn/watercolor-icons-lucide-vue'),
+  heroicons: () => import('@zeturn/watercolor-icons-heroicons-vue'),
+  tabler: () => import('@zeturn/watercolor-icons-tabler-vue'),
+  phosphor: () => import('@zeturn/watercolor-icons-phosphor-vue'),
+  feather: () => import('@zeturn/watercolor-icons-feather')
 }
 
 const loadIconPackage = async (library) => {
-  const packageName = ICON_PACKAGES[library]
-  if (!packageName) {
+  const loader = ICON_LOADERS[library]
+  if (!loader) {
     return null
   }
 
-  return import(/* @vite-ignore */ packageName)
+  return loader()
 }
 
 const props = defineProps({

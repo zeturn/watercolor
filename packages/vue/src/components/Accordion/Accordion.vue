@@ -12,6 +12,10 @@
     >
       <button
         :class="['wc-accordion-header', { 'wc-accordion-header--active': activeItems.includes(index) }]"
+        :id="`${accordionId}-trigger-${index}`"
+        :disabled="item.disabled"
+        :aria-expanded="activeItems.includes(index)"
+        :aria-controls="`${accordionId}-panel-${index}`"
         type="button"
         @click="toggleItem(index)"
       >
@@ -25,7 +29,9 @@
         </span>
       </button>
       <div
+        :id="`${accordionId}-panel-${index}`"
         :class="['wc-accordion-content', { 'wc-accordion-content--open': activeItems.includes(index) }]"
+        :aria-labelledby="`${accordionId}-trigger-${index}`"
         :style="{ display: activeItems.includes(index) ? undefined : 'none' }"
       >
         <div class="wc-accordion-content-inner">
@@ -42,7 +48,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, useId } from 'vue'
 import { buildAccordionClasses, toggleActiveItems } from './utils'
 
 const props = defineProps({
@@ -76,14 +82,16 @@ const props = defineProps({
 
 const emit = defineEmits(['toggle'])
 
+const accordionId = useId()
 const activeItems = ref([])
 
 const accordionClasses = computed(() => buildAccordionClasses(props.variant, props.class))
 
 const toggleItem = (index) => {
+  if (props.items[index]?.disabled) return
   activeItems.value = toggleActiveItems(activeItems.value, index, props.multiple)
   emit('toggle', index, activeItems.value.includes(index))
 }
 </script>
 
-<style src="./style.css"></style> 
+<style src="./style.css"></style>

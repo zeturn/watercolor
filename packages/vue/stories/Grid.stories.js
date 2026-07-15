@@ -2,7 +2,7 @@ import Grid from '../src/components/Grid/Grid.vue'
 
 /**
  * @autodoc
- * Grid组件提供了一个灵活的网格布局系统，基于Flexbox实现。
+ * Grid组件提供了一个基于原生 CSS Grid 的响应式 12 列布局系统。
  * 它支持容器和项目两种模式，提供了12列的响应式网格系统。
  */
 export default {
@@ -11,7 +11,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: 'Grid组件是一个基于Flexbox的响应式网格系统，支持12列布局和多种对齐方式。可以作为容器（container）或项目（item）使用。'
+        component: 'Grid组件是一个基于原生 CSS Grid 的响应式 12 列网格系统，不依赖 Tailwind 或宿主项目的工具类。'
       }
     }
   },
@@ -65,7 +65,7 @@ export default {
     direction: {
       control: 'select',
       options: ['row', 'column', 'row-reverse', 'column-reverse'],
-      description: 'Flex方向',
+      description: '布局方向',
       defaultValue: 'row'
     },
     justifyContent: {
@@ -275,4 +275,4 @@ export const NestedGrids = {
       </Grid>
     `
   })
-} 
+}

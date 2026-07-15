@@ -5,10 +5,10 @@ import { getCardClasses } from './utils.js'
 const Card = ({
   children,
   title = '',
-  variant = 'filled',
+  variant = 'minimal',
   color = 'default',
   size = 'medium',
-  interactive = true,
+  interactive = false,
   noBorder = true,
   className = '',
   header = null,
@@ -17,14 +17,23 @@ const Card = ({
   onClick,
   onMouseEnter,
   onMouseLeave,
+  onKeyDown,
   ...props
 }) => {
-  const cardClasses = getCardClasses(className, variant, color, size, interactive, noBorder)
+  const isInteractive = interactive || Boolean(onClick)
+  const cardClasses = getCardClasses(className, variant, color, size, isInteractive, noBorder)
 
   const handleClick = (e) => {
-    if (interactive && onClick) {
+    if (isInteractive && onClick) {
       onClick(e)
     }
+  }
+
+  const handleKeyDown = (event) => {
+    onKeyDown?.(event)
+    if (!onClick || event.defaultPrevented || !['Enter', ' '].includes(event.key)) return
+    event.preventDefault()
+    onClick(event)
   }
 
   return (
@@ -32,6 +41,7 @@ const Card = ({
       className={cardClasses}
       style={style}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       role={onClick ? 'button' : undefined}
@@ -43,17 +53,17 @@ const Card = ({
           {header}
         </div>
       )}
-      
+
       {title && (
         <div className="wc-card-header">
           <h3 className="wc-card__title">{title}</h3>
         </div>
       )}
-      
+
       <div className="wc-card-content">
         {children}
       </div>
-      
+
       {footer && (
         <div className="wc-card-footer">
           {footer}
@@ -65,4 +75,4 @@ const Card = ({
 
 Card.displayName = 'Card'
 
-export default Card 
+export default Card

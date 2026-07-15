@@ -2,6 +2,10 @@
   <component
     :is="component"
     :class="paperClasses"
+    :role="clickable ? 'button' : undefined"
+    :tabindex="clickable ? 0 : undefined"
+    @click="handleClick"
+    @keydown="handleKeydown"
   >
     <slot />
   </component>
@@ -9,58 +13,68 @@
 
 <script setup>
 import { computed } from 'vue'
+import { getPaperClasses, validateElevation } from './utils.js'
+import './style.css'
 
 const props = defineProps({
   elevation: {
-    type: Number,
+    type: [Number, String],
     default: 1,
-    validator: (value) => value >= 0 && value <= 24
+    validator: (value) => Number(value) >= 0 && Number(value) <= 24
   },
   variant: {
     type: String,
     default: 'elevation',
     validator: (value) => ['elevation', 'outlined'].includes(value)
   },
-  square: {
-    type: Boolean,
-    default: false
+  square: Boolean,
+  rounded: Boolean,
+  shape: {
+    type: String,
+    default: ''
   },
-  rounded: {
-    type: Boolean,
-    default: false
+  size: {
+    type: String,
+    default: ''
   },
+  color: {
+    type: String,
+    default: 'default'
+  },
+  hoverable: Boolean,
+  clickable: Boolean,
+  gradient: Boolean,
+  frosted: Boolean,
+  textured: Boolean,
   component: {
     type: String,
     default: 'div'
+  },
+  className: {
+    type: String,
+    default: ''
   }
 })
 
+const emit = defineEmits(['click'])
+
 const paperClasses = computed(() => {
-  const baseClasses = 'wc-paper transition-all duration-250 bg-[var(--wc-neutral-0)] dark:bg-[var(--wc-neutral-800)]'
-  
-  const classes = [baseClasses]
-  
-  // Variant styles
-  if (props.variant === 'outlined') {
-    classes.push('wc-paper--outlined')
-    classes.push('border border-[var(--wc-neutral-200)] dark:border-[var(--wc-neutral-700)]')
-  } else {
-    // Elevation styles
-    if (props.elevation > 0) {
-      classes.push(`wc-paper--elevation-${props.elevation}`)
-      classes.push('border border-[var(--wc-neutral-200)] dark:border-[var(--wc-neutral-700)]')
-    }
-  }
-  
-  // Border radius
-  if (props.rounded) {
-    classes.push('wc-paper--rounded')
-  }
-  
-  if (!props.square && !props.rounded) {
-    classes.push('rounded-lg')
-  }
-  
-  return classes
+  const classes = getPaperClasses({
+    ...props,
+    elevation: validateElevation(props.elevation)
+  }).split(' ')
+
+  if (props.rounded) classes.push('wc-paper--rounded')
+  return classes.filter(Boolean).join(' ')
 })
-</script> 
+
+const handleClick = (event) => {
+  if (props.clickable) emit('click', event)
+}
+
+const handleKeydown = (event) => {
+  if (!props.clickable || !['Enter', ' '].includes(event.key)) return
+  event.preventDefault()
+  emit('click', event)
+}
+</script>

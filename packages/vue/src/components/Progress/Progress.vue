@@ -4,12 +4,12 @@
       v-if="label || showPercent"
       class="wc-progress-header"
     >
-      <label
+      <span
         v-if="label"
         class="wc-progress-label"
       >
         {{ label }}
-      </label>
+      </span>
       <span
         v-if="showPercent"
         class="wc-progress-percent"
@@ -20,6 +20,11 @@
     
     <div
       :class="progressClasses"
+      role="progressbar"
+      :aria-label="label || '进度'"
+      :aria-valuenow="safeValue"
+      aria-valuemin="0"
+      aria-valuemax="100"
     >
       <div 
         :class="barClasses"
@@ -85,4 +90,3 @@ const barStyle = computed(() => ({
   width: `${safeValue.value}%`
 }))
 </script>
-

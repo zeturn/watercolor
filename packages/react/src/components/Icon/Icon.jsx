@@ -4,21 +4,22 @@ import './style.css'
 
 const StubIcon = ({ className, style }) => <span className={className} style={style} />
 
-const ICON_PACKAGES = {
-  lucide: '@zeturn/watercolor-icons-lucide-react',
-  heroicons: '@zeturn/watercolor-icons-heroicons-react',
-  tabler: '@zeturn/watercolor-icons-tabler-react',
-  phosphor: '@zeturn/watercolor-icons-phosphor-react',
-  feather: '@zeturn/watercolor-icons-feather',
+// Literal import specifiers let Vite/Rollup discover and split each pack.
+const ICON_LOADERS = {
+  lucide: () => import('@zeturn/watercolor-icons-lucide-react'),
+  heroicons: () => import('@zeturn/watercolor-icons-heroicons-react'),
+  tabler: () => import('@zeturn/watercolor-icons-tabler-react'),
+  phosphor: () => import('@zeturn/watercolor-icons-phosphor-react'),
+  feather: () => import('@zeturn/watercolor-icons-feather'),
 }
 
 const loadIconPackage = (library) => {
-  const packageName = ICON_PACKAGES[library]
-  if (!packageName) {
+  const loader = ICON_LOADERS[library]
+  if (!loader) {
     return Promise.resolve(null)
   }
 
-  return import(/* @vite-ignore */ packageName)
+  return loader()
 }
 
 const lazyWithFallback = (importer, resolveComponent) =>

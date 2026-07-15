@@ -1,107 +1,74 @@
-/* AppBar 组件样式 */
-
 .wc-appbar {
-  width: 100%;
-  transition: all 0.25s ease;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-
-  /* Default spacing: keeps inner content away from edges */
   --wc-appbar-padding-y: 10px;
   --wc-appbar-padding-x: 16px;
+  z-index: 50;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
   padding: var(--wc-appbar-padding-y) var(--wc-appbar-padding-x);
-}
-
-.wc-appbar--fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.wc-appbar--absolute {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.wc-appbar--sticky {
-  position: sticky;
-  top: 0;
-}
-
-.wc-appbar--static {
-  position: static;
-}
-
-.wc-appbar--relative {
-  position: relative;
-}
-
-.wc-appbar--default {
-  /* Normal state: opaque white (theme-aware via semantic tokens) */
-  background-color: var(--wc-bg-canvas);
   color: var(--wc-text-primary);
+  transition:
+    background-color var(--wc-motion-normal) var(--wc-ease-standard),
+    box-shadow var(--wc-motion-normal) var(--wc-ease-standard);
 }
 
-.wc-appbar--primary {
-  background-color: var(--wc-bg-brand);
-  color: var(--wc-text-inverse);
+.wc-appbar--fixed,
+.wc-appbar--absolute,
+.wc-appbar--sticky {
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.wc-appbar--fixed { position: fixed; }
+.wc-appbar--absolute { position: absolute; }
+.wc-appbar--sticky { position: sticky; }
+.wc-appbar--static { position: static; }
+.wc-appbar--relative { position: relative; }
+
+.wc-appbar--default,
+.wc-appbar--transparent {
+  background: transparent;
 }
 
 .wc-appbar--secondary {
-  background-color: var(--wc-bg-surface);
-  color: var(--wc-text-primary);
+  background: var(--wc-surface-subtle);
 }
 
-.wc-appbar--transparent {
-  background-color: transparent;
+.wc-appbar--primary {
+  background: var(--wc-accent);
+  color: var(--wc-text-on-accent);
 }
 
 .wc-appbar--inherit {
-  background-color: inherit;
+  background: inherit;
   color: inherit;
 }
 
 .wc-appbar--outlined {
-  border-bottom: 1px solid var(--wc-border-default);
+  box-shadow: inset 0 -1px 0 var(--wc-border-subtle);
 }
 
-.wc-appbar--elevation-0 {
+.wc-appbar--elevation-0,
+.wc-appbar.wc-appbar--outlined {
   box-shadow: none;
 }
 
-.wc-appbar--elevation-1 {
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
+.wc-appbar--elevation-1,
 .wc-appbar--elevation-2 {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--wc-shadow-sm);
 }
 
-.wc-appbar--elevation-3 {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.wc-appbar--elevation-4 {
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-}
-
+.wc-appbar--elevation-3,
+.wc-appbar--elevation-4,
 .wc-appbar--elevation-6 {
-  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--wc-shadow-md);
 }
 
 .wc-appbar--elevation-8,
 .wc-appbar--elevation-12,
 .wc-appbar--elevation-16,
 .wc-appbar--elevation-24 {
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-}
-
-/* Ensure outlined variant stays "flat" even if elevation classes exist */
-.wc-appbar.wc-appbar--outlined {
-  box-shadow: none;
+  box-shadow: var(--wc-shadow-lg);
 }

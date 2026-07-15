@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useId } from 'react'
 import './style.css'
 import {
   formatDate,
@@ -28,6 +28,7 @@ export function DatePicker({
   ...rest
 }) {
   const wrapperRef = useRef(null)
+  const inputId = useId()
   const [isOpen, setOpen] = useState(false)
   const [currentDate, setCurrentDate] = useState(() =>
     value ? new Date(value) : new Date()
@@ -55,6 +56,16 @@ export function DatePicker({
   const toggleOpen = () => {
     if (disabled) return
     setOpen((v) => !v)
+  }
+
+  const handleInputKeyDown = (event) => {
+    if (disabled) return
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'ArrowDown') {
+      event.preventDefault()
+      setOpen(true)
+    } else if (event.key === 'Escape') {
+      setOpen(false)
+    }
   }
 
   const changeMonth = (delta) => {
@@ -117,22 +128,31 @@ export function DatePicker({
       <div className={wrapperClasses} onClick={toggleOpen}>
         <input
           type="text"
+          id={inputId}
           className="wc-datepicker-input"
           value={inputDisplay}
           placeholder={placeholder}
           disabled={disabled}
           readOnly
+          role="combobox"
+          aria-haspopup="dialog"
+          aria-expanded={isOpen}
+          aria-controls={`${inputId}-calendar`}
+          onKeyDown={handleInputKeyDown}
         />
-        <span className="wc-datepicker-icon">📅</span>
+        <span className="wc-datepicker-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 10h18" /></svg>
+        </span>
       </div>
 
       {isOpen && (
-        <div className="wc-datepicker-dropdown" style={{ zIndex: 1000 }}>
+        <div className="wc-datepicker-dropdown" id={`${inputId}-calendar`} role="dialog" aria-label="选择日期">
           {/* header */}
           <div className="wc-datepicker-header">
             <button
               type="button"
               className="wc-datepicker-nav"
+              aria-label="上个月"
               onClick={() => changeMonth(-1)}
             >
               ‹
@@ -141,6 +161,7 @@ export function DatePicker({
             <button
               type="button"
               className="wc-datepicker-nav"
+              aria-label="下个月"
               onClick={() => changeMonth(1)}
             >
               ›
@@ -167,6 +188,9 @@ export function DatePicker({
                   type="button"
                   className={classes}
                   disabled={isDisabled}
+                  aria-label={formatDate(day.date, 'YYYY-MM-DD')}
+                  aria-selected={isSameDate(day.date, internal)}
+                  aria-current={isToday(day.date) ? 'date' : undefined}
                   onClick={() => handleSelect(day)}
                 >
                   {day.day}

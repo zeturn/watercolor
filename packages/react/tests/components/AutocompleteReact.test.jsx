@@ -18,7 +18,7 @@ describe('Autocomplete React', () => {
   it('shows options when input is focused', async () => {
     render(<Autocomplete options={options} />)
     
-    const input = screen.getByRole('textbox')
+    const input = screen.getByRole('combobox')
     fireEvent.focus(input)
     
     await waitFor(() => {
@@ -31,7 +31,7 @@ describe('Autocomplete React', () => {
   it('filters options based on search query', async () => {
     render(<Autocomplete options={options} />)
     
-    const input = screen.getByRole('textbox')
+    const input = screen.getByRole('combobox')
     fireEvent.focus(input)
     fireEvent.change(input, { target: { value: 'Option 1' } })
     
@@ -45,7 +45,7 @@ describe('Autocomplete React', () => {
     const handleChange = vi.fn()
     render(<Autocomplete options={options} onChange={handleChange} />)
     
-    const input = screen.getByRole('textbox')
+    const input = screen.getByRole('combobox')
     fireEvent.focus(input)
     
     await waitFor(() => {
@@ -67,7 +67,7 @@ describe('Autocomplete React', () => {
       />
     )
     
-    const input = screen.getByRole('textbox')
+    const input = screen.getByRole('combobox')
     expect(input.value).toBe('Option 1')
     
     const clearButton = document.querySelector('.wc-autocomplete__clear')
@@ -91,7 +91,7 @@ describe('Autocomplete React', () => {
       />
     )
     
-    const input = screen.getByRole('textbox')
+    const input = screen.getByRole('combobox')
     fireEvent.focus(input)
     
     await waitFor(() => {
@@ -119,7 +119,7 @@ describe('Autocomplete React', () => {
   it('disables input when disabled prop is true', () => {
     render(<Autocomplete options={options} disabled />)
     
-    const input = screen.getByRole('textbox')
+    const input = screen.getByRole('combobox')
     expect(input).toBeDisabled()
   })
 
@@ -127,7 +127,7 @@ describe('Autocomplete React', () => {
     const handleChange = vi.fn()
     render(<Autocomplete options={options} freeSolo onChange={handleChange} />)
     
-    const input = screen.getByRole('textbox')
+    const input = screen.getByRole('combobox')
     fireEvent.change(input, { target: { value: 'Custom value' } })
     
     expect(handleChange).toHaveBeenCalled()
@@ -136,7 +136,7 @@ describe('Autocomplete React', () => {
   it('respects minSearchLength prop', async () => {
     render(<Autocomplete options={options} minSearchLength={2} />)
     
-    const input = screen.getByRole('textbox')
+    const input = screen.getByRole('combobox')
     fireEvent.focus(input)
     fireEvent.change(input, { target: { value: 'O' } })
     
@@ -162,7 +162,7 @@ describe('Autocomplete React', () => {
       />
     )
     
-    const input = screen.getByRole('textbox')
+    const input = screen.getByRole('combobox')
     fireEvent.focus(input)
     
     await waitFor(() => {

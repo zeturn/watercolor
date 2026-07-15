@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import './style.css'
 
 /**
  * NumberAnimation 数字递增动画

@@ -19,40 +19,40 @@ export const variantMap = {
 
 // 变体样式类映射
 export const variantClassMap = {
-  h1: 'text-6xl font-light tracking-tight',
-  h2: 'text-5xl font-light tracking-tight',
-  h3: 'text-4xl font-normal',
-  h4: 'text-3xl font-normal',
-  h5: 'text-2xl font-normal',
-  h6: 'text-xl font-medium',
-  subtitle1: 'text-base font-normal',
-  subtitle2: 'text-sm font-medium',
-  body1: 'text-base font-normal',
-  body2: 'text-sm font-normal',
-  caption: 'text-xs font-normal',
-  overline: 'text-xs font-medium uppercase tracking-wide',
-  button: 'text-sm font-medium uppercase tracking-wide'
+  h1: 'wc-typography--h1',
+  h2: 'wc-typography--h2',
+  h3: 'wc-typography--h3',
+  h4: 'wc-typography--h4',
+  h5: 'wc-typography--h5',
+  h6: 'wc-typography--h6',
+  subtitle1: 'wc-typography--subtitle1',
+  subtitle2: 'wc-typography--subtitle2',
+  body1: 'wc-typography--body1',
+  body2: 'wc-typography--body2',
+  caption: 'wc-typography--caption',
+  overline: 'wc-typography--overline',
+  button: 'wc-typography--button'
 }
 
 // 颜色样式类映射
 export const colorClassMap = {
-  inherit: 'text-inherit',
-  primary: 'text-primary-600 dark:text-primary-400',
-  secondary: 'text-neutral-600 dark:text-neutral-400',
-  success: 'text-success-600 dark:text-success-400',
-  warning: 'text-warning-600 dark:text-warning-400',
-  error: 'text-error-600 dark:text-error-400',
-  textPrimary: 'text-neutral-900 dark:text-neutral-100',
-  textSecondary: 'text-neutral-600 dark:text-neutral-400',
-  textDisabled: 'text-neutral-400 dark:text-neutral-600'
+  inherit: 'wc-typography--color-inherit',
+  primary: 'wc-typography--color-primary',
+  secondary: 'wc-typography--color-secondary',
+  success: 'wc-typography--color-success',
+  warning: 'wc-typography--color-warning',
+  error: 'wc-typography--color-error',
+  textPrimary: 'wc-typography--color-text-primary',
+  textSecondary: 'wc-typography--color-text-secondary',
+  textDisabled: 'wc-typography--color-text-disabled'
 }
 
 // 对齐样式类映射
 export const alignClassMap = {
-  left: 'text-left',
-  center: 'text-center',
-  right: 'text-right',
-  justify: 'text-justify'
+  left: 'wc-typography--align-left',
+  center: 'wc-typography--align-center',
+  right: 'wc-typography--align-right',
+  justify: 'wc-typography--align-justify'
 }
 
 // 行高映射
@@ -80,11 +80,12 @@ export function getComponent(variant, customComponent) {
 // 构建Typography类名
 export function buildTypographyClasses(variant, color, align, gutterBottom, noWrap, className = '') {
   const classes = [
+    'wc-typography',
     variantClassMap[variant],
     colorClassMap[color],
     align !== 'inherit' ? alignClassMap[align] : null,
-    gutterBottom ? 'mb-4' : null,
-    noWrap ? 'truncate' : null,
+    gutterBottom ? 'wc-typography--gutter-bottom' : null,
+    noWrap ? 'wc-typography--no-wrap' : null,
     className
   ]
     .filter(Boolean)

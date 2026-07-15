@@ -9,6 +9,7 @@ const FormControlLabel = ({
   required = false,
   checked,
   value,
+  control,
   className = '',
   style = {},
   onChange,
@@ -46,7 +47,7 @@ const FormControlLabel = ({
       )}
 
       <span className="form-control-label__control">
-        {children}
+        {control || children}
       </span>
 
       {labelPlacement !== 'start' && (

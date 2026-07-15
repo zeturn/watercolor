@@ -11,7 +11,9 @@
       aria-label="上一页"
       @click="select(currentPageInternal - 1)"
     >
-      ‹
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m15 18-6-6 6-6" />
+      </svg>
     </button>
 
     <!-- 页面按钮 -->
@@ -22,6 +24,8 @@
       <button 
         v-if="!page.ellipsis" 
         :class="['page-btn', 'wc-page-btn', { active: page.num === currentPageInternal, 'wc-page-btn--active': page.num === currentPageInternal }]" 
+        :aria-current="page.num === currentPageInternal ? 'page' : undefined"
+        :aria-label="`第 ${page.num} 页`"
         @click="select(page.num)"
       >
         {{ page.num }}
@@ -39,7 +43,9 @@
       aria-label="下一页"
       @click="select(currentPageInternal + 1)"
     >
-      ›
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m9 18 6-6-6-6" />
+      </svg>
     </button>
 
     <!-- 页面大小选择器 -->
@@ -47,7 +53,7 @@
       v-if="showSizeChanger"
       class="wc-pagination-size-selector"
     >
-      <select @change="handleSizeChange">
+      <select aria-label="每页条数" @change="handleSizeChange">
         <option
           v-for="size in pageSizeOptions"
           :key="size"
@@ -70,6 +76,7 @@
         :min="1" 
         :max="pageCount"
         placeholder="页码"
+        aria-label="跳转页码"
         @keyup.enter="handleQuickJump"
       >
     </div>
@@ -216,4 +223,3 @@ export default {
 }
 </script>
 
- 

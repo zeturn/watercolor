@@ -25,11 +25,12 @@ const List = ({
   ...rest
 }) => {
   // 使用工具函数根据 props 生成原生 CSS 类，避免直接使用 Tailwind 类
-  const listClasses = getListClasses({ dense, disablePadding, className }).join(' ')
+  const listClasses = getListClasses({ dense, disablePadding, className }).concat(nav ? 'list--nav' : []).join(' ')
 
   return (
     <ListContext.Provider value={{ dense }}>
       <div role={nav ? 'navigation' : 'list'} className={listClasses} {...rest}>
+        {subheader && <div className="list-subheader">{subheader}</div>}
         {children}
       </div>
     </ListContext.Provider>

@@ -1,17 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './style.css'
-import { 
-  validVariants, 
-  getButtonClasses, 
-  getVariantStyles, 
-  getRoundedClass,
-  handleButtonClick as utilHandleButtonClick 
+import {
+  validVariants,
+  getButtonClasses,
+  handleButtonClick as utilHandleButtonClick
 } from './utils.js'
 
 const Button = ({
   children,
   variant = 'primary',
-  buttonStyle = 'filled',
+  buttonStyle = 'default',
   size = 'md',
   disabled = false,
   loading = false,
@@ -33,9 +31,6 @@ const Button = ({
   style = {},
   ...props
 }) => {
-  const [isHovered, setIsHovered] = useState(false)
-  const [isFocused, setIsFocused] = useState(false)
-
   // 构建CSS类名
   const buttonClasses = getButtonClasses({
     variant,
@@ -65,22 +60,18 @@ const Button = ({
   }
 
   const handleMouseOver = (event) => {
-    setIsHovered(true)
     onMouseOver?.(event)
   }
 
   const handleMouseOut = (event) => {
-    setIsHovered(false)
     onMouseOut?.(event)
   }
 
   const handleFocus = (event) => {
-    setIsFocused(true)
     onFocus?.(event)
   }
 
   const handleBlur = (event) => {
-    setIsFocused(false)
     onBlur?.(event)
   }
 
@@ -122,4 +113,4 @@ const Button = ({
 
 Button.displayName = 'Button'
 
-export default Button 
+export default Button

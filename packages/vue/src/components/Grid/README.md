@@ -2,7 +2,7 @@
 # Grid
 
 ## Introduction
-The **Grid** component provides a responsive grid layout system based on flexbox, allowing you to create complex layouts with ease. It supports breakpoints and flexible column configurations.
+The **Grid** component provides a responsive 12-column layout based on native CSS Grid. It supports mobile-first breakpoints and falls back to flexbox only for explicit column directions.
 
 ## Installation
 Install Watercolor UI (which includes the Grid component):
@@ -67,8 +67,8 @@ import { Grid } from 'watercolor-ui/vue';
 | Name | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
 | `container` | `boolean` | `false` | If `true`, acts as a grid container. |
-| `spacing` | `number` (0-10) | `0` | Spacing between items (in 8px units). |
-| `direction` | `"row" \| "column" \| "row-reverse" \| "column-reverse"` | `'row'` | Flex direction. |
+| `spacing` | `number` (0-12) | `0` | Spacing between items (in 4px units). |
+| `direction` | `"row" \| "column" \| "row-reverse" \| "column-reverse"` | `'row'` | Layout direction. |
 | `justifyContent` | `"flex-start" \| "center" \| "flex-end" \| "space-between" \| "space-around" \| "space-evenly"` | `'flex-start'` | Horizontal alignment. |
 | `alignItems` | `"flex-start" \| "center" \| "flex-end" \| "stretch" \| "baseline"` | `'stretch'` | Vertical alignment. |
 | `className / class` | `string` | `''` | Additional CSS classes. |
@@ -87,11 +87,11 @@ import { Grid } from 'watercolor-ui/vue';
 ## Spacing Values
 | Value | Gap |
 | ----- | --- |
-| `1` | 8px |
-| `2` | 16px |
-| `3` | 24px |
-| `4` | 32px |
-| `5` | 40px |
+| `1` | 4px |
+| `2` | 8px |
+| `3` | 12px |
+| `4` | 16px |
+| `5` | 20px |
 
 ## Grid System
 * Based on 12-column layout
@@ -142,7 +142,7 @@ import { Grid } from 'watercolor-ui/vue';
 ```
 
 ## Styling
-* Uses flexbox for layout.
+* Uses native CSS Grid for the standard row layout.
 * Automatically adapts to screen size.
 * Supports custom spacing between items.
 
@@ -160,4 +160,3 @@ Released under the ISC License.
 ## Reviewer
 Reviewed by: [@zeturn](https://github.com/zeturn)
 2025-01-13
-

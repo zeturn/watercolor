@@ -1,0 +1,117 @@
+.wc-surfaces-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-block: clamp(40px, 7vw, 88px);
+  color: var(--wc-text-primary);
+  background: var(--wc-surface-canvas);
+}
+
+.wc-surfaces-intro {
+  max-width: 640px;
+  margin-bottom: 64px;
+}
+
+.wc-surfaces-eyebrow {
+  margin: 0 0 14px;
+  color: var(--wc-accent);
+  font-size: var(--wc-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.wc-surfaces-title {
+  margin: 0 0 16px;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 560;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+}
+
+.wc-surfaces-description {
+  margin: 0;
+  color: var(--wc-text-secondary);
+  font-size: var(--wc-font-size-lg);
+  line-height: 1.65;
+}
+
+.wc-surfaces-section { margin-top: 56px; }
+
+.wc-surfaces-section-title {
+  margin: 0 0 20px;
+  font-size: var(--wc-font-size-sm);
+  font-weight: 600;
+}
+
+.wc-surfaces-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.wc-surfaces-card { min-height: 164px; }
+
+.wc-surfaces-card-icon {
+  margin-bottom: 18px;
+  color: var(--wc-text-secondary);
+}
+
+.wc-surfaces-card-title {
+  margin: 0 0 8px;
+  font-size: var(--wc-font-size-md);
+  font-weight: 600;
+}
+
+.wc-surfaces-card-copy {
+  margin: 0;
+  color: var(--wc-text-secondary);
+  font-size: var(--wc-font-size-sm);
+  line-height: 1.55;
+}
+
+.wc-surfaces-force-hover.wc-card { background: var(--wc-action-hover); }
+
+.wc-surfaces-hierarchy {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.6fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.wc-surfaces-settings {
+  padding: 8px 0;
+}
+
+.wc-surfaces-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 56px;
+  gap: 24px;
+}
+
+.wc-surfaces-setting-label { font-size: var(--wc-font-size-sm); }
+.wc-surfaces-setting-value { color: var(--wc-text-secondary); font-size: var(--wc-font-size-sm); }
+
+.wc-surfaces-popover {
+  padding: 20px;
+  background: var(--wc-surface-overlay);
+}
+
+.wc-surfaces-popover-label {
+  margin: 0 0 6px;
+  font-size: var(--wc-font-size-sm);
+  font-weight: 600;
+}
+
+.wc-surfaces-popover-copy {
+  margin: 0;
+  color: var(--wc-text-secondary);
+  font-size: var(--wc-font-size-xs);
+  line-height: 1.5;
+}
+
+@media (max-width: 760px) {
+  .wc-surfaces-grid,
+  .wc-surfaces-hierarchy { grid-template-columns: 1fr; }
+}

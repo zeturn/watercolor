@@ -36,7 +36,7 @@ export function RadioGroup({
   const groupClasses = ['wc-radio-group', className].filter(Boolean).join(' ')
   const contentClasses = [
     'wc-radio-group-content',
-    row ? 'flex flex-wrap gap-4' : 'space-y-2',
+    row && 'wc-radio-group-content--row',
   ]
     .filter(Boolean)
     .join(' ')
@@ -49,18 +49,18 @@ export function RadioGroup({
         {label && (
           <label className="wc-radio-group-label">
             {label}
-            {required && <span className="text-error-500">*</span>}
+            {required && <span className="wc-radio-group__required">*</span>}
           </label>
         )}
 
         <div className={contentClasses}>{children}</div>
 
         {(error || helperText) && (
-          <div className="mt-2">
+          <div className="wc-radio-group__message">
             {error ? (
-              <p className="text-sm text-error-500">{error}</p>
+              <p className="wc-radio-group__error">{error}</p>
             ) : (
-              <p className="text-sm text-neutral-500">{helperText}</p>
+              <p className="wc-radio-group__helper">{helperText}</p>
             )}
           </div>
         )}
@@ -103,6 +103,7 @@ export default function Radio({
     `wc-radio--${finalSize}`,
     isDisabled && 'wc-radio--disabled',
     focused && 'wc-radio--focused',
+    isChecked && 'wc-radio--checked',
     className,
   ]
     .filter(Boolean)

@@ -1,16 +1,21 @@
 <template>
   <span
-    class="wc-tooltip-wrapper relative inline-block"
+    class="wc-tooltip-wrapper"
     :class="className"
+    :aria-describedby="show ? tooltipId : undefined"
     @mouseenter="show = true"
     @mouseleave="show = false"
+    @focusin="show = true"
+    @focusout="show = false"
   >
     <slot />
     <transition name="tooltip-fade">
       <div
         v-if="show"
-        class="wc-tooltip absolute z-50 px-2 py-1 rounded text-xs whitespace-nowrap"
+        :id="tooltipId"
+        class="wc-tooltip"
         :class="placementClass"
+        role="tooltip"
       >
         {{ text }}
       </div>
@@ -19,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, useId } from 'vue'
 import { getPlacementClass, validatePlacement } from './utils'
 import './style.css'
 
@@ -40,6 +45,7 @@ if (!validatePlacement(props.placement)) {
 }
 
 const show = ref(false)
+const tooltipId = useId()
 
 const placementClass = computed(() => getPlacementClass(props.placement))
 </script>

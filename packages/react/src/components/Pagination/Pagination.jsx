@@ -90,7 +90,9 @@ export default function Pagination({
         onClick={() => select(currentPage - 1)}
         aria-label="上一页"
       >
-        ‹
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m15 18-6-6 6-6" />
+        </svg>
       </button>
 
       {pageItems.map((page) =>
@@ -103,6 +105,8 @@ export default function Pagination({
             key={page.key}
             className={`page-btn wc-page-btn${page.num === currentPage ? ' active wc-page-btn--active' : ''}`}
             onClick={() => select(page.num)}
+            aria-current={page.num === currentPage ? 'page' : undefined}
+            aria-label={`第 ${page.num} 页`}
           >
             {page.num}
           </button>
@@ -115,7 +119,9 @@ export default function Pagination({
         onClick={() => select(currentPage + 1)}
         aria-label="下一页"
       >
-        ›
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m9 18 6-6-6-6" />
+        </svg>
       </button>
     </nav>
   )

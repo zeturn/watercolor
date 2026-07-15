@@ -1,7 +1,7 @@
 <template>
   <teleport to="body">
-    <div 
-      v-if="isOpen" 
+    <div
+      v-if="isOpen"
       :class="snackbarClasses"
       :style="snackbarStyle"
       role="alert"
@@ -9,7 +9,24 @@
       aria-atomic="true"
     >
       <!-- Icon -->
-      <div v-if="showIcon" :class="iconClasses">{{ iconText }}</div>
+      <div v-if="showIcon" :class="iconClasses" aria-hidden="true">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="10" cy="10" r="7.25" />
+          <path v-if="severity === 'success'" d="m6.8 10.1 2.1 2.1 4.4-4.6" />
+          <template v-else-if="severity === 'info'">
+            <path d="M10 9v4" />
+            <path d="M10 6.5h.01" />
+          </template>
+          <template v-else-if="severity === 'warning'">
+            <path d="M10 6.5v4.2" />
+            <path d="M10 13.5h.01" />
+          </template>
+          <template v-else>
+            <path d="m7.5 7.5 5 5" />
+            <path d="m12.5 7.5-5 5" />
+          </template>
+        </svg>
+      </div>
 
       <!-- Content -->
       <div class="wc-snackbar__content">
@@ -41,7 +58,9 @@
         aria-label="关闭"
         @click="handleClose"
       >
-        ×
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+          <path d="m6 6 8 8M14 6l-8 8" />
+        </svg>
       </button>
 
       <!-- Progress Bar -->
@@ -58,6 +77,7 @@
 
 <script setup>
 import { computed, watch, onMounted, onUnmounted, ref } from 'vue'
+import './style.css'
 
 const props = defineProps({
   open: {
@@ -91,7 +111,7 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: 'filled',
+    default: 'standard',
     validator: (value) => ['filled', 'outlined', 'standard'].includes(value)
   },
   action: {
@@ -127,13 +147,6 @@ watch([
 ], ([openProp, modelVal]) => {
   internalOpen.value = props.modelValue !== undefined ? modelVal : openProp
 })
-
-const iconMap = {
-  success: '✓',
-  info: 'ℹ',
-  warning: '⚠',
-  error: '✕'
-}
 
 let autoHideTimer = null
 let progressTimer = null
@@ -172,8 +185,6 @@ const iconClasses = 'wc-snackbar__icon'
 
 const progressBarClasses = 'wc-snackbar__progress-bar'
 
-const iconText = computed(() => iconMap[props.severity] || iconMap.info)
-
 const handleClose = () => {
   internalOpen.value = false
   emit('close')
@@ -187,18 +198,18 @@ const startAutoHideTimer = () => {
   if (props.autoHideDuration > 0) {
     progress.value = 100
     const startTime = Date.now()
-    
+
     autoHideTimer = setTimeout(() => {
       handleClose()
     }, props.autoHideDuration)
-    
+
     // Progress bar animation
     if (props.showProgress) {
       progressTimer = setInterval(() => {
         const elapsed = Date.now() - startTime
         const remaining = Math.max(0, 100 - (elapsed / props.autoHideDuration) * 100)
         progress.value = remaining
-        
+
         if (remaining <= 0) {
           clearInterval(progressTimer)
         }
@@ -231,4 +242,4 @@ onMounted(() => {
 })
 
 onUnmounted(() => clearTimers())
-</script> 
+</script>

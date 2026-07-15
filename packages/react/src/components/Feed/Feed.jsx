@@ -5,9 +5,9 @@ const FeedItem = ({
   item, 
   showAvatar = true, 
   variant = 'timeline', 
-  color = 'var(--wc-primary-500)',
-  dotSize = 12,
-  lineWidth = 2,
+  color = 'var(--wc-accent)',
+  dotSize = 8,
+  lineWidth = 1,
   onItemClick 
 }) => {
   const hasChildren = Array.isArray(item.children) && item.children.length
@@ -25,11 +25,23 @@ const FeedItem = ({
     <li 
       className={`wc-feed-item ${variant} ${hasChildren ? 'has-children' : ''}`} 
       style={feedItemStyles} 
-      onClick={() => onItemClick && onItemClick(item)}
+      role={onItemClick ? 'button' : undefined}
+      tabIndex={onItemClick ? 0 : undefined}
+      onClick={(event) => {
+        event.stopPropagation()
+        if (onItemClick) onItemClick(item)
+      }}
+      onKeyDown={(event) => {
+        if (onItemClick && (event.key === 'Enter' || event.key === ' ')) {
+          event.stopPropagation()
+          event.preventDefault()
+          onItemClick(item)
+        }
+      }}
     >
       {showAvatar && item.avatar && (
         <div className="wc-feed-avatar">
-          <img src={item.avatar} alt="avatar" />
+          <img src={item.avatar} alt={item.author || ''} />
         </div>
       )}
       <div className="wc-feed-content">
@@ -63,9 +75,9 @@ const Feed = ({
   items = [], 
   variant = 'timeline', 
   showAvatar = true, 
-  color = 'var(--wc-primary-500)',
-  dotSize = 12,
-  lineWidth = 2,
+  color = 'var(--wc-accent)',
+  dotSize = 8,
+  lineWidth = 1,
   onItemClick, 
   className = '' 
 }) => {
@@ -96,4 +108,4 @@ const Feed = ({
 
 Feed.displayName = 'Feed'
 
-export default Feed 
+export default Feed

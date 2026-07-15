@@ -1,8 +1,7 @@
 <template>
   <div
     ref="menuRef"
-    :class="['wc-menu', { 'dark': isDarkMode }]"
-    :style="{ backgroundColor: 'var(--wc-bg-surface)', color: 'var(--wc-text-primary)' }"
+    class="wc-menu"
   >
     <div
       ref="triggerRef"
@@ -10,10 +9,16 @@
       @click="handleToggle"
     >
       <slot name="trigger">
-        <button class="wc-menu__button">
+        <button
+          type="button"
+          class="wc-menu__button"
+          :disabled="disabled"
+          aria-haspopup="menu"
+          :aria-expanded="isOpen"
+        >
           {{ triggerText }}
           <span :class="['wc-menu__arrow', { 'wc-menu__arrow--open': isOpen }]">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="6,9 12,15 18,9" />
             </svg>
           </span>
@@ -27,15 +32,16 @@
         ref="panelRef"
         :class="menuClasses"
         :style="menuStyles"
+        role="menu"
       >
         <slot name="content">
           <div v-if="variant === 'card'" class="wc-menu__card">
             <!-- 左侧示意图区域 -->
             <div class="wc-menu__card-illustration">
               <slot name="illustration">
-                <img 
-                  v-if="illustration" 
-                  :src="illustration" 
+                <img
+                  v-if="illustration"
+                  :src="illustration"
                   :alt="illustrationAlt"
                   class="wc-menu__illustration-image"
                 />
@@ -48,48 +54,48 @@
                 <p v-if="cardDescription" class="wc-menu__card-description">{{ cardDescription }}</p>
               </div>
             </div>
-            
+
             <!-- 右侧列表区域 -->
             <div class="wc-menu__card-list">
-              <div
+              <template
                 v-for="(item, index) in items"
                 :key="item.key || index"
-                :class="[
-                  item.divider ? 'wc-menu__divider' : 'wc-menu__item',
-                  {
-                    'wc-menu__item--disabled': item.disabled && !item.divider
-                  }
-                ]"
-                @click="handleItemClick(item, index)"
               >
-                <span
-                  v-if="item.icon"
-                  class="wc-menu__icon"
-                >{{ item.icon }}</span>
-                <span class="wc-menu__label">{{ item.label }}</span>
-              </div>
+                <div v-if="item.divider" class="wc-menu__divider" role="separator" />
+                <button
+                  v-else
+                  type="button"
+                  role="menuitem"
+                  :disabled="item.disabled"
+                  :class="itemClasses(item)"
+                  @click="handleItemClick(item, index)"
+                >
+                  <span v-if="item.icon" class="wc-menu__icon">{{ item.icon }}</span>
+                  <span class="wc-menu__label">{{ item.label }}</span>
+                </button>
+              </template>
             </div>
           </div>
-          
+
           <!-- 默认样式 -->
           <div v-else>
-            <div
+            <template
               v-for="(item, index) in items"
               :key="item.key || index"
-              :class="[
-                item.divider ? 'wc-menu__divider' : 'wc-menu__item',
-                {
-                  'wc-menu__item--disabled': item.disabled && !item.divider
-                }
-              ]"
-              @click="handleItemClick(item, index)"
             >
-              <span
-                v-if="item.icon"
-                class="wc-menu__icon"
-              >{{ item.icon }}</span>
-              <span class="wc-menu__label">{{ item.label }}</span>
-            </div>
+              <div v-if="item.divider" class="wc-menu__divider" role="separator" />
+              <button
+                v-else
+                type="button"
+                role="menuitem"
+                :disabled="item.disabled"
+                :class="itemClasses(item)"
+                @click="handleItemClick(item, index)"
+              >
+                <span v-if="item.icon" class="wc-menu__icon">{{ item.icon }}</span>
+                <span class="wc-menu__label">{{ item.label }}</span>
+              </button>
+            </template>
           </div>
         </slot>
       </div>
@@ -178,11 +184,20 @@ const menuStyles = computed(() => {
   }
 })
 
+const itemClasses = (item) => [
+  'wc-menu__item',
+  {
+    'wc-menu__item--disabled': item.disabled,
+    'wc-menu__item--selected': item.selected,
+    'wc-menu__item--danger': item.danger
+  }
+]
+
 const handleToggle = () => {
   if (props.disabled) return
-  
+
   isOpen.value = !isOpen.value
-  
+
   if (isOpen.value) {
     emit('open')
   } else {
@@ -192,7 +207,7 @@ const handleToggle = () => {
 
 const handleItemClick = (item, index) => {
   if (item.disabled || item.divider) return
-  
+
   emit('select', item, index)
   isOpen.value = false
   emit('close')
@@ -213,5 +228,3 @@ onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
 })
 </script>
-
- 

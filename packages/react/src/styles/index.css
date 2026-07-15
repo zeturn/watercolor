@@ -377,7 +377,7 @@
 	* 这些变量已内置明暗模式支持，会根据主题自动切换
 	* ============================================================================= */
 	
-	--wc-color-primary: var(--wc-primary-500);
+	--wc-color-primary: var(--wc-accent);
 	--wc-color-secondary: var(--wc-secondary-500);
 	
 	/* 文本颜色 */
@@ -402,6 +402,41 @@
 	--wc-bg-brand: var(--wc-primary-500);          /* 品牌色背景 */
 	--wc-bg-brand-hover: var(--wc-primary-200);    /* 品牌色悬停背景 */
 	--wc-bg-brand-active: var(--wc-primary-100);   /* 品牌色激活背景 */
+
+	/* Canonical surface and interaction tokens. Components consume these. */
+	--wc-surface-canvas: var(--wc-neutral-0);
+	--wc-surface-subtle: var(--wc-neutral-100);
+	--wc-surface-raised: var(--wc-neutral-0);
+	--wc-surface-overlay: var(--wc-neutral-0);
+	--wc-backdrop: rgba(0, 0, 0, 0.5);
+	--wc-action-hover: var(--wc-neutral-100);
+	--wc-action-active: var(--wc-neutral-200);
+	--wc-action-selected: var(--wc-neutral-100);
+	--wc-action-selected-hover: var(--wc-neutral-200);
+	--wc-action-disabled: var(--wc-neutral-100);
+	--wc-accent: var(--wc-primary-600);
+	--wc-accent-hover: var(--wc-primary-700);
+	--wc-accent-active: var(--wc-primary-800);
+	--wc-accent-subtle: var(--wc-primary-50);
+	--wc-danger: var(--wc-error-600);
+	--wc-danger-hover: var(--wc-error-700);
+	--wc-danger-subtle: var(--wc-error-50);
+	--wc-text-on-accent: #ffffff;
+	--wc-focus-ring: var(--wc-primary-500);
+	--wc-motion-fast: 120ms;
+	--wc-motion-normal: 180ms;
+	--wc-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+	/* Compatibility aliases for the existing public token surface. */
+	--wc-bg-canvas: var(--wc-surface-canvas);
+	--wc-bg-surface: var(--wc-surface-subtle);
+	--wc-bg-surface-secondary: var(--wc-action-active);
+	--wc-bg-surface-hover: var(--wc-action-hover);
+	--wc-bg-surface-active: var(--wc-action-active);
+	--wc-bg-overlay: var(--wc-backdrop);
+	--wc-bg-brand: var(--wc-accent);
+	--wc-bg-brand-hover: var(--wc-accent-hover);
+	--wc-bg-brand-active: var(--wc-accent-active);
 	--wc-bg-success: var(--wc-success-500);        /* 成功状态背景 */
 	--wc-bg-success-subtle: var(--wc-success-50);  /* 成功状态浅背景 */
 	--wc-bg-warning: var(--wc-warning-500);        /* 警告状态背景 */
@@ -636,6 +671,38 @@
   --wc-bg-brand: var(--wc-primary-600);          /* 品牌色背景 */
   --wc-bg-brand-hover: var(--wc-primary-200);    /* 品牌色悬停背景 */
   --wc-bg-brand-active: var(--wc-primary-300);   /* 品牌色激活背景 */
+
+  /* Canonical dark-theme surface and interaction mappings. */
+  --wc-surface-canvas: var(--wc-neutral-0);
+  --wc-surface-subtle: var(--wc-neutral-50);
+  --wc-surface-raised: var(--wc-neutral-50);
+  --wc-surface-overlay: var(--wc-neutral-50);
+  --wc-backdrop: rgba(0, 0, 0, 0.8);
+  --wc-action-hover: var(--wc-neutral-100);
+  --wc-action-active: var(--wc-neutral-200);
+  --wc-action-selected: var(--wc-neutral-100);
+  --wc-action-selected-hover: var(--wc-neutral-200);
+  --wc-action-disabled: var(--wc-neutral-50);
+  --wc-accent: var(--wc-primary-600);
+  --wc-accent-hover: var(--wc-primary-500);
+  --wc-accent-active: var(--wc-primary-700);
+  --wc-accent-subtle: var(--wc-primary-900);
+  --wc-danger: var(--wc-error-500);
+  --wc-danger-hover: var(--wc-error-400);
+  --wc-danger-subtle: var(--wc-error-50);
+  --wc-text-on-accent: #ffffff;
+  --wc-focus-ring: var(--wc-primary-400);
+
+  /* Compatibility aliases. */
+  --wc-bg-canvas: var(--wc-surface-canvas);
+  --wc-bg-surface: var(--wc-surface-subtle);
+  --wc-bg-surface-secondary: var(--wc-action-active);
+  --wc-bg-surface-hover: var(--wc-action-hover);
+  --wc-bg-surface-active: var(--wc-action-active);
+  --wc-bg-overlay: var(--wc-backdrop);
+  --wc-bg-brand: var(--wc-accent);
+  --wc-bg-brand-hover: var(--wc-accent-hover);
+  --wc-bg-brand-active: var(--wc-accent-active);
   --wc-bg-success: var(--wc-success-600);        /* 成功状态背景 */
   --wc-bg-success-subtle: var(--wc-success-100); /* 成功状态浅背景 */
   --wc-bg-warning: var(--wc-warning-600);        /* 警告状态背景 */

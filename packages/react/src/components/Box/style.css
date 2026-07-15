@@ -1,6 +1,6 @@
-/* Box 组件样式 */
+/* Box is a neutral layout primitive. Visual treatment is always opt-in via props. */
+.wc-box { color: inherit; background: transparent; }
 
-/* Display utilities */
 .flex { display: flex; }
 .block { display: block; }
 .inline { display: inline; }
@@ -8,13 +8,11 @@
 .hidden { display: none; }
 .grid { display: grid; }
 
-/* Flexbox direction */
 .flex-row { flex-direction: row; }
 .flex-col { flex-direction: column; }
 .flex-row-reverse { flex-direction: row-reverse; }
 .flex-col-reverse { flex-direction: column-reverse; }
 
-/* Justify content */
 .justify-start { justify-content: flex-start; }
 .justify-center { justify-content: center; }
 .justify-end { justify-content: flex-end; }
@@ -22,19 +20,16 @@
 .justify-around { justify-content: space-around; }
 .justify-evenly { justify-content: space-evenly; }
 
-/* Align items */
 .items-start { align-items: flex-start; }
 .items-center { align-items: center; }
 .items-end { align-items: flex-end; }
 .items-stretch { align-items: stretch; }
 .items-baseline { align-items: baseline; }
 
-/* Flex wrap */
 .flex-wrap { flex-wrap: wrap; }
 .flex-nowrap { flex-wrap: nowrap; }
 .flex-wrap-reverse { flex-wrap: wrap-reverse; }
 
-/* Gap utilities */
 .gap-0 { gap: 0; }
 .gap-1 { gap: 0.25rem; }
 .gap-2 { gap: 0.5rem; }
@@ -48,37 +43,3 @@
 .gap-16 { gap: 4rem; }
 .gap-20 { gap: 5rem; }
 .gap-24 { gap: 6rem; }
-
-/* 暗色模式 - 使用 .dark 类选择器 */
-.dark .wc-box {
-  background-color: var(--wc-neutral-800, #1f2937);
-  border-color: var(--wc-neutral-700, #374151);
-  color: var(--wc-neutral-100, #f3f4f6);
-}
-
-.dark .wc-box--elevation-1 {
-  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
-}
-
-.dark .wc-box--elevation-2 {
-  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
-}
-
-.dark .wc-box--elevation-3 {
-  box-shadow: 0 10px 15px rgba(255, 255, 255, 0.1);
-}
-
-.dark .wc-box--elevation-4 {
-  box-shadow: 0 20px 25px rgba(255, 255, 255, 0.15);
-}
-
-.dark .wc-box--outlined {
-  background-color: transparent;
-  border-color: var(--wc-neutral-700, #374151);
-  color: var(--wc-neutral-100, #f3f4f6);
-}
-
-.dark .wc-box--filled {
-  background-color: var(--wc-neutral-800, #1f2937);
-  color: var(--wc-neutral-100, #f3f4f6);
-} 

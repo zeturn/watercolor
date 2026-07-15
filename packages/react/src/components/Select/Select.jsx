@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useId } from 'react'
 import './style.css'
 
 const Select = ({
@@ -69,19 +69,6 @@ const Select = ({
     return classes.concat(className).filter(Boolean).join(' ')
   }
 
-  const getSelectStyles = () => {
-    const styles = { ...style }
-    
-    // Use CSS variables for theming
-    if (variant === 'outlined') {
-      styles.borderColor = error ? 'var(--wc-error-500)' : `var(--wc-${color}-500)`
-    } else if (variant === 'filled') {
-      styles.backgroundColor = 'var(--wc-neutral-50)'
-    }
-    
-    return styles
-  }
-
   const handleToggle = () => {
     if (!disabled) {
       setIsOpen(!isOpen)
@@ -130,6 +117,17 @@ const Select = ({
     }, 100)
   }
 
+  const handleKeyDown = (e) => {
+    if (disabled) return
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      handleToggle()
+    } else if (e.key === 'Escape') {
+      setIsOpen(false)
+      setIsFocused(false)
+    }
+  }
+
   const renderSelectedValue = () => {
     if (multiple && Array.isArray(selectedOption)) {
       if (selectedOption.length === 0) {
@@ -175,13 +173,15 @@ const Select = ({
     return classes.join(' ')
   }
 
-  const selectId = id || name || `select-${Math.random().toString(36).substr(2, 9)}`
+  const generatedId = useId()
+  const selectId = id || name || generatedId
 
   return (
-    <div className="wc-select" ref={selectRef}>
+    <div className={getSelectClasses()} style={style} ref={selectRef}>
       {label && (
         <label
           htmlFor={selectId}
+          id={`${selectId}-label`}
           className={getLabelClasses()}
         >
           {label}
@@ -191,15 +191,19 @@ const Select = ({
       <div className={getContainerClasses()}>
         <div
           className="wc-select__control"
-          style={getSelectStyles()}
+          id={selectId}
           onClick={handleToggle}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
           tabIndex={disabled ? -1 : 0}
           role="combobox"
           aria-expanded={isOpen}
           aria-haspopup="listbox"
           aria-labelledby={label ? `${selectId}-label` : undefined}
+          aria-controls={`${selectId}-options`}
+          aria-disabled={disabled}
+          aria-required={required}
         >
           <div className="wc-select__value">
             {renderSelectedValue()}
@@ -223,6 +227,7 @@ const Select = ({
         {isOpen && (
           <div
             className="wc-select__dropdown"
+            id={`${selectId}-options`}
             style={{ maxHeight }}
             ref={optionsRef}
           >

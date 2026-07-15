@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './style.css'
 
 const IconButton = ({
@@ -15,8 +15,6 @@ const IconButton = ({
   style = {},
   ...props
 }) => {
-  const [focused, setFocused] = useState(false)
-
   // 验证props
   const validColors = ['default', 'primary', 'secondary', 'error', 'warning', 'info', 'success']
   const validSizes = ['sm', 'md', 'lg']
@@ -39,7 +37,6 @@ const IconButton = ({
     `wc-icon-button--${size}`,
     edge && `wc-icon-button--edge-${edge}`,
     disabled && 'wc-icon-button--disabled',
-    focused && 'wc-icon-button--focused',
     className
   ].filter(Boolean).join(' ')
 
@@ -49,23 +46,14 @@ const IconButton = ({
     }
   }
 
-  const handleFocus = (event) => {
-    setFocused(true)
-    onFocus?.(event)
-  }
-
-  const handleBlur = (event) => {
-    setFocused(false)
-    onBlur?.(event)
-  }
-
   return (
     <button
+      type="button"
       className={buttonClasses}
       disabled={disabled}
       onClick={handleClick}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
+      onFocus={onFocus}
+      onBlur={onBlur}
       style={style}
       {...props}
     >
@@ -82,4 +70,4 @@ const IconButton = ({
 
 IconButton.displayName = 'IconButton'
 
-export default IconButton 
+export default IconButton

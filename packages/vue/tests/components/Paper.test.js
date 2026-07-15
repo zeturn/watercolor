@@ -9,7 +9,7 @@ describe('Paper Component', () => {
         default: '纸张内容'
       }
     })
-    
+
     expect(wrapper.text()).toContain('纸张内容')
     expect(wrapper.find('.wc-paper').exists()).toBe(true)
   })
@@ -23,7 +23,7 @@ describe('Paper Component', () => {
         default: '边框纸张'
       }
     })
-    
+
     expect(wrapper.classes()).toContain('wc-paper--outlined')
   })
 
@@ -36,7 +36,7 @@ describe('Paper Component', () => {
         default: '阴影纸张'
       }
     })
-    
+
     expect(wrapper.classes()).toContain('wc-paper--elevation-4')
   })
 
@@ -49,7 +49,7 @@ describe('Paper Component', () => {
         default: '圆角纸张'
       }
     })
-    
+
     expect(wrapper.classes()).toContain('wc-paper--rounded')
   })
 
@@ -62,7 +62,20 @@ describe('Paper Component', () => {
         default: '自定义元素纸张'
       }
     })
-    
+
     expect(wrapper.element.tagName.toLowerCase()).toBe('section')
   })
-}) 
+
+  it('only exposes interaction semantics when clickable', async () => {
+    const wrapper = mount(Paper, {
+      props: { clickable: true },
+      slots: { default: '可点击表面' }
+    })
+
+    expect(wrapper.attributes('role')).toBe('button')
+    expect(wrapper.attributes('tabindex')).toBe('0')
+
+    await wrapper.trigger('keydown', { key: ' ' })
+    expect(wrapper.emitted('click')).toHaveLength(1)
+  })
+})

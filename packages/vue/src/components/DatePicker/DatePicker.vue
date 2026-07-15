@@ -9,25 +9,36 @@
     >
       <input
         ref="inputRef"
+        :id="inputId"
         type="text"
         :value="displayValue"
         :placeholder="placeholder"
         :disabled="disabled"
         readonly
         class="wc-datepicker-input"
+        role="combobox"
+        aria-haspopup="dialog"
+        :aria-expanded="isOpen"
+        :aria-controls="`${inputId}-calendar`"
+        @keydown="handleInputKeydown"
       >
-      <span class="wc-datepicker-icon">📅</span>
+      <span class="wc-datepicker-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 10h18" /></svg>
+      </span>
     </div>
     
     <div
       v-if="isOpen"
+      :id="`${inputId}-calendar`"
       class="wc-datepicker-dropdown"
-      :style="dropdownStyles"
+      role="dialog"
+      aria-label="选择日期"
     >
       <div class="wc-datepicker-header">
         <button
           type="button"
           class="wc-datepicker-nav"
+          aria-label="上个月"
           @click="changeMonth(-1)"
         >
           ‹
@@ -38,6 +49,7 @@
         <button
           type="button"
           class="wc-datepicker-nav"
+          aria-label="下个月"
           @click="changeMonth(1)"
         >
           ›
@@ -61,6 +73,9 @@
           type="button"
           :class="getDayClasses(day)"
           :disabled="isDateDisabled(day)"
+          :aria-label="formatDate(day.date, 'YYYY-MM-DD')"
+          :aria-selected="isDateSelected(day.date)"
+          :aria-current="isToday(day.date) ? 'date' : undefined"
           @click="selectDate(day)"
         >
           {{ day.day }}
@@ -91,7 +106,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted, getCurrentInstance } from 'vue'
 import './style.css'
 
 const props = defineProps({
@@ -139,6 +154,8 @@ const emit = defineEmits(['update:modelValue', 'change'])
 
 const datePickerRef = ref(null)
 const inputRef = ref(null)
+const instance = getCurrentInstance()
+const inputId = `wc-datepicker-${instance?.uid || Math.random().toString(36).slice(2, 11)}`
 const isOpen = ref(false)
 const currentDate = ref(new Date())
 
@@ -153,10 +170,6 @@ const inputClasses = computed(() => [
     'wc-datepicker-wrapper--open': isOpen.value
   }
 ])
-
-const dropdownStyles = computed(() => ({
-  zIndex: 1000
-}))
 
 const selectedDate = computed(() => {
   if (!props.modelValue) return null
@@ -271,6 +284,16 @@ const togglePicker = () => {
   isOpen.value = !isOpen.value
 }
 
+const handleInputKeydown = (event) => {
+  if (props.disabled) return
+  if (event.key === 'Enter' || event.key === ' ' || event.key === 'ArrowDown') {
+    event.preventDefault()
+    isOpen.value = true
+  } else if (event.key === 'Escape') {
+    isOpen.value = false
+  }
+}
+
 const changeMonth = (delta) => {
   const newDate = new Date(currentDate.value)
   newDate.setMonth(newDate.getMonth() + delta)
@@ -319,4 +342,4 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
 })
-</script> 
+</script>

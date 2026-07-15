@@ -1,363 +1,66 @@
-/* Icon 组件样式 */
 .wc-icon {
+  position: relative;
   display: inline-flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  user-select: none;
-  vertical-align: middle;
+  color: currentColor;
   line-height: 1;
-  position: relative;
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  vertical-align: middle;
+  user-select: none;
 }
+.wc-icon svg { display: block; width: 100%; height: 100%; }
+.wc-icon--xs { width: 16px; height: 16px; }
+.wc-icon--sm { width: 20px; height: 20px; }
+.wc-icon--md { width: 24px; height: 24px; }
+.wc-icon--lg { width: 32px; height: 32px; }
+.wc-icon--xl { width: 48px; height: 48px; }
+.wc-icon--primary { color: var(--wc-text-brand); }
+.wc-icon--secondary { color: var(--wc-text-secondary); }
+.wc-icon--success { color: var(--wc-text-success); }
+.wc-icon--warning { color: var(--wc-text-warning); }
+.wc-icon--error { color: var(--wc-text-error); }
+.wc-icon--info { color: var(--wc-text-info); }
+.wc-icon--muted { color: var(--wc-text-tertiary); }
+.wc-icon--disabled { color: var(--wc-text-disabled); pointer-events: none; }
 
-.wc-icon svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  fill: currentColor;
-  transition: inherit;
-}
+.wc-icon--clickable { box-sizing: content-box; margin: -6px; padding: 6px; border-radius: var(--wc-radius-md); cursor: pointer; transition: background-color var(--wc-motion-fast) var(--wc-ease-standard), transform var(--wc-motion-fast) var(--wc-ease-standard); }
+.wc-icon--clickable:hover { background: var(--wc-action-hover); }
+.wc-icon--clickable:active { background: var(--wc-action-active); transform: scale(0.96); }
+.wc-icon--clickable:focus-visible { outline: 0; box-shadow: 0 0 0 2px var(--wc-focus-ring); }
+.wc-icon--spinning { animation: wc-icon-spin 1s linear infinite; }
+.wc-icon--pulse { animation: wc-icon-pulse 2s ease-in-out infinite; }
+.wc-icon--bounce { animation: wc-icon-bounce 1s ease infinite; }
+.wc-icon--wiggle { animation: wc-icon-wiggle 1s ease-in-out infinite; }
+.wc-icon--float { animation: wc-icon-float 3s ease-in-out infinite; }
+.wc-icon--gradient { color: var(--wc-text-brand); }
 
-/* 尺寸预设 */
-.wc-icon--xs {
-  width: 16px;
-  height: 16px;
-}
+@keyframes wc-icon-spin { to { transform: rotate(360deg); } }
+@keyframes wc-icon-pulse { 50% { opacity: 0.5; } }
+@keyframes wc-icon-bounce { 40% { transform: translateY(-6px); } 70% { transform: translateY(-2px); } }
+@keyframes wc-icon-wiggle { 20% { transform: rotate(-10deg); } 40% { transform: rotate(8deg); } 60% { transform: rotate(-4deg); } }
+@keyframes wc-icon-float { 50% { transform: translateY(-4px); } }
 
-.wc-icon--sm {
-  width: 20px;
-  height: 20px;
-}
+.icon-showcase { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 4px; padding: 4px; }
+.icon-card { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 14px 10px; color: var(--wc-text-primary); border-radius: var(--wc-radius-lg); background: transparent; font-family: var(--wc-font-family); transition: background-color var(--wc-motion-fast) var(--wc-ease-standard); }
+.icon-card:hover { background: var(--wc-action-hover); }
+.icon-card .wc-icon { color: var(--wc-text-secondary); }
+.icon-card:hover .wc-icon { color: var(--wc-text-primary); }
+.icon-name,
+.size-label,
+.color-label,
+.animation-label { color: var(--wc-text-tertiary); font-size: 0.75rem; font-weight: 500; line-height: 1.3; text-align: center; overflow-wrap: anywhere; }
+.library-showcase { margin-bottom: 28px; }
+.library-title { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; color: var(--wc-text-primary); font-size: 1.125rem; font-weight: 600; }
+.library-description { margin: 0 0 14px; color: var(--wc-text-secondary); font-size: 0.875rem; line-height: 1.5; }
+.size-showcase,
+.color-showcase,
+.animation-showcase { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; padding: 12px; }
+.size-item,
+.color-item,
+.animation-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 
-.wc-icon--md {
-  width: 24px;
-  height: 24px;
-}
-
-.wc-icon--lg {
-  width: 32px;
-  height: 32px;
-}
-
-.wc-icon--xl {
-  width: 48px;
-  height: 48px;
-}
-
-/* 颜色预设 */
-.wc-icon--primary {
-  color: var(--wc-primary-500, #3b82f6);
-}
-
-.wc-icon--secondary {
-  color: var(--wc-secondary-500, #6b7280);
-}
-
-.wc-icon--success {
-  color: var(--wc-success-500, #10b981);
-}
-
-.wc-icon--warning {
-  color: var(--wc-warning-500, #f59e0b);
-}
-
-.wc-icon--error {
-  color: var(--wc-error-500, #ef4444);
-}
-
-.wc-icon--info {
-  color: var(--wc-info-500, #06b6d4);
-}
-
-.wc-icon--muted {
-  color: var(--wc-text-muted, #9ca3af);
-}
-
-/* 交互状态 */
-.wc-icon--clickable {
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 4px;
-  padding: 2px;
-  margin: -2px;
-}
-
-.wc-icon--clickable:hover {
-  opacity: 0.8;
-  transform: scale(1.1);
-  background-color: rgba(0, 0, 0, 0.08);
-}
-
-.wc-icon--clickable:active {
-  transform: scale(0.95);
-  background-color: rgba(0, 0, 0, 0.08);
-}
-
-.wc-icon--clickable:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-}
-
-/* 旋转动画 */
-.wc-icon--spinning {
-  animation: wc-icon-spin 1s linear infinite;
-}
-
-@keyframes wc-icon-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* 脉冲动画 */
-.wc-icon--pulse {
-  animation: wc-icon-pulse 2s ease-in-out infinite;
-}
-
-@keyframes wc-icon-pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-/* 禁用状态 */
-.wc-icon--disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-/* 渐变动画 */
-.wc-icon--gradient {
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ef4444, #f59e0b);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: wc-icon-gradient 3s ease infinite;
-}
-
-@keyframes wc-icon-gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* 弹跳动画 */
-.wc-icon--bounce {
-  animation: wc-icon-bounce 1s ease infinite;
-}
-
-@keyframes wc-icon-bounce {
-  0%, 20%, 53%, 80%, 100% {
-    transform: translate3d(0, 0, 0);
-  }
-  40%, 43% {
-    transform: translate3d(0, -8px, 0);
-  }
-  70% {
-    transform: translate3d(0, -4px, 0);
-  }
-  90% {
-    transform: translate3d(0, -2px, 0);
-  }
-}
-
-/* 摇摆动画 */
-.wc-icon--wiggle {
-  animation: wc-icon-wiggle 1s ease-in-out infinite;
-}
-
-@keyframes wc-icon-wiggle {
-  0%, 7% { transform: rotateZ(0); }
-  15% { transform: rotateZ(-15deg); }
-  20% { transform: rotateZ(10deg); }
-  25% { transform: rotateZ(-10deg); }
-  30% { transform: rotateZ(6deg); }
-  35% { transform: rotateZ(-4deg); }
-  40%, 100% { transform: rotateZ(0); }
-}
-
-/* 悬浮效果 */
-.wc-icon--float {
-  animation: wc-icon-float 3s ease-in-out infinite;
-}
-
-@keyframes wc-icon-float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
-}
-
-/* 响应式设计 */
-@media (max-width: 640px) {
-  .wc-icon--responsive {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-  .wc-icon--responsive {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-@media (min-width: 1025px) {
-  .wc-icon--responsive {
-    width: 28px;
-    height: 28px;
-  }
-}
-
-/* Storybook专用样式 */
-.icon-showcase {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 16px;
-  padding: 20px;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-}
-
-.icon-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 12px;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.icon-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border-color: #3b82f6;
-}
-
-.icon-card .wc-icon {
-  color: #374151;
-  transition: color 0.2s ease;
-}
-
-.icon-card:hover .wc-icon {
-  color: #3b82f6;
-}
-
-.icon-name {
-  font-size: 11px;
-  color: #6b7280;
-  text-align: center;
-  line-height: 1.3;
-  word-break: break-word;
-  font-weight: 500;
-}
-
-.icon-card:hover .icon-name {
-  color: #374151;
-}
-
-.library-showcase {
-  margin-bottom: 32px;
-}
-
-.library-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #1f2937;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.library-description {
-  font-size: 14px;
-  color: #6b7280;
-  margin-bottom: 16px;
-  line-height: 1.5;
-}
-
-.size-showcase {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 20px;
-  background: white;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.size-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.size-label {
-  font-size: 12px;
-  color: #6b7280;
-  font-weight: 500;
-}
-
-.color-showcase {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-  background: white;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.color-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.color-label {
-  font-size: 12px;
-  color: #6b7280;
-  font-weight: 500;
-}
-
-.animation-showcase {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  padding: 20px;
-  background: white;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.animation-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.animation-label {
-  font-size: 12px;
-  color: #6b7280;
-  font-weight: 500;
-} 
+@media (max-width: 640px) { .wc-icon--responsive { width: 20px; height: 20px; } }
+@media (min-width: 641px) and (max-width: 1024px) { .wc-icon--responsive { width: 24px; height: 24px; } }
+@media (min-width: 1025px) { .wc-icon--responsive { width: 28px; height: 28px; } }
+@media (prefers-reduced-motion: reduce) { .wc-icon { animation: none; transition: none; } }

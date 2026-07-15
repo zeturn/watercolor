@@ -22,6 +22,11 @@ export default defineConfig({
       external: [
         'vue',
         '@zeturn/watercolor-core',
+        '@zeturn/watercolor-icons-feather',
+        '@zeturn/watercolor-icons-heroicons-vue',
+        '@zeturn/watercolor-icons-lucide-vue',
+        '@zeturn/watercolor-icons-phosphor-vue',
+        '@zeturn/watercolor-icons-tabler-vue',
       ],
       output: {
         globals: {

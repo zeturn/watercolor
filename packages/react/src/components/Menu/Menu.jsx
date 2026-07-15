@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import './style.css'
-import { 
+import {
   getMenuClasses,
   getMenuMenuClasses,
   getMenuButtonClasses,
@@ -64,19 +64,25 @@ const Menu = ({
     } else {
       outsideClickListener.remove()
     }
-    
+
     return () => outsideClickListener.remove()
   }, [isOpen])
 
   return (
-    <div className={menuClasses} ref={menuRef} {...props} style={{ backgroundColor: 'var(--wc-bg-surface)', color: 'var(--wc-text-primary)' }}>
+    <div className={menuClasses} ref={menuRef} {...props}>
       <div
         className="wc-menu__trigger"
         onClick={handleToggle}
         ref={triggerRef}
       >
         {triggerContent || children || (
-          <button className={buttonClasses}>
+          <button
+            type="button"
+            className={buttonClasses}
+            disabled={disabled}
+            aria-haspopup="menu"
+            aria-expanded={isOpen}
+          >
             {triggerText}
             <span className={arrowClasses}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -88,14 +94,14 @@ const Menu = ({
       </div>
 
       {isOpen && (
-        <div className={panelClasses} style={menuStyles}>
+        <div className={panelClasses} style={menuStyles} role="menu">
           {menuContent || (
             variant === 'card' ? (
               <div className="wc-menu__card">
                 {/* 左侧示意图区域 */}
                 <div className="wc-menu__card-illustration">
                   {illustration ? (
-                    <img 
+                    <img
                       src={illustration}
                       alt={illustrationAlt}
                       className="wc-menu__illustration-image"
@@ -112,20 +118,23 @@ const Menu = ({
                     </div>
                   )}
                 </div>
-                
+
                 {/* 右侧列表区域 */}
                 <div className="wc-menu__card-list">
                   {items.map((item, index) => {
                     if (item.divider) {
-                      return <div key={item.key || index} className="wc-menu__divider" />
+                      return <div key={item.key || index} className="wc-menu__divider" role="separator" />
                     }
-                    
+
                     const itemClasses = getMenuItemClasses(item).join(' ')
-                    
+
                     return (
-                      <div
+                      <button
+                        type="button"
+                        role="menuitem"
                         key={item.key || index}
                         className={itemClasses}
+                        disabled={item.disabled}
                         onClick={() => handleItemSelect(item, index)}
                       >
                         {item.icon && (
@@ -136,7 +145,7 @@ const Menu = ({
                         <span className="wc-menu__label">
                           {item.label}
                         </span>
-                      </div>
+                      </button>
                     )
                   })}
                 </div>
@@ -144,15 +153,18 @@ const Menu = ({
             ) : (
               items.map((item, index) => {
                 if (item.divider) {
-                  return <div key={item.key || index} className="wc-menu__divider" />
+                  return <div key={item.key || index} className="wc-menu__divider" role="separator" />
                 }
-                
+
                 const itemClasses = getMenuItemClasses(item).join(' ')
-                
+
                 return (
-                  <div
+                  <button
+                    type="button"
+                    role="menuitem"
                     key={item.key || index}
                     className={itemClasses}
+                    disabled={item.disabled}
                     onClick={() => handleItemSelect(item, index)}
                   >
                     {item.icon && (
@@ -163,7 +175,7 @@ const Menu = ({
                     <span className="wc-menu__label">
                       {item.label}
                     </span>
-                  </div>
+                  </button>
                 )
               })
             )
@@ -176,4 +188,4 @@ const Menu = ({
 
 Menu.displayName = 'Menu'
 
-export default Menu 
+export default Menu

@@ -10,17 +10,22 @@
     @mouseleave="hideCard"
     @touchstart="showCard"
     @touchend="hideCard"
+    @focusin="showCard"
+    @focusout="hideCard"
   >
     <!-- 触发元素 -->
-    <span class="hover-card-trigger">
+    <span
+      class="hover-card-trigger"
+      :id="triggerId"
+      :tabindex="disabled ? -1 : 0"
+      :aria-describedby="isVisible ? cardId : undefined"
+    >
       <slot>{{ triggerText }}</slot>
     </span>
 
     <!-- 预览卡片 -->
     <transition 
       name="hover-card-transition"
-      @enter="onEnter"
-      @leave="onLeave"
     >
       <div 
         v-if="isVisible"
@@ -30,9 +35,9 @@
           `hover-card-position-${position}`,
           `hover-card-card-size-${cardSize}`
         ]"
-        :style="cardStyle"
-        role="tooltip"
-        :aria-describedby="triggerId"
+        :id="cardId"
+        role="dialog"
+        :aria-labelledby="cardData.title ? `${cardId}-title` : undefined"
       >
         <!-- 箭头 -->
         <div 
@@ -62,6 +67,7 @@
             <div class="hover-card-body">
               <h3
                 v-if="cardData.title"
+                :id="`${cardId}-title`"
                 class="hover-card-title"
               >
                 {{ cardData.title }}
@@ -109,7 +115,7 @@
 </template>
 
 <script>
-import { ref, computed, nextTick, onMounted, onBeforeUnmount } from 'vue'
+import { ref, useId, onBeforeUnmount } from 'vue'
 import './style.css'
 
 export default {
@@ -160,7 +166,7 @@ export default {
     },
     showArrow: {
       type: Boolean,
-      default: true
+      default: false
     },
     disabled: {
       type: Boolean,
@@ -171,15 +177,10 @@ export default {
   setup(props, { emit }) {
     const isVisible = ref(false)
     const cardRef = ref(null)
-    const triggerId = ref(`hover-card-${Math.random().toString(36).substr(2, 9)}`)
+    const cardId = useId()
+    const triggerId = `${cardId}-trigger`
     const showTimer = ref(null)
     const hideTimer = ref(null)
-
-    const cardStyle = computed(() => {
-      return {
-        zIndex: 1000
-      }
-    })
 
     const showCard = () => {
       if (props.disabled) return
@@ -201,23 +202,6 @@ export default {
       }, props.hideDelay)
     }
 
-    const onEnter = (el) => {
-      el.style.opacity = '0'
-      el.style.transform = 'scale(0.95)'
-      
-      nextTick(() => {
-        el.style.transition = 'opacity 0.2s ease, transform 0.2s ease'
-        el.style.opacity = '1'
-        el.style.transform = 'scale(1)'
-      })
-    }
-
-    const onLeave = (el) => {
-      el.style.transition = 'opacity 0.15s ease, transform 0.15s ease'
-      el.style.opacity = '0'
-      el.style.transform = 'scale(0.95)'
-    }
-
     const handleAction = (action) => {
       emit('action', action)
       if (action.onClick) {
@@ -234,15 +218,12 @@ export default {
       isVisible,
       cardRef,
       triggerId,
-      cardStyle,
+      cardId,
       showCard,
       hideCard,
-      onEnter,
-      onLeave,
       handleAction
     }
   }
 }
 </script>
 
- 

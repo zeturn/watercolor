@@ -1,28 +1,30 @@
-/* CircularProgress 组件样式 */
 .wc-circular-progress {
-  display: inline-flex;
+  --wc-circular-tone: var(--wc-accent);
+
   position: relative;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  color: var(--wc-circular-tone);
+  vertical-align: middle;
 }
 
-.wc-circular-progress-svg {
-  transform: rotate(-90deg);
-}
-
-.wc-circular-progress-bg {
-  opacity: 0.2;
-  color: var(--wc-neutral-300, #d1d5db);
-}
-
+.wc-circular-progress-svg { display: block; transform: rotate(-90deg); }
+.wc-circular-progress-bg { color: var(--wc-action-selected); }
 .wc-circular-progress-circle {
+  color: var(--wc-circular-tone);
   stroke-linecap: round;
-  transition: stroke-dashoffset 0.3s ease;
+  transition: stroke-dashoffset var(--wc-motion-normal) var(--wc-ease-standard);
 }
+
+.wc-circular-progress--secondary { --wc-circular-tone: var(--wc-text-secondary); }
+.wc-circular-progress--success { --wc-circular-tone: var(--wc-text-success); }
+.wc-circular-progress--warning { --wc-circular-tone: var(--wc-text-warning); }
+.wc-circular-progress--error { --wc-circular-tone: var(--wc-text-error); }
+.wc-circular-progress--inherit { --wc-circular-tone: currentColor; }
 
 .wc-circular-progress-circle--indeterminate {
-  stroke-dashoffset: 0;
-  animation: wc-circular-progress-rotate 1.4s linear infinite;
+  animation: wc-circular-progress-rotate 1.3s linear infinite;
 }
 
 .wc-circular-progress-value {
@@ -30,96 +32,22 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 12px;
+  color: var(--wc-text-secondary);
+  font-size: 11px;
   font-weight: 500;
-  color: var(--wc-neutral-700, #374151);
+  font-variant-numeric: tabular-nums;
 }
 
-/* Color variants */
-.wc-circular-progress--primary .wc-circular-progress-circle {
-  color: var(--wc-primary-500, #3b82f6);
-}
-
-.wc-circular-progress--secondary .wc-circular-progress-circle {
-  color: var(--wc-neutral-500, #6b7280);
-}
-
-.wc-circular-progress--success .wc-circular-progress-circle {
-  color: var(--wc-success-500, #10b981);
-}
-
-.wc-circular-progress--warning .wc-circular-progress-circle {
-  color: var(--wc-warning-500, #f59e0b);
-}
-
-.wc-circular-progress--error .wc-circular-progress-circle {
-  color: var(--wc-error-500, #ef4444);
-}
-
-/* Inherit variant (uses currentColor) */
-.wc-circular-progress--inherit .wc-circular-progress-circle {
-  color: currentColor;
-}
-
-/* Dark mode inherit variant */
-.dark .wc-circular-progress--inherit .wc-circular-progress-circle {
-  color: currentColor;
-}
-
-/* Indeterminate animation */
-@keyframes wc-circular-progress-rotate {
-  0% {
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -35;
-  }
-  100% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -124;
-  }
-}
-
-/* 暗色模式 - 使用 .dark 类选择器 */
-.dark .wc-circular-progress-bg {
-  color: var(--wc-neutral-400, #737373);
-}
-
-.dark .wc-circular-progress-value {
-  color: var(--wc-neutral-600, #d4d4d4);
-}
-
-/* 暗色模式下的颜色变体 */
-.dark .wc-circular-progress--primary .wc-circular-progress-circle {
-  color: var(--wc-primary-500, #7ba3e8);
-}
-
-.dark .wc-circular-progress--secondary .wc-circular-progress-circle {
-  color: var(--wc-secondary-500, #85b568);
-}
-
-.dark .wc-circular-progress--success .wc-circular-progress-circle {
-  color: var(--wc-success-500, #5da673);
-}
-
-.dark .wc-circular-progress--warning .wc-circular-progress-circle {
-  color: var(--wc-warning-500, #c1894a);
-}
-
-.dark .wc-circular-progress--error .wc-circular-progress-circle {
-  color: var(--wc-error-500, #c16574);
-} 
-
-/* Overlay & positioning helpers */
 .wc-circular-progress--overlay {
   position: fixed;
   top: 50%;
   left: 50%;
+  z-index: 1400;
+  padding: 16px;
   transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.8);
-  z-index: 9999;
+  border-radius: var(--wc-radius-xl);
+  background: var(--wc-surface-overlay);
+  box-shadow: var(--wc-shadow-lg);
 }
 
 .wc-circular-progress--centered {
@@ -129,6 +57,19 @@
   transform: translate(-50%, -50%);
 }
 
-.wc-circular-progress--inline {
-  display: inline-flex;
-} 
+.wc-circular-progress--overlay.wc-circular-progress--centered {
+  position: fixed;
+}
+
+.wc-circular-progress--inline { display: inline-flex; }
+
+@keyframes wc-circular-progress-rotate {
+  0% { stroke-dasharray: 1 200; stroke-dashoffset: 0; }
+  50% { stroke-dasharray: 90 200; stroke-dashoffset: -36; }
+  100% { stroke-dasharray: 90 200; stroke-dashoffset: -126; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-circular-progress-circle { transition: none; }
+  .wc-circular-progress-circle--indeterminate { animation-duration: 2.4s; }
+}

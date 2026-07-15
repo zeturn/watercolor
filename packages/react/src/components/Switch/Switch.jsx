@@ -14,6 +14,7 @@ const Switch = ({
   ...props
 }) => {
   const labelId = useId()
+  const inputId = `${labelId}-input`
 
   const validColors = ['primary', 'success', 'warning', 'error', 'purple', 'orange', 'cyan', 'pink']
   const safeColor = validColors.includes(color) ? color : 'primary'
@@ -39,7 +40,7 @@ const Switch = ({
     <div className="wc-switch-wrapper">
       {/* Label */}
       {label && (
-        <label id={labelId} className="wc-switch__label">
+        <label id={labelId} htmlFor={inputId} className="wc-switch__label">
           {label}
           {required && <span className="wc-switch__required">*</span>}
         </label>
@@ -50,10 +51,13 @@ const Switch = ({
         <label className={switchClasses} aria-disabled={disabled}>
           <input
             type="checkbox"
+            id={inputId}
             className="wc-switch__input"
             checked={checked}
             disabled={disabled}
-            aria-labelledby={labelId}
+            aria-labelledby={label ? labelId : undefined}
+            aria-checked={checked}
+            required={required}
             role="switch"
             onChange={handleInputChange}
             {...props}
@@ -75,4 +79,4 @@ const Switch = ({
 
 Switch.displayName = 'Switch'
 
-export default Switch 
+export default Switch

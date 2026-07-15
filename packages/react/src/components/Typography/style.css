@@ -1,2 +1,113 @@
-/* Typography 组件样式 */
-/* Typography 组件暂无特定样式 */
+/* Typography is intentionally self-contained and does not require Tailwind. */
+.wc-typography {
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  font-family: var(--wc-font-family);
+  font-style: normal;
+  text-wrap: pretty;
+}
+
+.wc-typography--h1 {
+  font-size: clamp(2.5rem, 5vw, var(--wc-font-size-6xl, 4rem));
+  font-weight: 650;
+  letter-spacing: -0.04em;
+}
+
+.wc-typography--h2 {
+  font-size: clamp(2.125rem, 4vw, var(--wc-font-size-5xl, 3rem));
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+.wc-typography--h3 {
+  font-size: var(--wc-font-size-4xl, 2.25rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+.wc-typography--h4 {
+  font-size: var(--wc-font-size-3xl, 1.875rem);
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+.wc-typography--h5 {
+  font-size: var(--wc-font-size-2xl, 1.5rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.wc-typography--h6 {
+  font-size: var(--wc-font-size-xl, 1.25rem);
+  font-weight: 650;
+  letter-spacing: -0.015em;
+}
+
+.wc-typography--subtitle1 {
+  font-size: var(--wc-font-size-md, 1rem);
+  font-weight: 600;
+}
+
+.wc-typography--subtitle2 {
+  font-size: var(--wc-font-size-sm, 0.875rem);
+  font-weight: 600;
+}
+
+.wc-typography--body1 {
+  font-size: var(--wc-font-size-md, 1rem);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+.wc-typography--body2 {
+  font-size: var(--wc-font-size-sm, 0.875rem);
+  font-weight: 400;
+}
+
+.wc-typography--caption {
+  font-size: var(--wc-font-size-xs, 0.75rem);
+  font-weight: 400;
+}
+
+.wc-typography--overline {
+  font-size: var(--wc-font-size-xs, 0.75rem);
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.wc-typography--button {
+  display: inline-block;
+  font-size: var(--wc-font-size-sm, 0.875rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.wc-typography--color-inherit { color: inherit; }
+.wc-typography--color-primary { color: var(--wc-text-brand); }
+.wc-typography--color-secondary { color: var(--wc-text-secondary); }
+.wc-typography--color-success { color: var(--wc-text-success); }
+.wc-typography--color-warning { color: var(--wc-text-warning); }
+.wc-typography--color-error { color: var(--wc-text-error); }
+.wc-typography--color-text-primary { color: var(--wc-text-primary); }
+.wc-typography--color-text-secondary { color: var(--wc-text-secondary); }
+.wc-typography--color-text-disabled { color: var(--wc-text-disabled); }
+
+.wc-typography--align-left { text-align: left; }
+.wc-typography--align-center { text-align: center; }
+.wc-typography--align-right { text-align: right; }
+.wc-typography--align-justify { text-align: justify; }
+
+.wc-typography--gutter-bottom { margin-bottom: 1rem; }
+
+.wc-typography--no-wrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .wc-typography--h3 { font-size: var(--wc-font-size-3xl, 1.875rem); }
+  .wc-typography--h4 { font-size: var(--wc-font-size-2xl, 1.5rem); }
+}

@@ -4,7 +4,7 @@
  * 有效的Button变体类型
  */
 export const validVariants = [
-  'primary', 'secondary', 'filled', 'outlined', 'text', 
+  'primary', 'secondary', 'filled', 'outlined', 'text',
   'success', 'warning', 'error', 'info', 'purple', 'orange', 'cyan', 'pink'
 ]
 
@@ -88,24 +88,24 @@ export function getSafeVariant(variant) {
  * @returns {Array<string>} CSS类名数组
  */
 export function getButtonClasses(props) {
-  const { variant, size, disabled, loading, fullWidth, uppercase, rounded, buttonStyle = 'filled' } = props
+  const { variant, size, disabled, loading, fullWidth, uppercase, rounded, buttonStyle = 'default' } = props
   const classes = ['wc-btn']
-  
+
   // 样式模式类名
   classes.push(`wc-btn--style-${buttonStyle}`)
-  
+
   // 变体类名
   classes.push(`wc-btn--${getSafeVariant(variant)}`)
-  
+
   // 尺寸类名
   classes.push(`wc-btn--${size}`)
-  
+
   // 状态类名
   if (disabled || loading) classes.push('wc-btn--disabled')
   if (loading) classes.push('wc-btn--loading')
   if (fullWidth) classes.push('wc-btn--full-width')
   if (uppercase) classes.push('wc-btn--uppercase')
-  
+
   // 圆角类名
   if (rounded === false || rounded === 'none') {
     classes.push('wc-btn--rounded-none')
@@ -114,7 +114,7 @@ export function getButtonClasses(props) {
   } else {
     classes.push('wc-btn--rounded')
   }
-  
+
   return classes
 }
 
@@ -157,4 +157,4 @@ export function handleButtonClick({ event, disabled, loading, href, target, onCl
     }
     onClick?.(event)
   }
-} 
+}

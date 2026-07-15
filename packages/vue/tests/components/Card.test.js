@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import Card from '@/components/Card/Card.vue'
 
@@ -9,9 +9,11 @@ describe('Card Component', () => {
         default: '卡片内容'
       }
     })
-    
+
     expect(wrapper.text()).toContain('卡片内容')
     expect(wrapper.find('.wc-card-content').exists()).toBe(true)
+    expect(wrapper.classes()).toContain('wc-card--minimal')
+    expect(wrapper.classes()).not.toContain('wc-card--interactive')
   })
 
   it('shows title when provided', () => {
@@ -23,7 +25,7 @@ describe('Card Component', () => {
         default: '卡片内容'
       }
     })
-    
+
     expect(wrapper.find('.wc-card__title').text()).toBe('卡片标题')
     expect(wrapper.find('.wc-card-header').exists()).toBe(true)
   })
@@ -35,7 +37,7 @@ describe('Card Component', () => {
         default: '卡片内容'
       }
     })
-    
+
     expect(wrapper.find('.custom-header').exists()).toBe(true)
     expect(wrapper.text()).toContain('自定义头部')
   })
@@ -47,7 +49,7 @@ describe('Card Component', () => {
         footer: '<div class="custom-footer">自定义底部</div>'
       }
     })
-    
+
     expect(wrapper.find('.custom-footer').exists()).toBe(true)
     expect(wrapper.find('.wc-card-footer').exists()).toBe(true)
   })
@@ -61,7 +63,7 @@ describe('Card Component', () => {
         default: '边框卡片'
       }
     })
-    
+
     expect(wrapper.classes()).toContain('wc-card--outlined')
   })
 
@@ -74,7 +76,7 @@ describe('Card Component', () => {
         default: '主色卡片'
       }
     })
-    
+
     expect(wrapper.classes()).toContain('wc-card--primary')
   })
 
@@ -87,7 +89,7 @@ describe('Card Component', () => {
         default: '大尺寸卡片'
       }
     })
-    
+
     expect(wrapper.classes()).toContain('wc-card--large')
   })
 
@@ -100,7 +102,7 @@ describe('Card Component', () => {
         default: '可交互卡片'
       }
     })
-    
+
     expect(wrapper.classes()).toContain('wc-card--interactive')
   })
 
@@ -113,7 +115,7 @@ describe('Card Component', () => {
         default: '无边框卡片'
       }
     })
-    
+
     expect(wrapper.classes()).toContain('wc-card--no-border')
   })
 
@@ -126,7 +128,22 @@ describe('Card Component', () => {
         default: '自定义类名卡片'
       }
     })
-    
+
     expect(wrapper.classes()).toContain('custom-card-class')
   })
-}) 
+
+  it('treats a click listener as an interactive card', async () => {
+    const onClick = vi.fn()
+    const wrapper = mount(Card, {
+      attrs: { onClick },
+      slots: { default: '可点击卡片' }
+    })
+
+    expect(wrapper.classes()).toContain('wc-card--interactive')
+    expect(wrapper.attributes('role')).toBe('button')
+    expect(wrapper.attributes('tabindex')).toBe('0')
+
+    await wrapper.trigger('keydown', { key: 'Enter' })
+    expect(onClick).toHaveBeenCalledTimes(1)
+  })
+})

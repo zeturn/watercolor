@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useId } from 'react'
 import './style.css'
 import { getHoverCardClasses } from './utils.js'
 
@@ -11,7 +11,7 @@ const HoverCard = ({
   position = 'top', // top | bottom | left | right
   delay = 300,
   hideDelay = 100,
-  showArrow = true,
+  showArrow = false,
   disabled = false,
   onShow,
   onHide,
@@ -22,11 +22,12 @@ const HoverCard = ({
   card,
   ...props
 }) => {
+  const cardId = useId()
   const [visible, setVisible] = useState(false)
   const showTimer = useRef(null)
   const hideTimer = useRef(null)
   const cardRef = useRef(null)
-  const triggerId = useRef(`hover-card-${Math.random().toString(36).substr(2, 9)}`)
+  const triggerId = `${cardId}-trigger`
 
   const clearTimers = () => {
     clearTimeout(showTimer.current)
@@ -79,20 +80,27 @@ const HoverCard = ({
       onMouseLeave={hideCard}
       onTouchStart={showCard}
       onTouchEnd={hideCard}
+      onFocus={showCard}
+      onBlur={hideCard}
       style={style}
       {...props}
     >
-      <span className="hover-card-trigger">
+      <span
+        id={triggerId}
+        className="hover-card-trigger"
+        tabIndex={disabled ? -1 : 0}
+        aria-describedby={visible ? cardId : undefined}
+      >
         {children || triggerText}
       </span>
 
       {visible && (
         <div
           ref={cardRef}
+          id={cardId}
           className={popupClasses}
-          style={{ zIndex: 1000 }}
-          role="tooltip"
-          aria-describedby={triggerId.current}
+          role="dialog"
+          aria-labelledby={cardData.title ? `${cardId}-title` : undefined}
         >
           {showArrow && <div className={`hover-card-arrow hover-card-arrow-${position}`} />}
 
@@ -107,7 +115,7 @@ const HoverCard = ({
                   </div>
                 )}
                 <div className="hover-card-body">
-                  {cardData.title && <h3 className="hover-card-title">{cardData.title}</h3>}
+                  {cardData.title && <h3 id={`${cardId}-title`} className="hover-card-title">{cardData.title}</h3>}
                   {cardData.description && <p className="hover-card-description">{cardData.description}</p>}
                   {cardData.meta?.length && (
                     <div className="hover-card-meta">

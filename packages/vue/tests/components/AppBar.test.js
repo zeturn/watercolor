@@ -8,6 +8,7 @@ describe('AppBar (Vue)', () => {
     expect(wrapper.classes()).toContain('wc-appbar')
     expect(wrapper.classes()).toContain('wc-appbar--fixed')
     expect(wrapper.classes()).toContain('wc-appbar--default')
+    expect(wrapper.classes()).toContain('wc-appbar--elevation-0')
     expect(wrapper.text()).toBe('内容')
   })
 
@@ -51,4 +52,4 @@ describe('AppBar (Vue)', () => {
     const wrapper = mount(AppBar, { slots: { default: '<span>导航栏</span>' } })
     expect(wrapper.html()).toContain('导航栏')
   })
-}) 
+})
