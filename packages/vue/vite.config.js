@@ -31,6 +31,7 @@ export default defineConfig({
       output: {
         globals: {
           vue: 'Vue',
+          '@zeturn/watercolor-core': 'WatercolorCore',
         },
         assetFileNames: (assetInfo) => {
           return '[name][extname]'

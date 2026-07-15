@@ -1,0 +1,45 @@
+html { color-scheme: light; }
+html[data-resolved-theme='dark'], html.dark { color-scheme: dark; }
+body {
+  margin: 0;
+  background: var(--wc-surface-canvas);
+  color: var(--wc-text-primary);
+  font-family: var(--wc-font-family);
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font: inherit; }
+a { color: var(--wc-text-brand); text-decoration: none; }
+a:hover { color: var(--wc-accent-hover); }
+::placeholder { color: var(--wc-text-tertiary); opacity: 1; }
+::selection { background: var(--wc-accent-subtle); color: var(--wc-text-primary); }
+:focus-visible { outline: 2px solid var(--wc-focus-ring); outline-offset: 2px; }
+code, pre { font-family: var(--wc-font-mono); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--wc-border-strong); border-radius: var(--wc-radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--wc-text-tertiary); }
+
+.font-chinese { font-family: var(--wc-font-chinese), var(--wc-font-family); }
+.font-english { font-family: var(--wc-font-english), var(--wc-font-family); }
+.font-mono { font-family: var(--wc-font-mono); }
+.font-system { font-family: var(--wc-font-family); }
+.wc-text-semantic-primary { color: var(--wc-text-primary); }
+.wc-text-semantic-secondary { color: var(--wc-text-secondary); }
+.wc-text-semantic-tertiary { color: var(--wc-text-tertiary); }
+.wc-text-semantic-brand { color: var(--wc-text-brand); }
+.wc-bg-semantic-canvas { background: var(--wc-surface-canvas); }
+.wc-bg-semantic-surface { background: var(--wc-surface-subtle); }
+.wc-radius-sm { border-radius: var(--wc-radius-sm); }
+.wc-radius-md { border-radius: var(--wc-radius-md); }
+.wc-radius-lg { border-radius: var(--wc-radius-lg); }
+.wc-radius-xl { border-radius: var(--wc-radius-xl); }
+.wc-radius-2xl { border-radius: var(--wc-radius-2xl); }
+.wc-radius-full { border-radius: var(--wc-radius-full); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

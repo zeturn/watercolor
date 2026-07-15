@@ -1,0 +1,82 @@
+/** Mode mappings only. Primitive values remain stable. */
+[data-theme='dark'], .dark:not([data-theme]) {
+  --wc-mode-canvas: var(--wc-neutral-1000);
+  --wc-mode-subtle: var(--wc-neutral-950);
+  --wc-mode-raised: var(--wc-neutral-950);
+  --wc-mode-overlay: var(--wc-neutral-900);
+  --wc-mode-hover: var(--wc-neutral-900);
+  --wc-mode-active: var(--wc-neutral-800);
+  --wc-mode-selected: var(--wc-neutral-900);
+  --wc-mode-selected-hover: var(--wc-neutral-800);
+  --wc-mode-disabled: var(--wc-neutral-950);
+  --wc-mode-text: var(--wc-neutral-100);
+  --wc-mode-text-secondary: var(--wc-neutral-400);
+  --wc-mode-text-tertiary: var(--wc-neutral-500);
+  --wc-mode-text-disabled: var(--wc-neutral-600);
+  --wc-mode-text-inverse: var(--wc-neutral-950);
+  --wc-mode-border: var(--wc-neutral-800);
+  --wc-mode-border-strong: var(--wc-neutral-700);
+  --wc-mode-border-subtle: var(--wc-neutral-900);
+  --wc-mode-accent: var(--wc-primary-400);
+  --wc-mode-accent-hover: var(--wc-primary-300);
+  --wc-mode-accent-active: var(--wc-primary-500);
+  --wc-mode-accent-subtle: rgb(91 158 255 / .14);
+  --wc-mode-danger: var(--wc-error-400);
+  --wc-mode-danger-hover: var(--wc-error-300);
+  --wc-mode-danger-subtle: rgb(255 64 16 / .14);
+  --wc-mode-backdrop: rgb(0 0 0 / .72);
+  --wc-mode-shadow-sm: 0 1px 2px rgb(0 0 0 / .32);
+  --wc-mode-shadow-md: 0 6px 16px rgb(0 0 0 / .38);
+  --wc-mode-shadow-lg: 0 16px 36px rgb(0 0 0 / .44);
+  --wc-mode-shadow-xl: 0 28px 64px rgb(0 0 0 / .5);
+  --wc-text-success: var(--wc-success-400);
+  --wc-text-warning: var(--wc-warning-400);
+  --wc-text-error: var(--wc-error-400);
+  --wc-text-info: var(--wc-info-400);
+  --wc-bg-success-subtle: rgb(118 255 3 / .12);
+  --wc-bg-warning-subtle: rgb(255 204 22 / .12);
+  --wc-bg-error-subtle: rgb(255 64 16 / .12);
+  --wc-bg-info-subtle: rgb(65 211 252 / .12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='system'] {
+    --wc-mode-canvas: var(--wc-neutral-1000);
+    --wc-mode-subtle: var(--wc-neutral-950);
+    --wc-mode-raised: var(--wc-neutral-950);
+    --wc-mode-overlay: var(--wc-neutral-900);
+    --wc-mode-hover: var(--wc-neutral-900);
+    --wc-mode-active: var(--wc-neutral-800);
+    --wc-mode-selected: var(--wc-neutral-900);
+    --wc-mode-selected-hover: var(--wc-neutral-800);
+    --wc-mode-disabled: var(--wc-neutral-950);
+    --wc-mode-text: var(--wc-neutral-100);
+    --wc-mode-text-secondary: var(--wc-neutral-400);
+    --wc-mode-text-tertiary: var(--wc-neutral-500);
+    --wc-mode-text-disabled: var(--wc-neutral-600);
+    --wc-mode-text-inverse: var(--wc-neutral-950);
+    --wc-mode-border: var(--wc-neutral-800);
+    --wc-mode-border-strong: var(--wc-neutral-700);
+    --wc-mode-border-subtle: var(--wc-neutral-900);
+    --wc-mode-accent: var(--wc-primary-400);
+    --wc-mode-accent-hover: var(--wc-primary-300);
+    --wc-mode-accent-active: var(--wc-primary-500);
+    --wc-mode-accent-subtle: rgb(91 158 255 / .14);
+    --wc-mode-danger: var(--wc-error-400);
+    --wc-mode-danger-hover: var(--wc-error-300);
+    --wc-mode-danger-subtle: rgb(255 64 16 / .14);
+    --wc-mode-backdrop: rgb(0 0 0 / .72);
+    --wc-mode-shadow-sm: 0 1px 2px rgb(0 0 0 / .32);
+    --wc-mode-shadow-md: 0 6px 16px rgb(0 0 0 / .38);
+    --wc-mode-shadow-lg: 0 16px 36px rgb(0 0 0 / .44);
+    --wc-mode-shadow-xl: 0 28px 64px rgb(0 0 0 / .5);
+    --wc-text-success: var(--wc-success-400);
+    --wc-text-warning: var(--wc-warning-400);
+    --wc-text-error: var(--wc-error-400);
+    --wc-text-info: var(--wc-info-400);
+    --wc-bg-success-subtle: rgb(118 255 3 / .12);
+    --wc-bg-warning-subtle: rgb(255 204 22 / .12);
+    --wc-bg-error-subtle: rgb(255 64 16 / .12);
+    --wc-bg-info-subtle: rgb(65 211 252 / .12);
+  }
+}

@@ -37,6 +37,7 @@ export default defineConfig({
           'react-dom': 'ReactDOM',
           'react/jsx-runtime': 'ReactJSXRuntime',
           'react/jsx-dev-runtime': 'ReactJSXDevRuntime',
+          '@zeturn/watercolor-core': 'WatercolorCore',
         },
         assetFileNames: (assetInfo) => {
           return '[name][extname]'

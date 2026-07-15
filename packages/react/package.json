@@ -12,7 +12,7 @@
       "import": "./dist/watercolor-react.es.js",
       "require": "./dist/watercolor-react.umd.js"
     },
-    "./style.css": "./style.css"
+    "./style.css": "./dist/watercolor-react.css"
   },
   "files": [
     "dist",

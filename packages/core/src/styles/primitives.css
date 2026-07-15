@@ -1,0 +1,85 @@
+/** Stable design primitives. These values never change between color modes. */
+:root {
+  --wc-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --wc-font-chinese: "";
+  --wc-font-english: "";
+  --wc-font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  --wc-font-size-xs: .75rem; --wc-font-size-sm: .875rem; --wc-font-size-md: 1rem;
+  --wc-font-size-lg: 1.125rem; --wc-font-size-xl: 1.25rem; --wc-font-size-2xl: 1.5rem;
+  --wc-font-size-3xl: 1.875rem; --wc-font-size-4xl: 2.25rem; --wc-font-size-5xl: 3rem;
+  --wc-font-size-6xl: 4rem; --wc-font-size-7xl: 4.5rem; --wc-font-size-8xl: 6rem;
+  --wc-font-weight-regular: 400; --wc-font-weight-medium: 500; --wc-font-weight-semibold: 600; --wc-font-weight-bold: 700;
+
+  --wc-primary-50: #f8faff; --wc-primary-100: #edf5ff; --wc-primary-200: #d7e9ff;
+  --wc-primary-300: #b8d8ff; --wc-primary-400: #89bcff; --wc-primary-500: #5b9eff;
+  --wc-primary-600: #3384ff; --wc-primary-700: #1f74f4; --wc-primary-800: #165fc5;
+  --wc-primary-900: #164e9e; --wc-primary-950: #123e7d;
+  --wc-primary-500-rgb: 91, 158, 255; --wc-primary-600-rgb: 51, 132, 255;
+
+  --wc-secondary-50: #f6ffed; --wc-secondary-100: #d9f7be; --wc-secondary-200: #b7eb8f;
+  --wc-secondary-300: #95de64; --wc-secondary-400: #73d13d; --wc-secondary-500: #52c41a;
+  --wc-secondary-600: #389e0d; --wc-secondary-700: #237804; --wc-secondary-800: #135200;
+  --wc-secondary-900: #092b00; --wc-secondary-950: #051a00;
+
+  --wc-neutral-0: #ffffff; --wc-neutral-50: #fcfcfc; --wc-neutral-100: #f8f8f8;
+  --wc-neutral-200: #ebebeb; --wc-neutral-300: #dedede; --wc-neutral-400: #b5b5b5;
+  --wc-neutral-500: #919191; --wc-neutral-600: #707070; --wc-neutral-700: #5e5e5e;
+  --wc-neutral-800: #444444; --wc-neutral-900: #333333; --wc-neutral-950: #222222;
+  --wc-neutral-1000: #0f0f0f;
+
+  --wc-success-50: #f0fff4; --wc-success-100: #eeffcc; --wc-success-200: #d8ff9a;
+  --wc-success-300: #bdff67; --wc-success-400: #a2ff41; --wc-success-500: #76ff03;
+  --wc-success-600: #59db02; --wc-success-700: #40b701; --wc-success-800: #2c9300;
+  --wc-success-900: #1d7a00; --wc-success-950: #105000;
+
+  --wc-warning-50: #fffef0; --wc-warning-100: #fff9d0; --wc-warning-200: #fff0a1;
+  --wc-warning-300: #ffe673; --wc-warning-400: #ffdc50; --wc-warning-500: #ffcc16;
+  --wc-warning-600: #dbaa10; --wc-warning-700: #b78a0b; --wc-warning-800: #936b07;
+  --wc-warning-900: #7a5504; --wc-warning-950: #4d3502;
+
+  --wc-error-50: #fef2f2; --wc-error-100: #ffe6cf; --wc-error-200: #ffc79f;
+  --wc-error-300: #ffa16f; --wc-error-400: #ff7d4b; --wc-error-500: #ff4010;
+  --wc-error-600: #db250b; --wc-error-700: #b71108; --wc-error-800: #930508;
+  --wc-error-900: #7a030e; --wc-error-950: #4d0209;
+  --wc-danger-50: var(--wc-error-50); --wc-danger-100: var(--wc-error-100);
+  --wc-danger-200: var(--wc-error-200); --wc-danger-300: var(--wc-error-300);
+  --wc-danger-400: var(--wc-error-400); --wc-danger-500: var(--wc-error-500);
+  --wc-danger-600: var(--wc-error-600); --wc-danger-700: var(--wc-error-700);
+  --wc-danger-800: var(--wc-error-800); --wc-danger-900: var(--wc-error-900);
+
+  --wc-info-50: #f0fdfa; --wc-info-100: #d9fefc; --wc-info-200: #b3fefe;
+  --wc-info-300: #8cf5fe; --wc-info-400: #70e8fd; --wc-info-500: #41d3fc;
+  --wc-info-600: #2fa7d8; --wc-info-700: #207fb5; --wc-info-800: #145b92;
+  --wc-info-900: #0c4178; --wc-info-950: #07294d;
+
+  --wc-purple-50: #f9f7fc; --wc-purple-100: #f1eafc; --wc-purple-200: #e6d8fb;
+  --wc-purple-300: #d4b7f8; --wc-purple-400: #bb8df2; --wc-purple-500: #a667ed;
+  --wc-purple-600: #944ae4; --wc-purple-700: #833bd3; --wc-purple-800: #6f30b0;
+  --wc-purple-900: #5e298f;
+  --wc-pink-50: #fdf7f9; --wc-pink-100: #faeef3; --wc-pink-200: #f9dbe7;
+  --wc-pink-300: #f7bad3; --wc-pink-400: #f38ab6; --wc-pink-500: #ef629d;
+  --wc-pink-600: #e64a89; --wc-pink-700: #d53e77; --wc-pink-800: #b93665;
+  --wc-pink-900: #9f3155;
+  --wc-teal-50: #f6fcfb; --wc-teal-100: #e7f9f7; --wc-teal-200: #cff4f1;
+  --wc-teal-300: #b0eeea; --wc-teal-400: #8be6e0; --wc-teal-500: #6fdcd4;
+  --wc-teal-600: #4ec8c2; --wc-teal-700: #3aaaad; --wc-teal-800: #2e8f95;
+  --wc-teal-900: #267a80;
+  --wc-indigo-50: #f5f6fe; --wc-indigo-100: #eceeff; --wc-indigo-200: #dbdcff;
+  --wc-indigo-300: #c0c0ff; --wc-indigo-400: #9a97fc; --wc-indigo-500: #7c76f5;
+  --wc-indigo-600: #685de9; --wc-indigo-700: #5a4ed3; --wc-indigo-800: #4b3fb3;
+  --wc-indigo-900: #413592;
+  --wc-orange-50: #fff7ed; --wc-orange-100: #ffedd5; --wc-orange-200: #fed7aa;
+  --wc-orange-300: #fdba74; --wc-orange-400: #fb923c; --wc-orange-500: #f97316;
+  --wc-orange-600: #ea580c; --wc-orange-700: #c2410c; --wc-orange-800: #9a3412;
+  --wc-orange-900: #7c2d12;
+  --wc-cyan-50: #ecfeff; --wc-cyan-100: #cffafe; --wc-cyan-200: #a5f3fc;
+  --wc-cyan-300: #67e8f9; --wc-cyan-400: #22d3ee; --wc-cyan-500: #06b6d4;
+  --wc-cyan-600: #0891b2; --wc-cyan-700: #0e7490; --wc-cyan-800: #155e75;
+  --wc-cyan-900: #164e63;
+
+  --wc-radius-none: 0; --wc-radius-xs: .125rem; --wc-radius-sm: .25rem;
+  --wc-radius-md: .375rem; --wc-radius-lg: .5rem; --wc-radius-xl: .75rem;
+  --wc-radius-2xl: 1rem; --wc-radius-3xl: 1.5rem; --wc-radius-full: 9999px;
+  --wc-motion-fast: 120ms; --wc-motion-normal: 180ms;
+  --wc-ease-standard: cubic-bezier(.2, 0, 0, 1);
+}

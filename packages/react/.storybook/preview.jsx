@@ -54,6 +54,7 @@ const preview = {
         items: [
           { value: 'light', title: 'Light' },
           { value: 'dark', title: 'Dark' },
+          { value: 'system', title: 'System' },
         ],
         dynamicTitle: true,
       },
@@ -68,13 +69,18 @@ const preview = {
         if (debug) console.log('[Preview] Theme changed to:', theme)
         
         const root = document.documentElement
-        root.classList.remove('light', 'dark')
-        root.classList.add(theme)
+        const resolved = theme === 'system'
+          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          : theme
+        root.dataset.theme = theme
+        root.dataset.resolvedTheme = resolved
+        root.classList.toggle('dark', resolved === 'dark')
+        root.classList.toggle('light', resolved === 'light')
 
         // sync background
         const sbRoot = document.getElementById('storybook-root')
         if (sbRoot) {
-          sbRoot.style.backgroundColor = theme === 'dark' ? '#0f0f0f' : '#ffffff'
+          sbRoot.style.backgroundColor = 'var(--wc-surface-canvas)'
         }
 
         // save theme to localStorage and trigger manager reload
@@ -105,8 +111,8 @@ const preview = {
       return (
         <div
           style={{
-            backgroundColor: theme === 'dark' ? '#0f0f0f' : '#ffffff',
-            color: theme === 'dark' ? '#f5f5f5' : '#1f1f1f',
+            backgroundColor: 'var(--wc-surface-canvas)',
+            color: 'var(--wc-text-primary)',
             minHeight: '100vh',
           }}
         >
@@ -117,4 +123,4 @@ const preview = {
   ],
 }
 
-export default preview 
+export default preview

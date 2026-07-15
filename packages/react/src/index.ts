@@ -75,3 +75,4 @@ export * from './utils/theme'
 
 // 主题 Provider
 export { ThemeProvider, useTheme } from './ThemeReact.tsx'
+export type { ThemeContextValue, ThemeProviderProps } from './ThemeReact.tsx'

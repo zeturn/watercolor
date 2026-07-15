@@ -80,3 +80,4 @@ export * from './utils/theme'
 
 // 主题 Provider
 export { ThemeProvider, useTheme } from './ThemeVUE.ts'
+export type { ThemeStore } from './ThemeVUE.ts'

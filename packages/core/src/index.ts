@@ -1,3 +1,5 @@
+export * from './theme/index.js'
+
 export * as AccordionUtils from './components/Accordion/utils.js'
 export * as AlertUtils from './components/Alert/utils.jsx'
 export * as AppBarUtils from './components/AppBar/utils.js'

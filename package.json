@@ -22,6 +22,7 @@
     "docs:dev": "npm run docs:generate && vitepress dev docs",
     "docs:build": "npm run docs:generate && vitepress build docs",
     "audit:visual": "node scripts/audit-visual-style.mjs",
+    "audit:theme": "node scripts/audit-theme-contract.mjs",
     "check-publish": "node scripts/check-publish.mjs",
     "release": "node scripts/publish.mjs",
     "release:patch": "node scripts/publish.mjs patch",
