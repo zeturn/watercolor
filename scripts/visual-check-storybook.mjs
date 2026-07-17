@@ -3,6 +3,7 @@ import fs from 'node:fs'
 import http from 'node:http'
 import os from 'node:os'
 import path from 'node:path'
+import WebSocket from 'ws'
 
 const root = process.cwd()
 const outputDir = path.join(root, 'tmp/visual-regression')
