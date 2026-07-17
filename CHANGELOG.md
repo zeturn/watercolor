@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2026-07-17
+
+### Added
+- Added clean-room npm tarball consumers that install, import, typecheck, and bundle the core, React, and Vue packages.
+- Added a cross-framework public API manifest audit and real workspace lint/typecheck commands.
+- Added a release gate that validates source quality, package contracts, Storybooks, visual recipes, and tag/version alignment before publishing.
+
+### Changed
+- Published core, React, Vue, and icon packages as explicit ESM-only packages instead of exposing UMD files through a misleading `require` condition.
+- Made all Watercolor icon wrappers opt-in optional peers of the React and Vue packages.
+- Replaced unbounded internal dependency ranges with release-matched versions.
+- Expanded React public declarations with component-specific props for the core component set and verified Vue props, events, and slots declarations.
+- Consolidated documentation deployment on VitePress and aligned canonical URLs and license metadata.
+- Made the `watercolor-ui` installer explicit instead of mutating consumer projects during `postinstall`.
+
+### Fixed
+- Prevented published declaration files from referencing workspace-only `core/src` paths.
+- Reworked publish checks to inspect the actual package tarballs, exports, dependencies, declarations, and version set.
+- Prevented release scripts from silently staging unrelated working-tree files.
+
 ## [1.2.0] - 2026-07-17
 
 ### Added

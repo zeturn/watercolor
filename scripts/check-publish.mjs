@@ -1,125 +1,91 @@
 #!/usr/bin/env node
 
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import { execFileSync } from 'node:child_process'
+import fs from 'node:fs'
+import os from 'node:os'
+import path from 'node:path'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const rootDir = path.join(__dirname, '..')
+const root = process.cwd()
+const expectedVersion = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).version
+const packages = fs.readdirSync(path.join(root, 'packages'), { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(root, 'packages', entry.name, 'package.json')))
+  .map((entry) => entry.name)
+  .sort()
+const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'watercolor-publish-check-'))
+const errors = []
 
-console.log('🔍 检查发布文件...')
+const fail = (message) => errors.push(message)
+const readJson = (file) => JSON.parse(fs.readFileSync(file, 'utf8'))
 
-// 检查必要的文件
-const requiredFiles = [
-  'packages/react/dist/watercolor-react.css',
-  'packages/react/dist/watercolor-react.es.js',
-  'packages/react/dist/watercolor-react.umd.js',
-  'packages/react/index.d.ts',
-  'packages/react/package.json',
-  
-  'packages/vue/dist/watercolor-vue.css',
-  'packages/vue/dist/watercolor-vue.es.js',
-  'packages/vue/dist/watercolor-vue.umd.js',
-  'packages/vue/dist/index.d.ts',
-  'packages/vue/package.json',
-  
-  'packages/core/dist/core.es.js',
-  'packages/core/dist/core.umd.js',
-  'packages/core/dist/index.d.ts',
-  'packages/core/package.json',
-
-  'packages/watercolor-ui/package.json',
-  'packages/watercolor-ui/scripts/installer.js',
-  'packages/watercolor-ui/scripts/postinstall.js',
-  'packages/watercolor-ui/bin/watercolor-ui.js',
-  'packages/watercolor-ui/README.md',
-
-  'README.md',
-  'package.json'
-]
-
-const missingFiles = []
-
-for (const file of requiredFiles) {
-  const filePath = path.join(rootDir, file)
-  if (!fs.existsSync(filePath)) {
-    missingFiles.push(file)
-  }
+function pack(packageDirectory) {
+  const output = execFileSync('npm', [
+    'pack', path.join(root, 'packages', packageDirectory),
+    '--pack-destination', temporaryDirectory,
+    '--json',
+  ], {
+    encoding: 'utf8',
+    env: { ...process.env, npm_config_cache: path.join(temporaryDirectory, '.npm-cache') },
+  })
+  const [result] = JSON.parse(output)
+  if (!result?.filename || !Array.isArray(result.files)) throw new Error(`npm pack returned no manifest for ${packageDirectory}`)
+  return result
 }
 
-if (missingFiles.length > 0) {
-  console.error('❌ 缺少以下必要文件:')
-  missingFiles.forEach(file => console.error(`  - ${file}`))
-  process.exit(1)
-}
+try {
+  for (const packageDirectory of packages) {
+    const packageFile = path.join(root, 'packages', packageDirectory, 'package.json')
+    const pkg = readJson(packageFile)
+    if (pkg.version !== expectedVersion) fail(`${pkg.name}: version ${pkg.version} does not match root ${expectedVersion}`)
+    if (!pkg.license) fail(`${pkg.name}: missing license metadata`)
 
-const packageChecks = [
-  {
-    name: 'packages/core/package.json',
-    fields: ['name', 'version', 'main', 'module', 'types', 'files', 'exports']
-  },
-  {
-    name: 'packages/react/package.json',
-    fields: ['name', 'version', 'main', 'module', 'types', 'style', 'files', 'exports']
-  },
-  {
-    name: 'packages/vue/package.json',
-    fields: ['name', 'version', 'main', 'module', 'types', 'style', 'files', 'exports']
-  },
-  {
-    name: 'packages/watercolor-ui/package.json',
-    fields: ['name', 'version', 'main', 'bin', 'files']
-  }
-]
+    for (const [name, range] of Object.entries(pkg.dependencies ?? {})) {
+      if (range === '*') fail(`${pkg.name}: dependency ${name} uses an unbounded * range`)
+    }
 
-for (const check of packageChecks) {
-  const packageJson = JSON.parse(fs.readFileSync(path.join(rootDir, check.name), 'utf8'))
-  const missingFields = check.fields.filter(field => !packageJson[field])
+    if (packageDirectory !== 'watercolor-ui') {
+      const rootExport = pkg.exports?.['.']
+      if (!rootExport?.types || !rootExport?.import) fail(`${pkg.name}: ESM export requires types and import conditions`)
+      if (rootExport?.require) fail(`${pkg.name}: ESM-only package must not expose a require condition`)
+      if (pkg.exports?.['./src/*']) fail(`${pkg.name}: internal source must not be a public export`)
+      if (pkg.main && !pkg.main.endsWith('.js')) fail(`${pkg.name}: unexpected main entry ${pkg.main}`)
+    }
 
-  if (missingFields.length > 0) {
-    console.error(`❌ ${check.name} 缺少以下字段:`)
-    missingFields.forEach(field => console.error(`  - ${field}`))
-    process.exit(1)
-  }
-}
+    if (packageDirectory === 'react' || packageDirectory === 'vue') {
+      const forcedIcons = Object.keys(pkg.dependencies ?? {}).filter((name) => name.startsWith('@zeturn/watercolor-icons-'))
+      if (forcedIcons.length) fail(`${pkg.name}: icon wrappers must be opt-in (${forcedIcons.join(', ')})`)
+    }
 
-// 检查文件大小
-const distFiles = [
-  { name: 'watercolor-ui.css', maxSize: 500 }, // 500KB
-  { name: 'watercolor-ui.es.js', maxSize: 800 }, // 800KB
-  { name: 'watercolor-ui.umd.js', maxSize: 600 }, // 600KB
-  { name: 'watercolor-react.es.js', maxSize: 800 }, // 800KB
-  { name: 'watercolor-react.umd.js', maxSize: 600 }, // 600KB
-  { name: 'watercolor-vue.es.js', maxSize: 800 }, // 800KB
-  { name: 'watercolor-vue.umd.js', maxSize: 600 } // 600KB
-]
+    if (packageDirectory === 'watercolor-ui' && pkg.scripts?.postinstall) {
+      fail(`${pkg.name}: installers must be explicit; postinstall is forbidden`)
+    }
 
-for (const file of distFiles) {
-  const filePath = path.join(rootDir, 'dist', file.name)
-  if (fs.existsSync(filePath)) {
-    const stats = fs.statSync(filePath)
-    const sizeInKB = stats.size / 1024
-    if (sizeInKB > file.maxSize) {
-      console.warn(`⚠️  ${file.name} 文件过大: ${sizeInKB.toFixed(2)}KB (建议 < ${file.maxSize}KB)`)
+    const packed = pack(packageDirectory)
+    const fileNames = new Set(packed.files.map((file) => file.path))
+    if (!fileNames.has('package.json') || !fileNames.has('README.md')) fail(`${pkg.name}: tarball is missing package.json or README.md`)
+    if (packageDirectory !== 'watercolor-ui') {
+      if (!fileNames.has('dist/index.d.ts')) fail(`${pkg.name}: tarball is missing dist/index.d.ts`)
+      if (![...fileNames].some((file) => /^dist\/.*\.es\.js$/.test(file))) fail(`${pkg.name}: tarball has no ESM build`)
     }
   }
-}
 
-console.log('✅ 所有检查通过！')
-console.log('📦 准备发布到 npm workspaces...')
-console.log('')
-console.log('📋 发布清单:')
-console.log('  - 主文件: dist/watercolor-ui.umd.js')
-console.log('  - ES模块: dist/watercolor-ui.es.js')
-console.log('  - 样式文件: dist/watercolor-ui.css')
-console.log('  - 类型定义: dist/index.d.ts')
-console.log('  - 文档: README.md')
-console.log('')
-console.log('🚀 运行以下命令发布:')
-console.log('  npm publish')
-console.log('')
-console.log('💡 提示:')
-console.log('  - 确保已登录npm: npm login')
-console.log('  - 检查版本号: npm version patch/minor/major')
-console.log('  - 预览打包内容: npm pack') 
+  for (const packageDirectory of ['core', 'react', 'vue']) {
+    const dist = path.join(root, 'packages', packageDirectory, 'dist')
+    for (const file of fs.readdirSync(dist, { recursive: true })) {
+      if (typeof file !== 'string' || !file.endsWith('.d.ts')) continue
+      const contents = fs.readFileSync(path.join(dist, file), 'utf8')
+      if (/\.\.\/\.\.\/\.\.\/\.\.\/core\/src\//.test(contents)) fail(`${packageDirectory}/${file}: declaration escapes into core/src`)
+    }
+  }
+
+  const reactTypes = fs.readFileSync(path.join(root, 'packages/react/index.d.ts'), 'utf8')
+  if (/ComponentType<any>/.test(reactTypes)) fail('React public types still collapse components to ComponentType<any>')
+
+  if (errors.length) {
+    console.error(`Publish contract failed:\n${errors.map((error) => `- ${error}`).join('\n')}`)
+    process.exitCode = 1
+  } else {
+    console.log(`Publish contract OK: ${packages.length} tarballs, ESM-only exports, bounded dependencies, portable declarations.`)
+  }
+} finally {
+  fs.rmSync(temporaryDirectory, { recursive: true, force: true })
+}

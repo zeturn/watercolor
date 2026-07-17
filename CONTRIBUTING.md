@@ -44,4 +44,4 @@ npm run lint
 
 ## Releasing
 
-See [note/PUBLISHING.md](note/PUBLISHING.md) and [QUICK_RELEASE.md](QUICK_RELEASE.md).
+See [the release and integration guide](note/%E5%8F%91%E5%B8%83%E4%B8%8E%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97.md) and [QUICK_RELEASE.md](QUICK_RELEASE.md).

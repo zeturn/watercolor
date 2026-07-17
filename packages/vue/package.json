@@ -1,8 +1,9 @@
 {
   "name": "@zeturn/watercolor-vue",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "module",
-  "main": "dist/watercolor-vue.umd.js",
+  "license": "ISC",
+  "main": "dist/watercolor-vue.es.js",
   "module": "dist/watercolor-vue.es.js",
   "types": "dist/index.d.ts",
   "style": "dist/watercolor-vue.css",
@@ -10,19 +11,24 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/watercolor-vue.es.js",
-      "require": "./dist/watercolor-vue.umd.js"
+      "default": "./dist/watercolor-vue.es.js"
     },
     "./style.css": "./dist/watercolor-vue.css"
   },
   "files": [
     "dist"
   ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "build": "vite build",
     "test": "vitest run",
     "test:watch": "vitest",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx,.vue",
+    "typecheck": "tsc --noEmit"
   },
   "publishConfig": {
     "access": "public"
@@ -33,29 +39,32 @@
     "directory": "packages/vue"
   },
   "peerDependencies": {
-    "vue": "^3.5.0"
+    "vue": "^3.5.0",
+    "@zeturn/watercolor-icons-feather": "1.2.1",
+    "@zeturn/watercolor-icons-heroicons-vue": "1.2.1",
+    "@zeturn/watercolor-icons-lucide-vue": "1.2.1",
+    "@zeturn/watercolor-icons-phosphor-vue": "1.2.1",
+    "@zeturn/watercolor-icons-tabler-vue": "1.2.1"
   },
   "peerDependenciesMeta": {
-    "@heroicons/vue": {
+    "@zeturn/watercolor-icons-feather": {
       "optional": true
     },
-    "@phosphor-icons/vue": {
+    "@zeturn/watercolor-icons-heroicons-vue": {
       "optional": true
     },
-    "@tabler/icons-vue": {
+    "@zeturn/watercolor-icons-lucide-vue": {
       "optional": true
     },
-    "lucide-vue-next": {
+    "@zeturn/watercolor-icons-phosphor-vue": {
+      "optional": true
+    },
+    "@zeturn/watercolor-icons-tabler-vue": {
       "optional": true
     }
   },
   "dependencies": {
-    "@zeturn/watercolor-core": "*",
-    "@zeturn/watercolor-icons-feather": "*",
-    "@zeturn/watercolor-icons-heroicons-vue": "*",
-    "@zeturn/watercolor-icons-lucide-vue": "*",
-    "@zeturn/watercolor-icons-phosphor-vue": "*",
-    "@zeturn/watercolor-icons-tabler-vue": "*"
+    "@zeturn/watercolor-core": "1.2.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.5",

@@ -13,7 +13,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'WatercolorCore',
-      formats: ['es', 'umd'],
+      formats: ['es'],
       fileName: (format) => `core.${format}.js`,
     },
     rollupOptions: {

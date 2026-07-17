@@ -18,8 +18,8 @@ const Icon = getIcon('academic-cap')
 
 ## Docs
 
-- https://zeturn.github.io/watercolor/docs/
+- https://zeturn.github.io/watercolor/
 
 ## License
 
-MIT
+ISC

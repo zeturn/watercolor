@@ -5,11 +5,11 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
   plugins: [dts({ insertTypesEntry: true })],
   build: {
-    emptyOutDir: false,
+    emptyOutDir: true,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'WatercolorIconsPhosphorReact',
-      formats: ['es', 'umd'],
+      formats: ['es'],
       fileName: (format) => `watercolor-icons-phosphor-react.${format}.js`,
     },
     rollupOptions: {

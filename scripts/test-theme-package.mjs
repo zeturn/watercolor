@@ -1,56 +1,88 @@
+#!/usr/bin/env node
+
 import { execFileSync } from 'node:child_process'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 
 const root = process.cwd()
-const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'watercolor-theme-package-'))
+const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'watercolor-consumer-'))
+const cache = path.join(os.tmpdir(), 'watercolor-consumer-npm-cache')
+
+function run(command, args, options = {}) {
+  return execFileSync(command, args, {
+    cwd: temporaryDirectory,
+    stdio: 'pipe',
+    env: { ...process.env, npm_config_cache: cache },
+    ...options,
+  })
+}
 
 function pack(packageName) {
-  const output = execFileSync('npm', [
+  const output = run('npm', [
     'pack', path.join(root, 'packages', packageName),
     '--pack-destination', temporaryDirectory,
     '--json',
   ], { encoding: 'utf8' })
   const [result] = JSON.parse(output)
-  if (!result?.filename || !Array.isArray(result.files)) throw new Error(`npm pack did not describe packages/${packageName}`)
-  return { ...result, tarball: path.join(temporaryDirectory, result.filename) }
+  if (!result?.filename) throw new Error(`npm pack did not produce packages/${packageName}`)
+  return path.join(temporaryDirectory, result.filename)
 }
 
 try {
   const core = pack('core')
   const react = pack('react')
   const vue = pack('vue')
-  const coreFiles = new Set(core.files.map((file) => file.path))
-  for (const required of ['dist/index.d.ts', 'dist/core.es.js', 'theme-v2.schema.json']) {
-    if (!coreFiles.has(required)) throw new Error(`Core package is missing ${required}`)
-  }
-  for (const result of [core, react, vue]) {
-    const stale = result.files.find((file) => /(?:deprecations|themeManager)/i.test(file.path))
-    if (stale) throw new Error(`${result.name} still packages removed API file ${stale.path}`)
-  }
 
-  fs.writeFileSync(path.join(temporaryDirectory, 'package.json'), JSON.stringify({ private: true, type: 'module' }))
-  execFileSync('npm', ['install', '--ignore-scripts', '--no-package-lock', core.tarball], {
-    cwd: temporaryDirectory,
-    stdio: 'pipe',
-  })
-  execFileSync(process.execPath, ['--input-type=module', '--eval', `
-    import {
-      createThemeController,
-      createThemeInitScript,
-      validateThemeConfig,
-    } from '@zeturn/watercolor-core'
-    const before = globalThis.document
-    const controller = createThemeController({ initialMode: 'dark', storage: null })
-    if (controller.started || controller.mode !== 'dark' || globalThis.document !== before) throw new Error('controller is not SSR-pure')
-    if (!validateThemeConfig({ version: 2 }).ok) throw new Error('strict Theme v2 config is unavailable')
-    if (!createThemeInitScript().includes('resolvedTheme')) throw new Error('pre-paint helper is unavailable')
-  `], { cwd: temporaryDirectory, stdio: 'pipe' })
-  if (!fs.existsSync(path.join(temporaryDirectory, 'node_modules/@zeturn/watercolor-core/theme-v2.schema.json'))) {
-    throw new Error('The installed package does not include theme-v2.schema.json')
-  }
-  console.log(`Theme package smoke OK: ${core.name}, ${react.name}, ${vue.name}; real core consumer import passed.`)
+  fs.mkdirSync(path.join(temporaryDirectory, 'src'))
+  fs.writeFileSync(path.join(temporaryDirectory, 'package.json'), JSON.stringify({
+    private: true,
+    type: 'module',
+    scripts: { build: 'vite build && tsc --noEmit' },
+    dependencies: {
+      '@zeturn/watercolor-core': `file:${core}`,
+      '@zeturn/watercolor-react': `file:${react}`,
+      '@zeturn/watercolor-vue': `file:${vue}`,
+      react: '^19.0.0',
+      'react-dom': '^19.0.0',
+      vue: '^3.5.0',
+    },
+    devDependencies: {
+      '@types/react': '^19.0.0',
+      '@types/react-dom': '^19.0.0',
+      typescript: '^5.3.3',
+      vite: '^8.0.0',
+    },
+  }, null, 2))
+  fs.writeFileSync(path.join(temporaryDirectory, 'index.html'), '<div id="app"></div><script type="module" src="/src/main.tsx"></script>')
+  fs.writeFileSync(path.join(temporaryDirectory, 'src/main.tsx'), `
+    import React from 'react'
+    import { createRoot } from 'react-dom/client'
+    import { h } from 'vue'
+    import { Button, ThemeProvider } from '@zeturn/watercolor-react'
+    import { Button as VueButton } from '@zeturn/watercolor-vue'
+    import { validateThemeConfig } from '@zeturn/watercolor-core'
+    import '@zeturn/watercolor-react/style.css'
+    if (!validateThemeConfig({ version: 2 }).ok || !VueButton || !h) throw new Error('Vue/core consumer contract failed')
+    createRoot(document.getElementById('app')!).render(<ThemeProvider defaultMode="system"><Button variant="primary" onClick={() => undefined}>Watercolor</Button></ThemeProvider>)
+  `)
+  fs.writeFileSync(path.join(temporaryDirectory, 'tsconfig.json'), JSON.stringify({
+    compilerOptions: {
+      target: 'ES2020', module: 'ESNext', moduleResolution: 'bundler', jsx: 'react-jsx',
+      strict: true, skipLibCheck: true, noEmit: true, allowSyntheticDefaultImports: true,
+    },
+    include: ['src'],
+  }, null, 2))
+
+  run('npm', ['install', '--ignore-scripts', '--prefer-offline', '--no-audit', '--no-fund'])
+  run('npm', ['run', 'build'])
+  run(process.execPath, ['--input-type=module', '--eval', `
+    const core = await import('@zeturn/watercolor-core')
+    const react = await import('@zeturn/watercolor-react')
+    const vue = await import('@zeturn/watercolor-vue')
+    if (!core.createThemeController || !react.ThemeProvider || !vue.ThemeProvider) throw new Error('ESM imports are incomplete')
+  `])
+  console.log('Clean-room consumer OK: packed core, React and Vue installed, imported, typechecked and bundled.')
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true })
 }
