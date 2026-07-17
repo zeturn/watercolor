@@ -31,7 +31,7 @@
     "test:package-theme": "node scripts/test-theme-package.mjs",
     "test:package": "npm run build && npm run check-publish && node scripts/test-theme-package.mjs",
     "audit:api": "node scripts/check-api-parity.mjs",
-    "typecheck:public-api": "tsc --noEmit --jsx react-jsx --moduleResolution bundler --module esnext --target es2020 --strict --skipLibCheck tests/types/public-api.tsx",
+    "typecheck:public-api": "npm run build -w packages/core && npm run build -w packages/react && npm run build -w packages/vue && tsc --noEmit --jsx react-jsx --moduleResolution bundler --module esnext --target es2020 --strict --skipLibCheck tests/types/public-api.tsx",
     "visual:recipes": "node scripts/visual-check-storybook.mjs",
     "check-publish": "node scripts/check-publish.mjs",
     "release": "node scripts/publish.mjs",
