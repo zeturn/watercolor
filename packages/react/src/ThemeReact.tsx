@@ -4,6 +4,7 @@ import {
   type ColorTheme,
   type ResolvedThemeMode,
   type ThemeController,
+  type ThemeStorage,
   type ThemeMode,
   type ThemeSnapshot,
 } from '@zeturn/watercolor-core'
@@ -20,6 +21,7 @@ export interface ThemeProviderProps extends React.PropsWithChildren {
   color?: ColorTheme
   mode?: ThemeMode
   storageKey?: string
+  storage?: ThemeStorage | null
   onColorChange?: (color: ColorTheme) => void
   onModeChange?: (mode: ThemeMode, resolvedMode: ResolvedThemeMode) => void
 }
@@ -33,16 +35,23 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   color: controlledColor,
   mode: controlledMode,
   storageKey,
+  storage,
   onColorChange,
   onModeChange,
 }) => {
   const controllerRef = useRef<ThemeController | null>(null)
   if (!controllerRef.current) {
-    controllerRef.current = createThemeController({
+    const controller = createThemeController({
       defaultColor: controlledColor ?? defaultColor,
       defaultMode: controlledMode ?? defaultMode,
       storageKey,
+      storage,
     })
+    // Controlled props are authoritative, including on the first frame when
+    // persisted preferences disagree with the host application.
+    if (controlledMode) controller.setMode(controlledMode)
+    if (controlledColor) controller.setColor(controlledColor)
+    controllerRef.current = controller
   }
   const controller = controllerRef.current
   const [snapshot, setSnapshot] = useState<ThemeSnapshot>({

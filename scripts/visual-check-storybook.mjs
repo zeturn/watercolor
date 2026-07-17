@@ -19,6 +19,7 @@ const modes = [
 const stories = [
   { id: 'foundations-composition--overview', selector: '.wc-composition-demo' },
   { id: 'foundations-composition--component-boundaries', selector: '.wc-composition-demo' },
+  { id: 'foundations-theme-contract--provider-contract', selector: '.wc-theme-contract' },
   { id: 'recipes-product-pages--dashboard', selector: '.wc-recipe' },
   { id: 'recipes-product-pages--settings', selector: '.wc-recipe' },
   { id: 'recipes-product-pages--list-detail', selector: '.wc-recipe' },
@@ -149,11 +150,34 @@ async function capture({ baseUrl, framework, story, mode, debugPort }) {
   }
 
   const screenshot = await cdp.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false, fromSurface: true })
+  let themeSwitch = null
+  if (story.id === 'foundations-theme-contract--provider-contract') {
+    const readTheme = () => evaluate(cdp, `(() => ({
+      requested: document.querySelector('[data-theme-requested]')?.textContent,
+      resolved: document.querySelector('[data-theme-resolved]')?.textContent,
+      dataTheme: document.documentElement.dataset.theme,
+      dataResolvedTheme: document.documentElement.dataset.resolvedTheme,
+      className: document.documentElement.className,
+      colorScheme: document.documentElement.style.colorScheme,
+      background: getComputedStyle(document.querySelector('.wc-theme-contract')).backgroundColor,
+    }))()`)
+    const initial = await readTheme()
+    const switchTo = async (next) => {
+      await evaluate(cdp, `document.querySelector('[data-mode="${next}"]').click()`)
+      for (let attempt = 0; attempt < 40; attempt += 1) {
+        const current = await readTheme()
+        if (current.dataTheme === next && current.resolved === next) return current
+        await delay(25)
+      }
+      throw new Error(`Theme story did not switch to ${next}`)
+    }
+    themeSwitch = { initial, dark: await switchTo('dark'), light: await switchTo('light') }
+  }
   const filename = `${framework}-${story.id.replace('recipes-product-pages--', '').replace('foundations-composition--', 'composition-')}-${mode.name}.png`
   fs.writeFileSync(path.join(outputDir, filename), Buffer.from(screenshot.data, 'base64'))
   cdp.close()
   await fetch(`http://127.0.0.1:${debugPort}/json/close/${target.id}`)
-  return { framework, story: story.id, mode: mode.name, ...metrics, hover, screenshot: filename }
+  return { framework, story: story.id, mode: mode.name, ...metrics, hover, themeSwitch, screenshot: filename }
 }
 
 fs.mkdirSync(outputDir, { recursive: true })
@@ -195,6 +219,13 @@ try {
     if (!item.primitiveCounts.page || !item.primitiveCounts.stack) errors.push('missing Page or Stack composition')
     if (item.mode.includes('mobile') && item.splitColumns?.includes(' ')) errors.push(`Split did not collapse: ${item.splitColumns}`)
     if (item.hover && (item.hover.before !== 'rgba(0, 0, 0, 0)' || item.hover.after === item.hover.before)) errors.push(`hover surface failed: ${JSON.stringify(item.hover)}`)
+    if (item.themeSwitch) {
+      const expectedInitial = item.mode.startsWith('dark') ? 'dark' : 'light'
+      if (item.themeSwitch.initial.dataTheme !== expectedInitial || item.themeSwitch.initial.resolved !== expectedInitial) errors.push(`initial theme frame is inconsistent: ${JSON.stringify(item.themeSwitch.initial)}`)
+      if (!item.themeSwitch.dark.className.includes('dark') || item.themeSwitch.dark.className.includes('light') || item.themeSwitch.dark.colorScheme !== 'dark') errors.push(`dark DOM contract failed: ${JSON.stringify(item.themeSwitch.dark)}`)
+      if (!item.themeSwitch.light.className.includes('light') || item.themeSwitch.light.className.includes('dark') || item.themeSwitch.light.colorScheme !== 'light') errors.push(`light DOM contract failed: ${JSON.stringify(item.themeSwitch.light)}`)
+      if (item.themeSwitch.dark.background === item.themeSwitch.light.background) errors.push('theme canvas did not change')
+    }
     return errors.map((error) => `${item.framework}/${item.story}/${item.mode}: ${error}`)
   })
 

@@ -10,10 +10,12 @@ import {
 } from 'vue'
 import {
   createThemeController,
+  THEME_MODES,
   type ColorTheme,
   type ResolvedThemeMode,
   type ThemeController,
   type ThemeMode,
+  type ThemeStorage,
 } from '@zeturn/watercolor-core'
 
 export interface ThemeStore {
@@ -30,6 +32,7 @@ interface ProvideThemeOptions {
   defaultColor?: ColorTheme
   defaultMode?: ThemeMode
   storageKey?: string
+  storage?: ThemeStorage | null
   controller?: ThemeController
 }
 
@@ -76,10 +79,18 @@ export const ThemeProvider = defineComponent({
   name: 'ThemeProvider',
   props: {
     defaultColor: { type: String as PropType<ColorTheme>, default: 'default' },
-    defaultMode: { type: String as PropType<ThemeMode>, default: 'system' },
+    defaultMode: {
+      type: String as PropType<ThemeMode>,
+      default: 'system',
+      validator: (value: string) => THEME_MODES.includes(value as ThemeMode),
+    },
     color: String as PropType<ColorTheme>,
-    mode: String as PropType<ThemeMode>,
+    mode: {
+      type: String as PropType<ThemeMode>,
+      validator: (value: string | undefined) => value === undefined || THEME_MODES.includes(value as ThemeMode),
+    },
     storageKey: String,
+    storage: Object as PropType<ThemeStorage | null>,
   },
   emits: ['update:color', 'update:mode', 'mode-change'],
   setup (props, { emit, slots }) {
@@ -87,7 +98,12 @@ export const ThemeProvider = defineComponent({
       defaultColor: props.color ?? props.defaultColor,
       defaultMode: props.mode ?? props.defaultMode,
       storageKey: props.storageKey,
+      storage: props.storage,
     })
+    // Controlled props are authoritative, including on the first frame when
+    // persisted preferences disagree with the host application.
+    if (props.mode) controller.setMode(props.mode)
+    if (props.color) controller.setColor(props.color)
     const store = provideTheme({ controller })
 
     watch(() => props.mode, (value) => {

@@ -1,3 +1,5 @@
+import { warnThemeDeprecation } from './deprecations.js'
+
 export interface ColorPalette {
   50: string
   100: string
@@ -104,8 +106,9 @@ export function applyTheme(name: ColorTheme, target?: HTMLElement): void {
   setTheme(themes[name], target)
 }
 
-/** @deprecated Use applyTheme. */
+/** @deprecated Use applyTheme. Scheduled for removal in the next major version. */
 export function applyCSSTheme(name: string): void {
+  warnThemeDeprecation('applyCSSTheme()', 'applyTheme()')
   if (name === 'default') applyTheme('default')
 }
 
@@ -142,14 +145,22 @@ export async function loadThemeConfig(path = '/theme.config.json'): Promise<void
   }
 }
 
-/** @deprecated Use a ThemeProvider or createThemeController. */
+/** @deprecated Use ThemeProvider and useTheme(). Scheduled for removal in the next major version. */
 export function toggleDarkMode(dark: boolean): void {
+  warnThemeDeprecation('toggleDarkMode()', 'ThemeProvider with useTheme().setMode()')
   if (typeof document === 'undefined') return
-  document.documentElement.dataset.theme = dark ? 'dark' : 'light'
-  document.documentElement.dataset.resolvedTheme = dark ? 'dark' : 'light'
-  document.documentElement.classList.toggle('dark', dark)
+  const mode = dark ? 'dark' : 'light'
+  const root = document.documentElement
+  root.dataset.theme = mode
+  root.dataset.resolvedTheme = mode
+  root.classList.toggle('dark', dark)
+  root.classList.toggle('light', !dark)
+  root.style.colorScheme = mode
+  try { window.localStorage.setItem('wc-mode', mode) } catch {}
 }
 
+/** @deprecated Read the dark value from useTheme(). Scheduled for removal in the next major version. */
 export function isDarkMode(): boolean {
+  warnThemeDeprecation('isDarkMode()', 'useTheme().dark')
   return typeof document !== 'undefined' && document.documentElement.dataset.resolvedTheme === 'dark'
 }

@@ -63,12 +63,11 @@ import '@zeturn/watercolor-vue/style.css'
 
 ## SSR 项目
 
-主题工具函数会访问浏览器环境。在 Next.js、Nuxt 等 SSR 场景里，请只在客户端调用：
+主题配置加载会访问浏览器环境。在 Next.js、Nuxt 等 SSR 场景里，请只在客户端调用：
 
 - `loadThemeConfig`
-- `toggleDarkMode`
 
-推荐放在：
+模式切换应由根部的 `ThemeProvider` 管理。`loadThemeConfig` 推荐放在：
 
 - React: `useEffect`
 - Vue: `onMounted`

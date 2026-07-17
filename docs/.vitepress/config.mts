@@ -42,6 +42,7 @@ export default defineConfig({
             { text: '快速上手', link: '/guide/usage' },
             { text: '组合布局', link: '/guide/composition' },
             { text: '主题与图标', link: '/guide/theming' },
+            { text: '主题 API 迁移', link: '/guide/theme-migration' },
           ]
         }
       ],

@@ -263,16 +263,17 @@ import { Button, Icon } from '@zeturn/watercolor-vue'
 
 ## 主题、深色模式与品牌化
 
-你可以直接使用默认视觉风格，也可以进一步接入主题管理：
+你可以直接使用默认视觉风格，也可以在应用根部接入主题管理：
 
-```ts
-import { loadThemeConfig, toggleDarkMode } from '@zeturn/watercolor-react'
+```tsx
+import { ThemeProvider } from '@zeturn/watercolor-react'
 
-await loadThemeConfig('/theme.config.json')
-toggleDarkMode(true)
+<ThemeProvider defaultMode="system">
+  <App />
+</ThemeProvider>
 ```
 
-SSR 项目中，这类依赖浏览器环境的函数应该只在客户端执行。
+组件内通过 `useTheme().setMode('light' | 'dark' | 'system')` 切换模式。品牌配置仍可通过 `loadThemeConfig` 在客户端加载。
 
 更完整的主题说明见 [主题与图标](/guide/theming)。
 

@@ -1,9 +1,15 @@
 import { applyTheme, type ColorTheme } from './config.js'
+import { warnThemeDeprecation } from './deprecations.js'
 
 export type ThemeMode = 'light' | 'dark' | 'system'
 export type ResolvedThemeMode = 'light' | 'dark'
+export const THEME_MODES = ['light', 'dark', 'system'] as const
+export const THEME_STORAGE_KEY = 'wc-mode'
+export const THEME_COLOR_STORAGE_KEY = 'wc-color'
+export const LEGACY_THEME_STORAGE_KEY = 'wc-scheme'
 
 type Listener = (theme: ThemeSnapshot) => void
+export type ThemeStorage = Pick<Storage, 'getItem' | 'setItem'>
 
 export interface ThemeSnapshot {
   color: ColorTheme
@@ -14,7 +20,7 @@ export interface ThemeSnapshot {
 
 export interface ThemeControllerOptions {
   target?: HTMLElement | null
-  storage?: Pick<Storage, 'getItem' | 'setItem'> | null
+  storage?: ThemeStorage | null
   storageKey?: string
   defaultColor?: ColorTheme
   defaultMode?: ThemeMode
@@ -28,8 +34,8 @@ export interface ThemeController extends ThemeSnapshot {
   destroy: () => void
 }
 
-const isMode = (value: string | null | undefined): value is ThemeMode =>
-  value === 'light' || value === 'dark' || value === 'system'
+export const isThemeMode = (value: unknown): value is ThemeMode =>
+  typeof value === 'string' && THEME_MODES.includes(value as ThemeMode)
 
 export function createThemeController(options: ThemeControllerOptions = {}): ThemeController {
   const target = options.target ?? (typeof document === 'undefined' ? null : document.documentElement)
@@ -41,7 +47,7 @@ export function createThemeController(options: ThemeControllerOptions = {}): The
       storage = null
     }
   }
-  const key = options.storageKey ?? 'wc-mode'
+  const key = options.storageKey ?? THEME_STORAGE_KEY
   const media = typeof window === 'undefined' || typeof window.matchMedia !== 'function'
     ? null
     : window.matchMedia('(prefers-color-scheme: dark)')
@@ -52,10 +58,16 @@ export function createThemeController(options: ThemeControllerOptions = {}): The
 
   try {
     const storedMode = storage?.getItem(key)
-    const legacyMode = storage?.getItem('wc-scheme')
-    const storedColor = storage?.getItem('wc-color')
-    if (isMode(storedMode)) mode = storedMode
-    else if (legacyMode === 'light' || legacyMode === 'dark') mode = legacyMode
+    const legacyMode = options.storageKey === undefined
+      ? storage?.getItem(LEGACY_THEME_STORAGE_KEY)
+      : null
+    const storedColor = storage?.getItem(THEME_COLOR_STORAGE_KEY)
+    if (isThemeMode(storedMode)) mode = storedMode
+    else if (legacyMode === 'light' || legacyMode === 'dark') {
+      mode = legacyMode
+      storage?.setItem(key, legacyMode)
+      warnThemeDeprecation(`localStorage['${LEGACY_THEME_STORAGE_KEY}']`, `localStorage['${THEME_STORAGE_KEY}']`)
+    }
     if (storedColor === 'default') color = storedColor
   } catch {
     // Storage may be unavailable in private browsing or sandboxed iframes.
@@ -85,8 +97,7 @@ export function createThemeController(options: ThemeControllerOptions = {}): The
     if (persist) {
       try {
         storage?.setItem(key, mode)
-        storage?.setItem('wc-scheme', current.resolvedMode)
-        storage?.setItem('wc-color', color)
+        storage?.setItem(THEME_COLOR_STORAGE_KEY, color)
       } catch {
         // Ignore storage failures; DOM theme switching still works.
       }
@@ -110,6 +121,7 @@ export function createThemeController(options: ThemeControllerOptions = {}): The
       apply()
     },
     setMode (next) {
+      if (!isThemeMode(next)) return
       if (next === mode) return
       mode = next
       apply()
@@ -133,10 +145,11 @@ export function createThemeController(options: ThemeControllerOptions = {}): The
   return controller
 }
 
-/** Backward-compatible name for the old cross-framework manager. */
+/** @deprecated Use createThemeController. Scheduled for removal in the next major version. */
 export function createThemeManager(
   defaultColor: ColorTheme = 'default',
   defaultDark = false,
 ): ThemeController {
+  warnThemeDeprecation('createThemeManager()', 'createThemeController()')
   return createThemeController({ defaultColor, defaultMode: defaultDark ? 'dark' : 'light' })
 }

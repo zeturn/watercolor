@@ -1,0 +1,36 @@
+.wc-theme-contract {
+  min-height: 100vh;
+  padding-block: clamp(3rem, 8vw, 7rem);
+  color: var(--wc-text-primary);
+  background: var(--wc-surface-canvas);
+}
+
+.wc-theme-contract :where(h1, p) { margin: 0; }
+.wc-theme-contract h1 { font-size: clamp(2.25rem, 6vw, 4.5rem); line-height: 1; letter-spacing: -0.05em; }
+.wc-theme-contract__kicker { color: var(--wc-text-brand); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.wc-theme-contract__copy { max-width: 42rem; color: var(--wc-text-secondary); font-size: 1.05rem; line-height: 1.65; }
+.wc-theme-contract__status { color: var(--wc-text-secondary); font-size: 0.875rem; }
+.wc-theme-contract__status strong { color: var(--wc-text-primary); }
+
+.wc-theme-contract__option {
+  min-height: 42px;
+  padding-inline: 14px;
+  border: 0;
+  border-radius: var(--wc-radius-lg);
+  color: var(--wc-text-secondary);
+  background: transparent;
+  cursor: pointer;
+  transition: background-color var(--wc-motion-fast) var(--wc-ease-standard), color var(--wc-motion-fast) var(--wc-ease-standard);
+}
+
+.wc-theme-contract__option:hover { color: var(--wc-text-primary); background: var(--wc-action-hover); }
+.wc-theme-contract__option.is-selected { color: var(--wc-text-primary); background: var(--wc-action-selected); }
+
+.wc-theme-contract__sample {
+  padding: 1rem;
+  border-radius: var(--wc-radius-lg);
+  color: var(--wc-text-secondary);
+  transition: background-color var(--wc-motion-fast) var(--wc-ease-standard);
+}
+
+.wc-theme-contract__sample:hover { background: var(--wc-action-hover); }

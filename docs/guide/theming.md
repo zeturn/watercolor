@@ -1,69 +1,132 @@
 # 主题与图标
 
-这一页集中说明 Watercolor UI 的主题切换、深色模式和图标接入策略。
+Watercolor 只有一条推荐的主题管理路径：在应用根部使用 `ThemeProvider`，在组件中通过 `useTheme()` 读取或更新主题。
 
-## 主题加载
+## 模式模型
 
-Watercolor UI 可以在浏览器环境中读取 `/theme.config.json`。你可以在应用启动后主动加载：
+`mode` 只接受三个值：
 
-### React
+- `light`：固定浅色。
+- `dark`：固定深色。
+- `system`：跟随 `prefers-color-scheme`，并在系统设置变化时自动更新。
+
+`useTheme()` 同时提供 `mode` 和 `resolvedMode`。当 `mode` 为 `system` 时，`resolvedMode` 仍会明确返回当前生效的 `light` 或 `dark`。
+
+## React
 
 ```tsx
-import { useEffect } from 'react'
-import { loadThemeConfig } from '@zeturn/watercolor-react'
+import { ThemeProvider, useTheme } from '@zeturn/watercolor-react'
 
-export function AppThemeBootstrap() {
-  useEffect(() => {
-    loadThemeConfig('/theme.config.json')
-  }, [])
+function ThemeControls() {
+  const { mode, resolvedMode, setMode } = useTheme()
 
-  return null
+  return (
+    <div>
+      <span>{mode} → {resolvedMode}</span>
+      <button onClick={() => setMode('light')}>Light</button>
+      <button onClick={() => setMode('dark')}>Dark</button>
+      <button onClick={() => setMode('system')}>System</button>
+    </div>
+  )
+}
+
+export function App() {
+  return (
+    <ThemeProvider defaultMode="system">
+      <ThemeControls />
+    </ThemeProvider>
+  )
 }
 ```
 
-### Vue
+受控模式可以使用 `mode` 和 `onModeChange`：
+
+```tsx
+<ThemeProvider mode={mode} onModeChange={(next) => setMode(next)}>
+  <App />
+</ThemeProvider>
+```
+
+## Vue
+
+在 Provider 的后代组件中调用 `useTheme()`：
 
 ```vue
+<!-- ThemeControls.vue -->
 <script setup>
-import { onMounted } from 'vue'
-import { loadThemeConfig } from '@zeturn/watercolor-vue'
+import { useTheme } from '@zeturn/watercolor-vue'
 
-onMounted(() => {
-  loadThemeConfig('/theme.config.json')
-})
+const theme = useTheme()
 </script>
+
+<template>
+  <span>{{ theme.mode.value }} → {{ theme.resolvedMode.value }}</span>
+  <button @click="theme.setMode('light')">Light</button>
+  <button @click="theme.setMode('dark')">Dark</button>
+  <button @click="theme.setMode('system')">System</button>
+</template>
 ```
 
-## 深色模式
+然后在应用根部提供主题：
 
-如果你的应用已经通过 `html.dark` 或 `body.dark` 管理深色模式，Watercolor UI 组件会自动跟随。
+```vue
+<!-- App.vue -->
+<script setup>
+import { ThemeProvider } from '@zeturn/watercolor-vue'
+import ThemeControls from './ThemeControls.vue'
+</script>
 
-你也可以直接使用工具函数：
+<template>
+  <ThemeProvider default-mode="system">
+    <ThemeControls />
+  </ThemeProvider>
+</template>
+```
+
+受控模式可以直接使用 `v-model:mode`。
+
+## DOM 与持久化契约
+
+Provider 会同步维护：
+
+- `data-theme="light | dark | system"`
+- `data-resolved-theme="light | dark"`
+- `color-scheme`
+- `wc-mode` localStorage 项
+
+`.dark` 和 `.light` class 当前仍会同步输出，供既有项目兼容；新代码不要依赖它们判断状态。请读取 `useTheme().resolvedMode`。
+
+如果需要多个独立应用共享同一页面，可以通过 `storageKey` 自定义持久化 key。
+
+## 避免首次渲染闪烁
+
+- SPA 应在应用根节点最外层挂载 `ThemeProvider`，不要等页面渲染后再切换 class。
+- SSR 应让服务端输出的 `data-theme` 与客户端初始 `defaultMode` 一致。
+- 如果主题来自用户 cookie，优先在服务端写入对应属性；不要在组件挂载完成后才读取。
+- `system` 模式的暗色 token 由 CSS media query 直接生效，Provider 随后同步 `data-resolved-theme`。
+
+## 品牌主题加载
+
+模式与品牌色是两个维度。`ThemeProvider` 管理明暗模式；`loadThemeConfig` 或 `applyTheme` 管理品牌 token。
 
 ```ts
-import { toggleDarkMode } from '@zeturn/watercolor-react'
+import { loadThemeConfig } from '@zeturn/watercolor-react'
 
-toggleDarkMode(true)
+await loadThemeConfig('/theme.config.json')
 ```
 
-## SSR 注意事项
+`loadThemeConfig` 依赖浏览器环境，SSR 项目应只在客户端调用。
 
-以下函数依赖浏览器 DOM，请只在客户端调用：
-
-- `loadThemeConfig`
-- `toggleDarkMode`
-
-在 Next.js 中建议放进 `useEffect`，在 Nuxt / Vue 中建议放进 `onMounted`。
+旧项目仍可暂时调用 `toggleDarkMode` 等兼容入口，但它们已弃用。替换方法见[主题 API 迁移指南](/guide/theme-migration)。
 
 ## 图标接入策略
 
-`Icon` 组件支持多个图标库，但不会在主包里静态打进所有图标依赖。推荐按需安装。
+`Icon` 支持多个图标库，但不会在主包中静态打入全部图标依赖。推荐按需安装。
 
 ### React
 
 ```bash
-npm install @zeturn/watercolor-react
-npm install lucide-react
+npm install @zeturn/watercolor-react lucide-react
 ```
 
 ```tsx
@@ -75,8 +138,7 @@ import { Icon } from '@zeturn/watercolor-react'
 ### Vue
 
 ```bash
-npm install @zeturn/watercolor-vue
-npm install lucide-vue-next
+npm install @zeturn/watercolor-vue lucide-vue-next
 ```
 
 ```vue
@@ -89,30 +151,4 @@ import { Icon } from '@zeturn/watercolor-vue'
 </template>
 ```
 
-## 支持的图标库
-
-- Lucide
-- Heroicons
-- Tabler
-- Phosphor
-- Feather
-
-如果你更希望锁定和 Watercolor 一起测试过的图标版本，也可以安装对应的 `@zeturn/watercolor-icons-*` 包。
-
-## 推荐实践
-
-- 默认优先 Lucide，命名稳定，可读性也最好。
-- 业务项目里尽量统一只使用 1 到 2 套图标库。
-- 不要在每个页面重复注册或重复引入图标资源。
-- 在设计系统层统一 `size`、`strokeWidth`、`color` 约定。
-
-## 主题文件建议
-
-如果你打算提供 `/theme.config.json`，建议至少包含：
-
-- 主色与语义色
-- 圆角或边框策略
-- 阴影强度
-- 深浅模式的基础配色
-
-这样组件库和你的品牌视觉才能保持一致。
+支持 Lucide、Heroicons、Tabler、Phosphor 和 Feather。业务项目尽量统一使用一到两套图标，并在设计系统层约定 `size`、`strokeWidth` 和颜色语义。
