@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "@zeturn/watercolor-core": ["../core/src/index.ts"],
+      "@zeturn/watercolor-core/src/*": ["../core/src/*"]
+    }
+  }
+}
