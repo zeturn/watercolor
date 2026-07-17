@@ -57,7 +57,7 @@ function serve(directory) {
 
 const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds))
 
-async function waitForJson(url, attempts = 100) {
+async function waitForJson(url, attempts = 300) {
   for (let attempt = 0; attempt < attempts; attempt += 1) {
     try {
       const response = await fetch(url)
@@ -223,9 +223,10 @@ const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'watercolor-chrome-'))
 const debugPort = 9338
 const chrome = spawn(chromePath, [
   '--headless=new', '--hide-scrollbars', '--disable-gpu', '--no-first-run',
-  '--no-default-browser-check', `--remote-debugging-port=${debugPort}`, `--user-data-dir=${profile}`,
+  '--no-default-browser-check', '--no-sandbox', '--disable-dev-shm-usage',
+  '--remote-debugging-address=127.0.0.1', `--remote-debugging-port=${debugPort}`, `--user-data-dir=${profile}`,
   'about:blank',
-], { stdio: 'ignore' })
+], { stdio: ['ignore', 'ignore', 'inherit'] })
 
 try {
   await waitForJson(`http://127.0.0.1:${debugPort}/json/version`)
