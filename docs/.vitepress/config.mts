@@ -40,6 +40,7 @@ export default defineConfig({
           items: [
             { text: '安装', link: '/guide/installation' },
             { text: '快速上手', link: '/guide/usage' },
+            { text: '组合布局', link: '/guide/composition' },
             { text: '主题与图标', link: '/guide/theming' },
           ]
         }

@@ -1,0 +1,66 @@
+.wc-composition-demo {
+  min-height: 100vh;
+  padding-block: clamp(2.5rem, 7vw, 6rem);
+  color: var(--wc-text-primary);
+  background: var(--wc-surface-canvas);
+}
+
+.wc-composition-demo :where(h1, h2, h3, p) { margin: 0; }
+.wc-composition-demo h1 { font-size: clamp(2.25rem, 7vw, 4.75rem); line-height: 0.98; letter-spacing: -0.055em; }
+.wc-composition-demo h2 { font-size: 1.25rem; letter-spacing: -0.025em; }
+.wc-composition-demo h3 { font-size: 0.9375rem; }
+
+.wc-composition-kicker {
+  color: var(--wc-text-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.wc-composition-lede {
+  max-width: 42rem;
+  color: var(--wc-text-secondary);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.65;
+}
+
+.wc-composition-section { padding-block: var(--wc-space-sm); }
+.wc-composition-copy { color: var(--wc-text-secondary); line-height: 1.6; }
+
+.wc-composition-item {
+  min-width: 0;
+  padding: 0.75rem;
+  border-radius: var(--wc-radius-lg);
+  transition: background-color 140ms ease;
+}
+
+.wc-composition-item:hover { background: var(--wc-surface-hover); }
+.wc-composition-item strong { display: block; margin-bottom: 0.25rem; }
+.wc-composition-item span { color: var(--wc-text-secondary); font-size: 0.875rem; }
+
+.wc-composition-chip {
+  padding: 0.45rem 0.7rem;
+  border-radius: var(--wc-radius-full);
+  color: var(--wc-text-secondary);
+  font-size: 0.8125rem;
+  white-space: nowrap;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.wc-composition-chip:hover { color: var(--wc-text-primary); background: var(--wc-surface-hover); }
+
+.wc-composition-guide-row {
+  padding: 0.75rem;
+  border-radius: var(--wc-radius-lg);
+  transition: background-color 140ms ease;
+}
+
+.wc-composition-guide-row:hover { background: var(--wc-surface-hover); }
+.wc-composition-guide-row code { color: var(--wc-text-accent); font: inherit; font-weight: 650; }
+.wc-composition-guide-row p { color: var(--wc-text-secondary); line-height: 1.5; }
+
+@media (max-width: 40rem) {
+  .wc-composition-demo { padding-block: 2.5rem; }
+  .wc-composition-guide-row { padding-inline: 0; }
+}

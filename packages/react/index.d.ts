@@ -1,6 +1,49 @@
-import type { ComponentType } from 'react'
+import type { ComponentPropsWithoutRef, ComponentType, ElementType, ReactElement, ReactNode } from 'react'
+import type {
+  CompositionAlign,
+  CompositionGap,
+  InlineJustify,
+  PageGutter,
+  PageSize,
+  SplitCollapse,
+  SplitRatio,
+} from '@zeturn/watercolor-core'
 
 type WatercolorComponent = ComponentType<any>
+type PolymorphicProps<T extends ElementType, OwnProps> = OwnProps &
+  Omit<ComponentPropsWithoutRef<T>, keyof OwnProps | 'as'> & { as?: T }
+type CompositionBaseProps = { children?: ReactNode; className?: string }
+
+export type PageProps<T extends ElementType = 'div'> = PolymorphicProps<T, CompositionBaseProps & {
+  size?: PageSize
+  gutter?: PageGutter
+}>
+export type StackProps<T extends ElementType = 'div'> = PolymorphicProps<T, CompositionBaseProps & {
+  gap?: CompositionGap
+  align?: CompositionAlign
+}>
+export type InlineProps<T extends ElementType = 'div'> = PolymorphicProps<T, CompositionBaseProps & {
+  gap?: CompositionGap
+  align?: CompositionAlign
+  justify?: InlineJustify
+  wrap?: boolean
+}>
+export type SplitProps<T extends ElementType = 'div'> = PolymorphicProps<T, CompositionBaseProps & {
+  ratio?: SplitRatio
+  gap?: CompositionGap
+  align?: CompositionAlign
+  collapse?: SplitCollapse
+}>
+
+export type {
+  CompositionAlign,
+  CompositionGap,
+  InlineJustify,
+  PageGutter,
+  PageSize,
+  SplitCollapse,
+  SplitRatio,
+} from '@zeturn/watercolor-core'
 
 export const Accordion: WatercolorComponent
 export const Alert: WatercolorComponent
@@ -36,6 +79,7 @@ export const HoverCard: WatercolorComponent
 export const Icon: WatercolorComponent
 export const IconButton: WatercolorComponent
 export const ImageGallery: WatercolorComponent
+export const Inline: <T extends ElementType = 'div'>(props: InlineProps<T>) => ReactElement | null
 export const Input: WatercolorComponent
 export const List: WatercolorComponent
 export const ListItem: WatercolorComponent
@@ -45,6 +89,7 @@ export const Menu: WatercolorComponent
 export const Modal: WatercolorComponent
 export const NumberAnimation: WatercolorComponent
 export const Pagination: WatercolorComponent
+export const Page: <T extends ElementType = 'div'>(props: PageProps<T>) => ReactElement | null
 export const Paper: WatercolorComponent
 export const Popover: WatercolorComponent
 export const PricingTable: WatercolorComponent
@@ -56,6 +101,8 @@ export const Select: WatercolorComponent
 export const Skeleton: WatercolorComponent
 export const Slider: WatercolorComponent
 export const SlideOver: WatercolorComponent
+export const Split: <T extends ElementType = 'div'>(props: SplitProps<T>) => ReactElement | null
+export const Stack: <T extends ElementType = 'div'>(props: StackProps<T>) => ReactElement | null
 export const Snackbar: WatercolorComponent
 export const Status: WatercolorComponent
 export const Switch: WatercolorComponent
