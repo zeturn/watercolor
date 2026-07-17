@@ -8,9 +8,9 @@ Modern, minimalist, watercolor-inspired UI components for **Vue 3.5+** and **Rea
 
 [![npm version](https://img.shields.io/npm/v/@zeturn/watercolor-vue?label=vue)](https://www.npmjs.com/package/@zeturn/watercolor-vue)
 [![npm version](https://img.shields.io/npm/v/@zeturn/watercolor-react?label=react)](https://www.npmjs.com/package/@zeturn/watercolor-react)
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![ISC license](https://img.shields.io/badge/License-ISC-blue.svg)](LICENSE)
 
-[🚀 Quick Start](#-quick-start) · [📚 Docs](https://zeturn.github.io/watercolor/docs/) · [🧩 Vue Storybook](https://zeturn.github.io/watercolor/vue/) · [⚛️ React Storybook](https://zeturn.github.io/watercolor/react/) · [📝 Changelog](CHANGELOG.md)
+[🚀 Quick Start](#-quick-start) · [📚 Docs](https://zeturn.github.io/watercolor/) · [🧩 Vue Storybook](https://zeturn.github.io/watercolor/vue/) · [⚛️ React Storybook](https://zeturn.github.io/watercolor/react/) · [📝 Changelog](CHANGELOG.md)
 
 </div>
 
@@ -24,7 +24,7 @@ Modern, minimalist, watercolor-inspired UI components for **Vue 3.5+** and **Rea
 
 ## 📚 Documentation
 
-- Docs: https://zeturn.github.io/watercolor/docs/
+- Docs: https://zeturn.github.io/watercolor/
 - Vue Storybook: https://zeturn.github.io/watercolor/vue/
 - React Storybook: https://zeturn.github.io/watercolor/react/
 
@@ -80,24 +80,23 @@ Theme loading is explicit and safely falls back to the default borderless Waterc
 
 ### Icons (optional)
 
-The `Icon` component supports multiple icon libraries via optional packages:
+The `Icon` component supports multiple libraries through opt-in Watercolor icon
+packages. The React and Vue packages do not install any icon pack by default.
 
-**Install only what you need** — icon libraries are now fully optional peer dependencies (v1.1.18+):
-
-- React: `lucide-react`, `@heroicons/react`, `@tabler/icons-react`, `@phosphor-icons/react`
-- Vue: `lucide-vue-next`, `@heroicons/vue`, `@tabler/icons-vue`, `@phosphor-icons/vue`
-- Or use Watercolor's versioned packages: `@zeturn/watercolor-icons-*`
+- React: `@zeturn/watercolor-icons-lucide-react`, `-heroicons-react`, `-tabler-react`, or `-phosphor-react`
+- Vue: `@zeturn/watercolor-icons-lucide-vue`, `-heroicons-vue`, `-tabler-vue`, or `-phosphor-vue`
+- Both frameworks can use `@zeturn/watercolor-icons-feather`.
 
 **Example**:
 ```bash
-npm install lucide-react  # React only
-npm install lucide-vue-next  # Vue only
+npm install @zeturn/watercolor-icons-lucide-react
+# or: npm install @zeturn/watercolor-icons-lucide-vue
 ```
 
 ## 🤝 Contributing
 
-See [note/组件开发与规范.md](note/%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%8E%E8%A7%84%E8%8C%83.md) and [note/PUBLISHING.md](note/PUBLISHING.md).
+See [note/组件开发与规范.md](note/%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%8E%E8%A7%84%E8%8C%83.md) and [note/发布与集成指南.md](note/%E5%8F%91%E5%B8%83%E4%B8%8E%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97.md).
 
 ## 📄 License
 
-MIT — see [LICENSE](LICENSE).
+ISC — see [LICENSE](LICENSE).

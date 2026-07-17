@@ -1,17 +1,31 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
+import { existsSync, unlinkSync } from 'fs'
 import dts from 'vite-plugin-dts'
 
+const removePrivateUtilityDeclarations = (emittedFiles) => {
+  for (const filePath of emittedFiles.keys()) {
+    if (/[/\\]components[/\\][^/\\]+[/\\]utils\.(?:d\.ts|d\.ts\.map)$/.test(filePath) && existsSync(filePath)) {
+      unlinkSync(filePath)
+    }
+  }
+}
+
 export default defineConfig({
-  plugins: [react(), dts({ insertTypesEntry: true })],
+  plugins: [react(), dts({
+    insertTypesEntry: true,
+    entryRoot: 'src',
+    include: ['src'],
+    afterBuild: removePrivateUtilityDeclarations,
+  })],
   build: {
     emptyOutDir: true,
     assetsDir: '',
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'WatercolorReact',
-      formats: ['es', 'umd'],
+      formats: ['es'],
       fileName: (format) => `watercolor-react.${format}.js`,
       cssFileName: 'watercolor-react',
     },

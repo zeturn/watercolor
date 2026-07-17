@@ -1,8 +1,9 @@
 {
   "name": "@zeturn/watercolor-react",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "module",
-  "main": "dist/watercolor-react.umd.js",
+  "license": "ISC",
+  "main": "dist/watercolor-react.es.js",
   "module": "dist/watercolor-react.es.js",
   "types": "index.d.ts",
   "style": "dist/watercolor-react.css",
@@ -10,7 +11,7 @@
     ".": {
       "types": "./index.d.ts",
       "import": "./dist/watercolor-react.es.js",
-      "require": "./dist/watercolor-react.umd.js"
+      "default": "./dist/watercolor-react.es.js"
     },
     "./style.css": "./dist/watercolor-react.css"
   },
@@ -19,12 +20,17 @@
     "index.d.ts",
     "style.css"
   ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "build": "vite build",
     "test": "vitest run",
     "test:watch": "vitest",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "typecheck": "tsc --noEmit"
   },
   "publishConfig": {
     "access": "public"
@@ -36,29 +42,32 @@
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "@zeturn/watercolor-icons-feather": "1.2.1",
+    "@zeturn/watercolor-icons-heroicons-react": "1.2.1",
+    "@zeturn/watercolor-icons-lucide-react": "1.2.1",
+    "@zeturn/watercolor-icons-phosphor-react": "1.2.1",
+    "@zeturn/watercolor-icons-tabler-react": "1.2.1"
   },
   "peerDependenciesMeta": {
-    "@heroicons/react": {
+    "@zeturn/watercolor-icons-feather": {
       "optional": true
     },
-    "@phosphor-icons/react": {
+    "@zeturn/watercolor-icons-heroicons-react": {
       "optional": true
     },
-    "@tabler/icons-react": {
+    "@zeturn/watercolor-icons-lucide-react": {
       "optional": true
     },
-    "lucide-react": {
+    "@zeturn/watercolor-icons-phosphor-react": {
+      "optional": true
+    },
+    "@zeturn/watercolor-icons-tabler-react": {
       "optional": true
     }
   },
   "dependencies": {
-    "@zeturn/watercolor-core": "*",
-    "@zeturn/watercolor-icons-feather": "*",
-    "@zeturn/watercolor-icons-heroicons-react": "*",
-    "@zeturn/watercolor-icons-lucide-react": "*",
-    "@zeturn/watercolor-icons-phosphor-react": "*",
-    "@zeturn/watercolor-icons-tabler-react": "*",
+    "@zeturn/watercolor-core": "1.2.1",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {

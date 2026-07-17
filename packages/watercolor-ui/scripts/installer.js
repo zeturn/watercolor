@@ -2,29 +2,32 @@ const fs = require('fs')
 const path = require('path')
 const { spawnSync } = require('child_process')
 const readline = require('readline')
+const { version: WATERCOLOR_VERSION } = require('../package.json')
 
-const PACKAGE_CORE = '@zeturn/watercolor-core'
-const PACKAGE_REACT = '@zeturn/watercolor-react'
-const PACKAGE_VUE = '@zeturn/watercolor-vue'
+const watercolorPackage = name => `${name}@${WATERCOLOR_VERSION}`
+const PACKAGE_CORE = watercolorPackage('@zeturn/watercolor-core')
+const PACKAGE_REACT = watercolorPackage('@zeturn/watercolor-react')
+const PACKAGE_VUE = watercolorPackage('@zeturn/watercolor-vue')
 const ICON_PACKAGES = {
-  feather: '@zeturn/watercolor-icons-feather',
+  feather: watercolorPackage('@zeturn/watercolor-icons-feather'),
   heroicons: {
-    react: '@zeturn/watercolor-icons-heroicons-react',
-    vue: '@zeturn/watercolor-icons-heroicons-vue'
+    react: watercolorPackage('@zeturn/watercolor-icons-heroicons-react'),
+    vue: watercolorPackage('@zeturn/watercolor-icons-heroicons-vue')
   },
   lucide: {
-    react: '@zeturn/watercolor-icons-lucide-react',
-    vue: '@zeturn/watercolor-icons-lucide-vue'
+    react: watercolorPackage('@zeturn/watercolor-icons-lucide-react'),
+    vue: watercolorPackage('@zeturn/watercolor-icons-lucide-vue')
   },
   phosphor: {
-    react: '@zeturn/watercolor-icons-phosphor-react',
-    vue: '@zeturn/watercolor-icons-phosphor-vue'
+    react: watercolorPackage('@zeturn/watercolor-icons-phosphor-react'),
+    vue: watercolorPackage('@zeturn/watercolor-icons-phosphor-vue')
   },
   tabler: {
-    react: '@zeturn/watercolor-icons-tabler-react',
-    vue: '@zeturn/watercolor-icons-tabler-vue'
+    react: watercolorPackage('@zeturn/watercolor-icons-tabler-react'),
+    vue: watercolorPackage('@zeturn/watercolor-icons-tabler-vue')
   }
 }
+const packageName = specifier => specifier.slice(0, specifier.lastIndexOf('@'))
 const ROOT_PACKAGE_NAME = 'watercolor-ui-root'
 
 function getPackageManager() {
@@ -53,8 +56,8 @@ function detectFramework(pkg) {
     ...(pkg.peerDependencies || {})
   }
 
-  const hasReact = Boolean(deps.react || deps['react-dom'] || deps[PACKAGE_REACT])
-  const hasVue = Boolean(deps.vue || deps[PACKAGE_VUE])
+  const hasReact = Boolean(deps.react || deps['react-dom'] || deps[packageName(PACKAGE_REACT)])
+  const hasVue = Boolean(deps.vue || deps[packageName(PACKAGE_VUE)])
 
   if (hasReact && hasVue) return 'both'
   if (hasReact) return 'react'
@@ -71,11 +74,11 @@ function detectIconPack(pkg) {
   }
 
   const detected = []
-  if (deps[ICON_PACKAGES.feather]) detected.push('feather')
-  if (deps[ICON_PACKAGES.heroicons.react] || deps[ICON_PACKAGES.heroicons.vue]) detected.push('heroicons')
-  if (deps[ICON_PACKAGES.lucide.react] || deps[ICON_PACKAGES.lucide.vue]) detected.push('lucide')
-  if (deps[ICON_PACKAGES.phosphor.react] || deps[ICON_PACKAGES.phosphor.vue]) detected.push('phosphor')
-  if (deps[ICON_PACKAGES.tabler.react] || deps[ICON_PACKAGES.tabler.vue]) detected.push('tabler')
+  if (deps[packageName(ICON_PACKAGES.feather)]) detected.push('feather')
+  if (deps[packageName(ICON_PACKAGES.heroicons.react)] || deps[packageName(ICON_PACKAGES.heroicons.vue)]) detected.push('heroicons')
+  if (deps[packageName(ICON_PACKAGES.lucide.react)] || deps[packageName(ICON_PACKAGES.lucide.vue)]) detected.push('lucide')
+  if (deps[packageName(ICON_PACKAGES.phosphor.react)] || deps[packageName(ICON_PACKAGES.phosphor.vue)]) detected.push('phosphor')
+  if (deps[packageName(ICON_PACKAGES.tabler.react)] || deps[packageName(ICON_PACKAGES.tabler.vue)]) detected.push('tabler')
 
   if (detected.length === 1) return detected[0]
   return null

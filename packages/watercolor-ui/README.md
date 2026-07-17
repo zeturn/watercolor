@@ -8,36 +8,26 @@ This package is an installer for Watercolor UI.
 npm install watercolor-ui
 ```
 
-During installation, it will install the core package and the selected platform package:
+Run the installer to install the core package and the selected platform package:
 
 - `@zeturn/watercolor-core`
 - `@zeturn/watercolor-react` or `@zeturn/watercolor-vue`
 - One icon package (optional)
 
-### Control the selection
+### Choose a platform
 
-Set the framework explicitly if you want non-interactive installs:
-
-```bash
-WATERCOLOR_UI_FRAMEWORK=react npm install watercolor-ui
-WATERCOLOR_UI_FRAMEWORK=vue npm install watercolor-ui
-WATERCOLOR_UI_FRAMEWORK=both npm install watercolor-ui
-```
-
-Set the icon pack explicitly (defaults to none):
+Use the CLI interactively:
 
 ```bash
-WATERCOLOR_UI_ICONS=feather npm install watercolor-ui
-WATERCOLOR_UI_ICONS=heroicons npm install watercolor-ui
-WATERCOLOR_UI_ICONS=lucide npm install watercolor-ui
-WATERCOLOR_UI_ICONS=phosphor npm install watercolor-ui
-WATERCOLOR_UI_ICONS=tabler npm install watercolor-ui
+npx watercolor-ui
 ```
 
-You can also run the installer manually:
+Or choose the framework and optional icon pack explicitly:
 
 ```bash
 npx watercolor-ui --framework react
-npx watercolor-ui --icons lucide
-npx watercolor-ui
+npx watercolor-ui --framework vue --icons lucide
 ```
+
+Installing `watercolor-ui` has no postinstall side effects. The CLI only changes
+dependencies when you invoke it explicitly.

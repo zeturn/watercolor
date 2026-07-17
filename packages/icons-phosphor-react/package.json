@@ -1,20 +1,21 @@
 {
   "name": "@zeturn/watercolor-icons-phosphor-react",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "module",
-  "main": "dist/watercolor-icons-phosphor-react.umd.js",
+  "main": "dist/watercolor-icons-phosphor-react.es.js",
   "module": "dist/watercolor-icons-phosphor-react.es.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/watercolor-icons-phosphor-react.es.js",
-      "require": "./dist/watercolor-icons-phosphor-react.umd.js"
+      "default": "./dist/watercolor-icons-phosphor-react.es.js"
     }
   },
   "files": [
     "dist"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "vite build"
   },
@@ -33,5 +34,5 @@
     "url": "git+https://github.com/zeturn/watercolor.git",
     "directory": "packages/icons-phosphor-react"
   },
-  "license": "MIT"
+  "license": "ISC"
 }

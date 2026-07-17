@@ -1,7 +1,8 @@
 {
   "name": "watercolor-ui",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Watercolor UI installer for core and platform packages",
+  "type": "commonjs",
   "main": "scripts/installer.js",
   "bin": {
     "watercolor-ui": "bin/watercolor-ui.js"
@@ -12,9 +13,6 @@
     "README.md",
     "package.json"
   ],
-  "scripts": {
-    "postinstall": "node scripts/postinstall.js"
-  },
   "publishConfig": {
     "access": "public"
   },

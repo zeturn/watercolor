@@ -24,15 +24,24 @@ if (!['patch', 'minor', 'major'].includes(versionType)) {
 try {
   // 1. 检查当前状态
   console.log('\n📋 检查当前状态...')
-  execSync('git status --porcelain', { stdio: 'inherit' })
+  const branch = execSync('git branch --show-current', { encoding: 'utf8' }).trim()
+  if (branch !== 'main') throw new Error(`Releases must start from main, received ${branch || '<detached>'}.`)
+  const dirty = execSync('git status --porcelain', { encoding: 'utf8' }).trim()
+  if (dirty) throw new Error('Working tree must be clean before release. Commit the intended changes first.')
   
   // 2. 运行测试
   console.log('\n🧪 运行测试...')
-  execSync('npm test', { stdio: 'inherit' })
+  execSync('npm test -- --run', { stdio: 'inherit' })
   
   // 3. 检查代码质量
   console.log('\n🔍 检查代码质量...')
   execSync('npm run lint', { stdio: 'inherit' })
+  execSync('npm run typecheck', { stdio: 'inherit' })
+  execSync('npm run audit:theme', { stdio: 'inherit' })
+  execSync('npm run audit:composition', { stdio: 'inherit' })
+  execSync('npm run audit:visual', { stdio: 'inherit' })
+  execSync('npm run audit:api', { stdio: 'inherit' })
+  execSync('npm run typecheck:public-api', { stdio: 'inherit' })
   
   // 4. 构建项目
   console.log('\n🔨 构建项目...')
@@ -41,6 +50,7 @@ try {
   // 5. 检查发布文件
   console.log('\n✅ 检查发布文件...')
   execSync('npm run check-publish', { stdio: 'inherit' })
+  execSync('npm run test:package-theme', { stdio: 'inherit' })
   
   // 6. 更新版本号
   console.log(`\n📦 更新版本号 (${versionType})...`)
@@ -59,7 +69,7 @@ try {
   
   // 8. 创建Git标签
   console.log('\n🏷️ 创建Git标签...')
-  execSync(`git add .`, { stdio: 'inherit' })
+  execSync('git add package.json package-lock.json packages/*/package.json', { stdio: 'inherit' })
   execSync(`git commit -m "chore: release v${newVersion}"`, { stdio: 'inherit' })
   execSync(`git tag v${newVersion}`, { stdio: 'inherit' })
   
@@ -79,11 +89,6 @@ try {
   
 } catch (error) {
   console.error('\n❌ 发布失败:', error.message)
-  console.log('\n💡 手动发布步骤:')
-  console.log('1. npm version patch/minor/major')
-  console.log('2. npm run build')
-  console.log('3. npm run check-publish')
-  console.log('4. npm publish')
-  console.log('5. git push --follow-tags')
+  console.log('\nSee note/发布与集成指南.md. Do not bypass the tagged release gate with a local npm publish.')
   process.exit(1)
-} 
+}

@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@zeturn/watercolor-core/src/*": ["../core/src/*"]
     },
     "jsx": "preserve",
     "declaration": true,
