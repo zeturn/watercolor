@@ -34,9 +34,9 @@
     "directory": "packages/core"
   },
   "devDependencies": {
-    "ajv": "^8.12.0",
-    "@vitejs/plugin-react": "^6.0.1",
-    "vite": "^8.0.2",
+    "ajv": "^8.20.0",
+    "@vitejs/plugin-react": "^6.0.3",
+    "vite": "^8.1.5",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^3.2.4",
     "jsdom": "^23.2.0",
