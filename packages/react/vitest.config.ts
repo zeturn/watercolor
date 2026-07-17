@@ -9,11 +9,11 @@ export default defineConfig({
     jsxImportSource: 'react',
   },
   resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-      '@zeturn/watercolor-core': resolve(__dirname, '../core/src/index.ts'),
-      '@zeturn/watercolor-core/src': resolve(__dirname, '../core/src'),
-    },
+    alias: [
+      { find: '@', replacement: resolve(__dirname, 'src') },
+      { find: /^@zeturn\/watercolor-core$/, replacement: resolve(__dirname, '../core/src/index.ts') },
+      { find: '@zeturn/watercolor-core/src', replacement: resolve(__dirname, '../core/src') },
+    ],
   },
   test: {
     globals: true,
