@@ -131,29 +131,3 @@ export const TopPlacement = {
     }
   }
 }
-
-export const DarkMode = {
-  name: '暗色模式',
-  args: {
-    triggerText: '选择选项',
-    items: [
-      { label: '选项 1', icon: '📝', key: 'option1' },
-      { label: '选项 2', icon: '🔍', key: 'option2' },
-      { divider: true },
-      { label: '设置', icon: '⚙️', key: 'settings' },
-      { label: '帮助', icon: '❓', key: 'help' },
-      { label: '退出', icon: '🔚', key: 'logout', danger: true }
-    ],
-    placement: 'bottom-start',
-    variant: 'default',
-    disabled: false,
-    isDarkMode: true
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: '展示组件在暗色模式下的外观。'
-      }
-    }
-  }
-}

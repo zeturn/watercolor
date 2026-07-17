@@ -1,53 +1,49 @@
-# 主题 API 迁移
+# 迁移到 Theme v2
 
-本次收口不会立即删除旧 API。兼容入口仍然工作，但会在开发环境中只警告一次，并计划在下一个大版本移除。
+Watercolor 1.2 删除旧主题双轨 API，配置文件也升级为严格的 `version: 2` schema。
 
-## API 对照
+## API 替换
 
-| 旧写法 | 推荐替换 |
+| 已删除 | Theme v2 |
 | --- | --- |
 | `toggleDarkMode(true)` | `useTheme().setMode('dark')` |
-| `toggleDarkMode(false)` | `useTheme().setMode('light')` |
 | `isDarkMode()` | `useTheme().dark` 或 `resolvedMode === 'dark'` |
-| `applyCSSTheme('default')` | `applyTheme('default')` |
-| `createThemeManager(...)` | `createThemeController(...)`；框架应用优先使用 `ThemeProvider` |
-| `localStorage['wc-scheme']` | `localStorage['wc-mode']` |
-| 读取 `.dark` class | 读取 `useTheme().resolvedMode` |
+| `createThemeManager()` | `ThemeProvider` 或 `createThemeController()` |
+| `applyCSSTheme()` / `applyTheme()` / `setTheme()` | `applyThemeConfig()` |
+| `setFonts()` / `applyFontTheme()` | Theme v2 `tokens.fonts` |
+| `PaperUtils.themeUtils` | `useTheme()` |
 
-## React 迁移
+Controller 现在是纯创建并显式启动：
 
-```diff
-- import { toggleDarkMode } from '@zeturn/watercolor-react'
-- toggleDarkMode(true)
-+ import { useTheme } from '@zeturn/watercolor-react'
-+ const { setMode } = useTheme()
-+ setMode('dark')
+```ts
+const controller = createThemeController({ initialMode: 'system' })
+controller.start()
 ```
 
-确保组件位于 Provider 内：
+框架应用应优先使用 Provider。
 
-```tsx
-<ThemeProvider defaultMode="system">
-  <App />
-</ThemeProvider>
+## JSON 迁移
+
+旧配置：
+
+```json
+{ "primary": { "600": "#7c3aed" }, "radius": { "lg": "12px" } }
 ```
 
-## Vue 迁移
+Theme v2：
 
-```diff
-- import { toggleDarkMode } from '@zeturn/watercolor-vue'
-- toggleDarkMode(true)
-+ import { useTheme } from '@zeturn/watercolor-vue'
-+ const theme = useTheme()
-+ theme.setMode('dark')
+```json
+{
+  "version": 2,
+  "tokens": {
+    "colors": { "primary": { "600": "#7c3aed" } },
+    "radius": { "lg": "12px" }
+  }
+}
 ```
 
-## storage 自动迁移
+旧扁平 JSON 会返回校验错误，不会被部分应用。仓库提供的 `theme-v2.schema.json` 可用于编辑器提示和 CI 校验。
 
-如果 `wc-mode` 不存在而旧的 `wc-scheme` 为 `light` 或 `dark`，Theme Controller 会读取旧值并写入新的 `wc-mode`。旧 key 暂时保留，方便旧版本应用回滚，但 Watercolor 不再更新它。
+## 存储
 
-迁移完成后可以由业务代码在合适的版本清理 `wc-scheme`。
-
-## class 兼容期
-
-Provider 当前仍会同步 `.dark` 与 `.light`，因此现有业务 CSS 不会立刻失效。新样式应优先使用 Watercolor 语义 token；必须判断模式时，使用 `data-resolved-theme` 或 `useTheme()`。
+正式 key 为 `wc-mode`。1.x 期间仍会从旧 `wc-scheme` 一次性读取并迁移，但不会继续写入；该兼容读取将在 2.0 删除。

@@ -9,7 +9,7 @@ export default defineConfig({
     dts({ insertTypesEntry: true })
   ],
   build: {
-    emptyOutDir: false,
+    emptyOutDir: true,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'WatercolorCore',

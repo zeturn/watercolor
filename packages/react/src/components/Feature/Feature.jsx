@@ -30,7 +30,6 @@ const Feature = ({
   children,
   className = '',
   style = {},
-  isDarkMode = false,
 }) => {
   const cardClasses = getFeatureCardClasses({
     align,

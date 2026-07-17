@@ -11,20 +11,26 @@ const chromePath = process.env.CHROME_PATH || (process.platform === 'darwin'
   : 'google-chrome')
 
 const modes = [
-  { name: 'light-desktop', theme: 'light', width: 1440, height: 1000 },
-  { name: 'dark-desktop', theme: 'dark', width: 1440, height: 1000 },
-  { name: 'light-mobile', theme: 'light', width: 390, height: 844 },
-  { name: 'dark-mobile', theme: 'dark', width: 390, height: 844 },
+  { name: 'light-desktop', theme: 'light', resolvedTheme: 'light', width: 1440, height: 1000 },
+  { name: 'dark-desktop', theme: 'dark', resolvedTheme: 'dark', width: 1440, height: 1000 },
+  { name: 'system-light-desktop', theme: 'system', resolvedTheme: 'light', prefersColorScheme: 'light', width: 1440, height: 1000 },
+  { name: 'system-dark-desktop', theme: 'system', resolvedTheme: 'dark', prefersColorScheme: 'dark', width: 1440, height: 1000 },
+  { name: 'light-mobile', theme: 'light', resolvedTheme: 'light', width: 390, height: 844 },
+  { name: 'dark-mobile', theme: 'dark', resolvedTheme: 'dark', width: 390, height: 844 },
 ]
 const stories = [
   { id: 'foundations-composition--overview', selector: '.wc-composition-demo' },
   { id: 'foundations-composition--component-boundaries', selector: '.wc-composition-demo' },
   { id: 'foundations-theme-contract--provider-contract', selector: '.wc-theme-contract' },
+  { id: 'foundations-theme-contract--custom-theme-v-2', selector: '.wc-theme-contract' },
   { id: 'recipes-product-pages--dashboard', selector: '.wc-recipe' },
   { id: 'recipes-product-pages--settings', selector: '.wc-recipe' },
   { id: 'recipes-product-pages--list-detail', selector: '.wc-recipe' },
   { id: 'recipes-product-pages--form-page', selector: '.wc-recipe' },
 ]
+const componentModes = modes.filter((mode) => mode.name === 'light-desktop' || mode.name === 'dark-desktop')
+const storyFilter = process.env.STORY_FILTER?.trim()
+const includeStory = (story) => !storyFilter || story.id.includes(storyFilter)
 
 const mime = {
   '.css': 'text/css', '.html': 'text/html', '.ico': 'image/x-icon',
@@ -101,7 +107,7 @@ async function evaluate(cdp, expression) {
   return result.result.value
 }
 
-async function waitForStory(cdp, selector) {
+async function waitForStory(cdp, selector, label) {
   for (let attempt = 0; attempt < 80; attempt += 1) {
     if (await evaluate(cdp, `Boolean(document.querySelector(${JSON.stringify(selector)}))`)) {
       await evaluate(cdp, 'document.fonts.ready.then(() => true)')
@@ -110,7 +116,7 @@ async function waitForStory(cdp, selector) {
     }
     await delay(100)
   }
-  throw new Error(`Story did not render ${selector}`)
+  throw new Error(`Story did not render ${selector} (${label})`)
 }
 
 async function capture({ baseUrl, framework, story, mode, debugPort }) {
@@ -123,8 +129,11 @@ async function capture({ baseUrl, framework, story, mode, debugPort }) {
   await cdp.send('Emulation.setDeviceMetricsOverride', {
     width: mode.width, height: mode.height, deviceScaleFactor: 1, mobile: mode.width < 640,
   })
+  await cdp.send('Emulation.setEmulatedMedia', {
+    features: [{ name: 'prefers-color-scheme', value: mode.prefersColorScheme || mode.resolvedTheme }],
+  })
   await cdp.send('Page.navigate', { url })
-  await waitForStory(cdp, story.selector)
+  await waitForStory(cdp, story.selector, `${framework}/${story.id}/${mode.name}`)
 
   const metrics = await evaluate(cdp, `(() => {
     const split = document.querySelector('.wc-split')
@@ -134,6 +143,12 @@ async function capture({ baseUrl, framework, story, mode, debugPort }) {
       resolvedTheme: document.documentElement.dataset.resolvedTheme,
       splitColumns: split ? getComputedStyle(split).gridTemplateColumns : null,
       primitiveCounts: Object.fromEntries(['page', 'stack', 'inline', 'split'].map(name => [name, document.querySelectorAll('.wc-' + name).length])),
+      storybookError: [...document.querySelectorAll('.sb-errordisplay, [data-testid="story-error"]')]
+        .find((element) => {
+          const box = element.getBoundingClientRect()
+          const style = getComputedStyle(element)
+          return style.display !== 'none' && style.visibility !== 'hidden' && box.width > 0 && box.height > 0
+        })?.textContent?.trim() || null,
     }
   })()`)
 
@@ -151,7 +166,7 @@ async function capture({ baseUrl, framework, story, mode, debugPort }) {
 
   const screenshot = await cdp.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false, fromSurface: true })
   let themeSwitch = null
-  if (story.id === 'foundations-theme-contract--provider-contract') {
+  if (story.id.startsWith('foundations-theme-contract--')) {
     const readTheme = () => evaluate(cdp, `(() => ({
       requested: document.querySelector('[data-theme-requested]')?.textContent,
       resolved: document.querySelector('[data-theme-resolved]')?.textContent,
@@ -160,6 +175,7 @@ async function capture({ baseUrl, framework, story, mode, debugPort }) {
       className: document.documentElement.className,
       colorScheme: document.documentElement.style.colorScheme,
       background: getComputedStyle(document.querySelector('.wc-theme-contract')).backgroundColor,
+      primary: getComputedStyle(document.documentElement).getPropertyValue('--wc-primary-600').trim(),
     }))()`)
     const initial = await readTheme()
     const switchTo = async (next) => {
@@ -177,7 +193,22 @@ async function capture({ baseUrl, framework, story, mode, debugPort }) {
   fs.writeFileSync(path.join(outputDir, filename), Buffer.from(screenshot.data, 'base64'))
   cdp.close()
   await fetch(`http://127.0.0.1:${debugPort}/json/close/${target.id}`)
-  return { framework, story: story.id, mode: mode.name, ...metrics, hover, themeSwitch, screenshot: filename }
+  return { framework, story: story.id, storyKind: story.kind || 'reference', mode: mode.name, expectedResolvedTheme: mode.resolvedTheme, ...metrics, hover, themeSwitch, screenshot: filename }
+}
+
+function defaultComponentStories(framework) {
+  const index = JSON.parse(fs.readFileSync(path.join(root, `packages/${framework}/storybook-static/index.json`), 'utf8'))
+  const entries = Object.values(index.entries).filter((entry) => entry.type === 'story' && entry.title.startsWith('Components/'))
+  const byTitle = new Map()
+  for (const entry of entries) {
+    const current = byTitle.get(entry.title)
+    if (!current || entry.name === 'Default') byTitle.set(entry.title, entry)
+  }
+  return [...byTitle.values()].map((entry) => ({
+    id: entry.id,
+    selector: '#storybook-root > *',
+    kind: 'component-default',
+  }))
 }
 
 fs.mkdirSync(outputDir, { recursive: true })
@@ -207,31 +238,40 @@ try {
 
   const report = []
   for (const framework of frameworks) {
-    for (const story of stories) {
+    console.log(`Checking ${framework.framework} reference stories...`)
+    for (const story of stories.filter(includeStory)) {
       for (const mode of modes) report.push(await capture({ ...framework, story, mode, debugPort }))
+    }
+    const componentStories = defaultComponentStories(framework.framework).filter(includeStory)
+    console.log(`Checking ${framework.framework} component defaults (${componentStories.length})...`)
+    for (const story of componentStories) {
+      for (const mode of componentModes) report.push(await capture({ ...framework, story, mode, debugPort }))
     }
   }
 
   const failures = report.flatMap((item) => {
     const errors = []
     if (item.scrollWidth > item.innerWidth) errors.push(`horizontal overflow ${item.scrollWidth}/${item.innerWidth}`)
-    if (!item.mode.startsWith(item.resolvedTheme)) errors.push(`theme did not resolve: ${item.resolvedTheme}`)
-    if (!item.primitiveCounts.page || !item.primitiveCounts.stack) errors.push('missing Page or Stack composition')
+    if (item.resolvedTheme !== item.expectedResolvedTheme) errors.push(`theme did not resolve: expected ${item.expectedResolvedTheme}, received ${item.resolvedTheme}`)
+    if (item.storybookError) errors.push(`Storybook render error: ${item.storybookError}`)
+    if (item.storyKind === 'reference' && (!item.primitiveCounts.page || !item.primitiveCounts.stack)) errors.push('missing Page or Stack composition')
     if (item.mode.includes('mobile') && item.splitColumns?.includes(' ')) errors.push(`Split did not collapse: ${item.splitColumns}`)
     if (item.hover && (item.hover.before !== 'rgba(0, 0, 0, 0)' || item.hover.after === item.hover.before)) errors.push(`hover surface failed: ${JSON.stringify(item.hover)}`)
     if (item.themeSwitch) {
-      const expectedInitial = item.mode.startsWith('dark') ? 'dark' : 'light'
-      if (item.themeSwitch.initial.dataTheme !== expectedInitial || item.themeSwitch.initial.resolved !== expectedInitial) errors.push(`initial theme frame is inconsistent: ${JSON.stringify(item.themeSwitch.initial)}`)
+      const expectedRequested = item.mode.startsWith('system-') ? 'system' : item.expectedResolvedTheme
+      if (item.themeSwitch.initial.dataTheme !== expectedRequested || item.themeSwitch.initial.resolved !== item.expectedResolvedTheme) errors.push(`initial theme frame is inconsistent: ${JSON.stringify(item.themeSwitch.initial)}`)
       if (!item.themeSwitch.dark.className.includes('dark') || item.themeSwitch.dark.className.includes('light') || item.themeSwitch.dark.colorScheme !== 'dark') errors.push(`dark DOM contract failed: ${JSON.stringify(item.themeSwitch.dark)}`)
       if (!item.themeSwitch.light.className.includes('light') || item.themeSwitch.light.className.includes('dark') || item.themeSwitch.light.colorScheme !== 'light') errors.push(`light DOM contract failed: ${JSON.stringify(item.themeSwitch.light)}`)
       if (item.themeSwitch.dark.background === item.themeSwitch.light.background) errors.push('theme canvas did not change')
+      if (item.story.endsWith('--custom-theme-v-2') && (item.themeSwitch.dark.primary !== '#8b5cf6' || item.themeSwitch.light.primary !== '#8b5cf6')) errors.push(`custom brand token was not stable: ${JSON.stringify(item.themeSwitch)}`)
     }
     return errors.map((error) => `${item.framework}/${item.story}/${item.mode}: ${error}`)
   })
 
   fs.writeFileSync(path.join(outputDir, 'report.json'), `${JSON.stringify(report, null, 2)}\n`)
   if (failures.length) throw new Error(`Visual checks failed:\n${failures.join('\n')}`)
-  console.log(`Visual checks OK: ${report.length} captures, 2 frameworks, ${stories.length} stories, ${modes.length} modes.`)
+  const componentCaptures = report.filter((item) => item.storyKind === 'component-default').length
+  console.log(`Visual checks OK: ${report.length} captures (${componentCaptures} component-default), 2 frameworks.`)
   console.log(`Artifacts: ${path.relative(root, outputDir)}`)
 } finally {
   servers.forEach((server) => server.close())

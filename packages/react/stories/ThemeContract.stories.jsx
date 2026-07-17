@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Inline from '@/components/Inline/Inline.jsx'
 import Page from '@/components/Page/Page.jsx'
 import Stack from '@/components/Stack/Stack.jsx'
 import { ThemeProvider, useTheme } from '@/ThemeReact.tsx'
+import { applyThemeConfig, resetThemeConfig } from '@/utils/theme.ts'
 import { pageModes } from '../.storybook/modes.js'
 import './ThemeContract.css'
 
@@ -16,6 +17,17 @@ export default {
 }
 
 const options = ['light', 'dark', 'system']
+const customTheme = {
+  version: 2,
+  tokens: {
+    colors: { primary: { 400: '#c4b5fd', 500: '#a78bfa', 600: '#8b5cf6', 700: '#7c3aed' } },
+    radius: { lg: '14px', xl: '18px', '2xl': '24px' },
+  },
+  modes: {
+    light: { canvas: '#fffbff', actionHover: '#f5efff', actionSelected: '#eee5ff', accent: '#7c3aed' },
+    dark: { canvas: '#120f18', actionHover: '#241d30', actionSelected: '#30243f', accent: '#c4b5fd' },
+  },
+}
 
 function ContractContent () {
   const theme = useTheme()
@@ -54,6 +66,18 @@ function ContractHarness ({ initialMode }) {
   return <ThemeProvider mode={mode} onModeChange={setMode}><ContractContent /></ThemeProvider>
 }
 
+function CustomContractHarness ({ initialMode }) {
+  useEffect(() => {
+    applyThemeConfig(customTheme)
+    return () => resetThemeConfig()
+  }, [])
+  return <ContractHarness initialMode={initialMode} />
+}
+
 export const ProviderContract = {
   render: (_args, context) => <ContractHarness key={context.globals.theme} initialMode={context.globals.theme} />,
+}
+
+export const CustomThemeV2 = {
+  render: (_args, context) => <CustomContractHarness key={context.globals.theme} initialMode={context.globals.theme} />,
 }

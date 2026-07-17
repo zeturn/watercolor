@@ -62,18 +62,21 @@ import { Button } from '@zeturn/watercolor-vue'
 // import { Button } from '@zeturn/watercolor-react'
 ```
 
-### Theming & Dark Mode
+### Theme v2
 
-Both Vue and React packages export theme helpers.
+The default Watercolor theme works without configuration. Use `ThemeProvider` for light, dark, and system modes; optionally load a strict Theme v2 JSON for brand tokens.
 
-```ts
-import { loadThemeConfig, toggleDarkMode } from '@zeturn/watercolor-react'
+```tsx
+import { ThemeProvider, loadThemeConfig } from '@zeturn/watercolor-react'
 
-await loadThemeConfig('/theme.config.json')
-toggleDarkMode(true)
+await loadThemeConfig('/theme.json')
+
+<ThemeProvider defaultMode="system">
+  <App />
+</ThemeProvider>
 ```
 
-> Note: theme helpers run in browser only. For SSR (Next.js / Nuxt), call them on the client.
+Theme loading is explicit and safely falls back to the default borderless Watercolor design. See the theming guide for SSR pre-paint helpers.
 
 ### Icons (optional)
 

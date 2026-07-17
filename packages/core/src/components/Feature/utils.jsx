@@ -65,7 +65,6 @@ export const getFeatureCardClasses = ({ align, size, background, reverse, vertic
 /**
  * 获取Feature图标的CSS类名
  * @param {string|number} iconSize - 图标尺寸
- * @param {boolean} isDarkMode - 是否为暗模式
  * @returns {Array<string>} CSS类名数组
  */
 export function getFeatureIconClasses(iconSize) {
@@ -79,7 +78,6 @@ export function getFeatureIconClasses(iconSize) {
 /**
  * 获取Feature内容的CSS类名
  * @param {string} align - 对齐方式
- * @param {boolean} isDarkMode - 是否为暗模式
  * @returns {Array<string>} CSS类名数组
  */
 export function getFeatureContentClasses(align) {
@@ -93,7 +91,6 @@ export function getFeatureContentClasses(align) {
 /**
  * 获取Feature标题的CSS类名
  * @param {string} size - 尺寸
- * @param {boolean} isDarkMode - 是否为暗模式
  * @returns {Array<string>} CSS类名数组
  */
 export function getFeatureTitleClasses(size) {
@@ -107,7 +104,6 @@ export function getFeatureTitleClasses(size) {
 /**
  * 获取Feature描述的CSS类名
  * @param {string} size - 尺寸
- * @param {boolean} isDarkMode - 是否为暗模式
  * @returns {Array<string>} CSS类名数组
  */
 export const getFeatureDescriptionClasses = (size) => {

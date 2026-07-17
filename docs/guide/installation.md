@@ -63,14 +63,7 @@ import '@zeturn/watercolor-vue/style.css'
 
 ## SSR 项目
 
-主题配置加载会访问浏览器环境。在 Next.js、Nuxt 等 SSR 场景里，请只在客户端调用：
-
-- `loadThemeConfig`
-
-模式切换应由根部的 `ThemeProvider` 管理。`loadThemeConfig` 推荐放在：
-
-- React: `useEffect`
-- Vue: `onMounted`
+模式切换由根部的 `ThemeProvider` 管理。Next.js、Nuxt 等 SSR 项目应在 `<head>` 使用 `createThemeInitScript`，并用 `serializeThemeConfig` 输出可选的 Theme v2 配置，避免首屏闪烁。远程 `loadThemeConfig(url)` 只应在客户端显式调用。
 
 ## 图标库按需安装
 

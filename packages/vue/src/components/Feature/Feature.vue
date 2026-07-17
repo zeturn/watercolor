@@ -47,7 +47,6 @@ export default {
     ctaLabel: { type: String, default: '' },
     ctaHref: { type: String, default: '#' },
     variant: { type: String, default: 'default', validator: v => ['default','elevated','minimal'].includes(v) },
-    isDarkMode: { type: Boolean, default: false }, // retained for API compatibility; theme is inherited
   },
   emits: ['click', 'cta-click'],
   computed: {

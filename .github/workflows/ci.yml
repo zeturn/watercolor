@@ -52,6 +52,21 @@ jobs:
       - name: Run Vue tests
         run: npm run test:vue
 
+  test-core:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Theme v2 core tests
+        run: npm run test:core
+
   # React 单元测试
   test-react:
     runs-on: ubuntu-latest
@@ -74,7 +89,7 @@ jobs:
   # 构建测试
   build:
     runs-on: ubuntu-latest
-    needs: [test-vue, test-react]
+    needs: [test-core, test-vue, test-react]
     steps:
       - uses: actions/checkout@v4
       
@@ -91,6 +106,14 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
+
+      - name: Audit contracts and public types
+        run: |
+          npm run audit:theme
+          npm run audit:composition
+          npm run audit:visual
+          npm run typecheck:theme
+          npm run test:package-theme
         
       - name: Build Storybook
         env:
@@ -102,6 +125,9 @@ jobs:
           mkdir -p storybook-static/react
           cp -r packages/vue/storybook-static/* storybook-static/vue/
           cp -r packages/react/storybook-static/* storybook-static/react/
+
+      - name: Run Storybook visual matrix
+        run: npm run visual:recipes
 
       - name: Build VitePress Docs
         env:

@@ -150,10 +150,6 @@ const props = defineProps({
   cardDescription: {
     type: String,
     default: ''
-  },
-  isDarkMode: {
-    type: Boolean,
-    default: false
   }
 })
 

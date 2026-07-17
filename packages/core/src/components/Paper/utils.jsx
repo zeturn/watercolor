@@ -1,8 +1,6 @@
 /**
  * Paper 组件工具函数
  */
-import { warnThemeDeprecation } from '../../theme/deprecations.js'
-
 // 阴影等级映射
 export const elevationMap = {
   0: 'none',
@@ -193,53 +191,6 @@ export function getRecommendedElevation(options = {}) {
 }
 
 /**
- * 主题工具函数
- */
-export const themeUtils = {
-  /**
-   * 检测当前主题
-   * @returns {string} 当前主题名称
-   * @deprecated Use useTheme().resolvedMode.
-   */
-  getCurrentTheme() {
-    warnThemeDeprecation('PaperUtils.themeUtils.getCurrentTheme()', 'useTheme().resolvedMode')
-    return document.documentElement.getAttribute('data-resolved-theme') ||
-           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-  },
-
-  /**
-   * 设置主题
-   * @param {string} theme - 主题名称
-   * @deprecated Use ThemeProvider and useTheme().setMode().
-   */
-  setTheme(theme) {
-    warnThemeDeprecation('PaperUtils.themeUtils.setTheme()', 'ThemeProvider with useTheme().setMode()')
-    const mode = theme === 'dark' || theme === 'light' || theme === 'system' ? theme : 'system'
-    const resolved = mode === 'system'
-      ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-      : mode
-    const root = document.documentElement
-    root.dataset.theme = mode
-    root.dataset.resolvedTheme = resolved
-    root.classList.toggle('dark', resolved === 'dark')
-    root.classList.toggle('light', resolved === 'light')
-    root.style.colorScheme = resolved
-    localStorage.setItem('wc-mode', mode)
-  },
-
-  /**
-   * 获取CSS变量值
-   * @param {string} varName - CSS变量名
-   * @returns {string} CSS变量值
-   */
-  getCSSVariable(varName) {
-    return getComputedStyle(document.documentElement)
-      .getPropertyValue(varName)
-      .trim()
-  }
-}
-
-/**
  * 无障碍辅助函数
  */
 export const accessibilityUtils = {
@@ -371,7 +322,6 @@ export default {
   validateElevation,
   getElevationClass,
   getRecommendedElevation,
-  themeUtils,
   accessibilityUtils,
   animationUtils,
   devUtils,

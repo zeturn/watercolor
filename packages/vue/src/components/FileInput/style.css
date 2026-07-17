@@ -1,4 +1,5 @@
 .wc-file-input-wrapper {
+  box-sizing: border-box;
   position: relative;
   display: inline-flex;
   max-width: 100%;

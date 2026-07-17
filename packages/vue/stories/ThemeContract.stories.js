@@ -1,10 +1,23 @@
-import { defineComponent } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import Inline from '../src/components/Inline/Inline.vue'
 import Page from '../src/components/Page/Page.vue'
 import Stack from '../src/components/Stack/Stack.vue'
 import { ThemeProvider, useTheme } from '../src/ThemeVUE.ts'
+import { applyThemeConfig, resetThemeConfig } from '../src/utils/theme.ts'
 import { pageModes } from '../.storybook/modes.js'
 import './ThemeContract.css'
+
+const customTheme = {
+  version: 2,
+  tokens: {
+    colors: { primary: { 400: '#c4b5fd', 500: '#a78bfa', 600: '#8b5cf6', 700: '#7c3aed' } },
+    radius: { lg: '14px', xl: '18px', '2xl': '24px' },
+  },
+  modes: {
+    light: { canvas: '#fffbff', actionHover: '#f5efff', actionSelected: '#eee5ff', accent: '#7c3aed' },
+    dark: { canvas: '#120f18', actionHover: '#241d30', actionSelected: '#30243f', accent: '#c4b5fd' },
+  },
+}
 
 export default {
   title: 'Foundations/Theme contract',
@@ -34,6 +47,19 @@ const ContractContent = defineComponent({
 export const ProviderContract = {
   render: (_args, context) => ({
     components: { ContractContent, ThemeProvider },
+    data: () => ({ mode: context.globals.theme }),
+    template: '<ThemeProvider v-model:mode="mode"><ContractContent /></ThemeProvider>'
+  })
+}
+
+export const CustomThemeV2 = {
+  render: (_args, context) => ({
+    components: { ContractContent, ThemeProvider },
+    setup () {
+      onMounted(() => applyThemeConfig(customTheme))
+      onBeforeUnmount(() => resetThemeConfig())
+      return { initialMode: context.globals.theme }
+    },
     data: () => ({ mode: context.globals.theme }),
     template: '<ThemeProvider v-model:mode="mode"><ContractContent /></ThemeProvider>'
   })

@@ -14,7 +14,6 @@ export default {
     bgColor: { control: 'color' },
     ctaLabel: { control: 'text' },
     onCtaClick: { action: 'ctaClicked' },
-    isDarkMode: { control: 'boolean' },
   },
 }
 
@@ -97,11 +96,4 @@ export const Default = Template.bind({})
 Default.args = {
   title: 'Awesome Feature',
   description: 'Feature description goes here.',
-  isDarkMode: false,
-}
-
-export const DarkMode = Template.bind({})
-DarkMode.args = {
-  ...Default.args,
-  isDarkMode: true,
 }

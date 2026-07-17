@@ -273,7 +273,7 @@ import { ThemeProvider } from '@zeturn/watercolor-react'
 </ThemeProvider>
 ```
 
-组件内通过 `useTheme().setMode('light' | 'dark' | 'system')` 切换模式。品牌配置仍可通过 `loadThemeConfig` 在客户端加载。
+组件内通过 `useTheme().setMode('light' | 'dark' | 'system')` 切换模式。严格的 Theme v2 品牌配置可以通过 `applyThemeConfig(object)` 或 `loadThemeConfig(url)` 显式加载；未加载配置时直接使用默认无边框 Watercolor 视觉。
 
 更完整的主题说明见 [主题与图标](/guide/theming)。
 

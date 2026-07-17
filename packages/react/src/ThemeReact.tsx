@@ -1,7 +1,15 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import {
   createThemeController,
-  type ColorTheme,
   type ResolvedThemeMode,
   type ThemeController,
   type ThemeStorage,
@@ -10,87 +18,85 @@ import {
 } from '@zeturn/watercolor-core'
 
 export interface ThemeContextValue extends ThemeSnapshot {
-  setColor: (color: ColorTheme) => void
   setMode: (mode: ThemeMode) => void
-  toggleDark: () => void
+  toggleMode: () => void
 }
 
 export interface ThemeProviderProps extends React.PropsWithChildren {
-  defaultColor?: ColorTheme
   defaultMode?: ThemeMode
-  color?: ColorTheme
   mode?: ThemeMode
   storageKey?: string
   storage?: ThemeStorage | null
-  onColorChange?: (color: ColorTheme) => void
-  onModeChange?: (mode: ThemeMode, resolvedMode: ResolvedThemeMode) => void
+  onModeChange?: (mode: ThemeMode) => void
+  onResolvedModeChange?: (resolvedMode: ResolvedThemeMode) => void
 }
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined)
+const useBrowserLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
-  defaultColor = 'default',
   defaultMode = 'system',
-  color: controlledColor,
   mode: controlledMode,
   storageKey,
   storage,
-  onColorChange,
   onModeChange,
+  onResolvedModeChange,
 }) => {
   const controllerRef = useRef<ThemeController | null>(null)
   if (!controllerRef.current) {
-    const controller = createThemeController({
-      defaultColor: controlledColor ?? defaultColor,
-      defaultMode: controlledMode ?? defaultMode,
+    controllerRef.current = createThemeController({
+      initialMode: controlledMode ?? defaultMode,
       storageKey,
       storage,
+      readStorage: controlledMode === undefined,
     })
-    // Controlled props are authoritative, including on the first frame when
-    // persisted preferences disagree with the host application.
-    if (controlledMode) controller.setMode(controlledMode)
-    if (controlledColor) controller.setColor(controlledColor)
-    controllerRef.current = controller
   }
   const controller = controllerRef.current
   const [snapshot, setSnapshot] = useState<ThemeSnapshot>({
-    color: controller.color,
     mode: controller.mode,
     resolvedMode: controller.resolvedMode,
     dark: controller.dark,
   })
+  const resolvedRef = useRef(snapshot.resolvedMode)
+  const onResolvedModeChangeRef = useRef(onResolvedModeChange)
+  onResolvedModeChangeRef.current = onResolvedModeChange
 
-  useEffect(() => controller.subscribe(setSnapshot), [controller])
-  useEffect(() => () => controller.destroy(), [controller])
-  useEffect(() => {
-    if (controlledMode) controller.setMode(controlledMode)
+  useBrowserLayoutEffect(() => {
+    const unsubscribe = controller.subscribe((next) => {
+      setSnapshot(next)
+      if (resolvedRef.current !== next.resolvedMode) {
+        resolvedRef.current = next.resolvedMode
+        onResolvedModeChangeRef.current?.(next.resolvedMode)
+      }
+    })
+    controller.start()
+    return () => {
+      unsubscribe()
+      controller.destroy()
+    }
+  }, [controller])
+
+  useBrowserLayoutEffect(() => {
+    if (controlledMode !== undefined) controller.setMode(controlledMode)
   }, [controller, controlledMode])
-  useEffect(() => {
-    if (controlledColor) controller.setColor(controlledColor)
-  }, [controller, controlledColor])
 
   const setMode = useCallback((next: ThemeMode) => {
-    controller.setMode(next)
-    onModeChange?.(controller.mode, controller.resolvedMode)
-  }, [controller, onModeChange])
+    if (controlledMode === undefined) controller.setMode(next)
+    onModeChange?.(next)
+  }, [controller, controlledMode, onModeChange])
 
-  const setColor = useCallback((next: ColorTheme) => {
-    controller.setColor(next)
-    onColorChange?.(controller.color)
-  }, [controller, onColorChange])
-
-  const toggleDark = useCallback(() => {
-    controller.toggleDark()
-    onModeChange?.(controller.mode, controller.resolvedMode)
-  }, [controller, onModeChange])
+  const toggleMode = useCallback(() => {
+    const next = controller.resolvedMode === 'dark' ? 'light' : 'dark'
+    if (controlledMode === undefined) controller.setMode(next)
+    onModeChange?.(next)
+  }, [controller, controlledMode, onModeChange])
 
   const value = useMemo<ThemeContextValue>(() => ({
     ...snapshot,
-    setColor,
     setMode,
-    toggleDark,
-  }), [snapshot, setColor, setMode, toggleDark])
+    toggleMode,
+  }), [snapshot, setMode, toggleMode])
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }

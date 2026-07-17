@@ -11,6 +11,7 @@
     "test:ui": "vitest --ui",
     "test:react": "npm run test -w packages/react",
     "test:vue": "npm run test -w packages/vue",
+    "test:core": "npm run test -w packages/core",
     "lint": "npm run lint --workspaces --if-present",
     "storybook": "npm run storybook:vue",
     "build-storybook": "npm run build-storybook:vue",
@@ -25,6 +26,8 @@
     "audit:theme": "node scripts/audit-theme-contract.mjs",
     "audit:composition": "node scripts/audit-composition-layer.mjs",
     "typecheck:composition": "npm run build -w packages/core && tsc --noEmit --jsx react-jsx --moduleResolution bundler --module esnext --target es2020 --skipLibCheck tests/types/composition.tsx",
+    "typecheck:theme": "npm run build -w packages/core && npm run build -w packages/react && npm run build -w packages/vue && tsc --noEmit --jsx react-jsx --moduleResolution bundler --module esnext --target es2020 --skipLibCheck tests/types/theme-v2.tsx",
+    "test:package-theme": "node scripts/test-theme-package.mjs",
     "visual:recipes": "node scripts/visual-check-storybook.mjs",
     "check-publish": "node scripts/check-publish.mjs",
     "release": "node scripts/publish.mjs",
@@ -111,5 +114,5 @@
     "npm": ">=8.0.0"
   },
   "license": "ISC",
-  "version": "1.1.46"
+  "version": "1.2.0"
 }

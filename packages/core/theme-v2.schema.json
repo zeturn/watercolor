@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zeturn.github.io/watercolor/theme-v2.schema.json",
+  "title": "Watercolor Theme v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "const": 2 },
+    "tokens": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "colors": {
+          "type": "object",
+          "propertyNames": {
+            "enum": ["primary", "secondary", "neutral", "success", "warning", "error", "info", "purple", "pink", "teal", "indigo", "orange", "cyan"]
+          },
+          "additionalProperties": { "$ref": "#/$defs/palette" }
+        },
+        "fonts": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "english": { "$ref": "#/$defs/safeString" },
+            "chinese": { "$ref": "#/$defs/safeString" },
+            "fallback": { "$ref": "#/$defs/safeString" },
+            "mono": { "$ref": "#/$defs/safeString" }
+          }
+        },
+        "radius": {
+          "type": "object",
+          "propertyNames": { "enum": ["none", "xs", "sm", "md", "lg", "xl", "2xl", "3xl", "full"] },
+          "additionalProperties": { "type": "string", "pattern": "^(0|-?(\\d+|\\d*\\.\\d+)(px|rem|em|%))$" }
+        },
+        "motion": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "fast": { "type": "string", "pattern": "^(\\d+|\\d*\\.\\d+)(ms|s)$" },
+            "normal": { "type": "string", "pattern": "^(\\d+|\\d*\\.\\d+)(ms|s)$" },
+            "easing": { "type": "string", "pattern": "^(linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier\\(.+\\))$" }
+          }
+        }
+      }
+    },
+    "modes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "light": { "$ref": "#/$defs/mode" },
+        "dark": { "$ref": "#/$defs/mode" }
+      }
+    }
+  },
+  "$defs": {
+    "safeString": { "type": "string", "minLength": 1, "pattern": "^[^;{}<>]+$" },
+    "color": {
+      "type": "string",
+      "pattern": "^(#[0-9a-fA-F]{3,8}|(rgb|rgba|hsl|hsla|oklch|oklab|color|color-mix|var)\\(.+\\)|transparent|currentColor|black|white)$"
+    },
+    "palette": {
+      "type": "object",
+      "propertyNames": { "enum": ["0", "50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950", "1000"] },
+      "additionalProperties": { "$ref": "#/$defs/color" }
+    },
+    "mode": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canvas": { "$ref": "#/$defs/color" },
+        "surfaceSubtle": { "$ref": "#/$defs/color" },
+        "surfaceRaised": { "$ref": "#/$defs/color" },
+        "surfaceOverlay": { "$ref": "#/$defs/color" },
+        "actionHover": { "$ref": "#/$defs/color" },
+        "actionActive": { "$ref": "#/$defs/color" },
+        "actionSelected": { "$ref": "#/$defs/color" },
+        "actionSelectedHover": { "$ref": "#/$defs/color" },
+        "actionDisabled": { "$ref": "#/$defs/color" },
+        "textPrimary": { "$ref": "#/$defs/color" },
+        "textSecondary": { "$ref": "#/$defs/color" },
+        "textTertiary": { "$ref": "#/$defs/color" },
+        "textDisabled": { "$ref": "#/$defs/color" },
+        "textInverse": { "$ref": "#/$defs/color" },
+        "borderDefault": { "$ref": "#/$defs/color" },
+        "borderStrong": { "$ref": "#/$defs/color" },
+        "borderSubtle": { "$ref": "#/$defs/color" },
+        "accent": { "$ref": "#/$defs/color" },
+        "accentHover": { "$ref": "#/$defs/color" },
+        "accentActive": { "$ref": "#/$defs/color" },
+        "accentSubtle": { "$ref": "#/$defs/color" },
+        "danger": { "$ref": "#/$defs/color" },
+        "dangerHover": { "$ref": "#/$defs/color" },
+        "dangerSubtle": { "$ref": "#/$defs/color" },
+        "backdrop": { "$ref": "#/$defs/color" },
+        "shadowSm": { "$ref": "#/$defs/safeString" },
+        "shadowMd": { "$ref": "#/$defs/safeString" },
+        "shadowLg": { "$ref": "#/$defs/safeString" },
+        "shadowXl": { "$ref": "#/$defs/safeString" },
+        "focusRing": { "$ref": "#/$defs/color" }
+      }
+    }
+  }
+}

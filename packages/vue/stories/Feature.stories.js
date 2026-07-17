@@ -12,7 +12,6 @@ export default {
     reverse: { control: 'boolean' },
     bgColor: { control: 'color' },
     ctaLabel: { control: 'text' },
-    isDarkMode: { control: 'boolean' },
   },
 }
 
@@ -29,7 +28,6 @@ Basic.args = {
   title: '实时协作',
   description: '多人同时编辑，毫秒级同步',
   icon: '🚀',
-  isDarkMode: false,
 }
 
 export const Center = Template.bind({})
@@ -84,9 +82,3 @@ export const MultipleFeatures = {
     `
   })
 }
-
-export const DarkMode = Template.bind({})
-DarkMode.args = {
-  ...Basic.args,
-  isDarkMode: true,
-} 

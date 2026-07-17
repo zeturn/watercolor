@@ -48,15 +48,17 @@ const themeContractErrors = []
 if (!controllerSource.includes("export const THEME_MODES = ['light', 'dark', 'system']")) themeContractErrors.push('ThemeMode runtime contract is missing')
 if (controllerSource.includes('setItem(LEGACY_THEME_STORAGE_KEY')) themeContractErrors.push('controller still writes the legacy storage key')
 if (!controllerSource.includes('storage?.setItem(key, legacyMode)')) themeContractErrors.push('legacy storage migration is missing')
-for (const api of ['applyCSSTheme()', 'toggleDarkMode()', 'isDarkMode()']) {
-  if (!configSource.includes(`warnThemeDeprecation('${api}'`)) themeContractErrors.push(`${api} has no deprecation warning`)
+if (!controllerSource.includes('start ()') || controllerSource.includes('applyTheme(')) themeContractErrors.push('controller is not a pure mode-only lifecycle')
+if (!configSource.includes('THEME_CONFIG_VERSION = 2') || !configSource.includes('validateThemeConfig') || !configSource.includes('resetThemeConfig')) themeContractErrors.push('Theme v2 config API is incomplete')
+for (const api of ['toggleDarkMode', 'isDarkMode', 'applyCSSTheme', 'createThemeManager']) {
+  if (controllerSource.includes(api) || configSource.includes(api)) themeContractErrors.push(`${api} remains in the Theme v2 core`)
 }
-if (!controllerSource.includes("warnThemeDeprecation('createThemeManager()'")) themeContractErrors.push('createThemeManager() has no deprecation warning')
 for (const framework of ['vue', 'react']) {
   const provider = read(`packages/${framework}/src/${framework === 'vue' ? 'ThemeVUE.ts' : 'ThemeReact.tsx'}`)
   const story = `packages/${framework}/stories/ThemeContract.stories.${framework === 'vue' ? 'js' : 'jsx'}`
   if (!provider.includes('createThemeController')) themeContractErrors.push(`${framework} provider bypasses the shared controller`)
   if (!fs.existsSync(path.join(root, story))) themeContractErrors.push(`${framework} theme contract story is missing`)
+  if (!read(story).includes('CustomThemeV2')) themeContractErrors.push(`${framework} custom Theme v2 story is missing`)
 }
 const recommendedDocs = ['docs/guide/theming.md', 'docs/guide/usage.md', 'docs/guide/installation.md'].map(read).join('\n')
 if (!recommendedDocs.includes('ThemeProvider') || !recommendedDocs.includes('useTheme')) themeContractErrors.push('recommended theme documentation is incomplete')
@@ -71,4 +73,4 @@ if (missing.length || invalidEntries.length || primitiveModeOverrides.length || 
   process.exit(1)
 }
 
-console.log(`Theme contract OK: ${usages.size} component token usages, ${defaultModeTokens.size} mode tokens, one Provider model, migrated storage.`)
+console.log(`Theme v2 contract OK: ${usages.size} component token usages, ${defaultModeTokens.size} mode tokens, strict config, pure mode controller.`)

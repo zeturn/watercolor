@@ -1,99 +1,78 @@
 {
-  "primary": {
-    "50": "#eff6ff",
-    "100": "#dbeafe",
-    "200": "#bfdbfe",
-    "300": "#93c5fd",
-    "400": "#60a5fa",
-    "500": "#3b82f6",
-    "600": "#2563eb",
-    "700": "#1d4ed8",
-    "800": "#1e40af",
-    "900": "#1e3a8a"
+  "$schema": "./packages/core/theme-v2.schema.json",
+  "version": 2,
+  "tokens": {
+    "colors": {
+      "primary": {
+        "50": "#f8faff",
+        "100": "#edf5ff",
+        "200": "#d7e9ff",
+        "300": "#b8d8ff",
+        "400": "#89bcff",
+        "500": "#5b9eff",
+        "600": "#3384ff",
+        "700": "#1f74f4",
+        "800": "#165fc5",
+        "900": "#164e9e",
+        "950": "#123e7d"
+      },
+      "secondary": {
+        "50": "#f6ffed",
+        "100": "#d9f7be",
+        "200": "#b7eb8f",
+        "300": "#95de64",
+        "400": "#73d13d",
+        "500": "#52c41a",
+        "600": "#389e0d",
+        "700": "#237804",
+        "800": "#135200",
+        "900": "#092b00",
+        "950": "#051a00"
+      }
+    },
+    "fonts": {
+      "chinese": "Noto Sans SC",
+      "english": "Inter",
+      "fallback": "-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
+      "mono": "SFMono-Regular, Consolas, monospace"
+    },
+    "radius": {
+      "sm": "4px",
+      "md": "6px",
+      "lg": "8px",
+      "xl": "12px",
+      "2xl": "16px",
+      "3xl": "24px",
+      "full": "9999px"
+    },
+    "motion": {
+      "fast": "120ms",
+      "normal": "180ms",
+      "easing": "cubic-bezier(.2, 0, 0, 1)"
+    }
   },
-  "secondary": {
-    "50": "#f3f4ff",
-    "100": "#e5e7ff",
-    "200": "#c7d2fe",
-    "300": "#a5b4fc",
-    "400": "#818cf8",
-    "500": "#6366f1",
-    "600": "#4f46e5",
-    "700": "#4338ca",
-    "800": "#3730a3",
-    "900": "#312e81"
-  },
-  "neutral": {
-    "50": "#f9fafb",
-    "100": "#f3f4f6",
-    "200": "#e5e7eb",
-    "300": "#d1d5db",
-    "400": "#9ca3af",
-    "500": "#6b7280",
-    "600": "#4b5563",
-    "700": "#374151",
-    "800": "#1f2937",
-    "900": "#111827"
-  },
-  "success": {
-    "50": "#ecfdf5",
-    "100": "#d1fae5",
-    "200": "#a7f3d0",
-    "300": "#6ee7b7",
-    "400": "#34d399",
-    "500": "#10b981",
-    "600": "#059669",
-    "700": "#047857",
-    "800": "#065f46",
-    "900": "#064e3b"
-  },
-  "warning": {
-    "50": "#fffbeb",
-    "100": "#fef3c7",
-    "200": "#fde68a",
-    "300": "#fcd34d",
-    "400": "#fbbf24",
-    "500": "#f59e0b",
-    "600": "#d97706",
-    "700": "#b45309",
-    "800": "#92400e",
-    "900": "#78350f"
-  },
-  "error": {
-    "50": "#fef2f2",
-    "100": "#fee2e2",
-    "200": "#fecaca",
-    "300": "#fca5a5",
-    "400": "#f87171",
-    "500": "#ef4444",
-    "600": "#dc2626",
-    "700": "#b91c1c",
-    "800": "#991b1b",
-    "900": "#7f1d1d"
-  },
-  "info": {
-    "50": "#f0f9ff",
-    "100": "#e0f2fe",
-    "200": "#bae6fd",
-    "300": "#7dd3fc",
-    "400": "#38bdf8",
-    "500": "#0ea5e9",
-    "600": "#0284c7",
-    "700": "#0369a1",
-    "800": "#075985",
-    "900": "#0c4a6e"
-  },
-  "fonts": {
-    "chinese": "Noto Sans SC",
-    "english": "Inter",
-    "fallback": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
-  },
-  "radius": {
-    "sm": "0.125rem",
-    "md": "0.25rem",
-    "lg": "0.5rem",
-    "xl": "0.75rem",
-    "2xl": "1rem",
-    "full": "9999px"
+  "modes": {
+    "light": {
+      "canvas": "#ffffff",
+      "surfaceSubtle": "#f8f8f8",
+      "surfaceRaised": "#ffffff",
+      "actionHover": "#f8f8f8",
+      "actionSelected": "#f2f2f2",
+      "textPrimary": "#222222",
+      "textSecondary": "#707070",
+      "accent": "#3384ff",
+      "focusRing": "#5b9eff"
+    },
+    "dark": {
+      "canvas": "#0f0f0f",
+      "surfaceSubtle": "#161616",
+      "surfaceRaised": "#1d1d1d",
+      "actionHover": "#222222",
+      "actionSelected": "#292929",
+      "textPrimary": "#f8f8f8",
+      "textSecondary": "#b5b5b5",
+      "accent": "#89bcff",
+      "focusRing": "#5b9eff"
+    }
   }
-} 
+}

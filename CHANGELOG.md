@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-07-17
+
+### Added
+- Added strict Theme v2 design-token JSON validation, schema, object/URL loading, reset, and SSR serialization APIs.
+- Added a pure mode controller with explicit lifecycle, system preference tracking, cross-tab synchronization, and `wc-mode` persistence.
+- Added React and Vue Theme providers with controlled/uncontrolled modes, resolved-mode notifications, SSR-safe rendering, and hydration coverage.
+- Added a pre-paint initialization helper for flash-free light, dark, and system mode startup.
+- Added unstyled `Page`, `Stack`, `Inline`, and `Split` composition primitives and responsive reference recipes.
+
+### Changed
+- Made the borderless Watercolor visual language the complete default when no custom theme is loaded.
+- Kept custom brand tokens stable across light, dark, and system mode changes.
+- Expanded CI with Theme v2 contracts, public type checks, package-consumer smoke tests, and a 316-capture cross-framework Storybook visual matrix.
+- Cleaned build output before every core, React, and Vue package build so removed declarations cannot leak into releases.
+
+### Removed
+- Removed `toggleDarkMode`, `isDarkMode`, `createThemeManager`, legacy theme/font application helpers, and Paper `themeUtils`.
+- Removed component-level `isDarkMode` props and theme branches; components now consume semantic tokens only.
+
+### Fixed
+- Fixed responsive composition widths and default FileInput/List overflow in both frameworks.
+- Fixed SSR first-paint mode consistency, provider hydration, listener cleanup, and legacy storage migration.
+
 ## [1.1.18] - 2026-01-23
 
 ### Changed

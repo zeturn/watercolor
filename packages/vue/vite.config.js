@@ -6,7 +6,7 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
   plugins: [vue(), dts({ insertTypesEntry: true })],
   build: {
-    emptyOutDir: false,
+    emptyOutDir: true,
     assetsDir: '',
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),

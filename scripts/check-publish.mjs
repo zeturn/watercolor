@@ -15,7 +15,7 @@ const requiredFiles = [
   'packages/react/dist/watercolor-react.css',
   'packages/react/dist/watercolor-react.es.js',
   'packages/react/dist/watercolor-react.umd.js',
-  'packages/react/dist/index.d.ts',
+  'packages/react/index.d.ts',
   'packages/react/package.json',
   
   'packages/vue/dist/watercolor-vue.css',
@@ -26,6 +26,7 @@ const requiredFiles = [
   
   'packages/core/dist/core.es.js',
   'packages/core/dist/core.umd.js',
+  'packages/core/dist/index.d.ts',
   'packages/core/package.json',
 
   'packages/watercolor-ui/package.json',

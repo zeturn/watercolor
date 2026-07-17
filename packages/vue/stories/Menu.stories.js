@@ -51,10 +51,6 @@ export default {
     disabled: {
       control: { type: 'boolean' },
       description: '是否禁用'
-    },
-    isDarkMode: {
-      control: { type: 'boolean' },
-      description: '是否为暗色模式'
     }
   }
 }
@@ -167,22 +163,3 @@ export const TopPlacement = {
     }
   }
 }
-
-export const DarkMode = {
-  name: '暗色模式',
-  args: {
-    triggerText: '选择选项',
-    items: sampleItems,
-    placement: 'bottom-start',
-    variant: 'default',
-    disabled: false,
-    isDarkMode: true
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: '展示组件在暗色模式下的外观。'
-      }
-    }
-  }
-} 

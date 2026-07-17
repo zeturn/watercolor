@@ -123,3 +123,4 @@ export const Watermark: WatercolorComponent
 
 export * from './dist/src/utils/theme'
 export { ThemeProvider, useTheme } from './dist/src/ThemeReact'
+export type { ThemeContextValue, ThemeProviderProps } from './dist/src/ThemeReact'
