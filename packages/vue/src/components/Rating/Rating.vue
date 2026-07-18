@@ -2,14 +2,14 @@
   <div
     class="wc-rating"
     role="radiogroup"
-    aria-label="评分组件"
+    :aria-label="ariaLabel || messages.rating"
   >
     <button
       v-for="n in max"
       :key="n"
       type="button"
       :class="['wc-rating-item', { 'wc-rating-item--active': n <= hovered || n <= internalValue }]"
-      :aria-label="`${n} / ${max}`"
+      :aria-label="messages.ratingValue(n, max)"
       :aria-checked="n === internalValue"
       role="radio"
       :disabled="readonly"
@@ -22,6 +22,7 @@
 
 <script>
 import { ref, watch } from 'vue'
+import { useLocale } from '../../LocaleVUE'
 import './style.css'
 
 export default {
@@ -29,12 +30,14 @@ export default {
   props: {
     modelValue: { type: Number, default: 0 },
     max: { type: Number, default: 5 },
-    readonly: { type: Boolean, default: false }
+    readonly: { type: Boolean, default: false },
+    ariaLabel: { type: String, default: '' }
   },
   emits: ['update:modelValue', 'change'],
   setup(props, { emit }) {
     const internalValue = ref(props.modelValue)
     const hovered = ref(0)
+    const { messages } = useLocale()
     watch(() => props.modelValue, (value) => { internalValue.value = value })
     const select = (value) => {
       if (props.readonly) return
@@ -46,7 +49,7 @@ export default {
     const hover = (value) => {
       if (!props.readonly) hovered.value = value
     }
-    return { internalValue, hovered, select, hover }
+    return { internalValue, hovered, select, hover, messages }
   }
 }
 </script>

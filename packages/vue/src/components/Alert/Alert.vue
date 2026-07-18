@@ -40,7 +40,7 @@
       v-if="closable"
       class="wc-alert-close"
       type="button"
-      aria-label="关闭"
+      :aria-label="messages.close"
       @click="handleClose"
     >
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
@@ -53,6 +53,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { getAlertClasses, isValidAlertType, isValidAlertVariant } from './utils.js'
+import { useLocale } from '../../LocaleVUE'
 import './style.css'
 
 const props = defineProps({
@@ -85,6 +86,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['close'])
+const { messages } = useLocale()
 
 const visible = ref(true)
 

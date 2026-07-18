@@ -25,7 +25,6 @@ const FeedItem = ({
     <li 
       className={`wc-feed-item ${variant} ${hasChildren ? 'has-children' : ''}`} 
       style={feedItemStyles} 
-      role={onItemClick ? 'button' : undefined}
       tabIndex={onItemClick ? 0 : undefined}
       onClick={(event) => {
         event.stopPropagation()

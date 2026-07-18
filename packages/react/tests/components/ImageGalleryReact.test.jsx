@@ -27,7 +27,7 @@ describe('ImageGallery (React)', () => {
 
   test('shows pagination when enabled', () => {
     render(<ImageGallery images={sampleImages} showPagination itemsPerPage={1} />);
-    // Check for the "next" button instead of a specific page link
-    expect(screen.getByRole('button', { name: '下一页' })).toBeInTheDocument();
+    // Check for the "next" pagination button instead of a specific page link
+    expect(screen.getByRole('button', { name: 'Next page' })).toBeInTheDocument();
   });
 });

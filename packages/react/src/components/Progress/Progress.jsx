@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocale } from '../../LocaleReact'
 import './style.css'
 
 const Progress = ({
@@ -11,6 +12,7 @@ const Progress = ({
   className = '',
   ...props
 }) => {
+  const { messages } = useLocale()
   const validColors = ['primary', 'success', 'warning', 'error', 'purple', 'orange', 'cyan', 'pink']
   const safeColor = validColors.includes(color) ? color : 'primary'
 
@@ -49,7 +51,7 @@ const Progress = ({
       <div
         className={progressClasses.join(' ')}
         role="progressbar"
-        aria-label={label || '进度'}
+        aria-label={label || messages.progress}
         aria-valuenow={safeValue}
         aria-valuemin="0"
         aria-valuemax="100"

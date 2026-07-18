@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useId } from 'react'
 import './style.css'
+import { useLocale } from '../../LocaleReact.tsx'
 
 const Tabs = ({
   tabs = [],
@@ -11,6 +12,7 @@ const Tabs = ({
   ...props
 }) => {
   const tabsId = useId()
+  const { messages } = useLocale()
   const [internalActiveIndex, setInternalActiveIndex] = useState(controlledActiveIndex || 0)
   
   const isControlled = controlledActiveIndex !== undefined
@@ -74,7 +76,7 @@ const Tabs = ({
   
   return (
     <div className="wc-tabs-wrapper" {...props}>
-      <div className={tabsClasses} role="tablist" aria-label="内容分组">
+      <div className={tabsClasses} role="tablist" aria-label={messages.tabList}>
         {tabs.map((tab, index) => (
           <button
             key={tab.key || index}

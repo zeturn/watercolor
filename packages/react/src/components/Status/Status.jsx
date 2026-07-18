@@ -17,6 +17,7 @@ const Status = ({
   return (
     <span
       className={statusClasses}
+      role="status"
       title={statusTextContent}
       aria-label={statusTextContent}
       {...props}

@@ -186,7 +186,7 @@ describe('Banner 组件', () => {
       }
     })
     
-    expect(wrapper.find('.wc-banner-close').attributes('aria-label')).toBe('关闭')
+    expect(wrapper.find('.wc-banner-close').attributes('aria-label')).toBe('Close')
     expect(wrapper.find('.wc-banner-close').attributes('type')).toBe('button')
   })
 }) 

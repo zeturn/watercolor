@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useId, useRef, useCallback } from 'react'
 import Button from '../Button/Button.jsx'
 import { Portal, useOverlayLayer } from '../../interactions.jsx'
+import { useLocale } from '../../LocaleReact.tsx'
 import './style.css'
 import { 
   getModalClasses, 
@@ -52,6 +53,7 @@ const Modal = ({
   const modalId = useId()
   const [isVisible, setIsVisible] = useState(visible || open)
   const modalRef = useRef(null)
+  const { messages } = useLocale()
 
   // 统一处理 visible 和 open
   const isOpen = visible || open
@@ -139,7 +141,7 @@ const Modal = ({
             size="sm"
             className="wc-modal__close"
             onClick={handleClose}
-            aria-label="关闭"
+            aria-label={messages.closeDialog}
           >
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M6 6l12 12M18 6 6 18" />

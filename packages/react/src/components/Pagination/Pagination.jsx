@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react'
+import { useLocale } from '../../LocaleReact'
 import './style.css'
 
 /**
@@ -23,6 +24,7 @@ export default function Pagination({
   className = '',
   ...rest
 }) {
+  const { messages } = useLocale()
   const [currentPage, setCurrentPage] = useState(value)
 
   // 同步外部 value
@@ -83,12 +85,12 @@ export default function Pagination({
   ].filter(Boolean).join(' ')
 
   return (
-    <nav className={rootClasses} aria-label="分页导航" {...rest}>
+    <nav className={rootClasses} aria-label={messages.pagination} {...rest}>
       <button
         className="page-btn wc-page-btn wc-page-btn--prev wc-page-btn--nav"
         disabled={currentPage === 1}
         onClick={() => select(currentPage - 1)}
-        aria-label="上一页"
+        aria-label={messages.previousPage}
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="m15 18-6-6 6-6" />
@@ -106,7 +108,7 @@ export default function Pagination({
             className={`page-btn wc-page-btn${page.num === currentPage ? ' active wc-page-btn--active' : ''}`}
             onClick={() => select(page.num)}
             aria-current={page.num === currentPage ? 'page' : undefined}
-            aria-label={`第 ${page.num} 页`}
+            aria-label={messages.page(page.num)}
           >
             {page.num}
           </button>
@@ -117,7 +119,7 @@ export default function Pagination({
         className="page-btn wc-page-btn wc-page-btn--next wc-page-btn--nav"
         disabled={currentPage === pageCount}
         onClick={() => select(currentPage + 1)}
-        aria-label="下一页"
+        aria-label={messages.nextPage}
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="m9 18 6-6-6-6" />

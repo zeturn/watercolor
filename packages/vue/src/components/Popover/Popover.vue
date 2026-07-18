@@ -29,7 +29,7 @@
           :class="[`wc-popover-content--${resolvedPlacement}`]"
           :id="popoverId"
           role="dialog"
-          aria-label="弹出内容"
+          :aria-label="messages.closePopover"
           tabindex="-1"
         >
           <slot>
@@ -44,6 +44,7 @@
 <script>
 import { computed, ref, nextTick, useId, watch } from 'vue'
 import { useFloatingPosition, useOverlayLayer } from '../../interactions'
+import { useLocale } from '../../LocaleVUE'
 import './style.css'
 
 export default {
@@ -69,6 +70,7 @@ export default {
   },
   emits: ['update:modelValue', 'open', 'close'],
   setup(props, { emit }) {
+    const { messages } = useLocale()
     const isOpen = ref(props.modelValue)
     const triggerWrapper = ref(null)
     const popoverRef = ref(null)
@@ -119,7 +121,7 @@ export default {
       if (value) nextTick(update)
     })
 
-    return { isOpen, open, close, toggle, triggerWrapper, popoverRef, popoverId, resolvedPlacement }
+    return { isOpen, open, close, toggle, triggerWrapper, popoverRef, popoverId, resolvedPlacement, messages }
   },
 }
 </script>

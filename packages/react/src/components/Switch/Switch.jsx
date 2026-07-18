@@ -1,4 +1,5 @@
 import React, { useId } from 'react'
+import { useLocale } from '../../LocaleReact'
 import './style.css' // 引入组件样式
 
 const Switch = ({
@@ -13,6 +14,7 @@ const Switch = ({
   className = '',
   ...props
 }) => {
+  const { messages } = useLocale()
   const labelId = useId()
   const inputId = `${labelId}-input`
 
@@ -56,6 +58,7 @@ const Switch = ({
             checked={checked}
             disabled={disabled}
             aria-labelledby={label ? labelId : undefined}
+            aria-label={label ? undefined : messages.switchControl}
             aria-checked={checked}
             required={required}
             role="switch"

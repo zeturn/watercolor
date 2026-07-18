@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocale } from '../../LocaleReact'
 import './style.css'
 import { getChipClasses, handleChipClick, handleChipDelete, getDefaultDeleteIconPath } from './utils.jsx'
 
@@ -18,6 +19,7 @@ export default function Chip({
   className = '',
   ...rest
 }) {
+  const { messages } = useLocale()
   const chipClasses = getChipClasses({
     size,
     variant,
@@ -67,7 +69,7 @@ export default function Chip({
           type="button"
           onClick={handleDelete}
           className="wc-chip-delete"
-          aria-label="删除"
+          aria-label={messages.removeItem(typeof label === 'string' ? label : undefined)}
         >
           {deleteIcon || (
             <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" className="wc-chip-delete-icon" aria-hidden="true">

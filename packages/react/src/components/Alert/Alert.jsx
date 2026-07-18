@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './style.css'
 import { getAlertClasses } from './utils.js'
+import { useLocale } from '../../LocaleReact.tsx'
 
 const AlertIcon = ({ type }) => {
   const detail = type === 'success'
@@ -30,6 +31,7 @@ export function Alert({
   onClose = () => {},
 }) {
   const [visible, setVisible] = useState(true)
+  const { messages } = useLocale()
 
   if (!visible) return null
 
@@ -61,7 +63,7 @@ export function Alert({
         <button
           type="button"
           className="wc-alert-close"
-          aria-label="关闭"
+          aria-label={messages.close}
           onClick={handleClose}
         >
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true">

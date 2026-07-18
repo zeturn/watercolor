@@ -18,7 +18,7 @@ describe('Modal (React)', () => {
   test('calls onClose when close button is clicked', async () => {
     const handleClose = vi.fn();
     render(<Modal visible={true} title="Test Modal" onClose={handleClose} closable><div>Content</div></Modal>);
-    fireEvent.click(screen.getByRole('button', { name: '关闭' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Close dialog' }));
     await waitFor(() => {
       expect(handleClose).toHaveBeenCalledTimes(1);
     });
@@ -51,7 +51,7 @@ describe('Modal (React)', () => {
     trigger.focus()
     fireEvent.click(trigger);
     await screen.findByRole('dialog');
-    fireEvent.click(screen.getByRole('button', { name: '关闭' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Close dialog' }));
     await waitFor(() => {
       expect(screen.getByRole('button', { name: 'Open modal' })).toHaveFocus();
     });

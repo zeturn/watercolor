@@ -5,6 +5,7 @@
       type="color"
       :value="modelValue"
       :disabled="disabled"
+      :aria-label="messages.colorPicker"
       @input="handleInput"
     >
     <span
@@ -16,8 +17,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useLocale } from '../../LocaleVUE'
 import { getColorPickerClasses, getPreviewStyles } from './utils.js'
 import './style.css'
+
+const { messages } = useLocale()
 
 interface Props {
   modelValue?: string

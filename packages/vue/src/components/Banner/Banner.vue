@@ -58,7 +58,7 @@
         v-if="closable"
         class="wc-banner-close"
         type="button"
-        aria-label="关闭"
+        :aria-label="messages.close"
         @click="handleClose"
       >
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
@@ -79,6 +79,7 @@ import {
   handleBannerClose,
   handleBannerAction
 } from './utils.js'
+import { useLocale } from '../../LocaleVUE'
 import './style.css'
 
 const props = defineProps({
@@ -127,6 +128,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['close', 'action'])
+const { messages } = useLocale()
 
 const visible = ref(true)
 

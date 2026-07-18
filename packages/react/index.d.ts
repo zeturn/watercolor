@@ -262,6 +262,55 @@ export interface ThemeProviderProps {
   onThemeError?: (result: Extract<ThemeApplyResult | ThemeLoadResult, { ok: false }>) => void
 }
 
+export interface WatercolorLocaleMessages {
+  breadcrumb: string
+  closePopover: string
+  close: string
+  closeDialog: string
+  closeLightbox: string
+  downloadImage: (index: number) => string
+  colorPicker: string
+  circularProgress: string
+  enterFullscreen: string
+  loading: string
+  muteVideo: string
+  nextImage: string
+  nextMonth: string
+  nextPage: string
+  openCalendar: string
+  openImageInLightbox: (index: number) => string
+  page: (page: number) => string
+  pagination: string
+  pauseVideo: string
+  playVideo: string
+  previousMonth: string
+  previousPage: string
+  previousImage: string
+  progress: string
+  rating: string
+  ratingValue: (value: number, max: number) => string
+  remove: string
+  removeItem: (label?: string) => string
+  rowsPerPage: string
+  switchControl: string
+  tabList: string
+  unmuteVideo: string
+  jumpToPage: string
+  verificationCodeDigit: (index: number) => string
+  viewImage: (index: number, description?: string) => string
+  volume: string
+  videoProgress: string
+}
+export interface LocaleContextValue {
+  locale?: string
+  messages: WatercolorLocaleMessages
+}
+export interface LocaleProviderProps {
+  children?: ReactNode
+  locale?: string
+  messages?: Partial<WatercolorLocaleMessages>
+}
+
 export type PageProps<T extends ElementType = 'div'> = PolymorphicProps<T, CompositionBaseProps & {
   size?: PageSize
   gutter?: PageGutter
@@ -373,6 +422,9 @@ export const TypingText: WatercolorComponent
 export const VerificationCodeInput: WatercolorComponent
 export const VideoPlayer: WatercolorComponent
 export const Watermark: WatercolorComponent
+export const LocaleProvider: ComponentType<LocaleProviderProps>
+export const defaultLocaleMessages: WatercolorLocaleMessages
+export function useLocale(): LocaleContextValue
 
 export {
   THEME_CONFIG_VERSION,

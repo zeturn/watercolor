@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './style.css'
+import { useLocale } from '../../LocaleReact.tsx'
 
-const Rating = ({ value = 0, max = 5, readOnly = false, onChange = () => {}, className = '', style = {}, ...rest }) => {
+const Rating = ({ value = 0, max = 5, readOnly = false, onChange = () => {}, className = '', style = {}, ariaLabel, ...rest }) => {
   const [hovered, setHovered] = useState(0)
   const [internal, setInternal] = useState(value)
+  const { messages } = useLocale()
 
   useEffect(() => setInternal(value), [value])
 
@@ -15,7 +17,7 @@ const Rating = ({ value = 0, max = 5, readOnly = false, onChange = () => {}, cla
   }
 
   return (
-    <div className={['wc-rating', className].filter(Boolean).join(' ')} role="radiogroup" aria-label="评分组件" style={style} {...rest}>
+    <div className={['wc-rating', className].filter(Boolean).join(' ')} role="radiogroup" aria-label={ariaLabel || messages.rating} style={style} {...rest}>
       {Array.from({ length: max }, (_, index) => {
         const itemValue = index + 1
         const active = itemValue <= hovered || itemValue <= internal
@@ -28,7 +30,7 @@ const Rating = ({ value = 0, max = 5, readOnly = false, onChange = () => {}, cla
             onMouseLeave={() => !readOnly && setHovered(0)}
             onClick={() => handleSelect(itemValue)}
             disabled={readOnly}
-            aria-label={`${itemValue} / ${max}`}
+            aria-label={messages.ratingValue(itemValue, max)}
             aria-checked={itemValue === internal}
             role="radio"
           >★</button>

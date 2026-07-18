@@ -33,7 +33,7 @@
             variant="text"
             size="sm"
             class="wc-modal__close"
-            aria-label="关闭"
+            :aria-label="messages.closeDialog"
             @click="handleClose"
           >
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -78,6 +78,7 @@
 <script setup>
 import { computed, ref, getCurrentInstance } from 'vue'
 import Button from '../Button/Button.vue'
+import { useLocale } from '../../LocaleVUE'
 import { useOverlayLayer } from '../../interactions'
 
 const props = defineProps({
@@ -181,6 +182,7 @@ const emit = defineEmits(['close', 'update:modelValue'])
 const instance = getCurrentInstance()
 const titleId = `modal-title-${instance?.uid || Math.random().toString(36).substr(2, 9)}`
 const modalRef = ref(null)
+const { messages } = useLocale()
 
 // 统一处理 visible/open/modelValue
 const isOpen = computed({

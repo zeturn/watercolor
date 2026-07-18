@@ -17,7 +17,7 @@ jobs:
   release-gate:
     name: Verify release
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - name: Checkout tagged source
         uses: actions/checkout@v4
@@ -83,11 +83,15 @@ jobs:
           npm run audit:theme
           npm run audit:composition
           npm run audit:visual
+          npm run audit:i18n-a11y
           npm run audit:api
           npm run typecheck:public-api
 
       - name: Verify publish artifacts and clean-room consumers
         run: npm run test:package
+
+      - name: Enforce bundle size budgets
+        run: npm run audit:bundle
 
       - name: Build Storybooks
         env:
@@ -98,6 +102,9 @@ jobs:
 
       - name: Run Storybook visual matrix
         run: npm run visual:recipes
+
+      - name: Run Storybook accessibility matrix
+        run: npm run visual:a11y
 
       - name: Build canonical documentation
         env:

@@ -3,6 +3,7 @@ import {
   Button,
   Checkbox,
   Input,
+  LocaleProvider,
   Menu,
   Modal,
   Radio,
@@ -51,6 +52,19 @@ export const reactPublicApi = (
       </Table>
     </Stack>
   </ThemeProvider>
+)
+
+export const reactLocaleApi = (
+  <LocaleProvider
+    locale="zh-CN"
+    messages={{
+      close: '关闭',
+      closeDialog: '关闭对话框',
+      ratingValue: (value, max) => `${value} / ${max}`,
+    }}
+  >
+    <Tabs tabs={[{ key: 'localized', title: 'Localized' }]} />
+  </LocaleProvider>
 )
 
 type VueButtonProps = InstanceType<typeof VueButton>['$props']

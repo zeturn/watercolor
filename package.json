@@ -26,6 +26,8 @@
     "audit:visual": "node scripts/audit-visual-style.mjs",
     "audit:theme": "node scripts/audit-theme-contract.mjs",
     "audit:composition": "node scripts/audit-composition-layer.mjs",
+    "audit:i18n-a11y": "node scripts/audit-i18n-a11y.mjs",
+    "audit:bundle": "node scripts/audit-bundle-size.mjs",
     "typecheck:composition": "npm run build -w packages/core && tsc --noEmit --jsx react-jsx --moduleResolution bundler --module esnext --target es2020 --skipLibCheck tests/types/composition.tsx",
     "typecheck:theme": "npm run build -w packages/core && npm run build -w packages/react && npm run build -w packages/vue && tsc --noEmit --jsx react-jsx --moduleResolution bundler --module esnext --target es2020 --skipLibCheck tests/types/theme-v2.tsx",
     "test:package-theme": "node scripts/test-theme-package.mjs",
@@ -33,6 +35,7 @@
     "audit:api": "node scripts/check-api-parity.mjs",
     "typecheck:public-api": "npm run build -w packages/core && npm run build -w packages/react && npm run build -w packages/vue && tsc --noEmit --jsx react-jsx --moduleResolution bundler --module esnext --target es2020 --strict --skipLibCheck tests/types/public-api.tsx",
     "visual:recipes": "node scripts/visual-check-storybook.mjs",
+    "visual:a11y": "node scripts/a11y-check-storybook.mjs",
     "check-publish": "node scripts/check-publish.mjs",
     "release": "node scripts/publish.mjs",
     "release:patch": "node scripts/publish.mjs patch",
@@ -41,6 +44,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.0",
+    "@storybook/addon-a11y": "^10.3.3",
     "@storybook/addon-docs": "10.3.3",
     "@storybook/addon-links": "10.3.3",
     "@storybook/vue3-vite": "10.3.3",
@@ -56,6 +60,7 @@
     "@vue/eslint-config-typescript": "^12.0.0",
     "@vue/test-utils": "^2.4.3",
     "ajv": "^8.12.0",
+    "axe-core": "^4.12.1",
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
@@ -119,5 +124,5 @@
     "npm": ">=8.0.0"
   },
   "license": "ISC",
-  "version": "1.2.3"
+  "version": "1.2.4"
 }

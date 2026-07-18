@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-core",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "type": "module",
   "license": "ISC",
   "main": "dist/core.es.js",

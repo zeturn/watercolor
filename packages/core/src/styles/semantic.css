@@ -11,7 +11,7 @@
   --wc-mode-disabled: var(--wc-theme-light-action-disabled, var(--wc-neutral-100));
   --wc-mode-text: var(--wc-theme-light-text-primary, var(--wc-neutral-950));
   --wc-mode-text-secondary: var(--wc-theme-light-text-secondary, var(--wc-neutral-600));
-  --wc-mode-text-tertiary: var(--wc-theme-light-text-tertiary, var(--wc-neutral-500));
+  --wc-mode-text-tertiary: var(--wc-theme-light-text-tertiary, var(--wc-neutral-600));
   --wc-mode-text-disabled: var(--wc-theme-light-text-disabled, var(--wc-neutral-400));
   --wc-mode-text-inverse: var(--wc-theme-light-text-inverse, var(--wc-neutral-0));
   --wc-mode-border: var(--wc-theme-light-border-default, var(--wc-neutral-200));

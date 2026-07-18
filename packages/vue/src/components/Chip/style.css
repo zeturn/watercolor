@@ -46,7 +46,7 @@
 }
 
 .wc-chip--clickable:focus-visible:not(.wc-chip--disabled) {
-  box-shadow: var(--wc-focus-ring);
+  box-shadow: 0 0 0 2px var(--wc-focus-ring);
 }
 
 .wc-chip--disabled {
@@ -97,7 +97,7 @@
   outline: 0;
 }
 
-.wc-chip-delete:focus-visible { box-shadow: var(--wc-focus-ring); }
+.wc-chip-delete:focus-visible { box-shadow: 0 0 0 2px var(--wc-focus-ring); }
 .wc-chip-delete svg { width: 14px; height: 14px; }
 
 @media (prefers-reduced-motion: reduce) {

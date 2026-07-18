@@ -10,7 +10,7 @@
     <div class="controls">
       <button
         class="ctrl-btn"
-        :aria-label="playing ? '暂停' : '播放'"
+        :aria-label="playing ? messages.pauseVideo : messages.playVideo"
         @click="togglePlay"
       >
         {{ playing ? '❚❚' : '▶️' }}
@@ -19,7 +19,7 @@
         class="progress"
         role="slider"
         tabindex="0"
-        aria-label="播放进度"
+        :aria-label="messages.videoProgress"
         :aria-valuenow="Math.round(progress)"
         aria-valuemin="0"
         aria-valuemax="100"
@@ -33,7 +33,7 @@
       <span class="time">{{ formattedCurrent }} / {{ formattedDuration }}</span>
       <button
         class="ctrl-btn"
-        :aria-label="muted ? '取消静音' : '静音'"
+        :aria-label="muted ? messages.unmuteVideo : messages.muteVideo"
         @click="toggleMute"
       >
         {{ muted ? '🔇' : '🔊' }}
@@ -45,10 +45,11 @@
         min="0"
         max="1"
         step="0.05"
+        :aria-label="messages.volume"
       >
       <button
         class="ctrl-btn"
-        aria-label="全屏"
+        :aria-label="messages.enterFullscreen"
         @click="handleFullscreen"
       >
         ⛶
@@ -59,6 +60,7 @@
 
 <script>
 import { ref, computed, onMounted, watch } from 'vue'
+import { useLocale } from '../../LocaleVUE'
 import { formatTime, calculateSeekPosition, toggleFullscreen } from './utils'
 import './style.css'
 
@@ -70,6 +72,7 @@ export default {
     loop: { type: Boolean, default: false },
   },
   setup(props) {
+    const { messages } = useLocale()
     const video = ref(null)
     const playing = ref(false)
     const progress = ref(0)
@@ -128,7 +131,7 @@ export default {
     return { 
       video, playing, progress, togglePlay, updateProgress, seek, 
       volume, muted, toggleMute, handleFullscreen, 
-      formattedCurrent, formattedDuration, onEnded 
+      formattedCurrent, formattedDuration, onEnded, messages
     }
   }
 }

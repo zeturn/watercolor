@@ -112,6 +112,8 @@ jobs:
           npm run audit:theme
           npm run audit:composition
           npm run audit:visual
+          npm run audit:i18n-a11y
+          npm run audit:bundle
           npm run typecheck:theme
           npm run test:package-theme
         
@@ -128,6 +130,9 @@ jobs:
 
       - name: Run Storybook visual matrix
         run: npm run visual:recipes
+
+      - name: Run Storybook accessibility matrix
+        run: npm run visual:a11y
 
       - name: Build VitePress Docs
         env:

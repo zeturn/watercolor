@@ -82,3 +82,7 @@ export * from './utils/theme'
 // 主题 Provider
 export { ThemeProvider, useTheme } from './ThemeReact.tsx'
 export type { ThemeContextValue, ThemeProviderProps } from './ThemeReact.tsx'
+
+// 国际化 Provider
+export { LocaleProvider, defaultLocaleMessages, useLocale } from './LocaleReact.tsx'
+export type { LocaleContextValue, LocaleProviderProps, WatercolorLocaleMessages } from './LocaleReact.tsx'

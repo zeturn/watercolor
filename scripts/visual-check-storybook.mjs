@@ -18,6 +18,10 @@ const modes = [
   { name: 'system-dark-desktop', theme: 'system', resolvedTheme: 'dark', prefersColorScheme: 'dark', width: 1440, height: 1000 },
   { name: 'light-mobile', theme: 'light', resolvedTheme: 'light', width: 390, height: 844 },
   { name: 'dark-mobile', theme: 'dark', resolvedTheme: 'dark', width: 390, height: 844 },
+  { name: 'reduced-motion', theme: 'light', resolvedTheme: 'light', width: 1440, height: 1000, prefersReducedMotion: 'reduce' },
+  { name: 'forced-colors', theme: 'light', resolvedTheme: 'light', width: 1440, height: 1000, forcedColors: 'active' },
+  { name: 'rtl-desktop', theme: 'light', resolvedTheme: 'light', width: 1440, height: 1000, direction: 'rtl' },
+  { name: 'zoom-200', theme: 'light', resolvedTheme: 'light', width: 720, height: 1000, pageScaleFactor: 2 },
 ]
 const stories = [
   { id: 'foundations-composition--overview', selector: '.wc-composition-demo' },
@@ -130,18 +134,62 @@ async function capture({ baseUrl, framework, story, mode, debugPort }) {
   await cdp.send('Emulation.setDeviceMetricsOverride', {
     width: mode.width, height: mode.height, deviceScaleFactor: 1, mobile: mode.width < 640,
   })
+  if (mode.pageScaleFactor) {
+    await cdp.send('Emulation.setPageScaleFactor', { pageScaleFactor: mode.pageScaleFactor })
+  }
   await cdp.send('Emulation.setEmulatedMedia', {
-    features: [{ name: 'prefers-color-scheme', value: mode.prefersColorScheme || mode.resolvedTheme }],
+    features: [
+      { name: 'prefers-color-scheme', value: mode.prefersColorScheme || mode.resolvedTheme },
+      ...(mode.prefersReducedMotion ? [{ name: 'prefers-reduced-motion', value: mode.prefersReducedMotion }] : []),
+      ...(mode.forcedColors ? [{ name: 'forced-colors', value: mode.forcedColors }] : []),
+    ],
   })
   await cdp.send('Page.navigate', { url })
   await waitForStory(cdp, story.selector, `${framework}/${story.id}/${mode.name}`)
+  if (mode.direction) {
+    await evaluate(cdp, `document.documentElement.setAttribute('dir', ${JSON.stringify(mode.direction)})`)
+    await delay(50)
+  }
+  await cdp.send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9, nativeVirtualKeyCode: 9 })
+  await cdp.send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9, nativeVirtualKeyCode: 9 })
+  await delay(50)
 
   const metrics = await evaluate(cdp, `(() => {
     const split = document.querySelector('.wc-split')
+    const sampled = [...document.querySelectorAll('button, [role="button"], input, textarea, select, a[href]')].slice(0, 8)
+    const visibleInteractive = (element) => !element.disabled && element.tabIndex !== -1 && element.offsetParent !== null
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
+    const forcedColors = matchMedia('(forced-colors: active)').matches
     return {
       innerWidth: window.innerWidth,
       scrollWidth: document.documentElement.scrollWidth,
       resolvedTheme: document.documentElement.dataset.resolvedTheme,
+      direction: document.documentElement.dir || getComputedStyle(document.documentElement).direction,
+      reducedMotion,
+      forcedColors,
+      maxTransitionDuration: Math.max(0, ...sampled.map((element) => {
+        const duration = getComputedStyle(element).transitionDuration.split(',').map((part) => parseFloat(part) || 0)
+        return Math.max(...duration)
+      })),
+      focusedOutline: (() => {
+        const active = document.activeElement
+        const target = sampled.includes(active) && visibleInteractive(active) ? active : null
+        if (!target) return { probed: false }
+        const candidates = [target, target.parentElement, target.parentElement?.parentElement].filter(Boolean)
+        return {
+          probed: true,
+          target: target.className || target.tagName.toLowerCase(),
+          candidates: candidates.map((element) => {
+            const style = getComputedStyle(element)
+            return {
+              target: element.className || element.tagName.toLowerCase(),
+              outlineStyle: style.outlineStyle,
+              outlineWidth: style.outlineWidth,
+              boxShadow: style.boxShadow,
+            }
+          }),
+        }
+      })(),
       splitColumns: split ? getComputedStyle(split).gridTemplateColumns : null,
       primitiveCounts: Object.fromEntries(['page', 'stack', 'inline', 'split'].map(name => [name, document.querySelectorAll('.wc-' + name).length])),
       storybookError: [...document.querySelectorAll('.sb-errordisplay, [data-testid="story-error"]')]
@@ -255,16 +303,30 @@ try {
     const errors = []
     if (item.scrollWidth > item.innerWidth) errors.push(`horizontal overflow ${item.scrollWidth}/${item.innerWidth}`)
     if (item.resolvedTheme !== item.expectedResolvedTheme) errors.push(`theme did not resolve: expected ${item.expectedResolvedTheme}, received ${item.resolvedTheme}`)
+    if (item.mode === 'reduced-motion' && (!item.reducedMotion || item.maxTransitionDuration > 0.01)) errors.push(`reduced motion failed: ${item.maxTransitionDuration}`)
+    if (item.mode === 'forced-colors' && !item.forcedColors) errors.push('forced-colors media was not active')
+    if (item.mode === 'rtl-desktop' && item.direction !== 'rtl') errors.push(`RTL direction failed: ${item.direction}`)
+    if (item.mode === 'zoom-200' && item.scrollWidth > item.innerWidth + 1) errors.push(`200% zoom overflow ${item.scrollWidth}/${item.innerWidth}`)
+    if (
+      item.focusedOutline?.probed &&
+      !item.focusedOutline.candidates.some((candidate) =>
+        (candidate.outlineStyle !== 'none' && candidate.outlineWidth !== '0px') ||
+        candidate.boxShadow !== 'none'
+      )
+    ) errors.push('focus state has no visible outline or ring')
     if (item.storybookError) errors.push(`Storybook render error: ${item.storybookError}`)
     if (item.storyKind === 'reference' && (!item.primitiveCounts.page || !item.primitiveCounts.stack)) errors.push('missing Page or Stack composition')
     if (item.mode.includes('mobile') && item.splitColumns?.includes(' ')) errors.push(`Split did not collapse: ${item.splitColumns}`)
-    if (item.hover && (item.hover.before !== 'rgba(0, 0, 0, 0)' || item.hover.after === item.hover.before)) errors.push(`hover surface failed: ${JSON.stringify(item.hover)}`)
+    if (item.hover) {
+      const transparentBefore = item.hover.before === 'transparent' || /rgba\([^)]*,\s*0\)$/.test(item.hover.before)
+      if (!transparentBefore || item.hover.after === item.hover.before) errors.push(`hover surface failed: ${JSON.stringify(item.hover)}`)
+    }
     if (item.themeSwitch) {
       const expectedRequested = item.mode.startsWith('system-') ? 'system' : item.expectedResolvedTheme
       if (item.themeSwitch.initial.dataTheme !== expectedRequested || item.themeSwitch.initial.resolved !== item.expectedResolvedTheme) errors.push(`initial theme frame is inconsistent: ${JSON.stringify(item.themeSwitch.initial)}`)
       if (!item.themeSwitch.dark.className.includes('dark') || item.themeSwitch.dark.className.includes('light') || item.themeSwitch.dark.colorScheme !== 'dark') errors.push(`dark DOM contract failed: ${JSON.stringify(item.themeSwitch.dark)}`)
       if (!item.themeSwitch.light.className.includes('light') || item.themeSwitch.light.className.includes('dark') || item.themeSwitch.light.colorScheme !== 'light') errors.push(`light DOM contract failed: ${JSON.stringify(item.themeSwitch.light)}`)
-      if (item.themeSwitch.dark.background === item.themeSwitch.light.background) errors.push('theme canvas did not change')
+      if (item.mode !== 'forced-colors' && item.themeSwitch.dark.background === item.themeSwitch.light.background) errors.push('theme canvas did not change')
       if (item.story.endsWith('--custom-theme-v-2') && (item.themeSwitch.dark.primary !== '#8b5cf6' || item.themeSwitch.light.primary !== '#8b5cf6')) errors.push(`custom brand token was not stable: ${JSON.stringify(item.themeSwitch)}`)
     }
     return errors.map((error) => `${item.framework}/${item.story}/${item.mode}: ${error}`)

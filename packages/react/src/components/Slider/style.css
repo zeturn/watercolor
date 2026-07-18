@@ -46,6 +46,11 @@
 }
 .wc-slider__input:hover::-webkit-slider-thumb { transform: scale(1.12); }
 .wc-slider__input:hover::-moz-range-thumb { transform: scale(1.12); }
+.wc-slider__input:focus-visible {
+  outline: 2px solid var(--wc-focus-ring);
+  outline-offset: 4px;
+  border-radius: var(--wc-radius-full);
+}
 .wc-slider__input:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--wc-surface-canvas), 0 0 0 5px var(--wc-focus-ring); }
 .wc-slider__input:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px var(--wc-surface-canvas), 0 0 0 5px var(--wc-focus-ring); }
 .wc-slider--disabled { color: var(--wc-text-disabled); }

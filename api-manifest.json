@@ -13,7 +13,8 @@
     "Radio", "RadioGroup", "Rating", "Select", "Skeleton", "SlideOver", "Slider", "Snackbar",
     "Split", "Stack", "Status", "Switch", "Table", "TableBody", "TableCell", "TableHead",
     "TableRow", "Tabs", "TextField", "ThemeProvider", "Toolbar", "Tooltip", "TypingText",
-    "Typography", "VerificationCodeInput", "VideoPlayer", "Watermark", "useTheme"
+    "Typography", "VerificationCodeInput", "VideoPlayer", "Watermark",
+    "LocaleProvider", "defaultLocaleMessages", "useLocale", "useTheme"
   ],
   "typedContracts": {
     "react": [
@@ -21,7 +22,7 @@
       "RadioProps", "RadioGroupProps", "SwitchProps", "ModalProps", "MenuProps", "TabsProps",
       "TableProps", "TableHeadProps", "TableBodyProps", "TableRowProps", "TableCellProps",
       "PageProps", "StackProps", "InlineProps", "SplitProps", "ThemeProviderProps",
-      "ThemeContextValue"
+      "ThemeContextValue", "WatercolorLocaleMessages", "LocaleContextValue", "LocaleProviderProps"
     ],
     "vue": {
       "props": ["Button", "Input", "TextField", "Select", "Checkbox", "Radio", "RadioGroup", "Switch", "Modal", "Menu", "Tabs", "Table"],

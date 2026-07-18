@@ -35,12 +35,7 @@
         :key="image.id || index"
         class="gallery-item"
         :class="{ 'gallery-item-selected': selectedIndex === index }"
-        :tabindex="0"
-        role="button"
-        :aria-label="`查看图片 ${index + 1}: ${image.alt || image.title || '无描述'}`"
         @click="selectImage(index)"
-        @keydown.enter="selectImage(index)"
-        @keydown.space.prevent="selectImage(index)"
       >
         <!-- 图片容器 -->
         <div class="gallery-image-container">
@@ -66,7 +61,7 @@
             <div class="gallery-overlay-content">
               <button 
                 class="gallery-action-btn gallery-view-btn"
-                :aria-label="`在灯箱中查看图片 ${index + 1}`"
+                :aria-label="messages.openImageInLightbox(index + 1)"
                 @click.stop="openLightbox(index)"
               >
                 👁️
@@ -74,7 +69,7 @@
               <button 
                 v-if="showDownload"
                 class="gallery-action-btn gallery-download-btn"
-                :aria-label="`下载图片 ${index + 1}`"
+                :aria-label="messages.downloadImage(index + 1)"
                 @click.stop="downloadImage(image)"
               >
                 📥
@@ -112,6 +107,7 @@
       <button 
         class="gallery-page-btn"
         :disabled="currentPage === 1"
+        :aria-label="messages.previousPage"
         @click="goToPage(currentPage - 1)"
       >
         上一页
@@ -124,6 +120,7 @@
       <button 
         class="gallery-page-btn"
         :disabled="currentPage === totalPages"
+        :aria-label="messages.nextPage"
         @click="goToPage(currentPage + 1)"
       >
         下一页
@@ -145,7 +142,7 @@
         >
           <button 
             class="gallery-lightbox-close"
-            aria-label="关闭灯箱"
+            :aria-label="messages.closeLightbox"
             @click="closeLightbox"
           >
             ✕
@@ -178,7 +175,7 @@
             <button 
               class="gallery-lightbox-nav gallery-lightbox-prev"
               :disabled="lightboxIndex === 0"
-              aria-label="上一张图片"
+              :aria-label="messages.previousImage"
               @click="previousImage"
             >
               ‹
@@ -189,7 +186,7 @@
             <button 
               class="gallery-lightbox-nav gallery-lightbox-next"
               :disabled="lightboxIndex === images.length - 1"
-              aria-label="下一张图片"
+              :aria-label="messages.nextImage"
               @click="nextImage"
             >
               ›
@@ -203,6 +200,7 @@
 
 <script>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { useLocale } from '../../LocaleVUE'
 
 export default {
   name: 'ImageGallery',
@@ -264,6 +262,7 @@ export default {
   },
   emits: ['select', 'download', 'lightbox-open', 'lightbox-close'],
   setup(props, { emit }) {
+    const { messages } = useLocale()
     const selectedIndex = ref(-1)
     const lightboxVisible = ref(false)
     const lightboxIndex = ref(0)
@@ -393,7 +392,8 @@ export default {
       downloadImage,
       goToPage,
       onImageLoad,
-      onImageError
+      onImageError,
+      messages
     }
   }
 }

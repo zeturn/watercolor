@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-icons-phosphor-react",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "type": "module",
   "main": "dist/watercolor-icons-phosphor-react.es.js",
   "module": "dist/watercolor-icons-phosphor-react.es.js",

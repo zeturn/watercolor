@@ -11,7 +11,7 @@ describe('DatePicker (React)', () => {
     fireEvent.keyDown(input, { key: 'ArrowDown' })
 
     expect(input).toHaveAttribute('aria-expanded', 'true')
-    expect(screen.getByRole('dialog', { name: '选择日期' })).toBeInTheDocument()
+    expect(screen.getByRole('dialog', { name: 'Choose date' })).toBeInTheDocument()
   })
 
   it('closes on Escape and outside pointer down through the shared layer', () => {
@@ -20,11 +20,11 @@ describe('DatePicker (React)', () => {
 
     fireEvent.keyDown(input, { key: 'ArrowDown' })
     fireEvent.keyDown(document, { key: 'Escape' })
-    expect(screen.queryByRole('dialog', { name: '选择日期' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('dialog', { name: 'Choose date' })).not.toBeInTheDocument()
 
     fireEvent.keyDown(input, { key: 'ArrowDown' })
     fireEvent.mouseDown(document.body)
-    expect(screen.queryByRole('dialog', { name: '选择日期' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('dialog', { name: 'Choose date' })).not.toBeInTheDocument()
   })
 
   it('emits selected Date values', () => {

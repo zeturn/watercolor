@@ -14,6 +14,7 @@
       maxlength="1"
       autocomplete="one-time-code"
       inputmode="numeric"
+      :aria-label="messages.verificationCodeDigit(index + 1)"
       @input="onInput(index, $event)"
       @keydown.backspace.prevent="onBackspace(index, $event)"
       @focus="selectContent($event)"
@@ -23,7 +24,10 @@
 
 <script setup lang="ts">
 import { ref, watch, nextTick, onMounted } from 'vue'
+import { useLocale } from '../../LocaleVUE'
 import '@/components/Input/style.css'
+
+const { messages } = useLocale()
 
 const props = defineProps({
   length: {

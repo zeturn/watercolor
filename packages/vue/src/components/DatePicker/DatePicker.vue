@@ -33,13 +33,13 @@
       :id="`${inputId}-calendar`"
       class="wc-datepicker-dropdown"
       role="dialog"
-      aria-label="选择日期"
+      :aria-label="messages.openCalendar"
     >
       <div class="wc-datepicker-header">
         <button
           type="button"
           class="wc-datepicker-nav"
-          aria-label="上个月"
+          :aria-label="messages.previousMonth"
           @click="changeMonth(-1)"
         >
           ‹
@@ -50,7 +50,7 @@
         <button
           type="button"
           class="wc-datepicker-nav"
-          aria-label="下个月"
+          :aria-label="messages.nextMonth"
           @click="changeMonth(1)"
         >
           ›
@@ -109,6 +109,7 @@
 <script setup>
 import { ref, computed, watch, getCurrentInstance } from 'vue'
 import { useOverlayLayer } from '../../interactions'
+import { useLocale } from '../../LocaleVUE'
 import './style.css'
 
 const props = defineProps({
@@ -153,6 +154,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue', 'change'])
+const { messages } = useLocale()
 
 const datePickerRef = ref(null)
 const inputRef = ref(null)

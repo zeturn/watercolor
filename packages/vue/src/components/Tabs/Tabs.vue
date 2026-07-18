@@ -3,7 +3,7 @@
     <div
       :class="tabsClasses"
       role="tablist"
-      aria-label="内容分组"
+      :aria-label="messages.tabList"
     >
       <button
         v-for="(tab, index) in tabs"
@@ -40,6 +40,7 @@
 <script setup>
 import './style.css'
 import { computed, ref, useId, watch } from 'vue'
+import { useLocale } from '../../LocaleVUE'
 
 const props = defineProps({
   tabs: {
@@ -59,6 +60,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue', 'change'])
+const { messages } = useLocale()
 
 const tabsId = useId()
 const activeIndex = ref(props.modelValue)

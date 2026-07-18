@@ -5,6 +5,6 @@ import Skeleton from '@/components/Skeleton/Skeleton.jsx'
 describe('Skeleton (React)', () => {
   it('renders without crashing', () => {
     const { getByRole } = render(<Skeleton />)
-    expect(getByRole('status', { name: '正在加载' })).toBeInTheDocument()
+    expect(getByRole('status', { name: 'Loading' })).toBeInTheDocument()
   })
 })

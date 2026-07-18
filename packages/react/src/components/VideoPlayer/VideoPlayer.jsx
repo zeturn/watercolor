@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
+import { useLocale } from '../../LocaleReact'
 import { formatTime, calculateSeekPosition, toggleFullscreen } from './utils'
 import './style.css'
 
@@ -10,6 +11,7 @@ const VideoPlayer = ({
   style = {},
   ...rest
 }) => {
+  const { messages } = useLocale()
   const videoRef = useRef(null)
   const [playing, setPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -82,14 +84,14 @@ const VideoPlayer = ({
         onEnded={() => setPlaying(false)}
       />
       <div className="controls">
-        <button className="ctrl-btn" aria-label={playing ? '暂停' : '播放'} onClick={togglePlay}>{playing ? '❚❚' : '▶️'}</button>
-        <div className="progress" role="slider" tabIndex={0} aria-label="播放进度" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100} onClick={seek}>
+        <button className="ctrl-btn" aria-label={playing ? messages.pauseVideo : messages.playVideo} onClick={togglePlay}>{playing ? '❚❚' : '▶️'}</button>
+        <div className="progress" role="slider" tabIndex={0} aria-label={messages.videoProgress} aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100} onClick={seek}>
           <div className="progress-bar" style={{ width: `${progress}%` }} />
         </div>
         <span className="time">{formattedCurrent} / {formattedDuration}</span>
-        <button className="ctrl-btn" aria-label={muted ? '取消静音' : '静音'} onClick={toggleMute}>{muted ? '🔇' : '🔊'}</button>
-        <input className="volume" type="range" min="0" max="1" step="0.05" value={volume} onChange={(e)=>setVolume(Number(e.target.value))} />
-        <button className="ctrl-btn" aria-label="全屏" onClick={handleFullscreen}>⛶</button>
+        <button className="ctrl-btn" aria-label={muted ? messages.unmuteVideo : messages.muteVideo} onClick={toggleMute}>{muted ? '🔇' : '🔊'}</button>
+        <input className="volume" type="range" min="0" max="1" step="0.05" value={volume} aria-label={messages.volume} onChange={(e)=>setVolume(Number(e.target.value))} />
+        <button className="ctrl-btn" aria-label={messages.enterFullscreen} onClick={handleFullscreen}>⛶</button>
       </div>
     </div>
   )

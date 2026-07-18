@@ -40,7 +40,7 @@ export const FormControlExample = {
               label="我同意服务条款"
               :required="true"
             >
-              <Checkbox v-model="checkboxValue" />
+              <Checkbox v-model="checkboxValue" aria-label="我同意服务条款" />
             </FormControlLabel>
             <FormHelperText>请阅读并同意我们的服务条款</FormHelperText>
           </FormControl>
@@ -54,14 +54,14 @@ export const FormControlExample = {
               value="option1"
               label="选项 1"
             >
-              <Radio v-model="radioValue" value="option1" />
+              <Radio v-model="radioValue" value="option1" aria-label="选项 1" />
             </FormControlLabel>
             <FormControlLabel 
               v-model="radioValue"
               value="option2"
               label="选项 2"
             >
-              <Radio v-model="radioValue" value="option2" />
+              <Radio v-model="radioValue" value="option2" aria-label="选项 2" />
             </FormControlLabel>
             <FormHelperText error>请选择一个有效选项</FormHelperText>
           </FormControl>

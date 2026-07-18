@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocale } from '../../LocaleReact'
 import './style.css'
 import { getColorPickerClasses, handleColorChange, getPreviewStyles } from './utils.js'
 
@@ -10,6 +11,7 @@ export default function ColorPicker({
   disabled = false,
   className = ''
 }) {
+  const { messages } = useLocale()
   const normalizedValue = value ?? ''
   const colorPickerClasses = getColorPickerClasses({
     size,
@@ -32,6 +34,7 @@ export default function ColorPicker({
         onChange={handleInput}
         disabled={disabled}
         className="wc-color-picker__input"
+        aria-label={messages.colorPicker}
       />
       <span
         className="wc-color-picker__preview"

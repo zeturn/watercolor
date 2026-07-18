@@ -40,17 +40,17 @@ describe('Banner (React)', () => {
 
   it('显示和隐藏关闭按钮', () => {
     render(<Banner closable title="可关闭" />)
-    expect(screen.getByRole('button', { name: '关闭' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument()
     cleanup()
     
     render(<Banner closable={false} title="不可关闭" />)
-    expect(screen.queryByRole('button', { name: '关闭' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Close' })).not.toBeInTheDocument()
   })
 
   it('点击关闭按钮后消失并触发 onClose', () => {
     const onClose = vi.fn()
     render(<Banner closable title="可关闭" onClose={onClose} />)
-    const closeBtn = screen.getByRole('button', { name: '关闭' })
+    const closeBtn = screen.getByRole('button', { name: 'Close' })
     fireEvent.click(closeBtn)
     expect(onClose).toHaveBeenCalled()
     expect(screen.queryByText('可关闭')).not.toBeInTheDocument()

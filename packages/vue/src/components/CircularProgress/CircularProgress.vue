@@ -5,6 +5,7 @@
     :aria-valuenow="variantAriaValueNow"
     :aria-valuemin="0"
     :aria-valuemax="100"
+    :aria-label="messages.circularProgress"
   >
     <svg
       :width="size"
@@ -50,7 +51,10 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useLocale } from '../../LocaleVUE'
 import './style.css'
+
+const { messages } = useLocale()
 
 const props = defineProps({
   value: {

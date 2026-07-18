@@ -6,7 +6,7 @@
     :style="skeletonStyles"
     role="status"
     aria-live="polite"
-    aria-label="正在加载"
+    :aria-label="messages.loading"
     aria-busy="true"
   />
   <template v-else>
@@ -16,7 +16,10 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useLocale } from '../../LocaleVUE'
 import './style.css'
+
+const { messages } = useLocale()
 
 const props = defineProps({
   /** 是否显示加载状态 */

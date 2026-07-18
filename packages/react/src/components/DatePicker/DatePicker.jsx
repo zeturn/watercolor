@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useId } from 'react'
 import { useOverlayLayer } from '../../interactions.jsx'
+import { useLocale } from '../../LocaleReact'
 import './style.css'
 import {
   formatDate,
@@ -28,6 +29,7 @@ export function DatePicker({
   className = '',
   ...rest
 }) {
+  const { messages } = useLocale()
   const wrapperRef = useRef(null)
   const dropdownRef = useRef(null)
   const inputId = useId()
@@ -148,13 +150,13 @@ export function DatePicker({
       </div>
 
       {isOpen && (
-        <div ref={dropdownRef} className="wc-datepicker-dropdown" id={`${inputId}-calendar`} role="dialog" aria-label="选择日期">
+        <div ref={dropdownRef} className="wc-datepicker-dropdown" id={`${inputId}-calendar`} role="dialog" aria-label={messages.openCalendar}>
           {/* header */}
           <div className="wc-datepicker-header">
             <button
               type="button"
               className="wc-datepicker-nav"
-              aria-label="上个月"
+              aria-label={messages.previousMonth}
               onClick={() => changeMonth(-1)}
             >
               ‹
@@ -163,7 +165,7 @@ export function DatePicker({
             <button
               type="button"
               className="wc-datepicker-nav"
-              aria-label="下个月"
+              aria-label={messages.nextMonth}
               onClick={() => changeMonth(1)}
             >
               ›

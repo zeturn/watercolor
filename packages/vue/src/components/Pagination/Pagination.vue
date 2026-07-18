@@ -2,13 +2,13 @@
   <nav
     v-if="pageCount > 1"
     :class="paginationClasses"
-    aria-label="分页导航"
+    :aria-label="messages.pagination"
   >
     <!-- 上一页按钮 -->
     <button 
       class="page-btn wc-page-btn wc-page-btn--prev wc-page-btn--nav"
       :disabled="currentPageInternal === 1" 
-      aria-label="上一页"
+      :aria-label="messages.previousPage"
       @click="select(currentPageInternal - 1)"
     >
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -25,7 +25,7 @@
         v-if="!page.ellipsis" 
         :class="['page-btn', 'wc-page-btn', { active: page.num === currentPageInternal, 'wc-page-btn--active': page.num === currentPageInternal }]" 
         :aria-current="page.num === currentPageInternal ? 'page' : undefined"
-        :aria-label="`第 ${page.num} 页`"
+        :aria-label="messages.page(page.num)"
         @click="select(page.num)"
       >
         {{ page.num }}
@@ -40,7 +40,7 @@
     <button 
       class="page-btn wc-page-btn wc-page-btn--next wc-page-btn--nav" 
       :disabled="currentPageInternal === pageCount" 
-      aria-label="下一页"
+      :aria-label="messages.nextPage"
       @click="select(currentPageInternal + 1)"
     >
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -53,7 +53,7 @@
       v-if="showSizeChanger"
       class="wc-pagination-size-selector"
     >
-      <select aria-label="每页条数" @change="handleSizeChange">
+      <select :aria-label="messages.rowsPerPage" @change="handleSizeChange">
         <option
           v-for="size in pageSizeOptions"
           :key="size"
@@ -76,7 +76,7 @@
         :min="1" 
         :max="pageCount"
         placeholder="页码"
-        aria-label="跳转页码"
+        :aria-label="messages.jumpToPage"
         @keyup.enter="handleQuickJump"
       >
     </div>
@@ -85,6 +85,7 @@
 
 <script>
 import { ref, computed, watch } from 'vue'
+import { useLocale } from '../../LocaleVUE'
 import './style.css'
 
 export default {
@@ -134,6 +135,7 @@ export default {
   },
   emits: ['update:modelValue', 'change', 'page-change', 'size-change'],
   setup(props, { emit }) {
+    const { messages } = useLocale()
     const currentPageInternal = ref(props.currentPage || props.modelValue)
 
     watch(() => props.modelValue, (val) => {
@@ -217,9 +219,9 @@ export default {
       select, 
       paginationClasses,
       handleSizeChange,
-      handleQuickJump
+      handleQuickJump,
+      messages
     }
   }
 }
 </script>
-

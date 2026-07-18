@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react'
+import { useLocale } from '../../LocaleReact'
 import './style.css'
 
 const variants = {
@@ -9,6 +10,7 @@ const variants = {
 }
 
 const Skeleton = ({ animation = 'pulse', component: Component = 'div', height, width, variant = 'text', style = {}, className = '', ...rest }) => {
+  const { messages } = useLocale()
   const classes = useMemo(() => {
     const cls = ['wc-skeleton', variants[variant] || variants.text]
     if (animation === 'pulse') cls.push('wc-skeleton--pulse')
@@ -32,7 +34,7 @@ const Skeleton = ({ animation = 'pulse', component: Component = 'div', height, w
     }
   }
 
-  return <Component className={`${classes} ${className}`} style={sizeStyle} role="status" aria-live="polite" aria-label="正在加载" aria-busy="true" {...rest} />
+  return <Component className={`${classes} ${className}`} style={sizeStyle} role="status" aria-live="polite" aria-label={messages.loading} aria-busy="true" {...rest} />
 }
 
 export default Skeleton

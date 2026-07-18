@@ -37,9 +37,62 @@ code, pre { font-family: var(--wc-font-mono); }
 .wc-radius-full { border-radius: var(--wc-radius-full); }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
+  :root {
+    --wc-motion-fast: 0ms;
+    --wc-motion-normal: 0ms;
   }
+
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-delay: 0ms !important;
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-delay: 0ms !important;
+    transition-duration: 0ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  :root {
+    --wc-surface-canvas: Canvas;
+    --wc-surface-subtle: Canvas;
+    --wc-surface-raised: Canvas;
+    --wc-surface-overlay: Canvas;
+    --wc-action-hover: Highlight;
+    --wc-action-active: Highlight;
+    --wc-action-selected: Highlight;
+    --wc-action-selected-hover: Highlight;
+    --wc-action-disabled: GrayText;
+    --wc-text-primary: CanvasText;
+    --wc-text-secondary: CanvasText;
+    --wc-text-tertiary: CanvasText;
+    --wc-text-disabled: GrayText;
+    --wc-text-inverse: Canvas;
+    --wc-text-on-accent: HighlightText;
+    --wc-accent: Highlight;
+    --wc-accent-hover: Highlight;
+    --wc-accent-active: Highlight;
+    --wc-accent-subtle: Canvas;
+    --wc-danger: Mark;
+    --wc-danger-hover: Mark;
+    --wc-danger-subtle: Canvas;
+    --wc-border-default: CanvasText;
+    --wc-border-strong: CanvasText;
+    --wc-border-subtle: CanvasText;
+    --wc-focus-ring: Highlight;
+    --wc-shadow-sm: none;
+    --wc-shadow-md: none;
+    --wc-shadow-lg: none;
+    --wc-shadow-xl: none;
+  }
+}
+
+[dir='rtl'] .wc-banner-content,
+[dir='rtl'] .wc-alert,
+[dir='rtl'] .wc-snackbar,
+[dir='rtl'] .wc-breadcrumb,
+[dir='rtl'] .wc-menu-item,
+[dir='rtl'] .wc-select-option,
+[dir='rtl'] .wc-autocomplete-option {
+  direction: rtl;
 }

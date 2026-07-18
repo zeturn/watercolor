@@ -55,7 +55,7 @@
         v-if="closable"
         type="button"
         :class="closeButtonClasses"
-        aria-label="关闭"
+        :aria-label="messages.close"
         @click="handleClose"
       >
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
@@ -77,6 +77,7 @@
 
 <script setup>
 import { computed, watch, onMounted, onUnmounted, ref } from 'vue'
+import { useLocale } from '../../LocaleVUE'
 import './style.css'
 
 const props = defineProps({
@@ -133,6 +134,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['close', 'action', 'update:modelValue'])
+const { messages } = useLocale()
 
 const internalOpen = ref(
   props.modelValue !== undefined ? props.modelValue : props.open

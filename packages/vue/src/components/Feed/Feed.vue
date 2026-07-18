@@ -55,7 +55,6 @@ const FeedItem = defineComponent({
       class="wc-feed-item" 
       :class="[variant, (item.children && item.children.length) ? 'has-children' : '']" 
       :style="feedItemStyles"
-      role="button"
       tabindex="0"
       @click.stop="handleClick"
       @keydown.enter.stop="handleClick"

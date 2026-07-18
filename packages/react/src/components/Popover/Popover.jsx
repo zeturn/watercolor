@@ -1,5 +1,6 @@
 import React, { useState, useRef, useId } from 'react'
 import { Portal, useFloatingPosition, useOverlayLayer } from '../../interactions.jsx'
+import { useLocale } from '../../LocaleReact'
 import './style.css'
 
 /**
@@ -21,6 +22,7 @@ export default function Popover({
   children,
   className = '',
 }) {
+  const { messages } = useLocale()
   const popoverId = useId()
   const [internalOpen, setInternalOpen] = useState(false)
   const isControlled = open !== undefined && open !== null
@@ -94,7 +96,7 @@ export default function Popover({
             id={popoverId}
             className={`wc-popover-content wc-popover-content--${resolvedPlacement}`.trim()}
             role="dialog"
-            aria-label="弹出内容"
+            aria-label={messages.closePopover}
             tabIndex={-1}
           >
             {children}

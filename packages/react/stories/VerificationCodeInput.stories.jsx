@@ -44,7 +44,7 @@ const Template = (args) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <VerificationCodeInput {...args} value={value} onChange={handleChange} />
-      <p style={{ fontSize: '14px', color: 'gray' }}>当前值: {value}</p>
+      <p style={{ fontSize: '14px', color: 'var(--wc-text-secondary)' }}>当前值: {value}</p>
     </div>
   )
 }

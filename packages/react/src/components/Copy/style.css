@@ -37,7 +37,7 @@
 
 .wc-copy:hover,
 .wc-copy:focus-visible { background: var(--wc-action-hover); outline: 0; }
-.wc-copy:focus-visible { box-shadow: var(--wc-focus-ring); }
+.wc-copy:focus-visible { box-shadow: 0 0 0 2px var(--wc-focus-ring); }
 .wc-copy:active { background: var(--wc-action-active); }
 
 .wc-copy-text {

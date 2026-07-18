@@ -2,7 +2,7 @@
   --wc-banner-tone: var(--wc-text-info);
   width: 100%;
   background: var(--wc-surface-overlay);
-  box-shadow: var(--wc-shadow-md);
+  box-shadow: none;
   color: var(--wc-text-primary);
   font-family: var(--wc-font-family);
 }
@@ -112,7 +112,7 @@
 .wc-banner-action-btn:focus-visible,
 .wc-banner-close:focus-visible {
   outline: 0;
-  box-shadow: var(--wc-focus-ring);
+  box-shadow: 0 0 0 2px var(--wc-focus-ring);
 }
 
 .wc-banner-close svg {

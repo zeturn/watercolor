@@ -47,13 +47,13 @@ describe('Alert (React)', () => {
 
   it('shows close button when closable=true', () => {
     render(<Alert closable title="可关闭">内容</Alert>)
-    expect(screen.getByRole('button', { name: '关闭' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument()
   })
 
   it('calls onClose and hides when close button clicked', () => {
     const onClose = vi.fn()
     render(<Alert closable title="可关闭" onClose={onClose}>内容</Alert>)
-    const closeBtn = screen.getByRole('button', { name: '关闭' })
+    const closeBtn = screen.getByRole('button', { name: 'Close' })
     fireEvent.click(closeBtn)
     expect(onClose).toHaveBeenCalled()
     // 关闭后内容应消失

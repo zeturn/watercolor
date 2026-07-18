@@ -1,6 +1,7 @@
 <template>
   <span
     :class="statusClasses"
+    role="status"
     :title="statusText"
     :aria-label="statusText"
   >

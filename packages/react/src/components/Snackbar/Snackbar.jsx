@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import './style.css'
+import { useLocale } from '../../LocaleReact.tsx'
 
 const StatusIcon = ({ severity }) => {
   const detail = severity === 'success'
@@ -37,6 +38,7 @@ export default function Snackbar({
   onAction = () => {},
   children,
 }) {
+  const { messages } = useLocale()
   // Determine controlled vs uncontrolled mode
   const isControlled = modelValue !== undefined
   const [visible, setVisible] = useState(isControlled ? modelValue : open)
@@ -156,7 +158,7 @@ export default function Snackbar({
         <button
           type="button"
           className={closeButtonClasses}
-          aria-label="关闭"
+          aria-label={messages.close}
           onClick={handleClose}
         >
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true">

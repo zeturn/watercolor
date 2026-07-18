@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react'
+import { useLocale } from '../../LocaleReact'
 import './style.css'
 
 /**
@@ -22,6 +23,7 @@ const VerificationCodeInput = ({
   className = '',
   ...rest
 }) => {
+  const { messages } = useLocale()
   // 保存每个 input 的引用
   const inputsRef = useRef([])
 
@@ -129,6 +131,7 @@ const VerificationCodeInput = ({
           maxLength={1}
           autoComplete="one-time-code"
           inputMode="numeric"
+          aria-label={messages.verificationCodeDigit(idx + 1)}
           onInput={handleInput(idx)}
           onKeyDown={handleKeyDown(idx)}
           onFocus={handleFocus}

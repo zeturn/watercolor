@@ -1,7 +1,7 @@
 <template>
   <nav
     :class="breadcrumbClasses"
-    aria-label="面包屑导航"
+    :aria-label="messages.breadcrumb"
     role="navigation"
   >
     <ol class="wc-breadcrumb-list">
@@ -38,6 +38,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useLocale } from '../../LocaleVUE'
 import { 
   isValidVariant,
   processBreadcrumbItems,
@@ -79,6 +80,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['click'])
+const { messages } = useLocale()
 
 const breadcrumbClasses = computed(() => getBreadcrumbClasses(props.variant))
 

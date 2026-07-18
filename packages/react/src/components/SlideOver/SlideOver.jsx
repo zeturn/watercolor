@@ -1,5 +1,6 @@
 import React, { useCallback, useRef } from 'react'
 import { Portal, useOverlayLayer } from '../../interactions.jsx'
+import { useLocale } from '../../LocaleReact.tsx'
 import './style.css'
 
 /**
@@ -8,6 +9,7 @@ import './style.css'
  */
 const SlideOver = ({ open = false, onClose = () => {}, placement = 'right', width = 400, children, header, footer }) => {
   const panelRef = useRef(null)
+  const { messages } = useLocale()
 
   const handleClose = useCallback(() => {
     onClose?.()
@@ -42,7 +44,7 @@ const SlideOver = ({ open = false, onClose = () => {}, placement = 'right', widt
             {header && <header className="wc-slideover-header">{header}</header>}
             <div className="wc-slideover-body">{children}</div>
             {footer && <footer className="wc-slideover-footer">{footer}</footer>}
-            <button className="wc-slideover-close" type="button" onClick={handleClose} aria-label="关闭">
+            <button className="wc-slideover-close" type="button" onClick={handleClose} aria-label={messages.closeDialog}>
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M6 6l12 12M18 6 6 18" />
               </svg>

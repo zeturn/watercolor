@@ -77,7 +77,7 @@
 }
 
 .wc-snackbar__action:focus-visible,
-.wc-snackbar__close:focus-visible { box-shadow: var(--wc-focus-ring); }
+.wc-snackbar__close:focus-visible { box-shadow: 0 0 0 2px var(--wc-focus-ring); }
 
 .wc-snackbar__progress {
   position: absolute;

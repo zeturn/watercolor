@@ -6,6 +6,7 @@ import {
   handleBannerClose,
   handleBannerAction
 } from './utils.js'
+import { useLocale } from '../../LocaleReact.tsx'
 
 const BannerIcon = ({ type }) => {
   const detail = type === 'success'
@@ -44,6 +45,7 @@ export default function Banner({
   children,
 }) {
   const [visible, setVisible] = useState(true)
+  const { messages } = useLocale()
   if (!visible) return null
 
   const bannerClasses = getBannerClasses(type, position, sticky)
@@ -94,7 +96,7 @@ export default function Banner({
           <button
             onClick={handleClose}
             className="wc-banner-close"
-            aria-label="关闭"
+            aria-label={messages.close}
           >
             <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true">
               <path d="m6 6 8 8M14 6l-8 8" />

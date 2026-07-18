@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './style.css'
+import { useLocale } from '../../LocaleReact.tsx'
 
 const ImageGallery = ({
   images = [],
@@ -25,6 +26,7 @@ const ImageGallery = ({
 }) => {
   const [selected, setSelected] = useState(-1)
   const [page, setPage] = useState(1)
+  const { messages } = useLocale()
   const totalPages = showPagination ? Math.ceil(images.length / itemsPerPage) : 1
 
   const aspectMap = { sm: '75%', md: '66.67%', lg: '56.25%', xl: '50%' }
@@ -101,9 +103,6 @@ const ImageGallery = ({
             key={img.id || idx}
             className="gallery-item"
             onClick={() => handleSelect(idx)}
-            tabIndex={0}
-            role="button"
-            aria-label={`查看图片 ${idx + 1}`}
           >
             <div className="gallery-image-container" style={{ paddingBottom: aspectMap[size] }}>
               <img
@@ -116,7 +115,7 @@ const ImageGallery = ({
                 <div className="gallery-overlay-content">
                   <button
                     className="gallery-action-btn gallery-view-btn"
-                    aria-label={`在灯箱中查看图片 ${idx + 1}`}
+                    aria-label={messages.openImageInLightbox(idx + 1)}
                     onClick={(e) => {
                       e.stopPropagation();
                       handleSelect(idx)
@@ -127,7 +126,7 @@ const ImageGallery = ({
                   {showDownload && (
                     <button
                       className="gallery-action-btn gallery-download-btn"
-                      aria-label={`下载图片 ${idx + 1}`}
+                      aria-label={messages.downloadImage(idx + 1)}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleDownload(img)
@@ -151,9 +150,9 @@ const ImageGallery = ({
 
       {showPagination && totalPages > 1 && (
         <div className="gallery-pagination">
-          <button className="gallery-page-btn" disabled={page === 1} onClick={() => setPage(p => p - 1)}>上一页</button>
+          <button className="gallery-page-btn" disabled={page === 1} aria-label={messages.previousPage} onClick={() => setPage(p => p - 1)}>上一页</button>
           <span className="gallery-page-info">第 {page} 页，共 {totalPages} 页</span>
-          <button className="gallery-page-btn" disabled={page === totalPages} onClick={() => setPage(p => p + 1)}>下一页</button>
+          <button className="gallery-page-btn" disabled={page === totalPages} aria-label={messages.nextPage} onClick={() => setPage(p => p + 1)}>下一页</button>
         </div>
       )}
 
@@ -166,7 +165,7 @@ const ImageGallery = ({
           aria-labelledby="lightbox-title"
         >
           <div className="gallery-lightbox-content" onClick={e => e.stopPropagation()}>
-            <button className="gallery-lightbox-close" onClick={closeLightbox}>✕</button>
+            <button className="gallery-lightbox-close" aria-label={messages.closeLightbox} onClick={closeLightbox}>✕</button>
             <div className="gallery-lightbox-image-container">
               <img src={images[selected].src} alt={images[selected].alt} className="gallery-lightbox-image" />
             </div>
@@ -180,7 +179,7 @@ const ImageGallery = ({
               <button
                 className="gallery-lightbox-nav gallery-lightbox-prev"
                 disabled={selected === 0}
-                aria-label="上一张图片"
+                aria-label={messages.previousImage}
                 onClick={handlePrev}
               >
                 ‹
@@ -189,7 +188,7 @@ const ImageGallery = ({
               <button
                 className="gallery-lightbox-nav gallery-lightbox-next"
                 disabled={selected === images.length - 1}
-                aria-label="下一张图片"
+                aria-label={messages.nextImage}
                 onClick={handleNext}
               >
                 ›

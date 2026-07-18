@@ -11,10 +11,10 @@
   --wc-font-weight-regular: 400; --wc-font-weight-medium: 500; --wc-font-weight-semibold: 600; --wc-font-weight-bold: 700;
 
   --wc-primary-50: #f8faff; --wc-primary-100: #edf5ff; --wc-primary-200: #d7e9ff;
-  --wc-primary-300: #b8d8ff; --wc-primary-400: #89bcff; --wc-primary-500: #5b9eff;
-  --wc-primary-600: #3384ff; --wc-primary-700: #1f74f4; --wc-primary-800: #165fc5;
+  --wc-primary-300: #b8d8ff; --wc-primary-400: #7fb4ff; --wc-primary-500: #3f8cff;
+  --wc-primary-600: #0b6bdc; --wc-primary-700: #075fc4; --wc-primary-800: #0b4f9f;
   --wc-primary-900: #164e9e; --wc-primary-950: #123e7d;
-  --wc-primary-500-rgb: 91, 158, 255; --wc-primary-600-rgb: 51, 132, 255;
+  --wc-primary-500-rgb: 63, 140, 255; --wc-primary-600-rgb: 11, 107, 220;
 
   --wc-secondary-50: #f6ffed; --wc-secondary-100: #d9f7be; --wc-secondary-200: #b7eb8f;
   --wc-secondary-300: #95de64; --wc-secondary-400: #73d13d; --wc-secondary-500: #52c41a;

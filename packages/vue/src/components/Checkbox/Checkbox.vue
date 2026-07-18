@@ -4,6 +4,7 @@
       type="checkbox"
       :checked="isChecked"
       :disabled="disabled"
+      :aria-label="ariaLabel || undefined"
       :class="checkboxClasses"
       @change="handleChange"
       @focus="handleFocus"
@@ -48,6 +49,10 @@ const props = defineProps({
     default: true
   },
   label: {
+    type: String,
+    default: ''
+  },
+  ariaLabel: {
     type: String,
     default: ''
   },

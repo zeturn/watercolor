@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.4] - 2026-07-18
+
+### Added
+- Added Storybook axe checks for React and Vue and wired the accessibility gate into CI and release publishing.
+- Added a shared LocaleProvider/messages contract for React and Vue so component aria labels and status text can be localized consistently.
+- Added visual checks for reduced motion, forced colors, RTL, 200% zoom, keyboard focus, and key component states across React and Vue.
+- Added integration docs and minimal React, Vue, Next SSR, and Nuxt SSR examples for the 1.2 line.
+- Added bundle size budgets for core, React, and Vue publish artifacts.
+
+### Changed
+- Tightened the default Watercolor palette contrast while preserving the flat, low-chrome visual style.
+- Disabled unnecessary decorative motion under `prefers-reduced-motion` and added forced-colors/RTL base support.
+- Removed Banner's default shadow and kept focus treatment visible only when it communicates interaction state.
+
+### Fixed
+- Replaced hardcoded Chinese aria labels across React and Vue components with locale messages.
+- Fixed missing accessible names in progress, color picker, verification code, switch, video, recipe icon buttons, and form-control stories.
+- Fixed Slider keyboard focus visibility in both frameworks.
+- Fixed several Storybook recipe and component semantics issues surfaced by axe and visual checks.
+
 ## [1.2.3] - 2026-07-18
 
 ### Added

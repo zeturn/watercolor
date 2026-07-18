@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocale } from '../../LocaleReact'
 import './style.css'
 import { 
   calculateCircleParams, 
@@ -22,6 +23,7 @@ export default function CircularProgress({
   className = '',
   ...rest
 }) {
+  const { messages } = useLocale()
   const { sizeNumber, center, radius, circumference } = calculateCircleParams(size, thickness)
   const strokeDashoffset = calculateStrokeDashoffset(variant, value, circumference)
   
@@ -40,6 +42,7 @@ export default function CircularProgress({
   return (
     <div
       className={progressClasses}
+      aria-label={messages.circularProgress}
       {...ariaProps}
       {...rest}
     >

@@ -35,7 +35,7 @@ export const FormControlExample = {
           <FormControl error={false} margin="normal">
             <FormControlLabel
               label="我同意服务条款"
-              control={<Checkbox checked={checkboxValue} onChange={(e) => setCheckboxValue(e.target.checked)} />}
+              control={<Checkbox aria-label="我同意服务条款" checked={checkboxValue} onChange={(e) => setCheckboxValue(e.target.checked)} />}
               required
             />
             <FormHelperText>请阅读并同意我们的服务条款</FormHelperText>
@@ -47,11 +47,11 @@ export const FormControlExample = {
           <FormControl error={true} margin="normal">
             <FormControlLabel
               label="选项 1"
-              control={<Radio checked={radioValue === 'option1'} onChange={() => setRadioValue('option1')} />}
+              control={<Radio aria-label="选项 1" checked={radioValue === 'option1'} onChange={() => setRadioValue('option1')} />}
             />
             <FormControlLabel
               label="选项 2"
-              control={<Radio checked={radioValue === 'option2'} onChange={() => setRadioValue('option2')} />}
+              control={<Radio aria-label="选项 2" checked={radioValue === 'option2'} onChange={() => setRadioValue('option2')} />}
             />
             <FormHelperText error>请选择一个有效选项</FormHelperText>
           </FormControl>

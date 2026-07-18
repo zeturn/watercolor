@@ -38,7 +38,7 @@
           <button
             class="wc-slideover-close"
             type="button"
-            aria-label="关闭"
+            :aria-label="messages.closeDialog"
             @click="close"
           >
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -54,6 +54,7 @@
 <script>
 import { computed, ref, watch } from 'vue'
 import { useOverlayLayer } from '../../interactions'
+import { useLocale } from '../../LocaleVUE'
 import './style.css'
 export default {
   name: 'SlideOver',
@@ -75,6 +76,7 @@ export default {
   emits: ['update:modelValue', 'open', 'close'],
   setup(props, { emit }) {
     const panelRef = ref(null)
+    const { messages } = useLocale()
 
     const model = computed({
       get: () => props.modelValue,
@@ -105,7 +107,7 @@ export default {
       }
     }, { immediate: true })
 
-    return { model, close, panelStyle, panelRef }
+    return { model, close, panelStyle, panelRef, messages }
   }
 }
 </script>

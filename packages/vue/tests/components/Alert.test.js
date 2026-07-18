@@ -120,6 +120,6 @@ describe('Alert 组件', () => {
     })
     
     expect(wrapper.find('[role="alert"]').exists()).toBe(true)
-    expect(wrapper.find('.wc-alert-close').attributes('aria-label')).toBe('关闭')
+    expect(wrapper.find('.wc-alert-close').attributes('aria-label')).toBe('Close')
   })
 }) 

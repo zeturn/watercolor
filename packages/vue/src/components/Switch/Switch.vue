@@ -28,6 +28,7 @@
           role="switch"
           :aria-checked="modelValue"
           :aria-labelledby="label ? labelId : undefined"
+          :aria-label="label ? undefined : messages.switchControl"
           @change="handleChange"
         >
         <span class="wc-switch__track">
@@ -47,7 +48,10 @@
 
 <script setup>
 import { computed, getCurrentInstance } from 'vue'
+import { useLocale } from '../../LocaleVUE'
 import './style.css'
+
+const { messages } = useLocale()
 
 const props = defineProps({
   modelValue: { type: Boolean, default: false },

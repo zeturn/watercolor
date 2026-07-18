@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocale } from '../../LocaleReact'
 import './style.css'
 import { 
   processBreadcrumbItems,
@@ -18,6 +19,7 @@ export default function Breadcrumb({
   maxItems = 0, 
   onItemClick 
 }) {
+  const { messages } = useLocale()
   // 处理 items 与截断逻辑
   const processed = React.useMemo(() => 
     processBreadcrumbItems(items, showHome, homeIcon, maxItems),
@@ -31,7 +33,7 @@ export default function Breadcrumb({
   const breadcrumbClasses = getBreadcrumbClasses(variant)
 
   return (
-    <nav className={breadcrumbClasses} aria-label="面包屑导航" role="navigation">
+    <nav className={breadcrumbClasses} aria-label={messages.breadcrumb} role="navigation">
       <ol className="wc-breadcrumb-list">
         {processed.map((item, idx) => (
           <li key={idx} className={getBreadcrumbItemClasses(idx, processed.length)}>          

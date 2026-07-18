@@ -5,12 +5,12 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.jsx'
 describe('Breadcrumb (React)', () => {
   it('renders without crashing', () => {
     render(<Breadcrumb />)
-    expect(screen.getByRole('navigation', { name: '面包屑导航' })).toBeInTheDocument()
+    expect(screen.getByRole('navigation', { name: 'Breadcrumb' })).toBeInTheDocument()
   })
 
   it('renders with default props', () => {
     render(<Breadcrumb />)
-    const nav = screen.getByRole('navigation', { name: '面包屑导航' })
+    const nav = screen.getByRole('navigation', { name: 'Breadcrumb' })
     expect(nav).toBeInTheDocument()
     expect(nav).toHaveClass('wc-breadcrumb')
     expect(nav).toHaveClass('wc-breadcrumb--default')

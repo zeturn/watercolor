@@ -103,7 +103,7 @@
 
 .wc-alert-close:focus-visible {
   outline: 0;
-  box-shadow: var(--wc-focus-ring);
+  box-shadow: 0 0 0 2px var(--wc-focus-ring);
 }
 
 .wc-alert-close svg {

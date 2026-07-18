@@ -6,6 +6,7 @@
       :value="value"
       :checked="isChecked"
       :disabled="computedDisabled"
+      :aria-label="ariaLabel || undefined"
       :class="radioClasses"
       @change="handleChange"
       @focus="handleFocus"
@@ -44,6 +45,10 @@ const props = defineProps({
     default: ''
   },
   label: {
+    type: String,
+    default: ''
+  },
+  ariaLabel: {
     type: String,
     default: ''
   },

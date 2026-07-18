@@ -162,7 +162,7 @@ describe('Breadcrumb Component', () => {
       }
     })
     
-    expect(wrapper.find('nav').attributes('aria-label')).toBe('面包屑导航')
+    expect(wrapper.find('nav').attributes('aria-label')).toBe('Breadcrumb')
     expect(wrapper.find('nav').attributes('role')).toBe('navigation')
     
     const lastLink = wrapper.findAll('li').at(-1).find('span, a, button')

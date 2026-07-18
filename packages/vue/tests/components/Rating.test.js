@@ -124,7 +124,7 @@ describe('Rating Component', () => {
     })
 
     expect(wrapper.find('.wc-rating').attributes('role')).toBe('radiogroup')
-    expect(wrapper.find('.wc-rating').attributes('aria-label')).toBe('评分组件')
+    expect(wrapper.find('.wc-rating').attributes('aria-label')).toBe('Rating')
     
     const stars = wrapper.findAll('.wc-rating-item')
     expect(stars[1].attributes('role')).toBe('radio')
