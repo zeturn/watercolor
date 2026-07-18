@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.2] - 2026-07-18
+
+### Added
+- Added React and Vue `ThemeProvider` support for `config`, `themeUrl`, `target`, `initialResolvedMode`, `onThemeLoad`, and `onThemeError`.
+- Added Provider-managed remote Theme v2 loading with AbortSignal cancellation, last-request-wins concurrency, scoped target support, and unmount restoration.
+- Added strict Theme v2 schema/runtime drift audit, contrast warnings for text/canvas, accent/on-accent, danger, and focus ring, and a documented token stability policy.
+
+### Changed
+- Made Watercolor dark-mode CSS consume `data-resolved-theme` only, while keeping `.light` and `.dark` as integration signals.
+- Documented that Watercolor defaults to light styling without a Provider and only follows system theme when Provider or SSR initialization is used.
+
+### Fixed
+- Prevented stale remote theme requests from mutating DOM after a newer Provider request wins.
+- Restored Provider-owned DOM attributes and theme variables on unmount, including pre-existing inline variables on the same target.
+
 ## [1.2.1] - 2026-07-17
 
 ### Added

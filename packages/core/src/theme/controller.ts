@@ -22,6 +22,13 @@ export interface ThemeControllerOptions {
   readStorage?: boolean
 }
 
+interface ThemeDomSnapshot {
+  theme: string | undefined
+  resolvedTheme: string | undefined
+  className: string
+  colorScheme: string
+}
+
 export interface ThemeController extends ThemeSnapshot {
   readonly started: boolean
   start: () => void
@@ -50,6 +57,7 @@ export function createThemeController(options: ThemeControllerOptions = {}): The
   let prefersDark = options.initialResolvedMode === 'dark'
   let started = false
   let target: HTMLElement | null = null
+  let domSnapshot: ThemeDomSnapshot | null = null
   let storage: ThemeStorage | null = null
   let media: MediaQueryList | null = null
   const key = typeof options.storageKey === 'string' && options.storageKey.trim() ? options.storageKey : THEME_STORAGE_KEY
@@ -88,6 +96,14 @@ export function createThemeController(options: ThemeControllerOptions = {}): The
       if (started || typeof window === 'undefined') return
       started = true
       target = options.target === undefined ? document.documentElement : options.target
+      domSnapshot = target
+        ? {
+            theme: target.dataset.theme,
+            resolvedTheme: target.dataset.resolvedTheme,
+            className: target.className,
+            colorScheme: target.style.colorScheme,
+          }
+        : null
       if (options.storage === undefined) {
         try { storage = window.localStorage } catch { storage = null }
       } else storage = options.storage
@@ -128,10 +144,19 @@ export function createThemeController(options: ThemeControllerOptions = {}): The
       media?.removeEventListener?.('change', onSystemChange)
       if (!media?.removeEventListener) media?.removeListener?.(onSystemChange)
       if (typeof window !== 'undefined') window.removeEventListener('storage', onStorage)
+      if (target && domSnapshot) {
+        if (domSnapshot.theme === undefined) delete target.dataset.theme
+        else target.dataset.theme = domSnapshot.theme
+        if (domSnapshot.resolvedTheme === undefined) delete target.dataset.resolvedTheme
+        else target.dataset.resolvedTheme = domSnapshot.resolvedTheme
+        target.className = domSnapshot.className
+        target.style.colorScheme = domSnapshot.colorScheme
+      }
       listeners.clear()
       media = null
       storage = null
       target = null
+      domSnapshot = null
       started = false
     },
   }

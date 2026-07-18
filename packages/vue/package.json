@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-vue",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "type": "module",
   "license": "ISC",
   "main": "dist/watercolor-vue.es.js",
@@ -39,12 +39,12 @@
     "directory": "packages/vue"
   },
   "peerDependencies": {
-    "vue": "^3.5.0",
-    "@zeturn/watercolor-icons-feather": "1.2.1",
-    "@zeturn/watercolor-icons-heroicons-vue": "1.2.1",
-    "@zeturn/watercolor-icons-lucide-vue": "1.2.1",
-    "@zeturn/watercolor-icons-phosphor-vue": "1.2.1",
-    "@zeturn/watercolor-icons-tabler-vue": "1.2.1"
+    "@zeturn/watercolor-icons-feather": "1.2.2",
+    "@zeturn/watercolor-icons-heroicons-vue": "1.2.2",
+    "@zeturn/watercolor-icons-lucide-vue": "1.2.2",
+    "@zeturn/watercolor-icons-phosphor-vue": "1.2.2",
+    "@zeturn/watercolor-icons-tabler-vue": "1.2.2",
+    "vue": "^3.5.0"
   },
   "peerDependenciesMeta": {
     "@zeturn/watercolor-icons-feather": {
@@ -64,13 +64,13 @@
     }
   },
   "dependencies": {
-    "@zeturn/watercolor-core": "1.2.1"
+    "@zeturn/watercolor-core": "1.2.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.5",
-    "vite": "^8.0.2",
-    "vite-plugin-dts": "^4.5.4",
+    "@vue/compiler-sfc": "^3.5.17",
     "typescript": "^5.3.3",
-    "@vue/compiler-sfc": "^3.5.17"
+    "vite": "^8.0.2",
+    "vite-plugin-dts": "^4.5.4"
   }
 }

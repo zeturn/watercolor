@@ -36,27 +36,44 @@ const invalidEntries = frameworkEntries.filter((file) =>
   read(file).trim() !== "@import '@zeturn/watercolor-core/theme.css';",
 )
 const modeCss = read('packages/core/src/styles/modes.css')
+const schema = JSON.parse(read('packages/core/theme-v2.schema.json'))
 const primitiveModeOverrides = [...modeCss.matchAll(/--wc-(?:primary|secondary|neutral|success|warning|error|info|purple|pink|teal|indigo|orange|cyan)-\d+\s*:/g)]
 const defaultModeTokens = new Set([...read('packages/core/src/styles/semantic.css').matchAll(/(--wc-mode-[\w-]+)\s*:/g)].map((match) => match[1]))
-const darkBlock = modeCss.match(/\[data-theme='dark'\][^{]*\{([^}]*)\}/s)?.[1] ?? ''
+const darkBlock = modeCss.match(/\[data-resolved-theme='dark'\][^{]*\{([^}]*)\}/s)?.[1] ?? ''
 const darkModeTokens = new Set([...darkBlock.matchAll(/(--wc-mode-[\w-]+)\s*:/g)].map((match) => match[1]))
 const incompleteDarkMode = [...defaultModeTokens].filter((token) => !darkModeTokens.has(token))
 const controllerSource = read('packages/core/src/theme/controller.ts')
 const configSource = read('packages/core/src/theme/config.ts')
+const policySource = read('docs/guide/theme-v2-policy.md')
 const themeContractErrors = []
 
 if (!controllerSource.includes("export const THEME_MODES = ['light', 'dark', 'system']")) themeContractErrors.push('ThemeMode runtime contract is missing')
+if (!modeCss.includes("[data-resolved-theme='dark']")) themeContractErrors.push('dark CSS must be keyed by data-resolved-theme')
+if (modeCss.includes("@media (prefers-color-scheme: dark)") || modeCss.includes(".dark:not([data-theme])") || modeCss.includes("[data-theme='dark']")) themeContractErrors.push('dark CSS has duplicate legacy/system mappings')
 if (controllerSource.includes('setItem(LEGACY_THEME_STORAGE_KEY')) themeContractErrors.push('controller still writes the legacy storage key')
 if (!controllerSource.includes('storage?.setItem(key, legacyMode)')) themeContractErrors.push('legacy storage migration is missing')
 if (!controllerSource.includes('start ()') || controllerSource.includes('applyTheme(')) themeContractErrors.push('controller is not a pure mode-only lifecycle')
-if (!configSource.includes('THEME_CONFIG_VERSION = 2') || !configSource.includes('validateThemeConfig') || !configSource.includes('resetThemeConfig')) themeContractErrors.push('Theme v2 config API is incomplete')
+if (!configSource.includes('THEME_CONFIG_VERSION = 2') || !configSource.includes('validateThemeConfig') || !configSource.includes('resetThemeConfig') || !configSource.includes('AbortSignal')) themeContractErrors.push('Theme v2 config API is incomplete')
+if (!configSource.includes('warnLowContrast') || !configSource.includes("'onAccent'") || !configSource.includes("'focusRing'")) themeContractErrors.push('strict theme contrast audit is incomplete')
 for (const api of ['toggleDarkMode', 'isDarkMode', 'applyCSSTheme', 'createThemeManager']) {
   if (controllerSource.includes(api) || configSource.includes(api)) themeContractErrors.push(`${api} remains in the Theme v2 core`)
+}
+const schemaModeTokens = Object.keys(schema.$defs.mode.properties).sort()
+const runtimeModeTokens = [...configSource.match(/const modeTokenNames = \[([\s\S]*?)\] as const/)?.[1].matchAll(/'([^']+)'/g) ?? []].map((match) => match[1]).sort()
+if (JSON.stringify(schemaModeTokens) !== JSON.stringify(runtimeModeTokens)) themeContractErrors.push('Theme v2 schema mode tokens drift from runtime validator')
+for (const token of runtimeModeTokens) {
+  if (!policySource.includes(`\`${token}\``)) themeContractErrors.push(`Theme v2 stability policy omits ${token}`)
+}
+for (const token of ['textPrimary', 'canvas', 'accent', 'onAccent', 'danger', 'focusRing']) {
+  if (!policySource.includes(`\`${token}\``)) themeContractErrors.push(`Theme v2 contrast policy omits ${token}`)
 }
 for (const framework of ['vue', 'react']) {
   const provider = read(`packages/${framework}/src/${framework === 'vue' ? 'ThemeVUE.ts' : 'ThemeReact.tsx'}`)
   const story = `packages/${framework}/stories/ThemeContract.stories.${framework === 'vue' ? 'js' : 'jsx'}`
   if (!provider.includes('createThemeController')) themeContractErrors.push(`${framework} provider bypasses the shared controller`)
+  for (const prop of ['config', 'themeUrl', 'target', 'initialResolvedMode', 'onThemeLoad', 'onThemeError']) {
+    if (!provider.includes(prop)) themeContractErrors.push(`${framework} provider is missing ${prop}`)
+  }
   if (!fs.existsSync(path.join(root, story))) themeContractErrors.push(`${framework} theme contract story is missing`)
   if (!read(story).includes('CustomThemeV2')) themeContractErrors.push(`${framework} custom Theme v2 story is missing`)
 }

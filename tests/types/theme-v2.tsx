@@ -24,7 +24,17 @@ const result = applyThemeConfig(theme)
 const vueResult = applyVueThemeConfig(theme)
 const serialized = serializeThemeConfig(theme)
 const script: string = createThemeInitScript({ defaultMode: 'system' })
-const props: ThemeProviderProps = { defaultMode: 'system', onModeChange: (_mode) => {} }
+const target = document.createElement('section')
+const props: ThemeProviderProps = {
+  config: theme,
+  defaultMode: 'system',
+  themeUrl: '/theme.json',
+  target,
+  initialResolvedMode: 'dark',
+  onModeChange: (_mode) => {},
+  onThemeLoad: (_result) => {},
+  onThemeError: (_result) => {},
+}
 const context = null as unknown as ThemeContextValue
 const vueStore = null as unknown as ThemeStore
 

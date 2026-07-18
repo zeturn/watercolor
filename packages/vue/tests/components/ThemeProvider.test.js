@@ -24,6 +24,17 @@ const createStorage = () => {
 }
 
 let storage
+const brandTheme = {
+  version: 2,
+  tokens: { colors: { primary: { 600: '#123456' } } },
+  modes: { light: { canvas: '#ffffff', textPrimary: '#111111', accent: '#123456', onAccent: '#ffffff' } },
+}
+
+const deferred = () => {
+  let resolve
+  const promise = new Promise((next) => { resolve = next })
+  return { promise, resolve }
+}
 
 describe('ThemeProvider', () => {
   beforeEach(() => {
@@ -31,9 +42,13 @@ describe('ThemeProvider', () => {
     document.documentElement.className = ''
     document.documentElement.removeAttribute('data-theme')
     document.documentElement.removeAttribute('data-resolved-theme')
+    document.documentElement.removeAttribute('style')
   })
 
-  afterEach(() => vi.unstubAllGlobals())
+  afterEach(() => {
+    vi.unstubAllGlobals()
+    document.body.innerHTML = ''
+  })
 
   it('publishes mode state and keeps the legacy dark class in sync', async () => {
     render(ThemeProvider, {
@@ -100,6 +115,13 @@ describe('ThemeProvider', () => {
     expect(document.documentElement.outerHTML).toBe(before)
   })
 
+  it('can render system dark on the server with an explicit resolved mode', async () => {
+    const app = createSSRApp({
+      render: () => h(ThemeProvider, { defaultMode: 'system', initialResolvedMode: 'dark' }, () => h(Probe)),
+    })
+    expect(await renderToString(app)).toContain('system:dark')
+  })
+
   it('hydrates server markup without a theme mismatch', async () => {
     const createApp = () => createSSRApp({
       render: () => h(ThemeProvider, { defaultMode: 'dark', storage }, () => h(Probe)),
@@ -119,5 +141,84 @@ describe('ThemeProvider', () => {
     expect(consoleWarn).not.toHaveBeenCalled()
     app.unmount()
     container.remove()
+  })
+
+  it('does not request a theme file when themeUrl is omitted', () => {
+    const fetch = vi.fn()
+    vi.stubGlobal('fetch', fetch)
+    const view = render(ThemeProvider, {
+      props: { defaultMode: 'light', storage },
+      slots: { default: () => h(Probe) },
+    })
+    expect(fetch).not.toHaveBeenCalled()
+    view.unmount()
+    expect(document.documentElement.dataset.theme).toBeUndefined()
+  })
+
+  it('applies scoped config and restores the same target on unmount', () => {
+    const target = document.createElement('section')
+    target.style.setProperty('--wc-primary-600', '#000000')
+    const view = render(ThemeProvider, {
+      props: { defaultMode: 'dark', storage, target, config: brandTheme },
+      slots: { default: () => h(Probe) },
+    })
+    expect(target.dataset.resolvedTheme).toBe('dark')
+    expect(target.style.getPropertyValue('--wc-primary-600')).toBe('#123456')
+    expect(document.documentElement.dataset.resolvedTheme).toBeUndefined()
+    view.unmount()
+    expect(target.dataset.resolvedTheme).toBeUndefined()
+    expect(target.style.getPropertyValue('--wc-primary-600')).toBe('#000000')
+  })
+
+  it('reports remote theme errors without changing existing config', async () => {
+    const onThemeError = vi.fn()
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce({ ok: false, status: 404 }))
+    render(ThemeProvider, {
+      props: { storage, config: brandTheme, themeUrl: '/missing.json', onThemeError },
+      slots: { default: () => h(Probe) },
+    })
+    await Promise.resolve()
+    await Promise.resolve()
+    expect(onThemeError).toHaveBeenCalledWith(expect.objectContaining({ ok: false, url: '/missing.json' }))
+    expect(document.documentElement.style.getPropertyValue('--wc-primary-600')).toBe('#123456')
+  })
+
+  it('keeps the previous remote theme when a newer URL fails', async () => {
+    const fetch = vi.fn()
+      .mockResolvedValueOnce({ ok: true, json: () => Promise.resolve(brandTheme) })
+      .mockResolvedValueOnce({ ok: false, status: 500 })
+    vi.stubGlobal('fetch', fetch)
+    const view = render(ThemeProvider, {
+      props: { storage, themeUrl: '/brand.json' },
+      slots: { default: () => h(Probe) },
+    })
+    await Promise.resolve()
+    await Promise.resolve()
+    expect(document.documentElement.style.getPropertyValue('--wc-primary-600')).toBe('#123456')
+    await view.rerender({ storage, themeUrl: '/broken.json' })
+    await Promise.resolve()
+    await Promise.resolve()
+    expect(document.documentElement.style.getPropertyValue('--wc-primary-600')).toBe('#123456')
+  })
+
+  it('aborts obsolete theme requests and lets the last request win', async () => {
+    const first = deferred()
+    const secondTheme = { ...brandTheme, tokens: { colors: { primary: { 600: '#abcdef' } } } }
+    const fetch = vi.fn()
+      .mockReturnValueOnce(first.promise)
+      .mockResolvedValueOnce({ ok: true, json: () => Promise.resolve(secondTheme) })
+    vi.stubGlobal('fetch', fetch)
+    const view = render(ThemeProvider, {
+      props: { storage, themeUrl: '/first.json' },
+      slots: { default: () => h(Probe) },
+    })
+    await view.rerender({ storage, themeUrl: '/second.json' })
+    await Promise.resolve()
+    expect(fetch.mock.calls[0][1].signal.aborted).toBe(true)
+    expect(document.documentElement.style.getPropertyValue('--wc-primary-600')).toBe('#abcdef')
+    first.resolve({ ok: true, json: () => Promise.resolve(brandTheme) })
+    await Promise.resolve()
+    await Promise.resolve()
+    expect(document.documentElement.style.getPropertyValue('--wc-primary-600')).toBe('#abcdef')
   })
 })

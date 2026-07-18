@@ -86,6 +86,7 @@
         "borderDefault": { "$ref": "#/$defs/color" },
         "borderStrong": { "$ref": "#/$defs/color" },
         "borderSubtle": { "$ref": "#/$defs/color" },
+        "onAccent": { "$ref": "#/$defs/color" },
         "accent": { "$ref": "#/$defs/color" },
         "accentHover": { "$ref": "#/$defs/color" },
         "accentActive": { "$ref": "#/$defs/color" },

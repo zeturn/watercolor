@@ -97,6 +97,23 @@ describe('Theme v2 controller', () => {
     expect(removeWindowListener).toHaveBeenCalledWith('storage', expect.any(Function))
   })
 
+  it('restores the target DOM contract when destroyed', () => {
+    const target = document.createElement('section')
+    target.dataset.theme = 'light'
+    target.dataset.resolvedTheme = 'light'
+    target.className = 'existing'
+    target.style.colorScheme = 'light'
+    const controller = createThemeController({ target, initialMode: 'dark', storage: null })
+    controller.start()
+    expect(target.dataset.resolvedTheme).toBe('dark')
+    expect(target.classList.contains('dark')).toBe(true)
+    controller.destroy()
+    expect(target.dataset.theme).toBe('light')
+    expect(target.dataset.resolvedTheme).toBe('light')
+    expect(target.className).toBe('existing')
+    expect(target.style.colorScheme).toBe('light')
+  })
+
   it('resolves modes and executes the pre-paint script before providers mount', () => {
     expect(resolveThemeMode('system', true)).toBe('dark')
     const script = createThemeInitScript({ defaultMode: 'light', storageKey: 'wc-mode' })

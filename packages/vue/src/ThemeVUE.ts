@@ -10,12 +10,17 @@ import {
   type Ref,
 } from 'vue'
 import {
+  applyThemeConfig,
   createThemeController,
+  resetThemeConfig,
   THEME_MODES,
+  type ThemeApplyResult,
   type ResolvedThemeMode,
   type ThemeController,
+  type ThemeLoadResult,
   type ThemeMode,
   type ThemeStorage,
+  type WatercolorThemeConfig,
 } from '@zeturn/watercolor-core'
 
 export interface ThemeStore {
@@ -24,6 +29,31 @@ export interface ThemeStore {
   dark: Ref<boolean>
   setMode: (mode: ThemeMode) => void
   toggleMode: () => void
+}
+
+type ThemeErrorResult = Extract<ThemeApplyResult | ThemeLoadResult, { ok: false }>
+
+async function loadProviderTheme (
+  url: string,
+  target: HTMLElement | null | undefined,
+  isCurrent: () => boolean,
+  signal?: AbortSignal,
+): Promise<ThemeLoadResult | null> {
+  if (typeof fetch === 'undefined') {
+    return { ok: false, url, errors: [{ path: '$', message: 'Theme config URL or fetch is unavailable.' }], warnings: [] }
+  }
+  try {
+    const response = await fetch(url, { cache: 'no-store', signal })
+    if (!isCurrent()) return null
+    if (!response.ok) return { ok: false, url, errors: [{ path: '$', message: `Theme request failed with ${response.status}.` }], warnings: [] }
+    const config = await response.json()
+    if (!isCurrent()) return null
+    const result = applyThemeConfig(config, { target })
+    return { ...result, url }
+  } catch (error) {
+    if (!isCurrent()) return null
+    return { ok: false, url, errors: [{ path: '$', message: error instanceof Error ? error.message : 'Theme request failed.' }], warnings: [] }
+  }
 }
 
 const THEME_KEY = Symbol('WatercolorTheme')
@@ -37,22 +67,30 @@ export function useTheme (): ThemeStore {
 export const ThemeProvider = defineComponent({
   name: 'ThemeProvider',
   props: {
+    config: Object as PropType<WatercolorThemeConfig>,
     defaultMode: {
       type: String as PropType<ThemeMode>,
       default: 'system',
       validator: (value: string) => THEME_MODES.includes(value as ThemeMode),
     },
+    themeUrl: String,
+    target: Object as PropType<HTMLElement | null>,
     mode: {
       type: String as PropType<ThemeMode>,
       validator: (value: string | undefined) => value === undefined || THEME_MODES.includes(value as ThemeMode),
     },
+    initialResolvedMode: String as PropType<ResolvedThemeMode>,
     storageKey: String,
     storage: Object as PropType<ThemeStorage | null>,
+    onThemeLoad: Function as PropType<(result: ThemeApplyResult | ThemeLoadResult) => void>,
+    onThemeError: Function as PropType<(result: ThemeErrorResult) => void>,
   },
-  emits: ['update:mode', 'mode-change', 'resolved-mode-change'],
+  emits: ['update:mode', 'mode-change', 'resolved-mode-change', 'theme-load', 'theme-error'],
   setup (props, { emit, slots }) {
     const controller: ThemeController = createThemeController({
+      target: props.target,
       initialMode: props.mode ?? props.defaultMode,
+      initialResolvedMode: props.initialResolvedMode,
       storageKey: props.storageKey,
       storage: props.storage,
       readStorage: props.mode === undefined,
@@ -60,6 +98,10 @@ export const ThemeProvider = defineComponent({
     const mode = ref<ThemeMode>(controller.mode)
     const resolvedMode = ref<ResolvedThemeMode>(controller.resolvedMode)
     const dark = ref(controller.dark)
+    const target = props.target
+    let mounted = false
+    let requestId = 0
+    let abortController: AbortController | null = null
 
     const unsubscribe = controller.subscribe((snapshot) => {
       mode.value = snapshot.mode
@@ -76,14 +118,53 @@ export const ThemeProvider = defineComponent({
     const store: ThemeStore = { mode, resolvedMode, dark, setMode, toggleMode }
     provide(THEME_KEY, store)
 
+    const emitThemeLoad = (result: ThemeApplyResult | ThemeLoadResult): void => {
+      props.onThemeLoad?.(result)
+      emit('theme-load', result)
+    }
+    const emitThemeError = (result: ThemeErrorResult): void => {
+      props.onThemeError?.(result)
+      emit('theme-error', result)
+    }
+    const runThemeRequest = (): void => {
+      const currentRequest = ++requestId
+      abortController?.abort()
+      abortController = typeof AbortController === 'undefined' ? null : new AbortController()
+
+      if (props.config !== undefined) {
+        const result = applyThemeConfig(props.config, { target })
+        if (result.ok) emitThemeLoad(result)
+        else emitThemeError(result)
+      } else if (!props.themeUrl) {
+        resetThemeConfig(target)
+      }
+
+      if (props.themeUrl) {
+        void loadProviderTheme(props.themeUrl, target, () => currentRequest === requestId, abortController?.signal).then((result) => {
+          if (!result) return
+          if (result.ok) emitThemeLoad(result)
+          else if (!abortController?.signal.aborted) emitThemeError(result)
+        })
+      }
+    }
+
     watch(() => props.mode, (value) => {
       if (value !== undefined) controller.setMode(value)
     })
     watch(resolvedMode, (value, previous) => {
       if (value !== previous) emit('resolved-mode-change', value)
     })
-    onMounted(() => controller.start())
+    watch(() => [props.config, props.themeUrl] as const, () => {
+      if (mounted) runThemeRequest()
+    })
+    onMounted(() => {
+      mounted = true
+      controller.start()
+      runThemeRequest()
+    })
     onBeforeUnmount(() => {
+      abortController?.abort()
+      resetThemeConfig(target)
       unsubscribe()
       controller.destroy()
     })

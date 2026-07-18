@@ -15,8 +15,8 @@ const theme = {
     radius: { lg: '14px' },
   },
   modes: {
-    light: { canvas: '#fefefe', accent: '#123456' },
-    dark: { canvas: '#101010', accent: '#abcdef' },
+    light: { canvas: '#fefefe', accent: '#123456', onAccent: '#ffffff' },
+    dark: { canvas: '#101010', accent: '#abcdef', onAccent: '#101010' },
   },
 } as const
 
@@ -32,7 +32,7 @@ afterEach(() => {
 describe('Theme v2 configuration', () => {
   it('validates and applies primitive and per-mode variables transactionally', () => {
     const result = applyThemeConfig(theme)
-    expect(result).toMatchObject({ ok: true, appliedVariables: 6 })
+    expect(result).toMatchObject({ ok: true, appliedVariables: 8 })
     expect(document.documentElement.style.getPropertyValue('--wc-primary-600')).toBe('#123456')
     expect(document.documentElement.style.getPropertyValue('--wc-radius-lg')).toBe('14px')
     expect(document.documentElement.style.getPropertyValue('--wc-theme-light-canvas')).toBe('#fefefe')
@@ -50,12 +50,16 @@ describe('Theme v2 configuration', () => {
   it('warns about low primary-text contrast without rejecting the theme', () => {
     const result = validateThemeConfig({
       version: 2,
-      modes: { light: { canvas: '#ffffff', textPrimary: '#eeeeee' } },
+      modes: { light: { canvas: '#ffffff', textPrimary: '#eeeeee', accent: '#ffffff', onAccent: '#eeeeee' } },
     })
     expect(result.ok).toBe(true)
     expect(result.warnings).toContainEqual({
       path: '$.modes.light.textPrimary',
       message: 'textPrimary and canvas have less than 4.5:1 contrast.',
+    })
+    expect(result.warnings).toContainEqual({
+      path: '$.modes.light.onAccent',
+      message: 'onAccent and accent have less than 4.5:1 contrast.',
     })
   })
 
@@ -69,7 +73,7 @@ describe('Theme v2 configuration', () => {
 
   it('can validate an application without mutating the browser root', () => {
     const before = document.documentElement.getAttribute('style')
-    expect(applyThemeConfig(theme, { target: null })).toMatchObject({ ok: true, appliedVariables: 6 })
+    expect(applyThemeConfig(theme, { target: null })).toMatchObject({ ok: true, appliedVariables: 8 })
     expect(document.documentElement.getAttribute('style')).toBe(before)
   })
 
@@ -88,6 +92,21 @@ describe('Theme v2 configuration', () => {
     await expect(loadThemeConfig('/missing.json')).resolves.toMatchObject({ ok: false, url: '/missing.json' })
     vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce({ ok: true, json: () => Promise.reject(new Error('bad json')) }))
     await expect(loadThemeConfig('/bad.json')).resolves.toMatchObject({ ok: false, url: '/bad.json' })
+  })
+
+  it('passes AbortSignal to remote theme requests', async () => {
+    const signal = new AbortController().signal
+    const fetch = vi.fn().mockResolvedValueOnce({ ok: false, status: 499 })
+    vi.stubGlobal('fetch', fetch)
+    await loadThemeConfig('/abortable.json', { signal })
+    expect(fetch).toHaveBeenCalledWith('/abortable.json', { cache: 'no-store', signal })
+  })
+
+  it('restores pre-existing inline variables when resetting provider-owned config', () => {
+    document.documentElement.style.setProperty('--wc-primary-600', '#000000')
+    applyThemeConfig(theme)
+    resetThemeConfig()
+    expect(document.documentElement.style.getPropertyValue('--wc-primary-600')).toBe('#000000')
   })
 
   it('serializes only validated variables for SSR', () => {

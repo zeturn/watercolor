@@ -19,9 +19,12 @@ import type {
   SplitCollapse,
   SplitRatio,
   ResolvedThemeMode,
+  ThemeApplyResult,
+  ThemeLoadResult,
   ThemeMode,
   ThemeSnapshot,
   ThemeStorage,
+  WatercolorThemeConfig,
 } from '@zeturn/watercolor-core'
 
 type WatercolorComponent = ComponentType<Record<string, unknown>>
@@ -245,12 +248,18 @@ export interface ThemeContextValue extends ThemeSnapshot {
 }
 export interface ThemeProviderProps {
   children?: ReactNode
+  config?: WatercolorThemeConfig
   defaultMode?: ThemeMode
+  themeUrl?: string
+  target?: HTMLElement | null
   mode?: ThemeMode
+  initialResolvedMode?: ResolvedThemeMode
   storageKey?: string
   storage?: ThemeStorage | null
   onModeChange?: (mode: ThemeMode) => void
   onResolvedModeChange?: (resolvedMode: ResolvedThemeMode) => void
+  onThemeLoad?: (result: ThemeApplyResult | ThemeLoadResult) => void
+  onThemeError?: (result: Extract<ThemeApplyResult | ThemeLoadResult, { ok: false }>) => void
 }
 
 export type PageProps<T extends ElementType = 'div'> = PolymorphicProps<T, CompositionBaseProps & {

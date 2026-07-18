@@ -11,6 +11,7 @@ const modeTokenNames = [
   'actionHover', 'actionActive', 'actionSelected', 'actionSelectedHover', 'actionDisabled',
   'textPrimary', 'textSecondary', 'textTertiary', 'textDisabled', 'textInverse',
   'borderDefault', 'borderStrong', 'borderSubtle',
+  'onAccent',
   'accent', 'accentHover', 'accentActive', 'accentSubtle',
   'danger', 'dangerHover', 'dangerSubtle', 'backdrop',
   'shadowSm', 'shadowMd', 'shadowLg', 'shadowXl', 'focusRing',
@@ -70,7 +71,11 @@ export interface ThemeApplyOptions {
   target?: HTMLElement | null
 }
 
-const appliedVariables = new WeakMap<HTMLElement, Set<string>>()
+export interface ThemeLoadOptions extends ThemeApplyOptions {
+  signal?: AbortSignal
+}
+
+const appliedVariables = new WeakMap<HTMLElement, Map<string, string | null>>()
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null && !Array.isArray(value)
@@ -114,6 +119,24 @@ const parseHexColor = (value: unknown): [number, number, number] | null => {
     ? [...match[1]].map((character) => character + character).join('')
     : match[1]
   return [0, 2, 4].map((index) => Number.parseInt(hex.slice(index, index + 2), 16)) as [number, number, number]
+}
+
+const warnLowContrast = (
+  warnings: ThemeValidationIssue[],
+  mode: 'light' | 'dark',
+  foregroundName: ThemeModeTokenName,
+  foreground: unknown,
+  backgroundName: ThemeModeTokenName,
+  background: unknown,
+  minimum = 4.5,
+): void => {
+  const foregroundColor = parseHexColor(foreground)
+  const backgroundColor = parseHexColor(background)
+  if (!foregroundColor || !backgroundColor || contrastRatio(foregroundColor, backgroundColor) >= minimum) return
+  warnings.push({
+    path: `$.modes.${mode}.${foregroundName}`,
+    message: `${foregroundName} and ${backgroundName} have less than ${minimum}:1 contrast.`,
+  })
 }
 
 const contrastRatio = (foreground: [number, number, number], background: [number, number, number]): number => {
@@ -218,14 +241,10 @@ export function validateThemeConfig(input: unknown): ThemeValidationResult {
             errors.push({ path: `$.modes.${mode}.${name}`, message: isShadow ? 'Invalid shadow value.' : 'Invalid CSS color.' })
           }
         }
-        const canvas = parseHexColor(values.canvas)
-        const textPrimary = parseHexColor(values.textPrimary)
-        if (canvas && textPrimary && contrastRatio(textPrimary, canvas) < 4.5) {
-          warnings.push({
-            path: `$.modes.${mode}.textPrimary`,
-            message: 'textPrimary and canvas have less than 4.5:1 contrast.',
-          })
-        }
+        warnLowContrast(warnings, mode, 'textPrimary', values.textPrimary, 'canvas', values.canvas)
+        warnLowContrast(warnings, mode, 'onAccent', values.onAccent, 'accent', values.accent)
+        warnLowContrast(warnings, mode, 'danger', values.danger, 'canvas', values.canvas, 3)
+        warnLowContrast(warnings, mode, 'focusRing', values.focusRing, 'canvas', values.canvas, 3)
       }
     }
   }
@@ -271,7 +290,10 @@ const resolveTarget = (target?: HTMLElement | null): HTMLElement | null =>
 export function resetThemeConfig(target?: HTMLElement | null): void {
   const root = resolveTarget(target)
   if (!root) return
-  for (const name of appliedVariables.get(root) ?? []) root.style.removeProperty(name)
+  for (const [name, previous] of appliedVariables.get(root) ?? []) {
+    if (previous === null) root.style.removeProperty(name)
+    else root.style.setProperty(name, previous)
+  }
   appliedVariables.delete(root)
 }
 
@@ -282,18 +304,20 @@ export function applyThemeConfig(input: unknown, options: ThemeApplyOptions = {}
   const variables = configVariables(validation.config)
   if (root) {
     resetThemeConfig(root)
+    const previous = new Map<string, string | null>()
+    for (const name of variables.keys()) previous.set(name, root.style.getPropertyValue(name) || null)
     for (const [name, value] of variables) root.style.setProperty(name, value)
-    appliedVariables.set(root, new Set(variables.keys()))
+    appliedVariables.set(root, previous)
   }
   return { ok: true, appliedVariables: variables.size, warnings: validation.warnings }
 }
 
-export async function loadThemeConfig(url: string, options: ThemeApplyOptions = {}): Promise<ThemeLoadResult> {
+export async function loadThemeConfig(url: string, options: ThemeLoadOptions = {}): Promise<ThemeLoadResult> {
   if (typeof url !== 'string' || !url.trim() || typeof fetch === 'undefined') {
     return { ok: false, url, errors: [{ path: '$', message: 'Theme config URL or fetch is unavailable.' }], warnings: [] }
   }
   try {
-    const response = await fetch(url, { cache: 'no-store' })
+    const response = await fetch(url, { cache: 'no-store', signal: options.signal })
     if (!response.ok) return { ok: false, url, errors: [{ path: '$', message: `Theme request failed with ${response.status}.` }], warnings: [] }
     const result = applyThemeConfig(await response.json(), options)
     return { ...result, url }
