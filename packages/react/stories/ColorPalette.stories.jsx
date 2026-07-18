@@ -82,7 +82,7 @@ const ColorBlock = ({ varName }) => {
 };
 
 export default {
-  title: "Basic/Color Palette",
+  title: "Design System/Tokens/Color Palette",
   component: null,
 };
 

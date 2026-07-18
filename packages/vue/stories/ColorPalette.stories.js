@@ -39,7 +39,7 @@ const ColorBlock = {
 };
 
 export default {
-  title: 'Basic/Color Palette',
+  title: 'Design System/Tokens/Color Palette',
   component: ColorBlock,
 };
 
