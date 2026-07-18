@@ -1,0 +1,119 @@
+#!/usr/bin/env node
+
+import fs from 'node:fs'
+import path from 'node:path'
+
+const root = process.cwd()
+const rootPackage = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'))
+const version = rootPackage.version
+const failures = []
+
+const read = (file) => fs.readFileSync(path.join(root, file), 'utf8')
+const exists = (file) => fs.existsSync(path.join(root, file))
+
+function fail(message) {
+  failures.push(message)
+}
+
+function assertFile(file, description = file) {
+  if (!exists(file)) fail(`Missing ${description}: ${file}`)
+}
+
+function assertIncludes(file, needle, description = needle) {
+  const content = read(file)
+  if (!content.includes(needle)) fail(`${file} should include ${description}`)
+}
+
+function collectGuideLinks() {
+  const config = read('docs/.vitepress/config.mts')
+  return [...config.matchAll(/link:\s*'\/guide\/([^']+)'/g)].map((match) => match[1])
+}
+
+for (const guide of [
+  'installation',
+  'usage',
+  'composition',
+  'recipes',
+  'interaction-contract',
+  'accessibility-i18n',
+  'theming',
+  'theme-migration',
+  'integrations',
+  'production-checklist',
+  'two-zero-migration',
+]) {
+  assertFile(`docs/guide/${guide}.md`, `guide page ${guide}`)
+}
+
+for (const guide of collectGuideLinks()) {
+  assertFile(`docs/guide/${guide}.md`, `sidebar target ${guide}`)
+}
+
+for (const file of [
+  'examples/README.md',
+  'examples/react-minimal/README.md',
+  'examples/vue-minimal/README.md',
+  'examples/next-ssr/README.md',
+  'examples/nuxt-ssr/README.md',
+]) {
+  assertFile(file)
+}
+
+const examples = [
+  {
+    name: 'react-minimal',
+    manifest: 'examples/react-minimal/package.json',
+    packageName: '@zeturn/watercolor-react',
+    app: 'examples/react-minimal/src/App.jsx',
+    provider: 'themeUrl="/theme.json"',
+    mode: 'defaultMode="system"',
+    style: "@zeturn/watercolor-react/style.css",
+  },
+  {
+    name: 'vue-minimal',
+    manifest: 'examples/vue-minimal/package.json',
+    packageName: '@zeturn/watercolor-vue',
+    app: 'examples/vue-minimal/src/main.js',
+    provider: 'theme-url="/theme.json"',
+    mode: 'default-mode="system"',
+    style: "@zeturn/watercolor-vue/style.css",
+  },
+]
+
+for (const example of examples) {
+  assertFile(example.manifest, `${example.name} manifest`)
+  assertFile(example.app, `${example.name} app entry`)
+  const manifest = JSON.parse(read(example.manifest))
+  const actual = manifest.dependencies?.[example.packageName]
+  if (actual !== version) fail(`${example.manifest} uses ${example.packageName}@${actual}; expected ${version}`)
+  assertIncludes(example.app, example.provider, `${example.name} Provider themeUrl`)
+  assertIncludes(example.app, example.mode, `${example.name} system mode`)
+  assertIncludes(example.app, 'LocaleProvider', `${example.name} LocaleProvider`)
+  assertIncludes(example.app, example.style, `${example.name} style import`)
+  assertFile(`examples/${example.name}/public/theme.json`, `${example.name} Theme v2 JSON`)
+  const theme = JSON.parse(read(`examples/${example.name}/public/theme.json`))
+  if (theme.version !== 2) fail(`examples/${example.name}/public/theme.json must be Theme v2`)
+}
+
+assertIncludes('README.md', 'examples/react-minimal', 'React example link')
+assertIncludes('README.md', 'examples/vue-minimal', 'Vue example link')
+assertIncludes('docs/guide/usage.md', '/guide/recipes', 'recipes guide link')
+assertIncludes('docs/guide/integrations.md', 'theme.json', 'theme fallback guidance')
+assertIncludes('docs/guide/production-checklist.md', 'npm run audit:docs-examples', 'docs audit checklist')
+
+for (const file of [
+  'README.md',
+  'docs/guide/integrations.md',
+  'docs/guide/recipes.md',
+  'docs/guide/production-checklist.md',
+  'examples/README.md',
+]) {
+  const content = read(file)
+  if (/\b1\.2\.4\b/.test(content)) fail(`${file} still references 1.2.4`)
+}
+
+if (failures.length) {
+  throw new Error(`Docs/examples audit failed:\n${failures.map((failure) => `- ${failure}`).join('\n')}`)
+}
+
+console.log(`Docs/examples audit OK: examples match ${version}, guide links and onboarding docs are present.`)

@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.5] - 2026-07-18
+
+### Added
+- Added page recipe guidance for composing product pages with `Page`, `Stack`, `Inline`, and `Split` instead of heavy container styling.
+- Added a production checklist covering installation, Theme v2, composition, accessibility, docs, and release verification.
+- Added example READMEs for React, Vue, Next SSR, and Nuxt SSR onboarding paths.
+- Added a docs/examples audit that checks sidebar links, onboarding docs, minimal example ThemeProvider usage, Theme v2 JSON files, and example dependency versions.
+
+### Changed
+- Updated README and integration docs to present Provider-managed `themeUrl` loading as the recommended Theme v2 onboarding path.
+- Wired the docs/examples audit into CI and the release gate so examples stay aligned with the package version.
+
 ## [1.2.4] - 2026-07-18
 
 ### Added

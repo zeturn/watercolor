@@ -27,6 +27,7 @@
     "audit:theme": "node scripts/audit-theme-contract.mjs",
     "audit:composition": "node scripts/audit-composition-layer.mjs",
     "audit:i18n-a11y": "node scripts/audit-i18n-a11y.mjs",
+    "audit:docs-examples": "node scripts/audit-docs-examples.mjs",
     "audit:bundle": "node scripts/audit-bundle-size.mjs",
     "typecheck:composition": "npm run build -w packages/core && tsc --noEmit --jsx react-jsx --moduleResolution bundler --module esnext --target es2020 --skipLibCheck tests/types/composition.tsx",
     "typecheck:theme": "npm run build -w packages/core && npm run build -w packages/react && npm run build -w packages/vue && tsc --noEmit --jsx react-jsx --moduleResolution bundler --module esnext --target es2020 --skipLibCheck tests/types/theme-v2.tsx",
@@ -124,5 +125,5 @@
     "npm": ">=8.0.0"
   },
   "license": "ISC",
-  "version": "1.2.4"
+  "version": "1.2.5"
 }

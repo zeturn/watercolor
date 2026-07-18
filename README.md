@@ -17,10 +17,13 @@ Modern, minimalist, watercolor-inspired UI components for **Vue 3.5+** and **Rea
 ## ✨ Features
 
 - One design language, two frameworks (Vue + React)
-- CSS Variables theming + built-in dark mode
+- Borderless default Watercolor style with CSS variable theming
+- Theme v2 JSON loading through React/Vue providers
+- Built-in light, dark, and system mode handling
 - TypeScript-first APIs
 - Tree-shaking friendly builds
 - Optional icon packs (install only what you use)
+- LocaleProvider for localizable accessibility strings
 
 ## 📚 Documentation
 
@@ -67,16 +70,23 @@ import { Button } from '@zeturn/watercolor-vue'
 The default Watercolor theme works without configuration. Use `ThemeProvider` for light, dark, and system modes; optionally load a strict Theme v2 JSON for brand tokens.
 
 ```tsx
-import { ThemeProvider, loadThemeConfig } from '@zeturn/watercolor-react'
+import { ThemeProvider } from '@zeturn/watercolor-react'
 
-await loadThemeConfig('/theme.json')
-
-<ThemeProvider defaultMode="system">
+<ThemeProvider defaultMode="system" themeUrl="/theme.json">
   <App />
 </ThemeProvider>
 ```
 
-Theme loading is explicit and safely falls back to the default borderless Watercolor design. See the theming guide for SSR pre-paint helpers.
+Theme loading safely falls back to the default borderless Watercolor design. See the theming guide for SSR pre-paint helpers and scoped themes.
+
+### Examples
+
+- `examples/react-minimal`
+- `examples/vue-minimal`
+- `examples/next-ssr`
+- `examples/nuxt-ssr`
+
+The examples are version-checked with the docs/examples audit so installation snippets stay aligned with published packages.
 
 ### Icons (optional)
 

@@ -113,6 +113,7 @@ jobs:
           npm run audit:composition
           npm run audit:visual
           npm run audit:i18n-a11y
+          npm run audit:docs-examples
           npm run audit:bundle
           npm run typecheck:theme
           npm run test:package-theme

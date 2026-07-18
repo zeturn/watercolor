@@ -41,11 +41,13 @@ export default defineConfig({
             { text: '安装', link: '/guide/installation' },
             { text: '快速上手', link: '/guide/usage' },
             { text: '组合布局', link: '/guide/composition' },
+            { text: '页面 Recipes', link: '/guide/recipes' },
             { text: '交互契约', link: '/guide/interaction-contract' },
             { text: '可访问性与国际化', link: '/guide/accessibility-i18n' },
             { text: '主题与图标', link: '/guide/theming' },
             { text: '主题 API 迁移', link: '/guide/theme-migration' },
             { text: '集成示例', link: '/guide/integrations' },
+            { text: '生产检查清单', link: '/guide/production-checklist' },
             { text: '2.0 迁移指南', link: '/guide/two-zero-migration' },
           ]
         }

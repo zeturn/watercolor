@@ -41,6 +41,8 @@ createApp(App).mount('#app')
 
 ## 常见使用方式
 
+如果你要先搭一个完整页面，而不是单独试组件，建议从 [页面 Recipes](/guide/recipes) 开始。Recipes 使用 `Page`、`Stack`、`Inline`、`Split` 做无样式组合层，能更接近 Watercolor 默认的扁平、无边框产品风格。
+
 ### 1. 基础展示组件
 
 适合先接入这些组件快速建立视觉风格：
