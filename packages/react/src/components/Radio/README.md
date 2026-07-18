@@ -8,7 +8,7 @@ The **Radio** component allows users to select a single option from a set. It wo
 Install Watercolor UI (which includes the Radio component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-react
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.

@@ -83,6 +83,7 @@ jobs:
           npm run audit:theme
           npm run audit:composition
           npm run audit:visual
+          npm run audit:visual:minimal
           npm run audit:i18n-a11y
           npm run audit:docs-examples
           npm run audit:api

@@ -8,7 +8,7 @@ It supports multiple color themes, sizes and a *dot* mode, making it suitable fo
 Install Watercolor UI (which includes the Badge component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-react
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.

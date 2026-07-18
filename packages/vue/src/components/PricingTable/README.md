@@ -5,15 +5,14 @@ The **PricingTable** component displays a set of pricing plans in a responsive g
 
 ## Installation
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-vue
 ```
-(Assuming **watercolor-ui** is the package name that exports the component.)
 
 ## Usage
 ### React
 ```jsx
-import PricingTable from 'watercolor-ui/src/components/PricingTable/PricingTable'
-import 'watercolor-ui/src/components/PricingTable/style.css'
+import { PricingTable } from '@zeturn/watercolor-react'
+import '@zeturn/watercolor-react/style.css'
 
 const plans = [
   {
@@ -45,8 +44,8 @@ export default function Demo () {
 ### Vue
 ```vue
 <script setup>
-import PricingTable from 'watercolor-ui/src/components/PricingTable/PricingTable.vue'
-import 'watercolor-ui/src/components/PricingTable/style.css'
+import { PricingTable } from '@zeturn/watercolor-vue'
+import '@zeturn/watercolor-vue/style.css'
 
 const plans = [
   {

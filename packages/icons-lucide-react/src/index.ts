@@ -1,5 +1,8 @@
 import * as Lucide from 'lucide-react'
-import type { ComponentType } from 'react'
+import type { ComponentType, SVGProps } from 'react'
+
+type ReactIconComponent = ComponentType<SVGProps<SVGSVGElement>>
+type IconModule = Record<string, ReactIconComponent | undefined>
 
 function toPascalCase(input: string): string {
   return input
@@ -9,13 +12,13 @@ function toPascalCase(input: string): string {
     .join('')
 }
 
-const MissingIcon: ComponentType<any> = () => null
+const MissingIcon: ReactIconComponent = () => null
 
 /**
  * Resolve a Lucide React icon component by kebab-case name (e.g. "log-in").
  */
-export function getIcon(name: string): ComponentType<any> {
+export function getIcon(name: string): ReactIconComponent {
   const pascal = toPascalCase(name)
-  const mod: any = Lucide
+  const mod = Lucide as unknown as IconModule
   return mod[pascal] || mod.HelpCircle || MissingIcon
 }

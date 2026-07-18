@@ -332,7 +332,7 @@ export const LoadingStates = () => (
 
 export const CommandLine = () => {
   const commands = [
-    "$ npm install watercolor-ui",
+    "$ npm install @zeturn/watercolor-react",
     "$ npm run dev",
     "Server running on http://localhost:3000",
     "Ready for development! 🎉"

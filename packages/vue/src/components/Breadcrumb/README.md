@@ -8,7 +8,7 @@ The **Breadcrumb** component provides navigation hierarchy, showing users their 
 Install Watercolor UI (which includes the Breadcrumb component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-vue
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.

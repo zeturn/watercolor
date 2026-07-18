@@ -8,7 +8,7 @@ The **Pagination** component provides navigation between pages of data, with sup
 Install Watercolor UI (which includes the Pagination component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-react
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.

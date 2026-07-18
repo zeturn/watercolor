@@ -40,17 +40,26 @@ try {
   execSync('npm run audit:theme', { stdio: 'inherit' })
   execSync('npm run audit:composition', { stdio: 'inherit' })
   execSync('npm run audit:visual', { stdio: 'inherit' })
+  execSync('npm run audit:visual:minimal', { stdio: 'inherit' })
+  execSync('npm run audit:i18n-a11y', { stdio: 'inherit' })
+  execSync('npm run audit:docs-examples', { stdio: 'inherit' })
   execSync('npm run audit:api', { stdio: 'inherit' })
   execSync('npm run typecheck:public-api', { stdio: 'inherit' })
   
   // 4. 构建项目
   console.log('\n🔨 构建项目...')
   execSync('npm run build', { stdio: 'inherit' })
+  execSync('npm run audit:bundle', { stdio: 'inherit' })
   
   // 5. 检查发布文件
   console.log('\n✅ 检查发布文件...')
   execSync('npm run check-publish', { stdio: 'inherit' })
   execSync('npm run test:package-theme', { stdio: 'inherit' })
+  execSync('npm run build-storybook:vue', { stdio: 'inherit' })
+  execSync('npm run build-storybook:react', { stdio: 'inherit' })
+  execSync('npm run visual:recipes', { stdio: 'inherit' })
+  execSync('npm run visual:a11y', { stdio: 'inherit' })
+  execSync('npm run docs:build', { stdio: 'inherit' })
   
   // 6. 更新版本号
   console.log(`\n📦 更新版本号 (${versionType})...`)

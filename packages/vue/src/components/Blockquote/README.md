@@ -5,7 +5,7 @@
 
 ## Installation
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-vue
 # or
 pnpm add watercolor-ui
 ```
@@ -14,7 +14,7 @@ pnpm add watercolor-ui
 ### React
 ```jsx
 import React from 'react'
-import { Blockquote } from 'watercolor-ui'
+import { Blockquote } from '@zeturn/watercolor-vue'
 
 export default function Example() {
   return (
@@ -28,7 +28,7 @@ export default function Example() {
 ### Vue
 ```vue
 <script setup>
-import { Blockquote } from 'watercolor-ui'
+import { Blockquote } from '@zeturn/watercolor-vue'
 </script>
 
 <template>

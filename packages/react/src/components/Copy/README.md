@@ -7,9 +7,9 @@ Copy is a utility component that allows users to copy any given text to the clip
 Install the Watercolor UI library (or just copy the component) via npm / yarn:
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-react
 # or
-yarn add watercolor-ui
+yarn add @zeturn/watercolor-react
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ Below are minimal usage examples for both React and Vue. The API is the same acr
 
 ### React
 ```jsx
-import { Copy } from 'watercolor-ui'
+import { Copy } from '@zeturn/watercolor-react'
 
 export default function Demo() {
   return (
@@ -29,7 +29,7 @@ export default function Demo() {
 ### Vue
 ```vue
 <script setup>
-import Copy from 'watercolor-ui/Copy.vue'
+import { Copy } from '@zeturn/watercolor-vue'
 </script>
 
 <template>

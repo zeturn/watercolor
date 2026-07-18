@@ -7,6 +7,15 @@ export interface FeatherSvgOptions {
   strokeWidth?: number
 }
 
+interface FeatherIcon {
+  toSvg: (options: Record<string, string | number>) => string
+}
+
+interface FeatherModule {
+  icons?: Record<string, FeatherIcon | undefined>
+  default?: FeatherModule
+}
+
 /**
  * Returns an SVG string for a Feather icon name (e.g. "heart", "log-in").
  * This is framework-agnostic so React/Vue wrappers can render it via innerHTML.
@@ -16,7 +25,8 @@ export async function getFeatherSvg(
   options: FeatherSvgOptions = {}
 ): Promise<string> {
   const feather = await import('feather-icons')
-  const featherLib: any = (feather as any).default || feather
+  const featherModule = feather as unknown as FeatherModule
+  const featherLib = featherModule.default || featherModule
 
   const icon = featherLib?.icons?.[name]
   if (!icon?.toSvg) return ''

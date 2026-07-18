@@ -12,6 +12,7 @@ import {
 import {
   applyThemeConfig,
   createThemeController,
+  loadProviderThemeConfig,
   resetThemeConfig,
   THEME_MODES,
   type ThemeApplyResult,
@@ -32,29 +33,6 @@ export interface ThemeStore {
 }
 
 type ThemeErrorResult = Extract<ThemeApplyResult | ThemeLoadResult, { ok: false }>
-
-async function loadProviderTheme (
-  url: string,
-  target: HTMLElement | null | undefined,
-  isCurrent: () => boolean,
-  signal?: AbortSignal,
-): Promise<ThemeLoadResult | null> {
-  if (typeof fetch === 'undefined') {
-    return { ok: false, url, errors: [{ path: '$', message: 'Theme config URL or fetch is unavailable.' }], warnings: [] }
-  }
-  try {
-    const response = await fetch(url, { cache: 'no-store', signal })
-    if (!isCurrent()) return null
-    if (!response.ok) return { ok: false, url, errors: [{ path: '$', message: `Theme request failed with ${response.status}.` }], warnings: [] }
-    const config = await response.json()
-    if (!isCurrent()) return null
-    const result = applyThemeConfig(config, { target })
-    return { ...result, url }
-  } catch (error) {
-    if (!isCurrent()) return null
-    return { ok: false, url, errors: [{ path: '$', message: error instanceof Error ? error.message : 'Theme request failed.' }], warnings: [] }
-  }
-}
 
 const THEME_KEY = Symbol('WatercolorTheme')
 
@@ -140,7 +118,11 @@ export const ThemeProvider = defineComponent({
       }
 
       if (props.themeUrl) {
-        void loadProviderTheme(props.themeUrl, target, () => currentRequest === requestId, abortController?.signal).then((result) => {
+        void loadProviderThemeConfig(props.themeUrl, {
+          target,
+          isCurrent: () => currentRequest === requestId,
+          signal: abortController?.signal,
+        }).then((result) => {
           if (!result) return
           if (result.ok) emitThemeLoad(result)
           else if (!abortController?.signal.aborted) emitThemeError(result)

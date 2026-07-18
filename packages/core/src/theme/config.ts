@@ -75,6 +75,10 @@ export interface ThemeLoadOptions extends ThemeApplyOptions {
   signal?: AbortSignal
 }
 
+export interface ThemeProviderLoadOptions extends ThemeLoadOptions {
+  isCurrent?: () => boolean
+}
+
 const appliedVariables = new WeakMap<HTMLElement, Map<string, string | null>>()
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -322,6 +326,25 @@ export async function loadThemeConfig(url: string, options: ThemeLoadOptions = {
     const result = applyThemeConfig(await response.json(), options)
     return { ...result, url }
   } catch (error) {
+    return { ok: false, url, errors: [{ path: '$', message: error instanceof Error ? error.message : 'Theme request failed.' }], warnings: [] }
+  }
+}
+
+export async function loadProviderThemeConfig(url: string, options: ThemeProviderLoadOptions = {}): Promise<ThemeLoadResult | null> {
+  const isCurrent = options.isCurrent ?? (() => true)
+  if (typeof url !== 'string' || !url.trim() || typeof fetch === 'undefined') {
+    return { ok: false, url, errors: [{ path: '$', message: 'Theme config URL or fetch is unavailable.' }], warnings: [] }
+  }
+  try {
+    const response = await fetch(url, { cache: 'no-store', signal: options.signal })
+    if (!isCurrent()) return null
+    if (!response.ok) return { ok: false, url, errors: [{ path: '$', message: `Theme request failed with ${response.status}.` }], warnings: [] }
+    const config = await response.json()
+    if (!isCurrent()) return null
+    const result = applyThemeConfig(config, { target: options.target })
+    return { ...result, url }
+  } catch (error) {
+    if (!isCurrent()) return null
     return { ok: false, url, errors: [{ path: '$', message: error instanceof Error ? error.message : 'Theme request failed.' }], warnings: [] }
   }
 }

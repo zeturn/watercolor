@@ -30,7 +30,7 @@ The Status component renders a small dot indicator for representing state. It su
 </template>
 
 <script setup>
-import { Status } from 'watercolor-ui'
+import { Status } from '@zeturn/watercolor-react'
 </script>
 ```
 

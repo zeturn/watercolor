@@ -84,6 +84,10 @@ try {
   }
   const coreEntry = fs.readFileSync(path.join(root, 'packages/core/src/index.ts'), 'utf8')
   if (/export \* as \w+Utils from ['"]\.\/components\//.test(coreEntry)) fail('Core root entry must not export component utility namespaces')
+  for (const generator of ['scripts/generate-react-assets.mjs', 'scripts/generate-react-assets.js']) {
+    const contents = fs.readFileSync(path.join(root, generator), 'utf8')
+    if (/expect\(true\)\.toBe\(true\)/.test(contents)) fail(`${generator}: generated tests must assert rendered output, not expect(true)`)
+  }
   for (const framework of ['react', 'vue']) {
     const sourceRoot = path.join(root, 'packages', framework, 'src')
     const leaks = []

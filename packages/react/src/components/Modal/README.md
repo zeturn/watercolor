@@ -8,7 +8,7 @@ The **Modal** (also known as Dialog) component displays content in a layer above
 Install Watercolor UI (which includes the Modal component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-react
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.

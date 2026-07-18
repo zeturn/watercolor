@@ -5,14 +5,14 @@ A flexible, lightweight verification code (OTP) input component that lets users 
 
 ## Installation
 ```bash
-npm install @watercolor-ui/watercolor
+npm install @zeturn/watercolor-vue
 ```
 (Or import directly from the package if you already have **Watercolor UI** installed.)
 
 ## Usage
 ### React
 ```jsx
-import { VerificationCodeInput } from 'watercolor';
+import { VerificationCodeInput } from '@zeturn/watercolor-react'
 
 function App() {
   const [code, setCode] = useState('');
@@ -32,8 +32,8 @@ function App() {
 ### Vue 3
 ```vue
 <script setup>
-import VerificationCodeInput from 'watercolor/dist/components/Input/VerificationCodeInput.vue';
-import { ref } from 'vue';
+import { VerificationCodeInput } from '@zeturn/watercolor-vue'
+import { ref } from 'vue'
 
 const code = ref('');
 </script>

@@ -1,6 +1,8 @@
 import * as Phosphor from '@phosphor-icons/vue'
 import type { Component } from 'vue'
 
+type IconModule = Record<string, Component | undefined>
+
 function toPascalCase(input: string): string {
   return input
     .split('-')
@@ -14,7 +16,7 @@ function toPascalCase(input: string): string {
  * Note: phosphor-vue exports are prefixed with `Ph`.
  */
 export function getIcon(name: string): Component | undefined {
-  const mod: any = Phosphor
+  const mod = Phosphor as unknown as IconModule
   const iconName = 'Ph' + toPascalCase(name)
   return mod[iconName] || mod.PhQuestion
 }

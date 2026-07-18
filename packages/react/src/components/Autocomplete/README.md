@@ -8,7 +8,7 @@ The **Autocomplete** component combines a text input with a dropdown menu of sug
 Install Watercolor UI (which includes the Autocomplete component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-react
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.

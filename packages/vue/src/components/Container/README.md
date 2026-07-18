@@ -8,7 +8,7 @@ The **Container** component provides a responsive container with centered conten
 Install Watercolor UI (which includes the Container component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-vue
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.

@@ -8,7 +8,7 @@ The **Grid** component provides a responsive 12-column layout based on native CS
 Install Watercolor UI (which includes the Grid component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-vue
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.

@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.7] - 2026-07-18
+
+### Added
+- Added a minimal visual strict audit for high-risk components so default states stay borderless and shadowless unless a state or explicit variant needs emphasis.
+- Added release gates that reject generated React smoke tests using `expect(true)` and docs that regress to legacy install/import guidance.
+
+### Changed
+- Shared Provider `themeUrl` loading through core so React and Vue keep the same AbortSignal and last-request-wins behavior while only owning framework lifecycle wiring.
+- Synchronized the local release script with the GitHub publish gate by adding docs/examples, visual, a11y, Storybook, docs build, and bundle checks.
+- Tightened icon wrapper module types across React and Vue wrappers without falling back to `ComponentType<any>` or broad `any` module access.
+- Updated component README and story guidance to use `@zeturn/watercolor-react` and `@zeturn/watercolor-vue` package imports.
+
+### Fixed
+- Replaced empty generated React test templates with a real rendered-output assertion.
+
 ## [1.2.6] - 2026-07-18
 
 ### Changed

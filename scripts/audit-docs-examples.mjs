@@ -10,6 +10,7 @@ const failures = []
 
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8')
 const exists = (file) => fs.existsSync(path.join(root, file))
+const legacyDocsPattern = /(watercolor-ui\/src|watercolor-ui\/[^'"\s]+\.(?:vue|jsx)|@watercolorui|@watercolor-ui\/watercolor|watercolor\/dist|from ['"]watercolor-ui['"]|from ['"]watercolor['"]|npm install watercolor-ui|yarn add watercolor-ui)/
 
 function fail(message) {
   failures.push(message)
@@ -110,6 +111,34 @@ for (const file of [
 ]) {
   const content = read(file)
   if (/\b1\.2\.4\b/.test(content)) fail(`${file} still references 1.2.4`)
+}
+
+const documentationRoots = [
+  'README.md',
+  'docs',
+  'examples',
+  'packages/react/src/components',
+  'packages/vue/src/components',
+]
+
+function walkDocs(entry) {
+  const absolute = path.join(root, entry)
+  if (!exists(entry)) return []
+  const stats = fs.statSync(absolute)
+  if (stats.isFile()) return [entry]
+  const results = []
+  for (const child of fs.readdirSync(absolute, { withFileTypes: true })) {
+    if (child.name === 'dist' || child.name === 'storybook-static' || child.name === '.vitepress') continue
+    results.push(...walkDocs(path.join(entry, child.name)))
+  }
+  return results
+}
+
+for (const file of documentationRoots.flatMap(walkDocs)) {
+  if (!/\.(?:md|mdx)$/.test(file)) continue
+  const content = read(file)
+  const match = content.match(legacyDocsPattern)
+  if (match) fail(`${file} still uses legacy package/import guidance (${match[0]})`)
 }
 
 if (failures.length) {

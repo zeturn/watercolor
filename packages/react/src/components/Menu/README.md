@@ -6,7 +6,7 @@ The **Menu** component displays a list of choices that appears when triggered by
 Install Watercolor UI (which includes the Menu component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-react
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.

@@ -5,6 +5,7 @@ import * as Solid24 from '@heroicons/vue/24/solid'
 import * as Solid20 from '@heroicons/vue/20/solid'
 
 export type HeroiconsVariant = 'outline' | 'solid' | 'mini'
+type IconModule = Record<string, Component | undefined>
 
 function toPascalCase(input: string): string {
   return input
@@ -28,9 +29,9 @@ export function getIcon(
 ): Component | undefined {
   const componentName = `${toPascalCase(name)}Icon`
 
-  const outlineMod: any = Outline24
-  const solidMod: any = Solid24
-  const miniMod: any = Solid20
+  const outlineMod = Outline24 as unknown as IconModule
+  const solidMod = Solid24 as unknown as IconModule
+  const miniMod = Solid20 as unknown as IconModule
 
   if (variant === 'solid') {
     return solidMod[componentName] || solidMod.QuestionMarkCircleIcon

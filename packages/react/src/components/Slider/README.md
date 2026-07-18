@@ -8,7 +8,7 @@ The **Slider** component allows users to select a value from a continuous range.
 Install Watercolor UI (which includes the Slider component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-react
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.

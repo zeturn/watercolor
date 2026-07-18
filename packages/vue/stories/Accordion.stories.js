@@ -48,7 +48,7 @@ const defaultItems = [
   {
     title: '如何安装和使用？',
     content:
-      '您可以通过npm安装：npm install watercolor-ui，然后在您的项目中导入所需的组件。所有组件都支持TypeScript，并提供了完整的类型定义。',
+      '您可以通过npm安装：npm install @zeturn/watercolor-vue，然后在您的项目中导入所需的组件。所有组件都支持TypeScript，并提供了完整的类型定义。',
   },
   {
     title: '支持哪些浏览器？',

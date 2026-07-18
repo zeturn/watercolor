@@ -1,10 +1,12 @@
-import type { ComponentType } from 'react'
+import type { ComponentType, SVGProps } from 'react'
 
 import * as Outline24 from '@heroicons/react/24/outline'
 import * as Solid24 from '@heroicons/react/24/solid'
 import * as Solid20 from '@heroicons/react/20/solid'
 
 export type HeroiconsVariant = 'outline' | 'solid' | 'mini'
+type ReactIconComponent = ComponentType<SVGProps<SVGSVGElement>>
+type IconModule = Record<string, ReactIconComponent | undefined>
 
 function toPascalCase(input: string): string {
   return input
@@ -14,7 +16,7 @@ function toPascalCase(input: string): string {
     .join('')
 }
 
-const MissingIcon: ComponentType<any> = () => null
+const MissingIcon: ReactIconComponent = () => null
 
 /**
  * Resolve a Heroicons React icon component by kebab-case name.
@@ -27,12 +29,12 @@ const MissingIcon: ComponentType<any> = () => null
 export function getIcon(
   name: string,
   variant: HeroiconsVariant = 'outline'
-): ComponentType<any> {
+): ReactIconComponent {
   const componentName = `${toPascalCase(name)}Icon`
 
-  const outlineMod: any = Outline24
-  const solidMod: any = Solid24
-  const miniMod: any = Solid20
+  const outlineMod = Outline24 as unknown as IconModule
+  const solidMod = Solid24 as unknown as IconModule
+  const miniMod = Solid20 as unknown as IconModule
 
   if (variant === 'solid') {
     return solidMod[componentName] || solidMod.QuestionMarkCircleIcon || MissingIcon

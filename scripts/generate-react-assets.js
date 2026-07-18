@@ -42,8 +42,8 @@ import ${name} from '@/components/${name}/${name}.jsx'
 // 该测试仅验证组件能够正常渲染（不抛异常）
 describe('${name} (React)', () => {
   it('renders without crashing', () => {
-    render(<${name} />)
-    expect(true).toBe(true)
+    const { container } = render(<${name} />)
+    expect(container.firstElementChild).toBeTruthy()
   })
 })
 `

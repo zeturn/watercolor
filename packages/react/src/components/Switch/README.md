@@ -8,7 +8,7 @@ The **Switch** component is a toggle control for binary on/off states. It provid
 Install Watercolor UI (which includes the Switch component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-react
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.

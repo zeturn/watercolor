@@ -34,8 +34,8 @@ import ${name} from '@/components/${name}/${name}.jsx'
 
 describe('${name} (React)', () => {
   it('renders without crashing', () => {
-    render(<${name} />)
-    expect(true).toBe(true)
+    const { container } = render(<${name} />)
+    expect(container.firstElementChild).toBeTruthy()
   })
 })
 `

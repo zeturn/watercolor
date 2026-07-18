@@ -8,7 +8,7 @@ The **Tabs** component organizes content into separate panels, allowing users to
 Install Watercolor UI (which includes the Tabs component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-vue
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.

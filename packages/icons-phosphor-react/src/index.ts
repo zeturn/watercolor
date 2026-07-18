@@ -1,5 +1,8 @@
 import * as Phosphor from '@phosphor-icons/react'
-import type { ComponentType } from 'react'
+import type { ComponentType, SVGProps } from 'react'
+
+type ReactIconComponent = ComponentType<SVGProps<SVGSVGElement>>
+type IconModule = Record<string, ReactIconComponent | undefined>
 
 function toPascalCase(input: string): string {
   return input
@@ -9,13 +12,13 @@ function toPascalCase(input: string): string {
     .join('')
 }
 
-const MissingIcon: ComponentType<any> = () => null
+const MissingIcon: ReactIconComponent = () => null
 
 /**
  * Resolve a Phosphor React icon component by kebab-case name (e.g. "arrow-right").
  */
-export function getIcon(name: string): ComponentType<any> {
-  const mod: any = Phosphor
+export function getIcon(name: string): ReactIconComponent {
+  const mod = Phosphor as unknown as IconModule
   const iconName = toPascalCase(name)
   return mod[iconName] || mod.Question || MissingIcon
 }

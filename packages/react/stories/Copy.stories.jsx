@@ -58,7 +58,7 @@ export default {
 
 export const Default = {
   args: {
-    text: 'npm install watercolor-ui',
+    text: 'npm install @zeturn/watercolor-react',
     variant: 'default',
     size: 'md',
     showLabel: true,
@@ -78,7 +78,7 @@ export const Default = {
 
 export const CodeSnippet = {
   args: {
-    text: 'import { Copy } from "watercolor-ui"\\n\\n<Copy text="Hello World" />',
+    text: 'import { Copy } from "@zeturn/watercolor-react"\\n\\n<Copy text="Hello World" />',
     variant: 'outlined',
     size: 'md',
     showLabel: true,
@@ -151,15 +151,15 @@ export const Variants = {
     <div className="space-y-6 w-96">
       <div>
         <h3 className="text-lg font-semibold mb-3">默认样式</h3>
-        <Copy text="npm install watercolor-ui" />
+        <Copy text="npm install @zeturn/watercolor-react" />
       </div>
       <div>
         <h3 className="text-lg font-semibold mb-3">边框样式</h3>
-        <Copy text="npm install watercolor-ui" variant="outlined" />
+        <Copy text="npm install @zeturn/watercolor-react" variant="outlined" />
       </div>
       <div>
         <h3 className="text-lg font-semibold mb-3">填充样式</h3>
-        <Copy text="npm install watercolor-ui" variant="filled" />
+        <Copy text="npm install @zeturn/watercolor-react" variant="filled" />
       </div>
       <div>
         <h3 className="text-lg font-semibold mb-3">简约样式</h3>

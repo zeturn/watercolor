@@ -5,13 +5,13 @@ NumberAnimation is a lightweight component that animates numbers from a start va
 
 ## Installation
 ```bash
-npm install @watercolorui/number-animation
+npm install @zeturn/watercolor-vue
 ```
 
 ## Usage
 ### React
 ```jsx
-import NumberAnimation from '@watercolorui/number-animation/NumberAnimation.jsx';
+import { NumberAnimation } from '@zeturn/watercolor-react'
 
 function Example() {
   return (
@@ -30,7 +30,7 @@ function Example() {
 ### Vue
 ```vue
 <script setup>
-import NumberAnimation from '@watercolorui/number-animation/NumberAnimation.vue'
+import { NumberAnimation } from '@zeturn/watercolor-vue'
 </script>
 
 <template>

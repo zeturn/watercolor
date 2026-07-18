@@ -7,9 +7,9 @@
 Install the Watercolor UI library (or copy the single file) via npm / yarn:
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-react
 # or
-yarn add watercolor-ui
+yarn add @zeturn/watercolor-react
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ Below is a minimal usage example for both React and Vue. The API is identical ac
 
 ### React
 ```jsx
-import { Checkbox } from 'watercolor-ui'
+import { Checkbox } from '@zeturn/watercolor-react'
 
 export default function Demo() {
   const [checked, setChecked] = React.useState(false)
@@ -35,7 +35,7 @@ export default function Demo() {
 ### Vue
 ```vue
 <script setup>
-import Checkbox from 'watercolor-ui/Checkbox.vue'
+import { Checkbox } from '@zeturn/watercolor-vue'
 import { ref } from 'vue'
 
 const checked = ref(false)

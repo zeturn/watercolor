@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-icons-tabler-vue",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "type": "module",
   "main": "dist/watercolor-icons-tabler-vue.es.js",
   "module": "dist/watercolor-icons-tabler-vue.es.js",

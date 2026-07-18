@@ -1,6 +1,8 @@
 import * as Lucide from 'lucide-vue-next'
 import type { Component } from 'vue'
 
+type IconModule = Record<string, Component | undefined>
+
 function toPascalCase(input: string): string {
   return input
     .split('-')
@@ -14,6 +16,6 @@ function toPascalCase(input: string): string {
  */
 export function getIcon(name: string): Component | undefined {
   const pascal = toPascalCase(name)
-  const mod: any = Lucide
+  const mod = Lucide as unknown as IconModule
   return mod[pascal] || mod.HelpCircle
 }

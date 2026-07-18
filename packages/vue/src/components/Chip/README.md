@@ -8,7 +8,7 @@ The **Chip** component is a compact element used to represent small pieces of in
 Install Watercolor UI (which includes the Chip component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-vue
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.

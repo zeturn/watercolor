@@ -41,7 +41,8 @@
     "release": "node scripts/publish.mjs",
     "release:patch": "node scripts/publish.mjs patch",
     "release:minor": "node scripts/publish.mjs minor",
-    "release:major": "node scripts/publish.mjs major"
+    "release:major": "node scripts/publish.mjs major",
+    "audit:visual:minimal": "node scripts/audit-minimal-visual.mjs"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.0",
@@ -125,5 +126,5 @@
     "npm": ">=8.0.0"
   },
   "license": "ISC",
-  "version": "1.2.6"
+  "version": "1.2.7"
 }

@@ -7,9 +7,9 @@
 Install Watercolor UI (or copy the standalone component) via npm / yarn:
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-vue
 # or
-yarn add watercolor-ui
+yarn add @zeturn/watercolor-vue
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ Below are minimal examples for each framework.
 
 ### React
 ```jsx
-import { CircularProgress } from 'watercolor-ui'
+import { CircularProgress } from '@zeturn/watercolor-react'
 
 export default function Demo() {
   return (
@@ -29,7 +29,7 @@ export default function Demo() {
 ### Vue
 ```vue
 <script setup>
-import CircularProgress from 'watercolor-ui/CircularProgress.vue'
+import { CircularProgress } from '@zeturn/watercolor-vue'
 </script>
 
 <template>

@@ -57,7 +57,7 @@ export default {
 
 export const Default = {
   args: {
-    text: 'npm install watercolor-ui',
+    text: 'npm install @zeturn/watercolor-vue',
     variant: 'default',
     size: 'md',
     showLabel: true,
@@ -96,7 +96,7 @@ export const Default = {
 
 export const CodeSnippet = {
   args: {
-    text: 'import { Copy } from "watercolor-ui"\n\n<Copy text="Hello World" />',
+    text: 'import { Copy } from "@zeturn/watercolor-vue"\n\n<Copy text="Hello World" />',
     variant: 'outlined',
     size: 'md',
     showLabel: true,

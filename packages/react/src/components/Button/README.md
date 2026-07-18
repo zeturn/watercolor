@@ -8,7 +8,7 @@ The **Button** component is a versatile interactive element that triggers action
 Install Watercolor UI (which includes the Button component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-react
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.

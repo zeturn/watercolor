@@ -15,7 +15,7 @@ Divider is a basic layout component used to visually separate content.
 ### React
 
 ```jsx
-import Divider from '@/components/Divider/Divider'
+import { Divider } from '@zeturn/watercolor-react'
 
 // Basic divider
 <Divider />
@@ -62,7 +62,7 @@ import Divider from '@/components/Divider/Divider'
 </template>
 
 <script setup>
-import Divider from '@/components/Divider/Divider.vue'
+import { Divider } from '@zeturn/watercolor-vue'
 </script>
 ```
 

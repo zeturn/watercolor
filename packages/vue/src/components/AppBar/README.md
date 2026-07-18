@@ -8,7 +8,7 @@ The **AppBar** component provides a top-level navigation bar typically used for 
 Install Watercolor UI (which includes the AppBar component):
 
 ```bash
-npm install watercolor-ui
+npm install @zeturn/watercolor-vue
 ```
 
 > Both **React** and **Vue 3** versions are provided – import from the appropriate entry point.
