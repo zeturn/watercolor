@@ -67,10 +67,10 @@
     "@zeturn/watercolor-core": "1.2.3"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.5",
-    "@vue/compiler-sfc": "^3.5.17",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "@vue/compiler-sfc": "^3.5.40",
     "typescript": "^5.3.3",
-    "vite": "^8.0.2",
+    "vite": "^8.1.5",
     "vite-plugin-dts": "^4.5.4"
   }
 }
