@@ -1,4 +1,9 @@
-export type WatercolorPlacement = 'top' | 'bottom' | 'left' | 'right'
+export type WatercolorSide = 'top' | 'bottom' | 'left' | 'right'
+export type WatercolorAlignment = 'start' | 'center' | 'end'
+export type WatercolorPlacement =
+  | WatercolorSide
+  | `${WatercolorSide}-start`
+  | `${WatercolorSide}-end`
 
 export interface FloatingPositionOptions {
   placement?: WatercolorPlacement
@@ -276,16 +281,25 @@ export const createOverlayLayer = (options: OverlayLayerOptions): OverlayLayer =
   }
 }
 
+const parsePlacement = (placement: WatercolorPlacement): { side: WatercolorSide; alignment: WatercolorAlignment } => {
+  const [side, alignment] = placement.split('-') as [WatercolorSide, WatercolorAlignment | undefined]
+  return { side, alignment: alignment ?? 'center' }
+}
+
+const formatPlacement = (side: WatercolorSide, alignment: WatercolorAlignment): WatercolorPlacement =>
+  alignment === 'center' ? side : `${side}-${alignment}`
+
 const oppositePlacement = (placement: WatercolorPlacement): WatercolorPlacement => {
-  switch (placement) {
+  const { side, alignment } = parsePlacement(placement)
+  switch (side) {
     case 'top':
-      return 'bottom'
+      return formatPlacement('bottom', alignment)
     case 'bottom':
-      return 'top'
+      return formatPlacement('top', alignment)
     case 'left':
-      return 'right'
+      return formatPlacement('right', alignment)
     case 'right':
-      return 'left'
+      return formatPlacement('left', alignment)
   }
 }
 
@@ -298,7 +312,8 @@ const hasRoom = (
   viewportWidth: number,
   viewportHeight: number
 ) => {
-  switch (placement) {
+  const { side } = parsePlacement(placement)
+  switch (side) {
     case 'top':
       return anchorRect.top - floatingRect.height - offset >= padding
     case 'bottom':
@@ -333,22 +348,31 @@ export const computeFloatingPosition = (
 
   let top = 0
   let left = 0
-  switch (resolvedPlacement) {
+  const { side, alignment } = parsePlacement(resolvedPlacement)
+  switch (side) {
     case 'top':
       top = anchorRect.top - floatingRect.height - offset
-      left = anchorRect.left + (anchorRect.width - floatingRect.width) / 2
+      if (alignment === 'start') left = anchorRect.left
+      else if (alignment === 'end') left = anchorRect.right - floatingRect.width
+      else left = anchorRect.left + (anchorRect.width - floatingRect.width) / 2
       break
     case 'bottom':
       top = anchorRect.bottom + offset
-      left = anchorRect.left + (anchorRect.width - floatingRect.width) / 2
+      if (alignment === 'start') left = anchorRect.left
+      else if (alignment === 'end') left = anchorRect.right - floatingRect.width
+      else left = anchorRect.left + (anchorRect.width - floatingRect.width) / 2
       break
     case 'left':
       top = anchorRect.top + (anchorRect.height - floatingRect.height) / 2
       left = anchorRect.left - floatingRect.width - offset
+      if (alignment === 'start') top = anchorRect.top
+      else if (alignment === 'end') top = anchorRect.bottom - floatingRect.height
       break
     case 'right':
       top = anchorRect.top + (anchorRect.height - floatingRect.height) / 2
       left = anchorRect.right + offset
+      if (alignment === 'start') top = anchorRect.top
+      else if (alignment === 'end') top = anchorRect.bottom - floatingRect.height
       break
   }
 

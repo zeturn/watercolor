@@ -139,4 +139,38 @@ describe('interaction primitives', () => {
     expect(position.top).toBeGreaterThanOrEqual(12)
     expect(floating.style.position).toBe('fixed')
   })
+
+  it('supports start and end aligned floating placements', () => {
+    const anchor = document.createElement('button')
+    const floating = document.createElement('div')
+    document.body.append(anchor, floating)
+
+    vi.spyOn(anchor, 'getBoundingClientRect').mockReturnValue({
+      top: 100,
+      bottom: 120,
+      left: 80,
+      right: 180,
+      width: 100,
+      height: 20,
+      x: 80,
+      y: 100,
+      toJSON: () => {},
+    })
+    vi.spyOn(floating, 'getBoundingClientRect').mockReturnValue({
+      top: 0,
+      bottom: 40,
+      left: 0,
+      right: 60,
+      width: 60,
+      height: 40,
+      x: 0,
+      y: 0,
+      toJSON: () => {},
+    })
+
+    expect(applyFloatingPosition(anchor, floating, { placement: 'bottom-start' }).left).toBe(80)
+    expect(applyFloatingPosition(anchor, floating, { placement: 'bottom-end' }).left).toBe(120)
+    expect(applyFloatingPosition(anchor, floating, { placement: 'right-start' }).top).toBe(100)
+    expect(applyFloatingPosition(anchor, floating, { placement: 'right-end' }).top).toBe(80)
+  })
 })

@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-icons-lucide-react",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "type": "module",
   "main": "dist/watercolor-icons-lucide-react.es.js",
   "module": "dist/watercolor-icons-lucide-react.es.js",

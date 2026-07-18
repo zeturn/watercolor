@@ -7,6 +7,7 @@ import type {
   InputHTMLAttributes,
   ReactElement,
   ReactNode,
+  CSSProperties,
   TdHTMLAttributes,
   ThHTMLAttributes,
 } from 'react'
@@ -27,7 +28,9 @@ import type {
   WatercolorThemeConfig,
 } from '@zeturn/watercolor-core'
 
-type WatercolorComponent = ComponentType<Record<string, unknown>>
+type FloatingPlacement = 'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end' | 'right-start' | 'right-end'
+type HtmlComponentProps<T extends HTMLElement = HTMLElement> = HTMLAttributes<T> & { className?: string; style?: CSSProperties; children?: ReactNode }
+type PolymorphicComponent<TDefault extends ElementType, OwnProps> = <T extends ElementType = TDefault>(props: PolymorphicProps<T, OwnProps>) => ReactElement | null
 type PolymorphicProps<T extends ElementType, OwnProps> = OwnProps &
   Omit<ComponentPropsWithoutRef<T>, keyof OwnProps | 'as'> & { as?: T }
 type CompositionBaseProps = { children?: ReactNode; className?: string }
@@ -51,6 +54,9 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   uppercase?: boolean
   ripple?: boolean
 }
+
+export interface FabProps extends Omit<ButtonProps, 'variant'> { variant?: 'circular' | 'extended'; color?: ComponentColor | 'default'; label?: ReactNode; icon?: ReactNode }
+export interface IconButtonProps extends Omit<ButtonProps, 'variant' | 'buttonStyle' | 'fullWidth'> { color?: ComponentColor | 'default'; edge?: boolean | 'start' | 'end'; icon?: ReactNode }
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'color' | 'value'> {
   value?: string | number | readonly string[]
@@ -242,6 +248,66 @@ export interface TableCellProps extends Omit<TdHTMLAttributes<HTMLTableCellEleme
   variant?: 'head' | 'body' | 'footer'
 }
 
+export interface AccordionItem { key?: string | number; title?: ReactNode; content?: ReactNode; disabled?: boolean; [key: string]: unknown }
+export interface AccordionProps extends HtmlComponentProps<HTMLDivElement> { items?: readonly AccordionItem[]; multiple?: boolean; variant?: 'default' | 'bordered' | 'separated'; onToggle?: (key: string | number, expanded: boolean) => void }
+export interface AlertProps extends HtmlComponentProps<HTMLDivElement> { type?: 'success' | 'warning' | 'error' | 'info'; severity?: 'success' | 'warning' | 'error' | 'info'; variant?: 'filled' | 'outlined' | 'standard'; title?: ReactNode; message?: ReactNode; closable?: boolean; onClose?: () => void; icon?: ReactNode; action?: ReactNode }
+export interface AppBarProps extends HtmlComponentProps<HTMLElement> { position?: 'static' | 'fixed' | 'absolute' | 'sticky' | 'relative'; color?: string; elevation?: number; variant?: 'elevation' | 'outlined' | 'minimal' }
+export interface AutocompleteProps<Value = unknown> extends Omit<SelectProps, 'value' | 'onChange' | 'onSearch'> { value?: Value | Value[] | null; onChange?: (value: Value | Value[] | null) => void; readonly?: boolean; freeSolo?: boolean; minSearchLength?: number; noOptionsText?: ReactNode; onInputChange?: (value: string) => void; filterOptions?: (options: readonly SelectOption[], query: string) => readonly SelectOption[]; renderInput?: (props: Record<string, unknown>) => ReactNode; getOptionLabel?: (option: Value | SelectOption) => string; getOptionValue?: (option: Value | SelectOption) => string | number }
+export interface AvatarProps extends HtmlComponentProps<HTMLDivElement> { src?: string; alt?: string; size?: ComponentSize | 'xs' | 'xl' | number; variant?: 'circular' | 'rounded' | 'square'; color?: ComponentColor | 'default'; children?: ReactNode }
+export interface BadgeProps extends HtmlComponentProps<HTMLSpanElement> { variant?: ComponentColor | 'primary' | 'default'; size?: ComponentSize; dot?: boolean; children?: ReactNode }
+export interface BannerProps extends HtmlComponentProps<HTMLDivElement> { type?: 'info' | 'success' | 'warning' | 'error'; title?: ReactNode; message?: ReactNode; closable?: boolean; onClose?: () => void; sticky?: boolean; zIndex?: number; icon?: ReactNode; actions?: ReactNode }
+export interface BlockquoteProps extends HtmlComponentProps<HTMLElement> { cite?: ReactNode; variant?: 'default' | 'minimal' | 'card'; noBorder?: boolean; interactive?: boolean; size?: ComponentSize | 'medium'; color?: ComponentColor | 'default' }
+export interface BoxProps<T extends ElementType = 'div'> extends PolymorphicProps<T, { children?: ReactNode; className?: string; style?: CSSProperties; p?: unknown; pt?: unknown; pr?: unknown; pb?: unknown; pl?: unknown; px?: unknown; py?: unknown; m?: unknown; mt?: unknown; mr?: unknown; mb?: unknown; ml?: unknown; mx?: unknown; my?: unknown; display?: CSSProperties['display']; flexDirection?: CSSProperties['flexDirection']; justifyContent?: CSSProperties['justifyContent']; alignItems?: CSSProperties['alignItems']; flexWrap?: CSSProperties['flexWrap']; gap?: CSSProperties['gap']; bgcolor?: string; color?: string; border?: string | number; borderRadius?: string | number; width?: CSSProperties['width']; height?: CSSProperties['height']; minWidth?: CSSProperties['minWidth']; minHeight?: CSSProperties['minHeight']; maxWidth?: CSSProperties['maxWidth']; maxHeight?: CSSProperties['maxHeight'] }> { component?: T }
+export interface BreadcrumbItem { label?: ReactNode; href?: string; icon?: ReactNode; disabled?: boolean; current?: boolean; [key: string]: unknown }
+export interface BreadcrumbProps extends Omit<HtmlComponentProps<HTMLElement>, 'onClick'> { items?: readonly BreadcrumbItem[]; separator?: ReactNode; variant?: 'default' | 'compact'; showHome?: boolean; homeIcon?: ReactNode; maxItems?: number; onItemClick?: (item: BreadcrumbItem, index: number) => void }
+export interface CardProps extends HtmlComponentProps<HTMLDivElement> { title?: ReactNode; variant?: 'minimal' | 'default' | 'outlined' | 'elevated'; color?: ComponentColor | 'default'; size?: ComponentSize | 'medium'; interactive?: boolean; noBorder?: boolean; header?: ReactNode; footer?: ReactNode }
+export interface CardActionsProps extends HtmlComponentProps<HTMLDivElement> { disableSpacing?: boolean; disablePadding?: boolean; justifyContent?: CSSProperties['justifyContent'] }
+export interface CardContentProps extends HtmlComponentProps<HTMLDivElement> { disablePadding?: boolean; padding?: 'none' | 'compact' | 'normal' | 'comfortable' }
+export interface ChipProps extends HtmlComponentProps<HTMLDivElement> { label?: ReactNode; avatar?: ReactNode; deletable?: boolean; disabled?: boolean; clickable?: boolean; variant?: 'filled' | 'outlined' | 'minimal'; size?: ComponentSize; color?: ComponentColor | 'default'; deleteIcon?: ReactNode; onDelete?: () => void }
+export interface CircularProgressProps extends HtmlComponentProps<HTMLDivElement> { value?: number; size?: number | string; thickness?: number; variant?: 'determinate' | 'indeterminate'; color?: ComponentColor | 'inherit'; showValue?: boolean; overlay?: boolean; centered?: boolean; inline?: boolean }
+export interface ColorPickerProps extends Omit<HtmlComponentProps<HTMLDivElement>, 'onChange'> { value?: string; onChange?: (value: string) => void; size?: ComponentSize; shape?: 'circle' | 'square' | 'rounded'; disabled?: boolean }
+export interface ContainerProps extends HtmlComponentProps<HTMLDivElement> { maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false | string; fluid?: boolean; fixed?: boolean }
+export interface CopyProps extends HtmlComponentProps<HTMLButtonElement> { text?: string; value?: string; copied?: boolean; error?: boolean; label?: ReactNode; copiedLabel?: ReactNode; errorLabel?: ReactNode; onCopy?: (value: string) => void; icon?: ReactNode }
+export interface DatePickerProps extends Omit<HtmlComponentProps<HTMLDivElement>, 'onChange'> { value?: Date | string | null; onChange?: (value: Date) => void; placeholder?: string; disabled?: boolean; size?: ComponentSize; variant?: 'default' | FieldVariant; format?: string; showToday?: boolean; minDate?: Date | string | null; maxDate?: Date | string | null }
+export interface DividerProps extends HtmlComponentProps<HTMLHRElement> { variant?: 'solid' | 'dashed' | 'dotted'; orientation?: 'horizontal' | 'vertical'; flexItem?: boolean }
+export interface FeatureProps extends HtmlComponentProps<HTMLDivElement> { title?: ReactNode; description?: ReactNode; icon?: ReactNode; iconSize?: number; size?: ComponentSize; align?: 'left' | 'center' | 'right'; background?: string; variant?: 'default' | 'minimal' | 'card'; bgColor?: string; reverse?: boolean; vertical?: boolean; ctaLabel?: ReactNode; ctaHref?: string; onCtaClick?: (event: unknown) => void }
+export interface FeedItem { title?: ReactNode; description?: ReactNode; avatar?: ReactNode; time?: ReactNode; children?: FeedItem[]; [key: string]: unknown }
+export interface FeedProps extends Omit<HtmlComponentProps<HTMLDivElement>, 'onClick'> { item?: FeedItem; items?: readonly FeedItem[]; showAvatar?: boolean; variant?: 'timeline' | 'list'; color?: string; dotSize?: number; lineWidth?: number; onItemClick?: (item: FeedItem) => void }
+export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> { onChange?: (files: FileList | File[]) => void; onInvalid?: (files: FileList | File[]) => void; label?: ReactNode; helperText?: ReactNode; accept?: string; multiple?: boolean; className?: string }
+export interface FormControlProps extends HtmlComponentProps<HTMLDivElement> { disabled?: boolean; error?: boolean; required?: boolean; variant?: FieldVariant; size?: ComponentSize; fullWidth?: boolean; margin?: 'none' | 'dense' | 'normal' }
+export interface FormControlLabelProps extends HtmlComponentProps<HTMLLabelElement> { label?: ReactNode; labelPlacement?: 'start' | 'end' | 'top' | 'bottom'; disabled?: boolean; required?: boolean; checked?: boolean; value?: unknown; control?: ReactNode; onChange?: (...args: unknown[]) => void }
+export interface FormGroupProps extends HtmlComponentProps<HTMLDivElement> { row?: boolean; spacing?: 'compact' | 'normal' | 'comfortable' }
+export interface FormHelperTextProps extends HtmlComponentProps<HTMLParagraphElement> { disabled?: boolean; error?: boolean; filled?: boolean; focused?: boolean; margin?: 'none' | 'dense' | 'normal'; required?: boolean; variant?: FieldVariant; id?: string; size?: ComponentSize }
+export interface GridProps extends HtmlComponentProps<HTMLDivElement> { container?: boolean; item?: boolean; xs?: number | boolean; sm?: number | boolean; md?: number | boolean; lg?: number | boolean; xl?: number | boolean; spacing?: number | string; direction?: CSSProperties['flexDirection']; justifyContent?: CSSProperties['justifyContent']; alignItems?: CSSProperties['alignItems'] }
+export interface HoverCardProps extends HtmlComponentProps<HTMLDivElement> { triggerText?: ReactNode; cardData?: Record<string, unknown>; variant?: 'default' | 'outlined' | 'filled' | 'minimal'; size?: ComponentSize; cardSize?: ComponentSize | 'xl'; position?: FloatingPlacement; delay?: number; hideDelay?: number; showArrow?: boolean; disabled?: boolean; onShow?: () => void; onHide?: () => void; onAction?: (...args: unknown[]) => void; card?: ReactNode }
+export interface IconProps extends HtmlComponentProps<HTMLSpanElement> { name?: string; size?: number | string; color?: string; children?: ReactNode }
+export interface ImageGalleryImage { src: string; alt?: string; title?: ReactNode; description?: ReactNode; [key: string]: unknown }
+export interface ImageGalleryProps extends HtmlComponentProps<HTMLDivElement> { images?: readonly ImageGalleryImage[]; title?: ReactNode; layout?: 'grid' | 'masonry' | 'carousel'; size?: ComponentSize | 'xl'; columns?: number; gap?: number; showInfo?: boolean; showCount?: boolean; showDownload?: boolean; showPagination?: boolean; itemsPerPage?: number; lazyLoad?: boolean; loading?: boolean; onSelect?: (image: ImageGalleryImage, index: number) => void; onDownload?: (image: ImageGalleryImage) => void; onLightboxOpen?: (event: unknown) => void; onLightboxClose?: () => void }
+export interface ListProps extends HtmlComponentProps<HTMLUListElement> { dense?: boolean; disablePadding?: boolean; nav?: boolean; subheader?: ReactNode }
+export interface ListItemProps<T extends ElementType = 'li'> extends PolymorphicProps<T, { children?: ReactNode; className?: string; button?: boolean; disabled?: boolean; divider?: boolean; selected?: boolean; disableGutters?: boolean; multiselect?: boolean }> { component?: T }
+export interface ListItemIconProps extends HtmlComponentProps<HTMLSpanElement> { position?: 'start' | 'end' }
+export interface ListItemTextProps extends HtmlComponentProps<HTMLSpanElement> { primary?: ReactNode; secondary?: ReactNode; inset?: boolean }
+export interface NumberAnimationProps extends HtmlComponentProps<HTMLSpanElement> { active?: boolean; duration?: number; from?: number; to?: number; locale?: string; precision?: number; showSeparator?: boolean; prefix?: ReactNode; suffix?: ReactNode; separator?: string; formatter?: (value: number) => ReactNode; easing?: 'linear' | 'easeIn' | 'easeOut' | 'easeInOut' | string; onFinish?: () => void }
+export interface PaginationProps extends Omit<HtmlComponentProps<HTMLElement>, 'onChange'> { value?: number; page?: number; onChange?: (page: number) => void; total?: number; pageSize?: number; siblingCount?: number; boundaryCount?: number; size?: ComponentSize | 'xl' }
+export interface PaperProps<T extends ElementType = 'div'> extends PolymorphicProps<T, { children?: ReactNode; className?: string; style?: CSSProperties; variant?: 'elevation' | 'outlined' | 'minimal'; elevation?: number; square?: boolean; hoverable?: boolean; clickable?: boolean; color?: ComponentColor | 'default'; size?: ComponentSize | null; shape?: string | null; gradient?: boolean; frosted?: boolean; textured?: boolean }> { component?: T }
+export interface PopoverProps extends HtmlComponentProps<HTMLDivElement> { open?: boolean; onOpenChange?: (open: boolean) => void; triggerText?: ReactNode; trigger?: ReactNode; placement?: FloatingPlacement; offset?: number }
+export interface PricingPlan { title?: ReactNode; price?: ReactNode; features?: readonly ReactNode[]; highlighted?: boolean; [key: string]: unknown }
+export interface PricingTableProps extends HtmlComponentProps<HTMLDivElement> { plans?: readonly PricingPlan[]; columns?: number }
+export interface ProgressProps extends HtmlComponentProps<HTMLDivElement> { value?: number; label?: ReactNode; showPercent?: boolean; color?: ComponentColor; size?: ComponentSize; animated?: boolean }
+export interface RatingProps extends Omit<HtmlComponentProps<HTMLDivElement>, 'onChange'> { value?: number; max?: number; readOnly?: boolean; onChange?: (value: number) => void; ariaLabel?: string }
+export interface SkeletonProps<T extends ElementType = 'div'> extends PolymorphicProps<T, { children?: ReactNode; className?: string; style?: CSSProperties; animation?: false | 'pulse' | 'wave'; height?: number | string; width?: number | string; variant?: 'text' | 'rectangular' | 'rounded' | 'circular' }> { component?: T }
+export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange' | 'value' | 'defaultValue'> { value?: number; defaultValue?: number; min?: number; max?: number; step?: number; label?: ReactNode; valueLabelDisplay?: 'off' | 'auto' | 'on'; onChange?: (value: number) => void; className?: string; style?: CSSProperties }
+export interface SlideOverProps extends HtmlComponentProps<HTMLDivElement> { open?: boolean; onClose?: () => void; placement?: 'left' | 'right' | 'top' | 'bottom'; width?: number | string; header?: ReactNode; footer?: ReactNode }
+export interface SnackbarProps extends HtmlComponentProps<HTMLDivElement> { open?: boolean; message?: ReactNode; severity?: 'success' | 'warning' | 'error' | 'info'; closable?: boolean; showIcon?: boolean; showProgress?: boolean; autoHideDuration?: number; action?: ReactNode; onClose?: () => void; onAction?: () => void }
+export interface StatusProps extends HtmlComponentProps<HTMLSpanElement> { status?: 'default' | 'success' | 'warning' | 'error' | 'info' | string; size?: ComponentSize; showText?: boolean; animated?: boolean; animationType?: 'auto' | 'glow' | 'spin' | 'bounce' | 'shake' | 'ripple'; text?: ReactNode }
+export interface ToolbarProps extends HtmlComponentProps<HTMLDivElement> { variant?: 'regular' | 'dense'; disableGutters?: boolean }
+export interface TooltipProps extends HtmlComponentProps<HTMLDivElement> { text?: ReactNode; placement?: 'top' | 'bottom' | 'left' | 'right'; children?: ReactNode }
+export interface TypographyProps<T extends ElementType = 'p'> extends PolymorphicProps<T, { children?: ReactNode; className?: string; style?: CSSProperties; variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2' | 'caption' | 'overline'; component?: T; color?: string; align?: CSSProperties['textAlign']; gutterBottom?: boolean; noWrap?: boolean }> { component?: T }
+export interface TypingTextProps extends HtmlComponentProps<HTMLSpanElement> { text?: string; speed?: number; pause?: number; loop?: boolean; erase?: boolean; showCursor?: boolean }
+export interface VerificationCodeInputProps extends Omit<HtmlComponentProps<HTMLDivElement>, 'onChange'> { length?: number; value?: string; onChange?: (value: string) => void; onComplete?: (value: string) => void; autoFocus?: boolean }
+export interface VideoPlayerProps extends HtmlComponentProps<HTMLDivElement> { src: string; autoplay?: boolean; loop?: boolean; muted?: boolean; poster?: string; controls?: boolean }
+export interface WatermarkProps extends HtmlComponentProps<HTMLDivElement> { content?: ReactNode; image?: string; fullscreen?: boolean; gap?: [number, number]; offset?: [number, number]; rotate?: number; zIndex?: number; opacity?: number; debug?: boolean; cross?: boolean }
+
 export interface ThemeContextValue extends ThemeSnapshot {
   setMode: (mode: ThemeMode) => void
   toggleMode: () => void
@@ -342,66 +408,66 @@ export type {
   SplitRatio,
 } from '@zeturn/watercolor-core'
 
-export const Accordion: WatercolorComponent
-export const Alert: WatercolorComponent
-export const AppBar: WatercolorComponent
-export const Autocomplete: WatercolorComponent
-export const Avatar: WatercolorComponent
-export const Badge: WatercolorComponent
-export const Banner: WatercolorComponent
-export const Blockquote: WatercolorComponent
-export const Box: WatercolorComponent
-export const Breadcrumb: WatercolorComponent
+export const Accordion: ComponentType<AccordionProps>
+export const Alert: ComponentType<AlertProps>
+export const AppBar: ComponentType<AppBarProps>
+export const Autocomplete: ComponentType<AutocompleteProps>
+export const Avatar: ComponentType<AvatarProps>
+export const Badge: ComponentType<BadgeProps>
+export const Banner: ComponentType<BannerProps>
+export const Blockquote: ComponentType<BlockquoteProps>
+export const Box: <T extends ElementType = 'div'>(props: BoxProps<T>) => ReactElement | null
+export const Breadcrumb: ComponentType<BreadcrumbProps>
 export const Button: ComponentType<ButtonProps>
-export const Card: WatercolorComponent
-export const CardActions: WatercolorComponent
-export const CardContent: WatercolorComponent
+export const Card: ComponentType<CardProps>
+export const CardActions: ComponentType<CardActionsProps>
+export const CardContent: ComponentType<CardContentProps>
 export const Checkbox: ComponentType<CheckboxProps>
-export const Chip: WatercolorComponent
-export const CircularProgress: WatercolorComponent
-export const ColorPicker: WatercolorComponent
-export const Container: WatercolorComponent
-export const Copy: WatercolorComponent
-export const DatePicker: WatercolorComponent
-export const Fab: WatercolorComponent
-export const Feed: WatercolorComponent
-export const Feature: WatercolorComponent
-export const FileInput: WatercolorComponent
-export const FormControl: WatercolorComponent
-export const FormControlLabel: WatercolorComponent
-export const FormGroup: WatercolorComponent
-export const FormHelperText: WatercolorComponent
-export const Grid: WatercolorComponent
-export const HoverCard: WatercolorComponent
-export const Icon: WatercolorComponent
-export const IconButton: WatercolorComponent
-export const ImageGallery: WatercolorComponent
+export const Chip: ComponentType<ChipProps>
+export const CircularProgress: ComponentType<CircularProgressProps>
+export const ColorPicker: ComponentType<ColorPickerProps>
+export const Container: ComponentType<ContainerProps>
+export const Copy: ComponentType<CopyProps>
+export const DatePicker: ComponentType<DatePickerProps>
+export const Fab: ComponentType<FabProps>
+export const Feed: ComponentType<FeedProps>
+export const Feature: ComponentType<FeatureProps>
+export const FileInput: ComponentType<FileInputProps>
+export const FormControl: ComponentType<FormControlProps>
+export const FormControlLabel: ComponentType<FormControlLabelProps>
+export const FormGroup: ComponentType<FormGroupProps>
+export const FormHelperText: ComponentType<FormHelperTextProps>
+export const Grid: ComponentType<GridProps>
+export const HoverCard: ComponentType<HoverCardProps>
+export const Icon: ComponentType<IconProps>
+export const IconButton: ComponentType<IconButtonProps>
+export const ImageGallery: ComponentType<ImageGalleryProps>
 export const Inline: <T extends ElementType = 'div'>(props: InlineProps<T>) => ReactElement | null
 export const Input: ComponentType<InputProps>
-export const List: WatercolorComponent
-export const ListItem: WatercolorComponent
-export const ListItemIcon: WatercolorComponent
-export const ListItemText: WatercolorComponent
+export const List: ComponentType<ListProps>
+export const ListItem: <T extends ElementType = 'li'>(props: ListItemProps<T>) => ReactElement | null
+export const ListItemIcon: ComponentType<ListItemIconProps>
+export const ListItemText: ComponentType<ListItemTextProps>
 export const Menu: ComponentType<MenuProps>
 export const Modal: ComponentType<ModalProps>
-export const NumberAnimation: WatercolorComponent
-export const Pagination: WatercolorComponent
+export const NumberAnimation: ComponentType<NumberAnimationProps>
+export const Pagination: ComponentType<PaginationProps>
 export const Page: <T extends ElementType = 'div'>(props: PageProps<T>) => ReactElement | null
-export const Paper: WatercolorComponent
-export const Popover: WatercolorComponent
-export const PricingTable: WatercolorComponent
-export const Progress: WatercolorComponent
+export const Paper: <T extends ElementType = 'div'>(props: PaperProps<T>) => ReactElement | null
+export const Popover: ComponentType<PopoverProps>
+export const PricingTable: ComponentType<PricingTableProps>
+export const Progress: ComponentType<ProgressProps>
 export const Radio: <Value = string | number | boolean>(props: RadioProps<Value>) => ReactElement | null
 export const RadioGroup: <Value = string | number | boolean>(props: RadioGroupProps<Value>) => ReactElement | null
-export const Rating: WatercolorComponent
+export const Rating: ComponentType<RatingProps>
 export const Select: <Value extends SelectValue = SelectValue>(props: SelectProps<Value>) => ReactElement | null
-export const Skeleton: WatercolorComponent
-export const Slider: WatercolorComponent
-export const SlideOver: WatercolorComponent
+export const Skeleton: <T extends ElementType = 'div'>(props: SkeletonProps<T>) => ReactElement | null
+export const Slider: ComponentType<SliderProps>
+export const SlideOver: ComponentType<SlideOverProps>
 export const Split: <T extends ElementType = 'div'>(props: SplitProps<T>) => ReactElement | null
 export const Stack: <T extends ElementType = 'div'>(props: StackProps<T>) => ReactElement | null
-export const Snackbar: WatercolorComponent
-export const Status: WatercolorComponent
+export const Snackbar: ComponentType<SnackbarProps>
+export const Status: ComponentType<StatusProps>
 export const Switch: ComponentType<SwitchProps>
 export const Table: ComponentType<TableProps> & {
   Head: ComponentType<TableHeadProps>
@@ -415,13 +481,13 @@ export const TableHead: ComponentType<TableHeadProps>
 export const TableRow: ComponentType<TableRowProps>
 export const Tabs: ComponentType<TabsProps>
 export const TextField: ComponentType<TextFieldProps>
-export const Toolbar: WatercolorComponent
-export const Tooltip: WatercolorComponent
-export const Typography: WatercolorComponent
-export const TypingText: WatercolorComponent
-export const VerificationCodeInput: WatercolorComponent
-export const VideoPlayer: WatercolorComponent
-export const Watermark: WatercolorComponent
+export const Toolbar: ComponentType<ToolbarProps>
+export const Tooltip: ComponentType<TooltipProps>
+export const Typography: <T extends ElementType = 'p'>(props: TypographyProps<T>) => ReactElement | null
+export const TypingText: ComponentType<TypingTextProps>
+export const VerificationCodeInput: ComponentType<VerificationCodeInputProps>
+export const VideoPlayer: ComponentType<VideoPlayerProps>
+export const Watermark: ComponentType<WatermarkProps>
 export const LocaleProvider: ComponentType<LocaleProviderProps>
 export const defaultLocaleMessages: WatercolorLocaleMessages
 export function useLocale(): LocaleContextValue

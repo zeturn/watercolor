@@ -79,6 +79,27 @@ try {
 
   const reactTypes = fs.readFileSync(path.join(root, 'packages/react/index.d.ts'), 'utf8')
   if (/ComponentType<any>/.test(reactTypes)) fail('React public types still collapse components to ComponentType<any>')
+  if (/ComponentType\s*<\s*Record\s*<\s*string\s*,\s*unknown\s*>\s*>/.test(reactTypes) || /\bWatercolorComponent\b/.test(reactTypes)) {
+    fail('React public types still expose generic WatercolorComponent declarations')
+  }
+  const coreEntry = fs.readFileSync(path.join(root, 'packages/core/src/index.ts'), 'utf8')
+  if (/export \* as \w+Utils from ['"]\.\/components\//.test(coreEntry)) fail('Core root entry must not export component utility namespaces')
+  for (const framework of ['react', 'vue']) {
+    const sourceRoot = path.join(root, 'packages', framework, 'src')
+    const leaks = []
+    const walk = (directory) => {
+      for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+        const fullPath = path.join(directory, entry.name)
+        if (entry.isDirectory()) walk(fullPath)
+        else if (/\.(?:js|jsx|ts|tsx|vue)$/.test(entry.name)) {
+          const contents = fs.readFileSync(fullPath, 'utf8')
+          if (/@zeturn\/watercolor-core\/src\//.test(contents)) leaks.push(path.relative(root, fullPath))
+        }
+      }
+    }
+    walk(sourceRoot)
+    if (leaks.length) fail(`${framework}: source imports private @zeturn/watercolor-core/src paths:\n${leaks.join('\n')}`)
+  }
 
   if (errors.length) {
     console.error(`Publish contract failed:\n${errors.map((error) => `- ${error}`).join('\n')}`)

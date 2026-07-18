@@ -3,13 +3,17 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@zeturn/watercolor-core/src/*": ["../core/src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
     "jsx": "preserve",
     "declaration": true,
     "declarationMap": true,
     "outDir": "dist"
   },
-  "include": ["src/**/*", "vite.config.js"]
+  "include": [
+    "src/**/*",
+    "vite.config.js"
+  ]
 }

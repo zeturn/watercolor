@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.6] - 2026-07-18
+
+### Changed
+- Tightened the React public declaration file so exported components use explicit props instead of a generic `WatercolorComponent`.
+- Narrowed `@zeturn/watercolor-core` root exports to the stable theme, composition, and interaction APIs.
+- Inlined React/Vue component utility helpers so framework packages no longer import private `@zeturn/watercolor-core/src/*` paths.
+- Expanded the shared floating placement contract to support `*-start` and `*-end` alignments.
+
+### Added
+- Added release gates that fail on generic React component declarations, core root utility namespace exports, or private core source imports from framework packages.
+
 ## [1.2.5] - 2026-07-18
 
 ### Added

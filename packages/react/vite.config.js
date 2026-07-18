@@ -62,7 +62,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
-      '@zeturn/watercolor-core/src': resolve(__dirname, '../core/src'),
     },
   },
 }) 

@@ -37,6 +37,9 @@ const reactDeclaration = await readFile(resolve(root, 'packages/react/index.d.ts
 if (/ComponentType\s*<\s*any\s*>/.test(reactDeclaration)) {
   throw new Error('React public declarations must not expose ComponentType<any>')
 }
+if (/ComponentType\s*<\s*Record\s*<\s*string\s*,\s*unknown\s*>\s*>/.test(reactDeclaration) || /\bWatercolorComponent\b/.test(reactDeclaration)) {
+  throw new Error('React public declarations must expose explicit component props, not WatercolorComponent or ComponentType<Record<string, unknown>>')
+}
 for (const typeName of manifest.typedContracts.react) {
   if (!new RegExp(`export\\s+(?:interface|type)\\s+${typeName}\\b`).test(reactDeclaration)) {
     throw new Error(`React public declaration is missing ${typeName}`)
