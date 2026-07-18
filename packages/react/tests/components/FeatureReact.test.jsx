@@ -4,8 +4,8 @@ import Feature from '@/components/Feature/Feature.jsx'
 
 describe('Feature (React)', () => {
   it('renders without crashing', () => {
-    render(<Feature />)
-    expect(true).toBe(true)
+    const { getByText } = render(<Feature title="Fast" description="Ships quickly" />)
+    expect(getByText('Fast')).toBeInTheDocument()
   })
 
   it('renders string icon without React child warnings', () => {

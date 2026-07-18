@@ -4,7 +4,7 @@ import Progress from '@/components/Progress/Progress.jsx'
 
 describe('Progress (React)', () => {
   it('renders without crashing', () => {
-    render(<Progress />)
-    expect(true).toBe(true)
+    const { getByRole } = render(<Progress value={42} label="Upload" />)
+    expect(getByRole('progressbar', { name: 'Upload' })).toHaveAttribute('aria-valuenow', '42')
   })
 })

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react'
-import { createPortal } from 'react-dom'
+import React, { useCallback, useRef } from 'react'
+import { Portal, useOverlayLayer } from '../../interactions.jsx'
 import './style.css'
 
 /**
@@ -8,52 +8,49 @@ import './style.css'
  */
 const SlideOver = ({ open = false, onClose = () => {}, placement = 'right', width = 400, children, header, footer }) => {
   const panelRef = useRef(null)
-  const previousActiveElement = useRef(null)
 
-  // ESC 关闭
-  useEffect(() => {
-    if (!open) return
-    previousActiveElement.current = document.activeElement
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    requestAnimationFrame(() => panelRef.current?.focus())
-    const handleKey = (e) => {
-      if (e.key === 'Escape') onClose()
-    }
-    window.addEventListener('keydown', handleKey)
-    return () => {
-      window.removeEventListener('keydown', handleKey)
-      document.body.style.overflow = previousOverflow
-      previousActiveElement.current?.focus?.()
-    }
-  }, [open, onClose])
+  const handleClose = useCallback(() => {
+    onClose?.()
+  }, [onClose])
 
-  if (typeof document === 'undefined') return null
+  useOverlayLayer({
+    open,
+    elementRef: panelRef,
+    modal: true,
+    lockScroll: true,
+    restoreFocus: true,
+    initialFocus: true,
+    closeOnEscape: true,
+    closeOnPointerDownOutside: false,
+    onEscapeKeyDown: handleClose,
+    zIndex: 3000,
+  })
 
-  return createPortal(
-    open ? (
-      <div className="wc-slideover-wrapper">
-        <div className="wc-slideover-overlay" onClick={onClose} />
-        <div
-          ref={panelRef}
-          className={`wc-slideover-panel wc-slideover-${placement}`}
-          style={{ width: typeof width === 'number' ? `${width}px` : width }}
-          role="dialog"
-          aria-modal="true"
-          tabIndex={-1}
-        >
-          {header && <header className="wc-slideover-header">{header}</header>}
-          <div className="wc-slideover-body">{children}</div>
-          {footer && <footer className="wc-slideover-footer">{footer}</footer>}
-          <button className="wc-slideover-close" type="button" onClick={onClose} aria-label="关闭">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 6l12 12M18 6 6 18" />
-            </svg>
-          </button>
+  return (
+    <Portal>
+      {open ? (
+        <div className="wc-slideover-wrapper">
+          <div className="wc-slideover-overlay" onClick={handleClose} />
+          <div
+            ref={panelRef}
+            className={`wc-slideover-panel wc-slideover-${placement}`}
+            style={{ width: typeof width === 'number' ? `${width}px` : width }}
+            role="dialog"
+            aria-modal="true"
+            tabIndex={-1}
+          >
+            {header && <header className="wc-slideover-header">{header}</header>}
+            <div className="wc-slideover-body">{children}</div>
+            {footer && <footer className="wc-slideover-footer">{footer}</footer>}
+            <button className="wc-slideover-close" type="button" onClick={handleClose} aria-label="关闭">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 6l12 12M18 6 6 18" />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
-    ) : null,
-    document.body
+      ) : null}
+    </Portal>
   )
 }
 

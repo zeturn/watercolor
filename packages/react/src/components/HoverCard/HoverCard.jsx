@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useId } from 'react'
+import { Portal, useFloatingPosition, useOverlayLayer } from '../../interactions.jsx'
 import './style.css'
-import { getHoverCardClasses } from './utils.js'
 
 const HoverCard = ({
   triggerText = 'Hover me',
@@ -27,6 +27,7 @@ const HoverCard = ({
   const showTimer = useRef(null)
   const hideTimer = useRef(null)
   const cardRef = useRef(null)
+  const triggerRef = useRef(null)
   const triggerId = `${cardId}-trigger`
 
   const clearTimers = () => {
@@ -73,6 +74,32 @@ const HoverCard = ({
     `hover-card-card-size-${cardSize}`
   ].join(' ')
 
+  const resolvedPlacement = useFloatingPosition({
+    open: visible,
+    anchorRef: triggerRef,
+    floatingRef: cardRef,
+    placement: position,
+    offset: 8,
+  })
+
+  useOverlayLayer({
+    open: visible,
+    elementRef: cardRef,
+    refs: [triggerRef],
+    closeOnEscape: true,
+    closeOnPointerDownOutside: true,
+    onEscapeKeyDown: () => {
+      setVisible(false)
+      onHide?.()
+      triggerRef.current?.focus()
+    },
+    onPointerDownOutside: () => {
+      setVisible(false)
+      onHide?.()
+    },
+    zIndex: 1000,
+  })
+
   return (
     <div
       className={wrapperClasses}
@@ -86,6 +113,7 @@ const HoverCard = ({
       {...props}
     >
       <span
+        ref={triggerRef}
         id={triggerId}
         className="hover-card-trigger"
         tabIndex={disabled ? -1 : 0}
@@ -95,12 +123,15 @@ const HoverCard = ({
       </span>
 
       {visible && (
+        <Portal>
         <div
           ref={cardRef}
           id={cardId}
-          className={popupClasses}
+          className={`${popupClasses} hover-card-position-${resolvedPlacement}`.trim()}
           role="dialog"
           aria-labelledby={cardData.title ? `${cardId}-title` : undefined}
+          onMouseEnter={showCard}
+          onMouseLeave={hideCard}
         >
           {showArrow && <div className={`hover-card-arrow hover-card-arrow-${position}`} />}
 
@@ -142,6 +173,7 @@ const HoverCard = ({
             )}
           </div>
         </div>
+        </Portal>
       )}
     </div>
   )

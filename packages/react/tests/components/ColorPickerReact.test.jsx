@@ -5,7 +5,7 @@ import ColorPicker from '@/components/ColorPicker/ColorPicker.jsx'
 describe('ColorPicker (React)', () => {
   it('renders without crashing', () => {
     render(<ColorPicker />)
-    expect(true).toBe(true)
+    expect(document.querySelector('input[type="color"]')).toHaveValue('#ffffff')
   })
 
   it('renders with default props', () => {

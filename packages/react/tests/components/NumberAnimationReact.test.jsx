@@ -4,7 +4,7 @@ import NumberAnimation from '@/components/NumberAnimation/NumberAnimation.jsx'
 
 describe('NumberAnimation (React)', () => {
   it('renders without crashing', () => {
-    render(<NumberAnimation />)
-    expect(true).toBe(true)
+    const { getByText } = render(<NumberAnimation active={false} to={42} />)
+    expect(getByText('42')).toBeInTheDocument()
   })
 })

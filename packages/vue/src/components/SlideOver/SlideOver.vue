@@ -36,7 +36,6 @@
             <slot name="footer" />
           </footer>
           <button
-            ref="closeRef"
             class="wc-slideover-close"
             type="button"
             aria-label="关闭"
@@ -53,7 +52,8 @@
 </template>
 
 <script>
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { useOverlayLayer } from '../../interactions'
 import './style.css'
 export default {
   name: 'SlideOver',
@@ -75,9 +75,6 @@ export default {
   emits: ['update:modelValue', 'open', 'close'],
   setup(props, { emit }) {
     const panelRef = ref(null)
-    const closeRef = ref(null)
-    const previousActiveElement = ref(null)
-    let previousOverflow = ''
 
     const model = computed({
       get: () => props.modelValue,
@@ -89,26 +86,26 @@ export default {
     }
     const panelStyle = computed(() => ({ width: typeof props.width === 'number' ? props.width + 'px' : props.width }))
 
-    watch(() => props.modelValue, async (open) => {
+    useOverlayLayer({
+      open: model,
+      elementRef: panelRef,
+      modal: true,
+      lockScroll: true,
+      restoreFocus: true,
+      initialFocus: true,
+      closeOnEscape: true,
+      closeOnPointerDownOutside: false,
+      onEscapeKeyDown: close,
+      zIndex: 3000
+    })
+
+    watch(() => props.modelValue, (open) => {
       if (open) {
-        previousActiveElement.value = document.activeElement
-        previousOverflow = document.body.style.overflow
-        document.body.style.overflow = 'hidden'
         emit('open')
-        await nextTick()
-        if (closeRef.value) closeRef.value.focus()
-        else panelRef.value?.focus()
-      } else {
-        document.body.style.overflow = previousOverflow
-        previousActiveElement.value?.focus?.()
       }
     }, { immediate: true })
 
-    onBeforeUnmount(() => {
-      document.body.style.overflow = previousOverflow
-    })
-
-    return { model, close, panelStyle, panelRef, closeRef }
+    return { model, close, panelStyle, panelRef }
   }
 }
 </script>

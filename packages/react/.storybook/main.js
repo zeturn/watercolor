@@ -1,7 +1,10 @@
 // .storybook-react/main.js
 import { fileURLToPath } from 'node:url'
+import path from 'node:path'
 
 const workspaceRoot = fileURLToPath(new URL('../../../', import.meta.url))
+const coreSourceEntry = path.resolve(workspaceRoot, 'packages/core/src/index.ts')
+const coreSourceRoot = path.resolve(workspaceRoot, 'packages/core/src')
 
 /** @type { import('@storybook/react-vite').StorybookConfig } */
 const config = {
@@ -26,6 +29,20 @@ const config = {
     return {
       ...config,
       plugins: filteredPlugins,
+      resolve: {
+        ...config.resolve,
+        alias: [
+          ...(Array.isArray(config.resolve?.alias) ? config.resolve.alias : []),
+          {
+            find: /^@zeturn\/watercolor-core$/,
+            replacement: coreSourceEntry,
+          },
+          {
+            find: /^@zeturn\/watercolor-core\/src\/(.*)$/,
+            replacement: `${coreSourceRoot}/$1`,
+          },
+        ],
+      },
       server: {
         ...config.server,
         fs: {

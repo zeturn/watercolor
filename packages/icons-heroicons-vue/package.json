@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-icons-heroicons-vue",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "type": "module",
   "main": "dist/watercolor-icons-heroicons-vue.es.js",
   "module": "dist/watercolor-icons-heroicons-vue.es.js",

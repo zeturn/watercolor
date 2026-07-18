@@ -4,7 +4,7 @@ import Pagination from '@/components/Pagination/Pagination.jsx'
 
 describe('Pagination (React)', () => {
   it('renders without crashing', () => {
-    render(<Pagination />)
-    expect(true).toBe(true)
+    const { getByRole } = render(<Pagination total={30} pageSize={10} />)
+    expect(getByRole('navigation')).toBeInTheDocument()
   })
 })

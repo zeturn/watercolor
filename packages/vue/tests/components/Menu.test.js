@@ -242,8 +242,31 @@ describe('Menu 组件', () => {
       }
     })
 
-    // 组件基础结构存在
     expect(wrapper.find('.wc-menu').exists()).toBe(true)
+  })
+
+  it('支持 ArrowDown 导航和 Escape 关闭', async () => {
+    const wrapper = mount(Menu, {
+      props: {
+        items: mockItems
+      },
+      attachTo: document.body
+    })
+
+    const trigger = wrapper.find('.wc-menu__button')
+    trigger.element.focus()
+    await trigger.trigger('keydown', { key: 'ArrowDown' })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isOpen).toBe(true)
+    expect(wrapper.find('[role="menu"]').exists()).toBe(true)
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isOpen).toBe(false)
+    expect(trigger.element).toHaveFocus()
+    wrapper.unmount()
   })
 
   it('具有正确的可访问性属性', async () => {

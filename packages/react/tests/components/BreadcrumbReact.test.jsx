@@ -5,7 +5,7 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.jsx'
 describe('Breadcrumb (React)', () => {
   it('renders without crashing', () => {
     render(<Breadcrumb />)
-    expect(true).toBe(true)
+    expect(screen.getByRole('navigation', { name: '面包屑导航' })).toBeInTheDocument()
   })
 
   it('renders with default props', () => {

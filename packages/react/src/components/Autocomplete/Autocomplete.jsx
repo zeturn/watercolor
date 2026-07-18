@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useId } from 'react'
+import { useOverlayLayer } from '../../interactions.jsx'
 import './style.css'
 
 const Autocomplete = ({
@@ -40,6 +41,7 @@ const Autocomplete = ({
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
   const autocompleteRef = useRef(null)
   const inputRef = useRef(null)
+  const dropdownRef = useRef(null)
 
   // Default functions
   const defaultGetOptionLabel = (option) => {
@@ -64,18 +66,21 @@ const Autocomplete = ({
     }
   }, [value, multiple])
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (autocompleteRef.current && !autocompleteRef.current.contains(event.target)) {
-        setIsOpen(false)
-      }
-    }
+  const closeDropdown = () => {
+    setIsOpen(false)
+    setHighlightedIndex(-1)
+  }
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
+  useOverlayLayer({
+    open: isOpen,
+    elementRef: dropdownRef,
+    refs: [autocompleteRef],
+    closeOnEscape: true,
+    closeOnPointerDownOutside: true,
+    onEscapeKeyDown: closeDropdown,
+    onPointerDownOutside: closeDropdown,
+    zIndex: 1000,
+  })
 
   const defaultFilterOptions = (options, query) => {
     if (!query || query.length < minSearchLength) {
@@ -156,8 +161,7 @@ const Autocomplete = ({
   const handleClear = (e) => {
     e.stopPropagation()
     setSearchQuery('')
-    setIsOpen(false)
-    setHighlightedIndex(-1)
+    closeDropdown()
     const newValue = multiple ? [] : null
     onChange?.({ target: { name, value: newValue } })
   }
@@ -182,7 +186,7 @@ const Autocomplete = ({
     } else {
       newValue = option
       setSearchQuery(getLabel(option))
-      setIsOpen(false)
+      closeDropdown()
     }
 
     setHighlightedIndex(-1)
@@ -216,8 +220,7 @@ const Autocomplete = ({
         }
         break
       case 'Escape':
-        setIsOpen(false)
-        setHighlightedIndex(-1)
+        closeDropdown()
         inputRef.current?.blur()
         break
       default:
@@ -306,7 +309,7 @@ const Autocomplete = ({
       </div>
 
       {isOpen && searchQuery.length >= minSearchLength && (
-        <div className="wc-autocomplete__dropdown" id={`${autocompleteId}-options`} role="listbox">
+        <div ref={dropdownRef} className="wc-autocomplete__dropdown" id={`${autocompleteId}-options`} role="listbox">
           {filteredOptions.length === 0 ? (
             <div className="wc-autocomplete__no-options">
               {noOptionsText}

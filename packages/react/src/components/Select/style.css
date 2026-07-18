@@ -170,6 +170,7 @@
   transition: background var(--wc-motion-fast) var(--wc-ease-standard);
 }
 .wc-select__option:hover { background: var(--wc-action-hover); }
+.wc-select__option[data-active="true"] { background: var(--wc-action-hover); }
 .wc-select__option--selected { background: var(--wc-action-selected); font-weight: 500; }
 .wc-select__option--selected:hover { background: var(--wc-action-selected-hover); }
 .wc-select__option--disabled { color: var(--wc-text-disabled); cursor: not-allowed; }

@@ -4,7 +4,7 @@
 }
 
 .wc-tooltip {
-  position: absolute;
+  position: fixed;
   z-index: 9999;
   width: max-content;
   max-width: min(280px, calc(100vw - 24px));
@@ -20,27 +20,15 @@
 }
 
 .wc-tooltip--top {
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .wc-tooltip--bottom {
-  top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .wc-tooltip--left {
-  top: 50%;
-  right: calc(100% + 8px);
-  transform: translateY(-50%);
 }
 
 .wc-tooltip--right {
-  top: 50%;
-  left: calc(100% + 8px);
-  transform: translateY(-50%);
 }
 
 .tooltip-fade-enter-active,

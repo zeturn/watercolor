@@ -4,7 +4,7 @@ import PricingTable from '@/components/PricingTable/PricingTable.jsx'
 
 describe('PricingTable (React)', () => {
   it('renders without crashing', () => {
-    render(<PricingTable />)
-    expect(true).toBe(true)
+    const { getByText } = render(<PricingTable plans={[{ name: 'Pro', price: '$9', features: ['A'], button: 'Buy' }]} />)
+    expect(getByText('Pro')).toBeInTheDocument()
   })
 })

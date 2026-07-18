@@ -1,5 +1,6 @@
 <template>
   <span
+    ref="triggerRef"
     class="wc-tooltip-wrapper"
     :class="className"
     :aria-describedby="show ? tooltipId : undefined"
@@ -9,23 +10,27 @@
     @focusout="show = false"
   >
     <slot />
-    <transition name="tooltip-fade">
-      <div
-        v-if="show"
-        :id="tooltipId"
-        class="wc-tooltip"
-        :class="placementClass"
-        role="tooltip"
-      >
-        {{ text }}
-      </div>
-    </transition>
+    <teleport to="body">
+      <transition name="tooltip-fade">
+        <div
+          v-if="show"
+          ref="tooltipRef"
+          :id="tooltipId"
+          class="wc-tooltip"
+          :class="placementClass"
+          role="tooltip"
+        >
+          {{ text }}
+        </div>
+      </transition>
+    </teleport>
   </span>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, useId } from 'vue'
 import { getPlacementClass, validatePlacement } from './utils'
+import { useFloatingPosition } from '../../interactions'
 import './style.css'
 
 interface Props {
@@ -46,6 +51,17 @@ if (!validatePlacement(props.placement)) {
 
 const show = ref(false)
 const tooltipId = useId()
+const triggerRef = ref<HTMLElement | null>(null)
+const tooltipRef = ref<HTMLElement | null>(null)
 
-const placementClass = computed(() => getPlacementClass(props.placement))
+const requestedPlacement = computed(() => props.placement)
+const { resolvedPlacement } = useFloatingPosition({
+  open: show,
+  anchorRef: triggerRef,
+  floatingRef: tooltipRef,
+  placement: requestedPlacement,
+  offset: ref(8)
+})
+
+const placementClass = computed(() => getPlacementClass(resolvedPlacement.value))
 </script>

@@ -15,6 +15,7 @@
   >
     <!-- 触发元素 -->
     <span
+      ref="triggerRef"
       class="hover-card-trigger"
       :id="triggerId"
       :tabindex="disabled ? -1 : 0"
@@ -24,21 +25,24 @@
     </span>
 
     <!-- 预览卡片 -->
-    <transition 
-      name="hover-card-transition"
-    >
-      <div 
-        v-if="isVisible"
-        ref="cardRef"
-        class="hover-card-popup"
-        :class="[
-          `hover-card-position-${position}`,
-          `hover-card-card-size-${cardSize}`
-        ]"
-        :id="cardId"
-        role="dialog"
-        :aria-labelledby="cardData.title ? `${cardId}-title` : undefined"
+    <teleport to="body">
+      <transition
+        name="hover-card-transition"
       >
+        <div
+          v-if="isVisible"
+          ref="cardRef"
+          class="hover-card-popup"
+          :class="[
+            `hover-card-position-${resolvedPlacement}`,
+            `hover-card-card-size-${cardSize}`
+          ]"
+          :id="cardId"
+          role="dialog"
+          :aria-labelledby="cardData.title ? `${cardId}-title` : undefined"
+          @mouseenter="showCard"
+          @mouseleave="hideCard"
+        >
         <!-- 箭头 -->
         <div 
           v-if="showArrow"
@@ -109,13 +113,15 @@
             </div>
           </slot>
         </div>
-      </div>
-    </transition>
+        </div>
+      </transition>
+    </teleport>
   </div>
 </template>
 
 <script>
-import { ref, useId, onBeforeUnmount } from 'vue'
+import { computed, ref, useId, onBeforeUnmount } from 'vue'
+import { useFloatingPosition, useOverlayLayer } from '../../interactions'
 import './style.css'
 
 export default {
@@ -177,6 +183,7 @@ export default {
   setup(props, { emit }) {
     const isVisible = ref(false)
     const cardRef = ref(null)
+    const triggerRef = ref(null)
     const cardId = useId()
     const triggerId = `${cardId}-trigger`
     const showTimer = ref(null)
@@ -214,9 +221,39 @@ export default {
       clearTimeout(hideTimer.value)
     })
 
+    const placement = computed(() => props.position)
+    const offset = ref(8)
+    const { resolvedPlacement } = useFloatingPosition({
+      open: isVisible,
+      anchorRef: triggerRef,
+      floatingRef: cardRef,
+      placement,
+      offset
+    })
+
+    useOverlayLayer({
+      open: isVisible,
+      elementRef: cardRef,
+      refs: [triggerRef],
+      closeOnEscape: true,
+      closeOnPointerDownOutside: true,
+      onEscapeKeyDown: () => {
+        isVisible.value = false
+        emit('hide')
+        triggerRef.value?.focus()
+      },
+      onPointerDownOutside: () => {
+        isVisible.value = false
+        emit('hide')
+      },
+      zIndex: 1000
+    })
+
     return {
       isVisible,
       cardRef,
+      triggerRef,
+      resolvedPlacement,
       triggerId,
       cardId,
       showCard,
@@ -226,4 +263,3 @@ export default {
   }
 }
 </script>
-

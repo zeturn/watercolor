@@ -4,7 +4,7 @@ import Switch from '@/components/Switch/Switch.jsx'
 
 describe('Switch (React)', () => {
   it('renders without crashing', () => {
-    render(<Switch />)
-    expect(true).toBe(true)
+    const { getByRole } = render(<Switch label="Notifications" checked />)
+    expect(getByRole('switch', { name: 'Notifications' })).toBeChecked()
   })
 })

@@ -45,7 +45,6 @@ export { default as ListItem } from './components/List/ListItem.vue'
 export { default as ListItemIcon } from './components/List/ListItemIcon.vue'
 export { default as ListItemText } from './components/List/ListItemText.vue'
 export { default as Menu } from './components/Menu/Menu.vue'
-// TODO: MenuItem 组件待实现后再导出
 export { default as Modal } from './components/Modal/Modal.vue'
 export { default as NumberAnimation } from './components/NumberAnimation/NumberAnimation.vue'
 export { default as Pagination } from './components/Pagination/Pagination.vue'

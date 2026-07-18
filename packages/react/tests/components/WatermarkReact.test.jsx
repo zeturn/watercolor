@@ -14,9 +14,11 @@ vi.mock('@/components/Watermark/utils', async (importOriginal) => {
 })
 
 describe('Watermark (React)', () => {
-  it('renders without crashing', () => {
-    render(<Watermark />)
-    expect(true).toBe(true)
+  it('renders without crashing', async () => {
+    render(<Watermark content="测试水印" />)
+    await waitFor(() => {
+      expect(document.querySelector('.wc-watermark')).toBeInTheDocument()
+    })
   })
 
   it('renders watermark when content is provided', async () => {

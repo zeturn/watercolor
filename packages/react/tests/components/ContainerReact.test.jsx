@@ -4,7 +4,7 @@ import Container from '@/components/Container/Container.jsx'
 
 describe('Container (React)', () => {
   it('renders without crashing', () => {
-    render(<Container />)
-    expect(true).toBe(true)
+    const { getByText } = render(<Container>Content</Container>)
+    expect(getByText('Content')).toBeInTheDocument()
   })
 })

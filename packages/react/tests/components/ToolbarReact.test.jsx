@@ -4,7 +4,7 @@ import Toolbar from '@/components/Toolbar/Toolbar.jsx'
 
 describe('Toolbar (React)', () => {
   it('renders without crashing', () => {
-    render(<Toolbar />)
-    expect(true).toBe(true)
+    const { getByText } = render(<Toolbar>Actions</Toolbar>)
+    expect(getByText('Actions')).toBeInTheDocument()
   })
 })

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useId } from 'react'
+import { useOverlayLayer } from '../../interactions.jsx'
 import './style.css'
 import {
   formatDate,
@@ -28,6 +29,7 @@ export function DatePicker({
   ...rest
 }) {
   const wrapperRef = useRef(null)
+  const dropdownRef = useRef(null)
   const inputId = useId()
   const [isOpen, setOpen] = useState(false)
   const [currentDate, setCurrentDate] = useState(() =>
@@ -40,16 +42,16 @@ export function DatePicker({
     setInternal(value ? new Date(value) : null)
   }, [value])
 
-  // click outside handler
-  useEffect(() => {
-    const handleClick = (e) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-        setOpen(false)
-      }
-    }
-    document.addEventListener('click', handleClick)
-    return () => document.removeEventListener('click', handleClick)
-  }, [])
+  useOverlayLayer({
+    open: isOpen,
+    elementRef: dropdownRef,
+    refs: [wrapperRef],
+    closeOnEscape: true,
+    closeOnPointerDownOutside: true,
+    onEscapeKeyDown: () => setOpen(false),
+    onPointerDownOutside: () => setOpen(false),
+    zIndex: 1000,
+  })
 
   const inputDisplay = internal ? formatDate(internal, format) : ''
 
@@ -146,7 +148,7 @@ export function DatePicker({
       </div>
 
       {isOpen && (
-        <div className="wc-datepicker-dropdown" id={`${inputId}-calendar`} role="dialog" aria-label="选择日期">
+        <div ref={dropdownRef} className="wc-datepicker-dropdown" id={`${inputId}-calendar`} role="dialog" aria-label="选择日期">
           {/* header */}
           <div className="wc-datepicker-header">
             <button

@@ -4,7 +4,7 @@ import Copy from '@/components/Copy/Copy.jsx'
 
 describe('Copy (React)', () => {
   it('renders without crashing', () => {
-    render(<Copy />)
-    expect(true).toBe(true)
+    const { getByRole } = render(<Copy text="copy me" />)
+    expect(getByRole('button', { name: /复制/ })).toBeInTheDocument()
   })
 })

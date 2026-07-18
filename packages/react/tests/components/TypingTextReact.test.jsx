@@ -4,7 +4,8 @@ import TypingText from '@/components/TypingText/TypingText.jsx'
 
 describe('TypingText (React)', () => {
   it('renders without crashing', () => {
-    render(<TypingText />)
-    expect(true).toBe(true)
+    const { container } = render(<TypingText text="Hello" showCursor />)
+    expect(container.querySelector('.typing-wrapper')).toBeInTheDocument()
+    expect(container.querySelector('.typing-cursor')).toBeInTheDocument()
   })
 })

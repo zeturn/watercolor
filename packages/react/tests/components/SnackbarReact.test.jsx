@@ -4,7 +4,7 @@ import Snackbar from '@/components/Snackbar/Snackbar.jsx'
 
 describe('Snackbar (React)', () => {
   it('renders without crashing', () => {
-    render(<Snackbar />)
-    expect(true).toBe(true)
+    render(<Snackbar open message="Saved" />)
+    expect(document.body.querySelector('[role="alert"]')).toHaveTextContent('Saved')
   })
 })

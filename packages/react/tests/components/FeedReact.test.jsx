@@ -4,7 +4,7 @@ import Feed from '@/components/Feed/Feed.jsx'
 
 describe('Feed (React)', () => {
   it('renders without crashing', () => {
-    render(<Feed />)
-    expect(true).toBe(true)
+    const { getByText } = render(<Feed items={[{ author: 'Ada', text: 'Updated', time: 'now' }]} />)
+    expect(getByText('Updated')).toBeInTheDocument()
   })
 })

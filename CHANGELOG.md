@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.3] - 2026-07-18
+
+### Added
+- Added a shared interaction core for overlay layers, focus restoration, focus traps, scroll locking, Escape/outside click handling, nested overlay ordering, and viewport collision positioning.
+- Added React and Vue interaction adapters so Portal/Teleport, floating positioning, and overlay lifecycle behavior are implemented consistently across frameworks.
+- Added a documented React/Vue interaction contract matrix for overlay, keyboard, focus, controlled/uncontrolled, SSR, and nested-overlay behavior.
+- Added shared-contract tests for Modal, SlideOver, Popover, Tooltip, HoverCard, Menu, Select, Autocomplete, and DatePicker behavior.
+
+### Changed
+- Migrated Modal, SlideOver, Menu, Select, Autocomplete, DatePicker, Popover, HoverCard, and Tooltip away from duplicated component-local overlay logic.
+- Improved Menu and Select keyboard behavior to follow the expected composite-widget model more closely.
+- Replaced empty or distorted React component smoke tests with meaningful render and accessibility assertions.
+
+### Fixed
+- Fixed stale overlay listeners from detached DOM layers by pruning disconnected layer entries before handling global events.
+- Fixed Vue MenuItem export cleanup by removing the obsolete TODO marker.
+- Fixed React List public props coverage by keeping published behavior under active tests instead of placeholder assertions.
+
 ## [1.2.2] - 2026-07-18
 
 ### Added

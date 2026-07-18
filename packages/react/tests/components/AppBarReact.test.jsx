@@ -4,8 +4,8 @@ import AppBar from '@/components/AppBar/AppBar.jsx'
 
 describe('AppBar (React)', () => {
   it('renders without crashing', () => {
-    render(<AppBar />)
-    expect(true).toBe(true)
+    render(<AppBar>Header</AppBar>)
+    expect(screen.getByText('Header')).toHaveClass('wc-appbar')
   })
 
   it('renders with default props', () => {

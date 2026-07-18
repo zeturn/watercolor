@@ -4,7 +4,7 @@ import SlideOver from '@/components/SlideOver/SlideOver.jsx'
 
 describe('SlideOver (React)', () => {
   it('renders without crashing', () => {
-    render(<SlideOver />)
-    expect(true).toBe(true)
+    render(<SlideOver open>Panel content</SlideOver>)
+    expect(document.body.querySelector('[role="dialog"]')).toHaveTextContent('Panel content')
   })
 })

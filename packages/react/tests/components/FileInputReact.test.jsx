@@ -4,7 +4,7 @@ import FileInput from '@/components/FileInput/FileInput.jsx'
 
 describe('FileInput (React)', () => {
   it('renders without crashing', () => {
-    render(<FileInput />)
-    expect(true).toBe(true)
+    const { getByText } = render(<FileInput label="Upload file" />)
+    expect(getByText('Upload file')).toBeInTheDocument()
   })
 })

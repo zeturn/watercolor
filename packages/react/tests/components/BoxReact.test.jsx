@@ -4,8 +4,8 @@ import Box from '@/components/Box/Box.jsx'
 
 describe('Box (React)', () => {
   it('renders without crashing', () => {
-    render(<Box />)
-    expect(true).toBe(true)
+    render(<Box>Box content</Box>)
+    expect(screen.getByText('Box content')).toBeInTheDocument()
   })
 
   it('renders with default props', () => {

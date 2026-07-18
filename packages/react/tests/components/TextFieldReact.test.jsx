@@ -4,7 +4,7 @@ import TextField from '@/components/TextField/TextField.jsx'
 
 describe('TextField (React)', () => {
   it('renders without crashing', () => {
-    render(<TextField />)
-    expect(true).toBe(true)
+    const { getByRole } = render(<TextField label="Name" value="Ada" />)
+    expect(getByRole('textbox', { name: 'Name' })).toHaveValue('Ada')
   })
 })

@@ -1,6 +1,9 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
 import Popover from '@/components/Popover/Popover.vue'
+
+const flushOverlay = () => new Promise(resolve => setTimeout(resolve, 0))
 
 describe('Popover Component', () => {
   it('renders correctly', () => {
@@ -239,4 +242,37 @@ describe('Popover Component', () => {
 
     expect(wrapper.vm.isOpen).toBe(true)
   })
-}) 
+
+  it('closes on Escape through the shared overlay layer', async () => {
+    const wrapper = mount(Popover, {
+      props: { modelValue: true },
+      slots: { default: '内容' },
+      attachTo: document.body
+    })
+
+    await nextTick()
+    await flushOverlay()
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+
+    expect(wrapper.emitted('update:modelValue')[0]).toEqual([false])
+    expect(wrapper.emitted('close')).toBeTruthy()
+    wrapper.unmount()
+  })
+
+  it('closes on outside pointer down but not when clicking the trigger', async () => {
+    const wrapper = mount(Popover, {
+      props: { modelValue: true },
+      slots: { default: '内容' },
+      attachTo: document.body
+    })
+
+    await nextTick()
+    await flushOverlay()
+    await wrapper.find('.wc-popover-trigger').trigger('mousedown')
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+
+    document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+    expect(wrapper.emitted('update:modelValue')[0]).toEqual([false])
+    wrapper.unmount()
+  })
+})

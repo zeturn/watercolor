@@ -1,5 +1,5 @@
 <template>
-  <div class="wc-autocomplete">
+  <div ref="autocompleteRef" class="wc-autocomplete">
     <!-- Label -->
     <label 
       v-if="label" 
@@ -66,6 +66,7 @@
     <!-- Dropdown -->
     <div
       v-if="open && filteredOptions.length > 0"
+      ref="dropdownRef"
       class="wc-autocomplete__dropdown"
       :id="`${autocompleteId}-options`"
       role="listbox"
@@ -101,6 +102,7 @@
     <!-- No Results -->
     <div
       v-if="open && searchQuery && filteredOptions.length === 0"
+      ref="dropdownRef"
       class="wc-autocomplete__dropdown"
       role="status"
     >
@@ -130,7 +132,8 @@
 </template>
 
 <script setup>
-import { ref, computed, getCurrentInstance, onMounted, onUnmounted, watch } from 'vue'
+import { ref, computed, getCurrentInstance, watch } from 'vue'
+import { useOverlayLayer } from '../../interactions'
 import './style.css'
 
 const props = defineProps({
@@ -221,6 +224,13 @@ const autocompleteId = ref(`autocomplete-${instance?.uid || Math.random().toStri
 const open = ref(false)
 const searchQuery = ref('')
 const highlightedIndex = ref(-1)
+const autocompleteRef = ref(null)
+const dropdownRef = ref(null)
+
+const closeDropdown = () => {
+  open.value = false
+  highlightedIndex.value = -1
+}
 
 const labelClasses = computed(() => {
   const classes = ['wc-autocomplete__label']
@@ -319,7 +329,7 @@ const handleFocus = (e) => {
 
 const handleBlur = (e) => {
   setTimeout(() => {
-    open.value = false
+    closeDropdown()
     emit('blur', e)
   }, 200)
 }
@@ -337,8 +347,7 @@ const handleInput = (e) => {
 
 const handleClear = () => {
   searchQuery.value = ''
-  open.value = false
-  highlightedIndex.value = -1
+  closeDropdown()
   emit('update:modelValue', props.multiple ? [] : null)
   emit('change', props.multiple ? [] : null)
 }
@@ -366,7 +375,7 @@ const selectOption = (option) => {
     emit('update:modelValue', option)
     emit('change', option)
     searchQuery.value = label
-    open.value = false
+    closeDropdown()
   }
   
   highlightedIndex.value = -1
@@ -400,8 +409,7 @@ const handleKeydown = (e) => {
       }
       break
     case 'Escape':
-      open.value = false
-      highlightedIndex.value = -1
+      closeDropdown()
       break
   }
 }
@@ -420,17 +428,14 @@ watch(() => props.modelValue, (newValue) => {
   }
 }, { immediate: true })
 
-const handleClickOutside = (event) => {
-  if (!event.target.closest('.wc-autocomplete')) {
-    open.value = false
-  }
-}
-
-onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-})
-
-onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
+useOverlayLayer({
+  open,
+  elementRef: dropdownRef,
+  refs: [autocompleteRef],
+  closeOnEscape: true,
+  closeOnPointerDownOutside: true,
+  onEscapeKeyDown: closeDropdown,
+  onPointerDownOutside: closeDropdown,
+  zIndex: 1000
 })
 </script>

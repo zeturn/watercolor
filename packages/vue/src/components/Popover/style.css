@@ -30,7 +30,7 @@
 }
 
 .wc-popover-content {
-  position: absolute;
+  position: fixed;
   z-index: 2000;
   min-width: 180px;
   max-width: min(320px, calc(100vw - 24px));

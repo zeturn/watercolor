@@ -46,7 +46,7 @@
 }
 
 .hover-card-popup {
-  position: absolute;
+  position: fixed;
   z-index: 1000;
   min-width: 220px;
   max-width: 320px;
@@ -63,27 +63,15 @@
 .hover-card-card-size-xl { min-width: 340px; max-width: 480px; }
 
 .hover-card-position-top {
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .hover-card-position-bottom {
-  top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .hover-card-position-left {
-  top: 50%;
-  right: calc(100% + 8px);
-  transform: translateY(-50%);
 }
 
 .hover-card-position-right {
-  top: 50%;
-  left: calc(100% + 8px);
-  transform: translateY(-50%);
 }
 
 .hover-card-arrow {

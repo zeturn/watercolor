@@ -4,7 +4,7 @@ import Slider from '@/components/Slider/Slider.jsx'
 
 describe('Slider (React)', () => {
   it('renders without crashing', () => {
-    render(<Slider />)
-    expect(true).toBe(true)
+    const { getByRole } = render(<Slider label="Volume" value={40} />)
+    expect(getByRole('slider', { name: 'Volume' })).toHaveValue('40')
   })
 })

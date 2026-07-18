@@ -96,6 +96,37 @@ describe('Select Component', () => {
     expect(wrapper.find('[role="listbox"]').exists()).toBe(true)
   })
 
+  it('selects the active option with ArrowDown and Enter', async () => {
+    const wrapper = mount(Select, { props: { options: defaultOptions, modelValue: '' } })
+    const control = wrapper.find('.wc-select__container')
+
+    await control.trigger('keydown', { key: 'ArrowDown' })
+    expect(wrapper.findAll('[role="option"]')[0].attributes('data-active')).toBe('true')
+
+    await control.trigger('keydown', { key: 'ArrowDown' })
+    await control.trigger('keydown', { key: 'Enter' })
+
+    expect(wrapper.emitted('update:modelValue')[0]).toEqual(['2'])
+  })
+
+  it('closes on Escape and outside pointer down through the shared layer', async () => {
+    const wrapper = mount(Select, { props: { options: defaultOptions }, attachTo: document.body })
+    const control = wrapper.find('.wc-select__container')
+
+    await control.trigger('click')
+    expect(wrapper.vm.open).toBe(true)
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.open).toBe(false)
+
+    await control.trigger('click')
+    expect(wrapper.vm.open).toBe(true)
+    document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.open).toBe(false)
+    wrapper.unmount()
+  })
+
   it('supports multiple selection', async () => {
     const wrapper = mount(Select, {
       props: {

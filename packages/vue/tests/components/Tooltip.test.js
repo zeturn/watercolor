@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
 import Tooltip from '@/components/Tooltip/Tooltip.vue'
 
 describe('Tooltip Component', () => {
@@ -34,9 +35,10 @@ describe('Tooltip Component', () => {
     await wrapper.trigger('mouseenter')
     await wrapper.vm.$nextTick()
 
-    // 工具提示应该显示
-    expect(wrapper.find('.wc-tooltip').exists()).toBe(true)
-    expect(wrapper.find('.wc-tooltip').text()).toContain('工具提示内容')
+    // 工具提示应该显示在 teleport 目标中
+    const tooltip = document.body.querySelector('.wc-tooltip')
+    expect(tooltip).toBeTruthy()
+    expect(tooltip.textContent).toContain('工具提示内容')
   })
 
   it('鼠标离开时应该隐藏工具提示', async () => {
@@ -52,14 +54,14 @@ describe('Tooltip Component', () => {
     // 先显示工具提示
     await wrapper.trigger('mouseenter')
     await wrapper.vm.$nextTick()
-    expect(wrapper.find('.wc-tooltip').exists()).toBe(true)
+    expect(document.body.querySelector('.wc-tooltip')).toBeTruthy()
 
     // 触发鼠标离开事件
     await wrapper.trigger('mouseleave')
     await wrapper.vm.$nextTick()
 
     // 工具提示应该隐藏
-    expect(wrapper.find('.wc-tooltip').exists()).toBe(false)
+    expect(document.body.querySelector('.wc-tooltip')).toBeFalsy()
   })
 
   it('应该正确应用位置', () => {
@@ -90,9 +92,9 @@ describe('Tooltip Component', () => {
     await wrapper.trigger('mouseenter')
     await wrapper.vm.$nextTick()
 
-    const tooltip = wrapper.find('.wc-tooltip')
-    expect(tooltip.exists()).toBe(true)
-    expect(tooltip.text()).toBe('这是必需的文本')
+    const tooltip = document.body.querySelector('.wc-tooltip')
+    expect(tooltip).toBeTruthy()
+    expect(tooltip.textContent).toBe('这是必需的文本')
   })
 
   it('应该支持不同的位置选项', () => {
@@ -128,7 +130,7 @@ describe('Tooltip Component', () => {
     expect(wrapper.text()).toContain('自定义内容')
   })
 
-  it('应该具有正确的ARIA属性', () => {
+  it('应该具有正确的ARIA属性', async () => {
     const wrapper = mount(Tooltip, {
       props: {
         text: '工具提示'
@@ -138,7 +140,10 @@ describe('Tooltip Component', () => {
       }
     })
 
-    expect(wrapper.find('.wc-tooltip-wrapper').exists()).toBe(true)
-    expect(wrapper.find('.wc-tooltip-wrapper').exists()).toBe(true)
+    await wrapper.trigger('mouseenter')
+    await nextTick()
+    const tooltip = document.body.querySelector('.wc-tooltip')
+    expect(wrapper.find('.wc-tooltip-wrapper').attributes('aria-describedby')).toBe(tooltip.id)
+    expect(document.body.contains(tooltip)).toBe(true)
   })
 })

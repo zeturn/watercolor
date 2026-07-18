@@ -1,5 +1,5 @@
 <template>
-  <div class="wc-select">
+  <div ref="selectRef" class="wc-select">
     <!-- Label -->
     <label 
       v-if="label" 
@@ -25,6 +25,7 @@
       :aria-required="required"
       :aria-labelledby="label ? `${selectId}-label` : undefined"
       :aria-controls="`${selectId}-options`"
+      :aria-activedescendant="open && activeIndex >= 0 ? `${selectId}-option-${activeIndex}` : undefined"
       @click="toggleDropdown"
       @keydown="handleKeydown"
     >
@@ -57,16 +58,19 @@
       v-if="open"
       class="wc-select__dropdown"
       :id="`${selectId}-options`"
+      ref="dropdownRef"
       role="listbox"
       :aria-multiselectable="multiple || undefined"
     >
       <div class="wc-select__options">
         <div
-          v-for="option in options"
+          v-for="(option, index) in options"
           :key="getOptionValue(option)"
+          :id="`${selectId}-option-${index}`"
           :class="getOptionClasses(option)"
           role="option"
           :aria-selected="isSelected(option)"
+          :data-active="activeIndex === index ? 'true' : undefined"
           @click="selectOption(option)"
         >
           <span class="wc-select__option-text">{{ getOptionLabel(option) }}</span>
@@ -110,7 +114,8 @@
 </template>
 
 <script setup>
-import { ref, computed, getCurrentInstance, onMounted, onUnmounted } from 'vue'
+import { ref, computed, getCurrentInstance } from 'vue'
+import { useOverlayLayer } from '../../interactions'
 import './style.css'
 
 const props = defineProps({
@@ -175,6 +180,9 @@ const emit = defineEmits(['update:modelValue', 'change'])
 const instance = getCurrentInstance()
 const selectId = ref(`select-${instance?.uid || Math.random().toString(36).substr(2, 9)}`)
 const open = ref(false)
+const activeIndex = ref(-1)
+const selectRef = ref(null)
+const dropdownRef = ref(null)
 
 const labelClasses = computed(() => {
   const classes = ['wc-select__label']
@@ -251,16 +259,64 @@ const getOptionClasses = (option) => {
 
 const toggleDropdown = () => {
   if (props.disabled) return
-  open.value = !open.value
+  if (open.value) {
+    closeDropdown()
+  } else {
+    openDropdown()
+  }
+}
+
+const enabledOptionIndexes = computed(() => props.options
+  .map((option, index) => ({ option, index }))
+  .filter(({ option }) => !option.disabled)
+  .map(({ index }) => index)
+)
+
+const openDropdown = (initialIndex = enabledOptionIndexes.value[0] ?? -1) => {
+  open.value = true
+  activeIndex.value = initialIndex
+}
+
+const closeDropdown = () => {
+  open.value = false
+  activeIndex.value = -1
+}
+
+const moveActiveIndex = (offset) => {
+  const indexes = enabledOptionIndexes.value
+  if (!indexes.length) return
+  const currentIndex = indexes.indexOf(activeIndex.value)
+  const nextIndex = currentIndex < 0
+    ? 0
+    : (currentIndex + offset + indexes.length) % indexes.length
+  activeIndex.value = indexes[nextIndex]
 }
 
 const handleKeydown = (event) => {
   if (props.disabled) return
   if (event.key === 'Enter' || event.key === ' ') {
     event.preventDefault()
-    toggleDropdown()
+    if (open.value && activeIndex.value >= 0) {
+      selectOption(props.options[activeIndex.value])
+    } else {
+      openDropdown()
+    }
+  } else if (event.key === 'ArrowDown') {
+    event.preventDefault()
+    if (!open.value) openDropdown()
+    else moveActiveIndex(1)
+  } else if (event.key === 'ArrowUp') {
+    event.preventDefault()
+    if (!open.value) openDropdown(enabledOptionIndexes.value[enabledOptionIndexes.value.length - 1] ?? -1)
+    else moveActiveIndex(-1)
+  } else if (event.key === 'Home') {
+    event.preventDefault()
+    activeIndex.value = enabledOptionIndexes.value[0] ?? -1
+  } else if (event.key === 'End') {
+    event.preventDefault()
+    activeIndex.value = enabledOptionIndexes.value[enabledOptionIndexes.value.length - 1] ?? -1
   } else if (event.key === 'Escape') {
-    open.value = false
+    closeDropdown()
   }
 }
 
@@ -282,21 +338,22 @@ const selectOption = (option) => {
   } else {
     emit('update:modelValue', value)
     emit('change', value)
-    open.value = false
+    closeDropdown()
   }
 }
 
 const handleClickOutside = (event) => {
-  if (!event.target.closest('.wc-select')) {
-    open.value = false
-  }
+  if (!selectRef.value?.contains(event.target)) closeDropdown()
 }
 
-onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-})
-
-onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
+useOverlayLayer({
+  open,
+  elementRef: dropdownRef,
+  refs: [selectRef],
+  closeOnEscape: true,
+  closeOnPointerDownOutside: true,
+  onEscapeKeyDown: closeDropdown,
+  onPointerDownOutside: closeDropdown,
+  zIndex: 1000
 })
 </script>

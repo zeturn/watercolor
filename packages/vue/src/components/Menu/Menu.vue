@@ -7,6 +7,7 @@
       ref="triggerRef"
       class="wc-menu__trigger"
       @click="handleToggle"
+      @keydown="handleTriggerKeydown"
     >
       <slot name="trigger">
         <button
@@ -33,6 +34,7 @@
         :class="menuClasses"
         :style="menuStyles"
         role="menu"
+        @keydown="handlePanelKeydown"
       >
         <slot name="content">
           <div v-if="variant === 'card'" class="wc-menu__card">
@@ -104,8 +106,11 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, nextTick, watch } from 'vue'
+import { useFloatingPosition, useOverlayLayer } from '../../interactions'
 import './style.css'
+
+const normalizePlacement = (placement) => placement.startsWith('top') ? 'top' : 'bottom'
 
 const props = defineProps({
   items: {
@@ -159,6 +164,8 @@ const isOpen = ref(false)
 const menuRef = ref(null)
 const triggerRef = ref(null)
 const panelRef = ref(null)
+const requestedPlacement = computed(() => normalizePlacement(props.placement))
+const offset = ref(6)
 
 const menuClasses = computed(() => {
   const classes = ['wc-menu__menu', `wc-menu__menu--${props.placement}`]
@@ -201,26 +208,99 @@ const handleToggle = () => {
   }
 }
 
-const handleItemClick = (item, index) => {
-  if (item.disabled || item.divider) return
-
-  emit('select', item, index)
+const closeMenu = () => {
+  if (!isOpen.value) return
   isOpen.value = false
   emit('close')
 }
 
+const focusMenuItem = async (target = 'first') => {
+  await nextTick()
+  const items = Array.from(panelRef.value?.querySelectorAll('[role="menuitem"]:not(:disabled)') || [])
+  if (!items.length) return
+  const activeIndex = items.indexOf(document.activeElement)
+  let nextIndex = target === 'last' ? items.length - 1 : 0
+  if (target === 'next') nextIndex = activeIndex < 0 ? 0 : (activeIndex + 1) % items.length
+  if (target === 'previous') nextIndex = activeIndex <= 0 ? items.length - 1 : activeIndex - 1
+  items[nextIndex]?.focus()
+}
+
+watch(isOpen, (open) => {
+  if (open) focusMenuItem('first')
+})
+
+const handleItemClick = (item, index) => {
+  if (item.disabled || item.divider) return
+
+  emit('select', item, index)
+  closeMenu()
+}
+
 const handleClickOutside = (event) => {
   if (menuRef.value && !menuRef.value.contains(event.target)) {
-    isOpen.value = false
-    emit('close')
+    closeMenu()
   }
 }
 
-onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
+const handleTriggerKeydown = async (event) => {
+  if (props.disabled) return
+  if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    if (!isOpen.value) {
+      isOpen.value = true
+      emit('open')
+    } else {
+      focusMenuItem('next')
+    }
+  } else if (event.key === 'ArrowUp') {
+    event.preventDefault()
+    if (!isOpen.value) {
+      isOpen.value = true
+      emit('open')
+      focusMenuItem('last')
+    } else {
+      focusMenuItem('previous')
+    }
+  }
+}
+
+const handlePanelKeydown = (event) => {
+  if (event.key === 'ArrowDown') {
+    event.preventDefault()
+    focusMenuItem('next')
+  } else if (event.key === 'ArrowUp') {
+    event.preventDefault()
+    focusMenuItem('previous')
+  } else if (event.key === 'Home') {
+    event.preventDefault()
+    focusMenuItem('first')
+  } else if (event.key === 'End') {
+    event.preventDefault()
+    focusMenuItem('last')
+  } else if (event.key === 'Tab') {
+    closeMenu()
+  }
+}
+
+useFloatingPosition({
+  open: isOpen,
+  anchorRef: triggerRef,
+  floatingRef: panelRef,
+  placement: requestedPlacement,
+  offset
 })
 
-onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
+useOverlayLayer({
+  open: isOpen,
+  elementRef: panelRef,
+  refs: [triggerRef],
+  closeOnEscape: true,
+  closeOnPointerDownOutside: true,
+  onEscapeKeyDown: () => {
+    closeMenu()
+    triggerRef.value?.querySelector('button')?.focus()
+  },
+  onPointerDownOutside: closeMenu,
+  zIndex: 1000
 })
 </script>

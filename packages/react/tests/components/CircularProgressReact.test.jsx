@@ -5,7 +5,7 @@ import CircularProgress from '@/components/CircularProgress/CircularProgress.jsx
 describe('CircularProgress (React)', () => {
   it('renders without crashing', () => {
     render(<CircularProgress />)
-    expect(true).toBe(true)
+    expect(screen.getByRole('progressbar')).toBeInTheDocument()
   })
 
   it('renders with default props', () => {

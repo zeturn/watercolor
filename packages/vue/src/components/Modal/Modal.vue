@@ -76,8 +76,9 @@
 </template>
 
 <script setup>
-import { computed, watch, onMounted, onUnmounted, ref, nextTick, getCurrentInstance } from 'vue'
+import { computed, ref, getCurrentInstance } from 'vue'
 import Button from '../Button/Button.vue'
+import { useOverlayLayer } from '../../interactions'
 
 const props = defineProps({
   // 基础属性
@@ -180,7 +181,6 @@ const emit = defineEmits(['close', 'update:modelValue'])
 const instance = getCurrentInstance()
 const titleId = `modal-title-${instance?.uid || Math.random().toString(36).substr(2, 9)}`
 const modalRef = ref(null)
-const previousActiveElement = ref(null)
 
 // 统一处理 visible/open/modelValue
 const isOpen = computed({
@@ -275,125 +275,17 @@ const handleOverlayClick = () => {
   }
 }
 
-// 键盘事件处理
-const handleKeyDown = (event) => {
-  if (event.key === 'Escape' && props.closable && !props.disableEscapeKeyDown) {
-    handleClose()
-  }
-}
-
-// 焦点管理
-const focusDialog = (element) => {
-  if (element) {
-    const focusableElements = element.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    )
-    
-    if (focusableElements.length > 0) {
-      focusableElements[0].focus()
-    } else {
-      element.focus()
-    }
-  }
-}
-
-const createFocusTrap = (element) => {
-  if (!element) return () => {}
-
-  const focusableElements = element.querySelectorAll(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-  )
-  
-  const firstElement = focusableElements[0]
-  const lastElement = focusableElements[focusableElements.length - 1]
-
-  const handleTabKeyDown = (e) => {
-    if (e.key === 'Tab') {
-      if (e.shiftKey) {
-        if (document.activeElement === firstElement) {
-          e.preventDefault()
-          lastElement?.focus()
-        }
-      } else {
-        if (document.activeElement === lastElement) {
-          e.preventDefault()
-          firstElement?.focus()
-        }
-      }
-    }
-  }
-
-  element.addEventListener('keydown', handleTabKeyDown)
-  
-  return () => {
-    element.removeEventListener('keydown', handleTabKeyDown)
-  }
-}
-
-// 滚动锁定
-let originalOverflow = ''
-const lockBodyScroll = () => {
-  if (props.lockScroll) {
-    originalOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-  }
-}
-
-const unlockBodyScroll = () => {
-  if (props.lockScroll) {
-    document.body.style.overflow = originalOverflow
-  }
-}
-
-let focusTrapCleanup = null
-
-// 监听 open 状态变化
-watch(isOpen, async (newOpen) => {
-  if (newOpen) {
-    // 保存当前焦点元素
-    previousActiveElement.value = document.activeElement
-    
-    // 锁定滚动
-    lockBodyScroll()
-    
-    // 下一帧设置焦点
-    await nextTick()
-    setTimeout(() => {
-      if (modalRef.value) {
-        focusDialog(modalRef.value)
-        focusTrapCleanup = createFocusTrap(modalRef.value)
-      }
-    }, 100)
-    
-    // 添加键盘事件监听
-    document.addEventListener('keydown', handleKeyDown)
-  } else {
-    // 移除键盘事件监听
-    document.removeEventListener('keydown', handleKeyDown)
-    
-    // 清理焦点陷阱
-    if (focusTrapCleanup) {
-      focusTrapCleanup()
-      focusTrapCleanup = null
-    }
-    
-    // 恢复焦点
-    if (previousActiveElement.value && previousActiveElement.value.focus) {
-      previousActiveElement.value.focus()
-    }
-    
-    // 解锁滚动
-    unlockBodyScroll()
-  }
-}, { immediate: true })
-
-// 组件卸载时清理
-onUnmounted(() => {
-  document.removeEventListener('keydown', handleKeyDown)
-  if (focusTrapCleanup) {
-    focusTrapCleanup()
-  }
-  unlockBodyScroll()
+useOverlayLayer({
+  open: isOpen,
+  elementRef: modalRef,
+  modal: true,
+  lockScroll: props.lockScroll,
+  restoreFocus: true,
+  initialFocus: true,
+  closeOnEscape: props.closable && !props.disableEscapeKeyDown,
+  closeOnPointerDownOutside: false,
+  onEscapeKeyDown: handleClose,
+  zIndex: props.zIndex
 })
 </script>
 

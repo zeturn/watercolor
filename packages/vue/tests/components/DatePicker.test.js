@@ -223,4 +223,23 @@ describe('DatePicker 组件', () => {
     expect(input.attributes('type')).toBe('text')
     expect(input.attributes('readonly')).toBeDefined()
   })
+
+  it('通过共享弹层层处理 Escape 和外部点击关闭', async () => {
+    const wrapper = mount(DatePicker, { attachTo: document.body })
+    const input = wrapper.find('input')
+
+    await input.trigger('keydown', { key: 'ArrowDown' })
+    expect(wrapper.vm.isOpen).toBe(true)
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isOpen).toBe(false)
+
+    await input.trigger('keydown', { key: 'ArrowDown' })
+    expect(wrapper.vm.isOpen).toBe(true)
+    document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isOpen).toBe(false)
+    wrapper.unmount()
+  })
 }) 

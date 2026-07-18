@@ -29,6 +29,7 @@
     
     <div
       v-if="isOpen"
+      ref="dropdownRef"
       :id="`${inputId}-calendar`"
       class="wc-datepicker-dropdown"
       role="dialog"
@@ -106,7 +107,8 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted, getCurrentInstance } from 'vue'
+import { ref, computed, watch, getCurrentInstance } from 'vue'
+import { useOverlayLayer } from '../../interactions'
 import './style.css'
 
 const props = defineProps({
@@ -154,6 +156,7 @@ const emit = defineEmits(['update:modelValue', 'change'])
 
 const datePickerRef = ref(null)
 const inputRef = ref(null)
+const dropdownRef = ref(null)
 const instance = getCurrentInstance()
 const inputId = `wc-datepicker-${instance?.uid || Math.random().toString(36).slice(2, 11)}`
 const isOpen = ref(false)
@@ -322,12 +325,6 @@ const clearDate = () => {
   isOpen.value = false
 }
 
-const handleClickOutside = (event) => {
-  if (datePickerRef.value && !datePickerRef.value.contains(event.target)) {
-    isOpen.value = false
-  }
-}
-
 watch(() => props.modelValue, (newValue) => {
   if (newValue) {
     const date = newValue instanceof Date ? newValue : new Date(newValue)
@@ -335,11 +332,14 @@ watch(() => props.modelValue, (newValue) => {
   }
 })
 
-onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-})
-
-onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
+useOverlayLayer({
+  open: isOpen,
+  elementRef: dropdownRef,
+  refs: [datePickerRef],
+  closeOnEscape: true,
+  closeOnPointerDownOutside: true,
+  onEscapeKeyDown: () => { isOpen.value = false },
+  onPointerDownOutside: () => { isOpen.value = false },
+  zIndex: 1000
 })
 </script>

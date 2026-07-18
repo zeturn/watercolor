@@ -1,15 +1,11 @@
-import React, { useState, useEffect, useId, useRef } from 'react'
-import { createPortal } from 'react-dom'
+import React, { useState, useEffect, useId, useRef, useCallback } from 'react'
 import Button from '../Button/Button.jsx'
+import { Portal, useOverlayLayer } from '../../interactions.jsx'
 import './style.css'
 import { 
   getModalClasses, 
   getOverlayClasses,
   handleModalClose,
-  handleOverlayClick as utilHandleOverlayClick,
-  handleKeyDown as utilHandleKeyDown,
-  focusDialog,
-  createFocusTrap
 } from './utils.js'
 
 const Modal = ({
@@ -56,8 +52,6 @@ const Modal = ({
   const modalId = useId()
   const [isVisible, setIsVisible] = useState(visible || open)
   const modalRef = useRef(null)
-  const previousActiveElement = useRef(null)
-  const focusTrapCleanup = useRef(null)
 
   // 统一处理 visible 和 open
   const isOpen = visible || open
@@ -84,68 +78,31 @@ const Modal = ({
     position
   })
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     handleModalClose(setIsVisible, onClose)
-  }
+  }, [onClose])
 
-  const handleOverlayClick = () => {
+  const handleOverlayClick = useCallback(() => {
     const shouldClose = maskClosable && closeOnOverlay
     const isDisabled = disableBackdropClick
     
     if (shouldClose && !isDisabled) {
       handleClose()
     }
-  }
+  }, [closeOnOverlay, disableBackdropClick, handleClose, maskClosable])
 
-  const handleKeyDown = (e) => {
-    const canClose = closable && !disableEscapeKeyDown
-    utilHandleKeyDown(e, canClose, handleClose)
-  }
-
-  // 焦点管理
-  useEffect(() => {
-    if (isVisible) {
-      // 保存当前焦点元素
-      previousActiveElement.current = document.activeElement
-      
-      // 设置焦点到模态框
-      setTimeout(() => {
-        if (modalRef.current) {
-          focusDialog(modalRef.current)
-          // 创建焦点陷阱
-          focusTrapCleanup.current = createFocusTrap(modalRef.current)
-        }
-      }, 100)
-      
-      // 添加键盘事件监听
-      document.addEventListener('keydown', handleKeyDown)
-      
-      // 滚动锁定
-      if (lockScroll) {
-        document.body.style.overflow = 'hidden'
-      }
-      
-      return () => {
-        document.removeEventListener('keydown', handleKeyDown)
-        
-        // 清理焦点陷阱
-        if (focusTrapCleanup.current) {
-          focusTrapCleanup.current()
-          focusTrapCleanup.current = null
-        }
-        
-        // 恢复焦点
-        if (previousActiveElement.current && previousActiveElement.current.focus) {
-          previousActiveElement.current.focus()
-        }
-        
-        // 恢复滚动
-        if (lockScroll) {
-          document.body.style.overflow = ''
-        }
-      }
-    }
-  }, [isVisible, closable, disableEscapeKeyDown, lockScroll])
+  useOverlayLayer({
+    open: isVisible,
+    elementRef: modalRef,
+    modal: true,
+    lockScroll,
+    restoreFocus: true,
+    initialFocus: true,
+    closeOnEscape: closable && !disableEscapeKeyDown,
+    closeOnPointerDownOutside: false,
+    onEscapeKeyDown: handleClose,
+    zIndex,
+  })
 
   if (!isVisible) return null
 
@@ -218,7 +175,7 @@ const Modal = ({
     </div>
   )
 
-  return createPortal(modalContent, document.body)
+  return <Portal>{modalContent}</Portal>
 }
 
 Modal.displayName = 'Modal'

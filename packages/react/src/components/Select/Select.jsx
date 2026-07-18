@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect, useId } from 'react'
+import React, { useState, useRef, useId } from 'react'
+import { useOverlayLayer } from '../../interactions.jsx'
 import './style.css'
 
 const Select = ({
@@ -32,22 +33,26 @@ const Select = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(-1)
   const selectRef = useRef(null)
   const optionsRef = useRef(null)
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (selectRef.current && !selectRef.current.contains(event.target)) {
-        setIsOpen(false)
-        setIsFocused(false)
-      }
-    }
+  const closeDropdown = () => {
+    setIsOpen(false)
+    setIsFocused(false)
+    setActiveIndex(-1)
+  }
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
+  useOverlayLayer({
+    open: isOpen,
+    elementRef: optionsRef,
+    refs: [selectRef],
+    closeOnEscape: true,
+    closeOnPointerDownOutside: true,
+    onEscapeKeyDown: closeDropdown,
+    onPointerDownOutside: closeDropdown,
+    zIndex: 1000,
+  })
 
   const selectedOption = multiple 
     ? options.filter(option => value.includes(option.value))
@@ -71,8 +76,10 @@ const Select = ({
 
   const handleToggle = () => {
     if (!disabled) {
-      setIsOpen(!isOpen)
-      setIsFocused(!isOpen)
+      const nextOpen = !isOpen
+      setIsOpen(nextOpen)
+      setIsFocused(nextOpen)
+      setActiveIndex(nextOpen ? Math.max(0, options.findIndex(option => !option.disabled)) : -1)
     }
   }
 
@@ -89,8 +96,7 @@ const Select = ({
       }
     } else {
       newValue = option.value
-      setIsOpen(false)
-      setIsFocused(false)
+      closeDropdown()
     }
 
     onChange?.({ target: { name, value: newValue } })
@@ -119,12 +125,52 @@ const Select = ({
 
   const handleKeyDown = (e) => {
     if (disabled) return
+    const enabledOptions = options
+      .map((option, index) => ({ option, index }))
+      .filter(({ option }) => !option.disabled)
+
+    const focusByOffset = (offset) => {
+      if (!enabledOptions.length) return
+      const currentEnabledIndex = enabledOptions.findIndex(({ index }) => index === activeIndex)
+      const nextEnabledIndex = currentEnabledIndex < 0
+        ? 0
+        : (currentEnabledIndex + offset + enabledOptions.length) % enabledOptions.length
+      setActiveIndex(enabledOptions[nextEnabledIndex].index)
+    }
+
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
-      handleToggle()
+      if (isOpen && activeIndex >= 0) {
+        handleOptionClick(options[activeIndex])
+      } else {
+        handleToggle()
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      if (!isOpen) {
+        setIsOpen(true)
+        setIsFocused(true)
+        setActiveIndex(enabledOptions[0]?.index ?? -1)
+      } else {
+        focusByOffset(1)
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      if (!isOpen) {
+        setIsOpen(true)
+        setIsFocused(true)
+        setActiveIndex(enabledOptions[enabledOptions.length - 1]?.index ?? -1)
+      } else {
+        focusByOffset(-1)
+      }
+    } else if (e.key === 'Home') {
+      e.preventDefault()
+      setActiveIndex(enabledOptions[0]?.index ?? -1)
+    } else if (e.key === 'End') {
+      e.preventDefault()
+      setActiveIndex(enabledOptions[enabledOptions.length - 1]?.index ?? -1)
     } else if (e.key === 'Escape') {
-      setIsOpen(false)
-      setIsFocused(false)
+      closeDropdown()
     }
   }
 
@@ -202,6 +248,7 @@ const Select = ({
           aria-haspopup="listbox"
           aria-labelledby={label ? `${selectId}-label` : undefined}
           aria-controls={`${selectId}-options`}
+          aria-activedescendant={isOpen && activeIndex >= 0 ? `${selectId}-option-${activeIndex}` : undefined}
           aria-disabled={disabled}
           aria-required={required}
         >
@@ -242,10 +289,12 @@ const Select = ({
                   return (
                     <div
                       key={option.value || index}
+                      id={`${selectId}-option-${index}`}
                       className={getOptionClasses(option, isSelected)}
                       onClick={() => handleOptionClick(option)}
                       role="option"
                       aria-selected={isSelected}
+                      data-active={activeIndex === index ? 'true' : undefined}
                     >
                       <span className="wc-select__option-text">
                         {renderOption ? renderOption(option) : (option.label || option.value)}

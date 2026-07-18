@@ -4,7 +4,7 @@ import Radio from '@/components/Radio/Radio.jsx'
 
 describe('Radio (React)', () => {
   it('renders without crashing', () => {
-    render(<Radio />)
-    expect(true).toBe(true)
+    const { getByRole } = render(<Radio label="Option" value="one" />)
+    expect(getByRole('radio', { name: 'Option' })).toBeInTheDocument()
   })
 })

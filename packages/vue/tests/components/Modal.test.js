@@ -1,6 +1,9 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { defineComponent, h, nextTick, ref } from 'vue'
 import Modal from '@/components/Modal/Modal.vue'
+
+const flushOverlay = () => new Promise(resolve => setTimeout(resolve, 0))
 
 // 每次测试后清理 body，避免污染
 afterEach(() => {
@@ -108,12 +111,15 @@ describe('Modal Component', () => {
     expect(document.body.querySelector('.wc-modal').classList.contains('wc-modal--fullscreen')).toBe(true)
   })
 
-  it('prevents scrolling when open and lockScroll is true', () => {
+  it('prevents scrolling when open and lockScroll is true', async () => {
     document.body.style.overflow = ''
     const wrapper = mount(Modal, {
       props: { open: true, lockScroll: true },
       attachTo: document.body
     })
+    await nextTick()
+    await nextTick()
+    await flushOverlay()
     expect(document.body.style.overflow).toBe('hidden')
     wrapper.unmount()
     expect(document.body.style.overflow).toBe('')
@@ -176,4 +182,48 @@ describe('Modal v-model/visible/open 兼容性', () => {
     expect(wrapper.emitted('update:modelValue')).toBeTruthy()
     expect(wrapper.emitted('update:modelValue')[0]).toEqual([false])
   })
-}) 
+
+  it('closes on Escape through the shared overlay layer', async () => {
+    const wrapper = mount(Modal, {
+      props: { modelValue: true, closable: true },
+      attachTo: document.body
+    })
+
+    await nextTick()
+    await flushOverlay()
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+
+    expect(wrapper.emitted('update:modelValue')[0]).toEqual([false])
+    expect(wrapper.emitted('close')).toBeTruthy()
+    wrapper.unmount()
+  })
+
+  it('restores focus to the trigger after closing', async () => {
+    const Example = defineComponent({
+      setup() {
+        const open = ref(false)
+        return () => h('div', [
+          h('button', { type: 'button', onClick: () => { open.value = true } }, 'Open modal'),
+          h(Modal, {
+            modelValue: open.value,
+            'onUpdate:modelValue': (value) => { open.value = value },
+            onClose: () => { open.value = false },
+          }, { default: () => h('button', { type: 'button' }, 'Inside modal') })
+        ])
+      }
+    })
+
+    const wrapper = mount(Example, { attachTo: document.body })
+    const trigger = wrapper.find('button')
+    trigger.element.focus()
+    await trigger.trigger('click')
+    await nextTick()
+
+    const closeBtn = document.body.querySelector('.wc-modal__close')
+    closeBtn.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+
+    await nextTick()
+    expect(document.activeElement).toBe(trigger.element)
+  })
+})
