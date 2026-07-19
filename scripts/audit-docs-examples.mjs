@@ -25,26 +25,36 @@ function assertIncludes(file, needle, description = needle) {
   if (!content.includes(needle)) fail(`${file} should include ${description}`)
 }
 
+const siteDocs = read('site/src/data/docs.js')
+function assertSiteDoc(id, description = id) {
+  if (!siteDocs.includes(`${id}: \``) && !siteDocs.includes(`'${id}': \``)) {
+    fail(`Missing site docs section: ${description}`)
+  }
+}
+
 function collectGuideLinks() {
+  if (!exists('docs/.vitepress/config.mts')) return []
   const config = read('docs/.vitepress/config.mts')
   return [...config.matchAll(/link:\s*'\/guide\/([^']+)'/g)].map((match) => match[1])
 }
 
-for (const guide of [
-  'installation',
+assertFile('site/src/data/docs.js', 'canonical site docs data')
+assertFile('site/src/data/components.jsx', 'canonical component docs data')
+
+for (const section of [
+  'intro',
+  'install',
+  'quick-start',
   'usage',
-  'composition',
-  'recipes',
-  'interaction-contract',
-  'accessibility-i18n',
   'theming',
-  'theme-migration',
-  'integrations',
-  'production-checklist',
-  'two-zero-migration',
-]) {
-  assertFile(`docs/guide/${guide}.md`, `guide page ${guide}`)
-}
+  'customization',
+  'dark-mode',
+  'accessibility',
+  'ssr',
+  'tree-shaking',
+  'migration',
+  'contributing',
+]) assertSiteDoc(section)
 
 for (const guide of collectGuideLinks()) {
   assertFile(`docs/guide/${guide}.md`, `sidebar target ${guide}`)
@@ -98,15 +108,18 @@ for (const example of examples) {
 
 assertIncludes('README.md', 'examples/react-minimal', 'React example link')
 assertIncludes('README.md', 'examples/vue-minimal', 'Vue example link')
-assertIncludes('docs/guide/usage.md', '/guide/recipes', 'recipes guide link')
-assertIncludes('docs/guide/integrations.md', 'theme.json', 'theme fallback guidance')
-assertIncludes('docs/guide/production-checklist.md', 'npm run audit:docs-examples', 'docs audit checklist')
+if (exists('docs/guide/usage.md')) assertIncludes('docs/guide/usage.md', '/guide/recipes', 'recipes guide link')
+if (exists('docs/guide/integrations.md')) assertIncludes('docs/guide/integrations.md', 'theme.json', 'theme fallback guidance')
+if (exists('docs/guide/production-checklist.md')) assertIncludes('docs/guide/production-checklist.md', 'npm run audit:docs-examples', 'docs audit checklist')
+if (!siteDocs.includes('theme.json')) fail('site docs should include theme.json fallback guidance')
+if (!siteDocs.includes('npm run audit:docs-examples')) fail('site docs should include docs audit checklist')
 
 for (const file of [
   'README.md',
-  'docs/guide/integrations.md',
-  'docs/guide/recipes.md',
-  'docs/guide/production-checklist.md',
+  'site/src/data/docs.js',
+  ...(exists('docs/guide/integrations.md') ? ['docs/guide/integrations.md'] : []),
+  ...(exists('docs/guide/recipes.md') ? ['docs/guide/recipes.md'] : []),
+  ...(exists('docs/guide/production-checklist.md') ? ['docs/guide/production-checklist.md'] : []),
   'examples/README.md',
 ]) {
   const content = read(file)

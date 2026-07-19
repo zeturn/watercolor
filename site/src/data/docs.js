@@ -123,7 +123,7 @@ npm install @zeturn/watercolor-vue @zeturn/watercolor-core
 \`\`\`jsx
 import React from 'react'
 import { Button, TextField, Container } from '@zeturn/watercolor-react'
-import '@zeturn/watercolor-core/styles'
+import '@zeturn/watercolor-react/style.css'
 
 function App() {
   return (
@@ -149,7 +149,7 @@ function App() {
 
 <script setup>
 import { Button, TextField, Container } from '@zeturn/watercolor-vue'
-import '@zeturn/watercolor-core/styles'
+import '@zeturn/watercolor-vue/style.css'
 </script>
 \`\`\`
 
@@ -212,41 +212,74 @@ import { Button } from '@zeturn/watercolor-react/components/Button'
 
   theming: `## 主题系统
 
-Watercolor UI 使用 **CSS 变量** 实现灵活的主题定制。主题配置通过 JSON 文件驱动。
+Watercolor 的默认主题不需要任何配置即可工作：无边框、少阴影，并用 hover / focus / selected 等状态背景建立层次。需要品牌化时，使用 **Theme v2 JSON** 覆盖语义 token，而不是改组件内部样式。
 
-### 默认主题色彩
+### React
 
-### Primary 主色
-\`\`\`css
---wc-primary-50: #eff6ff;
---wc-primary-500: #3b82f6;  /* 主色 */
---wc-primary-900: #1e3a8a;
-\`\`\`
+\`\`\`tsx
+import { ThemeProvider, useTheme } from '@zeturn/watercolor-react'
+import '@zeturn/watercolor-react/style.css'
 
-### Secondary 辅助色
-\`\`\`css
---wc-secondary-50: #f3f4ff;
---wc-secondary-500: #6366f1;
---wc-secondary-900: #312e81;
-\`\`\`
-
-### 语义色
-
-| 变量名 | 用途 | 默认值 |
-|--------|------|--------|
-| \`--wc-success\` | 成功/确认 | #10b981 |
-| \`--wc-warning\` | 警告/注意 | #f59e0b |
-| \`--wc-error\` | 错误/危险 | #ef4444 |
-| \`--wc-info\` | 信息/提示 | #0ea5e9 |
-
-### 自定义主题
-
-\`\`\`css
-:root {
-  --wc-primary-500: #8b5cf6; /* 改为紫色主色 */
-  --wc-radius-md: 16px;     /* 更大的圆角 */
+export function Root() {
+  return (
+    <ThemeProvider defaultMode="system" themeUrl="/theme.json">
+      <App />
+    </ThemeProvider>
+  )
 }
-\`\`\``,
+
+function ThemeToggle() {
+  const { mode, setMode, resolvedMode } = useTheme()
+  return <button onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}>{resolvedMode}</button>
+}
+\`\`\`
+
+### Vue
+
+\`\`\`vue
+<script setup>
+import { ThemeProvider, useTheme } from '@zeturn/watercolor-vue'
+import '@zeturn/watercolor-vue/style.css'
+</script>
+
+<template>
+  <ThemeProvider theme-url="/theme.json" default-mode="system">
+    <App />
+  </ThemeProvider>
+</template>
+\`\`\`
+
+### Theme v2 JSON
+
+\`\`\`json
+{
+  "version": 2,
+  "tokens": {
+    "light": {
+      "canvas": "#ffffff",
+      "textPrimary": "#171717",
+      "accent": "#2563eb",
+      "onAccent": "#ffffff",
+      "danger": "#dc2626",
+      "focusRing": "#3b82f6"
+    },
+    "dark": {
+      "canvas": "#050505",
+      "textPrimary": "#f5f5f5",
+      "accent": "#60a5fa",
+      "onAccent": "#06111f",
+      "danger": "#f87171",
+      "focusRing": "#93c5fd"
+    }
+  }
+}
+\`\`\`
+
+### 稳定 token 策略
+
+Theme v2 冻结以下 mode token 名称，1.x 内不做破坏性重命名：\`canvas\`, \`surfaceSubtle\`, \`surfaceRaised\`, \`surfaceOverlay\`, \`actionHover\`, \`actionActive\`, \`actionSelected\`, \`actionSelectedHover\`, \`actionDisabled\`, \`textPrimary\`, \`textSecondary\`, \`textTertiary\`, \`textDisabled\`, \`textInverse\`, \`borderDefault\`, \`borderStrong\`, \`borderSubtle\`, \`onAccent\`, \`accent\`, \`accentHover\`, \`accentActive\`, \`accentSubtle\`, \`danger\`, \`dangerHover\`, \`dangerSubtle\`, \`backdrop\`, \`shadowSm\`, \`shadowMd\`, \`shadowLg\`, \`shadowXl\`, \`focusRing\`.
+
+strict theme audit 会校验关键对比度：\`textPrimary\` / \`canvas\`、\`accent\` / \`onAccent\`、\`danger\`、\`focusRing\`。如果 \`theme.json\` 缺失、加载失败或校验失败，Provider 会回退到默认 Watercolor 样式。`,
 
   customization: `## 自定义样式
 
@@ -296,46 +329,29 @@ Watercolor UI 使用 **CSS 变量** 实现灵活的主题定制。主题配置�
 
   'dark-mode': `## 暗黑模式
 
-Watercolor UI 内置了完整的明暗模式支持。
+Watercolor 使用 \`data-resolved-theme\` 表达最终解析后的主题。CSS 只读取 \`data-resolved-theme="dark"\`，避免 \`.dark\`、\`data-theme\` 和系统媒体查询重复映射导致 SSR hydration 风险。
 
-### 自动跟随系统
+### system 模式
 
-\`\`\`jsx
-import { ThemeController } from '@zeturn/watercolor-core/theme'
-
-// 自动检测系统偏好
-const theme = new ThemeController()
-theme.auto()
+\`\`\`tsx
+<ThemeProvider defaultMode="system" initialResolvedMode="light">
+  <App />
+</ThemeProvider>
 \`\`\`
 
-### 手动切换
+\`defaultMode="system"\` 会在客户端跟随 \`prefers-color-scheme\`。SSR 场景建议传入 \`initialResolvedMode\` 或使用预绘制脚本，让服务端首屏和客户端解析结果一致。
 
-\`\`\`jsx
-function App() {
-  const [isDark, setIsDark] = useState(false)
+### 局部主题
 
-  return (
-    <>
-      <button onClick={() => setIsDark(!isDark)}>切换主题</button>
-      <div className={isDark ? 'dark' : ''}>
-        <YourApp />
-      </div>
-    </>
-  )
-}
+\`\`\`tsx
+<section ref={panelRef}>
+  <ThemeProvider target={panelRef.current} defaultMode="dark">
+    <SettingsPanel />
+  </ThemeProvider>
+</section>
 \`\`\`
 
-### CSS 变量方式
-
-暗黑模式下会自动使用对应的深色变量值：
-
-\`\`\`css
-/* 亮色模式 */
-:root { --wc-base-100: #ffffff; }
-
-/* 暗色模式 */
-.dark { --wc-base-100: #1f2937; }
-\`\`\``,
+\`target\` 可以把 mode 和 scoped Theme v2 token 都挂到同一个目标节点。Provider 卸载时会恢复目标节点上原有的主题属性。`,
 
   accessibility: `## 无障碍支持 (Accessibility)
 
@@ -382,7 +398,7 @@ Watercolor UI 完全兼容服务端渲染（SSR）。
 
 \`\`\`jsx
 // pages/_app.js or app/layout.js
-import '@zeturn/watercolor-core/styles'
+import '@zeturn/watercolor-react/style.css'
 
 export default function App({ Component, pageProps }) {
   return <Component {...pageProps} />
@@ -394,7 +410,7 @@ export default function App({ Component, pageProps }) {
 \`\`\`vue
 <!-- nuxt.config.ts or plugins/watercolor.client.ts -->
 <script setup lang="ts">
-import '@zeturn/watercolor-core/styles'
+import '@zeturn/watercolor-vue/style.css'
 </script>
 \`\`\`
 
@@ -433,8 +449,8 @@ import * as WC from '@zeturn/watercolor-react'
 ### 样式也支持按需加载
 
 \`\`\`css
-/* 只导入基础样式 + 特定组件样式 */
-@import '@zeturn/watercolor-core/styles/base.css';
+/* 默认推荐导入框架包样式；高级用法再按组件拆分 */
+@import '@zeturn/watercolor-react/style.css';
 @import '@zeturn/watercolor-react/components/Button/style.css';
 \`\`\``,
 
@@ -490,6 +506,9 @@ npm run dev
 
 # 启动 Storybook
 npm run storybook
+
+# 发布前文档与示例检查
+npm run audit:docs-examples
 \`\`\`
 
 ### 项目结构
@@ -500,7 +519,8 @@ watercolor/
 │   ├── core/          # 核心逻辑和样式
 │   ├── vue/           # Vue 组件实现
 │   └── react/         # React 组件实现
-├── docs/              # VitePress 文档
+├── site/              # 官网和文档源
+├── docs/              # GitHub Pages 构建产物
 └── scripts/           # 构建脚本
 \`\`\`
 

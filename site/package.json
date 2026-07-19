@@ -9,17 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@zeturn/watercolor-core": "^1.2.7",
-    "@zeturn/watercolor-icons-feather": "^1.2.7",
-    "@zeturn/watercolor-icons-heroicons-react": "^1.2.7",
-    "@zeturn/watercolor-icons-lucide-react": "^1.2.7",
-    "@zeturn/watercolor-icons-phosphor-react": "^1.2.7",
-    "@zeturn/watercolor-icons-tabler-react": "^1.2.7",
-    "@zeturn/watercolor-react": "^1.2.7",
+    "@zeturn/watercolor-core": "file:../packages/core",
+    "@zeturn/watercolor-icons-feather": "file:../packages/icons-feather",
+    "@zeturn/watercolor-icons-heroicons-react": "file:../packages/icons-heroicons-react",
+    "@zeturn/watercolor-icons-lucide-react": "file:../packages/icons-lucide-react",
+    "@zeturn/watercolor-icons-phosphor-react": "file:../packages/icons-phosphor-react",
+    "@zeturn/watercolor-icons-tabler-react": "file:../packages/icons-tabler-react",
+    "@zeturn/watercolor-react": "file:../packages/react",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
-    "watercolor-ui": "^1.2.7"
+    "watercolor-ui": "file:../packages/watercolor-ui"
   },
   "devDependencies": {
     "@types/react": "^18.3.12",

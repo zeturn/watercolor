@@ -23,4 +23,4 @@ npm install
 npm run build
 ```
 
-SSR 示例目前是集成片段，不包含完整脚手架。完整说明见 `docs/guide/integrations.md`。
+SSR 示例目前是集成片段，不包含完整脚手架。完整说明见站点文档的 SSR 与主题章节。

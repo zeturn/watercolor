@@ -3,6 +3,10 @@ import path from 'node:path'
 
 const root = process.cwd()
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8')
+const readIfExists = (file) => {
+  const absolute = path.join(root, file)
+  return fs.existsSync(absolute) ? fs.readFileSync(absolute, 'utf8') : ''
+}
 const coreFiles = [
   'packages/core/src/styles/primitives.css',
   'packages/core/src/styles/semantic.css',
@@ -45,7 +49,12 @@ const darkModeTokens = new Set([...darkBlock.matchAll(/(--wc-mode-[\w-]+)\s*:/g)
 const incompleteDarkMode = [...defaultModeTokens].filter((token) => !darkModeTokens.has(token))
 const controllerSource = read('packages/core/src/theme/controller.ts')
 const configSource = read('packages/core/src/theme/config.ts')
-const policySource = read('docs/guide/theme-v2-policy.md')
+const policySource = [
+  readIfExists('docs/guide/theme-v2-policy.md'),
+  readIfExists('site/src/data/docs.js'),
+  readIfExists('README.md'),
+  readIfExists('examples/README.md'),
+].join('\n').replaceAll('\\`', '`')
 const themeContractErrors = []
 
 if (!controllerSource.includes("export const THEME_MODES = ['light', 'dark', 'system']")) themeContractErrors.push('ThemeMode runtime contract is missing')
@@ -78,7 +87,13 @@ for (const framework of ['vue', 'react']) {
   if (!fs.existsSync(path.join(root, story))) themeContractErrors.push(`${framework} theme contract story is missing`)
   if (!read(story).includes('CustomThemeV2')) themeContractErrors.push(`${framework} custom Theme v2 story is missing`)
 }
-const recommendedDocs = ['docs/guide/theming.md', 'docs/guide/usage.md', 'docs/guide/installation.md'].map(read).join('\n')
+const recommendedDocs = [
+  readIfExists('docs/guide/theming.md'),
+  readIfExists('docs/guide/usage.md'),
+  readIfExists('docs/guide/installation.md'),
+  readIfExists('site/src/data/docs.js'),
+  readIfExists('README.md'),
+].join('\n')
 if (!recommendedDocs.includes('ThemeProvider') || !recommendedDocs.includes('useTheme')) themeContractErrors.push('recommended theme documentation is incomplete')
 if (/toggleDarkMode\s*\(/.test(recommendedDocs)) themeContractErrors.push('recommended documentation still calls toggleDarkMode()')
 
