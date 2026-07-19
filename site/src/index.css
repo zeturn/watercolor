@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 主题色：蓝 + 浅绿（覆盖 Watercolor 默认色） */
+:root {
+  --wc-color-primary: #3b82f6;
+  --wc-color-secondary: #4ade80;
+  --wc-color-primary-rgb: 59, 130, 246;
+  --wc-color-secondary-rgb: 74, 222, 128;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-600 via-rose-500 to-amber-400;
+  background-size: 200% auto;
+  animation: gradientX 8s ease infinite;
+}
+
+/* Watercolor blob effect */
+.blob {
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: blob 7s infinite;
+}
+
+.blob-2 {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: blob 8s infinite reverse;
+}
+
+/* Glass morphism */
+.glass {
+  @apply bg-white/70 backdrop-blur-lg border border-white/20;
+}
+
+/* Scroll animation base styles */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-animate-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-animate-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-animate-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-animate-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger children animations */
+.stagger-children > *:nth-child(1) { transition-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { transition-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { transition-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { transition-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { transition-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { transition-delay: 0.3s; }
+.stagger-children > *:nth-child(7) { transition-delay: 0.35s; }
+.stagger-children > *:nth-child(8) { transition-delay: 0.4s; }
+
+/* Code block styling */
+.code-block {
+  @apply font-mono text-sm bg-base-200 rounded-xl p-4 overflow-x-auto;
+}
+
+.code-block code {
+  color: inherit;
+}
+
+/* Component card hover effect */
+.component-card {
+  @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
+}
+
+/* Nav active state — Watercolor 经典 Material 风格：柔和背景高亮，无底边线 */
+.nav-active {
+  @apply text-primary font-medium bg-primary/10 px-3 py-1.5 rounded-lg;
+}
+
+/* Props API 数据表：补充行分隔线与表头底色（Table 组件默认完全无边框） */
+.wc-table thead tr {
+  @apply border-b-2 border-base-300 bg-base-200/70;
+}
+.wc-table thead th {
+  @apply font-bold text-base-content/80;
+}
+.wc-table tbody tr {
+  @apply border-b border-base-200 transition-colors;
+}
+.wc-table tbody tr:last-child {
+  border-bottom: none;
+}
+.wc-table tbody tr:hover {
+  @apply bg-base-100;
+}

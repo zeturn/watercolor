@@ -1,8 +1,0 @@
-.vitepress/cache
-.vitepress/dist
-.vitepress/.temp
-/generated
-
-# Generated from src/components/**/README.md
-/components/*.md
-!/components/index.md
