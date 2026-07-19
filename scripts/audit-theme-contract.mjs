@@ -7,6 +7,7 @@ const coreFiles = [
   'packages/core/src/styles/primitives.css',
   'packages/core/src/styles/semantic.css',
   'packages/core/src/styles/modes.css',
+  'packages/core/src/styles/component-states.css',
 ]
 const coreCss = coreFiles.map(read).join('\n')
 const componentCss = fs.readdirSync(path.join(root, 'packages/vue/src/components'), { withFileTypes: true })
