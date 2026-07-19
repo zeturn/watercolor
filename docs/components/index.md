@@ -56,6 +56,7 @@ title: Components
 <a class="wc-components-card" href="./Checkbox">Checkbox</a>
 <a class="wc-components-card" href="./Chip">Chip</a>
 <a class="wc-components-card" href="./CircularProgress">CircularProgress</a>
+<a class="wc-components-card" href="./CodeBlock">CodeBlock</a>
 <a class="wc-components-card" href="./ColorPicker">ColorPicker</a>
 <a class="wc-components-card" href="./Container">Container</a>
 <a class="wc-components-card" href="./Copy">Copy</a>

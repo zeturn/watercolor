@@ -2,6 +2,40 @@ import React, { useState, useEffect } from 'react'
 import './style.css'
 import { useLocale } from '../../LocaleReact.tsx'
 
+const EyeIcon = () => (
+  <svg className="gallery-icon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" />
+    <circle cx="12" cy="12" r="2.75" />
+  </svg>
+)
+
+const DownloadIcon = () => (
+  <svg className="gallery-icon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 3v11" />
+    <path d="m7 10 5 5 5-5" />
+    <path d="M5 20h14" />
+  </svg>
+)
+
+const CloseIcon = () => (
+  <svg className="gallery-icon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="m6 6 12 12" />
+    <path d="M18 6 6 18" />
+  </svg>
+)
+
+const ChevronLeftIcon = () => (
+  <svg className="gallery-icon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="m15 18-6-6 6-6" />
+  </svg>
+)
+
+const ChevronRightIcon = () => (
+  <svg className="gallery-icon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="m9 6 6 6-6 6" />
+  </svg>
+)
+
 const ImageGallery = ({
   images = [],
   title = '',
@@ -121,7 +155,7 @@ const ImageGallery = ({
                       handleSelect(idx)
                     }}
                   >
-                    👁️
+                    <EyeIcon />
                   </button>
                   {showDownload && (
                     <button
@@ -132,7 +166,7 @@ const ImageGallery = ({
                         handleDownload(img)
                       }}
                     >
-                      📥
+                      <DownloadIcon />
                     </button>
                   )}
                 </div>
@@ -165,7 +199,7 @@ const ImageGallery = ({
           aria-labelledby="lightbox-title"
         >
           <div className="gallery-lightbox-content" onClick={e => e.stopPropagation()}>
-            <button className="gallery-lightbox-close" aria-label={messages.closeLightbox} onClick={closeLightbox}>✕</button>
+            <button className="gallery-lightbox-close" aria-label={messages.closeLightbox} onClick={closeLightbox}><CloseIcon /></button>
             <div className="gallery-lightbox-image-container">
               <img src={images[selected].src} alt={images[selected].alt} className="gallery-lightbox-image" />
             </div>
@@ -182,7 +216,7 @@ const ImageGallery = ({
                 aria-label={messages.previousImage}
                 onClick={handlePrev}
               >
-                ‹
+                <ChevronLeftIcon />
               </button>
               <span className="gallery-lightbox-counter">{selected + 1} / {images.length}</span>
               <button
@@ -191,11 +225,11 @@ const ImageGallery = ({
                 aria-label={messages.nextImage}
                 onClick={handleNext}
               >
-                ›
+                <ChevronRightIcon />
               </button>
             </div>
             {showDownload && (
-              <button className="gallery-action-btn gallery-download-btn" onClick={() => handleDownload(images[selected])}>下载</button>
+              <button className="gallery-action-btn gallery-download-btn" aria-label={messages.downloadImage(selected + 1)} onClick={() => handleDownload(images[selected])}><DownloadIcon /></button>
             )}
           </div>
         </div>

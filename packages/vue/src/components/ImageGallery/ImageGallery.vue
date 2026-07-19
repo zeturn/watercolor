@@ -64,7 +64,18 @@
                 :aria-label="messages.openImageInLightbox(index + 1)"
                 @click.stop="openLightbox(index)"
               >
-                👁️
+                <svg
+                  class="gallery-icon"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="2.75"
+                  />
+                </svg>
               </button>
               <button 
                 v-if="showDownload"
@@ -72,7 +83,15 @@
                 :aria-label="messages.downloadImage(index + 1)"
                 @click.stop="downloadImage(image)"
               >
-                📥
+                <svg
+                  class="gallery-icon"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M12 3v11" />
+                  <path d="m7 10 5 5 5-5" />
+                  <path d="M5 20h14" />
+                </svg>
               </button>
             </div>
           </div>
@@ -145,7 +164,14 @@
             :aria-label="messages.closeLightbox"
             @click="closeLightbox"
           >
-            ✕
+            <svg
+              class="gallery-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="m6 6 12 12" />
+              <path d="M18 6 6 18" />
+            </svg>
           </button>
           
           <div class="gallery-lightbox-image-container">
@@ -178,7 +204,13 @@
               :aria-label="messages.previousImage"
               @click="previousImage"
             >
-              ‹
+              <svg
+                class="gallery-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="m15 18-6-6 6-6" />
+              </svg>
             </button>
             <span class="gallery-lightbox-counter">
               {{ lightboxIndex + 1 }} / {{ images.length }}
@@ -189,7 +221,13 @@
               :aria-label="messages.nextImage"
               @click="nextImage"
             >
-              ›
+              <svg
+                class="gallery-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="m9 6 6 6-6 6" />
+              </svg>
             </button>
           </div>
         </div>

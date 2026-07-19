@@ -41,6 +41,7 @@
 .gallery-lightbox-close,
 .gallery-lightbox-nav { display: inline-grid; align-items: center; justify-content: center; color: var(--wc-text-primary); border: 0; border-radius: var(--wc-radius-full); background: var(--wc-surface-overlay); font: inherit; cursor: pointer; transition: background-color var(--wc-motion-fast) var(--wc-ease-standard), transform var(--wc-motion-fast) var(--wc-ease-standard); }
 .gallery-action-btn { width: 38px; height: 38px; font-size: 1rem; }
+.gallery-icon { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .gallery-action-btn:hover,
 .gallery-page-btn:hover:not(:disabled),
 .gallery-lightbox-close:hover,

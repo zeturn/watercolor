@@ -139,8 +139,8 @@ The video player includes the following built-in controls:
 
 ### Play/Pause Button
 - Click to toggle between play and pause
-- Shows play icon (▶️) when paused
-- Shows pause icon (❚❚) when playing
+- Shows a play icon when paused
+- Shows a pause icon when playing
 
 ### Progress Bar
 - Visual representation of playback progress
@@ -155,12 +155,12 @@ The video player includes the following built-in controls:
 ### Volume Control
 - Slider to adjust volume (0 to 1)
 - Mute button to toggle audio on/off
-- Shows volume icon (🔊) or mute icon (🔇)
+- Shows volume or muted icons
 
 ### Fullscreen Button
 - Toggle fullscreen mode
 - Works on supported browsers
-- Shows fullscreen icon (⛶)
+- Shows a fullscreen icon
 
 ## Keyboard Support
 

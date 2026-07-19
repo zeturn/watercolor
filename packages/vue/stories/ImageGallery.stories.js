@@ -543,7 +543,10 @@ export const CustomTitle = {
           <template #title>
             <div class="flex items-center space-x-3">
               <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                <span class="text-white text-sm">📸</span>
+                <svg class="text-white" style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 8.5A2.5 2.5 0 0 1 6.5 6H8l1.5-2h5L16 6h1.5A2.5 2.5 0 0 1 20 8.5v8A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5v-8Z" />
+                  <circle cx="12" cy="12.5" r="3" />
+                </svg>
               </div>
               <div>
                 <h2 class="text-xl font-bold text-gray-900">我的摄影作品集</h2>

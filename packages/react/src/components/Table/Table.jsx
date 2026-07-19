@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from 'react'
+import './style.css'
 
 const TableContext = createContext({ size: 'md', dense: false, hover: false, striped: false })
 

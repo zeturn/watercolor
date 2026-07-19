@@ -2,6 +2,7 @@
 .video-el { display: block; width: 100%; border-radius: var(--wc-radius-xl); background: var(--wc-neutral-950); }
 .controls { display: flex; align-items: center; gap: 4px; margin-top: 6px; color: var(--wc-text-secondary); font-size: 0.8125rem; }
 .ctrl-btn { display: inline-grid; width: 34px; height: 34px; flex: 0 0 auto; padding: 0; color: var(--wc-text-secondary); border: 0; border-radius: var(--wc-radius-md); background: transparent; font: inherit; font-size: 0.9375rem; cursor: pointer; transition: background-color var(--wc-motion-fast) var(--wc-ease-standard), color var(--wc-motion-fast) var(--wc-ease-standard); place-items: center; }
+.video-icon { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .ctrl-btn:hover { color: var(--wc-text-primary); background: var(--wc-action-hover); }
 .ctrl-btn:active { background: var(--wc-action-active); }
 .ctrl-btn:focus-visible { outline: 0; box-shadow: 0 0 0 2px var(--wc-focus-ring); }

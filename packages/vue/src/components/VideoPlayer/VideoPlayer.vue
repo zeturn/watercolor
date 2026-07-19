@@ -13,7 +13,23 @@
         :aria-label="playing ? messages.pauseVideo : messages.playVideo"
         @click="togglePlay"
       >
-        {{ playing ? '❚❚' : '▶️' }}
+        <svg
+          v-if="playing"
+          class="video-icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M8 6v12" />
+          <path d="M16 6v12" />
+        </svg>
+        <svg
+          v-else
+          class="video-icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M8 5.5v13l10-6.5-10-6.5Z" />
+        </svg>
       </button>
       <div
         class="progress"
@@ -36,7 +52,26 @@
         :aria-label="muted ? messages.unmuteVideo : messages.muteVideo"
         @click="toggleMute"
       >
-        {{ muted ? '🔇' : '🔊' }}
+        <svg
+          v-if="muted"
+          class="video-icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M4 10v4h4l5 4V6L8 10H4Z" />
+          <path d="m17 10 4 4" />
+          <path d="m21 10-4 4" />
+        </svg>
+        <svg
+          v-else
+          class="video-icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M4 10v4h4l5 4V6L8 10H4Z" />
+          <path d="M16 9.5a4 4 0 0 1 0 5" />
+          <path d="M18.5 7a7.5 7.5 0 0 1 0 10" />
+        </svg>
       </button>
       <input
         v-model.number="volume"
@@ -52,7 +87,16 @@
         :aria-label="messages.enterFullscreen"
         @click="handleFullscreen"
       >
-        ⛶
+        <svg
+          class="video-icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M8 4H4v4" />
+          <path d="M16 4h4v4" />
+          <path d="M20 16v4h-4" />
+          <path d="M4 16v4h4" />
+        </svg>
       </button>
     </div>
   </div>

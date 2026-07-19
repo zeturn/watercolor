@@ -266,6 +266,7 @@ export interface CardContentProps extends HtmlComponentProps<HTMLDivElement> { d
 export interface ChipProps extends HtmlComponentProps<HTMLDivElement> { label?: ReactNode; avatar?: ReactNode; deletable?: boolean; disabled?: boolean; clickable?: boolean; variant?: 'filled' | 'outlined' | 'minimal'; size?: ComponentSize; color?: ComponentColor | 'default'; deleteIcon?: ReactNode; onDelete?: () => void }
 export interface CircularProgressProps extends HtmlComponentProps<HTMLDivElement> { value?: number; size?: number | string; thickness?: number; variant?: 'determinate' | 'indeterminate'; color?: ComponentColor | 'inherit'; showValue?: boolean; overlay?: boolean; centered?: boolean; inline?: boolean }
 export interface ColorPickerProps extends Omit<HtmlComponentProps<HTMLDivElement>, 'onChange'> { value?: string; onChange?: (value: string) => void; size?: ComponentSize; shape?: 'circle' | 'square' | 'rounded'; disabled?: boolean }
+export interface CodeBlockProps extends Omit<HtmlComponentProps<HTMLElement>, 'title' | 'onCopy'> { code?: string; language?: string; title?: ReactNode; showLanguage?: boolean; showLineNumbers?: boolean; showCopyButton?: boolean; diff?: boolean; wrap?: boolean; maxHeight?: string | number; onCopy?: (code: string) => void }
 export interface ContainerProps extends HtmlComponentProps<HTMLDivElement> { maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false | string; fluid?: boolean; fixed?: boolean }
 export interface CopyProps extends HtmlComponentProps<HTMLButtonElement> { text?: string; value?: string; copied?: boolean; error?: boolean; label?: ReactNode; copiedLabel?: ReactNode; errorLabel?: ReactNode; onCopy?: (value: string) => void; icon?: ReactNode }
 export interface DatePickerProps extends Omit<HtmlComponentProps<HTMLDivElement>, 'onChange'> { value?: Date | string | null; onChange?: (value: Date) => void; placeholder?: string; disabled?: boolean; size?: ComponentSize; variant?: 'default' | FieldVariant; format?: string; showToday?: boolean; minDate?: Date | string | null; maxDate?: Date | string | null }
@@ -426,6 +427,7 @@ export const Checkbox: ComponentType<CheckboxProps>
 export const Chip: ComponentType<ChipProps>
 export const CircularProgress: ComponentType<CircularProgressProps>
 export const ColorPicker: ComponentType<ColorPickerProps>
+export const CodeBlock: ComponentType<CodeBlockProps>
 export const Container: ComponentType<ContainerProps>
 export const Copy: ComponentType<CopyProps>
 export const DatePicker: ComponentType<DatePickerProps>
