@@ -33,11 +33,11 @@
 }
 
 .wc-menu__button:hover:not(:disabled) {
-  background: var(--wc-action-hover);
+  background: var(--wc-state-hover-bg);
 }
 
 .wc-menu__button:active:not(:disabled) {
-  background: var(--wc-action-active);
+  background: var(--wc-state-active-bg);
 }
 
 .wc-menu__button:focus {
@@ -45,13 +45,13 @@
 }
 
 .wc-menu__button:focus-visible {
-  outline: 2px solid var(--wc-focus-ring);
+  outline: var(--wc-state-focus-width) solid var(--wc-state-focus-ring);
   outline-offset: 2px;
 }
 
 .wc-menu__button:disabled,
 .wc-menu__button--disabled {
-  color: var(--wc-text-disabled);
+  color: var(--wc-state-disabled-fg);
   cursor: not-allowed;
 }
 
@@ -83,10 +83,10 @@
   padding: 4px;
   overflow-y: auto;
   color: var(--wc-text-primary);
-  background: var(--wc-surface-overlay);
+  background: var(--wc-state-open-bg);
   border: 0;
   border-radius: var(--wc-radius-xl);
-  box-shadow: var(--wc-shadow-lg);
+  box-shadow: var(--wc-state-open-shadow);
   animation: wc-menu-fade-in var(--wc-motion-normal) var(--wc-ease-standard);
 }
 
@@ -131,11 +131,11 @@
 }
 
 .wc-menu__item:hover:not(:disabled) {
-  background: var(--wc-action-hover);
+  background: var(--wc-state-hover-bg);
 }
 
 .wc-menu__item:active:not(:disabled) {
-  background: var(--wc-action-active);
+  background: var(--wc-state-active-bg);
 }
 
 .wc-menu__item:focus {
@@ -143,13 +143,13 @@
 }
 
 .wc-menu__item:focus-visible {
-  outline: 2px solid var(--wc-focus-ring);
+  outline: var(--wc-state-focus-width) solid var(--wc-state-focus-ring);
   outline-offset: -2px;
 }
 
 .wc-menu__item--disabled,
 .wc-menu__item:disabled {
-  color: var(--wc-text-disabled);
+  color: var(--wc-state-disabled-fg);
   cursor: not-allowed;
 }
 
@@ -159,11 +159,11 @@
 }
 
 .wc-menu__item--selected {
-  background: var(--wc-action-selected);
+  background: var(--wc-state-selected-bg);
 }
 
 .wc-menu__item--selected:hover:not(:disabled) {
-  background: var(--wc-action-selected-hover);
+  background: var(--wc-state-selected-hover-bg);
 }
 
 .wc-menu__item--danger {
@@ -271,7 +271,7 @@
 .wc-menu__card {
   display: flex;
   min-height: 180px;
-  background: var(--wc-surface-overlay);
+  background: var(--wc-state-open-bg);
 }
 
 .wc-menu__card-illustration {
@@ -301,7 +301,7 @@
   height: 60px;
   margin-bottom: 12px;
   color: var(--wc-text-secondary);
-  background: var(--wc-action-hover);
+  background: var(--wc-state-hover-bg);
   border-radius: var(--wc-radius-lg);
   font-size: 24px;
 }

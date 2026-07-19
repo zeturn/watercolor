@@ -1,0 +1,152 @@
+/** Component state contract.
+ * These tokens are intentionally semantic, not component-specific. They define
+ * how quiet Watercolor components reveal affordance across React and Vue.
+ */
+:root {
+  --wc-state-default-bg: transparent;
+  --wc-state-default-fg: var(--wc-text-primary);
+  --wc-state-muted-fg: var(--wc-text-secondary);
+  --wc-state-hover-bg: var(--wc-action-hover);
+  --wc-state-active-bg: var(--wc-action-active);
+  --wc-state-selected-bg: var(--wc-action-selected);
+  --wc-state-selected-hover-bg: var(--wc-action-selected-hover);
+  --wc-state-disabled-bg: var(--wc-action-disabled);
+  --wc-state-disabled-fg: var(--wc-text-disabled);
+  --wc-state-error-bg: var(--wc-danger-subtle);
+  --wc-state-error-fg: var(--wc-danger);
+  --wc-state-error-ring: var(--wc-danger);
+  --wc-state-open-bg: var(--wc-surface-overlay);
+  --wc-state-open-shadow: var(--wc-shadow-lg);
+  --wc-state-empty-fg: var(--wc-text-tertiary);
+  --wc-state-focus-ring: var(--wc-focus-ring);
+  --wc-state-focus-width: 2px;
+  --wc-state-focus-offset: 2px;
+  --wc-state-min-touch-target: 44px;
+  --wc-state-control-sm: 32px;
+  --wc-state-control-md: 40px;
+  --wc-state-control-lg: 48px;
+  --wc-state-row-compact: 36px;
+  --wc-state-row-default: 44px;
+  --wc-state-row-comfortable: 52px;
+  --wc-state-field-radius: var(--wc-radius-xl);
+  --wc-state-item-radius: var(--wc-radius-lg);
+  --wc-state-overlay-radius: var(--wc-radius-xl);
+}
+
+.wc-state-layer {
+  background: var(--wc-state-default-bg);
+  color: var(--wc-state-default-fg);
+  transition:
+    background-color var(--wc-motion-fast) var(--wc-ease-standard),
+    color var(--wc-motion-fast) var(--wc-ease-standard),
+    opacity var(--wc-motion-fast) var(--wc-ease-standard);
+}
+
+.wc-state-layer:hover,
+.wc-state-layer[data-state='hover'] {
+  background: var(--wc-state-hover-bg);
+}
+
+.wc-state-layer:active,
+.wc-state-layer[data-state='active'] {
+  background: var(--wc-state-active-bg);
+}
+
+.wc-state-layer:focus-visible,
+.wc-state-layer[data-state='focus'] {
+  outline: var(--wc-state-focus-width) solid var(--wc-state-focus-ring);
+  outline-offset: var(--wc-state-focus-offset);
+}
+
+.wc-state-layer[aria-selected='true'],
+.wc-state-layer[data-selected='true'],
+.wc-state-layer[data-state='selected'] {
+  background: var(--wc-state-selected-bg);
+  color: var(--wc-text-primary);
+}
+
+.wc-state-layer[aria-selected='true']:hover,
+.wc-state-layer[data-selected='true']:hover {
+  background: var(--wc-state-selected-hover-bg);
+}
+
+.wc-state-layer:disabled,
+.wc-state-layer[aria-disabled='true'],
+.wc-state-layer[data-disabled='true'],
+.wc-state-layer[data-state='disabled'] {
+  background: transparent;
+  color: var(--wc-state-disabled-fg);
+  cursor: not-allowed;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.wc-state-layer[aria-busy='true'],
+.wc-state-layer[data-loading='true'],
+.wc-state-layer[data-state='loading'] {
+  cursor: wait;
+}
+
+.wc-state-layer[aria-invalid='true'],
+.wc-state-layer[data-invalid='true'],
+.wc-state-layer[data-state='error'] {
+  color: var(--wc-state-error-fg);
+}
+
+.wc-state-field {
+  min-height: var(--wc-state-control-md);
+  border: 0;
+  border-radius: var(--wc-state-field-radius);
+  background: var(--wc-surface-subtle);
+  color: var(--wc-text-primary);
+}
+
+.wc-state-field:hover:not(:disabled):not([aria-disabled='true']) {
+  background: var(--wc-state-hover-bg);
+}
+
+.wc-state-field:focus-visible,
+.wc-state-field[data-state='focus'] {
+  outline: var(--wc-state-focus-width) solid var(--wc-state-focus-ring);
+  outline-offset: 0;
+}
+
+.wc-state-field[aria-invalid='true'],
+.wc-state-field[data-invalid='true'],
+.wc-state-field[data-state='error'] {
+  outline: var(--wc-state-focus-width) solid var(--wc-state-error-ring);
+  outline-offset: 0;
+}
+
+.wc-state-field:disabled,
+.wc-state-field[aria-disabled='true'],
+.wc-state-field[data-disabled='true'] {
+  background: var(--wc-state-disabled-bg);
+  color: var(--wc-state-disabled-fg);
+  cursor: not-allowed;
+}
+
+.wc-state-overlay {
+  border: 0;
+  border-radius: var(--wc-state-overlay-radius);
+  background: var(--wc-state-open-bg);
+  box-shadow: var(--wc-state-open-shadow);
+}
+
+.wc-state-empty {
+  color: var(--wc-state-empty-fg);
+  text-align: center;
+}
+
+@media (pointer: coarse) {
+  :root {
+    --wc-state-control-sm: var(--wc-state-min-touch-target);
+    --wc-state-row-compact: var(--wc-state-min-touch-target);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-state-layer {
+    transition: none;
+  }
+}

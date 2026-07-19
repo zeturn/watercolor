@@ -31,14 +31,14 @@
   transition: background-color var(--wc-motion-fast) var(--wc-ease-standard), color var(--wc-motion-fast) var(--wc-ease-standard);
 }
 .list-item--button { cursor: pointer; user-select: none; }
-.list-item--button:hover:not(.list-item--disabled) { background: var(--wc-action-hover); }
-.list-item--button:active:not(.list-item--disabled) { background: var(--wc-action-active); }
+.list-item--button:hover:not(.list-item--disabled) { background: var(--wc-state-hover-bg); }
+.list-item--button:active:not(.list-item--disabled) { background: var(--wc-state-active-bg); }
 .list-item--button:focus { outline: 0; }
-.list-item--button:focus-visible:not(.list-item--disabled) { box-shadow: 0 0 0 2px var(--wc-focus-ring); }
-.list-item--selected { background: var(--wc-action-selected); }
-.list-item--selected.list-item--button:hover { background: var(--wc-action-selected-hover); }
-.list-item--disabled { color: var(--wc-text-disabled); cursor: not-allowed; opacity: 0.55; }
-.list-item--disabled :is(.list-item-icon, .list-item-text-primary, .list-item-text-secondary) { color: var(--wc-text-disabled); }
+.list-item--button:focus-visible:not(.list-item--disabled) { box-shadow: 0 0 0 var(--wc-state-focus-width) var(--wc-state-focus-ring); }
+.list-item--selected { background: var(--wc-state-selected-bg); }
+.list-item--selected.list-item--button:hover { background: var(--wc-state-selected-hover-bg); }
+.list-item--disabled { color: var(--wc-state-disabled-fg); cursor: not-allowed; opacity: 0.55; }
+.list-item--disabled :is(.list-item-icon, .list-item-text-primary, .list-item-text-secondary) { color: var(--wc-state-disabled-fg); }
 .list-item--dense { min-height: 36px; padding-block: 4px; }
 .list-item--no-gutters { padding-inline: 0; }
 .list-item--divider { box-shadow: inset 0 -1px 0 var(--wc-border-subtle); }
@@ -72,7 +72,7 @@
 .list-item--expanded .list-item-icon--end { transform: rotate(180deg); }
 
 .list--outlined { box-shadow: inset 0 0 0 1px var(--wc-border-default); }
-.list--elevated { background: var(--wc-surface-overlay); box-shadow: var(--wc-shadow-sm); }
+.list--elevated { background: var(--wc-state-open-bg); box-shadow: var(--wc-shadow-sm); }
 .list--virtual { max-height: 400px; overflow-y: auto; }
 .list-virtual-item { position: absolute; right: 0; left: 0; }
 .list-item--multiselect { padding-left: 42px; }

@@ -42,22 +42,22 @@
 }
 
 .wc-tab:hover:not(:disabled):not(.wc-tab--active) {
-  background: var(--wc-action-hover);
+  background: var(--wc-state-hover-bg);
   color: var(--wc-text-primary);
 }
 
 .wc-tab--active {
-  background: var(--wc-action-selected);
+  background: var(--wc-state-selected-bg);
   color: var(--wc-text-primary);
 }
 
 .wc-tab:focus-visible {
-  outline: 2px solid var(--wc-focus-ring);
+  outline: var(--wc-state-focus-width) solid var(--wc-state-focus-ring);
   outline-offset: 2px;
 }
 
 .wc-tab:disabled {
-  color: var(--wc-text-disabled);
+  color: var(--wc-state-disabled-fg);
   cursor: not-allowed;
 }
 
@@ -69,7 +69,7 @@
 }
 
 .wc-tabs--pills .wc-tab--active {
-  background: var(--wc-action-selected-hover);
+  background: var(--wc-state-selected-hover-bg);
 }
 
 .wc-tabs--underline {

@@ -35,8 +35,8 @@
   max-height: min(90vh, 920px);
   overflow: hidden;
   border-radius: var(--wc-radius-2xl);
-  background: var(--wc-surface-overlay);
-  box-shadow: var(--wc-shadow-xl);
+  background: var(--wc-state-open-bg);
+  box-shadow: var(--wc-state-open-shadow);
   color: var(--wc-text-primary);
   animation: wc-modal-enter var(--wc-motion-normal) var(--wc-ease-standard);
 }
@@ -102,7 +102,7 @@
 }
 
 .wc-modal__close:hover {
-  background: var(--wc-action-hover);
+  background: var(--wc-state-hover-bg);
   color: var(--wc-text-primary);
 }
 

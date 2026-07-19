@@ -114,11 +114,11 @@
 }
 
 .wc-btn--style-default:hover:not(:disabled):not(.wc-btn--disabled) {
-  background: var(--wc-action-hover);
+  background: var(--wc-state-hover-bg);
 }
 
 .wc-btn--style-default:active:not(:disabled):not(.wc-btn--disabled) {
-  background: var(--wc-action-active);
+  background: var(--wc-state-active-bg);
 }
 
 .wc-btn--style-outlined {
@@ -129,11 +129,11 @@
 
 .wc-btn--style-outlined:hover:not(:disabled):not(.wc-btn--disabled) {
   border-color: var(--wc-border-strong);
-  background: var(--wc-action-hover);
+  background: var(--wc-state-hover-bg);
 }
 
 .wc-btn--style-outlined:active:not(:disabled):not(.wc-btn--disabled) {
-  background: var(--wc-action-active);
+  background: var(--wc-state-active-bg);
 }
 
 .wc-btn--style-filled {
@@ -151,7 +151,7 @@
 }
 
 .wc-btn:focus-visible {
-  outline: 2px solid var(--wc-focus-ring);
+  outline: var(--wc-state-focus-width) solid var(--wc-state-focus-ring);
   outline-offset: 2px;
 }
 
@@ -196,14 +196,14 @@
 .wc-btn:disabled {
   border-color: transparent;
   background: transparent;
-  color: var(--wc-text-disabled);
+  color: var(--wc-state-disabled-fg);
   cursor: not-allowed;
 }
 
 .wc-btn--style-filled.wc-btn--disabled,
 .wc-btn--style-filled:disabled {
-  background: var(--wc-action-disabled);
-  color: var(--wc-text-disabled);
+  background: var(--wc-state-disabled-bg);
+  color: var(--wc-state-disabled-fg);
 }
 
 .wc-btn--full-width { width: 100%; }
@@ -266,7 +266,7 @@
 .wc-fab:hover:not(:disabled) { background: var(--wc-accent-hover); }
 .wc-fab:active:not(:disabled) { background: var(--wc-accent-active); }
 .wc-fab:focus-visible {
-  outline: 2px solid var(--wc-focus-ring);
+  outline: var(--wc-state-focus-width) solid var(--wc-state-focus-ring);
   outline-offset: 2px;
 }
 
@@ -299,8 +299,8 @@
 
 .wc-fab--disabled,
 .wc-fab:disabled {
-  background: var(--wc-action-disabled);
-  color: var(--wc-text-disabled);
+  background: var(--wc-state-disabled-bg);
+  color: var(--wc-state-disabled-fg);
   cursor: not-allowed;
 }
 
@@ -332,17 +332,17 @@
 }
 
 .wc-icon-button:hover:not(:disabled):not(.wc-icon-button--disabled) {
-  background: var(--wc-action-hover);
+  background: var(--wc-state-hover-bg);
   color: var(--wc-text-primary);
 }
 
 .wc-icon-button:active:not(:disabled):not(.wc-icon-button--disabled) {
-  background: var(--wc-action-active);
+  background: var(--wc-state-active-bg);
 }
 
 .wc-icon-button:focus-visible,
 .wc-icon-button--focused {
-  outline: 2px solid var(--wc-focus-ring);
+  outline: var(--wc-state-focus-width) solid var(--wc-state-focus-ring);
   outline-offset: 2px;
 }
 
@@ -361,7 +361,7 @@
 .wc-icon-button--disabled,
 .wc-icon-button:disabled {
   background: transparent;
-  color: var(--wc-text-disabled);
+  color: var(--wc-state-disabled-fg);
   cursor: not-allowed;
 }
 
