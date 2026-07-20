@@ -17,7 +17,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       
       - name: Setup Node.js
         uses: actions/setup-node@v7
@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       
       - name: Setup Node.js
         uses: actions/setup-node@v7
@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       
       - name: Setup Node.js
         uses: actions/setup-node@v7
@@ -91,7 +91,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test-core, test-vue, test-react]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       
       - name: Setup Node.js
         uses: actions/setup-node@v7
