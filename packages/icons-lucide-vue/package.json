@@ -23,7 +23,7 @@
     "vue": "^3.5.0"
   },
   "dependencies": {
-    "lucide-vue-next": "^0.525.0"
+    "lucide-vue-next": "^1.0.0"
   },
   "publishConfig": {
     "access": "public"
