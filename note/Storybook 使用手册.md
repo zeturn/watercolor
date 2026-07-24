@@ -1,6 +1,6 @@
 # Storybook 指南
 
-> 本文档适用于 Watercolor UI 组件库的 Storybook 配置、组件文档编写、常见问题排查与最佳实践，支持 Vue3/Vite 与 React18/Vite 双端开发。
+> 本文档适用于 Watercolor UI 组件库的 Storybook 配置、组件文档编写、常见问题排查与最佳实践，支持 Vue3/Vite 与 React18/Vite 双端开发（Next.js App Router 复用 React 组件，无需单独的 Storybook 配置，其 `"use client"` 边界由 `packages/next` 构建注入）。
 
 ---
 

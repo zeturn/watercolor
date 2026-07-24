@@ -1,0 +1,88 @@
+{
+  "name": "@zeturn/watercolor-next",
+  "version": "1.2.8",
+  "description": "Watercolor UI components for Next.js (App Router / React Server Components), built on @zeturn/watercolor-react",
+  "type": "module",
+  "license": "ISC",
+  "main": "dist/watercolor-next.es.js",
+  "module": "dist/watercolor-next.es.js",
+  "types": "dist/index.d.ts",
+  "style": "style.css",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/watercolor-next.es.js",
+      "default": "./dist/watercolor-next.es.js"
+    },
+    "./style.css": "./style.css"
+  },
+  "files": [
+    "dist",
+    "style.css"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeturn/watercolor",
+    "directory": "packages/next"
+  },
+  "peerDependencies": {
+    "@zeturn/watercolor-icons-feather": "1.2.8",
+    "@zeturn/watercolor-icons-heroicons-react": "1.2.8",
+    "@zeturn/watercolor-icons-lucide-react": "1.2.8",
+    "@zeturn/watercolor-icons-phosphor-react": "1.2.8",
+    "@zeturn/watercolor-icons-tabler-react": "1.2.8",
+    "next": ">=13.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@zeturn/watercolor-icons-feather": {
+      "optional": true
+    },
+    "@zeturn/watercolor-icons-heroicons-react": {
+      "optional": true
+    },
+    "@zeturn/watercolor-icons-lucide-react": {
+      "optional": true
+    },
+    "@zeturn/watercolor-icons-phosphor-react": {
+      "optional": true
+    },
+    "@zeturn/watercolor-icons-tabler-react": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@zeturn/watercolor-core": "1.2.8",
+    "@zeturn/watercolor-react": "1.2.8"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^16.3.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^8.56.0",
+    "jsdom": "^29.1.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "typescript": "^7.0.2",
+    "vite": "^8.0.2",
+    "vite-plugin-dts": "^5.0.3",
+    "vitest": "^3.2.4",
+    "vitest-canvas-mock": "^0.3.3"
+  }
+}

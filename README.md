@@ -4,7 +4,7 @@
 
 <img src="public/img/watercolorui.png" width="140" alt="Watercolor UI" />
 
-Modern, minimalist, watercolor-inspired UI components for **Vue 3.5+** and **React 18/19** — built with **TypeScript**.
+Modern, minimalist, watercolor-inspired UI components for **Vue 3.5+**, **React 18/19**, and **Next.js (App Router)** — built with **TypeScript**.
 
 [![npm version](https://img.shields.io/npm/v/@zeturn/watercolor-vue?label=vue)](https://www.npmjs.com/package/@zeturn/watercolor-vue)
 [![npm version](https://img.shields.io/npm/v/@zeturn/watercolor-react?label=react)](https://www.npmjs.com/package/@zeturn/watercolor-react)
@@ -16,7 +16,7 @@ Modern, minimalist, watercolor-inspired UI components for **Vue 3.5+** and **Rea
 
 ## ✨ Features
 
-- One design language, two frameworks (Vue + React)
+- One design language, three platforms (Vue 3.5+, React 18/19, and Next.js App Router)
 - Borderless default Watercolor style with CSS variable theming
 - Theme v2 JSON loading through React/Vue providers
 - Built-in light, dark, and system mode handling
@@ -47,6 +47,12 @@ npm install @zeturn/watercolor-vue
 npm install @zeturn/watercolor-react
 ```
 
+**Next.js (App Router)**
+
+```bash
+npm install @zeturn/watercolor-next
+```
+
 ### Usage
 
 Import styles once in your app entry, then import components as needed.
@@ -63,6 +69,8 @@ import '@zeturn/watercolor-vue/style.css'
 import { Button } from '@zeturn/watercolor-vue'
 // React
 // import { Button } from '@zeturn/watercolor-react'
+// Next.js (App Router — no 'use client' needed, the RSC boundary ships in the package)
+// import { Button } from '@zeturn/watercolor-next'
 ```
 
 ### Theme v2

@@ -3,7 +3,8 @@
   "version": 1,
   "frameworks": [
     "react",
-    "vue"
+    "vue",
+    "next"
   ],
   "publicExports": [
     "Accordion",

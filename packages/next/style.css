@@ -1,0 +1,3 @@
+/* Watercolor UI for Next.js — re-exports the React stylesheet so a single
+   import pulls in every component style. */
+@import '@zeturn/watercolor-react/style.css';

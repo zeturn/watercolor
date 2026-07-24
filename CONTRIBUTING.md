@@ -7,6 +7,7 @@ Thanks for taking the time to contribute to Watercolor UI.
 - `packages/core`: cross-framework utilities
 - `packages/vue`: Vue 3 components
 - `packages/react`: React components
+- `packages/next`: Next.js (App Router / RSC) wrapper re-exporting React behind a `"use client"` boundary
 - `docs`: VitePress documentation
 
 ## Setup
@@ -31,6 +32,7 @@ npm run docs:dev
 # tests
 npm run test:vue
 npm run test:react
+npm run test:next
 
 # lint
 npm run lint
@@ -38,7 +40,7 @@ npm run lint
 
 ## Guidelines
 
-- Keep Vue/React APIs consistent when possible (prop names, defaults, variants).
+- Keep Vue/React/Next APIs consistent when possible (prop names, defaults, variants). The Next package re-exports React and is validated by `npm run audit:api`, so it must stay in sync with `@zeturn/watercolor-react`.
 - Prefer accessibility-friendly patterns: keyboard support, ARIA attributes, focus management.
 - Avoid introducing browser-only globals (`window`, `document`, `localStorage`) in module top-level code; guard for SSR.
 

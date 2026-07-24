@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "mode": {
+    "default": "system",
+    "storageKey": "watercolor-theme"
+  },
+  "tokens": {
+    "color": {
+      "primary": "#4f86c6",
+      "secondary": "#b07d62",
+      "success": "#3f9d6d",
+      "warning": "#d9a441",
+      "error": "#d9694f",
+      "info": "#5aa9c9"
+    },
+    "radius": {
+      "sm": "4px",
+      "md": "8px",
+      "lg": "16px",
+      "full": "999px"
+    },
+    "font": {
+      "family": "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
+      "scale": 1
+    }
+  }
+}

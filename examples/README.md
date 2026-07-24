@@ -6,7 +6,7 @@
 
 - `react-minimal`：Vite + React 19。
 - `vue-minimal`：Vite + Vue 3.5。
-- `next-ssr`：Next.js App Router SSR 主题预绘制说明。
+- `next-ssr`：可运行的 Next.js App Router 示例，演示 SSR 主题预绘制（依赖 workspace 包）。
 - `nuxt-ssr`：Nuxt 3 SSR 主题预绘制说明。
 
 ## Run locally
@@ -23,4 +23,4 @@ npm install
 npm run build
 ```
 
-SSR 示例目前是集成片段，不包含完整脚手架。完整说明见站点文档的 SSR 与主题章节。
+`next-ssr` 现在是一个可运行示例（需先从仓库根目录 `npm install && npm run build` 构建 workspace 包）。`nuxt-ssr` 目前仍是集成片段。完整说明见站点文档的 SSR 与主题章节。

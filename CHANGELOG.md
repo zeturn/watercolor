@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.8] - 2026-07-22
+
+### Added
+- Added a first-class `@zeturn/watercolor-next` package for **Next.js (App Router / React Server Components)**. It re-exports the full React API and injects the `"use client"` RSC boundary, so components can be used directly inside Server Components without adding `'use client'` yourself.
+- Added a runnable `examples/next-ssr` Next.js App Router example with SSR pre-paint theming via `createThemeInitScript`.
+- Added `next` to the cross-framework API parity manifest (`api-manifest.json`) so the Next package is validated against the React/Vue exports.
+- Wired `test:next`, `lint`, `typecheck`, `typecheck:theme`, and `typecheck:public-api` into the root scripts.
+
+### Changed
+- Documented three-platform support (Vue 3.5+, React 18/19, and Next.js App Router) across the README, CONTRIBUTING, release guide, and developer docs.
+
 ## [1.2.7] - 2026-07-18
 
 ### Added

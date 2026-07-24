@@ -4,6 +4,11 @@ All components are imported from `@zeturn/watercolor-react` (barrel) or
 `@zeturn/watercolor-react/components/<Name>` (deep). Every component accepts
 `variant`, `color`, `size`, and `disabled` where relevant.
 
+**Next.js (App Router):** import from `@zeturn/watercolor-next` instead. It re-exports the exact
+same components, providers, and hooks behind a built-in `"use client"` boundary, so you can drop
+components into Server Components without adding `'use client'` yourself. The catalog below is
+identical for the Next.js package.
+
 Shared `color` values: `'primary' | 'secondary' | 'accent' | 'success' | 'error' | 'warning' | 'neutral'`.
 Shared `size` values: `'sm' | 'md' | 'lg'`.
 
@@ -191,3 +196,4 @@ import { Button, TextField, Card, CardContent, Select, Modal, Table } from '@zet
 - Deep imports (`@zeturn/watercolor-react/components/<Name>`) improve tree-shaking when only a few components are used.
 - Icon packs are separate packages; import icons from the installed `@zeturn/watercolor-icons-*` package and pass them as `startIcon` / `endIcon` / `icon` props.
 - For Vue 3, use `@zeturn/watercolor-vue` with the equivalent component names and the same category structure.
+- For Next.js (App Router), use `@zeturn/watercolor-next` — it mirrors the React catalog above (same component names/props) and adds the RSC `"use client"` boundary automatically.

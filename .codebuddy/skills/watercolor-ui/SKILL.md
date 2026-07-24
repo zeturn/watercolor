@@ -1,12 +1,12 @@
 ---
 name: watercolor-ui
-description: This skill should be used when building user interfaces, web apps, dashboards, forms, or component demos with the Watercolor UI component library (@zeturn/watercolor-react for React, @zeturn/watercolor-vue for Vue 3). It covers installation, theming, and the full component catalog so an agent can scaffold and extend UIs using Watercolor's ready-made, watercolor-styled components.
+description: This skill should be used when building user interfaces, web apps, dashboards, forms, or component demos with the Watercolor UI component library (@zeturn/watercolor-react for React, @zeturn/watercolor-vue for Vue 3, @zeturn/watercolor-next for Next.js App Router). It covers installation, theming, and the full component catalog so an agent can scaffold and extend UIs using Watercolor's ready-made, watercolor-styled components.
 ---
 
 # Watercolor UI
 
 Watercolor UI is a modern, minimal, watercolor-style cross-framework component library for
-React 18/19 and Vue 3, published under the `@zeturn/watercolor-*` npm scope. This skill enables
+React 18/19, Vue 3, and Next.js (App Router), published under the `@zeturn/watercolor-*` npm scope. This skill enables
 an agent to scaffold and extend UIs using its prebuilt components instead of hand-rolling markup.
 
 ## When to use
@@ -41,6 +41,16 @@ Two paths:
    ```
 
    Icon packs are optional and tree-shakeable; install only the ones actually used.
+
+3. Next.js App Router (no `'use client'` needed — the RSC boundary ships in the package):
+
+   ```bash
+   npm install @zeturn/watercolor-next
+   ```
+
+   Then import components directly in Server Components; `@zeturn/watercolor-next` re-exports the
+   entire React API behind a built-in `"use client"` directive. For SSR pre-paint theming, add
+   `createThemeInitScript` from `@zeturn/watercolor-core` to `<head>`.
 
 ## Setup in the app entry
 
@@ -95,6 +105,7 @@ snippets is in `references/components.md`.
 
 ## References
 
-- `references/components.md` — full React component catalog (import paths, key props, snippets).
+- `references/components.md` — full React component catalog (import paths, key props, snippets). The same catalog applies to Next.js via `@zeturn/watercolor-next`.
 - Official docs: https://zeturn.github.io/watercolor/
-- Storybook: https://zeturn.github.io/watercolor/react/
+- Storybook (React): https://zeturn.github.io/watercolor/react/
+- Next.js example: `examples/next-ssr`
