@@ -32,7 +32,7 @@ export default function Navbar() {
     <AppBar
       position="sticky"
       color="default"
-      style={{ top: 0, zIndex: 50, backdropFilter: isScrolled ? 'blur(12px)' : 'none', backgroundColor: isScrolled ? 'rgba(255,255,255,0.7)' : 'transparent', borderBottom: isScrolled ? '1px solid var(--wc-border-default, #e5e7eb)' : 'none' }}
+      style={{ top: 0, zIndex: 50, backdropFilter: isScrolled ? 'blur(12px)' : 'none', backgroundColor: isScrolled ? 'rgba(255,255,255,0.85)' : 'transparent', borderBottom: isScrolled ? '1px solid var(--wc-border-default, #e5e7eb)' : 'none' }}
     >
       <Toolbar className="container mx-auto px-4 lg:px-8" style={{ width: '100%' }}>
         {/* Left: Logo */}

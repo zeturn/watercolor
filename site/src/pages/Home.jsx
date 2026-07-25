@@ -43,7 +43,7 @@ function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-[80vh] flex items-center">
+    <section className="relative min-h-[80vh] flex items-center overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="blob absolute -top-48 -right-32 w-[28rem] h-[28rem] bg-gradient-to-br from-fuchsia-500/25 to-transparent blur-3xl" />
@@ -57,7 +57,7 @@ function HeroSection() {
         }} />
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10 pt-8 lg:pt-4">
+      <div className="container mx-auto px-4 lg:px-8 relative z-10 pt-20 lg:pt-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left content */}
           <div className="space-y-8">
@@ -458,11 +458,17 @@ function CTASection() {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <Link to="/docs">
-                <Button size="lg" variant="primary" className="gap-2 shadow-lg shadow-primary/25">
+                <Button
+                  size="lg"
+                  variant="primary"
+                  className="gap-2 shadow-lg shadow-primary/25"
+                  endIcon={(
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                  )}
+                >
                   {t('cta.quickStart')}
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                  </svg>
                 </Button>
               </Link>
               <Link to="/components">
@@ -498,9 +504,6 @@ function Footer() {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-500 via-fuchsia-500 to-indigo-500 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">W</span>
-              </div>
               <span className="text-xl font-bold">
                 Water<span className="text-primary">color</span> UI
               </span>
