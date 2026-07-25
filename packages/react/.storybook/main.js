@@ -35,6 +35,10 @@ const config = {
         alias: [
           ...(Array.isArray(config.resolve?.alias) ? config.resolve.alias : []),
           {
+            find: /^@\/(.*)$/,
+            replacement: `${path.resolve(workspaceRoot, 'packages/react/src')}/$1`,
+          },
+          {
             find: /^@zeturn\/watercolor-core$/,
             replacement: coreSourceEntry,
           },
