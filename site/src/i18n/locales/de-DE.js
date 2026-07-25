@@ -3,6 +3,7 @@ export default {
     home: 'Start',
     docs: 'Dokumentation',
     components: 'Komponenten',
+    skill: 'KI-Skill',
   },
   hero: {
     buildWith: 'Erstellt mit',

@@ -3,6 +3,7 @@ export default {
     home: 'Home',
     docs: 'Docs',
     components: 'Components',
+    skill: 'AI Skill',
   },
   hero: {
     buildWith: 'Build with',

@@ -20,6 +20,7 @@ export default function Navbar() {
     { path: '/', label: t('nav.home') },
     { path: '/docs', label: t('nav.docs') },
     { path: '/components', label: t('nav.components') },
+    { path: '/skill', label: t('nav.skill') },
   ]
 
   const githubIcon = (

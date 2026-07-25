@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predev": "npm run sync-skills",
+    "sync-skills": "node scripts/prepare-watercolor.mjs --skill-only",
     "prebuild": "node scripts/prepare-watercolor.mjs",
     "build": "vite build",
     "preview": "vite preview"

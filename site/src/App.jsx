@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Docs from './pages/Docs'
 import Components from './pages/Components'
 import ComponentDetail from './pages/ComponentDetail'
+import Skill from './pages/Skill'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/docs/:sectionId" element={<Docs />} />
           <Route path="/components" element={<Components />} />
           <Route path="/components/:id" element={<ComponentDetail />} />
+          <Route path="/skill" element={<Skill />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>

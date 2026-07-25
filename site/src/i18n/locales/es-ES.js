@@ -3,6 +3,7 @@ export default {
     home: 'Inicio',
     docs: 'Documentación',
     components: 'Componentes',
+    skill: 'Skill de IA',
   },
   hero: {
     buildWith: 'Construido con',

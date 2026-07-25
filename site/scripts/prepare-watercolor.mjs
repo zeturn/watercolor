@@ -1,5 +1,5 @@
 import { execSync } from 'node:child_process'
-import { existsSync, mkdirSync, rmSync } from 'node:fs'
+import { existsSync, mkdirSync, rmSync, copyFileSync, readdirSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 
 const packages = [
@@ -27,14 +27,45 @@ function installFromRegistry(spec) {
   console.log(`Installed ${spec} from npm registry -> ${dest}`)
 }
 
+const skillOnly = process.argv.includes('--skill-only')
+
 const reactPath = join(process.cwd(), 'node_modules', '@zeturn', 'watercolor-react')
 const hasDist = existsSync(join(reactPath, 'dist', 'watercolor-react.es.js'))
 
 // Workspace junctions point at source packages without dist; replace them.
-if (!hasDist) {
-  for (const spec of packages) {
-    installFromRegistry(spec)
+if (!skillOnly) {
+  if (!hasDist) {
+    for (const spec of packages) {
+      installFromRegistry(spec)
+    }
+  } else {
+    console.log('@zeturn/watercolor-react already has dist, skipping registry pack')
   }
-} else {
-  console.log('@zeturn/watercolor-react already has dist, skipping registry pack')
+}
+
+// Sync the AI skill (source of truth: .codebuddy/skills/watercolor-ui) into public/
+// so it is always downloadable at /skills/watercolor-ui/... without manual copies.
+function copyDir(src, dest) {
+  if (!existsSync(src)) {
+    console.warn(`Skill source not found, skipping sync: ${src}`)
+    return
+  }
+  rmSync(dest, { recursive: true, force: true })
+  mkdirSync(dest, { recursive: true })
+  for (const entry of readdirSync(src)) {
+    const s = join(src, entry)
+    const d = join(dest, entry)
+    if (statSync(s).isDirectory()) {
+      copyDir(s, d)
+    } else {
+      copyFileSync(s, d)
+    }
+  }
+  console.log(`Synced skill -> ${dest}`)
+}
+
+if (process.env.SKIP_SKILL_SYNC !== '1') {
+  const skillSrc = join(process.cwd(), '..', '.codebuddy', 'skills', 'watercolor-ui')
+  const skillDest = join(process.cwd(), 'public', 'skills', 'watercolor-ui')
+  copyDir(skillSrc, skillDest)
 }

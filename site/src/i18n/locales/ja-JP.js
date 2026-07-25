@@ -3,6 +3,7 @@ export default {
     home: 'ホーム',
     docs: 'ドキュメント',
     components: 'コンポーネント',
+    skill: 'AI スキル',
   },
   hero: {
     buildWith: 'Build with',
