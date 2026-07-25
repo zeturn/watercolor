@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import ScrollReveal, { useScrollProgress } from '../components/ScrollReveal'
 import { Copy, Button, Card, NumberAnimation, Feature } from '@zeturn/watercolor-react'
 import { useI18n } from '../i18n'
+import { useDocumentMeta } from '../seo'
 
 /* 单次触发 hook：元素首次进入视口后锁定为 true，之后不再重置 */
 function useOnceInView(threshold = 0.3) {
@@ -131,7 +132,7 @@ function HeroSection() {
                 </div>
                 <div className="flex-1 mx-4">
                   <div className="bg-base-300 rounded-full h-6 flex items-center px-3">
-                    <span className="text-xs text-base-content/50">watercolor-ui.dev</span>
+                    <span className="text-xs text-base-content/50">watercolorui.com</span>
                   </div>
                 </div>
               </div>
@@ -553,6 +554,10 @@ function ScrollProgressBar() {
 
 // Main Home page
 export default function Home() {
+  useDocumentMeta({
+    description: 'Watercolor UI 是支持 React 与 Vue 3 的跨框架水彩风格组件库，提供 60+ 开箱即用组件，零运行时依赖、可主题化、注重可访问性。',
+  })
+
   return (
     <main className="relative">
       <ScrollProgressBar />

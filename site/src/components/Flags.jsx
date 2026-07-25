@@ -66,3 +66,35 @@ export function FlagJP(props) {
     </svg>
   )
 }
+
+/* 法国国旗 */
+export function FlagFR(props) {
+  return (
+    <svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" {...props}>
+      <rect width="10" height="20" x="0" fill="#0055A4" />
+      <rect width="10" height="20" x="10" fill="#ffffff" />
+      <rect width="10" height="20" x="20" fill="#EF4135" />
+    </svg>
+  )
+}
+
+/* 德国国旗 */
+export function FlagDE(props) {
+  return (
+    <svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" {...props}>
+      <rect width="30" height="6.67" y="0" fill="#000000" />
+      <rect width="30" height="6.67" y="6.67" fill="#DD0000" />
+      <rect width="30" height="6.66" y="13.34" fill="#FFCE00" />
+    </svg>
+  )
+}
+
+/* 西班牙国旗 */
+export function FlagES(props) {
+  return (
+    <svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" {...props}>
+      <rect width="30" height="20" fill="#AA151B" />
+      <rect width="30" height="10" y="5" fill="#F1BF00" />
+    </svg>
+  )
+}

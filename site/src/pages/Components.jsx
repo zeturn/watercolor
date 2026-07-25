@@ -3,7 +3,8 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
 import { Button, Badge, Input, Card } from '@zeturn/watercolor-react'
 import { componentCategories, allComponents } from '../data/components'
-import { useI18n } from '../i18n'
+import { useI18n, useComponentText } from '../i18n'
+import { useDocumentMeta } from '../seo'
 
 /* ── 组件线框预览图标（灰色扁平轮廓，无阴影）── */
 const S = '#e5e7eb' // stroke color
@@ -83,6 +84,11 @@ function ComponentPreviewIcon({ id }) {
 
 export default function Components() {
   const { t } = useI18n()
+  const { desc } = useComponentText()
+  useDocumentMeta({
+    title: '组件库',
+    description: `浏览 Watercolor UI 的全部 ${allComponents.length} 个水彩风组件，覆盖按钮、表单、布局、导航、反馈、数据展示与浮层等分类，支持 React 与 Vue 3。`,
+  })
   const [searchQuery, setSearchQuery] = useState('')
   const [viewMode, setViewMode] = useState('grid') // grid or list
   const [searchParams, setSearchParams] = useSearchParams()
@@ -111,7 +117,7 @@ export default function Components() {
       cat.components.forEach(comp => {
         if (!searchQuery ||
           (comp.name || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
-          (comp.description || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (desc(comp) || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
           (comp.tags || []).some(t => t.toLowerCase().includes(searchQuery.toLowerCase()))) {
           result.push({ ...comp, category: cat.name })
         }
@@ -253,7 +259,7 @@ export default function Components() {
           </div>
           <div className="p-4 space-y-2">
             <h3 className="font-semibold text-base-content group-hover:text-primary transition-colors">{comp.name}</h3>
-            <p className="text-sm text-base-content/50 line-clamp-2">{comp.desc}</p>
+            <p className="text-sm text-base-content/50 line-clamp-2">{desc(comp)}</p>
             {comp.tags.length > 0 && (
               <div className="flex flex-wrap gap-1 pt-1">
                 {comp.tags.slice(0, 3).map(tag => (
@@ -284,7 +290,7 @@ export default function Components() {
           </div>
           <div className="flex-1 min-w-0">
             <h3 className="font-semibold text-base-content group-hover:text-primary transition-colors">{comp.name}</h3>
-            <p className="text-sm text-base-content/50 truncate">{comp.desc}</p>
+            <p className="text-sm text-base-content/50 truncate">{desc(comp)}</p>
           </div>
           <div className="hidden md:flex gap-1 shrink-0">
             {comp.tags.slice(0, 2).map(tag => (

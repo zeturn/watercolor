@@ -4,11 +4,21 @@ import ScrollReveal from '../components/ScrollReveal'
 import ComponentPreview from '../components/ComponentPreview'
 import { Menu, Breadcrumb, Badge, Card, Table, Button, List, ListItem, ListItemText } from '@zeturn/watercolor-react'
 import { getComponentById, getAdjacentComponents, allComponents } from '../data/components'
+import { useI18n, useComponentText } from '../i18n'
+import { useDocumentMeta } from '../seo'
 
 export default function ComponentDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { t } = useI18n()
+  const { desc, propDesc } = useComponentText()
   const component = getComponentById(id)
+
+  useDocumentMeta({
+    title: component ? component.name : t('compDetail.notFoundTitle'),
+    description: component ? desc(component) : t('compDetail.notFoundDesc', { id }),
+    path: `/components/${id}`,
+  })
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -18,9 +28,9 @@ export default function ComponentDetail() {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
         <div className="text-6xl">🔍</div>
-        <h1 className="text-2xl font-bold">组件未找到</h1>
-        <p className="text-base-content/50">未找到 ID 为 "{id}" 的组件</p>
-        <Link to="/components"><Button size="sm" variant="primary">返回组件库</Button></Link>
+        <h1 className="text-2xl font-bold">{t('compDetail.notFoundTitle')}</h1>
+        <p className="text-base-content/50">{t('compDetail.notFoundDesc', { id })}</p>
+        <Link to="/components"><Button size="sm" variant="primary">{t('compDetail.backToLib')}</Button></Link>
       </div>
     )
   }
@@ -34,8 +44,8 @@ export default function ComponentDetail() {
         <div className="container mx-auto px-4 lg:px-8 py-4">
           <Breadcrumb
             items={[
-              { label: '首页', href: '/' },
-              { label: '组件库', href: '/components' },
+              { label: t('compDetail.breadcrumbHome'), href: '/' },
+              { label: t('compDetail.breadcrumbLib'), href: '/components' },
               { label: component.category, href: `/components?category=${component.category}` },
               { label: component.name, current: true },
             ]}
@@ -57,7 +67,7 @@ export default function ComponentDetail() {
                 <Badge variant="default" size="sm">{component.category}</Badge>
                 <Badge variant="primary" size="sm">v1.1</Badge>
               </div>
-              <p className="text-lg text-base-content/60 mb-6">{component.description}</p>
+              <p className="text-lg text-base-content/60 mb-6">{desc(component)}</p>
 
               {/* Tags */}
               <div className="flex flex-wrap gap-1.5 mb-8">
@@ -73,9 +83,9 @@ export default function ComponentDetail() {
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-xl font-bold flex items-center gap-2">
                     <span className="w-1.5 h-5 bg-primary rounded-full"></span>
-                    实时预览
+                    {t('compDetail.livePreview')}
                   </h2>
-                  <span className="text-xs text-base-content/40">可交互 Demo</span>
+                  <span className="text-xs text-base-content/40">{t('compDetail.interactiveDemo')}</span>
                 </div>
                 <div className="bg-base-200/40 rounded-2xl p-8 min-h-[200px] flex items-center justify-center border border-base-200">
                   <ComponentPreview componentId={component.id} />
@@ -88,22 +98,22 @@ export default function ComponentDetail() {
               <div id="usage" className="mb-8 scroll-mt-24">
                 <h2 className="text-xl font-bold flex items-center gap-2 mb-3">
                   <span className="w-1.5 h-5 bg-secondary rounded-full"></span>
-                  安装与使用
+                  {t('compDetail.installUsage')}
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <p className="text-sm text-base-content/60 mb-2">React 导入：</p>
+                    <p className="text-sm text-base-content/60 mb-2">{t('compDetail.reactImport')}</p>
                     <pre className="code-block"><code>{`import { ${component.name} } from '${component.importPath}'
 
-// 或按需导入
+// or import on demand
 import ${component.name} from '${component.importPath}'`}</code></pre>
                   </div>
                   <div>
-                    <p className="text-sm text-base-content/60 mb-2">Vue 导入：</p>
+                    <p className="text-sm text-base-content/60 mb-2">{t('compDetail.vueImport')}</p>
                     <pre className="code-block"><code>{`import { ${component.name} } from '@zeturn/watercolor-vue'`}</code></pre>
                   </div>
                   <div>
-                    <p className="text-sm text-base-content/60 mb-2">基础示例：</p>
+                    <p className="text-sm text-base-content/60 mb-2">{t('compDetail.basicExample')}</p>
                     <pre className="code-block"><code>{`<${component.name}${component.props[0] ? ` ${component.props[0].name}={${component.props[0].default}}` : ''} />`}</code></pre>
                   </div>
                 </div>
@@ -121,10 +131,10 @@ import ${component.name} from '${component.importPath}'`}</code></pre>
                   <Table size="md" hover>
                     <Table.Head>
                       <Table.Row>
-                        <Table.Cell component="th">属性</Table.Cell>
-                        <Table.Cell component="th">类型</Table.Cell>
-                        <Table.Cell component="th">默认值</Table.Cell>
-                        <Table.Cell component="th">说明</Table.Cell>
+                        <Table.Cell component="th">{t('compDetail.colProp')}</Table.Cell>
+                        <Table.Cell component="th">{t('compDetail.colType')}</Table.Cell>
+                        <Table.Cell component="th">{t('compDetail.colDefault')}</Table.Cell>
+                        <Table.Cell component="th">{t('compDetail.colDesc')}</Table.Cell>
                       </Table.Row>
                     </Table.Head>
                     <Table.Body>
@@ -133,7 +143,7 @@ import ${component.name} from '${component.importPath}'`}</code></pre>
                           <Table.Cell><code className="text-primary font-mono text-sm">{p.name}</code></Table.Cell>
                           <Table.Cell><code className="text-sm text-base-content/70 font-mono">{p.type}</code></Table.Cell>
                           <Table.Cell><code className="text-sm text-secondary font-mono">{p.default}</code></Table.Cell>
-                          <Table.Cell className="text-sm text-base-content/60">{p.desc}</Table.Cell>
+                          <Table.Cell className="text-sm text-base-content/60">{propDesc(component, p)}</Table.Cell>
                         </Table.Row>
                       ))}
                     </Table.Body>
@@ -149,12 +159,12 @@ import ${component.name} from '${component.importPath}'`}</code></pre>
               {/* On this page */}
               <Card variant="outlined" className="p-4">
                 <Menu
-                  triggerText="本页导航"
+                  triggerText={t('compDetail.onThisPage')}
                   size="sm"
                   placement="bottom-start"
                   items={[
-                    { key: 'preview', label: '实时预览' },
-                    { key: 'usage', label: '安装与使用' },
+                    { key: 'preview', label: t('compDetail.livePreview') },
+                    { key: 'usage', label: t('compDetail.installUsage') },
                     { key: 'props', label: 'Props API' },
                   ]}
                   onSelect={(item) => {
@@ -166,7 +176,7 @@ import ${component.name} from '${component.importPath}'`}</code></pre>
 
               {/* Category components */}
               <Card variant="outlined" className="p-4">
-                <h3 className="font-semibold mb-3 text-sm">{component.category} 分类</h3>
+                <h3 className="font-semibold mb-3 text-sm">{t('compDetail.categoryHeader', { category: component.category })}</h3>
                 <List disablePadding>
                   {allComponents
                     .filter((c) => c.category === component.category)

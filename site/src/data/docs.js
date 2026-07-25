@@ -1,6 +1,6 @@
 // Docs 文档数据 - 动态路由 /docs/:sectionId （多语言）
 
-const SUPPORTED_LANGS = ['zh-CN', 'en-US', 'ja-JP']
+const SUPPORTED_LANGS = ['zh-CN', 'en-US', 'ja-JP', 'fr-FR', 'de-DE', 'es-ES']
 const FALLBACK_LANG = 'zh-CN'
 
 function normLang(lang) {
@@ -1593,6 +1593,1060 @@ watercolor/
 4. Storybook stories を作成
 5. ユニットテストを追加
 6. ドキュメントを更新`,
+    },
+  },
+  'fr-FR': {
+    sections: [
+      {
+        group: 'Premiers pas',
+        items: [
+          { id: 'intro', label: 'Introduction' },
+          { id: 'install', label: 'Installation' },
+          { id: 'quick-start', label: 'Démarrage rapide' },
+          { id: 'usage', label: 'Utilisation de base' },
+        ],
+      },
+      {
+        group: 'Concepts fondamentaux',
+        items: [
+          { id: 'theming', label: 'Système de thème' },
+          { id: 'customization', label: 'Personnalisation' },
+          { id: 'dark-mode', label: 'Mode sombre' },
+          { id: 'accessibility', label: 'Accessibilité' },
+        ],
+      },
+      {
+        group: 'Avancé',
+        items: [
+          { id: 'ssr', label: 'Prise en charge SSR' },
+          { id: 'tree-shaking', label: 'Tree Shaking' },
+          { id: 'migration', label: 'Guide de migration' },
+          { id: 'contributing', label: 'Guide de contribution' },
+        ],
+      },
+    ],
+    content: {
+      intro: `## Qu'est-ce que Watercolor UI ?
+
+Watercolor UI est une bibliothèque de composants UI multi-frameworks, **moderne, minimaliste et au style aquarelle**, qui prend en charge à la fois **Vue 3.5+** et **React 18/19**.
+
+### Fonctionnalités clés
+
+- **Double framework** : un seul langage de conception couvrant Vue 3 et React 18/19
+- **Philosophie ultra-plate** : style aquarelle minimal sans ombres ni bordures
+- **Compatible Tree-shaking** : import à la demande pour réduire la taille du bundle
+- **Entièrement accessible** : navigation clavier, attributs ARIA, support lecteur d'écran
+- **Sûr pour le SSR** : évite les API navigateur au niveau supérieur des modules
+- **Piloté par CSS pur** : système de variables CSS natives, aucun coût d'exécution JS
+
+### Philosophie de conception
+
+Le nom « Watercolor » vient de la peinture à l'aquarelle — légère, translucide et nuancée. Nous poursuivons un langage visuel **ultra-plat (Ultra-flat)** :
+
+- Supprimer toute décoration inutile (ombres, bordures, dégradés)
+- Construire la hiérarchie avec la couleur et l'espacement
+- Conserver la pureté et l'universalité des composants
+
+### Nombre de composants
+
+Inclut actuellement **plus de 60 composants soigneusement conçus**, couvrant les scénarios suivants :
+
+| Catégorie | Nombre | Exemples |
+|-----------|--------|----------|
+| Formulaire | 18 | Button, TextField, Select, Checkbox... |
+| Mise en page | 4 | Container, Box, Grid, Paper |
+| Navigation | 7 | AppBar, Toolbar, Menu, Tabs... |
+| Retour | 9 | Alert, Snackbar, Modal, Tooltip... |
+| Affichage de données | 16 | Typography, Table, Avatar, Card... |
+| Avancé | 15+ | Popover, ImageGallery, VideoPlayer... |`,
+
+      install: `## Installer Watercolor UI
+
+### Option 1 : Installateur intelligent (recommandé)
+
+\`\`\`bash
+npm install @zeturn/watercolor-ui
+# ou
+yarn add @zeturn/watercolor-ui
+# ou
+pnpm add @zeturn/watercolor-ui
+\`\`\`
+
+L'installateur détecte automatiquement l'environnement de votre projet et vous guide dans le choix du framework et de la bibliothèque d'icônes.
+
+### Option 2 : Installation manuelle
+
+#### Projet React
+
+\`\`\`bash
+npm install @zeturn/watercolor-react @zeturn/watercolor-core
+\`\`\`
+
+#### Projet Vue
+
+\`\`\`bash
+npm install @zeturn/watercolor-vue @zeturn/watercolor-core
+\`\`\`
+
+### Prérequis Node
+
+- \`^20.19.0\`
+- ou \`>=22.12.0\``,
+
+      'quick-start': `## Démarrage rapide
+
+### Utilisation dans un projet React
+
+\`\`\`jsx
+import React from 'react'
+import { Button, TextField, Container } from '@zeturn/watercolor-react'
+import '@zeturn/watercolor-react/style.css'
+
+function App() {
+  return (
+    <Container maxWidth="md">
+      <h1>Hello Watercolor!</h1>
+      <TextField label="Votre nom" placeholder="Saisir..." />
+      <Button variant="filled">Cliquez ici</Button>
+    </Container>
+  )
+}
+\`\`\`
+
+### Utilisation dans un projet Vue
+
+\`\`\`vue
+<template>
+  <Container max-width="md">
+    <h1>Hello Watercolor!</h1>
+    <TextField label="Votre nom" placeholder="Saisir..." />
+    <Button variant="filled">Cliquez ici</Button>
+  </Container>
+</template>
+
+<script setup>
+import { Button, TextField, Container } from '@zeturn/watercolor-vue'
+import '@zeturn/watercolor-vue/style.css'
+</script>
+\`\`\`
+
+### Import à la demande
+
+Tous les composants prennent en charge l'import à la demande, pour une taille de bundle optimale :
+
+\`\`\`jsx
+// Importez uniquement les composants dont vous avez besoin
+import { Button } from '@zeturn/watercolor-react/components/Button'
+// Au lieu de import * from '@zeturn/watercolor-react'
+\`\`\``,
+
+      usage: `## Utilisation de base
+
+### Button
+
+\`\`\`jsx
+// Bouton de base
+<Button>Bouton par défaut</Button>
+
+// Variantes
+<Button variant="filled">Bouton rempli</Button>
+<Button variant="outlined">Bouton contouré</Button>
+<Button variant="text">Bouton texte</Button>
+
+// Tailles
+<Button size="sm">Petit</Button>
+<Button size="md">Moyen</Button>
+<Button size="lg">Grand</Button>
+
+// État désactivé
+<Button disabled>Désactivé</Button>
+\`\`\`
+
+### TextField
+
+\`\`\`jsx
+<TextField
+  label="Adresse e-mail"
+  type="email"
+  placeholder="votre@email.com"
+  helperText="Nous ne partagerons jamais votre e-mail"
+/>
+
+### Card
+
+\`\`\`jsx
+<Card>
+  <CardHeader title="Titre de la carte" subtitle="Description du sous-titre" />
+  <CardBody>
+    Contenu de la carte ici...
+  </CardBody>
+  <CardActions>
+    <Button variant="text">Action</Button>
+  </CardActions>
+</Card>
+\`\`\``,
+
+      theming: `## Système de thème
+
+Le thème par défaut de Watercolor fonctionne sans configuration : pas de bordures, peu d'ombres, et utilise les arrière-plans des états hover / focus / selected pour construire la hiérarchie. Pour la personnalisation de marque, remplacez les jetons sémantiques avec un **Theme v2 JSON** plutôt que de modifier le style interne des composants.
+
+### React
+
+\`\`\`tsx
+import { ThemeProvider, useTheme } from '@zeturn/watercolor-react'
+import '@zeturn/watercolor-react/style.css'
+
+export function Root() {
+  return (
+    <ThemeProvider defaultMode="system" themeUrl="/theme.json">
+      <App />
+    </ThemeProvider>
+  )
+}
+
+function ThemeToggle() {
+  const { mode, setMode, resolvedMode } = useTheme()
+  return <button onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}>{resolvedMode}</button>
+}
+\`\`\`
+
+### Vue
+
+\`\`\`vue
+<script setup>
+import { ThemeProvider, useTheme } from '@zeturn/watercolor-vue'
+import '@zeturn/watercolor-vue/style.css'
+</script>
+
+<template>
+  <ThemeProvider theme-url="/theme.json" default-mode="system">
+    <App />
+  </ThemeProvider>
+</template>
+\`\`\`
+
+### Theme v2 JSON
+
+\`\`\`json
+{
+  "version": 2,
+  "tokens": {
+    "light": {
+      "canvas": "#ffffff",
+      "textPrimary": "#171717",
+      "accent": "#2563eb",
+      "onAccent": "#ffffff",
+      "danger": "#dc2626",
+      "focusRing": "#3b82f6"
+    },
+    "dark": {
+      "canvas": "#050505",
+      "textPrimary": "#f5f5f5",
+      "accent": "#60a5fa",
+      "onAccent": "#06111f",
+      "danger": "#f87171",
+      "focusRing": "#93c5fd"
+    }
+  }
+}
+\`\`\`
+
+### Stratégie de jetons stable
+
+Theme v2 gèle les noms de jetons de mode suivants et n'introduira pas de renommage cassant dans la 1.x : \`canvas\`, \`surfaceSubtle\`, \`surfaceRaised\`, \`surfaceOverlay\`, \`actionHover\`, \`actionActive\`, \`actionSelected\`, \`actionSelectedHover\`, \`actionDisabled\`, \`textPrimary\`, \`textSecondary\`, \`textTertiary\`, \`textDisabled\`, \`textInverse\`, \`borderDefault\`, \`borderStrong\`, \`borderSubtle\`, \`onAccent\`, \`accent\`, \`accentHover\`, \`accentActive\`, \`accentSubtle\`, \`danger\`, \`dangerHover\`, \`dangerSubtle\`, \`backdrop\`, \`shadowSm\`, \`shadowMd\`, \`shadowLg\`, \`shadowXl\`, \`focusRing\`.
+
+L'audit strict du thème valide les ratios de contraste clés : \`textPrimary\` / \`canvas\`, \`accent\` / \`onAccent\`, \`danger\`, \`focusRing\`. Si \`theme.json\` est absent, échoue au chargement ou échoue à la validation, le Provider revient au style Watercolor par défaut.`,
+
+      customization: `## Personnalisation
+
+### Remplacer les variables CSS
+
+La méthode la plus simple est de remplacer directement les variables CSS :
+
+\`\`\`css
+/* Dans vos styles globaux */
+:root {
+  /* Couleurs personnalisées */
+  --wc-primary-500: #ec4899;
+
+  /* Rayons personnalisés */
+  --wc-radius-sm: 4px;
+  --wc-radius-md: 8px;
+  --wc-radius-lg: 12px;
+
+  /* Police personnalisée */
+  --wc-font-sans: 'Your Font', sans-serif;
+}
+\`\`\`
+
+### Étendre avec className
+
+Chaque composant accepte la prop standard \`className\` :
+
+\`\`\`jsx
+<Button className="my-custom-button">
+  Style personnalisé
+</Button>
+
+<style>
+.my-custom-button {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+</style>
+\`\`\`
+
+### Utiliser la prop style
+
+\`\`\`jsx
+<Button style={{ borderRadius: '9999px' }}>
+  Bouton arrondi
+</Button>
+\`\`\``,
+
+      'dark-mode': `## Mode sombre
+
+Watercolor utilise \`data-resolved-theme\` pour exprimer le thème final résolu. Le CSS lit uniquement \`data-resolved-theme="dark"\`, évitant la cartographie dupliquée de \`.dark\`, \`data-theme\` et des requêtes média système qui provoquent des risques d'hydratation SSR.
+
+### Mode system
+
+\`\`\`tsx
+<ThemeProvider defaultMode="system" initialResolvedMode="light">
+  <App />
+</ThemeProvider>
+\`\`\`
+
+\`defaultMode="system"\` suit \`prefers-color-scheme\` côté client. Pour les scénarios SSR, il est recommandé de passer \`initialResolvedMode\` ou d'utiliser un script de pré-rendu afin que le premier rendu serveur corresponde au résultat résolu côté client.
+
+### Thème localisé
+
+\`\`\`tsx
+<section ref={panelRef}>
+  <ThemeProvider target={panelRef.current} defaultMode="dark">
+    <SettingsPanel />
+  </ThemeProvider>
+</section>
+\`\`\`
+
+\`target\` attache à la fois le mode et les jetons Theme v2 localisés au même nœud cible. Lors du démontage du Provider, il restaure les attributs de thème d'origine sur le nœud cible.`,
+
+      accessibility: `## Accessibilité
+
+Watercolor UI fait de l'accessibilité l'un de ses principes de conception fondamentaux.
+
+### Prise en charge intégrée
+
+Tous les composants incluent par défaut :
+
+- Navigation au clavier — Tab / Shift+Tab / Enter / Space / Escape
+- Attributs ARIA — role, aria-label, aria-expanded, etc.
+- Gestion du focus — anneau de focus visible (focus-visible)
+- Contraste des couleurs — conforme à la norme WCAG AA
+- Optimisation lecteur d'écran — structure HTML sémantique
+- Mouvement réduit — respecte prefers-reduced-motion
+
+### Bonnes pratiques
+
+\`\`\`jsx
+// Ajouter un label aux boutons icônes
+<IconButton aria-label="Fermer la boîte de dialogue">
+  <CloseIcon />
+</IconButton>
+
+// Associer des labels aux champs de formulaire
+<TextField
+  id="email"
+  label="E-mail"
+  aria-describedby="email-hint"
+/>
+<span id="email-hint">Nous n'enverrons jamais de spam</span>
+
+// Utiliser role correctement
+<div role="alert" aria-live="polite">
+  Succès !
+</div>
+\`\`\``,
+
+      ssr: `## Prise en charge SSR
+
+Watercolor UI est entièrement compatible avec le rendu côté serveur (SSR).
+
+### Next.js (React)
+
+\`\`\`jsx
+// pages/_app.js ou app/layout.js
+import '@zeturn/watercolor-react/style.css'
+
+export default function App({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+\`\`\`
+
+### Nuxt 3 (Vue)
+
+\`\`\`vue
+<!-- nuxt.config.ts ou plugins/watercolor.client.ts -->
+<script setup lang="ts">
+import '@zeturn/watercolor-vue/style.css'
+</script>
+\`\`\`
+
+### Remarques
+
+- Tous les composants évitent d'accéder à \`window\` / \`document\` au niveau supérieur des modules
+- Les variables CSS sont correctement générées lors du SSR
+- Le changement de thème dynamique est recommandé après l'initialisation côté client`,
+
+      'tree-shaking': `## Tree Shaking
+
+L'architecture de Watercolor UI prend nativement en charge le Tree-shaking.
+
+### Import recommandé
+
+\`\`\`jsx
+// Recommandé : importer individuellement les composants à la demande
+import { Button } from '@zeturn/watercolor-react/components/Button'
+import { TextField } from '@zeturn/watercolor-react/components/TextField'
+
+// Acceptable : importer depuis le fichier d'entrée (ESM fera le tree-shake)
+import { Button, TextField } from '@zeturn/watercolor-react'
+
+// Non recommandé : tout importer
+import * as WC from '@zeturn/watercolor-react'
+\`\`\`
+
+### Comparaison de taille de bundle
+
+| Méthode d'import | Taille gzip |
+|------------------|-------------|
+| Button seul | ~2 KB |
+| 10 composants courants | ~15 KB |
+| Tous les composants | ~45 KB |
+
+### Les styles prennent aussi en charge le chargement à la demande
+
+\`\`\`css
+/* Par défaut : importer les styles du package framework ; diviser par composant uniquement pour usage avancé */
+@import '@zeturn/watercolor-react/style.css';
+@import '@zeturn/watercolor-react/components/Button/style.css';
+\`\`\``,
+
+      migration: `## Guide de migration
+
+### Migrer depuis Tailwind CSS
+
+Si vous écriviez auparavant vos styles directement avec Tailwind CSS :
+
+\`\`\`diff
+- <button class="bg-blue-500 text-white px-4 py-2 rounded-lg
+-   hover:bg-blue-600 transition-colors">
+-   Click me
+- </button>
++ <Button variant="filled">
++   Click me
++ </Button>
+\`\`\`
+
+### Migrer depuis d'autres bibliothèques UI
+
+| Bibliothèque | Équivalent Watercolor |
+|--------------|----------------------|
+| MUI Button | \`<Button>\` |
+| Ant Design Input | \`<TextField>\` |
+| Chakra UI Box | \`<Box>\` |
+| Radix Dialog | \`<Modal>\` |
+| Headless UI Menu | \`<Menu>\` |
+
+### Principaux changements de la v1.1.x
+
+- Suppression de la dépendance Tailwind CSS au profit de CSS natif
+- Bibliothèque d'icônes transformée en peerDependencies optionnelles
+- Ajout de l'API de contrôleur de thème
+- Amélioration de la compatibilité SSR`,
+
+      contributing: `## Guide de contribution
+
+Merci de votre intérêt pour Watercolor UI !
+
+### Configuration de l'environnement de développement
+
+\`\`\`bash
+# Cloner le dépôt
+git clone https://github.com/zeturn/watercolor.git
+cd watercolor
+
+# Installer les dépendances
+npm install
+
+# Lancer le mode développement
+npm run dev
+
+# Lancer Storybook
+npm run storybook
+
+# Vérification docs et exemples avant publication
+npm run audit:docs-examples
+\`\`\`
+
+### Structure du projet
+
+\`\`\`
+watercolor/
+├── packages/
+│   ├── core/          # Logique et styles principaux
+│   ├── vue/           # Implémentation des composants Vue
+│   └── react/         # Implémentation des composants React
+├── site/              # Source du site officiel et de la documentation
+├── docs/              # Sortie de build GitHub Pages
+└── scripts/           # Scripts de build
+\`\`\`
+
+### Conventions de commit
+
+Nous utilisons Conventional Commits :
+
+- \`feat:\` nouvelle fonctionnalité
+- \`fix:\` correction de bug
+- \`docs:\` mise à jour de documentation
+- \`style:\` formatage du code
+- \`refactor:\` refactoring
+- \`test:\` tests
+- \`chore:\` changements de build/outils
+
+### Développer un nouveau composant
+
+1. Créer une fonction utilitaire dans \`packages/core/src/components/\`
+2. Créer l'implémentation Vue dans \`packages/vue/src/components/\`
+3. Créer l'implémentation React dans \`packages/react/src/components/\`
+4. Écrire les stories Storybook
+5. Ajouter des tests unitaires
+6. Mettre à jour la documentation`,
+    },
+  },
+  'de-DE': {
+    sections: [
+      {
+        group: 'Erste Schritte',
+        items: [
+          { id: 'intro', label: 'Einführung' },
+          { id: 'install', label: 'Installation' },
+          { id: 'quick-start', label: 'Schnellstart' },
+          { id: 'usage', label: 'Grundlagen' },
+        ],
+      },
+      {
+        group: 'Kernkonzepte',
+        items: [
+          { id: 'theming', label: 'Theme-System' },
+          { id: 'customization', label: 'Anpassung' },
+          { id: 'dark-mode', label: 'Dunkelmodus' },
+          { id: 'accessibility', label: 'Barrierefreiheit' },
+        ],
+      },
+      {
+        group: 'Fortgeschritten',
+        items: [
+          { id: 'ssr', label: 'SSR-Unterstützung' },
+          { id: 'tree-shaking', label: 'Tree Shaking' },
+          { id: 'migration', label: 'Migrationsleitfaden' },
+          { id: 'contributing', label: 'Beitragsleitfaden' },
+        ],
+      },
+    ],
+    content: {
+      intro: `## Was ist Watercolor UI?
+
+Watercolor UI ist eine **moderne, minimalistische, aquarellartige** Multi-Framework-UI-Komponentenbibliothek, die sowohl **Vue 3.5+** als auch **React 18/19** unterstützt.
+
+### Kernfunktionen
+
+- **Dual-Framework-Support**: Eine Designsprache für Vue 3 und React 18/19
+- **Ultra-flache Designphilosophie**: Minimaler Aquarellstil ohne Schatten oder Rahmen
+- **Tree-shaking-freundlich**: Bedarfsgerechter Import zur Minimierung der Bundle-Größe
+- **Vollständig barrierefrei**: Tastaturnavigation, ARIA-Attribute, Screenreader-Support
+- **SSR-sicher**: Vermeidet Browser-APIs auf oberster Modulebene
+- **Reines CSS**: Nutzt native CSS-Variablen, kein JS-Runtime-Overhead
+
+### Designphilosophie
+
+Der Name „Watercolor“ stammt von der Aquarellmalerei — leicht, transparent und schichtig. Wir verfolgen eine **ultra-flache (Ultra-flat)** visuelle Sprache:
+
+- Entferne jeden unnötigen Schmuck (Schatten, Rahmen, Verläufe)
+- Baue Hierarchie mit Farbe und Abständen auf
+- Bewahre die Reinheit und Vielseitigkeit der Komponenten
+
+### Anzahl der Komponenten
+
+Derzeit sind **über 60 sorgfältig gestaltete Komponenten** enthalten, die folgende Szenarien abdecken:
+
+| Kategorie | Anzahl | Beispiele |
+|-----------|--------|-----------|
+| Formular | 18 | Button, TextField, Select, Checkbox... |
+| Layout | 4 | Container, Box, Grid, Paper |
+| Navigation | 7 | AppBar, Toolbar, Menu, Tabs... |
+| Feedback | 9 | Alert, Snackbar, Modal, Tooltip... |
+| Datendarstellung | 16 | Typography, Table, Avatar, Card... |
+| Erweitert | 15+ | Popover, ImageGallery, VideoPlayer... |`,
+
+      install: `## Watercolor UI installieren
+
+### Option 1: Intelligenter Installer (empfohlen)
+
+\`\`\`bash
+npm install @zeturn/watercolor-ui
+# oder
+yarn add @zeturn/watercolor-ui
+# oder
+pnpm add @zeturn/watercolor-ui
+\`\`\`
+
+Der Installer erkennt automatisch Ihre Projektumgebung und führt Sie bei der Wahl von Framework und Icon-Bibliothek.
+
+### Option 2: Manuelle Installation
+
+#### React-Projekt
+
+\`\`\`bash
+npm install @zeturn/watercolor-react @zeturn/watercolor-core
+\`\`\`
+
+#### Vue-Projekt
+
+\`\`\`bash
+npm install @zeturn/watercolor-vue @zeturn/watercolor-core
+\`\`\`
+
+### Node-Version
+
+- \`^20.19.0\`
+- oder \`>=22.12.0\``,
+
+      'quick-start': `## Schnellstart
+
+### In einem React-Projekt verwenden
+
+\`\`\`jsx
+import React from 'react'
+import { Button, TextField, Container } from '@zeturn/watercolor-react'
+import '@zeturn/watercolor-react/style.css'
+
+function App() {
+  return (
+    <Container maxWidth="md">
+      <h1>Hello Watercolor!</h1>
+      <TextField label="Ihr Name" placeholder="Eingeben..." />
+      <Button variant="filled">Klick mich</Button>
+    </Container>
+  )
+}
+\`\`\`
+
+### In einem Vue-Projekt verwenden
+
+\`\`\`vue
+<template>
+  <Container max-width="md">
+    <h1>Hello Watercolor!</h1>
+    <TextField label="Ihr Name" placeholder="Eingeben..." />
+    <Button variant="filled">Klick mich</Button>
+  </Container>
+</template>
+
+<script setup>
+import { Button, TextField, Container } from '@zeturn/watercolor-vue'
+import '@zeturn/watercolor-vue/style.css'
+</script>
+\`\`\`
+
+### Bedarfsgerechter Import
+
+Alle Komponenten unterstützen bedarfsgerechte Importe für eine optimale Bundle-Größe:
+
+\`\`\`jsx
+// Importieren Sie nur die Komponenten, die Sie brauchen
+import { Button } from '@zeturn/watercolor-react/components/Button'
+// Anstatt import * from '@zeturn/watercolor-react'
+\`\`\``,
+
+      usage: `## Grundlagen
+
+### Button
+
+\`\`\`jsx
+// Basis-Button
+<Button>Standard-Button</Button>
+
+// Varianten
+<Button variant="filled">Gefüllter Button</Button>
+<Button variant="outlined">Umriss-Button</Button>
+<Button variant="text">Text-Button</Button>
+
+// Größen
+<Button size="sm">Klein</Button>
+<Button size="md">Mittel</Button>
+<Button size="lg">Groß</Button>
+
+// Deaktiviert
+<Button disabled>Deaktiviert</Button>
+\`\`\`
+
+### TextField
+
+\`\`\`jsx
+<TextField
+  label="E-Mail-Adresse"
+  type="email"
+  placeholder="ihre@email.com"
+  helperText="Wir teilen Ihre E-Mail niemals"
+/>
+
+### Card
+
+\`\`\`jsx
+<Card>
+  <CardHeader title="Kartentitel" subtitle="Untertitel-Beschreibung" />
+  <CardBody>
+    Hier ist der Karteninhalt...
+  </CardBody>
+  <CardActions>
+    <Button variant="text">Aktion</Button>
+  </CardActions>
+</Card>
+\`\`\``,
+
+      theming: `## Theme-System
+
+Watercolors Standard-Theme funktioniert ohne Konfiguration: keine Rahmen, wenige Schatten, und nutzt Hintergründe der Zustände hover / focus / selected für die Hierarchie. Für Branding überschreiben Sie semantische Tokens mit einem **Theme v2 JSON** statt das interne Komponenten-Styling zu ändern.
+
+### React
+
+\`\`\`tsx
+import { ThemeProvider, useTheme } from '@zeturn/watercolor-react'
+import '@zeturn/watercolor-react/style.css'
+
+export function Root() {
+  return (
+    <ThemeProvider defaultMode="system" themeUrl="/theme.json">
+      <App />
+    </ThemeProvider>
+  )
+}
+
+function ThemeToggle() {
+  const { mode, setMode, resolvedMode } = useTheme()
+  return <button onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}>{resolvedMode}</button>
+}
+\`\`\`
+
+### Vue
+
+\`\`\`vue
+<script setup>
+import { ThemeProvider, useTheme } from '@zeturn/watercolor-vue'
+import '@zeturn/watercolor-vue/style.css'
+</script>
+
+<template>
+  <ThemeProvider theme-url="/theme.json" default-mode="system">
+    <App />
+  </ThemeProvider>
+</template>
+\`\`\`
+
+### Theme v2 JSON
+
+\`\`\`json
+{
+  "version": 2,
+  "tokens": {
+    "light": {
+      "canvas": "#ffffff",
+      "textPrimary": "#171717",
+      "accent": "#2563eb",
+      "onAccent": "#ffffff",
+      "danger": "#dc2626",
+      "focusRing": "#3b82f6"
+    },
+    "dark": {
+      "canvas": "#050505",
+      "textPrimary": "#f5f5f5",
+      "accent": "#60a5fa",
+      "onAccent": "#06111f",
+      "danger": "#f87171",
+      "focusRing": "#93c5fd"
+    }
+  }
+}
+\`\`\`
+
+### Stabile Token-Strategie
+
+Theme v2 friert folgende Mode-Token-Namen ein und führt innerhalb von 1.x keine breaking Renames durch: \`canvas\`, \`surfaceSubtle\`, \`surfaceRaised\`, \`surfaceOverlay\`, \`actionHover\`, \`actionActive\`, \`actionSelected\`, \`actionSelectedHover\`, \`actionDisabled\`, \`textPrimary\`, \`textSecondary\`, \`textTertiary\`, \`textDisabled\`, \`textInverse\`, \`borderDefault\`, \`borderStrong\`, \`borderSubtle\`, \`onAccent\`, \`accent\`, \`accentHover\`, \`accentActive\`, \`accentSubtle\`, \`danger\`, \`dangerHover\`, \`dangerSubtle\`, \`backdrop\`, \`shadowSm\`, \`shadowMd\`, \`shadowLg\`, \`shadowXl\`, \`focusRing\`.
+
+Das strikte Theme-Audit prüft zentrale Kontrastverhältnisse: \`textPrimary\` / \`canvas\`, \`accent\` / \`onAccent\`, \`danger\`, \`focusRing\`. Fehlt \`theme.json\`, schlägt das Laden oder die Validierung fehl, fällt der Provider auf die Standard-Watercolor-Styles zurück.`,
+
+      customization: `## Anpassung
+
+### CSS-Variablen überschreiben
+
+Der einfachste Weg ist, CSS-Variablen direkt zu überschreiben:
+
+\`\`\`css
+/* In Ihren globalen Styles */
+:root {
+  /* Eigene Farben */
+  --wc-primary-500: #ec4899;
+
+  /* Eigene Radien */
+  --wc-radius-sm: 4px;
+  --wc-radius-md: 8px;
+  --wc-radius-lg: 12px;
+
+  /* Eigene Schrift */
+  --wc-font-sans: 'Your Font', sans-serif;
+}
+\`\`\`
+
+### Mit className erweitern
+
+Jede Komponente akzeptiert die Standard-\`className\`-Prop:
+
+\`\`\`jsx
+<Button className="my-custom-button">
+  Eigener Stil
+</Button>
+
+<style>
+.my-custom-button {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+</style>
+\`\`\`
+
+### Die style-Prop nutzen
+
+\`\`\`jsx
+<Button style={{ borderRadius: '9999px' }}>
+  Runder Button
+</Button>
+\`\`\``,
+
+      'dark-mode': `## Dunkelmodus
+
+Watercolor nutzt \`data-resolved-theme\`, um das final aufgelöste Theme auszudrücken. CSS liest nur \`data-resolved-theme="dark"\` und vermeidet so die doppelte Abbildung von \`.dark\`, \`data-theme\` und System-Media-Queries, die SSR-Hydration-Risiken verursachen.
+
+### system-Modus
+
+\`\`\`tsx
+<ThemeProvider defaultMode="system" initialResolvedMode="light">
+  <App />
+</ThemeProvider>
+\`\`\`
+
+\`defaultMode="system"\` folgt clientseitig \`prefers-color-scheme\`. Für SSR-Szenarien empfiehlt es sich, \`initialResolvedMode\` zu übergeben oder ein Pre-Paint-Skript zu nutzen, damit das erste Server-Rendering mit dem clientseitigen Ergebnis übereinstimmt.
+
+### Lokales Theme
+
+\`\`\`tsx
+<section ref={panelRef}>
+  <ThemeProvider target={panelRef.current} defaultMode="dark">
+    <SettingsPanel />
+  </ThemeProvider>
+</section>
+\`\`\`
+
+\`target\` hängt sowohl den Mode als auch die lokalen Theme-v2-Tokens an denselben Zielknoten. Beim Unmount des Providers werden die ursprünglichen Theme-Attribute am Zielknoten wiederhergestellt.`,
+
+      accessibility: `## Barrierefreiheit
+
+Watercolor UI betrachtet Barrierefreiheit als eines seiner Kern-Designprinzipien.
+
+### Eingebaute Unterstützung
+
+Alle Komponenten enthalten standardmäßig:
+
+- Tastaturnavigation — Tab / Shift+Tab / Enter / Space / Escape
+- ARIA-Attribute — role, aria-label, aria-expanded usw.
+- Fokus-Management — sichtbarer Fokusring (focus-visible)
+- Farbkontrast — erfüllt WCAG-AA-Standard
+- Screenreader-Optimierung — semantisches HTML
+- Reduzierte Bewegung — respektiert prefers-reduced-motion
+
+### Best Practices
+
+\`\`\`jsx
+// Icon-Buttons ein Label geben
+<IconButton aria-label="Dialog schließen">
+  <CloseIcon />
+</IconButton>
+
+// Formularfelder mit Labels verknüpfen
+<TextField
+  id="email"
+  label="E-Mail"
+  aria-describedby="email-hint"
+/>
+<span id="email-hint">Wir senden keinen Spam</span>
+
+// role korrekt verwenden
+<div role="alert" aria-live="polite">
+  Erfolg!
+</div>
+\`\`\``,
+
+      ssr: `## SSR-Unterstützung
+
+Watercolor UI ist vollständig mit Server-Side-Rendering (SSR) kompatibel.
+
+### Next.js (React)
+
+\`\`\`jsx
+// pages/_app.js oder app/layout.js
+import '@zeturn/watercolor-react/style.css'
+
+export default function App({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+\`\`\`
+
+### Nuxt 3 (Vue)
+
+\`\`\`vue
+<!-- nuxt.config.ts oder plugins/watercolor.client.ts -->
+<script setup lang="ts">
+import '@zeturn/watercolor-vue/style.css'
+</script>
+\`\`\`
+
+### Hinweise
+
+- Alle Komponenten vermeiden den Zugriff auf \`window\` / \`document\` auf oberster Modulebene
+- CSS-Variablen werden bei SSR korrekt ausgegeben
+- Dynamischer Theme-Wechsel wird nach der Client-Initialisierung empfohlen`,
+
+      'tree-shaking': `## Tree Shaking
+
+Die Architektur von Watercolor UI unterstützt nativ Tree-Shaking.
+
+### Empfohlener Import
+
+\`\`\`jsx
+// Empfohlen: einzelne Komponenten bedarfsgereicht importieren
+import { Button } from '@zeturn/watercolor-react/components/Button'
+import { TextField } from '@zeturn/watercolor-react/components/TextField'
+
+// Akzeptabel: aus Entry-Datei importieren (ESM tree-shaked)
+import { Button, TextField } from '@zeturn/watercolor-react'
+
+// Nicht empfohlen: alles importieren
+import * as WC from '@zeturn/watercolor-react'
+\`\`\`
+
+### Bundle-Größe im Vergleich
+
+| Import-Methode | Gzip-Größe |
+|----------------|-------------|
+| Nur Button | ~2 KB |
+| 10 gängige Komponenten | ~15 KB |
+| Alle Komponenten | ~45 KB |
+
+### Styles unterstützen ebenfalls bedarfsgerechten Import
+
+\`\`\`css
+/* Standard: Framework-Paket-Styles importieren; pro Komponente nur für Fortgeschrittene splitten */
+@import '@zeturn/watercolor-react/style.css';
+@import '@zeturn/watercolor-react/components/Button/style.css';
+\`\`\``,
+
+      migration: `## Migrationsleitfaden
+
+### Von Tailwind CSS migrieren
+
+Wenn Sie zuvor Tailwind CSS direkt genutzt haben:
+
+\`\`\`diff
+- <button class="bg-blue-500 text-white px-4 py-2 rounded-lg
+-   hover:bg-blue-600 transition-colors">
+-   Click me
+- </button>
++ <Button variant="filled">
++   Click me
++ </Button>
+\`\`\`
+
+### Von anderen UI-Bibliotheken migrieren
+
+| Bibliothek | Watercolor-Äquivalent |
+|------------|----------------------|
+| MUI Button | \`<Button>\` |
+| Ant Design Input | \`<TextField>\` |
+| Chakra UI Box | \`<Box>\` |
+| Radix Dialog | \`<Modal>\` |
+| Headless UI Menu | \`<Menu>\` |
+
+### Wichtigste Änderungen in v1.1.x
+
+- Tailwind-CSS-Abhängigkeit entfernt, nativ zu CSS gewechselt
+- Icon-Bibliothek zu optionalen peerDependencies geändert
+- Theme-Controller-API hinzugefügt
+- SSR-Kompatibilität verbessert`,
+
+      contributing: `## Beitragsleitfaden
+
+Vielen Dank für Ihr Interesse an Watercolor UI!
+
+### Entwicklungsumgebung einrichten
+
+\`\`\`bash
+# Repository klonen
+git clone https://github.com/zeturn/watercolor.git
+cd watercolor
+
+# Abhängigkeiten installieren
+npm install
+
+# Dev-Modus starten
+npm run dev
+
+# Storybook starten
+npm run storybook
+
+# Docs- und Beispielprüfung vor Veröffentlichung
+npm run audit:docs-examples
+\`\`\`
+
+### Projektstruktur
+
+\`\`\`
+watercolor/
+├── packages/
+│   ├── core/          # Kernlogik und Styles
+│   ├── vue/           # Vue-Komponenten
+│   └── react/         # React-Komponenten
+├── site/              # Website und Docs-Quelle
+├── docs/              # GitHub Pages Build-Output
+└── scripts/           # Build-Skripte
+\`\`\`
+
+### Commit-Konventionen
+
+Wir verwenden Conventional Commits:
+
+- \`feat:\` neue Funktion
+- \`fix:\` Bugfix
+- \`docs:\` Dokumentationsupdate
+- \`style:\` Code-Formatierung
+- \`refactor:\` Refactoring
+- \`test:\` Tests
+- \`chore:\` Build/Tooling-Änderung
+
+### Neue Komponente entwickeln
+
+1. Utility-Funktion in \`packages/core/src/components/\` erstellen
+2. Vue-Implementierung in \`packages/vue/src/components/\` erstellen
+3. React-Implementierung in \`packages/react/src/components/\` erstellen
+4. Storybook-Stories schreiben
+5. Unit-Tests hinzufügen
+6. Dokumentation aktualisieren`,
     },
   },
 }

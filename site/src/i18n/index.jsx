@@ -2,11 +2,18 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import zhCN from './locales/zh-CN'
 import enUS from './locales/en-US'
 import jaJP from './locales/ja-JP'
+import frFR from './locales/fr-FR'
+import deDE from './locales/de-DE'
+import esES from './locales/es-ES'
+import { compI18n } from '../data/componentsI18n'
 
 const LOCALES = {
   'zh-CN': zhCN,
   'en-US': enUS,
   'ja-JP': jaJP,
+  'fr-FR': frFR,
+  'de-DE': deDE,
+  'es-ES': esES,
 }
 
 const DEFAULT_LANG = 'zh-CN'
@@ -20,6 +27,9 @@ function detectLang() {
   const nav = typeof navigator !== 'undefined' ? navigator.language || '' : ''
   if (nav.startsWith('zh')) return 'zh-CN'
   if (nav.startsWith('ja')) return 'ja-JP'
+  if (nav.startsWith('fr')) return 'fr-FR'
+  if (nav.startsWith('de')) return 'de-DE'
+  if (nav.startsWith('es')) return 'es-ES'
   if (nav.startsWith('en')) return 'en-US'
   return DEFAULT_LANG
 }
@@ -64,4 +74,18 @@ export function useI18n() {
   const ctx = useContext(I18nContext)
   if (!ctx) throw new Error('useI18n must be used within <I18nProvider>')
   return ctx
+}
+
+// 组件元数据（description / props.desc）的多语言读取助手。
+// 中文源在 data/components.jsx，翻译在 data/componentsI18n.js。
+export function useComponentText() {
+  const { lang } = useI18n()
+  return {
+    desc(comp) {
+      return compI18n[comp.id]?.description?.[lang] || comp.description
+    },
+    propDesc(comp, prop) {
+      return compI18n[comp.id]?.props?.[prop.name]?.[lang] || prop.desc
+    },
+  }
 }

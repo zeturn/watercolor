@@ -5,6 +5,7 @@ import Markdown from '../components/Markdown'
 import { Button, Badge, List, ListItem, ListItemText } from '@zeturn/watercolor-react'
 import { getDocSections, getAllDocSections, getDocById, getAdjacentDocs } from '../data/docs'
 import { useI18n } from '../i18n'
+import { useDocumentMeta } from '../seo'
 
 export default function Docs() {
   const { t, lang } = useI18n()
@@ -20,6 +21,12 @@ export default function Docs() {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [activeId])
+
+  useDocumentMeta({
+    title: doc?.title,
+    description: doc?.summary || doc?.description || 'Watercolor UI 使用文档，涵盖快速上手、安装、主题定制与 API 参考。',
+    path: activeId ? `/docs/${activeId}` : '/docs',
+  })
 
   if (!doc) {
     return (

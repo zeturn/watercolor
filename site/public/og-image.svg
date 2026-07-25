@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe4f0"/>
+      <stop offset="0.5" stop-color="#f3e8ff"/>
+      <stop offset="1" stop-color="#e0f2fe"/>
+    </linearGradient>
+    <linearGradient id="word" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f43f5e"/>
+      <stop offset="0.5" stop-color="#d946ef"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1050" cy="120" r="60" fill="#f43f5e" opacity="0.22"/>
+  <circle cx="1110" cy="510" r="90" fill="#6366f1" opacity="0.18"/>
+  <circle cx="120" cy="560" r="70" fill="#d946ef" opacity="0.16"/>
+  <text x="80" y="300" font-family="Inter, 'Noto Sans SC', sans-serif" font-size="118" font-weight="800" fill="url(#word)">Watercolor UI</text>
+  <text x="84" y="400" font-family="Inter, 'Noto Sans SC', sans-serif" font-size="44" font-weight="500" fill="#475569">跨框架水彩风格组件库 · React &amp; Vue 3</text>
+  <text x="84" y="470" font-family="Inter, 'Noto Sans SC', sans-serif" font-size="32" font-weight="400" fill="#64748b">60+ 开箱即用组件 · 零运行时依赖 · 可主题化 · 可访问</text>
+</svg>

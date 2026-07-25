@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { useI18n } from '../i18n'
-import { FlagCN, FlagUS, FlagJP } from './Flags'
+import { FlagCN, FlagUS, FlagJP, FlagFR, FlagDE, FlagES } from './Flags'
 
 const LANGUAGES = [
   { code: 'zh-CN', label: '简体中文', Flag: FlagCN },
   { code: 'en-US', label: 'English', Flag: FlagUS },
   { code: 'ja-JP', label: '日本語', Flag: FlagJP },
+  { code: 'fr-FR', label: 'Français', Flag: FlagFR },
+  { code: 'de-DE', label: 'Deutsch', Flag: FlagDE },
+  { code: 'es-ES', label: 'Español', Flag: FlagES },
 ]
 
 export default function LanguageSwitcher() {
