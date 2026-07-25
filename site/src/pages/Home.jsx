@@ -28,6 +28,7 @@ function useOnceInView(threshold = 0.3) {
 function HeroSection() {
   const { t } = useI18n()
   const [currentText, setCurrentText] = useState(0)
+  const [atTop, setAtTop] = useState(true)
   const heroTexts = [
     { title: 'Beautiful', subtitle: t('hero.subBeautiful'), color: 'from-rose-500 to-orange-400' },
     { title: 'Cross-Framework', subtitle: t('hero.subCross'), color: 'from-violet-500 to-fuchsia-500' },
@@ -42,10 +43,17 @@ function HeroSection() {
     return () => clearInterval(interval)
   }, [])
 
+  useEffect(() => {
+    const onScroll = () => setAtTop(window.scrollY < 10)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <section className="relative min-h-[80vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[80vh] flex items-center">
       {/* Background decorations */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className={`absolute inset-0 pointer-events-none z-[60] transition-opacity duration-500 ${atTop ? 'opacity-100' : 'opacity-0'}`}>
         <div className="blob absolute -top-48 -right-32 w-[28rem] h-[28rem] bg-gradient-to-br from-fuchsia-500/25 to-transparent blur-3xl" />
         <div className="blob-2 absolute top-1/2 -left-48 w-80 h-80 bg-gradient-to-br from-sky-400/20 to-transparent blur-3xl" />
         <div className="absolute bottom-20 right-1/4 w-64 h-64 bg-gradient-to-br from-amber-400/15 to-transparent rounded-full blur-3xl" />
@@ -57,7 +65,7 @@ function HeroSection() {
         }} />
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10 pt-20 lg:pt-24">
+      <div className="container mx-auto px-4 lg:px-8 relative z-10 pt-8 lg:pt-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left content */}
           <div className="space-y-8">
@@ -178,8 +186,8 @@ function HeroSection() {
               </div>
             </div>
 
-            {/* Floating decoration cards */}
-            <div className="absolute -left-8 top-20 glass rounded-xl p-3 shadow-lg animate-float z-0">
+            {/* Floating badges */}
+            <div className="absolute -left-8 top-20 glass rounded-xl p-3 shadow-lg animate-float z-30">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-success/20 flex items-center justify-center">
                   <svg className="w-4 h-4 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -193,7 +201,7 @@ function HeroSection() {
               </div>
             </div>
 
-            <div className="absolute -right-4 bottom-32 glass rounded-xl p-3 shadow-lg animate-float z-0" style={{ animationDelay: '2s' }}>
+            <div className="absolute -right-4 bottom-32 glass rounded-xl p-3 shadow-lg animate-float z-30" style={{ animationDelay: '2s' }}>
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
                   <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -206,6 +214,7 @@ function HeroSection() {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
 
