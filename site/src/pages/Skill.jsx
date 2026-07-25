@@ -8,9 +8,9 @@ const SITE = 'https://watercolorui.com'
 
 const tools = [
   {
-    name: 'CodeBuddy',
-    desc: 'Place the file under your project’s .codebuddy/skills directory so the agent can load it on demand.',
-    command: `curl -o .codebuddy/skills/watercolor-ui/SKILL.md ${SITE}/skills/watercolor-ui/SKILL.md`,
+    name: 'Codex',
+    desc: 'Place the file under your project’s .codex/skills directory so the agent can load it on demand.',
+    command: `curl -o .codex/skills/watercolor-ui/SKILL.md ${SITE}/skills/watercolor-ui/SKILL.md`,
   },
   {
     name: 'Claude Code',
@@ -31,7 +31,7 @@ export default function Skill() {
   useDocumentMeta({
     title: 'Watercolor UI Skill for AI Agents',
     description:
-      'Download a ready-to-use AI skill so coding agents (CodeBuddy, Claude, Cursor) can scaffold and extend UIs with the Watercolor UI component library.',
+      'Download a ready-to-use AI skill so coding agents (Codex, Claude, Cursor) can scaffold and extend UIs with the Watercolor UI component library.',
     path: '/skill',
   })
 
@@ -74,7 +74,7 @@ export default function Skill() {
               </span>
             </h1>
             <p className="mt-5 text-lg text-base-content/60 leading-relaxed">
-              Download a ready-to-use skill so coding agents — CodeBuddy, Claude Code, Cursor and
+              Download a ready-to-use skill so coding agents — Codex, Claude Code, Cursor and
               others — can scaffold and extend UIs with the Watercolor UI component library instead
               of hand-writing markup or guessing component APIs.
             </p>
