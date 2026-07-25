@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AppBar, Toolbar, Typography } from '@zeturn/watercolor-react'
+import { useI18n } from '../i18n'
+import LanguageSwitcher from './LanguageSwitcher'
 
 export default function Navbar() {
   const location = useLocation()
+  const { t } = useI18n()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -14,9 +17,9 @@ export default function Navbar() {
   }, [])
 
   const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/docs', label: 'Docs' },
-    { path: '/components', label: 'Components' },
+    { path: '/', label: t('nav.home') },
+    { path: '/docs', label: t('nav.docs') },
+    { path: '/components', label: t('nav.components') },
   ]
 
   const githubIcon = (
@@ -66,6 +69,7 @@ export default function Navbar() {
 
         {/* Right: Actions */}
         <div className="flex items-center gap-2">
+          <LanguageSwitcher />
           <a
             href="https://github.com/zeturn/watercolor"
             target="_blank"

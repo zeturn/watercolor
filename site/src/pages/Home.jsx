@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ScrollReveal, { useScrollProgress } from '../components/ScrollReveal'
 import { Copy, Button, Card, NumberAnimation, Feature } from '@zeturn/watercolor-react'
+import { useI18n } from '../i18n'
 
 /* 单次触发 hook：元素首次进入视口后锁定为 true，之后不再重置 */
 function useOnceInView(threshold = 0.3) {
@@ -24,12 +25,13 @@ function useOnceInView(threshold = 0.3) {
 
 // Hero Section with scroll animation
 function HeroSection() {
+  const { t } = useI18n()
   const [currentText, setCurrentText] = useState(0)
   const heroTexts = [
-    { title: 'Beautiful', subtitle: '水彩风格的视觉体验', color: 'from-rose-500 to-orange-400' },
-    { title: 'Cross-Framework', subtitle: 'Vue 3 & React 双框架支持', color: 'from-violet-500 to-fuchsia-500' },
-    { title: 'Accessible', subtitle: '完全无障碍的组件设计', color: 'from-emerald-400 to-cyan-500' },
-    { title: 'Minimal', subtitle: '超扁平设计哲学', color: 'from-amber-400 via-pink-500 to-purple-500' },
+    { title: 'Beautiful', subtitle: t('hero.subBeautiful'), color: 'from-rose-500 to-orange-400' },
+    { title: 'Cross-Framework', subtitle: t('hero.subCross'), color: 'from-violet-500 to-fuchsia-500' },
+    { title: 'Accessible', subtitle: t('hero.subAccessible'), color: 'from-emerald-400 to-cyan-500' },
+    { title: 'Minimal', subtitle: t('hero.subMinimal'), color: 'from-amber-400 via-pink-500 to-purple-500' },
   ]
 
   useEffect(() => {
@@ -60,7 +62,7 @@ function HeroSection() {
           <div className="space-y-8">
             {/* Main heading with animated text */}
             <h1 className="text-5xl lg:text-7xl font-black leading-tight tracking-tight">
-              <span className="block text-base-content">Build with</span>
+              <span className="block text-base-content">{t('hero.buildWith')}</span>
               <span
                 key={currentText}
                 className={`block gradient-text bg-gradient-to-r whitespace-nowrap ${heroTexts[currentText].color} transition-all duration-700`}
@@ -68,14 +70,14 @@ function HeroSection() {
               >
                 {heroTexts[currentText].title}
               </span>
-              <span className="block text-base-content">UI Components</span>
+              <span className="block text-base-content">{t('hero.uiComponents')}</span>
             </h1>
             
             {/* Subtitle */}
             <p className="text-xl text-base-content/70 max-w-lg leading-relaxed">
-              Watercolor UI 是一个现代、极简、<br/>
-              <span className="font-semibold text-base-content">水彩风格</span>的跨框架组件库。
-              一套代码，Vue 和 React 同时使用。
+              {t('hero.descLine1')}<br/>
+              <span className="font-semibold text-base-content">{t('hero.descHighlight')}</span>
+              {t('hero.descLine2')}
             </p>
 
             {/* CTA buttons */}
@@ -88,7 +90,7 @@ function HeroSection() {
                   style={{ display: 'inline-flex', alignItems: 'center', flexDirection: 'row' }}
                   startIcon={<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd"/></svg>}
                 >
-                  浏览组件
+                  {t('hero.browse')}
                 </Button>
               </Link>
               <a href="https://github.com/zeturn/watercolor" target="_blank" rel="noopener noreferrer">
@@ -208,7 +210,7 @@ function HeroSection() {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-          <span className="text-xs text-base-content/40">向下滚动</span>
+          <span className="text-xs text-base-content/40">{t('hero.scrollDown')}</span>
           <svg className="w-5 h-5 text-base-content/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
           </svg>
@@ -220,6 +222,7 @@ function HeroSection() {
 
 // "Instead of writing..." section with code comparison
 function ComparisonSection() {
+  const { t } = useI18n()
   const [ref, visible] = useOnceInView(0.3)
 
   return (
@@ -230,12 +233,12 @@ function ComparisonSection() {
           <ScrollReveal direction="left">
             <div className="space-y-6">
               <h2 ref={ref} className="text-4xl lg:text-6xl font-bold leading-tight">
-                instead of writing{' '}
+                {t('comparison.titleBefore')}{' '}
                 <NumberAnimation from={0} to={88} duration={2500} active={visible} suffix="%" />{' '}
-                more code
+                {t('comparison.titleAfter')}
               </h2>
               <p className="text-lg text-base-content/60 leading-relaxed">
-                For every element, every page, every project,<br/>again and again...
+                {t('comparison.subtitle1')}<br/>{t('comparison.subtitle2')}
               </p>
             </div>
           </ScrollReveal>
@@ -275,11 +278,12 @@ function ComparisonSection() {
 
 // Stats / Benefits section
 function StatsSection() {
+  const { t } = useI18n()
   const stats = [
-    { value: 60, suffix: '+', label: 'UI 组件', desc: '覆盖表单、布局、导航等全场景' },
-    { value: 2, label: '框架支持', desc: 'Vue 3 & React 18/19' },
-    { value: 88, suffix: '%', label: '更少代码量', desc: '相比原生 Tailwind 开发' },
-    { value: 0, label: '运行时依赖', desc: '完全 Tree-shakeable' },
+    { value: 60, suffix: '+', label: t('stats.components.label'), desc: t('stats.components.desc') },
+    { value: 2, label: t('stats.frameworks.label'), desc: t('stats.frameworks.desc') },
+    { value: 88, suffix: '%', label: t('stats.lessCode.label'), desc: t('stats.lessCode.desc') },
+    { value: 0, label: t('stats.deps.label'), desc: t('stats.deps.desc') },
   ]
 
   return (
@@ -293,12 +297,12 @@ function StatsSection() {
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-              Fewer class names<br/>
-              <span className="gradient-text">Faster development</span><br/>
-              Smaller file size
+              {t('stats.title1')}<br/>
+              <span className="gradient-text">{t('stats.title2')}</span><br/>
+              {t('stats.title3')}
             </h2>
             <p className="text-lg text-base-content/60 max-w-2xl mx-auto">
-              使用 Watercolor，你将写出更少的代码，获得更好的开发体验，同时保持极小的打包体积。
+              {t('stats.subtitle')}
             </p>
           </div>
         </ScrollReveal>
@@ -332,6 +336,7 @@ function StatCard({ value, suffix = '', label, desc, index }) {
 
 // Features grid section
 function FeaturesSection() {
+  const { t } = useI18n()
   const features = [
     {
       icon: (
@@ -339,8 +344,8 @@ function FeaturesSection() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z"/>
         </svg>
       ),
-      title: '极速开发',
-      description: '预构建的语义化组件，让你专注于业务逻辑而非样式细节。开箱即用，无需配置。',
+      title: t('features.fast.title'),
+      description: t('features.fast.desc'),
       gradient: 'from-primary/10 to-primary/5',
       iconBg: 'bg-primary/10 text-primary'
     },
@@ -350,8 +355,8 @@ function FeaturesSection() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
         </svg>
       ),
-      title: '纯净 HTML',
-      description: '生成的 DOM 结构简洁清晰，没有冗余的 wrapper 元素。HTML size 减少约 79%。',
+      title: t('features.cleanHtml.title'),
+      description: t('features.cleanHtml.desc'),
       gradient: 'from-secondary/10 to-secondary/5',
       iconBg: 'bg-secondary/10 text-secondary'
     },
@@ -361,8 +366,8 @@ function FeaturesSection() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
         </svg>
       ),
-      title: '高度可定制',
-      description: '通过 CSS 变量和主题系统，轻松定制颜色、圆角、字体等所有设计令牌。',
+      title: t('features.customizable.title'),
+      description: t('features.customizable.desc'),
       gradient: 'from-accent/10 to-accent/5',
       iconBg: 'bg-accent/10 text-accent'
     },
@@ -372,8 +377,8 @@ function FeaturesSection() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
         </svg>
       ),
-      title: '主题切换',
-      description: '内置明暗模式支持，一行代码即可实现全局主题切换。支持自定义多套主题。',
+      title: t('features.themeable.title'),
+      description: t('features.themeable.desc'),
       gradient: 'from-warning/10 to-warning/5',
       iconBg: 'bg-warning/10 text-warning'
     },
@@ -383,8 +388,8 @@ function FeaturesSection() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
         </svg>
       ),
-      title: '完全无障碍',
-      description: '所有组件内置键盘导航、ARIA 属性和屏幕阅读器支持，符合 WCAG 标准。',
+      title: t('features.accessible.title'),
+      description: t('features.accessible.desc'),
       gradient: 'from-success/10 to-success/5',
       iconBg: 'bg-success/10 text-success'
     },
@@ -394,8 +399,8 @@ function FeaturesSection() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/>
         </svg>
       ),
-      title: '纯 CSS 驱动',
-      description: '零 JavaScript 运行时开销。使用原生 CSS 变量系统，性能极致优化。',
+      title: t('features.pureCss.title'),
+      description: t('features.pureCss.desc'),
       gradient: 'from-info/10 to-info/5',
       iconBg: 'bg-info/10 text-info'
     },
@@ -407,10 +412,10 @@ function FeaturesSection() {
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-              Why choose <span className="gradient-text">Watercolor UI</span>?
+              {t('features.titleBefore')} <span className="gradient-text">Watercolor UI</span>{t('features.titleAfter')}
             </h2>
             <p className="text-lg text-base-content/60 max-w-2xl mx-auto">
-              Watercolor is for you if you:
+              {t('features.subtitle')}
             </p>
           </div>
         </ScrollReveal>
@@ -435,6 +440,7 @@ function FeaturesSection() {
 
 // CTA Section
 function CTASection() {
+  const { t } = useI18n()
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-rose-500/5 via-violet-500/5 to-sky-400/5" />
@@ -443,16 +449,16 @@ function CTASection() {
         <ScrollReveal>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              Ready to get started?
+              {t('cta.title')}
             </h2>
             <p className="text-lg text-base-content/60 mb-8 max-w-xl mx-auto">
-              安装 Watercolor UI，开始构建你的下一个项目。只需一行命令。
+              {t('cta.subtitle')}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <Link to="/docs">
                 <Button size="lg" variant="primary" className="gap-2 shadow-lg shadow-primary/25">
-                  快速开始
+                  {t('cta.quickStart')}
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                   </svg>
@@ -460,7 +466,7 @@ function CTASection() {
               </Link>
               <Link to="/components">
                 <Button size="lg" buttonStyle="outlined">
-                  探索组件库
+                  {t('cta.explore')}
                 </Button>
               </Link>
             </div>
@@ -484,6 +490,7 @@ function CTASection() {
 
 // Footer
 function Footer() {
+  const { t } = useI18n()
   return (
     <footer className="py-12 bg-base-200/50 border-t border-base-300">
       <div className="container mx-auto px-4 lg:px-8">
@@ -498,33 +505,33 @@ function Footer() {
               </span>
             </div>
             <p className="text-base-content/60 max-w-sm">
-              现代、极简、水彩风格的跨框架 UI 组件库。一套代码，Vue 和 React 同时使用。
+              {t('footer.tagline')}
             </p>
           </div>
           
           <div>
-            <h4 className="font-semibold mb-3">文档</h4>
+            <h4 className="font-semibold mb-3">{t('footer.docs')}</h4>
             <ul className="space-y-2 text-sm text-base-content/60">
-              <li><Link to="/docs" className="hover:text-primary transition-colors">快速开始</Link></li>
-              <li><Link to="/docs" className="hover:text-primary transition-colors">安装指南</Link></li>
-              <li><Link to="/docs" className="hover:text-primary transition-colors">主题定制</Link></li>
-              <li><Link to="/docs" className="hover:text-primary transition-colors">API 参考</Link></li>
+              <li><Link to="/docs" className="hover:text-primary transition-colors">{t('footer.quickStart')}</Link></li>
+              <li><Link to="/docs" className="hover:text-primary transition-colors">{t('footer.install')}</Link></li>
+              <li><Link to="/docs" className="hover:text-primary transition-colors">{t('footer.theming')}</Link></li>
+              <li><Link to="/docs" className="hover:text-primary transition-colors">{t('footer.api')}</Link></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="font-semibold mb-3">社区</h4>
+            <h4 className="font-semibold mb-3">{t('footer.community')}</h4>
             <ul className="space-y-2 text-sm text-base-content/60">
               <li><a href="https://github.com/zeturn/watercolor" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">GitHub</a></li>
-              <li><a href="https://github.com/zeturn/watercolor/issues" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">问题反馈</a></li>
-              <li><a href="https://github.com/zeturn/watercolor/discussions" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">讨论区</a></li>
+              <li><a href="https://github.com/zeturn/watercolor/issues" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">{t('footer.feedback')}</a></li>
+              <li><a href="https://github.com/zeturn/watercolor/discussions" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">{t('footer.discussions')}</a></li>
             </ul>
           </div>
         </div>
         
         <div className="border-t border-base-300 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-base-content/50">
-          <p>&copy; 2024-2026 Watercolor UI Team. All rights reserved.</p>
-          <p>Built with React + Vite + WaterColor UI</p>
+          <p>{t('footer.copyright')}</p>
+          <p>{t('footer.builtWith')}</p>
         </div>
       </div>
     </footer>

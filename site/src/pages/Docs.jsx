@@ -3,15 +3,19 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
 import Markdown from '../components/Markdown'
 import { Button, Badge, List, ListItem, ListItemText } from '@zeturn/watercolor-react'
-import { docSections, allDocSections, getDocById, getAdjacentDocs } from '../data/docs'
+import { getDocSections, getAllDocSections, getDocById, getAdjacentDocs } from '../data/docs'
+import { useI18n } from '../i18n'
 
 export default function Docs() {
+  const { t, lang } = useI18n()
   const { sectionId } = useParams()
   const navigate = useNavigate()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  const activeId = sectionId || allDocSections[0].id
-  const doc = getDocById(activeId)
+  const sections = getDocSections(lang)
+  const all = getAllDocSections(lang)
+  const activeId = sectionId || all[0]?.id
+  const doc = getDocById(activeId, lang)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -20,14 +24,16 @@ export default function Docs() {
   if (!doc) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
-        <div className="text-6xl">📄</div>
-        <h1 className="text-2xl font-bold">文档未找到</h1>
-        <Link to="/docs"><Button size="sm" variant="primary">返回文档首页</Button></Link>
+        <div className="text-6xl text-base-content/30">
+          <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <h1 className="text-2xl font-bold">{t('docs.notFound')}</h1>
+        <Link to="/docs"><Button size="sm" variant="primary">{t('docs.backHome')}</Button></Link>
       </div>
     )
   }
 
-  const { prev, next } = getAdjacentDocs(activeId)
+  const { prev, next } = getAdjacentDocs(activeId, lang)
 
   return (
     <div className="flex min-h-[calc(100vh-65px)]">
@@ -46,7 +52,7 @@ export default function Docs() {
           </div>
 
           <nav className="space-y-6">
-            {docSections.map((group) => (
+            {sections.map((group) => (
               <div key={group.group}>
                 <h3 className="text-xs font-semibold uppercase tracking-wider text-base-content/50 mb-2 px-3">{group.group}</h3>
                 <List disablePadding>
@@ -81,7 +87,7 @@ export default function Docs() {
             <div className="mb-2">
               <Badge size="sm">{doc.group}</Badge>
             </div>
-            <Markdown content={doc.content} />
+            <Markdown key={lang} content={doc.content} />
 
             {/* Prev / Next navigation */}
             <div className="mt-16 pt-8 border-t border-base-300 flex justify-between items-center">

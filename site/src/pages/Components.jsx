@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
 import { Button, Badge, Input, Card } from '@zeturn/watercolor-react'
 import { componentCategories, allComponents } from '../data/components'
+import { useI18n } from '../i18n'
 
 /* ── 组件线框预览图标（灰色扁平轮廓，无阴影）── */
 const S = '#e5e7eb' // stroke color
@@ -81,6 +82,7 @@ function ComponentPreviewIcon({ id }) {
 }
 
 export default function Components() {
+  const { t } = useI18n()
   const [searchQuery, setSearchQuery] = useState('')
   const [viewMode, setViewMode] = useState('grid') // grid or list
   const [searchParams, setSearchParams] = useSearchParams()
@@ -127,17 +129,17 @@ export default function Components() {
         <ScrollReveal>
           <div className="text-center mb-12">
             <h1 className="text-4xl lg:text-5xl font-bold mb-4">
-              All <span className="gradient-text">Watercolor</span> components
+              {t('comp.titleBefore')} <span className="gradient-text">Watercolor</span> {t('comp.titleAfter')}
             </h1>
             <p className="text-lg text-base-content/60 max-w-2xl mx-auto mb-2">
-              精心设计的 {totalComponents}+ 个组件，覆盖从表单到数据展示的全场景。点击任意组件查看详情。
+              {t('comp.subtitle', { count: totalComponents })}
             </p>
 
             {/* Search bar */}
             <div className="max-w-xl mx-auto mt-6">
               <Input
                 fullWidth
-                placeholder="搜索组件..."
+                placeholder={t('comp.searchPlaceholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 startAdornment={
@@ -160,7 +162,7 @@ export default function Components() {
                 buttonStyle={selectedCategory === 'all' ? 'filled' : 'text'}
                 onClick={() => selectCategory('all')}
               >
-                All ({totalComponents})
+                {t('comp.all')} ({totalComponents})
               </Button>
               {componentCategories.map((cat) => (
                 <Button
@@ -178,8 +180,8 @@ export default function Components() {
             </div>
 
             <span className="text-sm text-base-content/50 whitespace-nowrap">
-              显示 {filteredComponents.length} 个组件
-              {searchQuery && ` · 搜索 "${searchQuery}"`}
+              {t('comp.showing', { count: filteredComponents.length })}
+              {searchQuery && ` · ${t('comp.searching', { query: searchQuery })}`}
             </span>
             <div className="flex gap-1 ml-auto">
               <Button
@@ -221,10 +223,10 @@ export default function Components() {
         {filteredComponents.length === 0 && (
           <div className="text-center py-20">
             <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-xl font-semibold mb-2">没有找到匹配的组件</h3>
-            <p className="text-base-content/50">尝试更换搜索关键词或筛选条件</p>
+            <h3 className="text-xl font-semibold mb-2">{t('comp.emptyTitle')}</h3>
+            <p className="text-base-content/50">{t('comp.emptyDesc')}</p>
             <Button size="sm" buttonStyle="text" onClick={() => { setSearchQuery(''); selectCategory('all') }}>
-              清除筛选
+              {t('comp.clearFilter')}
             </Button>
           </div>
         )}
@@ -246,7 +248,7 @@ export default function Components() {
               <ComponentPreviewIcon id={comp.id} />
             </div>
             <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-              <Badge size="sm">查看详情</Badge>
+              <Badge size="sm">{t('comp.viewDetail')}</Badge>
             </div>
           </div>
           <div className="p-4 space-y-2">
