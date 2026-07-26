@@ -39,11 +39,11 @@
     "directory": "packages/next"
   },
   "peerDependencies": {
-    "@zeturn/watercolor-icons-feather": "1.2.8",
-    "@zeturn/watercolor-icons-heroicons-react": "1.2.8",
-    "@zeturn/watercolor-icons-lucide-react": "1.2.8",
-    "@zeturn/watercolor-icons-phosphor-react": "1.2.8",
-    "@zeturn/watercolor-icons-tabler-react": "1.2.8",
+    "@zeturn/watercolor-icons-feather": "1.2.9",
+    "@zeturn/watercolor-icons-heroicons-react": "1.2.9",
+    "@zeturn/watercolor-icons-lucide-react": "1.2.9",
+    "@zeturn/watercolor-icons-phosphor-react": "1.2.9",
+    "@zeturn/watercolor-icons-tabler-react": "1.2.9",
     "next": ">=13.0.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
@@ -66,8 +66,8 @@
     }
   },
   "dependencies": {
-    "@zeturn/watercolor-core": "1.2.8",
-    "@zeturn/watercolor-react": "1.2.8"
+    "@zeturn/watercolor-core": "1.2.9",
+    "@zeturn/watercolor-react": "1.2.9"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.5",

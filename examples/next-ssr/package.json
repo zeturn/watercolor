@@ -1,7 +1,7 @@
 {
   "name": "watercolor-next-ssr-example",
   "private": true,
-  "version": "1.2.8",
+  "version": "1.2.9",
   "type": "module",
   "scripts": {
     "dev": "next dev",
@@ -9,8 +9,8 @@
     "start": "next start"
   },
   "dependencies": {
-    "@zeturn/watercolor-core": "1.2.8",
-    "@zeturn/watercolor-next": "1.2.8",
+    "@zeturn/watercolor-core": "1.2.9",
+    "@zeturn/watercolor-next": "1.2.9",
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

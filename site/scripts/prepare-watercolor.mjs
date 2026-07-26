@@ -3,8 +3,8 @@ import { existsSync, mkdirSync, rmSync, copyFileSync, readdirSync, statSync } fr
 import { join } from 'node:path'
 
 const packages = [
-  '@zeturn/watercolor-core@1.2.8',
-  '@zeturn/watercolor-react@1.2.8',
+  '@zeturn/watercolor-core@1.2.9',
+  '@zeturn/watercolor-react@1.2.9',
 ]
 
 function installFromRegistry(spec) {
