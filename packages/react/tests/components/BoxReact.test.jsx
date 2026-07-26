@@ -150,7 +150,7 @@ describe('Box (React)', () => {
     it('applies border prop', () => {
       render(<Box border="1px solid black">Test</Box>)
       const box = screen.getByText('Test')
-      expect(box).toHaveStyle({ border: '1px solid black' })
+      expect(box.style.border).toBe('1px solid black')
     })
 
     it('applies borderRadius prop with number', () => {
@@ -274,7 +274,8 @@ describe('Box (React)', () => {
     it('handles negative values', () => {
       render(<Box p={-4} m={-2}>Test</Box>)
       const box = screen.getByText('Test')
-      expect(box).toHaveStyle({ padding: '-4px' })
+      // Negative padding is invalid CSS and is discarded by the browser.
+      expect(box.style.padding).toBe('')
       expect(box).toHaveStyle({ margin: '-2px' })
     })
   })
