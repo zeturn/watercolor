@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import * as WatercolorNext from '../src/index'
+import * as WatercolorReact from '@zeturn/watercolor-react'
 
 // The Next.js package must expose the exact same public surface as the React
 // package so the cross-framework API contract (api-manifest.json) stays in
@@ -30,6 +31,6 @@ describe('@zeturn/watercolor-next public API', () => {
 
   it('exports the same set of names as the React package', () => {
     const nextNames = Object.keys(WatercolorNext).sort()
-    expect(nextNames).toEqual(expected.slice().sort())
+    expect(nextNames).toEqual(Object.keys(WatercolorReact).sort())
   })
 })
