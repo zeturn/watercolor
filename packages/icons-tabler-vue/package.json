@@ -23,7 +23,7 @@
     "vue": "^3.5.0"
   },
   "dependencies": {
-    "@tabler/icons-vue": "^3.34.0"
+    "@tabler/icons-vue": "^3.45.0"
   },
   "publishConfig": {
     "access": "public"
