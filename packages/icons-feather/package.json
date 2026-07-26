@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-icons-feather",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "type": "module",
   "main": "dist/watercolor-icons-feather.es.js",
   "module": "dist/watercolor-icons-feather.es.js",
