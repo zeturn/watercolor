@@ -3,7 +3,7 @@ import 'vitest-canvas-mock'
 import '@testing-library/jest-dom'
 
 // 全局测试配置
-:beforeEach(() => {
+beforeEach(() => {
   // 重置DOM
   document.body.innerHTML = ''
   // 重置CSS变量
