@@ -73,7 +73,7 @@ type VueTabsSlots = InstanceType<typeof VueTabs>['$slots']
 
 export const vueButtonProps: VueButtonProps = { variant: 'primary', loading: true }
 export const vueSelectProps: VueSelectProps = { modelValue: 'one', options: [{ value: 'one', label: 'One' }] }
-export const vueTabsDefaultSlot: VueTabsSlots['default'] = ({ activeIndex }) => activeIndex
+export const vueTabsDefaultSlot: VueTabsSlots['default'] = ({ activeIndex }: { activeIndex: number }) => activeIndex
 
 // These assertions keep the public unions narrow enough to catch consumer mistakes.
 // @ts-expect-error unsupported visual variant
