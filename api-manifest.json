@@ -4,7 +4,8 @@
   "frameworks": [
     "react",
     "vue",
-    "next"
+    "next",
+    "svelte"
   ],
   "publicExports": [
     "Accordion",

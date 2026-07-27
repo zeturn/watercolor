@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@zeturn/watercolor-core": [
+        "../core/src/index.ts"
+      ]
+    },
+    "types": [
+      "svelte"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

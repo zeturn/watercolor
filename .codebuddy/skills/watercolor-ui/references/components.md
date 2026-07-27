@@ -197,3 +197,4 @@ import { Button, TextField, Card, CardContent, Select, Modal, Table } from '@zet
 - Icon packs are separate packages; import icons from the installed `@zeturn/watercolor-icons-*` package and pass them as `startIcon` / `endIcon` / `icon` props.
 - For Vue 3, use `@zeturn/watercolor-vue` with the equivalent component names and the same category structure.
 - For Next.js (App Router), use `@zeturn/watercolor-next` — it mirrors the React catalog above (same component names/props) and adds the RSC `"use client"` boundary automatically.
+- For Svelte 5 / SvelteKit, use `@zeturn/watercolor-svelte` — same export names as the catalog above; props use Svelte 5 runes conventions (callback events like `onclick`/`onchange`, two-way binding via `bind:value`/`bind:checked`, snippets instead of React children).

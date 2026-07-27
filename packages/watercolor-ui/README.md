@@ -18,6 +18,9 @@ Run the installer to install the core package and the selected platform package:
 the React components behind a built-in `"use client"` RSC boundary, so the installer is not needed
 for Next.js projects.
 
+**Svelte 5 / SvelteKit:** install [`@zeturn/watercolor-svelte`](../svelte) separately — native
+Svelte 5 components with the same export names, so the installer is not needed for Svelte projects.
+
 ### Choose a platform
 
 Use the CLI interactively:
@@ -33,6 +36,8 @@ npx watercolor-ui --framework react
 npx watercolor-ui --framework vue --icons lucide
 # Next.js (App Router) does not use the installer:
 #   npm install @zeturn/watercolor-next
+# Svelte 5 / SvelteKit does not use the installer:
+#   npm install @zeturn/watercolor-svelte
 ```
 
 Installing `watercolor-ui` has no postinstall side effects. The CLI only changes

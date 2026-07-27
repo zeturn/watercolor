@@ -8,6 +8,7 @@
 - `vue-minimal`：Vite + Vue 3.5。
 - `next-ssr`：可运行的 Next.js App Router 示例，演示 SSR 主题预绘制（依赖 workspace 包）。
 - `nuxt-ssr`：Nuxt 3 SSR 主题预绘制说明。
+- `svelte-ssr`：可运行的 SvelteKit 示例，演示 SSR 主题预绘制与 `@zeturn/watercolor-svelte` 组件用法。
 
 ## Run locally
 
@@ -23,4 +24,4 @@ npm install
 npm run build
 ```
 
-`next-ssr` 现在是一个可运行示例（需先从仓库根目录 `npm install && npm run build` 构建 workspace 包）。`nuxt-ssr` 目前仍是集成片段。完整说明见站点文档的 SSR 与主题章节。
+`next-ssr` 与 `svelte-ssr` 是可运行示例（需先从仓库根目录 `npm install && npm run build` 构建 workspace 包）。`nuxt-ssr` 目前仍是集成片段。完整说明见站点文档的 SSR 与主题章节。

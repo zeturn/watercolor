@@ -5,6 +5,7 @@ import path from 'node:path'
 const workspaceRoot = fileURLToPath(new URL('../../../', import.meta.url))
 const coreSourceEntry = path.resolve(workspaceRoot, 'packages/core/src/index.ts')
 const coreSourceRoot = path.resolve(workspaceRoot, 'packages/core/src')
+const vueSourceRoot = path.resolve(workspaceRoot, 'packages/vue/src')
 
 /** @type { import('@storybook/vue3-vite').StorybookConfig } */
 const config = {
@@ -34,6 +35,10 @@ const config = {
         ...config.resolve,
         alias: [
           ...(Array.isArray(config.resolve?.alias) ? config.resolve.alias : []),
+          {
+            find: /^@\/(.*)$/,
+            replacement: `${vueSourceRoot}/$1`,
+          },
           {
             find: /^@zeturn\/watercolor-core$/,
             replacement: coreSourceEntry,

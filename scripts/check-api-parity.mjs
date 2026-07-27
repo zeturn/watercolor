@@ -95,4 +95,4 @@ if (existsSync(vueDist)) {
   console.warn('Vue dist is absent; skipped generated declaration checks (run the Vue build first).')
 }
 
-console.log(`API parity passed: ${expected.length} shared React/Vue exports.`)
+console.log(`API parity passed: ${expected.length} shared ${manifest.frameworks.join('/')} exports.`)

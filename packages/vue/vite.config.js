@@ -14,6 +14,7 @@ const removePrivateUtilityDeclarations = (emittedFiles) => {
 
 export default defineConfig({
   plugins: [vue(), dts({
+    processor: 'vue',
     insertTypesEntry: true,
     entryRoot: 'src',
     include: ['src'],

@@ -64,7 +64,9 @@ try {
     if (!fileNames.has('package.json') || !fileNames.has('README.md')) fail(`${pkg.name}: tarball is missing package.json or README.md`)
     if (packageDirectory !== 'watercolor-ui') {
       if (!fileNames.has('dist/index.d.ts')) fail(`${pkg.name}: tarball is missing dist/index.d.ts`)
-      if (![...fileNames].some((file) => /^dist\/.*\.es\.js$/.test(file))) fail(`${pkg.name}: tarball has no ESM build`)
+      const hasEsmBuild = [...fileNames].some((file) => /^dist\/.*\.es\.js$/.test(file))
+        || (packageDirectory === 'svelte' && fileNames.has('dist/index.js'))
+      if (!hasEsmBuild) fail(`${pkg.name}: tarball has no ESM build`)
     }
   }
 
