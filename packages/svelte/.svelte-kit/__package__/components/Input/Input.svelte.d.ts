@@ -1,0 +1,20 @@
+type $$ComponentProps = {
+    value?: string;
+    type?: string;
+    placeholder?: string;
+    disabled?: boolean;
+    readonly?: boolean;
+    error?: boolean;
+    size?: 'sm' | 'md' | 'lg';
+    startIcon?: string;
+    endIcon?: string;
+    class?: string;
+    oninput?: (e: Event) => void;
+    onchange?: (e: Event) => void;
+    onfocus?: (e: FocusEvent) => void;
+    onblur?: (e: FocusEvent) => void;
+    [key: string]: any;
+};
+declare const Input: import("svelte").Component<$$ComponentProps, {}, "value">;
+type Input = ReturnType<typeof Input>;
+export default Input;

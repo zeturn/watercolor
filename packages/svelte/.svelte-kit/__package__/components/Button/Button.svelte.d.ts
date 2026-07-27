@@ -1,0 +1,27 @@
+import type { Snippet } from 'svelte';
+import './style.css';
+type $$ComponentProps = {
+    variant?: string;
+    buttonStyle?: string;
+    size?: string;
+    disabled?: boolean;
+    loading?: boolean;
+    fullWidth?: boolean;
+    type?: 'button' | 'submit' | 'reset';
+    href?: string | null;
+    target?: string;
+    startIcon?: string | Snippet | null;
+    endIcon?: string | Snippet | null;
+    rounded?: boolean | string;
+    uppercase?: boolean;
+    ripple?: boolean;
+    children?: Snippet;
+    onclick?: (event: MouseEvent) => void;
+    onmouseover?: (event: MouseEvent) => void;
+    onmouseout?: (event: MouseEvent) => void;
+    onfocus?: (event: FocusEvent) => void;
+    onblur?: (event: FocusEvent) => void;
+};
+declare const Button: import("svelte").Component<$$ComponentProps, {}, "">;
+type Button = ReturnType<typeof Button>;
+export default Button;
