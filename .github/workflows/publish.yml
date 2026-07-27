@@ -146,19 +146,11 @@ jobs:
           NODE_OPTIONS: --max_old_space_size=4096
 
       - name: Configure npm trusted publishing
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           cat > "$RUNNER_TEMP/npmrc-oidc" <<'EOF'
           registry=https://registry.npmjs.org/
           @zeturn:registry=https://registry.npmjs.org/
           EOF
-          cat > "$RUNNER_TEMP/npmrc-token" <<EOF
-          registry=https://registry.npmjs.org/
-          @zeturn:registry=https://registry.npmjs.org/
-          //registry.npmjs.org/:_authToken=\${NPM_TOKEN}
-          EOF
-          chmod 0600 "$RUNNER_TEMP/npmrc-token"
 
       - name: Publish in dependency order
         env:
@@ -217,7 +209,6 @@ jobs:
           npm publish --workspace packages/vue --access public --provenance
 
           wait_for_package @zeturn/watercolor-react
-          NPM_CONFIG_USERCONFIG="$RUNNER_TEMP/npmrc-token" \
-            npm publish --workspace packages/next --access public --provenance
+          npm publish --workspace packages/next --access public --provenance
 
           npm publish --workspace packages/watercolor-ui --access public --provenance
