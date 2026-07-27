@@ -9,6 +9,7 @@ pnpm-debug.log*
 dist/
 build/
 storybook-static/
+.svelte-kit/
 
 # Environment variables
 .env
