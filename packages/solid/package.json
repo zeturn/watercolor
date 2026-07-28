@@ -6,11 +6,11 @@
   "license": "ISC",
   "main": "dist/watercolor-solid.es.js",
   "module": "dist/watercolor-solid.es.js",
-  "types": "index.d.ts",
+  "types": "./dist/index.d.ts",
   "style": "dist/watercolor-solid.css",
   "exports": {
     ".": {
-      "types": "./index.d.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/watercolor-solid.es.js",
       "default": "./dist/watercolor-solid.es.js"
     },
@@ -18,7 +18,6 @@
   },
   "files": [
     "dist",
-    "index.d.ts",
     "style.css"
   ],
   "sideEffects": [
@@ -26,6 +25,7 @@
   ],
   "scripts": {
     "build": "vite build",
+    "build:types": "tsc -p tsconfig.build.json --noCheck",
     "test": "vitest run",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
@@ -39,10 +39,17 @@
     "directory": "packages/solid"
   },
   "peerDependencies": {
-    "solid-js": "^1.8.0"
+    "solid-js": "^1.8.0",
+    "@zeturn/watercolor-icons-feather": "1.2.13"
+  },
+  "peerDependenciesMeta": {
+    "@zeturn/watercolor-icons-feather": {
+      "optional": true
+    }
   },
   "dependencies": {
-    "@zeturn/watercolor-core": "1.2.13"
+    "@zeturn/watercolor-core": "1.2.13",
+    "prop-types": "^15.8.1"
   },
   "devDependencies": {
     "vite-plugin-solid": "^2.11.0",

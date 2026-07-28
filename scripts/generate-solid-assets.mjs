@@ -90,9 +90,15 @@ function transformJsx(src) {
 }
 
 let generatedCount = 0
+// 这些组件是手写维护的（非机械从 React 转换），生成器不覆盖它们。
+const SKIP_COMPONENTS = new Set(['Icon'])
 for (const dir of fs.readdirSync(REACT_COMPONENTS)) {
   const reactDir = path.join(REACT_COMPONENTS, dir)
   if (!fs.statSync(reactDir).isDirectory()) continue
+  if (SKIP_COMPONENTS.has(dir)) {
+    console.log('跳过(手写维护):', dir)
+    continue
+  }
   const solidDir = path.join(SOLID_COMPONENTS, dir)
   fs.mkdirSync(solidDir, { recursive: true })
 

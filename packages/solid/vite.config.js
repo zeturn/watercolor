@@ -1,24 +1,9 @@
 import { defineConfig } from 'vite'
 import solid from 'vite-plugin-solid'
 import { resolve } from 'path'
-import { existsSync, unlinkSync } from 'fs'
-import dts from 'vite-plugin-dts'
-
-const removePrivateUtilityDeclarations = (emittedFiles) => {
-  for (const filePath of emittedFiles.keys()) {
-    if (/[/\\]components[/\\][^/\\]+[/\\]utils\.(?:d\.ts|d\.ts\.map)$/.test(filePath) && existsSync(filePath)) {
-      unlinkSync(filePath)
-    }
-  }
-}
 
 export default defineConfig({
-  plugins: [solid(), dts({
-    insertTypesEntry: true,
-    entryRoot: 'src',
-    include: ['src'],
-    afterBuild: removePrivateUtilityDeclarations,
-  })],
+  plugins: [solid()],
   build: {
     emptyOutDir: true,
     assetsDir: '',
@@ -35,6 +20,9 @@ export default defineConfig({
         'solid-js/web',
         'solid-js/store',
         '@zeturn/watercolor-core',
+        // Feather icons are bundled (framework-agnostic SVG strings, tiny).
+        // lucide/heroicons/tabler/phosphor are intentionally NOT supported in Solid
+        // (no framework-agnostic/Solid package exists), so they are never imported.
       ],
       output: {
         globals: {
