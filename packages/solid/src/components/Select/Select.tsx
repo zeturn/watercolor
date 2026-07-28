@@ -1,0 +1,331 @@
+import { createSignal, createEffect, createMemo, onMount, onCleanup, useId, Show, For, Index } from 'solid-js'
+
+import { useOverlayLayer } from '../../interactions'
+import './style.css'
+
+const Select = ({
+  value = '',
+  onChange,
+  options = [],
+  placeholder = 'Select an option',
+  label = '',
+  helperText = '',
+  error = false,
+  errorMessage = '',
+  required = false,
+  disabled = false,
+  multiple = false,
+  clearable = false,
+  fullWidth = false,
+  size = 'md',
+  variant = 'filled',
+  color = 'primary',
+  maxHeight = 200,
+  name = '',
+  id = '',
+  className = '',
+  style = {},
+  onFocus,
+  onBlur,
+  onSearch,
+  renderOption,
+  renderValue,
+  ...props
+}) => {
+  const [isOpen, setIsOpen] = createSignal(false)
+  const [isFocused, setIsFocused] = createSignal(false)
+  const [activeIndex, setActiveIndex] = createSignal(-1)
+  let selectRef = null
+  let optionsRef = null
+
+  const closeDropdown = () => {
+    setIsOpen(false)
+    setIsFocused(false)
+    setActiveIndex(-1)
+  }
+
+  useOverlayLayer({
+    open: isOpen,
+    elementRef: optionsRef,
+    refs: [selectRef],
+    closeOnEscape: true,
+    closeOnPointerDownOutside: true,
+    onEscapeKeyDown: closeDropdown,
+    onPointerDownOutside: closeDropdown,
+    zIndex: 1000,
+  })
+
+  const selectedOption = multiple 
+    ? options.filter(option => value.includes(option.value))
+    : options.find(option => option.value === value)
+
+  const getSelectClasses = () => {
+    const classes = ['wc-select']
+    
+    classes.push(`wc-select--${variant}`)
+    classes.push(`wc-select--${size}`)
+    
+    if (error) classes.push('wc-select--error')
+    if (disabled) classes.push('wc-select--disabled')
+    if (isOpen) classes.push('wc-select--open')
+    if (isFocused) classes.push('wc-select--focused')
+    if (fullWidth) classes.push('wc-select--full-width')
+    if (multiple) classes.push('wc-select--multiple')
+    
+    return classes.concat(className).filter(Boolean).join(' ')
+  }
+
+  const handleToggle = () => {
+    if (!disabled) {
+      const nextOpen = !isOpen
+      setIsOpen(nextOpen)
+      setIsFocused(nextOpen)
+      setActiveIndex(nextOpen ? Math.max(0, options.findIndex(option => !option.disabled)) : -1)
+    }
+  }
+
+  const handleOptionClick = (option) => {
+    if (option.disabled) return
+
+    let newValue
+    if (multiple) {
+      const currentValues = Array.isArray(value) ? value : []
+      if (currentValues.includes(option.value)) {
+        newValue = currentValues.filter(v => v !== option.value)
+      } else {
+        newValue = [...currentValues, option.value]
+      }
+    } else {
+      newValue = option.value
+      closeDropdown()
+    }
+
+    onChange?.({ target: { name, value: newValue } })
+  }
+
+  const handleClear = (e) => {
+    e.stopPropagation()
+    const newValue = multiple ? [] : ''
+    onChange?.({ target: { name, value: newValue } })
+  }
+
+  const handleFocus = (e) => {
+    setIsFocused(true)
+    onFocus?.(e)
+  }
+
+  const handleBlur = (e) => {
+    // Don't blur immediately if clicking on options
+    setTimeout(() => {
+      if (!selectRef?.contains(document.activeElement)) {
+        setIsFocused(false)
+        onBlur?.(e)
+      }
+    }, 100)
+  }
+
+  const handleKeyDown = (e) => {
+    if (disabled) return
+    const enabledOptions = options
+      .map((option, index) => ({ option, index }))
+      .filter(({ option }) => !option.disabled)
+
+    const focusByOffset = (offset) => {
+      if (!enabledOptions.length) return
+      const currentEnabledIndex = enabledOptions.findIndex(({ index }) => index === activeIndex)
+      const nextEnabledIndex = currentEnabledIndex < 0
+        ? 0
+        : (currentEnabledIndex + offset + enabledOptions.length) % enabledOptions.length
+      setActiveIndex(enabledOptions[nextEnabledIndex].index)
+    }
+
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      if (isOpen && activeIndex >= 0) {
+        handleOptionClick(options[activeIndex])
+      } else {
+        handleToggle()
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      if (!isOpen) {
+        setIsOpen(true)
+        setIsFocused(true)
+        setActiveIndex(enabledOptions[0]?.index ?? -1)
+      } else {
+        focusByOffset(1)
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      if (!isOpen) {
+        setIsOpen(true)
+        setIsFocused(true)
+        setActiveIndex(enabledOptions[enabledOptions.length - 1]?.index ?? -1)
+      } else {
+        focusByOffset(-1)
+      }
+    } else if (e.key === 'Home') {
+      e.preventDefault()
+      setActiveIndex(enabledOptions[0]?.index ?? -1)
+    } else if (e.key === 'End') {
+      e.preventDefault()
+      setActiveIndex(enabledOptions[enabledOptions.length - 1]?.index ?? -1)
+    } else if (e.key === 'Escape') {
+      closeDropdown()
+    }
+  }
+
+  const renderSelectedValue = () => {
+    if (multiple && Array.isArray(selectedOption)) {
+      if (selectedOption.length === 0) {
+        return <span class="wc-select__placeholder">{placeholder}</span>
+      }
+      return (
+        <div class="wc-select__chips">
+          {selectedOption.map(option => (
+            <span key={option.value} class="wc-select__chip">
+              {renderValue ? renderValue(option) : (option.label || option.value)}
+            </span>
+          ))}
+        </div>
+      )
+    } else if (selectedOption) {
+      return renderValue ? renderValue(selectedOption) : (selectedOption.label || selectedOption.value)
+    } else {
+      return <span class="wc-select__placeholder">{placeholder}</span>
+    }
+  }
+
+  const getLabelClasses = () => {
+    const classes = ['wc-select__label']
+    classes.push(`wc-select__label--${size}`)
+    if (error) classes.push('wc-select__label--error')
+    if (isFocused || selectedOption) classes.push('wc-select__label--active')
+    return classes.join(' ')
+  }
+  const getContainerClasses = () => {
+    const classes = ['wc-select__container']
+    classes.push(`wc-select__container--${variant}`)
+    classes.push(`wc-select__container--${size}`)
+    if (disabled) classes.push('wc-select__container--disabled')
+    if (error) classes.push('wc-select__container--error')
+    if (isFocused) classes.push('wc-select__container--focused')
+    if (isOpen) classes.push('wc-select__container--open')
+    return classes.join(' ')
+  }
+  const getOptionClasses = (option, isSelected) => {
+    const classes = ['wc-select__option']
+    if (isSelected) classes.push('wc-select__option--selected')
+    if (option.disabled) classes.push('wc-select__option--disabled')
+    return classes.join(' ')
+  }
+
+  const generatedId = useId()
+  const selectId = id || name || generatedId
+
+  return (
+    <div class={getSelectClasses()} style={style} ref={selectRef}>
+      {label && (
+        <label
+          htmlFor={selectId}
+          id={`${selectId}-label`}
+          class={getLabelClasses()}
+        >
+          {label}
+          {required && <span class="wc-select__required">*</span>}
+        </label>
+      )}
+      <div class={getContainerClasses()}>
+        <div
+          class="wc-select__control"
+          id={selectId}
+          onClick={handleToggle}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          tabIndex={disabled ? -1 : 0}
+          role="combobox"
+          aria-expanded={isOpen()}
+          aria-haspopup="listbox"
+          aria-labelledby={label ? `${selectId}-label` : undefined}
+          aria-controls={`${selectId}-options`}
+          aria-activedescendant={isOpen && activeIndex >= 0 ? `${selectId}-option-${activeIndex()}` : undefined}
+          aria-disabled={disabled}
+          aria-required={required}
+        >
+          <div class="wc-select__value">
+            {renderSelectedValue()}
+          </div>
+          <div class="wc-select__indicators">
+            {clearable && (selectedOption || (multiple && value?.length > 0)) && (
+              <button
+                type="button"
+                class="wc-select__clear"
+                onClick={handleClear}
+                tabIndex={-1}
+              >
+                ×
+              </button>
+            )}
+            <div class={`wc-select__arrow${isOpen ? ' wc-select__arrow--open' : ''}`}>
+              ▼
+            </div>
+          </div>
+        </div>
+        {isOpen && (
+          <div
+            class="wc-select__dropdown"
+            id={`${selectId}-options`}
+            style={{ maxHeight }}
+            ref={optionsRef}
+          >
+            <div class="wc-select__options" role="listbox">
+              {options.length === 0 ? (
+                <div class="wc-select__no-options">没有可选项</div>
+              ) : (
+                options.map((option, index) => {
+                  const isSelected = multiple
+                    ? Array.isArray(value) && value.includes(option.value)
+                    : value === option.value
+                  return (
+                    <div
+                      key={option.value || index}
+                      id={`${selectId}-option-${index}`}
+                      class={getOptionClasses(option, isSelected)}
+                      onClick={() => handleOptionClick(option)}
+                      role="option"
+                      aria-selected={isSelected}
+                      data-active={activeIndex === index ? 'true' : undefined}
+                    >
+                      <span class="wc-select__option-text">
+                        {renderOption ? renderOption(option) : (option.label || option.value)}
+                      </span>
+                      {isSelected && (
+                        <svg class="wc-select__option-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <polyline points="20,6 9,17 4,12" />
+                        </svg>
+                      )}
+                    </div>
+                  )
+                })
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+      {(error || helperText) && (
+        <div>
+          {error ? (
+            <p class="wc-select__error">{errorMessage || error}</p>
+          ) : (
+            <p class="wc-select__helper">{helperText}</p>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+Select.displayName = 'Select'
+
+export default Select

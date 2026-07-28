@@ -1,0 +1,64 @@
+.wc-number-animation {
+  display: inline-block;
+  min-width: 0;
+  color: var(--wc-text-primary);
+  font-family: var(--wc-font-mono);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  transition:
+    color var(--wc-motion-fast) var(--wc-ease-standard),
+    transform var(--wc-motion-fast) var(--wc-ease-standard);
+}
+
+.wc-number-animation--sm { font-size: 0.875rem; }
+.wc-number-animation--md { font-size: 1rem; }
+.wc-number-animation--lg { font-size: 1.125rem; }
+.wc-number-animation--xl { font-size: 1.5rem; }
+.wc-number-animation--2xl { font-size: 2rem; }
+
+.wc-number-animation--primary { color: var(--wc-text-brand); }
+.wc-number-animation--secondary { color: var(--wc-text-secondary); }
+.wc-number-animation--success { color: var(--wc-text-success); }
+.wc-number-animation--warning { color: var(--wc-text-warning); }
+.wc-number-animation--error { color: var(--wc-text-error); }
+
+.wc-number-animation--highlight {
+  padding: 3px 7px;
+  border-radius: var(--wc-radius-md);
+  background: var(--wc-action-selected);
+  color: var(--wc-text-brand);
+}
+
+.wc-number-animation__wrapper { display: inline-flex; align-items: baseline; gap: 0.125em; }
+.wc-number-animation__prefix,
+.wc-number-animation__suffix { color: var(--wc-text-tertiary); font-size: 0.875em; font-weight: 500; }
+.wc-number-animation--with-separator { font-feature-settings: "tnum"; }
+.wc-number-animation--animated,
+.wc-number-animation--loading { animation: wc-number-pulse 1.8s ease-in-out infinite; }
+.wc-number-animation--finished { animation: wc-number-enter var(--wc-motion-normal) var(--wc-ease-standard); }
+.wc-number-animation--playing { transform: translateY(-1px); }
+.wc-number-animation--ease-in { transition-timing-function: ease-in; }
+.wc-number-animation--ease-out { transition-timing-function: ease-out; }
+.wc-number-animation--ease-in-out { transition-timing-function: ease-in-out; }
+
+@keyframes wc-number-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.62; }
+}
+
+@keyframes wc-number-enter {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .wc-number-animation--2xl { font-size: 1.5rem; }
+  .wc-number-animation--xl { font-size: 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-number-animation { animation: none; transition: none; }
+}

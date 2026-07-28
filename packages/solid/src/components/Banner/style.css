@@ -1,0 +1,138 @@
+.wc-banner {
+  --wc-banner-tone: var(--wc-text-info);
+  width: 100%;
+  background: var(--wc-surface-overlay);
+  box-shadow: none;
+  color: var(--wc-text-primary);
+  font-family: var(--wc-font-family);
+}
+
+.wc-banner--success { --wc-banner-tone: var(--wc-text-success); }
+.wc-banner--warning { --wc-banner-tone: var(--wc-text-warning); }
+.wc-banner--error { --wc-banner-tone: var(--wc-text-error); }
+
+.wc-banner--sticky {
+  position: fixed;
+  right: 0;
+  left: 0;
+}
+
+.wc-banner--top { top: 0; }
+.wc-banner--bottom { bottom: 0; }
+
+.wc-banner-content {
+  display: flex;
+  width: min(1120px, 100%);
+  box-sizing: border-box;
+  align-items: center;
+  gap: 12px;
+  margin: 0 auto;
+  padding: 12px 20px;
+}
+
+.wc-banner-icon {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--wc-banner-tone);
+}
+
+.wc-banner-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.wc-banner-text {
+  min-width: 0;
+  flex: 1;
+}
+
+.wc-banner-title {
+  margin-bottom: 2px;
+  font-size: var(--wc-font-size-sm);
+  font-weight: var(--wc-font-weight-semibold);
+  line-height: 1.4;
+}
+
+.wc-banner-message {
+  color: var(--wc-text-secondary);
+  font-size: var(--wc-font-size-sm);
+  line-height: 1.5;
+}
+
+.wc-banner-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 4px;
+}
+
+.wc-banner-action-btn,
+.wc-banner-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--wc-radius-lg);
+  background: transparent;
+  color: var(--wc-text-primary);
+  font: inherit;
+  cursor: pointer;
+}
+
+.wc-banner-action-btn {
+  min-height: 34px;
+  padding: 6px 10px;
+  font-size: var(--wc-font-size-sm);
+  font-weight: var(--wc-font-weight-medium);
+}
+
+.wc-banner-close {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  padding: 0;
+  color: var(--wc-text-secondary);
+}
+
+.wc-banner-action-btn:hover,
+.wc-banner-close:hover {
+  background: var(--wc-action-hover);
+  color: var(--wc-text-primary);
+}
+
+.wc-banner-action-btn:focus-visible,
+.wc-banner-close:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 2px var(--wc-focus-ring);
+}
+
+.wc-banner-close svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+
+@media (max-width: 640px) {
+  .wc-banner-content {
+    flex-wrap: wrap;
+    padding: 12px 14px;
+  }
+
+  .wc-banner-actions {
+    order: 3;
+    width: 100%;
+    padding-left: 32px;
+  }
+}

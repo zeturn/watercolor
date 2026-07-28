@@ -1,0 +1,49 @@
+.wc-tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.wc-tooltip {
+  position: fixed;
+  z-index: 9999;
+  width: max-content;
+  max-width: min(280px, calc(100vw - 24px));
+  padding: 6px 9px;
+  border-radius: var(--wc-radius-lg);
+  background: var(--wc-surface-overlay);
+  box-shadow: var(--wc-shadow-md);
+  color: var(--wc-text-primary);
+  font-size: var(--wc-font-size-xs);
+  line-height: 1.4;
+  white-space: normal;
+  pointer-events: none;
+}
+
+.wc-tooltip--top {
+}
+
+.wc-tooltip--bottom {
+}
+
+.wc-tooltip--left {
+}
+
+.wc-tooltip--right {
+}
+
+.tooltip-fade-enter-active,
+.tooltip-fade-leave-active {
+  transition: opacity var(--wc-motion-fast) var(--wc-ease-standard);
+}
+
+.tooltip-fade-enter-from,
+.tooltip-fade-leave-to {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tooltip-fade-enter-active,
+  .tooltip-fade-leave-active {
+    transition: none;
+  }
+}

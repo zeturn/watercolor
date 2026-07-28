@@ -1,0 +1,111 @@
+.wc-snackbar {
+  --wc-snackbar-tone: var(--wc-text-info);
+  --wc-snackbar-tint: var(--wc-bg-info-subtle);
+
+  display: flex;
+  align-items: flex-start;
+  width: min(420px, calc(100vw - 32px));
+  min-width: 280px;
+  gap: 12px;
+  padding: 14px 14px 14px 16px;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--wc-radius-xl);
+  background: var(--wc-surface-overlay);
+  color: var(--wc-text-primary);
+  box-shadow: var(--wc-shadow-lg);
+  font-family: var(--wc-font-family);
+  font-size: 14px;
+  line-height: 1.45;
+  pointer-events: auto;
+  animation: wc-snackbar-enter var(--wc-motion-normal) var(--wc-ease-standard) both;
+}
+
+.wc-snackbar--success { --wc-snackbar-tone: var(--wc-text-success); --wc-snackbar-tint: var(--wc-bg-success-subtle); }
+.wc-snackbar--warning { --wc-snackbar-tone: var(--wc-text-warning); --wc-snackbar-tint: var(--wc-bg-warning-subtle); }
+.wc-snackbar--error { --wc-snackbar-tone: var(--wc-text-error); --wc-snackbar-tint: var(--wc-bg-error-subtle); }
+
+.wc-snackbar--filled { background: var(--wc-snackbar-tint); }
+.wc-snackbar--outlined { box-shadow: inset 0 0 0 1px var(--wc-border-subtle), var(--wc-shadow-lg); }
+
+.wc-snackbar__icon {
+  display: inline-grid;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  place-items: center;
+  color: var(--wc-snackbar-tone);
+}
+
+.wc-snackbar__icon svg { width: 18px; height: 18px; }
+
+.wc-snackbar__content {
+  min-width: 0;
+  flex: 1;
+}
+
+.wc-snackbar__title {
+  margin-bottom: 2px;
+  color: var(--wc-text-primary);
+  font-weight: 600;
+}
+
+.wc-snackbar__message { color: var(--wc-text-secondary); }
+.wc-snackbar__actions { display: flex; flex: 0 0 auto; align-items: center; }
+
+.wc-snackbar__action,
+.wc-snackbar__close {
+  border: 0;
+  border-radius: var(--wc-radius-md);
+  background: transparent;
+  color: var(--wc-text-secondary);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 500;
+}
+
+.wc-snackbar__action { min-height: 30px; padding: 4px 8px; color: var(--wc-snackbar-tone); }
+.wc-snackbar__close { display: inline-grid; width: 30px; height: 30px; padding: 0; place-items: center; }
+.wc-snackbar__close svg { width: 16px; height: 16px; }
+
+.wc-snackbar__action:hover,
+.wc-snackbar__close:hover,
+.wc-snackbar__action:focus-visible,
+.wc-snackbar__close:focus-visible {
+  background: var(--wc-action-hover);
+  outline: 0;
+}
+
+.wc-snackbar__action:focus-visible,
+.wc-snackbar__close:focus-visible { box-shadow: 0 0 0 2px var(--wc-focus-ring); }
+
+.wc-snackbar__progress {
+  position: absolute;
+  right: 10px;
+  bottom: 4px;
+  left: 10px;
+  height: 2px;
+  overflow: hidden;
+  border-radius: var(--wc-radius-full);
+  background: var(--wc-action-hover);
+}
+
+.wc-snackbar__progress-bar {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--wc-snackbar-tone);
+  transition: width 50ms linear;
+}
+
+@keyframes wc-snackbar-enter {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 480px) {
+  .wc-snackbar { min-width: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-snackbar { animation: none; }
+}

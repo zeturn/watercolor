@@ -1,0 +1,74 @@
+.wc-status {
+  --wc-status-tone: var(--wc-text-tertiary);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--wc-text-secondary);
+  font-family: var(--wc-font-family);
+  line-height: 1.35;
+  vertical-align: middle;
+}
+
+.wc-status::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--wc-status-tone);
+}
+
+.wc-status--success { --wc-status-tone: var(--wc-text-success); }
+.wc-status--error { --wc-status-tone: var(--wc-text-error); }
+.wc-status--warning { --wc-status-tone: var(--wc-text-warning); }
+.wc-status--info,
+.wc-status--processing { --wc-status-tone: var(--wc-text-info); }
+.wc-status--pending { --wc-status-tone: var(--wc-text-brand); }
+.wc-status--cancelled { --wc-status-tone: var(--wc-text-disabled); }
+
+.wc-status--sm { gap: 5px; font-size: 12px; }
+.wc-status--sm::before { width: 7px; height: 7px; }
+.wc-status--md { font-size: 14px; }
+.wc-status--lg { gap: 8px; font-size: 16px; }
+.wc-status--lg::before { width: 11px; height: 11px; }
+.wc-status__text { color: inherit; font-weight: 500; }
+
+.wc-status--pulse::before,
+.wc-status--blink::before,
+.wc-status--breathe::before,
+.wc-status--glow::before { animation: wc-status-pulse 1.8s ease-in-out infinite; }
+.wc-status--spin::before { animation: wc-status-spin 1s linear infinite; }
+.wc-status--bounce::before { animation: wc-status-bounce 1.2s ease-in-out infinite; }
+.wc-status--shake::before { animation: wc-status-shake 0.8s ease-in-out infinite; }
+.wc-status--ripple::before { animation: wc-status-ripple 1.8s ease-out infinite; }
+
+@keyframes wc-status-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.82); }
+}
+
+@keyframes wc-status-spin {
+  from { transform: rotate(0deg) translateX(2px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(2px) rotate(-360deg); }
+}
+
+@keyframes wc-status-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes wc-status-shake {
+  0%, 100% { transform: translateX(0); }
+  33% { transform: translateX(-1px); }
+  66% { transform: translateX(1px); }
+}
+
+@keyframes wc-status-ripple {
+  0% { box-shadow: 0 0 0 0 var(--wc-status-tone); }
+  100% { box-shadow: 0 0 0 6px transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-status--animated::before { animation: none; }
+}

@@ -1,0 +1,84 @@
+import { createSignal, createEffect, createMemo, onMount, onCleanup, useId, Show, For, Index } from 'solid-js'
+
+import { useLocale } from '../../LocaleSolid'
+import './style.css'
+import { getChipClasses, handleChipClick, handleChipDelete, getDefaultDeleteIconPath } from './utils.tsx'
+
+export default function Chip({
+  label = '',
+  avatar = '',
+  deletable = false,
+  disabled = false,
+  clickable = false,
+  variant = 'filled',
+  size = 'md',
+  color = 'default',
+  deleteIcon = null,
+  onClick,
+  onDelete,
+  children,
+  className = '',
+  ...rest
+}) {
+  const { messages } = useLocale()
+  const chipClasses = getChipClasses({
+    size,
+    variant,
+    color,
+    clickable,
+    disabled,
+    className
+  })
+
+  const handleClick = (e) => {
+    handleChipClick(e, clickable, disabled, onClick)
+  }
+
+  const handleDelete = (e) => {
+    handleChipDelete(e, disabled, onDelete)
+  }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      handleClick(event)
+    }
+  }
+
+  return (
+    <div
+      class={chipClasses}
+      role={clickable ? 'button' : undefined}
+      tabIndex={clickable && !disabled ? 0 : undefined}
+      aria-disabled={clickable ? disabled : undefined}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      {...rest}
+    >
+      {(children && children.avatar) || avatar ? (
+        <div class="wc-chip-avatar">
+          {children && children.avatar ? (
+            children.avatar
+          ) : (
+            <img src={avatar} alt="" class="wc-chip-avatar-image" />
+          )}
+        </div>
+      ) : null}
+      <span class="wc-chip-label">{children?.label || label}</span>
+      {deletable && (
+        <button
+          type="button"
+          onClick={handleDelete}
+          class="wc-chip-delete"
+          aria-label={messages.removeItem(typeof label === 'string' ? label : undefined)}
+        >
+          {deleteIcon || (
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" class="wc-chip-delete-icon" aria-hidden="true">
+              <path fillRule="evenodd" d={getDefaultDeleteIconPath()} clipRule="evenodd" />
+            </svg>
+          )}
+        </button>
+      )}
+    </div>
+  )
+}

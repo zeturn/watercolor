@@ -1,0 +1,99 @@
+.wc-copy {
+  --wc-copy-tone: var(--wc-text-secondary);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  gap: 10px;
+  border: 0;
+  border-radius: var(--wc-radius-lg);
+  background: transparent;
+  color: var(--wc-copy-tone);
+  cursor: pointer;
+  font-family: var(--wc-font-family);
+  line-height: 1.4;
+  text-align: left;
+  user-select: none;
+  transition:
+    background-color var(--wc-motion-fast) var(--wc-ease-standard),
+    color var(--wc-motion-fast) var(--wc-ease-standard);
+}
+
+.wc-copy--sm { min-height: 28px; padding: 4px 7px; font-size: 12px; }
+.wc-copy--md { min-height: 34px; padding: 7px 9px; font-size: 14px; }
+.wc-copy--lg { min-height: 40px; padding: 9px 11px; font-size: 15px; }
+
+.wc-copy--primary { --wc-copy-tone: var(--wc-text-brand); }
+.wc-copy--secondary { --wc-copy-tone: var(--wc-text-secondary); }
+.wc-copy--success,
+.wc-copy--copied { --wc-copy-tone: var(--wc-text-success); }
+.wc-copy--warning { --wc-copy-tone: var(--wc-text-warning); }
+.wc-copy--error { --wc-copy-tone: var(--wc-text-error); }
+
+.wc-copy--filled { background: var(--wc-action-selected); }
+.wc-copy--outlined { box-shadow: inset 0 0 0 1px var(--wc-border-subtle); }
+.wc-copy--minimal { padding-inline: 4px; }
+
+.wc-copy:hover,
+.wc-copy:focus-visible { background: var(--wc-action-hover); outline: 0; }
+.wc-copy:focus-visible { box-shadow: 0 0 0 2px var(--wc-focus-ring); }
+.wc-copy:active { background: var(--wc-action-active); }
+
+.wc-copy-text {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  color: var(--wc-text-primary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wc-copy-action {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 5px;
+  color: var(--wc-copy-tone);
+}
+
+.wc-copy-icon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.wc-copy-icon svg { width: 100%; height: 100%; }
+.wc-copy-label { font-weight: 500; }
+
+.wc-copy-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  z-index: 1100;
+  padding: 6px 9px;
+  transform: translateX(-50%);
+  border-radius: var(--wc-radius-md);
+  background: var(--wc-surface-overlay);
+  color: var(--wc-text-primary);
+  box-shadow: var(--wc-shadow-md);
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: wc-copy-tooltip-enter var(--wc-motion-fast) var(--wc-ease-standard) both;
+}
+
+.wc-copy-tooltip--success { color: var(--wc-text-success); }
+.wc-copy-tooltip--error { color: var(--wc-text-error); }
+
+@keyframes wc-copy-tooltip-enter {
+  from { opacity: 0; transform: translate(-50%, 3px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-copy { transition: none; }
+  .wc-copy-tooltip { animation: none; }
+}

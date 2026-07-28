@@ -1,0 +1,90 @@
+.wc-popover-container {
+  position: relative;
+  display: inline-block;
+}
+
+.wc-popover-trigger {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: var(--wc-radius-lg);
+  background: transparent;
+  color: var(--wc-text-primary);
+  font: inherit;
+  font-size: var(--wc-font-size-sm);
+  cursor: pointer;
+  transition: background-color var(--wc-motion-fast) var(--wc-ease-standard);
+}
+
+.wc-popover-trigger:hover,
+.wc-popover-trigger[aria-expanded="true"] {
+  background: var(--wc-action-hover);
+}
+
+.wc-popover-trigger:focus-visible {
+  outline: 2px solid var(--wc-focus-ring);
+  outline-offset: 2px;
+}
+
+.wc-popover-content {
+  position: fixed;
+  z-index: 2000;
+  min-width: 180px;
+  max-width: min(320px, calc(100vw - 24px));
+  box-sizing: border-box;
+  padding: 12px;
+  border-radius: var(--wc-radius-xl);
+  background: var(--wc-surface-overlay);
+  box-shadow: var(--wc-shadow-lg);
+  color: var(--wc-text-primary);
+  font-size: var(--wc-font-size-sm);
+  line-height: 1.5;
+  transform-origin: center;
+}
+
+.wc-popover-content:focus-visible {
+  outline: 2px solid var(--wc-focus-ring);
+  outline-offset: 2px;
+}
+
+.wc-popover__header {
+  margin-bottom: 8px;
+  color: var(--wc-text-primary);
+  font-weight: var(--wc-font-weight-semibold);
+}
+
+.wc-popover__body {
+  margin: 0;
+  color: var(--wc-text-secondary);
+}
+
+.wc-popover__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.wc-popover-fade-enter-active,
+.wc-popover-fade-leave-active {
+  transition:
+    opacity var(--wc-motion-normal) var(--wc-ease-standard),
+    transform var(--wc-motion-normal) var(--wc-ease-standard);
+}
+
+.wc-popover-fade-enter-from,
+.wc-popover-fade-leave-to {
+  opacity: 0;
+  transform: translateY(4px) scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-popover-trigger,
+  .wc-popover-fade-enter-active,
+  .wc-popover-fade-leave-active {
+    transition: none;
+  }
+}

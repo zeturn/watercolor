@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@zeturn/watercolor-core": [
+        "../core/src/index.ts"
+      ]
+    },
+    "types": []
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

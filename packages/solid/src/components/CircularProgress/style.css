@@ -1,0 +1,75 @@
+.wc-circular-progress {
+  --wc-circular-tone: var(--wc-accent);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wc-circular-tone);
+  vertical-align: middle;
+}
+
+.wc-circular-progress-svg { display: block; transform: rotate(-90deg); }
+.wc-circular-progress-bg { color: var(--wc-action-selected); }
+.wc-circular-progress-circle {
+  color: var(--wc-circular-tone);
+  stroke-linecap: round;
+  transition: stroke-dashoffset var(--wc-motion-normal) var(--wc-ease-standard);
+}
+
+.wc-circular-progress--secondary { --wc-circular-tone: var(--wc-text-secondary); }
+.wc-circular-progress--success { --wc-circular-tone: var(--wc-text-success); }
+.wc-circular-progress--warning { --wc-circular-tone: var(--wc-text-warning); }
+.wc-circular-progress--error { --wc-circular-tone: var(--wc-text-error); }
+.wc-circular-progress--inherit { --wc-circular-tone: currentColor; }
+
+.wc-circular-progress-circle--indeterminate {
+  animation: wc-circular-progress-rotate 1.3s linear infinite;
+}
+
+.wc-circular-progress-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--wc-text-secondary);
+  font-size: 11px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.wc-circular-progress--overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1400;
+  padding: 16px;
+  transform: translate(-50%, -50%);
+  border-radius: var(--wc-radius-xl);
+  background: var(--wc-surface-overlay);
+  box-shadow: var(--wc-shadow-lg);
+}
+
+.wc-circular-progress--centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wc-circular-progress--overlay.wc-circular-progress--centered {
+  position: fixed;
+}
+
+.wc-circular-progress--inline { display: inline-flex; }
+
+@keyframes wc-circular-progress-rotate {
+  0% { stroke-dasharray: 1 200; stroke-dashoffset: 0; }
+  50% { stroke-dasharray: 90 200; stroke-dashoffset: -36; }
+  100% { stroke-dasharray: 90 200; stroke-dashoffset: -126; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-circular-progress-circle { transition: none; }
+  .wc-circular-progress-circle--indeterminate { animation-duration: 2.4s; }
+}

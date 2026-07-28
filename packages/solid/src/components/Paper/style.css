@@ -1,0 +1,159 @@
+/* Paper creates hierarchy only when the caller explicitly asks for it. */
+.wc-paper {
+  --wc-paper-bg: var(--wc-surface-raised);
+  --wc-paper-fg: var(--wc-text-primary);
+  --wc-paper-shadow: none;
+
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: var(--wc-paper-fg);
+  background: var(--wc-paper-bg);
+  border: 0;
+  border-radius: var(--wc-radius-xl);
+  box-shadow: var(--wc-paper-shadow);
+  transition:
+    background-color var(--wc-motion-fast) var(--wc-ease-standard),
+    box-shadow var(--wc-motion-normal) var(--wc-ease-standard),
+    color var(--wc-motion-fast) var(--wc-ease-standard);
+}
+
+.wc-paper--outlined {
+  background: transparent;
+  outline: 1px solid var(--wc-border-default);
+  outline-offset: -1px;
+}
+
+.wc-paper--elevation-0 { --wc-paper-shadow: none; }
+
+.wc-paper:is(.wc-paper--elevation-1, .wc-paper--elevation-2) {
+  --wc-paper-shadow: var(--wc-shadow-sm);
+}
+
+.wc-paper:is(.wc-paper--elevation-3, .wc-paper--elevation-4, .wc-paper--elevation-5) {
+  --wc-paper-shadow: var(--wc-shadow-md);
+}
+
+.wc-paper:is(
+  .wc-paper--elevation-6,
+  .wc-paper--elevation-7,
+  .wc-paper--elevation-8,
+  .wc-paper--elevation-9,
+  .wc-paper--elevation-10,
+  .wc-paper--elevation-11
+) {
+  --wc-paper-shadow: var(--wc-shadow-lg);
+}
+
+.wc-paper:is(
+  .wc-paper--elevation-12,
+  .wc-paper--elevation-13,
+  .wc-paper--elevation-14,
+  .wc-paper--elevation-15,
+  .wc-paper--elevation-16,
+  .wc-paper--elevation-17
+) {
+  --wc-paper-shadow: var(--wc-shadow-xl);
+}
+
+.wc-paper:is(
+  .wc-paper--elevation-18,
+  .wc-paper--elevation-19,
+  .wc-paper--elevation-20,
+  .wc-paper--elevation-21,
+  .wc-paper--elevation-22,
+  .wc-paper--elevation-23,
+  .wc-paper--elevation-24
+) {
+  --wc-paper-shadow: var(--wc-shadow-xl);
+}
+
+.wc-paper--square { border-radius: 0; }
+.wc-paper--rounded-sm { border-radius: var(--wc-radius-md); }
+.wc-paper--rounded,
+.wc-paper--rounded-lg { border-radius: var(--wc-radius-lg); }
+.wc-paper--rounded-xl { border-radius: var(--wc-radius-xl); }
+.wc-paper--rounded-2xl { border-radius: var(--wc-radius-2xl); }
+.wc-paper--rounded-full { border-radius: var(--wc-radius-full); }
+
+.wc-paper--sm { padding: 12px; }
+.wc-paper--md { padding: 16px; }
+.wc-paper--lg { padding: 24px; }
+.wc-paper--xl { padding: 32px; }
+
+.wc-paper--primary {
+  --wc-paper-bg: var(--wc-accent-subtle);
+  --wc-paper-fg: var(--wc-text-primary);
+}
+
+.wc-paper--success {
+  --wc-paper-bg: var(--wc-bg-success-subtle);
+  --wc-paper-fg: var(--wc-text-success);
+}
+
+.wc-paper--warning {
+  --wc-paper-bg: var(--wc-bg-warning-subtle);
+  --wc-paper-fg: var(--wc-text-warning);
+}
+
+.wc-paper--error {
+  --wc-paper-bg: var(--wc-bg-error-subtle);
+  --wc-paper-fg: var(--wc-text-error);
+}
+
+.wc-paper--info {
+  --wc-paper-bg: var(--wc-bg-info-subtle);
+  --wc-paper-fg: var(--wc-text-info);
+}
+
+.wc-paper--hoverable,
+.wc-paper--clickable { cursor: pointer; }
+
+.wc-paper--hoverable:hover,
+.wc-paper--clickable:hover { background: var(--wc-action-hover); }
+
+.wc-paper--clickable:active { background: var(--wc-action-active); }
+
+.wc-paper:focus { outline: none; }
+
+.wc-paper:focus-visible {
+  outline: 2px solid var(--wc-focus-ring);
+  outline-offset: 2px;
+}
+
+.wc-paper--gradient {
+  background: linear-gradient(135deg, var(--wc-paper-bg), var(--wc-surface-subtle));
+}
+
+.wc-paper--frosted {
+  background: color-mix(in srgb, var(--wc-surface-overlay) 82%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.wc-paper--textured {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    color-mix(in srgb, currentColor 12%, transparent) 1px,
+    transparent 0
+  );
+  background-size: 20px 20px;
+}
+
+.wc-paper__header,
+.wc-paper__content,
+.wc-paper__footer { padding: 16px; }
+
+.wc-paper__header { padding-bottom: 0; }
+.wc-paper__footer { padding-top: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-paper { transition: none; }
+}
+
+@media print {
+  .wc-paper {
+    color: black !important;
+    background: white !important;
+    box-shadow: none !important;
+  }
+}

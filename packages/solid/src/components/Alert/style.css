@@ -1,0 +1,116 @@
+.wc-alert {
+  --wc-alert-tone: var(--wc-text-info);
+  --wc-alert-tint: var(--wc-bg-info-subtle);
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--wc-radius-xl);
+  background: var(--wc-surface-subtle);
+  color: var(--wc-text-primary);
+  font-family: var(--wc-font-family);
+}
+
+.wc-alert--success {
+  --wc-alert-tone: var(--wc-text-success);
+  --wc-alert-tint: var(--wc-bg-success-subtle);
+}
+
+.wc-alert--warning {
+  --wc-alert-tone: var(--wc-text-warning);
+  --wc-alert-tint: var(--wc-bg-warning-subtle);
+}
+
+.wc-alert--error {
+  --wc-alert-tone: var(--wc-text-error);
+  --wc-alert-tint: var(--wc-bg-error-subtle);
+}
+
+.wc-alert--filled {
+  background: var(--wc-alert-tint);
+}
+
+.wc-alert--outlined {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--wc-border-subtle);
+}
+
+.wc-alert--minimal {
+  padding-inline: 0;
+  background: transparent;
+}
+
+.wc-alert-icon {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--wc-alert-tone);
+}
+
+.wc-alert-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.wc-alert-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.wc-alert-title {
+  margin-bottom: 3px;
+  color: var(--wc-text-primary);
+  font-size: var(--wc-font-size-sm);
+  font-weight: var(--wc-font-weight-semibold);
+  line-height: 1.45;
+}
+
+.wc-alert-message {
+  color: var(--wc-text-secondary);
+  font-size: var(--wc-font-size-sm);
+  line-height: 1.55;
+}
+
+.wc-alert-close {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin: -4px -6px -4px 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--wc-radius-lg);
+  background: transparent;
+  color: var(--wc-text-secondary);
+  cursor: pointer;
+}
+
+.wc-alert-close:hover {
+  background: var(--wc-action-hover);
+  color: var(--wc-text-primary);
+}
+
+.wc-alert-close:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 2px var(--wc-focus-ring);
+}
+
+.wc-alert-close svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 2;
+}

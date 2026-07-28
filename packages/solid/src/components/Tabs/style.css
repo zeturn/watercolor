@@ -1,0 +1,112 @@
+.wc-tabs-wrapper {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  font-family: var(--wc-font-family);
+}
+
+.wc-tabs {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 0;
+  scrollbar-width: none;
+}
+
+.wc-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.wc-tab {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: var(--wc-radius-xl);
+  background: transparent;
+  color: var(--wc-text-secondary);
+  font: inherit;
+  font-size: var(--wc-font-size-sm);
+  font-weight: var(--wc-font-weight-medium);
+  line-height: 1.4;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color var(--wc-motion-fast) var(--wc-ease-standard),
+    background-color var(--wc-motion-fast) var(--wc-ease-standard);
+}
+
+.wc-tab:hover:not(:disabled):not(.wc-tab--active) {
+  background: var(--wc-state-hover-bg);
+  color: var(--wc-text-primary);
+}
+
+.wc-tab--active {
+  background: var(--wc-state-selected-bg);
+  color: var(--wc-text-primary);
+}
+
+.wc-tab:focus-visible {
+  outline: var(--wc-state-focus-width) solid var(--wc-state-focus-ring);
+  outline-offset: 2px;
+}
+
+.wc-tab:disabled {
+  color: var(--wc-state-disabled-fg);
+  cursor: not-allowed;
+}
+
+.wc-tabs--pills {
+  width: fit-content;
+  padding: 4px;
+  border-radius: var(--wc-radius-2xl);
+  background: var(--wc-surface-subtle);
+}
+
+.wc-tabs--pills .wc-tab--active {
+  background: var(--wc-state-selected-hover-bg);
+}
+
+.wc-tabs--underline {
+  gap: 8px;
+}
+
+.wc-tabs--underline .wc-tab {
+  min-height: 44px;
+  padding-inline: 10px;
+  border-radius: var(--wc-radius-lg);
+}
+
+.wc-tabs--underline .wc-tab--active {
+  background: transparent;
+  color: var(--wc-text-primary);
+  box-shadow: inset 0 -2px 0 var(--wc-accent);
+}
+
+.wc-tab-content {
+  min-height: 0;
+  padding: 24px 0 0;
+  color: var(--wc-text-primary);
+}
+
+@media (max-width: 640px) {
+  .wc-tab {
+    min-width: max-content;
+    padding-inline: 12px;
+  }
+
+  .wc-tab-content {
+    padding-top: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-tab {
+    transition: none;
+  }
+}

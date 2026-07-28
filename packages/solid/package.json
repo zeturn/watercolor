@@ -1,0 +1,56 @@
+{
+  "name": "@zeturn/watercolor-solid",
+  "version": "1.2.13",
+  "description": "Watercolor UI components for SolidJS, built on @zeturn/watercolor-core",
+  "type": "module",
+  "license": "ISC",
+  "main": "dist/watercolor-solid.es.js",
+  "module": "dist/watercolor-solid.es.js",
+  "types": "index.d.ts",
+  "style": "dist/watercolor-solid.css",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./dist/watercolor-solid.es.js",
+      "default": "./dist/watercolor-solid.es.js"
+    },
+    "./style.css": "./dist/watercolor-solid.css"
+  },
+  "files": [
+    "dist",
+    "index.d.ts",
+    "style.css"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest run",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeturn/watercolor",
+    "directory": "packages/solid"
+  },
+  "peerDependencies": {
+    "solid-js": "^1.8.0"
+  },
+  "dependencies": {
+    "@zeturn/watercolor-core": "1.2.13"
+  },
+  "devDependencies": {
+    "vite-plugin-solid": "^2.11.0",
+    "solid-js": "^1.9.0",
+    "typescript": "^5.9.3",
+    "vite": "^8.1.5",
+    "vite-plugin-dts": "^5.0.3",
+    "vitest": "^3.2.4",
+    "jsdom": "^29.1.1"
+  }
+}

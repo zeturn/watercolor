@@ -1,0 +1,24 @@
+.wc-container {
+  width: 100%;
+  box-sizing: border-box;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+@media (min-width: 640px) {
+  .wc-container { padding-inline: 24px; }
+}
+
+@media (min-width: 1024px) {
+  .wc-container { padding-inline: 32px; }
+}
+
+.wc-container--xs { max-width: 20rem; }
+.wc-container--sm { max-width: 24rem; }
+.wc-container--md { max-width: 28rem; }
+.wc-container--lg { max-width: 64rem; }
+.wc-container--xl { max-width: 72rem; }
+.wc-container--2xl { max-width: 80rem; }
+
+.wc-container--fluid,
+.wc-container--fixed { max-width: none; }

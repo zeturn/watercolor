@@ -1,0 +1,23 @@
+
+import './style.css'
+
+const AppBar = ({
+  children,
+  position = 'fixed',
+  color = 'default',
+  elevation = 0,
+  variant = 'elevation',
+  className = '',
+  style = {},
+  ...rest
+}) => {
+  const classes = `wc-appbar wc-appbar--${position} wc-appbar--${color} wc-appbar--elevation-${elevation} wc-appbar--${variant} ${className}`
+
+  return (
+    <div class={classes} style={style} {...rest}>
+      {children}
+    </div>
+  )
+}
+
+export default AppBar

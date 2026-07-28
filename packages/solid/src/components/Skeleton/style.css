@@ -1,0 +1,39 @@
+.wc-skeleton {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--wc-radius-sm);
+  background: var(--wc-action-selected);
+  color: transparent;
+}
+
+.wc-skeleton--text { border-radius: var(--wc-radius-xs); }
+.wc-skeleton--rectangular { border-radius: var(--wc-radius-sm); }
+.wc-skeleton--rounded { border-radius: var(--wc-radius-lg); }
+.wc-skeleton--circular { border-radius: 50%; }
+
+.wc-skeleton--pulse { animation: wc-skeleton-pulse 1.6s ease-in-out infinite; }
+
+.wc-skeleton--wave::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, var(--wc-action-hover), transparent);
+  animation: wc-skeleton-wave 1.6s ease-in-out infinite;
+}
+
+@keyframes wc-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.48; }
+}
+
+@keyframes wc-skeleton-wave {
+  0% { transform: translateX(-100%); }
+  60%, 100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-skeleton--pulse,
+  .wc-skeleton--wave::after { animation: none; }
+}

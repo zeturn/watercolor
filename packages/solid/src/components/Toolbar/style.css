@@ -1,0 +1,42 @@
+/* Toolbar 组件样式 */
+
+.wc-toolbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.wc-toolbar--regular {
+  min-height: 4rem; /* 64px / 16px = 4rem */
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.wc-toolbar--dense {
+  min-height: 3rem; /* 48px / 16px = 3rem */
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.wc-toolbar--gutters {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .wc-toolbar--gutters {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wc-toolbar--gutters {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.wc-toolbar--no-gutters {
+  /* No horizontal padding */
+} 

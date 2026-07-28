@@ -1,0 +1,4 @@
+/* Watermark 组件样式 */
+.wc-watermark {
+  mix-blend-mode: multiply;
+}

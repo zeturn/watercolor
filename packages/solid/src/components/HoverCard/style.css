@@ -1,0 +1,190 @@
+.hover-card-container {
+  position: relative;
+  display: inline-block;
+  font-family: var(--wc-font-family);
+}
+
+.hover-card-trigger {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 4px;
+  border-radius: var(--wc-radius-md);
+  color: var(--wc-text-secondary);
+  cursor: pointer;
+  transition:
+    color var(--wc-motion-fast) var(--wc-ease-standard),
+    background-color var(--wc-motion-fast) var(--wc-ease-standard);
+}
+
+.hover-card-trigger:hover,
+.hover-card-trigger:focus-visible {
+  background: var(--wc-action-hover);
+  color: var(--wc-text-primary);
+  outline: none;
+}
+
+.hover-card-outlined .hover-card-trigger {
+  box-shadow: inset 0 0 0 1px var(--wc-border-subtle);
+}
+
+.hover-card-filled .hover-card-trigger {
+  background: var(--wc-surface-subtle);
+}
+
+.hover-card-minimal .hover-card-trigger {
+  padding-inline: 0;
+  background: transparent;
+}
+
+.hover-card-size-sm .hover-card-trigger { font-size: var(--wc-font-size-sm); }
+.hover-card-size-md .hover-card-trigger { font-size: var(--wc-font-size-md); }
+.hover-card-size-lg .hover-card-trigger { font-size: var(--wc-font-size-lg); }
+
+.hover-card-disabled .hover-card-trigger {
+  color: var(--wc-text-disabled);
+  cursor: not-allowed;
+}
+
+.hover-card-popup {
+  position: fixed;
+  z-index: 1000;
+  min-width: 220px;
+  max-width: 320px;
+  overflow: hidden;
+  border-radius: var(--wc-radius-2xl);
+  background: var(--wc-surface-overlay);
+  box-shadow: var(--wc-shadow-lg);
+  color: var(--wc-text-primary);
+}
+
+.hover-card-card-size-sm { min-width: 180px; max-width: 240px; }
+.hover-card-card-size-md { min-width: 220px; max-width: 320px; }
+.hover-card-card-size-lg { min-width: 280px; max-width: 400px; }
+.hover-card-card-size-xl { min-width: 340px; max-width: 480px; }
+
+.hover-card-position-top {
+}
+
+.hover-card-position-bottom {
+}
+
+.hover-card-position-left {
+}
+
+.hover-card-position-right {
+}
+
+.hover-card-arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--wc-surface-overlay);
+  transform: rotate(45deg);
+}
+
+.hover-card-arrow-top { right: calc(50% - 5px); bottom: -5px; }
+.hover-card-arrow-bottom { right: calc(50% - 5px); top: -5px; }
+.hover-card-arrow-left { top: calc(50% - 5px); right: -5px; }
+.hover-card-arrow-right { top: calc(50% - 5px); left: -5px; }
+
+.hover-card-content {
+  position: relative;
+  z-index: 1;
+  padding: 16px;
+}
+
+.hover-card-image {
+  overflow: hidden;
+  margin: -16px -16px 14px;
+}
+
+.hover-card-image img {
+  display: block;
+  width: 100%;
+  height: 128px;
+  object-fit: cover;
+}
+
+.hover-card-title {
+  margin: 0 0 6px;
+  color: var(--wc-text-primary);
+  font-size: var(--wc-font-size-md);
+  font-weight: var(--wc-font-weight-semibold);
+  line-height: 1.4;
+}
+
+.hover-card-description {
+  margin: 0;
+  color: var(--wc-text-secondary);
+  font-size: var(--wc-font-size-sm);
+  line-height: 1.55;
+}
+
+.hover-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.hover-card-meta-item {
+  padding: 3px 7px;
+  border-radius: var(--wc-radius-md);
+  background: var(--wc-surface-subtle);
+  color: var(--wc-text-tertiary);
+  font-size: var(--wc-font-size-xs);
+}
+
+.hover-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 12px;
+}
+
+.hover-card-action-btn {
+  min-height: 32px;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: var(--wc-radius-lg);
+  background: transparent;
+  color: var(--wc-text-primary);
+  font: inherit;
+  font-size: var(--wc-font-size-sm);
+  cursor: pointer;
+}
+
+.hover-card-action-btn:hover {
+  background: var(--wc-action-hover);
+}
+
+.hover-card-action-btn:focus-visible {
+  outline: 2px solid var(--wc-focus-ring);
+  outline-offset: 2px;
+}
+
+.hover-card-transition-enter-active,
+.hover-card-transition-leave-active {
+  transition:
+    opacity var(--wc-motion-normal) var(--wc-ease-standard),
+    transform var(--wc-motion-normal) var(--wc-ease-standard);
+}
+
+.hover-card-transition-enter-from,
+.hover-card-transition-leave-to {
+  opacity: 0;
+}
+
+@media (max-width: 640px) {
+  .hover-card-popup {
+    max-width: calc(100vw - 24px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-card-trigger,
+  .hover-card-transition-enter-active,
+  .hover-card-transition-leave-active {
+    transition: none;
+  }
+}
