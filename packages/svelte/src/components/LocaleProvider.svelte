@@ -1,6 +1,6 @@
 <script lang="ts">
   import { setContext } from 'svelte'
-  import { defaultLocaleMessages, type WatercolorLocaleMessages } from '../locale'
+  import { defaultLocaleMessages, type WatercolorLocaleMessages } from '../locale.js'
   import type { Snippet } from 'svelte'
 
   let {

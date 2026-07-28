@@ -11,7 +11,7 @@ import {
   output,
   signal,
 } from '@angular/core'
-import { useLocale } from '../../hooks'
+import { useLocale } from '../../hooks.js'
 
 interface CalendarDay {
   day: number

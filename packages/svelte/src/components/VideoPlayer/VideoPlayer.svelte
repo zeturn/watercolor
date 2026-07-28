@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { useLocale } from '../../hooks'
+  import { useLocale } from '../../hooks.js'
 
   let {
     src,

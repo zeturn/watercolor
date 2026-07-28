@@ -2,14 +2,14 @@ import { describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { defaultLocaleMessages } from '../locale'
+import { defaultLocaleMessages } from '../locale.js'
 import {
   createThemeController,
   applyThemeConfig,
   resetThemeConfig,
   createThemeInitScript,
   THEME_MODES,
-} from '../utils/theme'
+} from '../utils/theme.js'
 
 const here = dirname(fileURLToPath(import.meta.url))
 

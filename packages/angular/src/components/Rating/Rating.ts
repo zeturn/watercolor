@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input, model, output, signal } from '@angular/core'
-import { useLocale } from '../../hooks'
+import { useLocale } from '../../hooks.js'
 
 @Component({
   selector: 'wc-rating',

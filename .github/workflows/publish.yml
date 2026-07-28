@@ -207,6 +207,7 @@ jobs:
 
           npm publish --workspace packages/react --access public --provenance
           npm publish --workspace packages/vue --access public --provenance
+          npm publish --workspace packages/svelte --access public --provenance
           npm publish --workspace packages/angular --access public --provenance
 
           wait_for_package @zeturn/watercolor-react

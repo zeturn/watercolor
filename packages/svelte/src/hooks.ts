@@ -1,5 +1,5 @@
 import { getContext } from 'svelte'
-import { defaultLocaleMessages, type LocaleStore } from './locale'
+import { defaultLocaleMessages, type LocaleStore } from './locale.js'
 
 export interface ThemeStore {
   mode: string

@@ -9,7 +9,7 @@ import {
   output,
   signal,
 } from '@angular/core'
-import { useLocale } from '../../hooks'
+import { useLocale } from '../../hooks.js'
 
 export interface GalleryImage {
   id?: string | number

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core'
-import { WC_LOCALE } from '../hooks'
-import { defaultLocaleMessages, type LocaleStore, type WatercolorLocaleMessages } from '../locale'
+import { WC_LOCALE } from '../hooks.js'
+import { defaultLocaleMessages, type LocaleStore, type WatercolorLocaleMessages } from '../locale.js'
 
 @Component({
   selector: 'wc-locale-provider',
