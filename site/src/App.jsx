@@ -24,6 +24,15 @@ function RootRedirect() {
   return <Navigate to={target} replace />
 }
 
+// `/docs` 无具体小节时，重定向到默认小节 intro。
+// 注意：必须基于语言参数拼绝对路径 `/${lang}/docs/intro`。
+// 若写成相对 <Navigate to="docs/intro">，在 Splat 路由 /:lang/* 内部的嵌套
+// <Routes> 中会被相对解析成 /zh/docs/docs/intro，从而落入 "*" 被重定向回首页。
+function DocsRedirect() {
+  const { lang } = useParams()
+  return <Navigate to={`/${lang}/docs/intro`} replace />
+}
+
 // `/:lang` 路由布局：校验前缀、同步 i18n 语言、渲染 Navbar + 子路由。
 function LangLayout() {
   const { lang: pathLang } = useParams()
@@ -49,7 +58,7 @@ function LangLayout() {
       <Navbar />
       <Routes>
         <Route index element={<Home />} />
-        <Route path="docs" element={<Navigate to="docs/intro" replace />} />
+        <Route path="docs" element={<DocsRedirect />} />
         <Route path="docs/:sectionId" element={<Docs />} />
         <Route path="components" element={<Components />} />
         <Route path="components/:id" element={<ComponentDetail />} />
