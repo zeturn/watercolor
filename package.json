@@ -13,8 +13,8 @@
     "test:vue": "npm run test -w packages/vue",
     "test:next": "npm run test -w packages/next",
     "test:core": "npm run test -w packages/core",
-    "lint": "npm run lint -w packages/core && npm run lint -w packages/react && npm run lint -w packages/vue && npm run lint -w packages/next && npm run lint -w packages/svelte",
-    "typecheck": "npm run typecheck -w packages/core && npm run typecheck -w packages/react && npm run typecheck -w packages/vue && npm run typecheck -w packages/next && npm run typecheck -w packages/svelte",
+    "lint": "npm run lint -w packages/core && npm run lint -w packages/react && npm run lint -w packages/vue && npm run lint -w packages/next && npm run lint -w packages/svelte && npm run lint -w packages/angular",
+    "typecheck": "npm run typecheck -w packages/core && npm run typecheck -w packages/react && npm run typecheck -w packages/vue && npm run typecheck -w packages/next && npm run typecheck -w packages/svelte && npm run typecheck -w packages/angular",
     "storybook": "npm run storybook:vue",
     "build-storybook": "npm run build-storybook:vue",
     "storybook:vue": "npm run storybook -w packages/vue",
@@ -44,7 +44,8 @@
     "release:minor": "node scripts/publish.mjs minor",
     "release:major": "node scripts/publish.mjs major",
     "audit:visual:minimal": "node scripts/audit-minimal-visual.mjs",
-    "test:svelte": "npm run test -w packages/svelte --if-present"
+    "test:svelte": "npm run test -w packages/svelte --if-present",
+    "test:angular": "npm run test -w packages/angular --if-present"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.2.1",
@@ -129,5 +130,5 @@
     "npm": ">=8.0.0"
   },
   "license": "ISC",
-  "version": "1.2.11"
+  "version": "1.2.12"
 }

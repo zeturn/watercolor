@@ -1,0 +1,55 @@
+{
+  "name": "@zeturn/watercolor-angular",
+  "version": "1.2.12",
+  "description": "Watercolor UI components for Angular (standalone, signals), built on @zeturn/watercolor-core",
+  "type": "module",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./theme.css": "./src/styles/index.css"
+  },
+  "files": [
+    "dist",
+    "src/styles",
+    "!dist/__tests__"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "npm run build --prefix ../core && ngc -p tsconfig.lib.json",
+    "test": "vitest run",
+    "lint": "npm run build --prefix ../core && ngc -p tsconfig.check.json",
+    "typecheck": "npm run build --prefix ../core && ngc -p tsconfig.check.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeturn/watercolor",
+    "directory": "packages/angular"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=20.0.0"
+  },
+  "dependencies": {
+    "@zeturn/watercolor-core": "1.2.12"
+  },
+  "devDependencies": {
+    "@angular/compiler": "^21.0.0",
+    "@angular/compiler-cli": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "rxjs": "^7.8.1",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4",
+    "zone.js": "^0.15.0"
+  }
+}

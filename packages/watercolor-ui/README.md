@@ -21,6 +21,9 @@ for Next.js projects.
 **Svelte 5 / SvelteKit:** install [`@zeturn/watercolor-svelte`](../svelte) separately — native
 Svelte 5 components with the same export names, so the installer is not needed for Svelte projects.
 
+**Angular:** install [`@zeturn/watercolor-angular`](../angular) separately — native Angular
+standalone components with the same export names, so the installer is not needed for Angular projects.
+
 ### Choose a platform
 
 Use the CLI interactively:
@@ -38,6 +41,8 @@ npx watercolor-ui --framework vue --icons lucide
 #   npm install @zeturn/watercolor-next
 # Svelte 5 / SvelteKit does not use the installer:
 #   npm install @zeturn/watercolor-svelte
+# Angular does not use the installer:
+#   npm install @zeturn/watercolor-angular
 ```
 
 Installing `watercolor-ui` has no postinstall side effects. The CLI only changes

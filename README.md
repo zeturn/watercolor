@@ -4,7 +4,7 @@
 
 <img src="public/img/watercolorui.png" width="140" alt="Watercolor UI" />
 
-Modern, minimalist, watercolor-inspired UI components for **Vue 3.5+**, **React 18/19**, **Next.js (App Router)**, and **Svelte 5** — built with **TypeScript**.
+Modern, minimalist, watercolor-inspired UI components for **Vue 3.5+**, **React 18/19**, **Next.js (App Router)**, **Svelte 5**, and **Angular** — built with **TypeScript**.
 
 [![npm version](https://img.shields.io/npm/v/@zeturn/watercolor-vue?label=vue)](https://www.npmjs.com/package/@zeturn/watercolor-vue)
 [![npm version](https://img.shields.io/npm/v/@zeturn/watercolor-react?label=react)](https://www.npmjs.com/package/@zeturn/watercolor-react)
@@ -16,7 +16,7 @@ Modern, minimalist, watercolor-inspired UI components for **Vue 3.5+**, **React 
 
 ## ✨ Features
 
-- One design language, four platforms (Vue 3.5+, React 18/19, Next.js App Router, and Svelte 5)
+- One design language, five platforms (Vue 3.5+, React 18/19, Next.js App Router, Svelte 5, and Angular)
 - Borderless default Watercolor style with CSS variable theming
 - Theme v2 JSON loading through React/Vue providers
 - Built-in light, dark, and system mode handling
@@ -59,6 +59,12 @@ npm install @zeturn/watercolor-next
 npm install @zeturn/watercolor-svelte
 ```
 
+**Angular**
+
+```bash
+npm install @zeturn/watercolor-angular
+```
+
 ### Usage
 
 Import styles once in your app entry, then import components as needed.
@@ -79,6 +85,8 @@ import { Button } from '@zeturn/watercolor-vue'
 // import { Button } from '@zeturn/watercolor-next'
 // Svelte 5 / SvelteKit (styles are bundled with the package import)
 // import { Button } from '@zeturn/watercolor-svelte'
+// Angular (standalone components; import '@zeturn/watercolor-angular/theme.css' once)
+// import { Button } from '@zeturn/watercolor-angular'
 ```
 
 ### Theme v2
@@ -102,6 +110,7 @@ Theme loading safely falls back to the default borderless Watercolor design. See
 - `examples/next-ssr`
 - `examples/nuxt-ssr`
 - `examples/svelte-ssr`
+- `examples/angular-ssr`
 
 The examples are version-checked with the docs/examples audit so installation snippets stay aligned with published packages.
 

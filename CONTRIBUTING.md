@@ -9,6 +9,7 @@ Thanks for taking the time to contribute to Watercolor UI.
 - `packages/react`: React components
 - `packages/next`: Next.js (App Router / RSC) wrapper re-exporting React behind a `"use client"` boundary
 - `packages/svelte`: Svelte 5 components (runes, built with `@sveltejs/package`)
+- `packages/angular`: Angular standalone components (signals, built with `ngc` partial compilation)
 - `docs`: VitePress documentation
 
 ## Setup
@@ -35,6 +36,7 @@ npm run test:vue
 npm run test:react
 npm run test:next
 npm run test:svelte
+npm run test:angular
 
 # lint
 npm run lint
@@ -42,7 +44,7 @@ npm run lint
 
 ## Guidelines
 
-- Keep Vue/React/Next/Svelte APIs consistent when possible (prop names, defaults, variants). The Next package re-exports React, and all four frameworks are validated by `npm run audit:api` against `api-manifest.json`, so public exports must stay in sync.
+- Keep Vue/React/Next/Svelte/Angular APIs consistent when possible (prop names, defaults, variants). The Next package re-exports React, and all five frameworks are validated by `npm run audit:api` against `api-manifest.json`, so public exports must stay in sync.
 - Prefer accessibility-friendly patterns: keyboard support, ARIA attributes, focus management.
 - Avoid introducing browser-only globals (`window`, `document`, `localStorage`) in module top-level code; guard for SSR.
 

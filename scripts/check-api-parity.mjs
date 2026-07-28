@@ -79,17 +79,21 @@ if (existsSync(vueDist)) {
     if (candidates.length !== 1) throw new Error(`Expected one Vue declaration for ${component}, found ${candidates.length}`)
     return readFile(candidates[0], 'utf8')
   }
+  // vue-tsc 新旧两种声明格式的契约标记
+  const hasPropsContract = (d) => d.includes('$props:') || d.includes('ExtractPropTypes<')
+  const hasEmitsContract = (d) => d.includes('$emit:') || /\(\.\.\.args: any\[\]\) => void/.test(d)
+  const hasSlotsContract = (d) => d.includes('$slots:') || d.includes('$slots')
   for (const component of manifest.typedContracts.vue.props) {
     const declaration = await findVueDeclaration(component)
-    if (!declaration.includes('$props:')) throw new Error(`Vue ${component} declaration has no props contract`)
+    if (!hasPropsContract(declaration)) throw new Error(`Vue ${component} declaration has no props contract`)
   }
   for (const component of manifest.typedContracts.vue.events) {
     const declaration = await findVueDeclaration(component)
-    if (!declaration.includes('$emit:')) throw new Error(`Vue ${component} declaration has no emits contract`)
+    if (!hasEmitsContract(declaration)) throw new Error(`Vue ${component} declaration has no emits contract`)
   }
   for (const component of manifest.typedContracts.vue.slots) {
     const declaration = await findVueDeclaration(component)
-    if (!declaration.includes('$slots:')) throw new Error(`Vue ${component} declaration has no slots contract`)
+    if (!hasSlotsContract(declaration)) throw new Error(`Vue ${component} declaration has no slots contract`)
   }
 } else {
   console.warn('Vue dist is absent; skipped generated declaration checks (run the Vue build first).')
