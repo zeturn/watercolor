@@ -1,12 +1,12 @@
 ---
 name: watercolor-ui
-description: This skill should be used when building user interfaces, web apps, dashboards, forms, or component demos with the Watercolor UI component library (@zeturn/watercolor-react for React, @zeturn/watercolor-vue for Vue 3, @zeturn/watercolor-next for Next.js App Router). It covers installation, theming, and the full component catalog so an agent can scaffold and extend UIs using Watercolor's ready-made, watercolor-styled components.
+description: This skill should be used when building user interfaces, web apps, dashboards, forms, or component demos with the Watercolor UI component library (@zeturn/watercolor-react for React, @zeturn/watercolor-vue for Vue 3, @zeturn/watercolor-next for Next.js App Router, @zeturn/watercolor-svelte for Svelte 5 / SvelteKit, @zeturn/watercolor-angular for Angular). It covers installation, theming, and the full component catalog so an agent can scaffold and extend UIs using Watercolor's ready-made, watercolor-styled components.
 ---
 
 # Watercolor UI
 
 Watercolor UI is a modern, minimal, watercolor-style cross-framework component library for
-React 18/19, Vue 3, and Next.js (App Router), published under the `@zeturn/watercolor-*` npm scope. This skill enables
+React 18/19, Vue 3, Next.js (App Router), Svelte 5 / SvelteKit, and Angular, published under the `@zeturn/watercolor-*` npm scope. This skill enables
 an agent to scaffold and extend UIs using its prebuilt components instead of hand-rolling markup.
 
 ## When to use
@@ -51,6 +51,31 @@ Two paths:
    Then import components directly in Server Components; `@zeturn/watercolor-next` re-exports the
    entire React API behind a built-in `"use client"` directive. For SSR pre-paint theming, add
    `createThemeInitScript` from `@zeturn/watercolor-core` to `<head>`.
+
+4. Svelte 5 / SvelteKit:
+
+   ```bash
+   npm install @zeturn/watercolor-svelte
+   ```
+
+   Components use Svelte 5 runes (`$props()`, `$bindable()`), callback-style events (`onclick`,
+   `onchange`), and the same export names as React/Vue. Wrap the app in `ThemeProvider` /
+   `LocaleProvider` (context-based); consume theme state with `useTheme()`. For SvelteKit SSR
+   pre-paint theming, inject `createThemeInitScript` into `<svelte:head>` in `+layout.svelte`.
+
+5. Angular (standalone components + signals):
+
+   ```bash
+   npm install @zeturn/watercolor-angular
+   ```
+
+   Components are standalone with `wc-*` selectors (e.g. `<wc-button>`); import the classes into
+   your component `imports`. Inputs use signal `input()`, two-way binding via `model()`
+   (`[(checked)]`, `[(value)]`), and events are outputs such as `(clicked)`, `(changed)`, `(closed)`.
+   Wrap the app in `<wc-theme-provider>` / `<wc-locale-provider>`; consume theme state with
+   `useTheme()` (injection context) or a template reference to the provider. Import
+   `@zeturn/watercolor-angular/theme.css` once in global styles. For SSR pre-paint theming,
+   inject `createThemeInitScript` into the HTML `<head>` (see `examples/angular-ssr/src/server.ts`).
 
 ## Setup in the app entry
 
@@ -105,7 +130,9 @@ snippets is in `references/components.md`.
 
 ## References
 
-- `references/components.md` — full React component catalog (import paths, key props, snippets). The same catalog applies to Next.js via `@zeturn/watercolor-next`.
+- `references/components.md` — full React component catalog (import paths, key props, snippets). The same catalog applies to Next.js via `@zeturn/watercolor-next` and (by export name) to Svelte via `@zeturn/watercolor-svelte` and Angular via `@zeturn/watercolor-angular`.
 - Official docs: https://zeturn.github.io/watercolor/
 - Storybook (React): https://zeturn.github.io/watercolor/react/
 - Next.js example: `examples/next-ssr`
+- SvelteKit example: `examples/svelte-ssr`
+- Angular SSR example: `examples/angular-ssr`

@@ -4,7 +4,7 @@
 
 <img src="public/img/watercolorui.png" width="140" alt="Watercolor UI" />
 
-Modern, minimalist, watercolor-inspired UI components for **Vue 3.5+**, **React 18/19**, **Next.js (App Router)**, **Svelte 5**, and **Angular** — built with **TypeScript**.
+Modern, minimalist, watercolor-inspired UI components for **4 frameworks** — **Vue 3.5+**, **React 18/19**, **Svelte 5**, and **Angular** — with first-class **Next.js (App Router)** support built on the React package. Built with **TypeScript**.
 
 [![npm version](https://img.shields.io/npm/v/@zeturn/watercolor-vue?label=vue)](https://www.npmjs.com/package/@zeturn/watercolor-vue)
 [![npm version](https://img.shields.io/npm/v/@zeturn/watercolor-react?label=react)](https://www.npmjs.com/package/@zeturn/watercolor-react)
@@ -16,7 +16,7 @@ Modern, minimalist, watercolor-inspired UI components for **Vue 3.5+**, **React 
 
 ## ✨ Features
 
-- One design language, five platforms (Vue 3.5+, React 18/19, Next.js App Router, Svelte 5, and Angular)
+- One design language, 4 frameworks (Vue 3.5+, React 18/19, Svelte 5, and Angular), plus first-class Next.js App Router support via `@zeturn/watercolor-next`
 - Borderless default Watercolor style with CSS variable theming
 - Theme v2 JSON loading through React/Vue providers
 - Built-in light, dark, and system mode handling

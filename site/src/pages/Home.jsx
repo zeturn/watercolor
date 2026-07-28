@@ -567,7 +567,7 @@ function ScrollProgressBar() {
 // Main Home page
 export default function Home() {
   useDocumentMeta({
-    description: 'Watercolor UI 是支持 React 与 Vue 3 的跨框架水彩风格组件库，提供 60+ 开箱即用组件，零运行时依赖、可主题化、注重可访问性。',
+    description: 'Watercolor UI 是支持 Vue、React、Svelte、Angular 四大框架的跨框架水彩风格组件库，提供 60+ 开箱即用组件，零运行时依赖、可主题化、注重可访问性。',
   })
 
   return (

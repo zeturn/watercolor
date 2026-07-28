@@ -9,7 +9,7 @@ const SITE_URL = 'https://watercolorui.com'
 const SITE_NAME = 'Watercolor UI'
 const DEFAULT_TITLE = 'Watercolor UI - 水彩风格的跨框架组件库'
 const DEFAULT_DESCRIPTION =
-  'Watercolor UI 是一个现代、极简、水彩风格的跨框架 UI 组件库，同时支持 Vue 3 和 React，提供 60+ 开箱即用组件，零运行时依赖、可主题化、可访问。'
+  'Watercolor UI 是一个现代、极简、水彩风格的跨框架 UI 组件库，支持 Vue、React、Svelte、Angular 四大框架（并一等支持 Next.js），提供 60+ 开箱即用组件，零运行时依赖、可主题化、可访问。'
 const DEFAULT_OG_IMAGE = '/og-image.svg'
 
 function upsertMeta({ name, property, content }) {

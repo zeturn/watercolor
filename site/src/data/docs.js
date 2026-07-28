@@ -42,11 +42,11 @@ const docsI18n = {
     content: {
       intro: `## 什么是 Watercolor UI？
 
-Watercolor UI 是一个**现代、极简、水彩风格**的跨框架 UI 组件库，同时支持 **Vue 3.5+** 和 **React 18/19**。
+Watercolor UI 是一个**现代、极简、水彩风格**的跨框架 UI 组件库，支持 **Vue 3.5+**、**React 18/19**、**Svelte 5** 和 **Angular** 四大框架，并对 **Next.js (App Router)** 提供一等支持。
 
 ### 核心特性
 
-- **双框架支持**: 一套设计语言同时覆盖 Vue 3 和 React 18/19
+- **四框架支持**: 一套设计语言覆盖 Vue 3、React 18/19、Svelte 5 和 Angular（Next.js 一等支持）
 - **超扁平设计哲学**: 无阴影、无边框的极简水彩风格
 - **Tree-shaking 友好**: 按需导入，最小化打包体积
 - **完全无障碍**: 键盘导航、ARIA 属性、屏幕阅读器支持
@@ -100,6 +100,24 @@ npm install @zeturn/watercolor-react @zeturn/watercolor-core
 
 \`\`\`bash
 npm install @zeturn/watercolor-vue @zeturn/watercolor-core
+\`\`\`
+
+#### Svelte 项目
+
+\`\`\`bash
+npm install @zeturn/watercolor-svelte
+\`\`\`
+
+#### Angular 项目
+
+\`\`\`bash
+npm install @zeturn/watercolor-angular
+\`\`\`
+
+#### Next.js 项目
+
+\`\`\`bash
+npm install @zeturn/watercolor-next @zeturn/watercolor-core
 \`\`\`
 
 ### Node 版本要求
@@ -571,11 +589,11 @@ watercolor/
     content: {
       intro: `## What is Watercolor UI?
 
-Watercolor UI is a **modern, minimal, watercolor-style** cross-framework UI component library that supports both **Vue 3.5+** and **React 18/19**.
+Watercolor UI is a **modern, minimal, watercolor-style** cross-framework UI component library that supports 4 frameworks — **Vue 3.5+**, **React 18/19**, **Svelte 5**, and **Angular** — with first-class **Next.js (App Router)** support.
 
 ### Core Features
 
-- **Dual-framework support**: One design language covering both Vue 3 and React 18/19
+- **4-framework support**: One design language covering Vue 3, React 18/19, Svelte 5, and Angular (first-class Next.js support)
 - **Ultra-flat design philosophy**: Minimal watercolor style with no shadows or borders
 - **Tree-shaking friendly**: Import on demand to minimize bundle size
 - **Fully accessible**: Keyboard navigation, ARIA attributes, screen reader support
@@ -629,6 +647,24 @@ npm install @zeturn/watercolor-react @zeturn/watercolor-core
 
 \`\`\`bash
 npm install @zeturn/watercolor-vue @zeturn/watercolor-core
+\`\`\`
+
+#### Svelte project
+
+\`\`\`bash
+npm install @zeturn/watercolor-svelte
+\`\`\`
+
+#### Angular project
+
+\`\`\`bash
+npm install @zeturn/watercolor-angular
+\`\`\`
+
+#### Next.js project
+
+\`\`\`bash
+npm install @zeturn/watercolor-next @zeturn/watercolor-core
 \`\`\`
 
 ### Node Version Requirements
@@ -1100,11 +1136,11 @@ We use Conventional Commits:
     content: {
       intro: `## Watercolor UI とは？
 
-Watercolor UI は、**モダンでミニマルな水彩風**のクロスフレームワーク UI コンポーネントライブラリです。**Vue 3.5+** と **React 18/19** の両方をサポートしています。
+Watercolor UI は、**モダンでミニマルな水彩風**のクロスフレームワーク UI コンポーネントライブラリです。**Vue 3.5+**、**React 18/19**、**Svelte 5**、**Angular** の 4 フレームワークをサポートし、**Next.js (App Router)** もファーストクラスで対応しています。
 
 ### 主な特徴
 
-- **デュアルフレームワーク対応**: 1 つのデザイン言語で Vue 3 と React 18/19 の両方をカバー
+- **4 フレームワーク対応**: 1 つのデザイン言語で Vue 3・React 18/19・Svelte 5・Angular をカバー（Next.js もファーストクラス対応）
 - **超フラットなデザイン哲学**: 影や枠線のないミニマルな水彩スタイル
 - **Tree-shaking 対応**: 必要な分だけインポートしてバンドルサイズを最小化
 - **完全なアクセシビリティ**: キーボード操作、ARIA 属性、スクリーンリーダー対応
@@ -1158,6 +1194,24 @@ npm install @zeturn/watercolor-react @zeturn/watercolor-core
 
 \`\`\`bash
 npm install @zeturn/watercolor-vue @zeturn/watercolor-core
+\`\`\`
+
+#### Svelte プロジェクト
+
+\`\`\`bash
+npm install @zeturn/watercolor-svelte
+\`\`\`
+
+#### Angular プロジェクト
+
+\`\`\`bash
+npm install @zeturn/watercolor-angular
+\`\`\`
+
+#### Next.js プロジェクト
+
+\`\`\`bash
+npm install @zeturn/watercolor-next @zeturn/watercolor-core
 \`\`\`
 
 ### Node バージョン要件
@@ -1628,11 +1682,11 @@ watercolor/
     content: {
       intro: `## Qu'est-ce que Watercolor UI ?
 
-Watercolor UI est une bibliothèque de composants UI multi-frameworks, **moderne, minimaliste et au style aquarelle**, qui prend en charge à la fois **Vue 3.5+** et **React 18/19**.
+Watercolor UI est une bibliothèque de composants UI multi-frameworks, **moderne, minimaliste et au style aquarelle**, qui prend en charge 4 frameworks — **Vue 3.5+**, **React 18/19**, **Svelte 5** et **Angular** — avec un support **Next.js (App Router)** de premier ordre.
 
 ### Fonctionnalités clés
 
-- **Double framework** : un seul langage de conception couvrant Vue 3 et React 18/19
+- **4 frameworks** : un seul langage de conception couvrant Vue 3, React 18/19, Svelte 5 et Angular (support Next.js de premier ordre)
 - **Philosophie ultra-plate** : style aquarelle minimal sans ombres ni bordures
 - **Compatible Tree-shaking** : import à la demande pour réduire la taille du bundle
 - **Entièrement accessible** : navigation clavier, attributs ARIA, support lecteur d'écran
@@ -1686,6 +1740,24 @@ npm install @zeturn/watercolor-react @zeturn/watercolor-core
 
 \`\`\`bash
 npm install @zeturn/watercolor-vue @zeturn/watercolor-core
+\`\`\`
+
+#### Projet Svelte
+
+\`\`\`bash
+npm install @zeturn/watercolor-svelte
+\`\`\`
+
+#### Projet Angular
+
+\`\`\`bash
+npm install @zeturn/watercolor-angular
+\`\`\`
+
+#### Projet Next.js
+
+\`\`\`bash
+npm install @zeturn/watercolor-next @zeturn/watercolor-core
 \`\`\`
 
 ### Prérequis Node
@@ -2155,11 +2227,11 @@ Nous utilisons Conventional Commits :
     content: {
       intro: `## Was ist Watercolor UI?
 
-Watercolor UI ist eine **moderne, minimalistische, aquarellartige** Multi-Framework-UI-Komponentenbibliothek, die sowohl **Vue 3.5+** als auch **React 18/19** unterstützt.
+Watercolor UI ist eine **moderne, minimalistische, aquarellartige** Multi-Framework-UI-Komponentenbibliothek, die 4 Frameworks unterstützt — **Vue 3.5+**, **React 18/19**, **Svelte 5** und **Angular** — mit erstklassiger **Next.js (App Router)**-Unterstützung.
 
 ### Kernfunktionen
 
-- **Dual-Framework-Support**: Eine Designsprache für Vue 3 und React 18/19
+- **4-Framework-Support**: Eine Designsprache für Vue 3, React 18/19, Svelte 5 und Angular (erstklassige Next.js-Unterstützung)
 - **Ultra-flache Designphilosophie**: Minimaler Aquarellstil ohne Schatten oder Rahmen
 - **Tree-shaking-freundlich**: Bedarfsgerechter Import zur Minimierung der Bundle-Größe
 - **Vollständig barrierefrei**: Tastaturnavigation, ARIA-Attribute, Screenreader-Support
@@ -2213,6 +2285,24 @@ npm install @zeturn/watercolor-react @zeturn/watercolor-core
 
 \`\`\`bash
 npm install @zeturn/watercolor-vue @zeturn/watercolor-core
+\`\`\`
+
+#### Svelte-Projekt
+
+\`\`\`bash
+npm install @zeturn/watercolor-svelte
+\`\`\`
+
+#### Angular-Projekt
+
+\`\`\`bash
+npm install @zeturn/watercolor-angular
+\`\`\`
+
+#### Next.js-Projekt
+
+\`\`\`bash
+npm install @zeturn/watercolor-next @zeturn/watercolor-core
 \`\`\`
 
 ### Node-Version
