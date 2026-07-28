@@ -3,7 +3,8 @@
 // updates the document <title> / meta / canonical per route at runtime
 // (this is a client-rendered SPA, so meta is managed in JS).
 
-import { useEffect, useLocation } from 'react'
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import {
   LANG_TO_PATH,
   LANG_TO_HREFLANG,
