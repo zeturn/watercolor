@@ -1,4 +1,4 @@
-import { createSignal, createEffect, createMemo, onMount, onCleanup, useId, Show, For, Index } from 'solid-js'
+import { createSignal, createEffect } from 'solid-js'
 import { Portal } from 'solid-js/web'
 
 
@@ -177,5 +177,5 @@ export default function Snackbar({
     </div>
   )
 
-  return createPortal(node, document.body)
+  return Portal(node, document.body)
 }

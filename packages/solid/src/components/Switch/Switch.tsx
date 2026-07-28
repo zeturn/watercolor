@@ -1,4 +1,4 @@
-import { createSignal, createEffect, createMemo, onMount, onCleanup, useId, Show, For, Index } from 'solid-js'
+import { useId } from '../../useId'
 
 import { useLocale } from '../../LocaleSolid'
 import './style.css' // 引入组件样式

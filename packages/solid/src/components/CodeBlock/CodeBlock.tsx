@@ -1,4 +1,4 @@
-import { createSignal, createEffect, createMemo, onMount, onCleanup, useId, Show, For, Index } from 'solid-js'
+import { createSignal, createMemo } from 'solid-js'
 
 import './style.css'
 import { copyCodeToClipboard, getDiffState, getDisplayLanguage, getVisibleLine, normalizeLanguage, tokenizeLine } from './utils.js'

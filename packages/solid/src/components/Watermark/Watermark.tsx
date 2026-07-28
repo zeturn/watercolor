@@ -1,4 +1,4 @@
-import { createSignal, createEffect, createMemo, onMount, onCleanup, useId, Show, For, Index } from 'solid-js'
+import { createSignal, createEffect, createMemo } from 'solid-js'
 
 import { defaultProps, createCanvasUrl, createWatermarkStyle } from './utils'
 import './style.css'

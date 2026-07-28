@@ -1,4 +1,5 @@
-import { createSignal, createEffect, createMemo, onMount, onCleanup, useId, Show, For, Index } from 'solid-js'
+import { createSignal, createEffect } from 'solid-js'
+import { useId } from '../../useId'
 
 import './style.css'
 import { getInputClasses } from './utils.js'

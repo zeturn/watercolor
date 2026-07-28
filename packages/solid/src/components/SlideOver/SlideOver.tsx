@@ -1,4 +1,3 @@
-import { createSignal, createEffect, createMemo, onMount, onCleanup, useId, Show, For, Index } from 'solid-js'
 
 import { Portal, useOverlayLayer } from '../../interactions'
 import { useLocale } from '../../LocaleSolid.tsx'

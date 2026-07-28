@@ -49,6 +49,9 @@ function transformJsx(src) {
   code = code.replace(/useCallback\(\s*([\s\S]*?),\s*\[[^\]]*\]\s*\)/g, '$1')
   code = code.replace(/useCallback\(/g, '(')
   code = code.replace(/useId\(/g, 'useId(')
+  // createPortal(...) 调用点重命名为 Solid 的 Portal 组件
+  const hadCreatePortal = /createPortal\(/.test(code)
+  code = code.replace(/createPortal\(/g, 'Portal(')
 
   // 4. JSX 属性修正
   code = code.replace(/className=/g, 'class=')
@@ -74,15 +77,30 @@ function transformJsx(src) {
     )
   }
 
-  // 7. 补充 solid-js / solid-js/web 的 import（按需）
-  const needsSolid = /createSignal|createEffect|createMemo|onMount|onCleanup|useId|Show|For|Index/.test(code)
-  const needsPortal = /createPortal/.test(code)
+  // 7. 按需精确补充 import：只引入真正用到的符号，避免 noUnusedLocals 大量告警。
+  const solidSymbols = ['createSignal', 'createEffect', 'createMemo', 'onMount', 'onCleanup', 'Show', 'For', 'Index', 'createContext', 'useContext']
+  const usedSolid = solidSymbols.filter((s) => new RegExp('\\b' + s + '\\b').test(code))
+  // cloneElement 来自 solid-js/web（interactions 不重新导出它，不会冲突）
+  const usedCloneElement = /\bcloneElement\b/.test(code)
+  // createPortal 是 react-dom 的 API，转换后对应 solid-js/web 的 Portal 组件。
+  // 注意：interactions 模块自行导出了 Portal，已使用它的组件（HoverCard 等）不应
+  // 再从 solid-js/web 引入，否则会重复声明。所以仅在源码确实用到 react 的
+  // createPortal 时才补充 `import { Portal } from 'solid-js/web'`。
+  const usedCreatePortal = hadCreatePortal
+  const usedWeb = []
+  if (usedCloneElement) usedWeb.push('cloneElement')
+  if (usedCreatePortal) usedWeb.push('Portal')
+  // solid-js 当前版本不导出 useId，使用本地 shim（src/useId.ts）
+  const usedUseId = /\buseId\b/.test(code)
   let header = ''
-  if (needsSolid) {
-    header += "import { createSignal, createEffect, createMemo, onMount, onCleanup, useId, Show, For, Index } from 'solid-js'\n"
+  if (usedSolid.length) {
+    header += `import { ${usedSolid.join(', ')} } from 'solid-js'\n`
   }
-  if (needsPortal) {
-    header += "import { Portal } from 'solid-js/web'\n"
+  if (usedWeb.length) {
+    header += `import { ${usedWeb.join(', ')} } from 'solid-js/web'\n`
+  }
+  if (usedUseId) {
+    header += "import { useId } from '../../useId'\n"
   }
   if (header) code = header + code
 

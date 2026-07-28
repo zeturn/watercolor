@@ -1,4 +1,4 @@
-import { createSignal, createEffect, createMemo, onMount, onCleanup, useId, Show, For, Index } from 'solid-js'
+import { createSignal, createEffect } from 'solid-js'
 
 import { TypingAnimator } from './utils'
 import './style.css'
