@@ -10,7 +10,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core'
-import { useLocale } from '../../hooks'
+import { useLocale } from '../../hooks.js'
 
 @Component({
   selector: 'wc-video-player',

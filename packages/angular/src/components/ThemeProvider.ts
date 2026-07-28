@@ -16,7 +16,7 @@ import {
   loadProviderThemeConfig,
   resetThemeConfig,
 } from '@zeturn/watercolor-core'
-import { WC_THEME, type ThemeStore } from '../hooks'
+import { WC_THEME, type ThemeStore } from '../hooks.js'
 
 type ThemeMode = 'light' | 'dark' | 'system'
 type ResolvedThemeMode = 'light' | 'dark'

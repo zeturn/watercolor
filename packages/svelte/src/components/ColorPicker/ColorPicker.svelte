@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useLocale } from '../../hooks'
+  import { useLocale } from '../../hooks.js'
 
   let {
     value = $bindable('#ffffff'),

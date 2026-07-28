@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input, model, output } from '@angular/core'
-import { Input } from '../Input/Input'
+import { Input } from '../Input/Input.js'
 
 @Component({
   selector: 'wc-text-field',

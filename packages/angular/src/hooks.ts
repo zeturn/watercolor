@@ -1,5 +1,5 @@
 import { InjectionToken, inject } from '@angular/core'
-import { defaultLocaleMessages, type LocaleStore } from './locale'
+import { defaultLocaleMessages, type LocaleStore } from './locale.js'
 
 export interface ThemeStore {
   readonly mode: string

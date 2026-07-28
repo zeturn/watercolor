@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input, model, output } from '@angular/core'
-import { Radio } from './Radio'
+import { Radio } from './Radio.js'
 
 export interface RadioGroupOption {
   value: unknown

@@ -6,7 +6,7 @@ import {
   input,
   output,
 } from '@angular/core'
-import { getButtonClasses, handleButtonClick } from './utils'
+import { getButtonClasses, handleButtonClick } from './utils.js'
 
 @Component({
   selector: 'wc-button',

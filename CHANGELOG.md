@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.13] - 2026-07-28
+
+### Fixed
+- Fixed Angular package ESM output so relative imports resolve correctly in strict Node/module consumers.
+- Stopped the Svelte package root from importing CSS automatically; consumers can import `@zeturn/watercolor-svelte/theme.css` explicitly.
+- Added Svelte to the GitHub trusted-publishing release workflow.
+
 ## [1.2.12] - 2026-07-28
 
 ### Added

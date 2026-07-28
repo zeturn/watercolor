@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte'
-  import { useLocale } from '../../hooks'
+  import { useLocale } from '../../hooks.js'
 
   interface GalleryImage {
     id?: string | number

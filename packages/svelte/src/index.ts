@@ -1,21 +1,18 @@
-// 样式
-import './styles/index.css'
-
 export type * from './composition.js'
 
 // 主题工具 & 类型
-export * from './utils/theme'
+export * from './utils/theme.js'
 
 // 主题 Provider
 export { default as ThemeProvider } from './components/ThemeProvider.svelte'
-export { useTheme } from './hooks'
-export type { ThemeStore } from './hooks'
+export { useTheme } from './hooks.js'
+export type { ThemeStore } from './hooks.js'
 
 // 国际化 Provider
 export { default as LocaleProvider } from './components/LocaleProvider.svelte'
-export { useLocale } from './hooks'
-export { defaultLocaleMessages } from './locale'
-export type { LocaleStore, WatercolorLocaleMessages } from './locale'
+export { useLocale } from './hooks.js'
+export { defaultLocaleMessages } from './locale.js'
+export type { LocaleStore, WatercolorLocaleMessages } from './locale.js'
 
 // 按钮
 export { default as Button } from './components/Button/Button.svelte'
