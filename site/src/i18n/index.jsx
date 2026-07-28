@@ -6,7 +6,7 @@ import frFR from './locales/fr-FR'
 import deDE from './locales/de-DE'
 import esES from './locales/es-ES'
 import { compI18n } from '../data/componentsI18n'
-import { DEFAULT_LANG, PATH_TO_LANG, LANG_TO_PATH, isLangPath, toLangPath } from './langMap'
+import { DEFAULT_LANG, PATH_TO_LANG, LANG_TO_PATH, isLangPath, toLangPath, stripLang } from './langMap'
 
 const LOCALES = {
   'zh-CN': zhCN,
@@ -107,8 +107,9 @@ export function useLangPath() {
       if (/^(https?:)?\/\//.test(to) || to.startsWith('#') || to.startsWith('mailto:')) {
         return to
       }
-      const clean = to.startsWith('/') ? to : `/${to}`
-      return `/${langPath}${clean}`
+      // 先去掉可能已存在的语言前缀，避免重复叠加（如调用方已 localize 过）。
+      const clean = stripLang(to.startsWith('/') ? to : `/${to}`)
+      return `/${langPath}${clean || ''}`
     },
     [langPath],
   )
