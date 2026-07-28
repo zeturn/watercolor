@@ -1,0 +1,8 @@
+---
+import { Badge } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Badge client={client} {...props}>
+  <slot />
+</Badge>

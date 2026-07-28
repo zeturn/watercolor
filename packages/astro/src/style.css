@@ -1,0 +1,3 @@
+/* 主题与组件样式由 @zeturn/watercolor-react/style.css 提供。
+   该文件用于兼容 `@zeturn/watercolor-astro/style.css` 的引入路径。 */
+@import '@zeturn/watercolor-react/style.css';

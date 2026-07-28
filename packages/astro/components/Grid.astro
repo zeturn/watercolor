@@ -1,0 +1,8 @@
+---
+import { Grid } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Grid client={client} {...props}>
+  <slot />
+</Grid>

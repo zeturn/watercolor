@@ -1,0 +1,8 @@
+---
+import { Typography } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Typography client={client} {...props}>
+  <slot />
+</Typography>

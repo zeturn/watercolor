@@ -1,0 +1,8 @@
+---
+import { Accordion } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Accordion client={client} {...props}>
+  <slot />
+</Accordion>

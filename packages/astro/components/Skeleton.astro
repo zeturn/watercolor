@@ -1,0 +1,8 @@
+---
+import { Skeleton } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Skeleton client={client} {...props}>
+  <slot />
+</Skeleton>

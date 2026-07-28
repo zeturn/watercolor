@@ -1,0 +1,8 @@
+---
+import { Pagination } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Pagination client={client} {...props}>
+  <slot />
+</Pagination>

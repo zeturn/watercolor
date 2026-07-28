@@ -1,0 +1,45 @@
+{
+  "name": "@zeturn/watercolor-astro",
+  "version": "1.2.13",
+  "description": "First-class Astro support for Watercolor UI: integration + thin React component wrappers",
+  "type": "module",
+  "license": "ISC",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    },
+    "./integration": "./integration.mjs",
+    "./components/*": "./components/*",
+    "./style.css": "./src/style.css"
+  },
+  "files": [
+    "src",
+    "integration.mjs",
+    "components"
+  ],
+  "scripts": {
+    "build": "node -e \"console.log('astro package: integration.mjs + .astro wrappers need no build step')\""
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeturn/watercolor",
+    "directory": "packages/astro"
+  },
+  "peerDependencies": {
+    "@zeturn/watercolor-react": "1.2.13",
+    "astro": "^4.0.0 || ^5.0.0"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.0.0"
+  },
+  "devDependencies": {
+    "@zeturn/watercolor-react": "1.2.13",
+    "astro": "^5.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

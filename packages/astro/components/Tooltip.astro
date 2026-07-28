@@ -1,0 +1,8 @@
+---
+import { Tooltip } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Tooltip client={client} {...props}>
+  <slot />
+</Tooltip>

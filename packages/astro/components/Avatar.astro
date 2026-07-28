@@ -1,0 +1,8 @@
+---
+import { Avatar } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Avatar client={client} {...props}>
+  <slot />
+</Avatar>

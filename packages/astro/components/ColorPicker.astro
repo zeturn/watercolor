@@ -1,0 +1,8 @@
+---
+import { ColorPicker } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<ColorPicker client={client} {...props}>
+  <slot />
+</ColorPicker>

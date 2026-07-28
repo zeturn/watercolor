@@ -1,0 +1,8 @@
+---
+import { Blockquote } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Blockquote client={client} {...props}>
+  <slot />
+</Blockquote>

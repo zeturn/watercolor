@@ -1,0 +1,8 @@
+---
+import { CardActions } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<CardActions client={client} {...props}>
+  <slot />
+</CardActions>

@@ -1,0 +1,8 @@
+---
+import { Fab } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Fab client={client} {...props}>
+  <slot />
+</Fab>

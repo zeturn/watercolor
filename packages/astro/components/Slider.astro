@@ -1,0 +1,8 @@
+---
+import { Slider } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Slider client={client} {...props}>
+  <slot />
+</Slider>

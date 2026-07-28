@@ -1,0 +1,8 @@
+---
+import { Checkbox } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Checkbox client={client} {...props}>
+  <slot />
+</Checkbox>

@@ -1,0 +1,8 @@
+---
+import { Breadcrumb } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Breadcrumb client={client} {...props}>
+  <slot />
+</Breadcrumb>

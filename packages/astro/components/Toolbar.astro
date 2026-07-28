@@ -1,0 +1,8 @@
+---
+import { Toolbar } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Toolbar client={client} {...props}>
+  <slot />
+</Toolbar>

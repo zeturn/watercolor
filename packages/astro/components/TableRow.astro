@@ -1,0 +1,8 @@
+---
+import { TableRow } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<TableRow client={client} {...props}>
+  <slot />
+</TableRow>

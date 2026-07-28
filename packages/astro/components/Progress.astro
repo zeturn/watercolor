@@ -1,0 +1,8 @@
+---
+import { Progress } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Progress client={client} {...props}>
+  <slot />
+</Progress>

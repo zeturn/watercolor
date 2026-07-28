@@ -1,0 +1,8 @@
+---
+import { FormHelperText } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<FormHelperText client={client} {...props}>
+  <slot />
+</FormHelperText>

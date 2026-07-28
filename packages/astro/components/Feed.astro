@@ -1,0 +1,8 @@
+---
+import { Feed } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Feed client={client} {...props}>
+  <slot />
+</Feed>

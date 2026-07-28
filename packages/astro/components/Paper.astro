@@ -1,0 +1,8 @@
+---
+import { Paper } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Paper client={client} {...props}>
+  <slot />
+</Paper>

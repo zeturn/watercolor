@@ -1,0 +1,8 @@
+---
+import { Stack } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Stack client={client} {...props}>
+  <slot />
+</Stack>

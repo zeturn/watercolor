@@ -1,0 +1,8 @@
+---
+import { List } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<List client={client} {...props}>
+  <slot />
+</List>

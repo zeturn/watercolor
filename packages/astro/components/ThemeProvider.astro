@@ -1,0 +1,8 @@
+---
+import { ThemeProvider } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<ThemeProvider client={client} {...props}>
+  <slot />
+</ThemeProvider>

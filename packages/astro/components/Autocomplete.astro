@@ -1,0 +1,8 @@
+---
+import { Autocomplete } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Autocomplete client={client} {...props}>
+  <slot />
+</Autocomplete>

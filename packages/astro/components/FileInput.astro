@@ -1,0 +1,8 @@
+---
+import { FileInput } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<FileInput client={client} {...props}>
+  <slot />
+</FileInput>

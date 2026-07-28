@@ -1,0 +1,8 @@
+---
+import { HoverCard } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<HoverCard client={client} {...props}>
+  <slot />
+</HoverCard>

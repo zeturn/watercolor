@@ -1,0 +1,8 @@
+---
+import { Inline } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Inline client={client} {...props}>
+  <slot />
+</Inline>

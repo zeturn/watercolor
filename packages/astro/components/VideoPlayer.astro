@@ -1,0 +1,8 @@
+---
+import { VideoPlayer } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<VideoPlayer client={client} {...props}>
+  <slot />
+</VideoPlayer>

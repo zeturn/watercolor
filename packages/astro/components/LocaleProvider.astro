@@ -1,0 +1,8 @@
+---
+import { LocaleProvider } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<LocaleProvider client={client} {...props}>
+  <slot />
+</LocaleProvider>

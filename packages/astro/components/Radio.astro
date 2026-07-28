@@ -1,0 +1,8 @@
+---
+import { Radio } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Radio client={client} {...props}>
+  <slot />
+</Radio>

@@ -1,0 +1,8 @@
+---
+import { Chip } from '@zeturn/watercolor-react'
+const { client = 'load', ...props } = Astro.props
+---
+
+<Chip client={client} {...props}>
+  <slot />
+</Chip>
