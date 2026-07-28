@@ -65,12 +65,12 @@ try {
     if (packageDirectory !== 'watercolor-ui') {
       if (!fileNames.has('dist/index.d.ts')) fail(`${pkg.name}: tarball is missing dist/index.d.ts`)
       const hasEsmBuild = [...fileNames].some((file) => /^dist\/.*\.es\.js$/.test(file))
-        || (packageDirectory === 'svelte' && fileNames.has('dist/index.js'))
+        || ((packageDirectory === 'svelte' || packageDirectory === 'angular') && fileNames.has('dist/index.js'))
       if (!hasEsmBuild) fail(`${pkg.name}: tarball has no ESM build`)
     }
   }
 
-  for (const packageDirectory of ['core', 'react', 'vue']) {
+  for (const packageDirectory of ['core', 'react', 'vue', 'angular']) {
     const dist = path.join(root, 'packages', packageDirectory, 'dist')
     for (const file of fs.readdirSync(dist, { recursive: true })) {
       if (typeof file !== 'string' || !file.endsWith('.d.ts')) continue

@@ -5,7 +5,8 @@
     "react",
     "vue",
     "next",
-    "svelte"
+    "svelte",
+    "angular"
   ],
   "publicExports": [
     "Accordion",

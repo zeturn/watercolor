@@ -5,15 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.2.12] - 2026-07-28
 
 ### Added
+- Added a first-class `@zeturn/watercolor-angular` package for **Angular** (standalone components + signals), implementing the complete public component set (80+ exports) with `input()`/`model()`/`output()` signal APIs, `ThemeProvider`/`LocaleProvider` injection providers, and `useTheme`/`useLocale` helpers.
+- Added a runnable `examples/angular-ssr` Angular SSR example with pre-paint theming via `createThemeInitScript` injected in `server.ts`.
+- Added `angular` to the cross-framework API parity manifest (`api-manifest.json`) so the Angular package is validated against the shared public exports.
+- Wired `test:angular`, `lint`, and `typecheck` for `packages/angular` into the root scripts.
 - Added a first-class `@zeturn/watercolor-svelte` package for **Svelte 5 / SvelteKit**, implementing the complete public component set (80+ exports) with Svelte 5 runes, `ThemeProvider`/`LocaleProvider` context providers, and `useTheme`/`useLocale` helpers.
 - Added a runnable `examples/svelte-ssr` SvelteKit example with SSR pre-paint theming via `createThemeInitScript`.
 - Added `svelte` to the cross-framework API parity manifest (`api-manifest.json`) so the Svelte package is validated against the shared public exports.
 - Wired `test:svelte`, `lint`, and `typecheck` for `packages/svelte` into the root scripts.
 
 ### Fixed
+- Updated `check-api-parity.mjs` Vue typed-contract markers to accept the new `vue-tsc` declaration format (`ExtractPropTypes<...>`-based) alongside the legacy `$props:`/`$emit:` markers.
 - Fixed Vue declaration generation (`*.vue.d.ts`) under `vite-plugin-dts@5` by explicitly opting into the `vue` processor and installing the `@vue/language-core` peer, restoring the `audit:api` typed-contract checks.
 
 ## [1.2.8] - 2026-07-22
