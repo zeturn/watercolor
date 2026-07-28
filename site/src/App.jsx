@@ -67,7 +67,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<RootRedirect />} />
-        <Route path="/:lang" element={<LangLayout />} />
+        <Route path="/:lang/*" element={<LangLayout />} />
         <Route path="*" element={<RootRedirect />} />
       </Routes>
     </Router>
