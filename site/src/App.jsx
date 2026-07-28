@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useParams } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import Home from './pages/Home'
 import Docs from './pages/Docs'
 import Components from './pages/Components'
@@ -50,6 +51,7 @@ function LangLayout() {
         {/* 未知子路径 → 回到该语言首页 */}
         <Route path="*" element={<Navigate to={`/${pathLang}`} replace />} />
       </Routes>
+      <Footer />
     </>
   )
 }
