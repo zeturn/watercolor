@@ -6,6 +6,7 @@ import frFR from './locales/fr-FR'
 import deDE from './locales/de-DE'
 import esES from './locales/es-ES'
 import { compI18n } from '../data/componentsI18n'
+import { DEFAULT_LANG, PATH_TO_LANG, LANG_TO_PATH, isLangPath, toLangPath } from './langMap'
 
 const LOCALES = {
   'zh-CN': zhCN,
@@ -16,7 +17,6 @@ const LOCALES = {
   'es-ES': esES,
 }
 
-const DEFAULT_LANG = 'zh-CN'
 const STORAGE_KEY = 'wc-site-lang'
 
 function detectLang() {
@@ -32,6 +32,12 @@ function detectLang() {
   if (nav.startsWith('es')) return 'es-ES'
   if (nav.startsWith('en')) return 'en-US'
   return DEFAULT_LANG
+}
+
+// 根据浏览器/存储/默认，挑一个语言前缀，用于首次访问 `/` 时的重定向。
+export function detectInitialLangPath() {
+  const lang = detectLang()
+  return toLangPath(lang)
 }
 
 function resolve(dict, key) {
@@ -89,3 +95,25 @@ export function useComponentText() {
     },
   }
 }
+
+// 返回当前语言前缀与 localize()，用于把站内绝对路径拼上语言前缀。
+export function useLangPath() {
+  const { lang } = useI18n()
+  const langPath = toLangPath(lang)
+  const localize = useCallback(
+    (to) => {
+      if (!to) return `/${langPath}`
+      if (typeof to !== 'string') return to
+      if (/^(https?:)?\/\//.test(to) || to.startsWith('#') || to.startsWith('mailto:')) {
+        return to
+      }
+      const clean = to.startsWith('/') ? to : `/${to}`
+      return `/${langPath}${clean}`
+    },
+    [langPath],
+  )
+  return { langPath, localize }
+}
+
+export { isLangPath, PATH_TO_LANG, LANG_TO_PATH }
+

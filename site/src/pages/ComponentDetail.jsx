@@ -1,16 +1,18 @@
 import { useEffect } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
 import ComponentPreview from '../components/ComponentPreview'
 import { Menu, Breadcrumb, Badge, Card, Table, Button, List, ListItem, ListItemText } from '@zeturn/watercolor-react'
 import { getComponentById, getAdjacentComponents, allComponents } from '../data/components'
-import { useI18n, useComponentText } from '../i18n'
+import { useI18n, useComponentText, useLangPath } from '../i18n'
+import LangLink from '../components/LangLink'
 import { useDocumentMeta } from '../seo'
 
 export default function ComponentDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { t } = useI18n()
+  const { localize } = useLangPath()
   const { desc, propDesc } = useComponentText()
   const component = getComponentById(id)
 
@@ -30,7 +32,7 @@ export default function ComponentDetail() {
         <div className="text-6xl">🔍</div>
         <h1 className="text-2xl font-bold">{t('compDetail.notFoundTitle')}</h1>
         <p className="text-base-content/50">{t('compDetail.notFoundDesc', { id })}</p>
-        <Link to="/components"><Button size="sm" variant="primary">{t('compDetail.backToLib')}</Button></Link>
+        <LangLink to="/components"><Button size="sm" variant="primary">{t('compDetail.backToLib')}</Button></LangLink>
       </div>
     )
   }
@@ -44,9 +46,9 @@ export default function ComponentDetail() {
         <div className="container mx-auto px-4 lg:px-8 py-4">
           <Breadcrumb
             items={[
-              { label: t('compDetail.breadcrumbHome'), href: '/' },
-              { label: t('compDetail.breadcrumbLib'), href: '/components' },
-              { label: component.category, href: `/components?category=${component.category}` },
+              { label: t('compDetail.breadcrumbHome'), href: localize('/') },
+              { label: t('compDetail.breadcrumbLib'), href: localize('/components') },
+              { label: component.category, href: localize(`/components?category=${component.category}`) },
               { label: component.name, current: true },
             ]}
             onItemClick={(item) => {
@@ -185,7 +187,7 @@ import ${component.name} from '${component.importPath}'`}</code></pre>
                         key={c.id}
                         button
                         selected={c.id === id}
-                        onClick={() => navigate(`/components/${c.id}`)}
+                        onClick={() => navigate(localize(`/components/${c.id}`))}
                       >
                         <ListItemText primary={c.name} />
                       </ListItem>
@@ -199,16 +201,16 @@ import ${component.name} from '${component.importPath}'`}</code></pre>
         {/* Prev / Next navigation */}
         <div className="flex justify-between items-center mt-12 pt-8 border-t border-base-300">
           {prev ? (
-            <Link to={`/components/${prev.id}`}><Button size="sm" buttonStyle="text" className="gap-2">
+            <LangLink to={`/components/${prev.id}`}><Button size="sm" buttonStyle="text" className="gap-2">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/></svg>
               {prev.name}
-            </Button></Link>
+            </Button></LangLink>
           ) : <span />}
           {next ? (
-            <Link to={`/components/${next.id}`}><Button size="sm" buttonStyle="text" className="gap-2">
+            <LangLink to={`/components/${next.id}`}><Button size="sm" buttonStyle="text" className="gap-2">
               {next.name}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
-            </Button></Link>
+            </Button></LangLink>
           ) : <span />}
         </div>
       </div>

@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
 import Markdown from '../components/Markdown'
 import { Button, Badge, List, ListItem, ListItemText } from '@zeturn/watercolor-react'
 import { getDocSections, getAllDocSections, getDocById, getAdjacentDocs } from '../data/docs'
-import { useI18n } from '../i18n'
+import { useI18n, useLangPath } from '../i18n'
+import LangLink from '../components/LangLink'
 import { useDocumentMeta } from '../seo'
 
 export default function Docs() {
   const { t, lang } = useI18n()
+  const { localize } = useLangPath()
   const { sectionId } = useParams()
   const navigate = useNavigate()
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -35,7 +37,7 @@ export default function Docs() {
           <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
         </div>
         <h1 className="text-2xl font-bold">{t('docs.notFound')}</h1>
-        <Link to="/docs"><Button size="sm" variant="primary">{t('docs.backHome')}</Button></Link>
+        <LangLink to="/docs"><Button size="sm" variant="primary">{t('docs.backHome')}</Button></LangLink>
       </div>
     )
   }
@@ -68,7 +70,7 @@ export default function Docs() {
                       key={item.id}
                       button
                       selected={activeId === item.id}
-                      onClick={() => { navigate(`/docs/${item.id}`); setSidebarOpen(false) }}
+                      onClick={() => { navigate(localize(`/docs/${item.id}`)); setSidebarOpen(false) }}
                     >
                       <ListItemText primary={item.label} />
                     </ListItem>
@@ -99,16 +101,16 @@ export default function Docs() {
             {/* Prev / Next navigation */}
             <div className="mt-16 pt-8 border-t border-base-300 flex justify-between items-center">
               {prev ? (
-                <Link to={`/docs/${prev.id}`}><Button size="sm" buttonStyle="text" className="gap-2">
+                <LangLink to={`/docs/${prev.id}`}><Button size="sm" buttonStyle="text" className="gap-2">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/></svg>
                   {prev.label}
-                </Button></Link>
+                </Button></LangLink>
               ) : <span />}
               {next ? (
-                <Link to={`/docs/${next.id}`}><Button size="sm" buttonStyle="text" className="gap-2">
+                <LangLink to={`/docs/${next.id}`}><Button size="sm" buttonStyle="text" className="gap-2">
                   {next.label}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
-                </Button></Link>
+                </Button></LangLink>
               ) : <span />}
             </div>
           </ScrollReveal>

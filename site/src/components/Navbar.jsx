@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { AppBar, Toolbar, Typography } from '@zeturn/watercolor-react'
-import { useI18n } from '../i18n'
+import { useI18n, useLangPath } from '../i18n'
+import LangLink from './LangLink'
 import LanguageSwitcher from './LanguageSwitcher'
 
 export default function Navbar() {
   const location = useLocation()
   const { t } = useI18n()
+  const { localize } = useLangPath()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -37,22 +39,23 @@ export default function Navbar() {
     >
       <Toolbar className="container mx-auto px-4 lg:px-8" style={{ width: '100%' }}>
         {/* Left: Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
+        <LangLink to="/" className="flex items-center gap-2 group">
           <Typography variant="h6" style={{ fontWeight: 700 }}>
             Water<span style={{ color: 'var(--wc-color-primary, #6366f1)' }}>color</span> UI
           </Typography>
-        </Link>
+        </LangLink>
 
         <div style={{ flexGrow: 1 }} />
 
         {/* Center: Navigation */}
         <div className={`${isMenuOpen ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row gap-1 absolute lg:static top-full left-0 w-full lg:w-auto bg-base-100 lg:bg-transparent shadow-lg lg:shadow-none p-4 lg:p-0 z-40`}>
           {navItems.map((item) => {
+            const to = localize(item.path)
             const isActive = item.path === '/'
-              ? location.pathname === '/'
-              : location.pathname.startsWith(item.path)
+              ? location.pathname === to
+              : location.pathname.startsWith(to)
             return (
-              <Link
+              <LangLink
                 key={item.path}
                 to={item.path}
                 className={`text-sm px-3 py-1.5 rounded-lg transition-colors ${isActive
@@ -61,7 +64,7 @@ export default function Navbar() {
                   }`}
               >
                 {item.label}
-              </Link>
+              </LangLink>
             )
           })}
         </div>

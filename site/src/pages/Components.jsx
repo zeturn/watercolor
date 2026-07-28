@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
 import { Button, Badge, Input, Card } from '@zeturn/watercolor-react'
 import { componentCategories, allComponents } from '../data/components'
-import { useI18n, useComponentText } from '../i18n'
+import { useI18n, useComponentText, useLangPath } from '../i18n'
 import { useDocumentMeta } from '../seo'
 
 /* ── 组件线框预览图标（灰色扁平轮廓，无阴影）── */
@@ -84,6 +84,7 @@ function ComponentPreviewIcon({ id }) {
 
 export default function Components() {
   const { t } = useI18n()
+  const { localize } = useLangPath()
   const { desc } = useComponentText()
   useDocumentMeta({
     title: '组件库',
@@ -246,7 +247,7 @@ export default function Components() {
         <Card
           interactive
           variant="outlined"
-          onClick={() => navigate(`/components/${comp.id}`)}
+          onClick={() => navigate(localize(`/components/${comp.id}`))}
           className="component-card group h-full cursor-pointer"
         >
           <div className="bg-base-200/60 p-4 flex items-center justify-center min-h-[140px]">
@@ -282,7 +283,7 @@ export default function Components() {
         <Card
           interactive
           variant="outlined"
-          onClick={() => navigate(`/components/${comp.id}`)}
+          onClick={() => navigate(localize(`/components/${comp.id}`))}
           className="group hover:border-primary/30 transition-colors p-4 flex items-center gap-4 cursor-pointer"
         >
           <div className="w-12 h-12 rounded-xl bg-base-200/60 flex items-center justify-center shrink-0 overflow-hidden">

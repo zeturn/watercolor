@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import LangLink from '../components/LangLink'
 import ScrollReveal, { useScrollProgress } from '../components/ScrollReveal'
 import { Copy, Button, Card, NumberAnimation, Feature } from '@zeturn/watercolor-react'
 import { useI18n } from '../i18n'
@@ -91,7 +91,7 @@ function HeroSection() {
 
             {/* CTA buttons */}
             <div className="flex flex-wrap gap-4">
-              <Link to="/components">
+              <LangLink to="/components">
                 <Button
                   size="lg"
                   variant="primary"
@@ -101,7 +101,7 @@ function HeroSection() {
                 >
                   {t('hero.browse')}
                 </Button>
-              </Link>
+              </LangLink>
               <a href="https://github.com/zeturn/watercolor" target="_blank" rel="noopener noreferrer">
                 <Button
                   size="lg"
@@ -466,7 +466,7 @@ function CTASection() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <Link to="/docs">
+              <LangLink to="/docs">
                 <Button
                   size="lg"
                   variant="primary"
@@ -479,12 +479,12 @@ function CTASection() {
                 >
                   {t('cta.quickStart')}
                 </Button>
-              </Link>
-              <Link to="/components">
+              </LangLink>
+              <LangLink to="/components">
                 <Button size="lg" buttonStyle="outlined">
                   {t('cta.explore')}
                 </Button>
-              </Link>
+              </LangLink>
             </div>
 
             <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-base-200/80 backdrop-blur">
@@ -525,10 +525,10 @@ function Footer() {
           <div>
             <h4 className="font-semibold mb-3">{t('footer.docs')}</h4>
             <ul className="space-y-2 text-sm text-base-content/60">
-              <li><Link to="/docs" className="hover:text-primary transition-colors">{t('footer.quickStart')}</Link></li>
-              <li><Link to="/docs" className="hover:text-primary transition-colors">{t('footer.install')}</Link></li>
-              <li><Link to="/docs" className="hover:text-primary transition-colors">{t('footer.theming')}</Link></li>
-              <li><Link to="/docs" className="hover:text-primary transition-colors">{t('footer.api')}</Link></li>
+              <li><LangLink to="/docs" className="hover:text-primary transition-colors">{t('footer.quickStart')}</LangLink></li>
+              <li><LangLink to="/docs" className="hover:text-primary transition-colors">{t('footer.install')}</LangLink></li>
+              <li><LangLink to="/docs" className="hover:text-primary transition-colors">{t('footer.theming')}</LangLink></li>
+              <li><LangLink to="/docs" className="hover:text-primary transition-colors">{t('footer.api')}</LangLink></li>
             </ul>
           </div>
           

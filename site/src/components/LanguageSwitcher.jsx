@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useI18n } from '../i18n'
+import { toLangPath, stripLang } from '../i18n/langMap'
 import { FlagCN, FlagUS, FlagJP, FlagFR, FlagDE, FlagES } from './Flags'
 
 const LANGUAGES = [
@@ -13,8 +15,18 @@ const LANGUAGES = [
 
 export default function LanguageSwitcher() {
   const { lang, setLang } = useI18n()
+  const navigate = useNavigate()
+  const location = useLocation()
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
+
+  // 切换语言：更新 i18n 状态并同步 URL 前缀，保留当前路径与查询参数。
+  const handleSelect = (code) => {
+    setLang(code)
+    const rest = stripLang(location.pathname)
+    navigate(`/${toLangPath(code)}${rest}${location.search}`, { replace: false })
+    setOpen(false)
+  }
 
   useEffect(() => {
     if (!open) return
@@ -68,7 +80,7 @@ export default function LanguageSwitcher() {
               <li key={code} role="option" aria-selected={active}>
                 <button
                   type="button"
-                  onClick={() => { setLang(code); setOpen(false) }}
+                  onClick={() => handleSelect(code)}
                   className={`w-full flex items-center gap-3 px-3 py-2 text-sm text-left transition-colors hover:bg-base-200 ${active ? 'text-primary font-medium' : 'text-base-content'}`}
                 >
                   <span className="inline-block w-6 shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/10 leading-none">

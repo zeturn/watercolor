@@ -9,7 +9,8 @@
     "sync-skills": "node scripts/prepare-watercolor.mjs --skill-only",
     "prebuild": "node scripts/prepare-watercolor.mjs",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sitemap": "node scripts/gen-sitemap.mjs"
   },
   "dependencies": {
     "@zeturn/watercolor-react": "1.2.11",
