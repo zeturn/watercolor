@@ -14,7 +14,13 @@ import { isLangPath, PATH_TO_LANG, toLangPath, stripLang } from './i18n/langMap'
 // 依据浏览器/存储偏好重定向到对应语言前缀路径，保留原 path。
 function RootRedirect() {
   const location = useLocation()
-  const target = `/${detectInitialLangPath()}${location.pathname === '/' ? '' : location.pathname}${location.search}`
+  const pathname = location.pathname
+  // 防御：若路径已带合法语言前缀（或为空），不再重定向，避免重复叠加前缀导致死循环。
+  const seg = pathname.split('/')[1] || ''
+  if (isLangPath(seg)) {
+    return <Navigate to={`${pathname}${location.search}`} replace />
+  }
+  const target = `/${detectInitialLangPath()}${pathname === '/' ? '' : pathname}${location.search}`
   return <Navigate to={target} replace />
 }
 
@@ -58,7 +64,7 @@ function LangLayout() {
 
 function App() {
   return (
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <Routes>
         <Route path="/" element={<RootRedirect />} />
         <Route path="/:lang" element={<LangLayout />} />
