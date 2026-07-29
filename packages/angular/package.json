@@ -48,7 +48,7 @@
     "@angular/compiler-cli": "^21.0.0",
     "@angular/core": "^21.0.0",
     "rxjs": "^7.8.1",
-    "typescript": "^5.9.3",
+    "typescript": "^7.0.2",
     "vitest": "^3.2.4",
     "zone.js": "^0.15.0"
   }
