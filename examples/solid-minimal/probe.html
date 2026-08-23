@@ -1,0 +1,7 @@
+<div id="root"></div>
+<script type="module">
+  import * as m from '@zeturn/watercolor-solid'
+  const wanted = ['Accordion','Alert','AppBar','Autocomplete','Avatar','Badge','Banner','Blockquote','Box','Breadcrumb','Button','Card','CardActions','CardContent','Checkbox','Chip','CircularProgress','CodeBlock','ColorPicker','Container','Copy','DatePicker','Fab','Feature','Feed','FileInput','FormControl','FormControlLabel','FormGroup','FormHelperText','Grid','HoverCard','Icon','IconButton','ImageGallery','Inline','Input','List','ListItem','ListItemIcon','ListItemText','LocaleProvider','Menu','Modal','NumberAnimation','Page','Pagination','Paper','Popover','PricingTable','Progress','Radio','RadioGroup','Rating','Select','Skeleton','SlideOver','Slider','Snackbar','Split','Stack','Status','Switch','Table','TableBody','TableCell','TableHead','TableRow','Tabs','TextField','ThemeProvider','Toolbar','Tooltip','TypingText','Typography','VerificationCodeInput','VideoPlayer','Watermark']
+  const bad = wanted.filter(k => typeof m[k] !== 'function')
+  console.log('PROBE-RESULT:' + JSON.stringify(bad.map(k => [k, typeof m[k]])))
+</script>

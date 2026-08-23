@@ -47,8 +47,8 @@ const Select = ({
 
   useOverlayLayer({
     open: isOpen,
-    elementRef: optionsRef,
-    refs: [selectRef],
+    elementRef: () => optionsRef,
+    refs: () => [selectRef],
     closeOnEscape: true,
     closeOnPointerDownOutside: true,
     onEscapeKeyDown: closeDropdown,

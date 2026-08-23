@@ -75,8 +75,8 @@ const Autocomplete = ({
 
   useOverlayLayer({
     open: isOpen,
-    elementRef: dropdownRef,
-    refs: [autocompleteRef],
+    elementRef: () => dropdownRef,
+    refs: () => [autocompleteRef],
     closeOnEscape: true,
     closeOnPointerDownOutside: true,
     onEscapeKeyDown: closeDropdown,
@@ -93,9 +93,9 @@ const Autocomplete = ({
     )
   }
 
-  const filteredOptions = filterOptions 
-    ? filterOptions(options, searchQuery)
-    : defaultFilterOptions(options, searchQuery)
+  const filteredOptions = () => (filterOptions
+    ? filterOptions(options, searchQuery())
+    : defaultFilterOptions(options, searchQuery()))
 
   const isSelected = (option) => {
     const optionValue = getValue(option)
@@ -124,14 +124,14 @@ const Autocomplete = ({
     classes.push(`wc-autocomplete__container--${size}`)
     if (disabled) classes.push('wc-autocomplete__container--disabled')
     if (error) classes.push('wc-autocomplete__container--error')
-    if (isOpen) classes.push('wc-autocomplete__container--open')
+    if (isOpen()) classes.push('wc-autocomplete__container--open')
     return classes.join(' ')
   }
 
   const getOptionClasses = (option, index) => {
     const classes = ['wc-autocomplete__option']
     if (isSelected(option)) classes.push('wc-autocomplete__option--selected')
-    if (index === highlightedIndex) classes.push('wc-autocomplete__option--highlighted')
+    if (index === highlightedIndex()) classes.push('wc-autocomplete__option--highlighted')
     if (option.disabled) classes.push('wc-autocomplete__option--disabled')
     return classes.join(' ')
   }
@@ -196,19 +196,19 @@ const Autocomplete = ({
   }
 
   const handleKeyDown = (e) => {
-    if (!isOpen && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+    if (!isOpen() && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
       setIsOpen(true)
       e.preventDefault()
       return
     }
 
-    if (!isOpen || filteredOptions.length === 0) return
+    if (!isOpen() || filteredOptions().length === 0) return
 
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault()
         setHighlightedIndex(prev => 
-          Math.min(prev + 1, filteredOptions.length - 1)
+          Math.min(prev + 1, filteredOptions().length - 1)
         )
         break
       case 'ArrowUp':
@@ -217,8 +217,8 @@ const Autocomplete = ({
         break
       case 'Enter':
         e.preventDefault()
-        if (highlightedIndex >= 0 && highlightedIndex < filteredOptions.length) {
-          handleOptionClick(filteredOptions[highlightedIndex])
+        if (highlightedIndex() >= 0 && highlightedIndex() < filteredOptions().length) {
+          handleOptionClick(filteredOptions()[highlightedIndex()])
         }
         break
       case 'Escape':
@@ -249,7 +249,7 @@ const Autocomplete = ({
         {renderInput ? (
           renderInput({
             id: autocompleteId,
-            value: searchQuery,
+            value: searchQuery(),
             onChange: handleInputChange,
             onFocus: handleFocus,
             onBlur: handleBlur,
@@ -260,9 +260,9 @@ const Autocomplete = ({
             ref: inputRef,
             role: 'combobox',
             'aria-autocomplete': 'list',
-            'aria-expanded': isOpen,
+            'aria-expanded': isOpen(),
             'aria-controls': `${autocompleteId}-options`,
-            'aria-activedescendant': highlightedIndex >= 0 ? `${autocompleteId}-option-${highlightedIndex()}` : undefined
+            'aria-activedescendant': highlightedIndex() >= 0 ? `${autocompleteId}-option-${highlightedIndex()}` : undefined
           })
         ) : (
           <input
@@ -283,12 +283,12 @@ const Autocomplete = ({
             aria-autocomplete="list"
             aria-expanded={isOpen()}
             aria-controls={`${autocompleteId}-options`}
-            aria-activedescendant={highlightedIndex >= 0 ? `${autocompleteId}-option-${highlightedIndex()}` : undefined}
+            aria-activedescendant={highlightedIndex() >= 0 ? `${autocompleteId}-option-${highlightedIndex()}` : undefined}
           />
         )}
         
         <div class="wc-autocomplete__indicators">
-          {clearable && searchQuery && (
+          {clearable && searchQuery() && (
             <button
               type="button"
               class="wc-autocomplete__clear"
@@ -302,7 +302,7 @@ const Autocomplete = ({
               </svg>
             </button>
           )}
-          <div class={`wc-autocomplete__arrow${isOpen && filteredOptions.length > 0 ? ' wc-autocomplete__arrow--open' : ''}`}>
+          <div class={`wc-autocomplete__arrow${isOpen() && filteredOptions().length > 0 ? ' wc-autocomplete__arrow--open' : ''}`}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="6,9 12,15 18,9" />
             </svg>
@@ -310,15 +310,15 @@ const Autocomplete = ({
         </div>
       </div>
 
-      {isOpen && searchQuery.length >= minSearchLength && (
+      {isOpen() && searchQuery().length >= minSearchLength && (
         <div ref={dropdownRef} class="wc-autocomplete__dropdown" id={`${autocompleteId}-options`} role="listbox">
-          {filteredOptions.length === 0 ? (
+          {filteredOptions().length === 0 ? (
             <div class="wc-autocomplete__no-options">
               {noOptionsText}
             </div>
           ) : (
             <div class="wc-autocomplete__options">
-              {filteredOptions.map((option, index) => (
+              {filteredOptions().map((option, index) => (
                 <div
                   key={getValue(option) || index}
                   id={`${autocompleteId}-option-${index}`}

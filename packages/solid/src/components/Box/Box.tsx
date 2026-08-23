@@ -1,3 +1,4 @@
+import { Dynamic } from 'solid-js/web'
 
 import './style.css'
 import { getBoxClasses, getBoxStyles } from './utils.js'
@@ -46,8 +47,8 @@ export default function Box({
   }
 
   return (
-    <Comp class={boxClasses} style={boxStyles} {...rest}>
+    <Dynamic component={Comp} class={boxClasses} style={boxStyles} {...rest}>
       {children}
-    </Comp>
+    </Dynamic>
   )
 }

@@ -1,4 +1,4 @@
-
+import { Dynamic } from 'solid-js/web'
 import PropTypes from 'prop-types'
 import {
   COMPOSITION_ALIGNS,
@@ -17,7 +17,8 @@ const Inline = ({
   children,
   ...props
 }) => (
-  <Component
+  <Dynamic
+    component={Component}
     class={['wc-inline', className].filter(Boolean).join(' ')}
     data-gap={gap}
     data-align={align}
@@ -26,7 +27,7 @@ const Inline = ({
     {...props}
   >
     {children}
-  </Component>
+  </Dynamic>
 )
 
 Inline.displayName = 'Inline'

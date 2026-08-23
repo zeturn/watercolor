@@ -92,9 +92,9 @@ const NumberAnimation = ({
     return `${prefix}${formatted}${suffix}`
   }
 
-  const classes = [
+  const classes = () => [
     'wc-number-animation',
-    isAnimating ? 'wc-number-animation--playing' : '',
+    isAnimating() ? 'wc-number-animation--playing' : '',
     easing && ['ease-in', 'ease-out', 'ease-in-out'].includes(easing) ? `wc-number-animation--${easing}` : '',
     className
   ]
@@ -102,8 +102,8 @@ const NumberAnimation = ({
     .join(' ')
 
   return (
-    <span class={classes} style={style} {...rest}>
-      {formatNumber(value)}
+    <span class={classes()} style={style} {...rest}>
+      {formatNumber(value())}
     </span>
   )
 }

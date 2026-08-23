@@ -1,4 +1,5 @@
 import { createSignal, createEffect } from 'solid-js'
+import { Dynamic } from 'solid-js/web'
 import { useId } from '../../useId'
 
 import './style.css'
@@ -118,7 +119,8 @@ const Input = ({
           </div>
         )}
         
-        <InputComponent
+        <Dynamic
+          component={InputComponent}
           ref={inputRef}
           class={getInputClasses()}
           style={getInputStyles()}

@@ -1,4 +1,5 @@
 import { useContext } from 'solid-js'
+import { Dynamic } from 'solid-js/web'
 
 import { ListContext } from './List.tsx'
 import { getListItemClasses } from './utils.js'
@@ -35,14 +36,15 @@ const ListItem = ({
   const Component = ComponentProp || (button ? 'button' : 'div')
 
   return (
-    <Component
+    <Dynamic
+      component={Component}
       role="listitem"
       class={itemClasses}
       disabled={button && disabled}
       {...rest}
     >
       {children}
-    </Component>
+    </Dynamic>
   )
 }
 

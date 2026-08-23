@@ -48,8 +48,8 @@ export function DatePicker({
 
   useOverlayLayer({
     open: isOpen,
-    elementRef: dropdownRef,
-    refs: [wrapperRef],
+    elementRef: () => dropdownRef,
+    refs: () => [wrapperRef],
     closeOnEscape: true,
     closeOnPointerDownOutside: true,
     onEscapeKeyDown: () => setOpen(false),

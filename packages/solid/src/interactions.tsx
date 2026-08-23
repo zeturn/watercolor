@@ -2,6 +2,13 @@ import { onMount, onCleanup, createSignal, createEffect, type JSX } from 'solid-
 import { Portal as SolidPortal } from 'solid-js/web'
 import { applyFloatingPosition, createOverlayLayer } from '@zeturn/watercolor-core'
 
+/** Accepts plain values, signal accessors, or getters and returns the value. */
+type MaybeAccessor<T> = T | (() => T)
+
+function access<T>(value: MaybeAccessor<T>): T {
+  return typeof value === 'function' ? (value as () => T)() : value
+}
+
 export function Portal(props: { children: JSX.Element; target?: string | HTMLElement | null }) {
   const mount = () => {
     if (typeof props.target === 'string') return document.querySelector(props.target) || document.body
@@ -11,9 +18,9 @@ export function Portal(props: { children: JSX.Element; target?: string | HTMLEle
 }
 
 export function useOverlayLayer(opts: {
-  open?: boolean
-  elementRef?: any
-  refs?: any[]
+  open?: MaybeAccessor<boolean>
+  elementRef?: MaybeAccessor<any>
+  refs?: MaybeAccessor<any[]>
   modal?: boolean
   lockScroll?: boolean
   restoreFocus?: boolean
@@ -28,12 +35,13 @@ export function useOverlayLayer(opts: {
 
   onMount(() => {
     createEffect(() => {
-      const open = opts.open
-      if (open) {
+      const open = access(opts.open)
+      const element = access(opts.elementRef)
+      if (open && element) {
         if (!layer) {
           layer = createOverlayLayer({
-            element: opts.elementRef,
-            refs: (opts.refs || []).map((r) => r).filter(Boolean),
+            element,
+            refs: (access(opts.refs) || []).map((r) => access(r)).filter(Boolean),
             modal: opts.modal,
             lockScroll: opts.lockScroll,
             restoreFocus: opts.restoreFocus,
@@ -61,9 +69,9 @@ export function useOverlayLayer(opts: {
 }
 
 export function useFloatingPosition(opts: {
-  open?: boolean
-  anchorRef?: any
-  floatingRef?: any
+  open?: MaybeAccessor<boolean>
+  anchorRef?: MaybeAccessor<any>
+  floatingRef?: MaybeAccessor<any>
   placement?: string
   offset?: number
   boundaryPadding?: number
@@ -72,10 +80,13 @@ export function useFloatingPosition(opts: {
 
   onMount(() => {
     createEffect(() => {
-      if (!opts.open || !opts.anchorRef || !opts.floatingRef || typeof window === 'undefined') return undefined
+      const open = access(opts.open)
+      const anchor = access(opts.anchorRef)
+      const floating = access(opts.floatingRef)
+      if (!open || !anchor || !floating || typeof window === 'undefined') return undefined
 
       const updatePosition = () => {
-        const position = applyFloatingPosition(opts.anchorRef, opts.floatingRef, {
+        const position = applyFloatingPosition(anchor, floating, {
           placement: opts.placement as any,
           offset: opts.offset,
           boundaryPadding: opts.boundaryPadding,

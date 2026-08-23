@@ -23,8 +23,8 @@ export default function Tooltip({
 
   const resolvedPlacement = useFloatingPosition({
     open: show,
-    anchorRef: triggerRef,
-    floatingRef: tooltipRef,
+    anchorRef: () => triggerRef,
+    floatingRef: () => tooltipRef,
     placement,
     offset: 8,
   })

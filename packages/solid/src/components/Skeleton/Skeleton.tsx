@@ -1,4 +1,5 @@
 import { createMemo } from 'solid-js'
+import { Dynamic } from 'solid-js/web'
 
 import { useLocale } from '../../LocaleSolid'
 import './style.css'
@@ -35,7 +36,7 @@ const Skeleton = ({ animation = 'pulse', component: Component = 'div', height, w
     }
   }
 
-  return <Component class={`${classes} ${className}`} style={sizeStyle} role="status" aria-live="polite" aria-label={messages.loading} aria-busy="true" {...rest} />
+  return <Dynamic component={Component} class={`${classes()} ${className}`} style={sizeStyle} role="status" aria-live="polite" aria-label={messages.loading} aria-busy="true" {...rest} />
 }
 
 export default Skeleton

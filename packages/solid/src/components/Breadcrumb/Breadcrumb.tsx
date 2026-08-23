@@ -28,7 +28,7 @@ export default function Breadcrumb({
   )
 
   const handleClick = (e, item, idx) => {
-    handleBreadcrumbClick(e, item, idx, processed.length, onItemClick)
+    handleBreadcrumbClick(e, item, idx, processed().length, onItemClick)
   }
 
   const breadcrumbClasses = getBreadcrumbClasses(variant)
@@ -36,9 +36,9 @@ export default function Breadcrumb({
   return (
     <nav class={breadcrumbClasses} aria-label={messages.breadcrumb} role="navigation">
       <ol class="wc-breadcrumb-list">
-        {processed.map((item, idx) => (
-          <li key={idx} class={getBreadcrumbItemClasses(idx, processed.length)}>          
-            {shouldRenderAsLink(idx, processed.length, item.disabled, item.isEllipsis) ? (
+        {processed().map((item, idx) => (
+          <li key={idx} class={getBreadcrumbItemClasses(idx, processed().length)}>
+            {shouldRenderAsLink(idx, processed().length, item.disabled, item.isEllipsis) ? (
               item.href ? (
                 <a
                   href={item.href}
@@ -64,7 +64,7 @@ export default function Breadcrumb({
                 {item.label}
               </span>
             )}
-            {idx < processed.length - 1 && (
+            {idx < processed().length - 1 && (
               <span class="wc-breadcrumb-separator">{separator}</span>
             )}
           </li>

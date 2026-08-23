@@ -1,4 +1,4 @@
-
+import { Dynamic } from 'solid-js/web'
 import PropTypes from 'prop-types'
 import { PAGE_GUTTERS, PAGE_SIZES } from '../../composition.js'
 import './style.css'
@@ -11,14 +11,15 @@ const Page = ({
   children,
   ...props
 }) => (
-  <Component
+  <Dynamic
+    component={Component}
     class={['wc-page', className].filter(Boolean).join(' ')}
     data-size={size}
     data-gutter={gutter}
     {...props}
   >
     {children}
-  </Component>
+  </Dynamic>
 )
 
 Page.displayName = 'Page'

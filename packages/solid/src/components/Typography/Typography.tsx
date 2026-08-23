@@ -1,3 +1,5 @@
+import { Dynamic } from 'solid-js/web'
+
 import { getComponent, buildTypographyClasses, lineHeightMap } from './utils'
 import './style.css'
 
@@ -22,9 +24,9 @@ const Typography = ({
   }
 
   return (
-    <Component class={classes} style={mergedStyle} {...rest}>
+    <Dynamic component={Component} class={classes} style={mergedStyle} {...rest}>
       {children}
-    </Component>
+    </Dynamic>
   )
 }
 

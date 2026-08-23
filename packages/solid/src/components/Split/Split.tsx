@@ -1,4 +1,4 @@
-
+import { Dynamic } from 'solid-js/web'
 import PropTypes from 'prop-types'
 import {
   COMPOSITION_ALIGNS,
@@ -18,7 +18,8 @@ const Split = ({
   children,
   ...props
 }) => (
-  <Component
+  <Dynamic
+    component={Component}
     class={['wc-split', className].filter(Boolean).join(' ')}
     data-ratio={ratio}
     data-gap={gap}
@@ -27,7 +28,7 @@ const Split = ({
     {...props}
   >
     {children}
-  </Component>
+  </Dynamic>
 )
 
 Split.displayName = 'Split'

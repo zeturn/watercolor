@@ -75,7 +75,7 @@ export default function CodeBlock({
 
       <pre class="wc-code-block__pre" style={maxHeight ? { maxHeight } : undefined}>
         <code class={`language-${normalizedLanguage}`}>
-          {lines.map((line, index) => {
+          {lines().map((line, index) => {
             const state = getDiffState(line, diff)
             const visibleLine = getVisibleLine(line, diff)
             return (

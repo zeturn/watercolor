@@ -1,4 +1,4 @@
-
+import { Dynamic } from 'solid-js/web'
 import PropTypes from 'prop-types'
 import { COMPOSITION_ALIGNS, COMPOSITION_GAPS } from '../../composition.js'
 import './style.css'
@@ -11,14 +11,15 @@ const Stack = ({
   children,
   ...props
 }) => (
-  <Component
+  <Dynamic
+    component={Component}
     class={['wc-stack', className].filter(Boolean).join(' ')}
     data-gap={gap}
     data-align={align}
     {...props}
   >
     {children}
-  </Component>
+  </Dynamic>
 )
 
 Stack.displayName = 'Stack'

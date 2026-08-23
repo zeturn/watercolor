@@ -47,7 +47,6 @@ export default function Banner({
 }) {
   const [visible, setVisible] = createSignal(true)
   const { messages } = useLocale()
-  if (!visible) return null
 
   const bannerClasses = getBannerClasses(type, position, sticky)
   const bannerStyles = getBannerStyles(zIndex)
@@ -59,13 +58,13 @@ export default function Banner({
     handleBannerAction(onAction)
   }
 
-  // 检查是否有自定义的操作按钮内容
-  const hasCustomActions = children && Children.count(children) > 0
+  // 检查是否有自定义的操作按钮内容（Solid 没有 React 的 Children API）
+  const hasCustomActions = Boolean(children)
 
   return (
     <div
       class={bannerClasses}
-      style={bannerStyles}
+      style={{ ...bannerStyles, display: visible() ? undefined : 'none' }}
       role={type === 'error' ? 'alert' : 'status'}
       aria-live={type === 'error' ? 'assertive' : 'polite'}
     >

@@ -1,4 +1,5 @@
 import { createSignal, createEffect } from 'solid-js'
+import { Dynamic } from 'solid-js/web'
 
 import './style.css'
 import { getTextFieldClasses } from './utils.js'
@@ -123,7 +124,8 @@ const TextField = ({
           </div>
         )}
         
-        <InputComponent
+        <Dynamic
+          component={InputComponent}
           class={multiline ? "wc-textfield__input wc-textfield__textarea" : "wc-textfield__input"}
           id={inputId}
           type={multiline ? undefined : type}

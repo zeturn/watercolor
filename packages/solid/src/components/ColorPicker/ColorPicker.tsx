@@ -48,8 +48,8 @@ export default function ColorPicker({
 
   useOverlayLayer({
     open: isOpen,
-    elementRef: popoverRef,
-    refs: [rootRef],
+    elementRef: () => popoverRef,
+    refs: () => [rootRef],
     closeOnEscape: true,
     closeOnPointerDownOutside: true,
     onEscapeKeyDown: closePicker,

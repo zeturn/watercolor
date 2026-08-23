@@ -78,16 +78,16 @@ const HoverCard = ({
 
   const resolvedPlacement = useFloatingPosition({
     open: visible,
-    anchorRef: triggerRef,
-    floatingRef: cardRef,
+    anchorRef: () => triggerRef,
+    floatingRef: () => cardRef,
     placement: position,
     offset: 8,
   })
 
   useOverlayLayer({
     open: visible,
-    elementRef: cardRef,
-    refs: [triggerRef],
+    elementRef: () => cardRef,
+    refs: () => [triggerRef],
     closeOnEscape: true,
     closeOnPointerDownOutside: true,
     onEscapeKeyDown: () => {

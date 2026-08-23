@@ -1,3 +1,4 @@
+import { Dynamic } from 'solid-js/web'
 
 import { getPaperClasses } from './utils.js'
 import './style.css'
@@ -67,7 +68,8 @@ export default function Paper({
   }
 
   return (
-    <Component
+    <Dynamic
+      component={Component}
       class={paperClasses}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
@@ -79,6 +81,6 @@ export default function Paper({
       {...rest}
     >
       {children}
-    </Component>
+    </Dynamic>
   )
 }

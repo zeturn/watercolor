@@ -1,5 +1,4 @@
 import { createSignal } from 'solid-js'
-import { cloneElement } from 'solid-js/web'
 import { useId } from '../../useId'
 
 import { Portal, useFloatingPosition, useOverlayLayer } from '../../interactions'
@@ -33,7 +32,7 @@ export default function Popover({
   let triggerRef = null
   let popoverRef = null
 
-  const actualOpen = isControlled ? open : internalOpen
+  const isOpen = () => (isControlled ? !!open : internalOpen())
 
   const setOpen = (state) => {
     if (!isControlled) {
@@ -44,21 +43,21 @@ export default function Popover({
 
   const closePopover = () => setOpen(false)
   const togglePopover = () => {
-    setOpen(!actualOpen)
+    setOpen(!isOpen())
   }
 
   const resolvedPlacement = useFloatingPosition({
-    open: actualOpen,
-    anchorRef: triggerRef,
-    floatingRef: popoverRef,
+    open: isOpen,
+    anchorRef: () => triggerRef,
+    floatingRef: () => popoverRef,
     placement,
     offset,
   })
 
   useOverlayLayer({
-    open: actualOpen,
-    elementRef: popoverRef,
-    refs: [triggerRef],
+    open: isOpen,
+    elementRef: () => popoverRef,
+    refs: () => [triggerRef],
     closeOnEscape: true,
     closeOnPointerDownOutside: true,
     onEscapeKeyDown: closePopover,
@@ -66,22 +65,26 @@ export default function Popover({
     zIndex: 2000,
   })
 
-  // Render
-  const triggerNode = trigger ? (
-    cloneElement(trigger, {
-      ref: triggerRef,
-      onClick: togglePopover,
-      'aria-expanded': actualOpen,
-      'aria-haspopup': 'dialog',
-      'aria-controls': popoverId,
-    })
+  // Render: Solid has no cloneElement, so custom triggers are wrapped in a
+  // span carrying the interaction handlers and aria attributes.
+  const triggerNode = () => trigger ? (
+    <span
+      ref={(el) => { triggerRef = el }}
+      class="wc-popover-trigger"
+      onClick={togglePopover}
+      aria-expanded={isOpen()}
+      aria-haspopup="dialog"
+      aria-controls={popoverId}
+    >
+      {trigger}
+    </span>
   ) : (
     <button
-      ref={triggerRef}
+      ref={(el) => { triggerRef = el }}
       type="button"
       class="wc-popover-trigger"
       onClick={togglePopover}
-      aria-expanded={actualOpen}
+      aria-expanded={isOpen()}
       aria-haspopup="dialog"
       aria-controls={popoverId}
     >
@@ -91,13 +94,13 @@ export default function Popover({
 
   return (
     <div class={`wc-popover-container ${className}`.trim()}>
-      {triggerNode}
-      {actualOpen &&
+      {triggerNode()}
+      {isOpen() &&
         <Portal>
           <div
-            ref={popoverRef}
+            ref={(el) => { popoverRef = el }}
             id={popoverId}
-            class={`wc-popover-content wc-popover-content--${resolvedPlacement}`.trim()}
+            class={`wc-popover-content wc-popover-content--${resolvedPlacement()}`.trim()}
             role="dialog"
             aria-label={messages.closePopover}
             tabIndex={-1}

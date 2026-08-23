@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'solid-js'
+import { Dynamic } from 'solid-js/web'
 
 import './style.css'
 
@@ -103,9 +104,9 @@ export const TableCell = ({
   ].filter(Boolean).join(' ')
 
   return (
-    <Component class={classes} scope={Component === 'th' || variant === 'head' ? scope : undefined} {...rest}>
+    <Dynamic component={Component} class={classes} scope={Component === 'th' || variant === 'head' ? scope : undefined} {...rest}>
       {children}
-    </Component>
+    </Dynamic>
   )
 }
 TableCell.displayName = 'TableCell'

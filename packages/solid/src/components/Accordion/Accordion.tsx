@@ -22,12 +22,12 @@ const Accordion = ({
 
   const toggleItem = (index) => {
     if (items[index]?.disabled) return
-    const newActiveItems = toggleActiveItems(activeItems, index, multiple)
+    const newActiveItems = toggleActiveItems(activeItems(), index, multiple)
     setActiveItems(newActiveItems)
     onToggle?.(index, newActiveItems.includes(index))
   }
 
-  const isActive = (index) => activeItems.includes(index)
+  const isActive = (index) => activeItems().includes(index)
 
   return (
     <div

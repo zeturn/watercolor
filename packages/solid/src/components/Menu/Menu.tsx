@@ -81,16 +81,16 @@ const Menu = ({
 
   const resolvedPlacement = useFloatingPosition({
     open: isOpen,
-    anchorRef: triggerRef,
-    floatingRef: panelRef,
+    anchorRef: () => triggerRef,
+    floatingRef: () => panelRef,
     placement: normalizePlacement(placement),
     offset: 6,
   })
 
   useOverlayLayer({
     open: isOpen,
-    elementRef: panelRef,
-    refs: [triggerRef],
+    elementRef: () => panelRef,
+    refs: () => [triggerRef],
     closeOnEscape: true,
     closeOnPointerDownOutside: true,
     onEscapeKeyDown: () => {

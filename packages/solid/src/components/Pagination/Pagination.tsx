@@ -42,16 +42,18 @@ export default function Pagination({
   }
 
   const pageItems = createMemo(() => {
+    const count = pageCount()
+    const current = currentPage()
     const totalNumbers = siblingCount * 2 + 3 + boundaryCount * 2
-    if (pageCount <= totalNumbers) {
-      return range(1, pageCount).map((n) => ({ key: n, num: n }))
+    if (count <= totalNumbers) {
+      return range(1, count).map((n) => ({ key: n, num: n }))
     }
 
-    const leftSibling = Math.max(currentPage - siblingCount, boundaryCount + 2)
-    const rightSibling = Math.min(currentPage + siblingCount, pageCount - boundaryCount - 1)
+    const leftSibling = Math.max(current - siblingCount, boundaryCount + 2)
+    const rightSibling = Math.min(current + siblingCount, count - boundaryCount - 1)
 
     const showLeftEllipsis = leftSibling > boundaryCount + 2
-    const showRightEllipsis = rightSibling < pageCount - boundaryCount - 1
+    const showRightEllipsis = rightSibling < count - boundaryCount - 1
 
     const items = []
 
@@ -61,18 +63,16 @@ export default function Pagination({
     for (let i = leftSibling; i <= rightSibling; i++) items.push({ key: 'm' + i, num: i })
     if (showRightEllipsis) items.push({ key: 'r-ellipsis', ellipsis: true })
 
-    for (let i = pageCount - boundaryCount + 1; i <= pageCount; i++) items.push({ key: 'e' + i, num: i })
+    for (let i = count - boundaryCount + 1; i <= count; i++) items.push({ key: 'e' + i, num: i })
 
     return items
-  }, [currentPage, pageCount, siblingCount, boundaryCount])
+  })
 
   const select = (page) => {
-      if (page < 1 || page > pageCount || page === currentPage) return
+      if (page < 1 || page > pageCount() || page === currentPage()) return
       setCurrentPage(page)
       onChange?.(page)
     }
-
-  if (pageCount <= 1) return null
 
   // 组装根元素类
   const rootClasses = [
@@ -83,11 +83,11 @@ export default function Pagination({
   ].filter(Boolean).join(' ')
 
   return (
-    <nav class={rootClasses} aria-label={messages.pagination} {...rest}>
+    <nav class={rootClasses} aria-label={messages.pagination} style={{ display: pageCount() <= 1 ? 'none' : undefined }} {...rest}>
       <button
         class="page-btn wc-page-btn wc-page-btn--prev wc-page-btn--nav"
-        disabled={currentPage === 1}
-        onClick={() => select(currentPage - 1)}
+        disabled={currentPage() === 1}
+        onClick={() => select(currentPage() - 1)}
         aria-label={messages.previousPage}
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -95,7 +95,7 @@ export default function Pagination({
         </svg>
       </button>
 
-      {pageItems.map((page) =>
+      {pageItems().map((page) =>
         page.ellipsis ? (
           <span key={page.key} class="page-ellipsis">
             …
@@ -103,9 +103,9 @@ export default function Pagination({
         ) : (
           <button
             key={page.key}
-            class={`page-btn wc-page-btn${page.num === currentPage ? ' active wc-page-btn--active' : ''}`}
+            class={`page-btn wc-page-btn${page.num === currentPage() ? ' active wc-page-btn--active' : ''}`}
             onClick={() => select(page.num)}
-            aria-current={page.num === currentPage ? 'page' : undefined}
+            aria-current={page.num === currentPage() ? 'page' : undefined}
             aria-label={messages.page(page.num)}
           >
             {page.num}
@@ -115,8 +115,8 @@ export default function Pagination({
 
       <button
         class="page-btn wc-page-btn wc-page-btn--next wc-page-btn--nav"
-        disabled={currentPage === pageCount}
-        onClick={() => select(currentPage + 1)}
+        disabled={currentPage() === pageCount()}
+        onClick={() => select(currentPage() + 1)}
         aria-label={messages.nextPage}
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
