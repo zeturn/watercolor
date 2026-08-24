@@ -24,7 +24,7 @@
     "react-dom": "^19.2.8"
   },
   "dependencies": {
-    "@tabler/icons-react": "^3.45.0"
+    "@tabler/icons-react": "^3.46.0"
   },
   "publishConfig": {
     "access": "public"
