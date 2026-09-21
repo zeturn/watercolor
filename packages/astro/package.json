@@ -39,7 +39,7 @@
   "devDependencies": {
     "@zeturn/watercolor-react": "1.2.13",
     "astro": "^5.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   }
 }
