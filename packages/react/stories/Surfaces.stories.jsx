@@ -1,3 +1,4 @@
+import { storyIcons } from './story-icons.js'
 import Box from '@/components/Box/Box.jsx'
 import Card from '@/components/Card/Card.jsx'
 import Container from '@/components/Container/Container.jsx'
@@ -34,17 +35,17 @@ export const Hierarchy = {
           <h2 id="card-treatment" className="wc-surfaces-section-title">Card treatment</h2>
           <Box display="grid" className="wc-surfaces-grid">
             <Card className="wc-surfaces-card" variant="minimal">
-              <Icon className="wc-surfaces-card-icon" name="align-left" size={22} />
+              <Icon className="wc-surfaces-card-icon" component={storyIcons['align-left']} size={22} />
               <h3 className="wc-surfaces-card-title">Quiet default</h3>
               <p className="wc-surfaces-card-copy">No border or background. Spacing is enough to establish the group.</p>
             </Card>
             <Card className="wc-surfaces-card wc-surfaces-force-hover" variant="minimal" interactive>
-              <Icon className="wc-surfaces-card-icon" name="mouse-pointer-2" size={22} />
+              <Icon className="wc-surfaces-card-icon" component={storyIcons['mouse-pointer-2']} size={22} />
               <h3 className="wc-surfaces-card-title">Interactive hover</h3>
               <p className="wc-surfaces-card-copy">A soft surface appears only when the region becomes actionable.</p>
             </Card>
             <Card className="wc-surfaces-card" variant="filled">
-              <Icon className="wc-surfaces-card-icon" name="panel-top" size={22} />
+              <Icon className="wc-surfaces-card-icon" component={storyIcons['panel-top']} size={22} />
               <h3 className="wc-surfaces-card-title">Explicit containment</h3>
               <p className="wc-surfaces-card-copy">A filled surface remains available when the content truly needs a boundary.</p>
             </Card>

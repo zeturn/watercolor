@@ -1,244 +1,72 @@
-import React, { useMemo, lazy, Suspense } from 'react'
+import React, { forwardRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import './style.css'
 
-const StubIcon = ({ className, style }) => <span className={className} style={style} />
+const sizes = { xs: 16, sm: 20, md: 24, lg: 32, xl: 48 }
+let warnedAboutNames = false
 
-// Literal import specifiers let Vite/Rollup discover and split each pack.
-const ICON_LOADERS = {
-  lucide: () => import('@zeturn/watercolor-icons-lucide-react'),
-  heroicons: () => import('@zeturn/watercolor-icons-heroicons-react'),
-  tabler: () => import('@zeturn/watercolor-icons-tabler-react'),
-  phosphor: () => import('@zeturn/watercolor-icons-phosphor-react'),
-  feather: () => import('@zeturn/watercolor-icons-feather'),
-}
-
-const loadIconPackage = (library) => {
-  const loader = ICON_LOADERS[library]
-  if (!loader) {
-    return Promise.resolve(null)
-  }
-
-  return loader()
-}
-
-const lazyWithFallback = (importer, resolveComponent) =>
-  lazy(() =>
-    importer()
-      .then((mod) => ({ default: resolveComponent(mod || {}) }))
-      .catch((err) => {
-        console.warn('[Icon] 动态导入失败，已回退到占位符图标。', err)
-        return { default: StubIcon }
-      })
-  )
-
-// 动态导入图标组件的函数
-const createIconComponent = (library, name, variant) => {
-  switch (library) {
-    case 'lucide':
-      return lazyWithFallback(
-        () => loadIconPackage('lucide'),
-        (module) => (module.getIcon?.(name)) || StubIcon
-      )
-
-    case 'heroicons':
-      return lazyWithFallback(
-        () => loadIconPackage('heroicons'),
-        (module) => (module.getIcon?.(name, variant)) || StubIcon
-      )
-
-    case 'tabler':
-      return lazyWithFallback(
-        () => loadIconPackage('tabler'),
-        (module) => (module.getIcon?.(name)) || StubIcon
-      )
-
-    case 'phosphor':
-      return lazyWithFallback(
-        () => loadIconPackage('phosphor'),
-        (module) => (module.getIcon?.(name)) || StubIcon
-      )
-
-    default:
-      return null
-  }
-}
-
-// 将语义化尺寸转换为像素值
-const getSizeValue = (size) => {
-  if (typeof size === 'number') return size
-  
-  const sizeMap = {
-    'xs': 16,
-    'sm': 20,
-    'md': 24,
-    'lg': 32,
-    'xl': 48
-  }
-  
-  return sizeMap[size] || parseInt(size) || 24
-}
-
-const Icon = ({
-  library = 'lucide',
-  name = '',
-  html = '',
+/** Presentation only: applications supply the icon; no catalog is imported. */
+const Icon = forwardRef(function Icon({
+  component: Component,
   size = 24,
   color = 'currentColor',
-  strokeWidth = 2,
-  variant = 'outline',
+  strokeWidth,
+  label,
+  decorative,
+  title,
   className = '',
+  style,
   children,
+  html,
+  library,
+  name,
+  variant,
   ...props
-}) => {
-  // 动态图标组件
-  const IconComponent = useMemo(() => {
-    if (!name) return null
-    
-    try {
-      return createIconComponent(library, name, variant)
-    } catch (error) {
-      console.warn(`Icon "${name}" not found in library "${library}"`)
-      return null
+}, ref) {
+  useEffect(() => {
+    if ((name || library || variant) && !Component && !children && !html && !warnedAboutNames) {
+      warnedAboutNames = true
+      console.warn('[Watercolor Icon] library/name no longer loads icon packages. Import an icon explicitly and pass component={YourIcon}.')
     }
-  }, [library, name, variant])
+  }, [name, library, variant, Component, children, html])
 
-  // Feather图标组件
-  const FeatherIconComponent = useMemo(() => {
-    if (library === 'feather' && name) {
-      return lazy(async () => {
-        try {
-          const sizeValue = getSizeValue(size)
-          const { getFeatherSvg } = (await loadIconPackage('feather')) || {}
-          const iconSvg = await getFeatherSvg(name, {
-            width: sizeValue,
-            height: sizeValue,
-            strokeWidth: Number(strokeWidth),
-          })
-          
-          return { 
-            default: ({ className, style }) => (
-              <span 
-                className={className} 
-                style={style} 
-                dangerouslySetInnerHTML={{ __html: iconSvg }} 
-              />
-            )
-          }
-        } catch (error) {
-          console.warn(`Feather icon "${name}" not found`)
-          return { default: () => <span /> }
-        }
-      })
-    }
-    return null
-  }, [library, name, size, strokeWidth])
-
-  // HTML图标内容
-  const htmlIcon = useMemo(() => {
-    if (library === 'html' && html) {
-      return html
-    }
-    return ''
-  }, [library, html])
-
-  // 图标样式
-  const iconStyles = useMemo(() => {
-    const styles = {}
-    
-    if (color && color !== 'currentColor') {
-      styles.color = color
-    }
-    
-    if (size) {
-      const sizeValue = getSizeValue(size)
-      styles.width = `${sizeValue}px`
-      styles.height = `${sizeValue}px`
-    }
-    
-    return styles
-  }, [color, size])
-
-  // 图标属性
-  const iconProps = useMemo(() => {
-    const sizeValue = getSizeValue(size)
-    
-    const iconProps = {
-      size: sizeValue,
-      color,
-      ...props
-    }
-    
-    // Lucide特有属性
-    if (library === 'lucide') {
-      iconProps.strokeWidth = strokeWidth
-    }
-    
-    // Tabler特有属性
-    if (library === 'tabler') {
-      iconProps.stroke = strokeWidth
-    }
-    
-    return iconProps
-  }, [library, size, color, strokeWidth, props])
-
-  // CSS类名
-  const iconClasses = `wc-icon ${className}`.trim()
-
-  // 渲染Feather图标组件
-  if (FeatherIconComponent) {
-    return (
-      <Suspense fallback={<span className={iconClasses} style={iconStyles} />}>
-        <FeatherIconComponent
-          className={iconClasses}
-          style={iconStyles}
-        />
-      </Suspense>
-    )
+  const dimension = sizes[size] ?? (typeof size === 'string' && /^\d+(?:\.\d+)?$/.test(size) ? Number(size) : size)
+  const accessibleLabel = label ?? props['aria-label'] ?? title
+  const hiddenValue = props['aria-hidden'] ?? (decorative ?? !(accessibleLabel || props['aria-labelledby']))
+  const hidden = hiddenValue === true || hiddenValue === 'true'
+  const shared = {
+    ...props,
+    ref,
+    title,
+    className: `wc-icon ${className}`.trim(),
+    style: { width: dimension, height: dimension, color, ...style },
+    'aria-label': accessibleLabel,
+    'aria-hidden': hidden ? true : undefined,
+    role: props.role ?? (hidden ? undefined : 'img'),
   }
 
-  // 渲染动态图标组件
-  if (IconComponent) {
-    return (
-      <Suspense fallback={<span className={iconClasses} style={iconStyles} />}>
-        <IconComponent
-          className={iconClasses}
-          style={iconStyles}
-          {...iconProps}
-        />
-      </Suspense>
-    )
+  if (Component) {
+    return <Component {...shared} width={dimension} height={dimension} color={color} {...(strokeWidth === undefined ? {} : { strokeWidth })} focusable={props.focusable ?? false}>{children}</Component>
   }
-
-  // 渲染HTML图标
-  if (htmlIcon) {
-    return (
-      <span
-        className={iconClasses}
-        style={iconStyles}
-        dangerouslySetInnerHTML={{ __html: htmlIcon }}
-      />
-    )
-  }
-
-  // 渲染子元素
-  return (
-    <span className={iconClasses} style={iconStyles}>
-      {children}
-    </span>
-  )
-}
+  if (html) return <span {...shared} dangerouslySetInnerHTML={{ __html: html }} />
+  return <span {...shared}>{children}</span>
+})
 
 Icon.propTypes = {
-  library: PropTypes.oneOf(['lucide', 'heroicons', 'tabler', 'phosphor', 'feather', 'html']),
-  name: PropTypes.string,
-  html: PropTypes.string,
+  component: PropTypes.elementType,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   color: PropTypes.string,
   strokeWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  variant: PropTypes.oneOf(['outline', 'solid', 'mini']),
+  label: PropTypes.string,
+  decorative: PropTypes.bool,
+  title: PropTypes.string,
   className: PropTypes.string,
-  children: PropTypes.node
+  style: PropTypes.object,
+  children: PropTypes.node,
+  html: PropTypes.string,
+  library: PropTypes.string,
+  name: PropTypes.string,
+  variant: PropTypes.string,
 }
 
-export default Icon 
+export default Icon

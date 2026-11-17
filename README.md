@@ -137,6 +137,21 @@ The examples are version-checked with the docs/examples audit so installation sn
 
 ### Icons (optional)
 
+For React and Next, pass an explicitly imported component. Core packages do not
+load icon catalogs or declare icon adapter peers:
+
+```tsx
+import Icon from '@zeturn/watercolor-react/Icon'
+import DatabaseIcon from '@zeturn/watercolor-icons-lucide-react/Database'
+
+<Icon component={DatabaseIcon} label="Database" />
+```
+
+React and Next also expose component subpaths such as `/Button`, `/Card`, and
+`/ThemeProvider`. Import the stylesheet once as shown above. See the
+[icon migration and performance guide](docs/guide/icon-performance.md) for the
+former `library/name` API, adapter subpaths, accessibility, and build budgets.
+
 The `Icon` component supports multiple libraries through opt-in Watercolor icon
 packages. The React and Vue packages do not install any icon pack by default.
 

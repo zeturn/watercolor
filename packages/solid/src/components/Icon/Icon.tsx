@@ -13,7 +13,7 @@ type IconParams = {
 }
 
 // Feather ships framework-agnostic SVG strings — no React needed and it bundles cleanly.
-const FEATHER_LOADER = () => import('@zeturn/watercolor-icons-feather')
+const FEATHER_LOADER = () => import('@zeturn/watercolor-icons-feather/legacy')
 
 // lucide/heroicons/tabler/phosphor only ship React or Vue component packages upstream.
 // There is no framework-agnostic or Solid-specific icon package yet, so Solid cannot

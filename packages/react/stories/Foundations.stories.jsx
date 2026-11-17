@@ -1,3 +1,4 @@
+import { storyIcons } from './story-icons.js'
 import Grid from '@/components/Grid/Grid.jsx'
 import Typography from '@/components/Typography/Typography.jsx'
 import Icon from '@/components/Icon/Icon.jsx'
@@ -50,14 +51,14 @@ export const Dashboard = {
       <div className="wc-foundations-shell">
         <header className="wc-foundations-toolbar">
           <button className="wc-foundations-icon-button" type="button" aria-label="Open navigation">
-            <Icon name="menu" size={20} />
+            <Icon component={storyIcons['menu']} size={20} />
           </button>
           <nav className="wc-foundations-tabs" aria-label="Workspace views">
             <button className="wc-foundations-tab" type="button" role="tab" aria-selected="true">Home</button>
             <button className="wc-foundations-tab" type="button" role="tab" aria-selected="false">Work</button>
           </nav>
           <button className="wc-foundations-icon-button" type="button" aria-label="Open profile">
-            <Icon name="circle-user-round" size={20} />
+            <Icon component={storyIcons['circle-user-round']} size={20} />
           </button>
         </header>
 
@@ -73,7 +74,7 @@ export const Dashboard = {
           {actions.map((action) => (
             <Grid key={action.title} item xs={12} md={4}>
               <ListItem button className="wc-foundations-action">
-                <ListItemIcon><Icon name={action.icon} size={22} /></ListItemIcon>
+                <ListItemIcon><Icon component={storyIcons[action.icon]} size={22} /></ListItemIcon>
                 <span className="wc-foundations-copy">
                   <Typography component="span" variant="subtitle2" color="textPrimary">{action.title}</Typography>
                   <Typography component="span" variant="body2" color="textSecondary">{action.detail}</Typography>
@@ -87,19 +88,19 @@ export const Dashboard = {
           <div className="wc-foundations-section-heading">
             <Typography component="span" variant="subtitle2" color="textPrimary">Recent work</Typography>
             <button className="wc-foundations-icon-button" type="button" aria-label="Search recent work">
-              <Icon name="search" size={19} />
+              <Icon component={storyIcons['search']} size={19} />
             </button>
           </div>
           <List disablePadding aria-label="Recent work">
             {recentItems.map((item) => (
               <ListItem key={item.title} button className="wc-foundations-recent">
-                <ListItemIcon><Icon name={item.icon} size={20} /></ListItemIcon>
+                <ListItemIcon><Icon component={storyIcons[item.icon]} size={20} /></ListItemIcon>
                 <span className="wc-foundations-copy">
                   <Typography component="span" variant="body1" color="textPrimary">{item.title}</Typography>
                   <Typography component="span" variant="caption" color="textSecondary">{item.detail}</Typography>
                 </span>
                 <Typography component="span" variant="caption" color="textSecondary" className="wc-foundations-row-meta">{item.meta}</Typography>
-                <Icon name="chevron-right" size={18} color="var(--wc-text-tertiary)" />
+                <Icon component={storyIcons['chevron-right']} size={18} color="var(--wc-text-tertiary)" />
               </ListItem>
             ))}
           </List>
@@ -107,14 +108,14 @@ export const Dashboard = {
 
         <form className="wc-foundations-composer" onSubmit={(event) => event.preventDefault()}>
           <button className="wc-foundations-icon-button" type="button" aria-label="Add attachment">
-            <Icon name="plus" size={21} />
+            <Icon component={storyIcons['plus']} size={21} />
           </button>
           <input className="wc-foundations-input" aria-label="Ask Watercolor" placeholder="Ask Watercolor" />
           <button className="wc-foundations-icon-button" type="button" aria-label="Use voice input">
-            <Icon name="mic" size={20} />
+            <Icon component={storyIcons['mic']} size={20} />
           </button>
           <button className="wc-foundations-send" type="submit" aria-label="Send">
-            <Icon name="arrow-up" size={20} />
+            <Icon component={storyIcons['arrow-up']} size={20} />
           </button>
         </form>
       </div>

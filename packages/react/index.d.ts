@@ -281,7 +281,20 @@ export interface FormGroupProps extends HtmlComponentProps<HTMLDivElement> { row
 export interface FormHelperTextProps extends HtmlComponentProps<HTMLParagraphElement> { disabled?: boolean; error?: boolean; filled?: boolean; focused?: boolean; margin?: 'none' | 'dense' | 'normal'; required?: boolean; variant?: FieldVariant; id?: string; size?: ComponentSize }
 export interface GridProps extends HtmlComponentProps<HTMLDivElement> { container?: boolean; item?: boolean; xs?: number | boolean; sm?: number | boolean; md?: number | boolean; lg?: number | boolean; xl?: number | boolean; spacing?: number | string; direction?: CSSProperties['flexDirection']; justifyContent?: CSSProperties['justifyContent']; alignItems?: CSSProperties['alignItems'] }
 export interface HoverCardProps extends HtmlComponentProps<HTMLDivElement> { triggerText?: ReactNode; cardData?: Record<string, unknown>; variant?: 'default' | 'outlined' | 'filled' | 'minimal'; size?: ComponentSize; cardSize?: ComponentSize | 'xl'; position?: FloatingPlacement; delay?: number; hideDelay?: number; showArrow?: boolean; disabled?: boolean; onShow?: () => void; onHide?: () => void; onAction?: (...args: unknown[]) => void; card?: ReactNode }
-export interface IconProps extends HtmlComponentProps<HTMLSpanElement> { name?: string; size?: number | string; color?: string; children?: ReactNode }
+export interface IconProps extends Omit<import('react').SVGProps<SVGSVGElement>, 'ref'> {
+  component?: ElementType
+  size?: number | string
+  color?: string
+  label?: string
+  decorative?: boolean
+  html?: string
+  /** @deprecated Import an icon and pass component instead. */
+  name?: string
+  /** @deprecated Icon no longer loads icon packages. */
+  library?: string
+  /** @deprecated Select the variant in the explicit icon import. */
+  variant?: string
+}
 export interface ImageGalleryImage { src: string; alt?: string; title?: ReactNode; description?: ReactNode; [key: string]: unknown }
 export interface ImageGalleryProps extends HtmlComponentProps<HTMLDivElement> { images?: readonly ImageGalleryImage[]; title?: ReactNode; layout?: 'grid' | 'masonry' | 'carousel'; size?: ComponentSize | 'xl'; columns?: number; gap?: number; showInfo?: boolean; showCount?: boolean; showDownload?: boolean; showPagination?: boolean; itemsPerPage?: number; lazyLoad?: boolean; loading?: boolean; onSelect?: (image: ImageGalleryImage, index: number) => void; onDownload?: (image: ImageGalleryImage) => void; onLightboxOpen?: (event: unknown) => void; onLightboxClose?: () => void }
 export interface ListProps extends HtmlComponentProps<HTMLUListElement> { dense?: boolean; disablePadding?: boolean; nav?: boolean; subheader?: ReactNode }
@@ -441,7 +454,7 @@ export const FormGroup: ComponentType<FormGroupProps>
 export const FormHelperText: ComponentType<FormHelperTextProps>
 export const Grid: ComponentType<GridProps>
 export const HoverCard: ComponentType<HoverCardProps>
-export const Icon: ComponentType<IconProps>
+export function Icon<C extends ElementType = 'svg'>(props: IconProps & { component?: C } & Omit<ComponentPropsWithoutRef<C>, keyof IconProps> & import('react').RefAttributes<SVGSVGElement | HTMLSpanElement>): ReactElement | null
 export const IconButton: ComponentType<IconButtonProps>
 export const ImageGallery: ComponentType<ImageGalleryProps>
 export const Inline: <T extends ElementType = 'div'>(props: InlineProps<T>) => ReactElement | null

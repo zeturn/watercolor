@@ -47,3 +47,9 @@ npx watercolor-ui --framework vue --icons lucide
 
 Installing `watercolor-ui` has no postinstall side effects. The CLI only changes
 dependencies when you invoke it explicitly.
+
+Use `--icons none` to install no adapter, and `--dry-run` to print the complete
+plan without changing files. Successful installs record the chosen provider in
+`watercolor.config.json` with `iconImports: "explicit"`. This configuration does
+not load icons; React applications import a component from an adapter subpath and
+pass it to `<Icon component={YourIcon} />`.

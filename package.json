@@ -46,7 +46,11 @@
     "audit:visual:minimal": "node scripts/audit-minimal-visual.mjs",
     "test:svelte": "npm run test -w packages/svelte --if-present",
     "test:solid": "npm run test -w packages/solid --if-present",
-    "test:angular": "npm run test -w packages/angular --if-present"
+    "test:angular": "npm run test -w packages/angular --if-present",
+    "test:icon-builds": "node scripts/test-icon-builds.mjs",
+    "test:installer": "node --test packages/watercolor-ui/tests/installer.test.cjs",
+    "audit:icons": "node scripts/audit-icon-boundaries.mjs",
+    "typecheck:icons": "tsc -p tests/fixtures/icon-build/tsconfig.json"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.2.1",
@@ -59,6 +63,7 @@
     "@types/node": "^26.1.1",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
+    "@typescript/typescript6": "^6.0.2",
     "@vitejs/plugin-react": "^6.0.4",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vitest/coverage-v8": "^3.2.4",

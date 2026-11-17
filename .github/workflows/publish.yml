@@ -95,6 +95,13 @@ jobs:
       - name: Enforce bundle size budgets
         run: npm run audit:bundle
 
+      - name: Verify icon boundaries and consumer budgets
+        run: |
+          npm run audit:icons
+          npm run test:installer
+          npm run typecheck:icons
+          npm run test:icon-builds
+
       - name: Build Storybooks
         env:
           NODE_OPTIONS: --max_old_space_size=4096

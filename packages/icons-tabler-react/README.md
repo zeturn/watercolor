@@ -1,25 +1,16 @@
 # @zeturn/watercolor-icons-tabler-react
 
-Tabler icon resolver for Watercolor UI (React).
+Independent React icon entries. This adapter imports no catalog at its root.
 
-## Install
+```tsx
+import Icon from '@zeturn/watercolor-react/Icon'
+import YourIcon from '@zeturn/watercolor-icons-tabler-react/IconDatabase'
 
-```bash
-npm install @zeturn/watercolor-icons-tabler-react
+<Icon component={YourIcon} label="Meaningful icon" />
 ```
 
-## Usage
+React and @tabler/icons-react are peers. Install this adapter and its provider only when selected.
+Use a single-icon subpath; the former getIcon(name) catalog lookup has been removed.
+For finite application menus, createIconResolver accepts a small explicitly imported map.
 
-```ts
-import { getIcon } from '@zeturn/watercolor-icons-tabler-react'
-
-const Icon = getIcon('alert-circle')
-```
-
-## Docs
-
-- https://zeturn.github.io/watercolor/
-
-## License
-
-ISC
+See [migration and performance checks](../../docs/guide/icon-performance.md).

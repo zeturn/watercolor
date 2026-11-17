@@ -1,25 +1,14 @@
 # @zeturn/watercolor-icons-feather
 
-Feather icon helpers for Watercolor UI (framework-agnostic).
+Import one static SVG string; no catalog enters the module graph.
 
-## Install
+```tsx
+import Icon from '@zeturn/watercolor-react/Icon'
+import databaseSvg from '@zeturn/watercolor-icons-feather/Database'
 
-```bash
-npm install @zeturn/watercolor-icons-feather
+<Icon html={databaseSvg} label="Database" />
 ```
 
-## Usage
-
-```ts
-import { getFeatherSvg } from '@zeturn/watercolor-icons-feather'
-
-const svg = await getFeatherSvg('heart')
-```
-
-## Docs
-
-- https://zeturn.github.io/watercolor/
-
-## License
-
-ISC
+The root exports renderFeatherSvg(svg, options) for dimensions and stroke customization.
+The old getFeatherSvg(name) API is available only at /legacy for Vue/Solid compatibility.
+It loads the full upstream catalog and is outside the new React/Next dependency graph.

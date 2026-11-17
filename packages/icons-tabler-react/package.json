@@ -10,6 +10,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/watercolor-icons-tabler-react.es.js",
       "default": "./dist/watercolor-icons-tabler-react.es.js"
+    },
+    "./*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.js",
+      "default": "./dist/icons/*.js"
     }
   },
   "files": [
@@ -17,13 +22,10 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "vite build"
+    "build": "node ../../scripts/build-icon-adapter.mjs"
   },
   "peerDependencies": {
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8"
-  },
-  "dependencies": {
+    "react": "^18.0.0 || ^19.0.0",
     "@tabler/icons-react": "^3.45.0"
   },
   "publishConfig": {
@@ -34,5 +36,8 @@
     "url": "git+https://github.com/zeturn/watercolor.git",
     "directory": "packages/icons-tabler-react"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@tabler/icons-react": "^3.45.0"
+  }
 }

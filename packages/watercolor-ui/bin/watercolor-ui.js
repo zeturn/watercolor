@@ -22,6 +22,7 @@ if (iconsFlag) {
   iconOverride = args[iconsArgIndex + 1]
 }
 
-runInstaller({ frameworkOverride, iconOverride, interactive: true }).catch(error => {
+runInstaller({ frameworkOverride, iconOverride, dryRun: args.includes('--dry-run') }).catch(error => {
   console.warn('[watercolor-ui] Installer error:', error.message)
+  process.exitCode = 1
 })

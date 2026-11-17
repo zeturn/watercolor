@@ -45,7 +45,7 @@ const ICON_LOADERS = {
   heroicons: () => import('@zeturn/watercolor-icons-heroicons-vue'),
   tabler: () => import('@zeturn/watercolor-icons-tabler-vue'),
   phosphor: () => import('@zeturn/watercolor-icons-phosphor-vue'),
-  feather: () => import('@zeturn/watercolor-icons-feather')
+  feather: () => import('@zeturn/watercolor-icons-feather/legacy')
 }
 
 const loadIconPackage = async (library) => {

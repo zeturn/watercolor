@@ -180,6 +180,7 @@ function installPackages(projectRoot, packages) {
   const result = spawnSync(command, args, {
     cwd: projectRoot,
     stdio: 'inherit',
+    shell: process.platform === 'win32',
     env: {
       ...process.env,
       WATERCOLOR_UI_SKIP_INSTALL: '1'
@@ -233,7 +234,25 @@ function resolveIconPackages(iconPack, framework) {
   return []
 }
 
-async function runInstaller({ frameworkOverride, iconOverride, interactive } = {}) {
+function buildInstallPlan(framework, iconPack = 'none') {
+  const packages = [PACKAGE_CORE]
+  if (framework === 'react' || framework === 'both') packages.push(PACKAGE_REACT)
+  if (framework === 'vue' || framework === 'both') packages.push(PACKAGE_VUE)
+  packages.push(...resolveIconPackages(iconPack, framework))
+  return { framework, iconProvider: iconPack, iconImports: 'explicit', packages }
+}
+
+function writeConfiguration(projectRoot, plan) {
+  const file = path.join(projectRoot, 'watercolor.config.json')
+  const existing = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {}
+  const configuration = { ...existing, version: 1, framework: plan.framework, iconProvider: plan.iconProvider, iconImports: 'explicit' }
+  fs.writeFileSync(file, JSON.stringify(configuration, null, 2) + '\n')
+  return file
+}
+
+async function runInstaller({ frameworkOverride, iconOverride, interactive, dryRun = false } = {}) {
+  if (frameworkOverride && !normalizeFramework(frameworkOverride)) throw new Error('Unknown framework. Use react, vue, both or skip.')
+  if (iconOverride && !normalizeIconPack(iconOverride)) throw new Error('Unknown icon provider. Use none, lucide, heroicons, tabler, phosphor or feather.')
   if (process.env.WATERCOLOR_UI_SKIP_INSTALL === '1') return
 
   const projectRoot = process.env.INIT_CWD || process.cwd()
@@ -264,25 +283,33 @@ async function runInstaller({ frameworkOverride, iconOverride, interactive } = {
     return
   }
 
-  const packages = [PACKAGE_CORE]
-  if (framework === 'react' || framework === 'both') packages.push(PACKAGE_REACT)
-  if (framework === 'vue' || framework === 'both') packages.push(PACKAGE_VUE)
-
   const iconPack = await resolveIconPack({
     iconOverride: iconOverride || process.env.WATERCOLOR_UI_ICONS,
     projectRoot,
     interactive: isInteractive
   })
 
-  packages.push(...resolveIconPackages(iconPack, framework))
+  const plan = buildInstallPlan(framework, iconPack)
+  const { packages } = plan
+  console.log(`[watercolor-ui] Installation plan (${framework}, icons: ${iconPack}):`)
+  for (const specifier of packages) console.log(`  - ${specifier}`)
+  console.log('[watercolor-ui] Icons require explicit component imports; configuration does not load a catalog.')
+  if (dryRun) return plan
 
   const ok = installPackages(projectRoot, packages)
   if (!ok) {
     console.warn('[watercolor-ui] Installation failed. Please install manually:')
     console.warn(`  npm install ${packages.join(' ')}`)
+    process.exitCode = 1
+    return
   }
+  const configuration = writeConfiguration(projectRoot, plan)
+  console.log(`[watercolor-ui] Saved ${configuration}`)
+  return plan
 }
 
 module.exports = {
-  runInstaller
+  runInstaller,
+  buildInstallPlan,
+  writeConfiguration,
 }

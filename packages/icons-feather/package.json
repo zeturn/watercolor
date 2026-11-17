@@ -10,6 +10,16 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/watercolor-icons-feather.es.js",
       "default": "./dist/watercolor-icons-feather.es.js"
+    },
+    "./legacy": {
+      "types": "./dist/legacy.d.ts",
+      "import": "./dist/legacy.js",
+      "default": "./dist/legacy.js"
+    },
+    "./*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.js",
+      "default": "./dist/icons/*.js"
     }
   },
   "files": [
@@ -17,10 +27,7 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "vite build"
-  },
-  "dependencies": {
-    "feather-icons": "^4.29.2"
+    "build": "node ../../scripts/build-feather-icons.mjs"
   },
   "publishConfig": {
     "access": "public"
@@ -30,5 +37,11 @@
     "url": "git+https://github.com/zeturn/watercolor.git",
     "directory": "packages/icons-feather"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "peerDependencies": {
+    "feather-icons": "^4.29.2"
+  },
+  "devDependencies": {
+    "feather-icons": "^4.29.2"
+  }
 }

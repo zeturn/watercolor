@@ -1,3 +1,11 @@
+// ESLint's TypeScript plugins use the JS Compiler API. TypeScript 7's native
+// compiler does not expose that API; use its official compatibility package
+// inside this ESLint process while leaving the native tsc command unchanged.
+const typescriptEntry = require.resolve('typescript')
+if (typeof require(typescriptEntry).createProgram !== 'function') {
+  require.cache[typescriptEntry].exports = require('@typescript/typescript6')
+}
+
 module.exports = {
   root: true,
   env: {
@@ -118,4 +126,4 @@ module.exports = {
       },
     },
   ],
-} 
+}

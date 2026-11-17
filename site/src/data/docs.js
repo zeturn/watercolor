@@ -2751,6 +2751,22 @@ Wir verwenden Conventional Commits:
   },
 }
 
+// React/Next icons now use explicit leaf imports. Vue retains its existing API.
+const iconMigrationExample = [
+  '### React / Next.js: explicit icon imports',
+  '',
+  'React and Next no longer load icons by library/name. Import a component and pass it explicitly. Other providers stay outside the module graph.',
+  '',
+  '```tsx',
+  "import Icon from '@zeturn/watercolor-react/Icon'",
+  "import DatabaseIcon from '@zeturn/watercolor-icons-lucide-react/Database'",
+  '<Icon component={DatabaseIcon} label="Database" />',
+  '```',
+  '',
+  'Next.js: use @zeturn/watercolor-next/Icon inside a Client Component. Component subpaths such as /Button and /Card are supported. The installer supports --icons none and --dry-run; its config records a choice and never loads a catalog.',
+].join('\n')
+for (const docs of Object.values(docsI18n)) docs.content.migration += `\n\n${iconMigrationExample}`
+
 // 获取侧边栏分组（含 label/group，按语言）
 export function getDocSections(lang) {
   return docsI18n[normLang(lang)].sections

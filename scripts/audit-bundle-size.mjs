@@ -7,18 +7,21 @@ import zlib from 'node:zlib'
 const root = process.cwd()
 const budgets = [
   { file: 'packages/core/dist/core.es.js', gzipKb: 75 },
-  { file: 'packages/react/dist/watercolor-react.es.js', gzipKb: 55 },
+  // Multi-entry builds must count shared chunks and entry shims as well.
+  { directory: 'packages/react/dist', gzipKb: 95 },
   { file: 'packages/react/dist/watercolor-react.css', gzipKb: 32 },
   { file: 'packages/vue/dist/watercolor-vue.es.js', gzipKb: 55 },
   { file: 'packages/vue/dist/watercolor-vue.css', gzipKb: 34 },
 ]
 
 const results = budgets.map((budget) => {
-  const absolute = path.join(root, budget.file)
+  const absolute = path.join(root, budget.file ?? budget.directory)
   if (!fs.existsSync(absolute)) return { ...budget, missing: true }
-  const raw = fs.readFileSync(absolute)
-  const gzipKb = zlib.gzipSync(raw).length / 1024
-  return { ...budget, actualGzipKb: Number(gzipKb.toFixed(2)) }
+  const files = budget.directory
+    ? fs.readdirSync(absolute, { recursive: true }).filter((file) => file.endsWith('.js')).map((file) => path.join(absolute, file))
+    : [absolute]
+  const gzipKb = files.reduce((sum, file) => sum + zlib.gzipSync(fs.readFileSync(file)).length / 1024, 0)
+  return { ...budget, file: budget.file ?? `${budget.directory}/**/*.js`, missing: files.length === 0, actualGzipKb: Number(gzipKb.toFixed(2)) }
 })
 
 const failures = results.filter((result) => result.missing || result.actualGzipKb > result.gzipKb)

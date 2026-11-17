@@ -1,25 +1,16 @@
 # @zeturn/watercolor-icons-lucide-react
 
-Lucide icon resolver for Watercolor UI (React).
+Independent React icon entries. This adapter imports no catalog at its root.
 
-## Install
+```tsx
+import Icon from '@zeturn/watercolor-react/Icon'
+import YourIcon from '@zeturn/watercolor-icons-lucide-react/Database'
 
-```bash
-npm install @zeturn/watercolor-icons-lucide-react
+<Icon component={YourIcon} label="Meaningful icon" />
 ```
 
-## Usage
+React and lucide-react are peers. Install this adapter and its provider only when selected.
+Use a single-icon subpath; the former getIcon(name) catalog lookup has been removed.
+For finite application menus, createIconResolver accepts a small explicitly imported map.
 
-```ts
-import { getIcon } from '@zeturn/watercolor-icons-lucide-react'
-
-const Icon = getIcon('log-in')
-```
-
-## Docs
-
-- https://zeturn.github.io/watercolor/
-
-## License
-
-ISC
+See [migration and performance checks](../../docs/guide/icon-performance.md).

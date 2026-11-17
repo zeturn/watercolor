@@ -1,0 +1,5 @@
+{
+  "vite": { "rssMiB": 768, "jsKiB": 280, "gzipKiB": 95, "deepModules": 70 },
+  "next": { "rssMiB": 2048, "clientJsKiB": 1024, "addedClientJsKiB": 96 },
+  "note": "RSS is the sum of per-Node-process peak RSS, a conservative ceiling for Next workers. Vite runs in one Node process."
+}

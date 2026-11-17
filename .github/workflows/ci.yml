@@ -119,6 +119,13 @@ jobs:
           npm run typecheck:theme
           npm run test:package-theme
         
+      - name: Verify icon boundaries and consumer budgets
+        run: |
+          npm run audit:icons
+          npm run test:installer
+          npm run typecheck:icons
+          npm run test:icon-builds
+
       - name: Build Storybook
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"

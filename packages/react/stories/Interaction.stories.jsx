@@ -1,3 +1,4 @@
+import { storyIcons } from './story-icons.js'
 import Button from '@/components/Button/Button.jsx'
 import IconButton from '@/components/Button/IconButton.jsx'
 import Icon from '@/components/Icon/Icon.jsx'
@@ -60,10 +61,10 @@ export const QuietStates = {
         <section className="wc-interaction-section" aria-labelledby="icon-states">
           <h2 id="icon-states" className="wc-interaction-section-title">Icon button states</h2>
           <div className="wc-interaction-states">
-            <div className="wc-interaction-state"><span className="wc-interaction-label">Default</span><IconButton aria-label="Settings"><Icon name="settings" size={20} /></IconButton></div>
-            <div className="wc-interaction-state"><span className="wc-interaction-label">Hover</span><IconButton className="wc-interaction-force-hover" aria-label="Settings"><Icon name="settings" size={20} /></IconButton></div>
-            <div className="wc-interaction-state"><span className="wc-interaction-label">Focus</span><IconButton className="wc-interaction-force-focus" aria-label="Settings"><Icon name="settings" size={20} /></IconButton></div>
-            <div className="wc-interaction-state"><span className="wc-interaction-label">Disabled</span><IconButton disabled aria-label="Settings"><Icon name="settings" size={20} /></IconButton></div>
+            <div className="wc-interaction-state"><span className="wc-interaction-label">Default</span><IconButton aria-label="Settings"><Icon component={storyIcons['settings']} size={20} /></IconButton></div>
+            <div className="wc-interaction-state"><span className="wc-interaction-label">Hover</span><IconButton className="wc-interaction-force-hover" aria-label="Settings"><Icon component={storyIcons['settings']} size={20} /></IconButton></div>
+            <div className="wc-interaction-state"><span className="wc-interaction-label">Focus</span><IconButton className="wc-interaction-force-focus" aria-label="Settings"><Icon component={storyIcons['settings']} size={20} /></IconButton></div>
+            <div className="wc-interaction-state"><span className="wc-interaction-label">Disabled</span><IconButton disabled aria-label="Settings"><Icon component={storyIcons['settings']} size={20} /></IconButton></div>
           </div>
         </section>
 
@@ -73,7 +74,7 @@ export const QuietStates = {
             <List className="wc-interaction-list" disablePadding>
               {navItems.map((item) => (
                 <ListItem key={item.title} button selected={item.selected} disabled={item.disabled}>
-                  <ListItemIcon><Icon name={item.icon} size={20} /></ListItemIcon>
+                  <ListItemIcon><Icon component={storyIcons[item.icon]} size={20} /></ListItemIcon>
                   <ListItemText primary={item.title} secondary={item.detail} />
                 </ListItem>
               ))}

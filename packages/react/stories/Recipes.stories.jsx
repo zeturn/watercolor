@@ -1,3 +1,4 @@
+import { storyIcons } from './story-icons.js'
 import React, { useState } from 'react'
 import Button from '@/components/Button/Button.jsx'
 import Icon from '@/components/Icon/Icon.jsx'
@@ -19,7 +20,7 @@ export default {
   },
 }
 
-const I = ({ name, size = 18 }) => <Icon name={name} size={size} />
+const I = ({ name, size = 18 }) => <Icon component={storyIcons[name]} size={size} />
 
 function Topbar ({ title = 'Watercolor' }) {
   return (
