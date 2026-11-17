@@ -28,4 +28,15 @@ Trusted Publishing begins.
 Do not run `npm publish` locally and do not create a tag whose version differs
 from any package manifest.
 
+If npm accepts packages but its processing queue delays registry visibility,
+resume the same tag after the queue clears:
+
+```bash
+gh workflow run publish.yml --ref main -f release_tag=v2.0.0
+```
+
+The workflow checks out that existing tag, repeats the release gate, skips
+versions already visible on npm, and waits up to ten minutes for each queued
+version. It never overwrites a published version or moves the release tag.
+
 See [发布与集成指南](note/%E5%8F%91%E5%B8%83%E4%B8%8E%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97.md) for the complete contract.

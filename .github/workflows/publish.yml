@@ -5,9 +5,14 @@ on:
     tags:
       - 'v*.*.*'
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing SemVer tag to publish or resume (for example v2.0.0)
+        required: false
+        type: string
 
 concurrency:
-  group: release-${{ github.ref }}
+  group: release-${{ inputs.release_tag || github.ref_name }}
   cancel-in-progress: false
 
 permissions:
@@ -21,6 +26,8 @@ jobs:
     steps:
       - name: Checkout tagged source
         uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.release_tag && format('refs/tags/{0}', inputs.release_tag) || github.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v7
@@ -30,8 +37,8 @@ jobs:
 
       - name: Require a SemVer tag matching every package
         env:
-          RELEASE_REF_NAME: ${{ github.ref_name }}
-          RELEASE_REF_TYPE: ${{ github.ref_type }}
+          RELEASE_REF_NAME: ${{ inputs.release_tag || github.ref_name }}
+          RELEASE_REF_TYPE: ${{ inputs.release_tag && 'tag' || github.ref_type }}
         run: |
           node <<'EOF'
           const fs = require('node:fs')
@@ -131,7 +138,7 @@ jobs:
     name: Publish verified packages
     needs: release-gate
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     permissions:
       contents: read
       id-token: write
@@ -140,6 +147,8 @@ jobs:
     steps:
       - name: Checkout tagged source
         uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.release_tag && format('refs/tags/{0}', inputs.release_tag) || github.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v7
@@ -169,10 +178,51 @@ jobs:
       - name: Publish in dependency order
         env:
           NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/npmrc-oidc
-          RELEASE_VERSION: ${{ github.ref_name }}
+          RELEASE_VERSION: ${{ inputs.release_tag || github.ref_name }}
         run: |
           set -euo pipefail
           version="${RELEASE_VERSION#v}"
+
+          # npm may accept a version before its asynchronous processing makes it
+          # readable. Allow time for that queue and make interrupted runs resumable.
+          wait_for_package() {
+            local package="$1"
+            local attempt
+            for attempt in {1..120}; do
+              if npm view "$package@$version" version --prefer-online >/dev/null 2>&1; then
+                return 0
+              fi
+              if [ "$attempt" -eq 120 ]; then
+                echo "$package@$version was not visible on npm after ten minutes" >&2
+                return 1
+              fi
+              if [ "$((attempt % 12))" -eq 1 ]; then
+                echo "Waiting for npm to process $package@$version ($attempt/120)..."
+              fi
+              sleep 5
+            done
+          }
+
+          publish_workspace() {
+            local workspace="$1"
+            local package log
+            package=$(node -e 'process.stdout.write(require("./" + process.argv[1] + "/package.json").name)' "$workspace")
+            if npm view "$package@$version" version --prefer-online >/dev/null 2>&1; then
+              echo "Already published: $package@$version; skipping."
+              return 0
+            fi
+            log="$RUNNER_TEMP/publish-$(basename "$workspace").log"
+            if npm publish --workspace "$workspace" --access public --provenance 2>&1 | tee "$log"; then
+              return 0
+            fi
+            # A previous run may have been accepted but still be processing.
+            # Only immutable-version conflicts can be recovered this way.
+            if grep -Eiq 'previously published|cannot publish over|EPUBLISHCONFLICT' "$log"; then
+              wait_for_package "$package"
+              return
+            fi
+            return 1
+          }
 
           for workspace in \
             packages/icons-feather \
@@ -185,24 +235,10 @@ jobs:
             packages/icons-tabler-react \
             packages/icons-tabler-vue
           do
-            npm publish --workspace "$workspace" --access public --provenance
+            publish_workspace "$workspace"
           done
 
-          npm publish --workspace packages/core --access public --provenance
-
-          wait_for_package() {
-            package="$1"
-            for attempt in {1..12}; do
-              if npm view "$package@$version" version >/dev/null 2>&1; then
-                return 0
-              fi
-              if [ "$attempt" -eq 12 ]; then
-                echo "$package@$version was not visible on npm in time" >&2
-                return 1
-              fi
-              sleep 5
-            done
-          }
+          publish_workspace packages/core
 
           for package in \
             @zeturn/watercolor-core \
@@ -219,12 +255,20 @@ jobs:
             wait_for_package "$package"
           done
 
-          npm publish --workspace packages/react --access public --provenance
-          npm publish --workspace packages/vue --access public --provenance
-          npm publish --workspace packages/svelte --access public --provenance
-          npm publish --workspace packages/angular --access public --provenance
+          publish_workspace packages/react
+          publish_workspace packages/vue
+          publish_workspace packages/svelte
+          publish_workspace packages/angular
 
           wait_for_package @zeturn/watercolor-react
-          npm publish --workspace packages/next --access public --provenance
+          publish_workspace packages/next
 
-          npm publish --workspace packages/watercolor-ui --access public --provenance
+          publish_workspace packages/watercolor-ui
+
+          for workspace in packages/*; do
+            manifest="$workspace/package.json"
+            if [ -f "$manifest" ] && node -e 'process.exit(require("./" + process.argv[1]).private ? 1 : 0)' "$manifest"; then
+              package=$(node -e 'process.stdout.write(require("./" + process.argv[1]).name)' "$manifest")
+              wait_for_package "$package"
+            fi
+          done
