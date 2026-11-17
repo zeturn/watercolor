@@ -9,6 +9,7 @@ const root = process.cwd()
 const expectedVersion = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).version
 const packages = fs.readdirSync(path.join(root, 'packages'), { withFileTypes: true })
   .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(root, 'packages', entry.name, 'package.json')))
+  .filter((entry) => !JSON.parse(fs.readFileSync(path.join(root, 'packages', entry.name, 'package.json'), 'utf8')).private)
   .map((entry) => entry.name)
   .sort()
 const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'watercolor-publish-check-'))
@@ -18,12 +19,14 @@ const fail = (message) => errors.push(message)
 const readJson = (file) => JSON.parse(fs.readFileSync(file, 'utf8'))
 
 function pack(packageDirectory) {
-  const output = execFileSync('npm', [
+  const npmCli = process.env.npm_execpath || path.join(path.dirname(process.execPath), 'node_modules/npm/bin/npm-cli.js')
+  const output = execFileSync(process.execPath, [npmCli,
     'pack', path.join(root, 'packages', packageDirectory),
     '--pack-destination', temporaryDirectory,
     '--json',
   ], {
     encoding: 'utf8',
+    maxBuffer: 32 * 1024 * 1024,
     env: { ...process.env, npm_config_cache: path.join(temporaryDirectory, '.npm-cache') },
   })
   const [result] = JSON.parse(output)
@@ -114,5 +117,6 @@ try {
     console.log(`Publish contract OK: ${packages.length} tarballs, ESM-only exports, bounded dependencies, portable declarations.`)
   }
 } finally {
-  fs.rmSync(temporaryDirectory, { recursive: true, force: true })
+  if (path.dirname(temporaryDirectory) !== path.resolve(os.tmpdir()) || !path.basename(temporaryDirectory).startsWith('watercolor-publish-check-')) throw new Error('Unexpected temporary path')
+  fs.rmSync(temporaryDirectory, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 })
 }

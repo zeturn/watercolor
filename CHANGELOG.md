@@ -5,10 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.0.0] - 2026-11-16
 
 ### Changed
-- **Breaking (React/Next):** Icon renders explicitly supplied components instead of loading catalogs via `library/name`; migrate to `component={YourIcon}`.
+- **Breaking (React/Next):** Icon renders explicitly supplied components instead of loading catalogs via `library/name`; migrate to `component={YourIcon}`. See [the migration guide](docs/guide/icon-performance.md).
 - Removed React/Next icon adapter peers and introduced independent component subpath exports with typed declarations and Next client boundaries.
 - React icon adapters now expose individual icon subpaths and a catalog-free explicit-map resolver. Their upstream providers are peers.
 - Feather adds static SVG subpaths; its former name loader is isolated at `/legacy` for existing Vue/Solid integration.
@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Isolated tarball Vite/Next consumers enforce module graph, bundle and RSS budgets.
-- TypeScript 6 Compiler API compatibility for declaration tooling used alongside TypeScript 7.
+- A supported TypeScript 6.0 toolchain shared by declaration generation, Angular, Svelte and lint/type checks.
 
 ## [1.2.13] - 2026-07-28
 

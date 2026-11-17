@@ -90,5 +90,5 @@ and module graphs. Bundle and RSS ceilings are in
 Node process's peak; Vite RSS is one Node process's peak. Results and command logs
 are written to `.cache/icon-build/`. These fixtures do not measure HashSlip itself.
 
-This is an unreleased API change. Publish it with the appropriate breaking-change
-version and migrate consumers before removing their existing workarounds.
+This API is introduced in Watercolor 2.0.0. Migrate consumers before removing
+their existing icon aliases or other workarounds.

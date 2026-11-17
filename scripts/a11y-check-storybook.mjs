@@ -189,6 +189,7 @@ try {
 } finally {
   servers.forEach((server) => server.close())
   chrome.kill('SIGTERM')
+  if (path.dirname(profile) !== path.resolve(os.tmpdir()) || !path.basename(profile).startsWith('watercolor-a11y-chrome-')) throw new Error('Unexpected Chrome profile path')
   try { fs.rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }) } catch {}
 }
 

@@ -3,6 +3,14 @@
 Watercolor publishes only from a verified SemVer tag. The tag must match the
 root and every workspace version.
 
+Solid and Astro are private, unpublished source workspaces. The release gates
+check every published package; private source experiments can be checked directly
+with `npm run typecheck -w packages/solid` when developing them.
+
+All internal package references, examples, and lockfiles are updated together by
+`scripts/sync-versions.mjs`. The website consumes local core/React workspaces, so
+release checks do not depend on the new version being available from npm first.
+
 ```bash
 # Start from a clean, up-to-date main branch.
 git switch main

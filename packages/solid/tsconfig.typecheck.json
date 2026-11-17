@@ -9,6 +9,7 @@
       "@zeturn/watercolor-core": [
         "../core/src/index.ts"
       ]
-    }
+    },
+    "rootDir": "../.."
   }
 }

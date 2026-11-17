@@ -9,11 +9,12 @@
   },
   "dependencies": {
     "@zeturn/watercolor-solid": "file:../../packages/solid",
-    "solid-js": "^1.9.0"
+    "solid-js": "^1.9.0",
+    "@zeturn/watercolor-core": "file:../../packages/core"
   },
   "devDependencies": {
     "vite": "^8.1.5",
     "vite-plugin-solid": "^2.11.0"
   },
-  "version": "1.2.13"
+  "version": "2.0.0"
 }

@@ -10,7 +10,12 @@ const skillSrc = resolve(siteRoot, '..', '.codebuddy', 'skills', 'watercolor-ui'
 const skillDest = join(siteRoot, 'public', 'skills', 'watercolor-ui')
 
 function verifyPackage(name, artifacts) {
-  const expectedVersion = sitePackage.dependencies[name]
+  const specification = sitePackage.dependencies[name]
+  const localManifest = specification?.startsWith('file:')
+    ? JSON.parse(readFileSync(resolve(siteRoot, specification.slice(5), 'package.json'), 'utf8'))
+    : null
+  if (localManifest && localManifest.name !== name) throw new Error(`Unexpected local package for ${name}`)
+  const expectedVersion = localManifest?.version ?? specification
   const manifestPath = require.resolve.paths(name)
     .map((directory) => join(directory, name, 'package.json'))
     .find(existsSync)

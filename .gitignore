@@ -2,6 +2,11 @@
 node_modules/
 .generated/
 .cache/
+docs/generated/
+docs/components/*.md
+!docs/components/index.md
+docs/.vitepress/cache/
+docs/.vitepress/dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

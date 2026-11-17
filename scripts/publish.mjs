@@ -28,6 +28,9 @@ try {
   if (branch !== 'main') throw new Error(`Releases must start from main, received ${branch || '<detached>'}.`)
   const dirty = execSync('git status --porcelain', { encoding: 'utf8' }).trim()
   if (dirty) throw new Error('Working tree must be clean before release. Commit the intended changes first.')
+
+  // Public consumer checks require fresh artifacts, including subpath entries.
+  execSync('npm run build', { stdio: 'inherit' })
   
   // 2. 运行测试
   console.log('\n🧪 运行测试...')
@@ -48,7 +51,6 @@ try {
   
   // 4. 构建项目
   console.log('\n🔨 构建项目...')
-  execSync('npm run build', { stdio: 'inherit' })
   execSync('npm run audit:bundle', { stdio: 'inherit' })
   
   // 5. 检查发布文件
@@ -63,12 +65,12 @@ try {
   
   // 6. 更新版本号
   console.log(`\n📦 更新版本号 (${versionType})...`)
-  execSync(`npm version ${versionType} --no-git-tag-version`, { stdio: 'inherit' })
-  try {
-    execSync(`npm version ${versionType} --workspaces --no-git-tag-version`, { stdio: 'inherit' })
-  } catch (e) {
-    console.warn('Workspace version update warning:', e.message)
-  }
+  const currentVersion = JSON.parse(fs.readFileSync(path.join(rootDir, 'package.json'), 'utf8')).version
+  const parts = currentVersion.split('.').map(Number)
+  if (versionType === 'major') { parts[0]++; parts[1] = 0; parts[2] = 0 }
+  else if (versionType === 'minor') { parts[1]++; parts[2] = 0 }
+  else parts[2]++
+  execSync(`node scripts/sync-versions.mjs ${parts.join('.')}`, { stdio: 'inherit', cwd: rootDir })
 
   // 7. 读取新的版本号
   const packageJson = JSON.parse(fs.readFileSync(path.join(rootDir, 'package.json'), 'utf8'))
@@ -78,7 +80,7 @@ try {
   
   // 8. 创建Git标签
   console.log('\n🏷️ 创建Git标签...')
-  execSync('git add package.json package-lock.json packages/*/package.json', { stdio: 'inherit' })
+  execSync('git add package.json package-lock.json packages/*/package.json site/package.json site/package-lock.json examples/*/package.json examples/*/package-lock.json', { stdio: 'inherit' })
   execSync(`git commit -m "chore: release v${newVersion}"`, { stdio: 'inherit' })
   execSync(`git tag v${newVersion}`, { stdio: 'inherit' })
   
@@ -89,7 +91,7 @@ try {
   // 10. 推送到GitHub
   console.log('\n📤 推送到GitHub...')
   execSync('git push origin main', { stdio: 'inherit' })
-  execSync('git push origin --tags', { stdio: 'inherit' })
+  execSync(`git push origin v${newVersion}`, { stdio: 'inherit' })
   
   console.log('\n🎉 发布成功！')
   console.log(`📦 包名: watercolor-ui@${newVersion}`)

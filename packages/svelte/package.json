@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-svelte",
-  "version": "1.2.13",
+  "version": "2.0.0",
   "description": "Watercolor UI components for Svelte 5, built on @zeturn/watercolor-core",
   "type": "module",
   "license": "ISC",
@@ -41,13 +41,13 @@
     "svelte": "^5.0.0"
   },
   "dependencies": {
-    "@zeturn/watercolor-core": "1.2.13"
+    "@zeturn/watercolor-core": "2.0.0"
   },
   "devDependencies": {
     "@sveltejs/package": "^2.3.7",
     "svelte": "^5.0.0",
     "svelte-check": "^4.1.0",
-    "typescript": "^7.0.2",
+    "typescript": "~6.0.3",
     "vite": "^8.0.2",
     "vitest": "^3.2.4",
     "jsdom": "^29.1.1"

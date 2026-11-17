@@ -1,6 +1,6 @@
 {
   "name": "@zeturn/watercolor-angular",
-  "version": "1.2.13",
+  "version": "2.0.0",
   "description": "Watercolor UI components for Angular (standalone, signals), built on @zeturn/watercolor-core",
   "type": "module",
   "license": "ISC",
@@ -41,14 +41,14 @@
     "@angular/core": ">=20.0.0"
   },
   "dependencies": {
-    "@zeturn/watercolor-core": "1.2.13"
+    "@zeturn/watercolor-core": "2.0.0"
   },
   "devDependencies": {
     "@angular/compiler": "^21.0.0",
     "@angular/compiler-cli": "^21.0.0",
     "@angular/core": "^21.0.0",
     "rxjs": "^7.8.1",
-    "typescript": "^7.0.2",
+    "typescript": "~6.0.3",
     "vitest": "^3.2.4",
     "zone.js": "^0.15.0"
   }

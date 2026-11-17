@@ -10,9 +10,15 @@ const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'watercolor-con
 const cache = path.join(os.tmpdir(), 'watercolor-consumer-npm-cache')
 
 function run(command, args, options = {}) {
+  if (command === 'npm') {
+    const npmCli = process.env.npm_execpath || path.join(path.dirname(process.execPath), 'node_modules/npm/bin/npm-cli.js')
+    args = [npmCli, ...args]
+    command = process.execPath
+  }
   return execFileSync(command, args, {
     cwd: temporaryDirectory,
     stdio: 'pipe',
+    maxBuffer: 32 * 1024 * 1024,
     env: { ...process.env, npm_config_cache: cache },
     ...options,
   })
@@ -84,5 +90,6 @@ try {
   `])
   console.log('Clean-room consumer OK: packed core, React and Vue installed, imported, typechecked and bundled.')
 } finally {
-  fs.rmSync(temporaryDirectory, { recursive: true, force: true })
+  if (path.dirname(temporaryDirectory) !== path.resolve(os.tmpdir()) || !path.basename(temporaryDirectory).startsWith('watercolor-consumer-')) throw new Error('Unexpected temporary path')
+  fs.rmSync(temporaryDirectory, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 })
 }

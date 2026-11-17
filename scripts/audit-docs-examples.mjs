@@ -44,11 +44,17 @@ assertFile('site/src/data/components.jsx', 'canonical component docs data')
 const sitePackage = JSON.parse(read('site/package.json'))
 const siteLock = JSON.parse(read('site/package-lock.json'))
 for (const name of ['@zeturn/watercolor-core', '@zeturn/watercolor-react']) {
-  if (sitePackage.dependencies?.[name] !== version) {
+  const specification = sitePackage.dependencies?.[name]
+  const localManifest = specification?.startsWith('file:')
+    ? JSON.parse(read(path.join('site', specification.slice(5), 'package.json')))
+    : null
+  const declaredVersion = localManifest?.version ?? specification
+  if (declaredVersion !== version || (localManifest && localManifest.name !== name)) {
     fail(`site/package.json must pin ${name} to ${version}`)
   }
-  if (siteLock.packages?.['']?.dependencies?.[name] !== version ||
-      siteLock.packages?.[`node_modules/${name}`]?.version !== version) {
+  const entry = siteLock.packages?.[`node_modules/${name}`]
+  const lockedVersion = entry?.link ? siteLock.packages?.[entry.resolved]?.version : entry?.version
+  if (siteLock.packages?.['']?.dependencies?.[name] !== specification || lockedVersion !== version) {
     fail(`site/package-lock.json must lock ${name} to ${version}`)
   }
 }

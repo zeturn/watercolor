@@ -34,15 +34,7 @@ export default defineConfig({
       checks: {
         pluginTimings: false,
       },
-      external: [
-        'vue',
-        '@zeturn/watercolor-core',
-        '@zeturn/watercolor-icons-feather',
-        '@zeturn/watercolor-icons-heroicons-vue',
-        '@zeturn/watercolor-icons-lucide-vue',
-        '@zeturn/watercolor-icons-phosphor-vue',
-        '@zeturn/watercolor-icons-tabler-vue',
-      ],
+      external: (id) => id === 'vue' || id === '@zeturn/watercolor-core' || id.startsWith('@zeturn/watercolor-icons-'),
       output: {
         globals: {
           vue: 'Vue',

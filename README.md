@@ -169,7 +169,7 @@ npm install @zeturn/watercolor-icons-lucide-react
 
 See [note/组件开发与规范.md](note/%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%8E%E8%A7%84%E8%8C%83.md) and [note/发布与集成指南.md](note/%E5%8F%91%E5%B8%83%E4%B8%8E%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97.md).
 
-For the documentation website, run `npm ci` followed by `npm run dev` or `npm run build` from `site/`. Development and production builds verify the installed core and React versions against the site's pinned dependencies.
+For the documentation website, first run `npm ci` and build `packages/core` and `packages/react` from the repository root. Then run `npm ci` followed by `npm run dev` or `npm run build` from `site/`. The website uses these local workspace packages and verifies their versions and build artifacts, including before a new version reaches npm.
 
 ## 📄 License
 
