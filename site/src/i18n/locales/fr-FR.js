@@ -9,7 +9,7 @@ export default {
     buildWith: 'Construit avec',
     uiComponents: 'composants UI',
     subBeautiful: 'Une expérience visuelle au style aquarelle',
-    subCross: '4 frameworks pris en charge : Vue, React, Svelte & Angular',
+    subCross: 'Vue, React, Svelte, Angular et Next.js, avec SolidJS / Astro dans les workspaces',
     subAccessible: 'Conception de composants totalement accessible',
     subMinimal: 'Philosophie de design ultra-plat',
     descLine1: 'Watercolor UI est une bibliothèque de composants moderne, minimaliste,',

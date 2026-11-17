@@ -9,7 +9,7 @@ export default {
     buildWith: 'Build with',
     uiComponents: 'UI Components',
     subBeautiful: '水彩风格的视觉体验',
-    subCross: 'Vue · React · Svelte · Angular 四大框架支持',
+    subCross: 'Vue · React · Svelte · Angular · Next.js，另有 SolidJS / Astro 源码包',
     subAccessible: '完全无障碍的组件设计',
     subMinimal: '超扁平设计哲学',
     descLine1: 'Watercolor UI 是一个现代、极简、',

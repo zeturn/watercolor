@@ -12,6 +12,7 @@ npm install @zeturn/watercolor-svelte
 
 ```svelte
 <script>
+  import '@zeturn/watercolor-svelte/theme.css'
   import { Button, ThemeProvider } from '@zeturn/watercolor-svelte'
 </script>
 
@@ -19,6 +20,8 @@ npm install @zeturn/watercolor-svelte
   <Button variant="primary">Continue</Button>
 </ThemeProvider>
 ```
+
+Import `theme.css` once in your app entry or root layout; the package root does not import CSS automatically.
 
 The package provides the same public component names as the React, Vue, and Next.js packages.
 It uses Svelte 5 runes, callback event props such as `onclick`, and bindable form values.

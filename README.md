@@ -4,7 +4,7 @@
 
 <img src="public/img/watercolorui.png" width="140" alt="Watercolor UI" />
 
-Modern, minimalist, watercolor-inspired UI components for **4 frameworks** — **Vue 3.5+**, **React 18/19**, **Svelte 5**, and **Angular** — with first-class **Next.js (App Router)** support built on the React package. Built with **TypeScript**.
+Modern, minimalist, watercolor-inspired UI components for **5 frameworks** — **Vue 3.5+**, **React 18/19**, **Svelte 5**, **Angular**, and **SolidJS** — with **Next.js (App Router)** support and **Astro** adapters built on the React package. Built with **TypeScript**.
 
 [![npm version](https://img.shields.io/npm/v/@zeturn/watercolor-vue?label=vue)](https://www.npmjs.com/package/@zeturn/watercolor-vue)
 [![npm version](https://img.shields.io/npm/v/@zeturn/watercolor-react?label=react)](https://www.npmjs.com/package/@zeturn/watercolor-react)
@@ -16,7 +16,7 @@ Modern, minimalist, watercolor-inspired UI components for **4 frameworks** — *
 
 ## ✨ Features
 
-- One design language, 4 frameworks (Vue 3.5+, React 18/19, Svelte 5, and Angular), plus first-class Next.js App Router support via `@zeturn/watercolor-next`
+- One design language, 5 frameworks (Vue 3.5+, React 18/19, Svelte 5, Angular, and SolidJS), plus Next.js App Router support via `@zeturn/watercolor-next` and React-backed Astro adapters via `@zeturn/watercolor-astro`
 - Borderless default Watercolor style with CSS variable theming
 - Theme v2 JSON loading through React/Vue providers
 - Built-in light, dark, and system mode handling
@@ -24,6 +24,8 @@ Modern, minimalist, watercolor-inspired UI components for **4 frameworks** — *
 - Tree-shaking friendly builds
 - Optional icon packs (install only what you use)
 - LocaleProvider for localizable accessibility strings
+
+SolidJS and Astro are currently available as repository workspace packages and are not published on the public npm registry. See the [Solid example](examples/solid-minimal/README.md) and [Astro adapter source](packages/astro).
 
 ## 📚 Documentation
 
@@ -65,6 +67,10 @@ npm install @zeturn/watercolor-svelte
 npm install @zeturn/watercolor-angular
 ```
 
+**SolidJS and Astro (workspace packages)**
+
+Use a local checkout for these packages. Follow [examples/solid-minimal](examples/solid-minimal/README.md) to build and run the SolidJS components. The [Astro adapter](packages/astro) provides React-backed components for projects configured with the `@astrojs/react` renderer.
+
 ### Usage
 
 Import styles once in your app entry, then import components as needed.
@@ -74,6 +80,16 @@ Import styles once in your app entry, then import components as needed.
 import '@zeturn/watercolor-vue/style.css'
 // React
 // import '@zeturn/watercolor-react/style.css'
+// Next.js
+// import '@zeturn/watercolor-next/style.css'
+// Svelte
+// import '@zeturn/watercolor-svelte/theme.css'
+// Angular
+// import '@zeturn/watercolor-angular/theme.css'
+// SolidJS (workspace package)
+// import '@zeturn/watercolor-solid/style.css'
+// Astro (workspace package)
+// import '@zeturn/watercolor-astro/style.css'
 ```
 
 ```ts
@@ -83,10 +99,14 @@ import { Button } from '@zeturn/watercolor-vue'
 // import { Button } from '@zeturn/watercolor-react'
 // Next.js (App Router — no 'use client' needed, the RSC boundary ships in the package)
 // import { Button } from '@zeturn/watercolor-next'
-// Svelte 5 / SvelteKit (styles are bundled with the package import)
+// Svelte 5 / SvelteKit (import theme.css explicitly as shown above)
 // import { Button } from '@zeturn/watercolor-svelte'
-// Angular (standalone components; import '@zeturn/watercolor-angular/theme.css' once)
+// Angular (standalone components)
 // import { Button } from '@zeturn/watercolor-angular'
+// SolidJS (workspace package)
+// import { Button } from '@zeturn/watercolor-solid'
+// Astro (workspace package; use client:* for interactive React islands)
+// import { Button } from '@zeturn/watercolor-astro'
 ```
 
 ### Theme v2
@@ -107,6 +127,7 @@ Theme loading safely falls back to the default borderless Watercolor design. See
 
 - `examples/react-minimal`
 - `examples/vue-minimal`
+- `examples/solid-minimal`
 - `examples/next-ssr`
 - `examples/nuxt-ssr`
 - `examples/svelte-ssr`
@@ -132,6 +153,8 @@ npm install @zeturn/watercolor-icons-lucide-react
 ## 🤝 Contributing
 
 See [note/组件开发与规范.md](note/%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%8E%E8%A7%84%E8%8C%83.md) and [note/发布与集成指南.md](note/%E5%8F%91%E5%B8%83%E4%B8%8E%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97.md).
+
+For the documentation website, run `npm ci` followed by `npm run dev` or `npm run build` from `site/`. Development and production builds verify the installed core and React versions against the site's pinned dependencies.
 
 ## 📄 License
 

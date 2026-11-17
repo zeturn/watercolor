@@ -1,51 +1,50 @@
-import { execSync } from 'node:child_process'
-import { existsSync, mkdirSync, rmSync, copyFileSync, readdirSync, statSync } from 'node:fs'
-import { join } from 'node:path'
+import { existsSync, mkdirSync, rmSync, copyFileSync, readFileSync, readdirSync, statSync } from 'node:fs'
+import { createRequire } from 'node:module'
+import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const packages = [
-  '@zeturn/watercolor-core@1.2.9',
-  '@zeturn/watercolor-react@1.2.9',
-]
+const siteRoot = dirname(fileURLToPath(new URL('../package.json', import.meta.url)))
+const require = createRequire(new URL('../package.json', import.meta.url))
+const sitePackage = JSON.parse(readFileSync(join(siteRoot, 'package.json'), 'utf8'))
+const skillSrc = resolve(siteRoot, '..', '.codebuddy', 'skills', 'watercolor-ui')
+const skillDest = join(siteRoot, 'public', 'skills', 'watercolor-ui')
 
-function installFromRegistry(spec) {
-  const name = spec.replace(/@[^@]+$/, '')
-  const dest = join(process.cwd(), 'node_modules', ...name.split('/'))
-  const tarball = execSync(`npm pack ${spec}`, { encoding: 'utf8' })
-    .trim()
-    .split(/\r?\n/)
-    .pop()
+function verifyPackage(name, artifacts) {
+  const expectedVersion = sitePackage.dependencies[name]
+  const manifestPath = require.resolve.paths(name)
+    .map((directory) => join(directory, name, 'package.json'))
+    .find(existsSync)
+  const installed = manifestPath && JSON.parse(readFileSync(manifestPath, 'utf8'))
+  const missingArtifacts = manifestPath
+    ? artifacts.filter((artifact) => !existsSync(join(dirname(manifestPath), artifact)))
+    : artifacts
 
-  rmSync(dest, { recursive: true, force: true })
-  mkdirSync(dest, { recursive: true })
-  execSync(`tar -xzf ${tarball} -C "${dest}" --strip-components=1`, { stdio: 'inherit' })
-  rmSync(tarball, { force: true })
-
-  const entry = join(dest, 'dist')
-  if (!existsSync(entry)) {
-    throw new Error(`Packed ${spec} but ${entry} is missing`)
+  if (!expectedVersion || installed?.version !== expectedVersion || missingArtifacts.length) {
+    throw new Error(
+      `Expected ${name}@${expectedVersion} with its build artifacts; found ${installed?.version ?? 'no installation'}. ` +
+      `Run npm ci --prefix "${siteRoot}". If using workspace links, build the matching core and React packages first.`,
+    )
   }
-  console.log(`Installed ${spec} from npm registry -> ${dest}`)
+  console.log(`Verified ${name}@${expectedVersion}`)
 }
 
 const skillOnly = process.argv.includes('--skill-only')
 
-const reactPath = join(process.cwd(), 'node_modules', '@zeturn', 'watercolor-react')
-const hasDist = existsSync(join(reactPath, 'dist', 'watercolor-react.es.js'))
-
-// Workspace junctions point at source packages without dist; replace them.
+// Use the locked installation. Never replace workspace links or download a
+// different package version during a build.
 if (!skillOnly) {
-  if (!hasDist) {
-    for (const spec of packages) {
-      installFromRegistry(spec)
-    }
-  } else {
-    console.log('@zeturn/watercolor-react already has dist, skipping registry pack')
-  }
+  verifyPackage('@zeturn/watercolor-core', ['dist/core.es.js', 'src/styles/index.css'])
+  verifyPackage('@zeturn/watercolor-react', ['dist/watercolor-react.es.js', 'dist/watercolor-react.css'])
 }
 
 // Sync the AI skill (source of truth: .codebuddy/skills/watercolor-ui) into public/
 // so it is always downloadable at /skills/watercolor-ui/... without manual copies.
 function copyDir(src, dest) {
+  const destination = resolve(dest)
+  const relativeDestination = relative(skillDest, destination)
+  if (relativeDestination === '..' || relativeDestination.startsWith(`..${sep}`) || isAbsolute(relativeDestination)) {
+    throw new Error(`Skill destination is outside ${skillDest}: ${destination}`)
+  }
   if (!existsSync(src)) {
     console.warn(`Skill source not found, skipping sync: ${src}`)
     return
@@ -65,7 +64,5 @@ function copyDir(src, dest) {
 }
 
 if (process.env.SKIP_SKILL_SYNC !== '1') {
-  const skillSrc = join(process.cwd(), '..', '.codebuddy', 'skills', 'watercolor-ui')
-  const skillDest = join(process.cwd(), 'public', 'skills', 'watercolor-ui')
   copyDir(skillSrc, skillDest)
 }

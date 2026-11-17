@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "predev": "npm run sync-skills",
+    "predev": "node scripts/prepare-watercolor.mjs",
     "sync-skills": "node scripts/prepare-watercolor.mjs --skill-only",
     "prebuild": "node scripts/prepare-watercolor.mjs",
     "build": "vite build",
@@ -13,7 +13,8 @@
     "sitemap": "node scripts/gen-sitemap.mjs"
   },
   "dependencies": {
-    "@zeturn/watercolor-react": "1.2.11",
+    "@zeturn/watercolor-core": "1.2.13",
+    "@zeturn/watercolor-react": "1.2.13",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0"

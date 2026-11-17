@@ -42,11 +42,13 @@ const docsI18n = {
     content: {
       intro: `## 什么是 Watercolor UI？
 
-Watercolor UI 是一个**现代、极简、水彩风格**的跨框架 UI 组件库，支持 **Vue 3.5+**、**React 18/19**、**Svelte 5** 和 **Angular** 四大框架，并对 **Next.js (App Router)** 提供一等支持。
+Watercolor UI 是一个**现代、极简、水彩风格**的跨框架 UI 组件库，支持 **Vue 3.5+**、**React 18/19**、**Svelte 5**、**Angular** 和 **SolidJS** 五个框架，并提供 **Next.js (App Router)** 支持和基于 React 的 **Astro** 适配。
+
+SolidJS 和 Astro 目前通过仓库源码包使用，尚未发布到公开 npm 注册表。
 
 ### 核心特性
 
-- **四框架支持**: 一套设计语言覆盖 Vue 3、React 18/19、Svelte 5 和 Angular（Next.js 一等支持）
+- **五框架支持**: 一套设计语言覆盖 Vue 3、React 18/19、Svelte 5、Angular 和 SolidJS，另有 Next.js 支持和 Astro 适配
 - **超扁平设计哲学**: 无阴影、无边框的极简水彩风格
 - **Tree-shaking 友好**: 按需导入，最小化打包体积
 - **完全无障碍**: 键盘导航、ARIA 属性、屏幕阅读器支持
@@ -589,11 +591,13 @@ watercolor/
     content: {
       intro: `## What is Watercolor UI?
 
-Watercolor UI is a **modern, minimal, watercolor-style** cross-framework UI component library that supports 4 frameworks — **Vue 3.5+**, **React 18/19**, **Svelte 5**, and **Angular** — with first-class **Next.js (App Router)** support.
+Watercolor UI is a **modern, minimal, watercolor-style** cross-framework UI component library that supports 5 frameworks — **Vue 3.5+**, **React 18/19**, **Svelte 5**, **Angular**, and **SolidJS** — with **Next.js (App Router)** support and React-backed **Astro** adapters.
+
+SolidJS and Astro are currently available as repository workspace packages, not on the public npm registry.
 
 ### Core Features
 
-- **4-framework support**: One design language covering Vue 3, React 18/19, Svelte 5, and Angular (first-class Next.js support)
+- **5-framework support**: One design language covering Vue 3, React 18/19, Svelte 5, Angular, and SolidJS, plus Next.js support and Astro adapters
 - **Ultra-flat design philosophy**: Minimal watercolor style with no shadows or borders
 - **Tree-shaking friendly**: Import on demand to minimize bundle size
 - **Fully accessible**: Keyboard navigation, ARIA attributes, screen reader support
@@ -1136,11 +1140,13 @@ We use Conventional Commits:
     content: {
       intro: `## Watercolor UI とは？
 
-Watercolor UI は、**モダンでミニマルな水彩風**のクロスフレームワーク UI コンポーネントライブラリです。**Vue 3.5+**、**React 18/19**、**Svelte 5**、**Angular** の 4 フレームワークをサポートし、**Next.js (App Router)** もファーストクラスで対応しています。
+Watercolor UI は、**モダンでミニマルな水彩風**のクロスフレームワーク UI コンポーネントライブラリです。**Vue 3.5+**、**React 18/19**、**Svelte 5**、**Angular**、**SolidJS** の 5 フレームワークをサポートし、**Next.js (App Router)** 対応と React ベースの **Astro** アダプターも提供します。
+
+SolidJS と Astro は現在リポジトリ内のワークスペースパッケージとして利用でき、公開 npm レジストリには未公開です。
 
 ### 主な特徴
 
-- **4 フレームワーク対応**: 1 つのデザイン言語で Vue 3・React 18/19・Svelte 5・Angular をカバー（Next.js もファーストクラス対応）
+- **5 フレームワーク対応**: 1 つのデザイン言語で Vue 3・React 18/19・Svelte 5・Angular・SolidJS をカバーし、Next.js 対応と Astro アダプターも提供
 - **超フラットなデザイン哲学**: 影や枠線のないミニマルな水彩スタイル
 - **Tree-shaking 対応**: 必要な分だけインポートしてバンドルサイズを最小化
 - **完全なアクセシビリティ**: キーボード操作、ARIA 属性、スクリーンリーダー対応
@@ -1682,11 +1688,13 @@ watercolor/
     content: {
       intro: `## Qu'est-ce que Watercolor UI ?
 
-Watercolor UI est une bibliothèque de composants UI multi-frameworks, **moderne, minimaliste et au style aquarelle**, qui prend en charge 4 frameworks — **Vue 3.5+**, **React 18/19**, **Svelte 5** et **Angular** — avec un support **Next.js (App Router)** de premier ordre.
+Watercolor UI est une bibliothèque de composants UI multi-frameworks, **moderne, minimaliste et au style aquarelle**, qui prend en charge 5 frameworks — **Vue 3.5+**, **React 18/19**, **Svelte 5**, **Angular** et **SolidJS** — avec le support de **Next.js (App Router)** et des adaptateurs **Astro** basés sur React.
+
+SolidJS et Astro sont actuellement disponibles dans les workspaces du dépôt et ne sont pas publiés sur le registre npm public.
 
 ### Fonctionnalités clés
 
-- **4 frameworks** : un seul langage de conception couvrant Vue 3, React 18/19, Svelte 5 et Angular (support Next.js de premier ordre)
+- **5 frameworks** : un seul langage de conception couvrant Vue 3, React 18/19, Svelte 5, Angular et SolidJS, avec le support de Next.js et des adaptateurs Astro
 - **Philosophie ultra-plate** : style aquarelle minimal sans ombres ni bordures
 - **Compatible Tree-shaking** : import à la demande pour réduire la taille du bundle
 - **Entièrement accessible** : navigation clavier, attributs ARIA, support lecteur d'écran
@@ -2227,11 +2235,13 @@ Nous utilisons Conventional Commits :
     content: {
       intro: `## Was ist Watercolor UI?
 
-Watercolor UI ist eine **moderne, minimalistische, aquarellartige** Multi-Framework-UI-Komponentenbibliothek, die 4 Frameworks unterstützt — **Vue 3.5+**, **React 18/19**, **Svelte 5** und **Angular** — mit erstklassiger **Next.js (App Router)**-Unterstützung.
+Watercolor UI ist eine **moderne, minimalistische, aquarellartige** Multi-Framework-UI-Komponentenbibliothek, die 5 Frameworks unterstützt — **Vue 3.5+**, **React 18/19**, **Svelte 5**, **Angular** und **SolidJS** — mit **Next.js (App Router)**-Unterstützung und React-basierten **Astro**-Adaptern.
+
+SolidJS und Astro sind derzeit als Workspace-Pakete im Repository verfügbar und noch nicht in der öffentlichen npm-Registry veröffentlicht.
 
 ### Kernfunktionen
 
-- **4-Framework-Support**: Eine Designsprache für Vue 3, React 18/19, Svelte 5 und Angular (erstklassige Next.js-Unterstützung)
+- **5-Framework-Support**: Eine Designsprache für Vue 3, React 18/19, Svelte 5, Angular und SolidJS, mit Next.js-Unterstützung und Astro-Adaptern
 - **Ultra-flache Designphilosophie**: Minimaler Aquarellstil ohne Schatten oder Rahmen
 - **Tree-shaking-freundlich**: Bedarfsgerechter Import zur Minimierung der Bundle-Größe
 - **Vollständig barrierefrei**: Tastaturnavigation, ARIA-Attribute, Screenreader-Support

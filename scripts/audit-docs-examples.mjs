@@ -41,6 +41,18 @@ function collectGuideLinks() {
 assertFile('site/src/data/docs.js', 'canonical site docs data')
 assertFile('site/src/data/components.jsx', 'canonical component docs data')
 
+const sitePackage = JSON.parse(read('site/package.json'))
+const siteLock = JSON.parse(read('site/package-lock.json'))
+for (const name of ['@zeturn/watercolor-core', '@zeturn/watercolor-react']) {
+  if (sitePackage.dependencies?.[name] !== version) {
+    fail(`site/package.json must pin ${name} to ${version}`)
+  }
+  if (siteLock.packages?.['']?.dependencies?.[name] !== version ||
+      siteLock.packages?.[`node_modules/${name}`]?.version !== version) {
+    fail(`site/package-lock.json must lock ${name} to ${version}`)
+  }
+}
+
 for (const section of [
   'intro',
   'install',

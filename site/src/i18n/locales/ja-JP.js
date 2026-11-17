@@ -9,7 +9,7 @@ export default {
     buildWith: 'Build with',
     uiComponents: 'UI Components',
     subBeautiful: '水彩スタイルのビジュアル体験',
-    subCross: 'Vue・React・Svelte・Angular の 4 フレームワーク対応',
+    subCross: 'Vue・React・Svelte・Angular・Next.js 対応、SolidJS / Astro はリポジトリ内で提供',
     subAccessible: '完全にアクセシブルなコンポーネント設計',
     subMinimal: 'ウルトラフラットなデザイン哲学',
     descLine1: 'Watercolor UI はモダンでミニマルな',
