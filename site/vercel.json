@@ -1,5 +1,5 @@
 {
   "installCommand": "npm ci --prefix .. && npm ci",
-  "buildCommand": "npm run build --prefix .. -w packages/core -w packages/react && npm run build",
+  "buildCommand": "npm run build --prefix ../packages/core && npm run build --prefix ../packages/react && npm run build",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
